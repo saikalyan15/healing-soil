@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
+import Header from '@/components/Header'
+import TrustStrip from '@/components/TrustStrip'
+import Footer from '@/components/Footer'
 
 const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
@@ -40,28 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
-        {/* Nav placeholder — replace with <Nav /> component */}
-        <header className="w-full border-b border-border bg-cream-card">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <span className="font-serif text-2xl font-semibold text-green-primary tracking-wide">
-              Healing Soil
-            </span>
-            <nav className="hidden gap-8 text-sm font-medium text-text-dark md:flex">
-              <a href="/our-products" className="hover:text-green-primary transition-colors">Shop</a>
-              <a href="/about" className="hover:text-green-primary transition-colors">About</a>
-              <a href="/blog" className="hover:text-green-primary transition-colors">Blog</a>
-              <a href="/our-stories" className="hover:text-green-primary transition-colors">Our Stories</a>
-              <a href="/cart" className="hover:text-green-primary transition-colors">Cart</a>
-            </nav>
-          </div>
-        </header>
-
+        <Header />
+        <TrustStrip />
         <main>{children}</main>
-
-        {/* Footer placeholder */}
-        <footer className="border-t border-border bg-green-dark py-10 text-center text-sm text-cream/70">
-          <p>&copy; {new Date().getFullYear()} Healing Soil. Made with love in Goa, India.</p>
-        </footer>
+        <Footer />
       </body>
     </html>
   )
