@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import TrustStrip from '@/components/TrustStrip'
 import Footer from '@/components/Footer'
+import OrderTray from '@/components/OrderTray'
 
 const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
@@ -45,8 +46,9 @@ export default function RootLayout({
       <body>
         <Header />
         <TrustStrip />
-        <main>{children}</main>
+        <main className="pb-[60px]">{children}</main>
         <Footer />
+        <OrderTray />
       </body>
     </html>
   )

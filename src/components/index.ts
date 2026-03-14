@@ -1,3 +1,6 @@
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
 export { default as TrustStrip } from './TrustStrip'
+export { default as ReviewCard } from './ReviewCard'
+export { default as ProductCard } from './ProductCard'
+export { default as OrderTray } from './OrderTray'
