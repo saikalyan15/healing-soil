@@ -1,7 +1,16 @@
 export const metadata = {
   title: 'Contact — Healing Soil',
   description:
-    'Get in touch with Healing Soil. The fastest way to reach us is WhatsApp.',
+    'Get in touch with Healing Soil. Chat with us on WhatsApp, follow us on Instagram, or find us on Facebook.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact — Healing Soil',
+    description: 'Get in touch with Healing Soil. The fastest way to reach us is WhatsApp.',
+    url: '/contact',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Contact Healing Soil' }],
+    type: 'website',
+  },
 }
 
 export default function ContactPage() {

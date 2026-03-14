@@ -6,6 +6,15 @@ export const metadata = {
   title: 'Our Story — Healing Soil',
   description:
     'From Bangalore to a farm in South Goa — how Healing Soil began and why we make soap the way we do.',
+  alternates: { canonical: '/our-story' },
+  openGraph: {
+    title: 'Our Story — Healing Soil',
+    description: 'From Bangalore to a farm in South Goa — how Healing Soil began and why we make soap the way we do.',
+    url: '/our-story',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Deepanjali, founder of Healing Soil' }],
+    type: 'website',
+  },
 }
 
 export default function OurStoryPage() {

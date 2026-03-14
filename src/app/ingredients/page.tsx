@@ -3,7 +3,16 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Ingredients — Healing Soil',
   description:
-    'Every ingredient in a Healing Soil soap is chosen deliberately. Here is what we use and why.',
+    'Every ingredient in a Healing Soil soap is chosen deliberately. Coconut oil, shea butter, neem, goat milk, and more — here is what we use and why.',
+  alternates: { canonical: '/ingredients' },
+  openGraph: {
+    title: 'Ingredients — Healing Soil',
+    description: 'Every ingredient in a Healing Soil soap is chosen deliberately. Here is what we use and why.',
+    url: '/ingredients',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Natural soap ingredients used by Healing Soil' }],
+    type: 'website',
+  },
 }
 
 const ingredients = [

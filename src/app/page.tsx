@@ -1,6 +1,23 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getFeaturedProducts } from '@/lib/products'
+
+export const metadata: Metadata = {
+  title: 'Healing Soil — Handmade Soaps from Goa',
+  description:
+    'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals. Made to order and shipped across India.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Healing Soil — Handmade Soaps from Goa',
+    description:
+      'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals.',
+    url: '/',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps from Goa' }],
+    type: 'website',
+  },
+}
 import { featuredReviews, shortReviews } from '@/lib/reviews'
 import { getBlogPosts } from '@/lib/blog'
 import ProductCard from '@/components/ProductCard'
@@ -12,8 +29,24 @@ export default async function HomePage() {
   const featuredProducts = await getFeaturedProducts().catch(() => [])
   const latestPosts = getBlogPosts('blog').slice(0, 2)
 
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Healing Soil',
+    url: 'https://healingsoil.in',
+    description: 'Handmade soaps from Goa, India. Small-batch, no chemicals, made to order.',
+    sameAs: [
+      'https://instagram.com/healingsoil.in',
+      'https://www.facebook.com/profile.php?id=61576352186521',
+    ],
+  }
+
   return (
     <div className="bg-[#F7F5F0]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
 
       {/* ── Section 1: Hero ─────────────────────────────────────────────────── */}
       <section className="w-full bg-[#F7F5F0]">

@@ -4,7 +4,16 @@ import BlogGrid from '@/components/BlogGrid'
 export const metadata = {
   title: 'Life on the Farm — Healing Soil Stories',
   description:
-    'Stories about slow living, growing food, and finding a different pace.',
+    'Stories from a farm in South Goa — slow living, growing food, and what happens when you leave the city behind.',
+  alternates: { canonical: '/stories' },
+  openGraph: {
+    title: 'Life on the Farm — Healing Soil Stories',
+    description: 'Stories about slow living, growing food, and finding a different pace.',
+    url: '/stories',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Life on the farm — Healing Soil stories' }],
+    type: 'website',
+  },
 }
 
 export default function StoriesPage() {

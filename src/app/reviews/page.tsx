@@ -5,7 +5,16 @@ import { featuredReviews, shortReviews } from '@/lib/reviews'
 export const metadata: Metadata = {
   title: 'Customer Reviews — Healing Soil',
   description:
-    'Read what customers say about Healing Soil handmade soaps from Goa.',
+    'Read what customers say about Healing Soil handmade soaps from Goa. Real reviews from real people — no edits, no stars.',
+  alternates: { canonical: '/reviews' },
+  openGraph: {
+    title: 'Customer Reviews — Healing Soil',
+    description: 'Read what customers say about Healing Soil handmade soaps from Goa.',
+    url: '/reviews',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Customer reviews for Healing Soil soaps' }],
+    type: 'website',
+  },
 }
 
 export default function ReviewsPage() {

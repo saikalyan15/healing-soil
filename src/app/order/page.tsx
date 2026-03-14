@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Place Your Order — Healing Soil',
   description:
     'Review your order and send it through. Deepanjali will confirm availability before any payment is taken.',
+  robots: { index: false, follow: false },
 }
 
 export default function OrderPage() {

@@ -1,5 +1,12 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import WhatsAppFallback from './WhatsAppFallback'
+
+export const metadata: Metadata = {
+  title: 'Order Received — Healing Soil',
+  description: 'Your order has been received. Deepanjali will confirm availability and contact you on WhatsApp shortly.',
+  robots: { index: false, follow: false },
+}
 
 type Props = {
   searchParams: { ref?: string }

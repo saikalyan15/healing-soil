@@ -23,13 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} — Healing Soil`,
     description: post.excerpt,
+    alternates: { canonical: `/blog/${params.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: `/blog/${params.slug}`,
+      siteName: 'Healing Soil',
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
-      ...(post.featuredImage ? { images: [post.featuredImage] } : {}),
+      images: [{ url: post.featuredImage || '/og-image.jpg', width: 1200, height: 630, alt: post.title }],
     },
   }
 }

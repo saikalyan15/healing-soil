@@ -4,7 +4,16 @@ import BlogGrid from '@/components/BlogGrid'
 export const metadata = {
   title: 'From the Farm — Healing Soil Blog',
   description:
-    'Writing about handmade soap, natural ingredients, and the science of skin.',
+    'Writing about handmade soap, natural ingredients, skin science, and slow living from a farm in South Goa.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'From the Farm — Healing Soil Blog',
+    description: 'Writing about handmade soap, natural ingredients, and the science of skin.',
+    url: '/blog',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil blog — from the farm' }],
+    type: 'website',
+  },
 }
 
 export default function BlogPage() {

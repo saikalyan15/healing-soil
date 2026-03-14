@@ -8,6 +8,16 @@ export const metadata: Metadata = {
   title: 'Shop Handmade Soaps — Healing Soil',
   description:
     'Buy handmade chemical-free soaps from Goa. Glycerin and goat milk bases, natural ingredients. Made to order and shipped across India.',
+  alternates: { canonical: '/shop' },
+  openGraph: {
+    title: 'Shop Handmade Soaps — Healing Soil',
+    description:
+      'Buy handmade chemical-free soaps from Goa. Glycerin and goat milk bases, natural ingredients. Made to order and shipped across India.',
+    url: '/shop',
+    siteName: 'Healing Soil',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps' }],
+    type: 'website',
+  },
 }
 
 export default async function ShopPage() {
@@ -16,8 +26,45 @@ export default async function ShopPage() {
   const krutika = reviews.find((r) => r.id === 'review-006')!
   const samyuktha = reviews.find((r) => r.id === 'review-008')!
 
+  const itemListSchema = products.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Healing Soil Handmade Soaps',
+        url: 'https://healingsoil.in/shop',
+        numberOfItems: products.length,
+        itemListElement: products.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: p.name,
+          url: `https://healingsoil.in/shop#${p.slug}`,
+          item: {
+            '@type': 'Product',
+            name: p.name,
+            description: p.description,
+            image: p.image_url || undefined,
+            offers: {
+              '@type': 'Offer',
+              price: p.price,
+              priceCurrency: 'INR',
+              availability: p.in_stock
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+            },
+          },
+        })),
+      }
+    : null
+
   return (
     <div className="bg-[#F7F5F0]">
+      {itemListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+      )}
+
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
 
         {/* Heading + intro */}
