@@ -88,6 +88,15 @@ export const reviews: Review[] = [
       'The Red wine soaps are awesome. They lather less and consume less water',
     featured: false,
   },
+  {
+    id: 'review-010',
+    author: 'Riya',
+    location: 'Bangalore',
+    occupation: 'Software Professional',
+    comment:
+      'Absolutely loving the honey oats glycerine  soap. It’s very gentle on the skin . Even without the heavy lather, it leaves me feeling so refreshed.',
+    featured: false,
+  },
 ]
 
 // ─── Derived exports ───────────────────────────────────────────────────────────
