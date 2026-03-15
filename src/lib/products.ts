@@ -97,12 +97,15 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 /**
- * Fetch only featured products (is_featured === true), capped at 4.
- * Used for the homepage hero/featured section.
+ * Fetch featured products for the homepage, capped at 4.
+ * Prefers products marked is_featured === true in SoapLedger.
+ * Falls back to the first 4 products if none are marked featured,
+ * so the section never renders empty.
  */
 export async function getFeaturedProducts(): Promise<Product[]> {
   const all = await getProducts()
-  return all.filter((p) => p.is_featured).slice(0, 4)
+  const featured = all.filter((p) => p.is_featured)
+  return (featured.length > 0 ? featured : all).slice(0, 4)
 }
 
 /**
