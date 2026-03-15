@@ -24,7 +24,7 @@ export default function OrderTray() {
           href="/order"
           className="rounded bg-[#1E5631] px-5 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
         >
-          Place Order
+          Checkout
         </Link>
       </div>
     </div>

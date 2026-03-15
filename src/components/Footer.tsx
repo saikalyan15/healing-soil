@@ -5,6 +5,7 @@ const footerNav = [
   { label: 'Our Story', href: '/our-story' },
   { label: 'Blog', href: '/blog' },
   { label: 'Stories', href: '/stories' },
+  { label: 'Track Order', href: 'https://wa.me/917483100651?text=Hi%20Healing%20Soil%2C%20I%27d%20like%20to%20check%20the%20status%20of%20my%20order.' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/contact' },
 ]

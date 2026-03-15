@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { useOrderStore } from '@/lib/store'
+
 const navLinks = [
   { label: 'Shop', href: '/shop' },
   { label: 'Our Story', href: '/our-story' },
@@ -15,6 +17,7 @@ const navLinks = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
+  const itemCount = useOrderStore((s) => s.itemCount)
 
   return (
     <header className="w-full bg-white border-b border-[#E8E0D5] relative z-50">
@@ -38,8 +41,8 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`font-sans text-sm font-medium transition-colors hover:text-green-primary ${
-                pathname === link.href ? 'text-green-primary' : 'text-text-dark'
+              className={`font-sans text-sm font-medium transition-colors hover:text-[#1E5631] ${
+                pathname === link.href ? 'text-[#1E5631]' : 'text-[#1A1A14]'
               }`}
             >
               {link.label}
@@ -48,12 +51,25 @@ export default function Header() {
         </nav>
 
         {/* Right side */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link
+            href="/order"
+            className="relative flex items-center justify-center p-2 text-[#1A1A14] hover:text-[#1E5631] transition-colors"
+            aria-label="View Cart"
+          >
+            <CartIcon />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1E5631] text-[10px] font-bold text-white">
+                {itemCount}
+              </span>
+            )}
+          </Link>
+
           <a
             href="https://wa.me/917483100651"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-green-primary px-4 py-2 text-xs font-medium text-white hover:bg-green-primary/90 transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#1E5631] px-4 py-2 text-xs font-medium text-white hover:bg-[#1E5631]/90 transition-colors"
           >
             <WhatsAppIcon />
             WhatsApp
@@ -61,23 +77,23 @@ export default function Header() {
 
           {/* Hamburger */}
           <button
-            className="md:hidden flex flex-col justify-center gap-[5px] p-1"
+            className="md:hidden flex flex-col justify-center gap-[5px] p-1 ml-1"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
             <span
-              className={`block h-0.5 w-6 bg-text-dark transition-all duration-200 ${
+              className={`block h-0.5 w-6 bg-[#1A1A14] transition-all duration-200 ${
                 menuOpen ? 'translate-y-[7px] rotate-45' : ''
               }`}
             />
             <span
-              className={`block h-0.5 w-6 bg-text-dark transition-all duration-200 ${
+              className={`block h-0.5 w-6 bg-[#1A1A14] transition-all duration-200 ${
                 menuOpen ? 'opacity-0' : ''
               }`}
             />
             <span
-              className={`block h-0.5 w-6 bg-text-dark transition-all duration-200 ${
+              className={`block h-0.5 w-6 bg-[#1A1A14] transition-all duration-200 ${
                 menuOpen ? '-translate-y-[7px] -rotate-45' : ''
               }`}
             />
@@ -94,8 +110,8 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`font-sans text-sm font-medium transition-colors hover:text-green-primary ${
-                  pathname === link.href ? 'text-green-primary' : 'text-text-dark'
+                className={`font-sans text-sm font-medium transition-colors hover:text-[#1E5631] ${
+                  pathname === link.href ? 'text-[#1E5631]' : 'text-[#1A1A14]'
                 }`}
               >
                 {link.label}
@@ -105,7 +121,7 @@ export default function Header() {
               href="https://wa.me/917483100651"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-green-primary px-4 py-2 text-xs font-medium text-white"
+              className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#1E5631] px-4 py-2 text-xs font-medium text-white"
             >
               <WhatsAppIcon />
               WhatsApp
@@ -114,6 +130,16 @@ export default function Header() {
         </div>
       )}
     </header>
+  )
+}
+
+function CartIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
   )
 }
 

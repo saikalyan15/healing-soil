@@ -87,7 +87,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               : 'bg-[#D6CFC4] text-[#999] cursor-not-allowed'
           }`}
         >
-          {added ? 'Added ✓' : 'Add to Order'}
+          {added ? 'Added to Cart ✓' : 'Add to Cart'}
         </button>
       </div>
     </div>

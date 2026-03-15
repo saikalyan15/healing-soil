@@ -12,75 +12,76 @@ export type OrderItem = {
 
 type OrderStore = {
   items: OrderItem[]
+  total: number
+  itemCount: number
   addItem: (product: Product) => void
   removeItem: (product_id: string) => void
   updateQty: (product_id: string, qty: number) => void
   clearOrder: () => void
-  total: number
-  itemCount: number
 }
+
+const calculateTotals = (items: OrderItem[]) => ({
+  total: items.reduce((sum, i) => sum + i.price * i.qty, 0),
+  itemCount: items.reduce((sum, i) => sum + i.qty, 0),
+})
 
 export const useOrderStore = create<OrderStore>()(
   persist(
     (set, get) => ({
       items: [],
+      total: 0,
+      itemCount: 0,
 
       addItem: (product) => {
-        const existing = get().items.find((i) => i.product_id === product.id)
+        const { items } = get()
+        const existing = items.find((i) => i.product_id === product.id)
+        let nextItems: OrderItem[]
+
         if (existing) {
-          set((state) => ({
-            items: state.items.map((i) =>
-              i.product_id === product.id ? { ...i, qty: i.qty + 1 } : i
-            ),
-          }))
+          nextItems = items.map((i) =>
+            i.product_id === product.id ? { ...i, qty: i.qty + 1 } : i
+          )
         } else {
-          set((state) => ({
-            items: [
-              ...state.items,
-              {
-                product_id: product.id,
-                product_name: product.name,
-                qty: 1,
-                price: product.price,
-                image_url: product.image_url,
-              },
-            ],
-          }))
+          nextItems = [
+            ...items,
+            {
+              product_id: product.id,
+              product_name: product.name,
+              qty: 1,
+              price: product.price,
+              image_url: product.image_url,
+            },
+          ]
         }
+        set({ items: nextItems, ...calculateTotals(nextItems) })
       },
 
-      removeItem: (product_id) =>
-        set((state) => ({
-          items: state.items.filter((i) => i.product_id !== product_id),
-        })),
+      removeItem: (product_id) => {
+        const nextItems = get().items.filter((i) => i.product_id !== product_id)
+        set({ items: nextItems, ...calculateTotals(nextItems) })
+      },
 
       updateQty: (product_id, qty) => {
         if (qty <= 0) {
           get().removeItem(product_id)
           return
         }
-        set((state) => ({
-          items: state.items.map((i) =>
-            i.product_id === product_id ? { ...i, qty } : i
-          ),
-        }))
+        const nextItems = get().items.map((i) =>
+          i.product_id === product_id ? { ...i, qty } : i
+        )
+        set({ items: nextItems, ...calculateTotals(nextItems) })
       },
 
-      clearOrder: () => set({ items: [] }),
-
-      // Derived — computed from items on each access
-      get total() {
-        return get().items.reduce((sum, i) => sum + i.price * i.qty, 0)
-      },
-
-      get itemCount() {
-        return get().items.reduce((sum, i) => sum + i.qty, 0)
-      },
+      clearOrder: () => set({ items: [], total: 0, itemCount: 0 }),
     }),
     {
       name: 'healing-soil-order',
-      // Only persist the items array; derived values recompute on access
-      partialize: (state) => ({ items: state.items }),
+      // Persist the essential state
+      partialize: (state) => ({ 
+        items: state.items,
+        total: state.total,
+        itemCount: state.itemCount 
+      }),
     }
   )
 )
