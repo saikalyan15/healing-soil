@@ -90,8 +90,9 @@ export default function OrderForm() {
     const normalizedPhone = normalizePhone(phone)
     const fullAddress = `${address.trim()}, ${state}`
 
-    const lineItems: LineItem[] = items.map((i) => ({
+    const lineItems = items.map((i) => ({
       product_id: i.product_id,
+      product_slug: i.product_slug,
       price: i.price,
       qty: i.qty,
     }))

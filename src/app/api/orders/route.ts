@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         address: address,
       },
       items: items.map((i: any) => ({
-        product_id: i.product_id,
+        product_id: i.product_slug, // API expects the SLUG as the ID
         price: i.price,
         qty: i.qty,
       })),
