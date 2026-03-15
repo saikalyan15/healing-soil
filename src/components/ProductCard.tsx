@@ -12,6 +12,7 @@ type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   function handleAddToOrder() {
     addItem(product)
@@ -20,6 +21,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   const displayPrice = product.price_range || `₹${product.price}`
+  const isLong = product.description.length > 80
 
   return (
     <div className="group flex flex-col rounded-lg border border-[#D6CFC4] bg-white overflow-hidden transition-shadow hover:shadow-md">
@@ -54,9 +56,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-serif text-[20px] text-[#1A1A14] leading-snug">
           {product.name}
         </h3>
-        <p className="font-sans text-[14px] text-[#666666] leading-relaxed line-clamp-2 flex-1">
-          {product.description}
-        </p>
+        <div className="flex-1">
+          <p className={`font-sans text-[14px] text-[#666666] leading-relaxed ${!expanded && isLong ? 'line-clamp-2' : ''}`}>
+            {product.description}
+          </p>
+          {isLong && (
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              className="mt-1 font-sans text-xs text-[#1E5631] hover:underline"
+            >
+              {expanded ? 'Show less' : 'Read more'}
+            </button>
+          )}
+        </div>
         <p className="font-sans text-sm font-bold text-[#1E5631] mt-1">
           {displayPrice}
         </p>

@@ -81,7 +81,9 @@ function normalise(raw: SoapLedgerProduct): Product {
 export async function getProducts(): Promise<Product[]> {
   const res = await fetch(`${getApiBase()}/api/products`, {
     headers: getApiHeaders(),
-    next: { revalidate: 86400 }, // 24 hours
+    ...(process.env.NODE_ENV === 'development'
+      ? { cache: 'no-store' }
+      : { next: { revalidate: 86400 } }), // 24 hours in production
   })
 
   if (!res.ok) {

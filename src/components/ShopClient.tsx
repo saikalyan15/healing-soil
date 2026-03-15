@@ -17,6 +17,17 @@ export default function ShopClient({ products }: ShopClientProps) {
 
   return (
     <div>
+      {/* Handmade variation notice */}
+      <div className="mb-8 flex items-start gap-3 rounded-lg border border-[#D6CFC4] bg-white px-4 py-3">
+        <span className="mt-0.5 text-lg leading-none">🌿</span>
+        <p className="font-sans text-[13px] leading-relaxed text-[#666666]">
+          <span className="font-medium text-[#1A1A14]">Every bar is made to order by hand.</span>{' '}
+          Images are illustrative — natural ingredients mean the colour, texture and marbling of
+          your soap will vary slightly from what you see. That variation is not a flaw; it is proof
+          it was made fresh, just for you.
+        </p>
+      </div>
+
       {/* Category filter tabs */}
       {categories.length > 1 && (
         <div className="mb-8 flex flex-wrap gap-2">
