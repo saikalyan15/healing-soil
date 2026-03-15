@@ -8,6 +8,11 @@ export type LineItem = {
   qty: number
 }
 
+/** Specific type for the WhatsApp message which needs the human-readable name */
+export type WhatsAppLineItem = LineItem & {
+  product_name: string
+}
+
 /** Payload sent to SoapLedger /api/orders/incoming */
 export type OrderPayload = {
   customer: {
@@ -48,10 +53,6 @@ function getApiHeaders(): HeadersInit {
     'x-api-key': key,
     'Content-Type': 'application/json',
   }
-}
-
-function orderTotal(items: LineItem[]): number {
-  return items.reduce((sum, item) => sum + item.unit_price * item.quantity, 0)
 }
 
 // ─── CallMeBot notification ────────────────────────────────────────────────────
@@ -148,15 +149,15 @@ export async function submitOrder(payload: OrderPayload): Promise<string> {
 export function buildWhatsAppMessage(
   orderId: string,
   customer: { name: string; email?: string },
-  items: LineItem[],
+  items: WhatsAppLineItem[],
   shipping: ShippingAddress,
   shippingCost: number
 ): string {
-  const subtotal = items.reduce((sum, item) => sum + item.unit_price * item.quantity, 0)
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0)
   const total = subtotal + shippingCost
 
   const itemLines = items
-    .map((i) => `• ${i.product_name} ×${i.quantity} — ₹${i.unit_price * i.quantity}`)
+    .map((i) => `• ${i.product_name} ×${i.qty} — ₹${i.price * i.qty}`)
     .join('\n')
 
   return [

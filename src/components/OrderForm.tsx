@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
-import { buildWhatsAppMessage, type LineItem, type ShippingAddress } from '@/lib/orders'
+import { buildWhatsAppMessage, type LineItem, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -92,19 +92,21 @@ export default function OrderForm() {
 
     const lineItems: LineItem[] = items.map((i) => ({
       product_id: i.product_id,
+      price: i.price,
+      qty: i.qty,
+    }))
+
+    const whatsappItems: WhatsAppLineItem[] = items.map((i) => ({
+      product_id: i.product_id,
       product_name: i.product_name,
-      slug: i.product_slug,
-      quantity: i.qty,
-      unit_price: i.price,
+      price: i.price,
+      qty: i.qty,
     }))
 
     const shippingAddress: ShippingAddress = {
       name: name.trim(),
       phone: normalizedPhone,
       address_line_1: fullAddress,
-      city: '',
-      state: '',
-      pincode: '',
     }
 
     try {
@@ -131,7 +133,7 @@ export default function OrderForm() {
       const waMessage = buildWhatsAppMessage(
         order_id,
         { name: name.trim() },
-        lineItems,
+        whatsappItems,
         shippingAddress,
         shipping
       )
