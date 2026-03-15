@@ -34,10 +34,7 @@ type SoapLedgerProduct = {
   category: string
 }
 
-/** Envelope the SoapLedger list endpoint returns */
-type SoapLedgerProductsResponse = {
-  value: SoapLedgerProduct[] // API uses "value", not "data"
-}
+// The SoapLedger list endpoint returns a plain JSON array (no envelope)
 
 // ─── Internal helpers ──────────────────────────────────────────────────────────
 
@@ -93,8 +90,8 @@ export async function getProducts(): Promise<Product[]> {
     )
   }
 
-  const json: SoapLedgerProductsResponse = await res.json()
-  return (json.value ?? []).map(normalise)
+  const json: SoapLedgerProduct[] = await res.json()
+  return (Array.isArray(json) ? json : []).map(normalise)
 }
 
 /**
