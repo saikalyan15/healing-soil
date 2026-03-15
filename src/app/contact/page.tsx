@@ -22,8 +22,8 @@ export default function ContactPage() {
           Get in touch
         </h1>
         <p className="mb-12 font-sans text-lg leading-relaxed text-[#666666]">
-          We are a small team — just Deepanjali making the soaps and Sai handling everything else.
-          The fastest way to reach us is WhatsApp.
+          Every bar of soap is handmade with care on our farm in South Goa.
+          The fastest way to reach Healing Soil is WhatsApp.
         </p>
 
         {/* Primary Contact Options */}

@@ -4,7 +4,7 @@ import WhatsAppFallback from './WhatsAppFallback'
 
 export const metadata: Metadata = {
   title: 'Order Received — Healing Soil',
-  description: 'Your order has been received. Deepanjali will confirm availability and contact you on WhatsApp shortly.',
+  description: 'Your order has been received. Healing Soil will confirm availability and contact you on WhatsApp shortly.',
   robots: { index: false, follow: false },
 }
 
@@ -51,7 +51,7 @@ export default function ConfirmationPage({ searchParams }: Props) {
           Your order has been recorded.
         </p>
         <p className="mb-10 font-sans text-sm text-[#666666]">
-          Deepanjali will confirm availability and get back to you on WhatsApp shortly.
+          Healing Soil will check your order and get back to you on WhatsApp shortly.
         </p>
 
         {/* WhatsApp fallback box */}
@@ -61,7 +61,7 @@ export default function ConfirmationPage({ searchParams }: Props) {
           </p>
           <WhatsAppFallback />
           <p className="mt-4 font-sans text-sm text-[#666666]">
-            Or reach Deepanjali directly:{' '}
+            Or reach Healing Soil directly:{' '}
             <a
               href="https://wa.me/917483100651"
               target="_blank"
@@ -79,28 +79,28 @@ export default function ConfirmationPage({ searchParams }: Props) {
             <div className="flex gap-4">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">1</span>
               <div>
-                <p className="font-sans text-sm font-bold text-[#1A1A14]">WhatsApp Confirmation</p>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Confirmation & Payment</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  Deepanjali will message you to confirm the items in your order are in stock and ready to be packed.
+                  We will message you to confirm and send a UPI QR code. 
+                  <span className="ml-1 font-medium text-[#1A1A14]">Please note: We do not offer Cash on Delivery (COD).</span>
                 </p>
               </div>
             </div>
             <div className="flex gap-4">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">2</span>
               <div>
-                <p className="font-sans text-sm font-bold text-[#1A1A14]">UPI Payment</p>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Made to Order</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  We will send you a UPI QR code or bank details. 
-                  <span className="ml-1 font-medium text-[#1A1A14]">Please note: We do not offer Cash on Delivery (COD).</span>
+                  Every bar is handmade fresh just for you. Total time to reach you via India Post is 8–15 days.
                 </p>
               </div>
             </div>
             <div className="flex gap-4">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">3</span>
               <div>
-                <p className="font-sans text-sm font-bold text-[#1A1A14]">Shipping from Goa</p>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Speed Post from Goa</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  Once payment is confirmed, your fresh soaps are shipped from South Goa, and we send you the tracking link.
+                  We ship via India Post Speed Post from South Goa. You will receive a tracking link as soon as your order is on its way.
                 </p>
               </div>
             </div>

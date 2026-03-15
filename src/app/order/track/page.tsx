@@ -30,17 +30,17 @@ export default function TrackOrderPage() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1E5631] px-8 py-4 font-sans text-base font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
           >
             <WhatsAppIcon />
-            Chat with Deepanjali
+            Chat with Healing Soil
           </a>
 
           <div className="mt-8 border-t border-[#F7F5F0] pt-6 text-left">
             <h3 className="mb-3 font-sans text-sm font-bold text-[#1A1A14]">Our Process:</h3>
             <ul className="space-y-3">
               {[
-                { step: '1', title: 'Order Received', desc: 'We check stock and current batch status.' },
-                { step: '2', title: 'WhatsApp Confirm', desc: 'We message you to confirm and send a UPI QR code.' },
-                { step: '3', title: 'Payment', desc: 'Once paid, your order is scheduled for packing.' },
-                { step: '4', title: 'Shipping', desc: 'We ship from South Goa and send you the tracking link.' },
+                { step: '1', title: 'Order Received', desc: 'We check your order and confirm details on WhatsApp.' },
+                { step: '2', title: 'Payment', desc: 'We send a UPI QR code. No Cash on Delivery (COD) is available.' },
+                { step: '3', title: 'Made to Order', desc: 'Your soaps are handmade fresh. Total time to reach you is 8–15 days.' },
+                { step: '4', title: 'Speed Post', desc: 'We ship from South Goa via India Post and send a tracking link.' },
               ].map((item) => (
                 <li key={item.step} className="flex gap-3">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F7F5F0] text-[10px] font-bold text-[#1E5631]">

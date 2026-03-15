@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import { buildWhatsAppMessage, type LineItem, type ShippingAddress } from '@/lib/orders'
@@ -46,6 +46,8 @@ export default function OrderForm() {
   const router = useRouter()
   const items = useOrderStore((s) => s.items)
   const clearOrder = useOrderStore((s) => s.clearOrder)
+  const updateQty = useOrderStore((s) => s.updateQty)
+  const removeItem = useOrderStore((s) => s.removeItem)
 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -54,6 +56,13 @@ export default function OrderForm() {
   const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Redirect if empty
+  useEffect(() => {
+    if (items.length === 0) {
+      router.push('/shop')
+    }
+  }, [items.length, router])
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
   
@@ -152,26 +161,68 @@ export default function OrderForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Order summary */}
       <div className="rounded-lg bg-[#F7F5F0] p-5">
-        <h2 className="font-serif text-xl text-[#1A1A14] mb-3">Order Summary</h2>
-        {items.length === 0 ? (
-          <p className="font-sans text-sm text-[#666666]">No items in your order yet.</p>
-        ) : (
-          <ul className="mb-4 space-y-2">
-            {items.map((item) => (
-              <li
-                key={item.product_id}
-                className="flex items-baseline justify-between font-sans text-sm text-[#1A1A14]"
-              >
-                <span>
-                  {item.product_name}{' '}
-                  <span className="text-[#666666]">×{item.qty}</span>
-                </span>
-                <span>₹{(item.price * item.qty).toLocaleString('en-IN')}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <div className="space-y-1.5 border-t border-[#D6CFC4] pt-3">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="font-serif text-xl text-[#1A1A14]">Order Summary</h2>
+          <button
+            type="button"
+            onClick={() => clearOrder()}
+            className="font-sans text-xs text-[#999] hover:text-red-500 transition-colors underline"
+          >
+            Empty Cart
+          </button>
+        </div>
+        <ul className="mb-4 space-y-4">
+          {items.map((item) => (
+            <li
+              key={item.product_id}
+              className="flex items-center justify-between gap-4 border-b border-[#D6CFC4] pb-4 last:border-0 last:pb-0"
+            >
+              <div className="flex-1">
+                <p className="font-sans text-sm font-medium text-[#1A1A14]">{item.product_name}</p>
+                <p className="font-sans text-xs text-[#666666]">₹{item.price.toLocaleString('en-IN')} each</p>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <div className="flex items-center rounded border border-[#D6CFC4] bg-white">
+                  <button
+                    type="button"
+                    onClick={() => updateQty(item.product_id, item.qty - 1)}
+                    className="px-2 py-1 text-[#666666] hover:bg-[#F7F5F0]"
+                  >
+                    –
+                  </button>
+                  <span className="min-w-[24px] text-center font-sans text-xs font-medium">
+                    {item.qty}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => updateQty(item.product_id, item.qty + 1)}
+                    className="px-2 py-1 text-[#666666] hover:bg-[#F7F5F0]"
+                  >
+                    +
+                  </button>
+                </div>
+                
+                <button
+                  type="button"
+                  onClick={() => removeItem(item.product_id)}
+                  className="ml-1 text-[#999] hover:text-red-500 transition-colors"
+                  aria-label="Remove item"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                  </svg>
+                </button>
+              </div>
+
+              <span className="min-w-[70px] text-right font-sans text-sm font-medium">
+                ₹{(item.price * item.qty).toLocaleString('en-IN')}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="space-y-1.5 border-t border-[#D6CFC4] pt-4">
           <div className="flex justify-between font-sans text-sm text-[#666666]">
             <span>Subtotal</span>
             <span>₹{subtotal.toLocaleString('en-IN')}</span>
@@ -206,7 +257,7 @@ export default function OrderForm() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Priya Nair"
+            placeholder="Enter your full name"
             autoComplete="name"
             className="w-full rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
           />
@@ -220,7 +271,7 @@ export default function OrderForm() {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="98765 43210"
+            placeholder="10-digit mobile number"
             autoComplete="tel"
             className="w-full rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
           />

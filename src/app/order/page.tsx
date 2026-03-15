@@ -4,7 +4,7 @@ import OrderPageClient from '@/components/OrderPageClient'
 export const metadata: Metadata = {
   title: 'Place Your Order — Healing Soil',
   description:
-    'Review your order and send it through. Deepanjali will confirm availability before any payment is taken.',
+    'Review your order and send it through. Healing Soil will confirm availability before any payment is taken.',
   robots: { index: false, follow: false },
 }
 

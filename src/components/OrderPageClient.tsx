@@ -55,9 +55,10 @@ export default function OrderPageClient() {
             <ul className="space-y-3">
               {[
                 { title: 'Place Order', desc: 'Confirm your items and delivery address.' },
-                { title: 'WhatsApp Chat', desc: 'A pre-filled message will open for you to send to Deepanjali.' },
-                { title: 'Confirmation', desc: 'We check stock and send you a UPI QR code for payment.' },
-                { title: 'Delivery', desc: 'Your soaps are packed and shipped from South Goa.' },
+                { title: 'Confirmation', desc: 'We check your order and send you a UPI QR code for payment.' },
+                { title: 'Made to Order', desc: 'Every bar is handmade fresh. Total time to reach you is 8–15 days.' },
+                { title: 'Shipping', desc: 'Your soaps are sent via India Post Speed Post from South Goa.' },
+                { title: 'Tracking', desc: 'We message you the tracking link as soon as it is dispatched.' },
               ].map((step, i) => (
                 <li key={i} className="flex gap-3 font-sans text-sm">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C9A84C] text-[10px] font-bold text-white">
@@ -73,7 +74,7 @@ export default function OrderPageClient() {
           </div>
 
           <p className="border-t border-[#D6CFC4] pt-4 font-sans text-xs text-[#666666]">
-            Questions? WhatsApp Deepanjali at{' '}
+            Questions? WhatsApp Healing Soil at{' '}
             <a
               href="https://wa.me/917483100651"
               target="_blank"
