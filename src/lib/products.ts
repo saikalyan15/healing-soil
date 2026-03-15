@@ -79,14 +79,17 @@ function normalise(raw: SoapLedgerProduct): Product {
 
 /**
  * Fetch all products from SoapLedger.
- * Cached with ISR — revalidates once every 24 hours.
+ * Cached with ISR — revalidates once every 24 hours or on-demand via tag.
  */
 export async function getProducts(): Promise<Product[]> {
   const res = await fetch(`${getApiBase()}/api/products`, {
     headers: getApiHeaders(),
-    ...(process.env.NODE_ENV === 'development'
-      ? { cache: 'no-store' }
-      : { next: { revalidate: 86400 } }), // 24 hours in production
+    next: {
+      revalidate: 86400, // 24 hours fallback
+      tags: ['products'], // Enable on-demand revalidation
+    },
+    // In development, we bypass cache entirely
+    ...(process.env.NODE_ENV === 'development' && { cache: 'no-store' }),
   })
 
   if (!res.ok) {
