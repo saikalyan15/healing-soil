@@ -5,6 +5,7 @@ import type { Product } from './products'
 export type OrderItem = {
   product_id: string
   product_name: string
+  product_slug: string
   qty: number
   price: number
   image_url: string
@@ -47,6 +48,7 @@ export const useOrderStore = create<OrderStore>()(
             {
               product_id: product.id,
               product_name: product.name,
+              product_slug: product.slug,
               qty: 1,
               price: product.price,
               image_url: product.image_url,

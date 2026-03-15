@@ -3,28 +3,27 @@
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
 export type LineItem = {
-  product_id: string
-  product_name: string
-  slug: string
-  quantity: number
-  unit_price: number       // INR
-}
-
-export type ShippingAddress = {
-  name: string
-  phone: string            // E.164 without + e.g. "917483100651"
-  address_line_1: string
-  address_line_2?: string
+  product_id: string       // Database ID from SoapLedger
+  price: number            // Unit price
+  qty: number
 }
 
 /** Payload sent to SoapLedger /api/orders/incoming */
 export type OrderPayload = {
-  customer_name: string
-  customer_phone: string   // E.164 without +
-  customer_email?: string
+  customer: {
+    name: string
+    phone: string
+    address: string
+  }
   items: LineItem[]
-  shipping_address: ShippingAddress
-  source: 'website'        // literal — always "website" for this integration
+  shipping: number         // Shipping cost
+  source: string           // e.g. "Website Order"
+}
+
+export type ShippingAddress = {
+  name: string
+  phone: string
+  address_line_1: string
 }
 
 /** Shape of the SoapLedger order creation response */
@@ -75,17 +74,14 @@ async function sendCallMeBotNotification(
       return
     }
 
-    const total = orderTotal(payload.items)
-
-    const itemLines = payload.items
-      .map((i) => `  • ${i.product_name} ×${i.quantity} @ ₹${i.unit_price}`)
-      .join('\n')
+    const subtotal = payload.items.reduce((sum, item) => sum + item.price * item.qty, 0)
+    const total = subtotal + payload.shipping
 
     const message = [
       `🧼 New Order — ${ref}`,
-      `Customer: ${payload.customer_name} (${payload.customer_phone})`,
-      `Items:\n${itemLines}`,
-      `Total: ₹${total}`,
+      `Customer: ${payload.customer.name} (${payload.customer.phone})`,
+      `Items: ${payload.items.length}`,
+      `Total: ₹${total} (inc. ₹${payload.shipping} shipping)`,
       `View: https://soap-ledger.vercel.app/orders/${orderId}`,
     ].join('\n')
 

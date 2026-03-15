@@ -4,18 +4,21 @@ import { submitOrder, type OrderPayload } from '@/lib/orders'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { customer_name, customer_phone, items, address } = body
+    const { customer_name, customer_phone, items, address, shipping } = body
 
     const payload: OrderPayload = {
-      customer_name,
-      customer_phone,
-      items,
-      shipping_address: {
+      customer: {
         name: customer_name,
         phone: customer_phone,
-        address_line_1: address,
+        address: address,
       },
-      source: 'website',
+      items: items.map((i: any) => ({
+        product_id: i.product_id,
+        price: i.unit_price,
+        qty: i.quantity,
+      })),
+      shipping: shipping,
+      source: 'Website Order',
     }
 
     const order_id = await submitOrder(payload)

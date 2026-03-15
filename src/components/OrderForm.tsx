@@ -93,7 +93,7 @@ export default function OrderForm() {
     const lineItems: LineItem[] = items.map((i) => ({
       product_id: i.product_id,
       product_name: i.product_name,
-      slug: i.product_id,
+      slug: i.product_slug,
       quantity: i.qty,
       unit_price: i.price,
     }))
@@ -102,6 +102,9 @@ export default function OrderForm() {
       name: name.trim(),
       phone: normalizedPhone,
       address_line_1: fullAddress,
+      city: '',
+      state: '',
+      pincode: '',
     }
 
     try {
@@ -113,6 +116,7 @@ export default function OrderForm() {
           customer_phone: normalizedPhone,
           items: lineItems,
           address: fullAddress,
+          shipping: shipping,
         }),
       })
 
