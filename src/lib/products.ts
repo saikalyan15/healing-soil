@@ -2,12 +2,12 @@
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
-/** Matches the SoapLedger API product response shape */
+/** Normalised product shape used throughout the app */
 export type Product = {
   id: string
   name: string
   slug: string
-  base: string              // e.g. "Goat Milk", "Shea Butter", "Castile"
+  base: string              // e.g. "Goat Milk", "Shea Butter", "Glycerine"
   price: number             // base price in INR
   price_range: string       // display string e.g. "₹250 – ₹350"
   description: string
@@ -18,10 +18,25 @@ export type Product = {
   category: string          // e.g. "face", "body", "hair", "gift"
 }
 
+/** Raw shape returned by the SoapLedger API — field names differ from our internal type */
+type SoapLedgerProduct = {
+  id: string
+  name: string
+  slug: string
+  base_type: string         // API calls it base_type, we normalise to base
+  price: string             // API returns a numeric string e.g. "250.00"
+  price_range: string | null
+  short_description: string // API calls it short_description, we normalise to description
+  ingredients: string[]
+  image_url: string
+  in_stock: boolean
+  is_featured: boolean
+  category: string
+}
+
 /** Envelope the SoapLedger list endpoint returns */
 type SoapLedgerProductsResponse = {
-  data: Product[]
-  total: number
+  value: SoapLedgerProduct[] // API uses "value", not "data"
 }
 
 // ─── Internal helpers ──────────────────────────────────────────────────────────
@@ -38,6 +53,25 @@ function getApiHeaders(): HeadersInit {
   return {
     'x-api-key': key,
     'Content-Type': 'application/json',
+  }
+}
+
+/** Map a raw SoapLedger product to the normalised Product type */
+function normalise(raw: SoapLedgerProduct): Product {
+  const price = parseFloat(raw.price) || 0
+  return {
+    id: raw.id,
+    name: raw.name,
+    slug: raw.slug,
+    base: raw.base_type,
+    price,
+    price_range: raw.price_range ?? `₹${price}`,
+    description: raw.short_description,
+    ingredients: raw.ingredients ?? [],
+    image_url: raw.image_url ?? '',
+    in_stock: raw.in_stock,
+    is_featured: raw.is_featured,
+    category: raw.category,
   }
 }
 
@@ -60,7 +94,7 @@ export async function getProducts(): Promise<Product[]> {
   }
 
   const json: SoapLedgerProductsResponse = await res.json()
-  return json.data ?? []
+  return (json.value ?? []).map(normalise)
 }
 
 /**
