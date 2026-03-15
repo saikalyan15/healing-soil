@@ -14,8 +14,8 @@ export async function POST(req: NextRequest) {
       },
       items: items.map((i: any) => ({
         product_id: i.product_id,
-        price: i.unit_price,
-        qty: i.quantity,
+        price: i.price,
+        qty: i.qty,
       })),
       shipping: shipping,
       source: 'Website Order',

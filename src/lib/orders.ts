@@ -115,11 +115,14 @@ async function sendCallMeBotNotification(
  * @returns The SoapLedger `order_id` string on success
  */
 export async function submitOrder(payload: OrderPayload): Promise<string> {
+  const body = JSON.stringify(payload)
+  console.log('[SoapLedger Request Payload]:', body)
+
   // 1. POST to SoapLedger
   const res = await fetch(`${getApiBase()}/api/orders/incoming`, {
     method: 'POST',
     headers: getApiHeaders(),
-    body: JSON.stringify({ ...payload, source: 'website' }),
+    body,
   })
 
   if (!res.ok) {
