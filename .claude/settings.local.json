@@ -8,7 +8,8 @@
       "WebFetch(domain:soap-ledger.vercel.app)",
       "Bash(curl:*)",
       "Bash(powershell -Command \"Invoke-RestMethod -Uri 'https://soap-ledger.vercel.app/api/products' -Headers @{'x-api-key'='0cb061d4288774790f755fc7b291a6e5a505bf82d7249a850e6659987d54b16a'} -Method Get | ConvertTo-Json -Depth 3\" 2>&1)",
-      "Bash(where magick:*)"
+      "Bash(where magick:*)",
+      "Bash(grep:*)"
     ]
   }
 }

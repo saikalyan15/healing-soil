@@ -16,6 +16,7 @@ export type Product = {
   in_stock: boolean
   is_featured: boolean
   category: string          // e.g. "face", "body", "hair", "gift"
+  display_order: number     // controls sort order in the shop
 }
 
 /** Raw shape returned by the SoapLedger API — field names differ from our internal type */
@@ -32,6 +33,7 @@ type SoapLedgerProduct = {
   in_stock: boolean
   is_featured: boolean
   category: string
+  display_order: number | null
 }
 
 // The SoapLedger list endpoint returns a plain JSON array (no envelope)
@@ -69,6 +71,7 @@ function normalise(raw: SoapLedgerProduct): Product {
     in_stock: raw.in_stock,
     is_featured: raw.is_featured,
     category: raw.category,
+    display_order: raw.display_order ?? 9999,
   }
 }
 
@@ -93,7 +96,9 @@ export async function getProducts(): Promise<Product[]> {
   }
 
   const json: SoapLedgerProduct[] = await res.json()
-  return (Array.isArray(json) ? json : []).map(normalise)
+  return (Array.isArray(json) ? json : [])
+    .map(normalise)
+    .sort((a, b) => a.display_order - b.display_order)
 }
 
 /**
