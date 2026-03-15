@@ -22,6 +22,7 @@ export type OrderPayload = {
   }
   items: LineItem[]
   shipping: number         // Shipping cost
+  notes?: string           // Customer instructions
   source: string           // e.g. "Website Order"
 }
 
@@ -112,10 +113,18 @@ async function sendCallMeBotNotification(
  * - If SoapLedger POST fails → throws (caller should show error to user)
  * - If CallMeBot fails      → logs error, does NOT throw (order is never lost)
  *
- * @returns The SoapLedger `order_id` string on success
+ * @returns Object with order_id (UUID) and ref (human-readable)
  */
-export async function submitOrder(payload: OrderPayload): Promise<string> {
-  const body = JSON.stringify(payload)
+export async function submitOrder(payload: OrderPayload): Promise<{ order_id: string; ref: string }> {
+  // Ensure the source is explicitly mentioned in the notes for easy searching in dashboard
+  const enrichedPayload = {
+    ...payload,
+    notes: payload.notes 
+      ? `${payload.notes} (via Website)`
+      : 'Order via Website'
+  }
+
+  const body = JSON.stringify(enrichedPayload)
   console.log('[SoapLedger Request Payload]:', body)
 
   // 1. POST to SoapLedger
@@ -137,7 +146,7 @@ export async function submitOrder(payload: OrderPayload): Promise<string> {
   // 2. Fire CallMeBot notification (non-blocking, errors are swallowed)
   await sendCallMeBotNotification(order.order_id, order.ref, payload)
 
-  return order.order_id
+  return { order_id: order.order_id, ref: order.ref }
 }
 
 // ─── WhatsApp deep-link builder ────────────────────────────────────────────────
@@ -154,7 +163,8 @@ export function buildWhatsAppMessage(
   customer: { name: string; email?: string },
   items: WhatsAppLineItem[],
   shipping: ShippingAddress,
-  shippingCost: number
+  shippingCost: number,
+  notes?: string
 ): string {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0)
   const total = subtotal + shippingCost
@@ -179,6 +189,8 @@ export function buildWhatsAppMessage(
     `${shipping.address_line_1}`,
     `Phone: ${shipping.phone}`,
     ``,
+    notes ? `Note: ${notes}` : '',
+    notes ? `` : '',
     `Order ref: ${orderId}`,
     customer.email ? `Email: ${customer.email}` : '',
   ]
