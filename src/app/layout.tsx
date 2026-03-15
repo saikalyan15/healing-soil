@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import TrustStrip from '@/components/TrustStrip'
 import Footer from '@/components/Footer'
 import OrderTray from '@/components/OrderTray'
+import WelcomeBanner from '@/components/WelcomeBanner'
 
 const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
+        <WelcomeBanner />
         <Header />
         <TrustStrip />
         <main className="pb-[60px]">{children}</main>

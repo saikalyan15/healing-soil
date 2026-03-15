@@ -58,7 +58,7 @@ export default function OrderPageClient() {
                 { title: 'Confirmation', desc: 'We check your order and send you a UPI QR code for payment.' },
                 { title: 'Made to Order', desc: 'Every bar is handmade fresh. Total time to reach you is 8–15 days.' },
                 { title: 'Shipping', desc: 'Your soaps are sent via India Post Speed Post from South Goa.' },
-                { title: 'Tracking', desc: 'We message you the tracking link as soon as it is dispatched.' },
+                { title: 'Tracking', desc: 'India Post Speed Post notifies you via SMS on the day of delivery.' },
               ].map((step, i) => (
                 <li key={i} className="flex gap-3 font-sans text-sm">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C9A84C] text-[10px] font-bold text-white">

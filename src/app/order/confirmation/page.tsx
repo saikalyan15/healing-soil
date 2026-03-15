@@ -100,7 +100,7 @@ export default function ConfirmationPage({ searchParams }: Props) {
               <div>
                 <p className="font-sans text-sm font-bold text-[#1A1A14]">Speed Post from Goa</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  We ship via India Post Speed Post from South Goa. You will receive a tracking link as soon as your order is on its way.
+                  We ship via India Post Speed Post from South Goa. India Post will notify you via SMS on the day of delivery.
                 </p>
               </div>
             </div>
