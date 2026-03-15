@@ -116,15 +116,7 @@ async function sendCallMeBotNotification(
  * @returns Object with order_id (UUID) and ref (human-readable)
  */
 export async function submitOrder(payload: OrderPayload): Promise<{ order_id: string; ref: string }> {
-  // Ensure the source is explicitly mentioned in the notes for easy searching in dashboard
-  const enrichedPayload = {
-    ...payload,
-    notes: payload.notes 
-      ? `${payload.notes} (via Website)`
-      : 'Order via Website'
-  }
-
-  const body = JSON.stringify(enrichedPayload)
+  const body = JSON.stringify(payload)
   console.log('[SoapLedger Request Payload]:', body)
 
   // 1. POST to SoapLedger
