@@ -92,8 +92,38 @@ export default function BlogPostPage({ params }: Props) {
 
   const pullQuote = reviews[2]
 
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.featuredImage || 'https://healingsoil.in/og-image.jpg',
+    datePublished: post.date,
+    author: {
+      '@type': 'Organization',
+      name: 'Healing Soil',
+      url: 'https://healingsoil.in',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Healing Soil',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://healingsoil.in/logo.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://healingsoil.in/blog/${params.slug}`,
+    },
+  }
+
   return (
     <div className="bg-[#F7F5F0]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <article className="mx-auto max-w-[720px] px-4 py-16 sm:px-6">
 
         {/* Category + date */}

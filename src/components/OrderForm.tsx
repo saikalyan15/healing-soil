@@ -53,7 +53,6 @@ export default function OrderForm() {
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [state, setState] = useState('')
-  const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -103,9 +102,6 @@ export default function OrderForm() {
       name: name.trim(),
       phone: normalizedPhone,
       address_line_1: fullAddress,
-      city: '',
-      state: state,
-      pincode: '',
     }
 
     try {
@@ -117,7 +113,6 @@ export default function OrderForm() {
           customer_phone: normalizedPhone,
           items: lineItems,
           address: fullAddress,
-          notes: notes.trim() || undefined,
         }),
       })
 
@@ -134,8 +129,7 @@ export default function OrderForm() {
         { name: name.trim() },
         lineItems,
         shippingAddress,
-        shipping,
-        notes.trim() || undefined
+        shipping
       )
 
       try {
@@ -303,19 +297,6 @@ export default function OrderForm() {
             placeholder="Flat / House no., Street, Area, City, State, PIN code"
             rows={3}
             autoComplete="street-address"
-            className="w-full resize-none rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
-          />
-        </div>
-
-        <div>
-          <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
-            Order Notes (Optional)
-          </label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Landmarks, special instructions, or skin concerns..."
-            rows={2}
             className="w-full resize-none rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
           />
         </div>

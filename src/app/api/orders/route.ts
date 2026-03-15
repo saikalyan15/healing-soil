@@ -4,20 +4,16 @@ import { submitOrder, type OrderPayload } from '@/lib/orders'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { customer_name, customer_phone, items, address, notes } = body
+    const { customer_name, customer_phone, items, address } = body
 
     const payload: OrderPayload = {
       customer_name,
       customer_phone,
       items,
-      notes,
       shipping_address: {
         name: customer_name,
         phone: customer_phone,
         address_line_1: address,
-        city: '',
-        state: '',
-        pincode: '',
       },
       source: 'website',
     }

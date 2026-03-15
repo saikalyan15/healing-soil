@@ -15,9 +15,6 @@ export type ShippingAddress = {
   phone: string            // E.164 without + e.g. "917483100651"
   address_line_1: string
   address_line_2?: string
-  city: string
-  state: string
-  pincode: string
 }
 
 /** Payload sent to SoapLedger /api/orders/incoming */
@@ -27,7 +24,6 @@ export type OrderPayload = {
   customer_email?: string
   items: LineItem[]
   shipping_address: ShippingAddress
-  notes?: string
   source: 'website'        // literal — always "website" for this integration
 }
 
@@ -158,8 +154,7 @@ export function buildWhatsAppMessage(
   customer: { name: string; email?: string },
   items: LineItem[],
   shipping: ShippingAddress,
-  shippingCost: number,
-  notes?: string
+  shippingCost: number
 ): string {
   const subtotal = items.reduce((sum, item) => sum + item.unit_price * item.quantity, 0)
   const total = subtotal + shippingCost
@@ -167,14 +162,6 @@ export function buildWhatsAppMessage(
   const itemLines = items
     .map((i) => `• ${i.product_name} ×${i.quantity} — ₹${i.unit_price * i.quantity}`)
     .join('\n')
-
-  const addressLines = [
-    shipping.address_line_1,
-    shipping.address_line_2,
-    `${shipping.city}, ${shipping.state} — ${shipping.pincode}`,
-  ]
-    .filter(Boolean)
-    .join(', ')
 
   return [
     `Hi Healing Soil! 🌿`,
@@ -189,11 +176,9 @@ export function buildWhatsAppMessage(
     ``,
     `Deliver to:`,
     `${shipping.name}`,
-    `${addressLines}`,
+    `${shipping.address_line_1}`,
     `Phone: ${shipping.phone}`,
     ``,
-    notes ? `Note: ${notes}` : '',
-    notes ? `` : '',
     `Order ref: ${orderId}`,
     customer.email ? `Email: ${customer.email}` : '',
   ]
