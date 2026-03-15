@@ -6,8 +6,30 @@ import { useOrderStore } from '@/lib/store'
 import { buildWhatsAppMessage, type LineItem, type ShippingAddress } from '@/lib/orders'
 
 const FREE_SHIPPING_THRESHOLD = 1000
-const SHIPPING_COST = 100
+const SHIPPING_STANDARD = 100
+const SHIPPING_NORTH = 150
 const WA_NUMBER = '917483100651'
+
+const NORTH_INDIA_STATES = [
+  'Delhi',
+  'Haryana',
+  'Himachal Pradesh',
+  'Jammu and Kashmir',
+  'Ladakh',
+  'Punjab',
+  'Rajasthan',
+  'Uttar Pradesh',
+  'Uttarakhand',
+]
+
+const ALL_STATES = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 
+  'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 
+  'Ladakh', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 
+  'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 
+  'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar Islands', 
+  'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Lakshadweep', 'Puducherry'
+].sort()
 
 function validateIndianPhone(p: string): boolean {
   return /^(\+91|91|0)?[6-9]\d{9}$/.test(p.replace(/\s|-/g, ''))
@@ -25,15 +47,25 @@ export default function OrderForm() {
   const items = useOrderStore((s) => s.items)
   const clearOrder = useOrderStore((s) => s.clearOrder)
 
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
-  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
-  const total = subtotal + shipping
-
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
+  const [state, setState] = useState('')
+  const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
+  
+  // Shipping logic
+  let shipping = 0
+  if (subtotal < FREE_SHIPPING_THRESHOLD && state) {
+    shipping = NORTH_INDIA_STATES.includes(state) ? SHIPPING_NORTH : SHIPPING_STANDARD
+  } else if (subtotal < FREE_SHIPPING_THRESHOLD && !state) {
+    shipping = SHIPPING_STANDARD // Default placeholder
+  }
+
+  const total = subtotal + shipping
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -41,12 +73,14 @@ export default function OrderForm() {
 
     if (!name.trim()) { setError('Please enter your full name.'); return }
     if (!validateIndianPhone(phone)) { setError('Please enter a valid Indian mobile number.'); return }
+    if (!state) { setError('Please select your state.'); return }
     if (!address.trim()) { setError('Please enter your delivery address.'); return }
     if (items.length === 0) { setError('Your order is empty.'); return }
 
     setLoading(true)
 
     const normalizedPhone = normalizePhone(phone)
+    const fullAddress = `${address.trim()}, ${state}`
 
     const lineItems: LineItem[] = items.map((i) => ({
       product_id: i.product_id,
@@ -59,9 +93,9 @@ export default function OrderForm() {
     const shippingAddress: ShippingAddress = {
       name: name.trim(),
       phone: normalizedPhone,
-      address_line_1: address.trim(),
+      address_line_1: fullAddress,
       city: '',
-      state: '',
+      state: state,
       pincode: '',
     }
 
@@ -73,7 +107,8 @@ export default function OrderForm() {
           customer_name: name.trim(),
           customer_phone: normalizedPhone,
           items: lineItems,
-          address: address.trim(),
+          address: fullAddress,
+          notes: notes.trim() || undefined,
         }),
       })
 
@@ -89,7 +124,9 @@ export default function OrderForm() {
         order_id,
         { name: name.trim() },
         lineItems,
-        shippingAddress
+        shippingAddress,
+        shipping,
+        notes.trim() || undefined
       )
 
       try {
@@ -191,14 +228,43 @@ export default function OrderForm() {
 
         <div>
           <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
+            State <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            className="w-full rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
+          >
+            <option value="">Select your state</option>
+            {ALL_STATES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
             Full Delivery Address <span className="text-red-500">*</span>
           </label>
           <textarea
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Flat / House no., Street, Area, City, State, PIN code"
-            rows={4}
+            rows={3}
             autoComplete="street-address"
+            className="w-full resize-none rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
+          />
+        </div>
+
+        <div>
+          <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
+            Order Notes (Optional)
+          </label>
+          <textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Landmarks, special instructions, or skin concerns..."
+            rows={2}
             className="w-full resize-none rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
           />
         </div>

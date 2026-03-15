@@ -51,17 +51,22 @@ export default function OrderPageClient() {
 
           {/* How it works */}
           <div>
-            <h3 className="mb-3 font-sans text-sm font-bold text-[#1A1A14]">How it works</h3>
-            <ul className="space-y-2.5">
+            <h3 className="mb-3 font-sans text-sm font-bold text-[#1A1A14]">What happens next?</h3>
+            <ul className="space-y-3">
               {[
-                'Place your order — no payment yet',
-                'Deepanjali confirms availability on WhatsApp',
-                'You pay only after confirmation',
-                'Handmade and shipped from Goa',
-              ].map((step) => (
-                <li key={step} className="flex gap-2.5 font-sans text-sm text-[#666666]">
-                  <span className="mt-0.5 font-bold text-[#C9A84C]">✓</span>
-                  {step}
+                { title: 'Place Order', desc: 'Confirm your items and delivery address.' },
+                { title: 'WhatsApp Chat', desc: 'A pre-filled message will open for you to send to Deepanjali.' },
+                { title: 'Confirmation', desc: 'We check stock and send you a UPI QR code for payment.' },
+                { title: 'Delivery', desc: 'Your soaps are packed and shipped from South Goa.' },
+              ].map((step, i) => (
+                <li key={i} className="flex gap-3 font-sans text-sm">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C9A84C] text-[10px] font-bold text-white">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-bold text-[#1A1A14] leading-none mb-1">{step.title}</p>
+                    <p className="text-[#666666] text-xs leading-relaxed">{step.desc}</p>
+                  </div>
                 </li>
               ))}
             </ul>

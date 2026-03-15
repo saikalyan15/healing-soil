@@ -157,9 +157,12 @@ export function buildWhatsAppMessage(
   orderId: string,
   customer: { name: string; email?: string },
   items: LineItem[],
-  shipping: ShippingAddress
+  shipping: ShippingAddress,
+  shippingCost: number,
+  notes?: string
 ): string {
-  const total = orderTotal(items)
+  const subtotal = items.reduce((sum, item) => sum + item.unit_price * item.quantity, 0)
+  const total = subtotal + shippingCost
 
   const itemLines = items
     .map((i) => `• ${i.product_name} ×${i.quantity} — ₹${i.unit_price * i.quantity}`)
@@ -180,6 +183,8 @@ export function buildWhatsAppMessage(
     ``,
     itemLines,
     ``,
+    `Subtotal: ₹${subtotal}`,
+    `Shipping: ${shippingCost === 0 ? 'FREE' : `₹${shippingCost}`}`,
     `Total: ₹${total}`,
     ``,
     `Deliver to:`,
@@ -187,6 +192,8 @@ export function buildWhatsAppMessage(
     `${addressLines}`,
     `Phone: ${shipping.phone}`,
     ``,
+    notes ? `Note: ${notes}` : '',
+    notes ? `` : '',
     `Order ref: ${orderId}`,
     customer.email ? `Email: ${customer.email}` : '',
   ]

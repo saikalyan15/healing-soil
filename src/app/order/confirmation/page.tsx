@@ -73,11 +73,51 @@ export default function ConfirmationPage({ searchParams }: Props) {
           </p>
         </div>
 
+        <div className="mb-10 text-left">
+          <h2 className="mb-4 font-serif text-2xl text-[#1E5631]">What happens next?</h2>
+          <div className="space-y-4 rounded-xl border border-[#D6CFC4] bg-white p-6 shadow-sm">
+            <div className="flex gap-4">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">1</span>
+              <div>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">WhatsApp Confirmation</p>
+                <p className="font-sans text-sm leading-relaxed text-[#666666]">
+                  Deepanjali will message you to confirm the items in your order are in stock and ready to be packed.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">2</span>
+              <div>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">UPI Payment</p>
+                <p className="font-sans text-sm leading-relaxed text-[#666666]">
+                  We will send you a UPI QR code or bank details. 
+                  <span className="ml-1 font-medium text-[#1A1A14]">Please note: We do not offer Cash on Delivery (COD).</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">3</span>
+              <div>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Shipping from Goa</p>
+                <p className="font-sans text-sm leading-relaxed text-[#666666]">
+                  Once payment is confirmed, your fresh soaps are shipped from South Goa, and we send you the tracking link.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <Link
           href="/shop"
-          className="inline-block rounded border border-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-[#1E5631] transition-colors hover:bg-[#1E5631] hover:text-white"
+          className="mr-4 inline-block rounded border border-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-[#1E5631] transition-colors hover:bg-[#1E5631] hover:text-white"
         >
           Continue Shopping
+        </Link>
+        <Link
+          href="/order/track"
+          className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
+        >
+          Track My Order
         </Link>
       </div>
     </div>
