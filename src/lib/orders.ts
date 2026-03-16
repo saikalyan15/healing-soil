@@ -135,10 +135,13 @@ export async function submitOrder(payload: OrderPayload): Promise<{ order_id: st
 
   const order: SoapLedgerOrderResponse = await res.json()
 
-  // 2. Fire CallMeBot notification (non-blocking, errors are swallowed)
-  await sendCallMeBotNotification(order.order_id, order.ref, payload)
+  // Fallback: if SoapLedger doesn't return a 'ref', create a simple one from timestamp
+  const humanRef = order.ref || `WEB-${Date.now().toString().slice(-6)}`
 
-  return { order_id: order.order_id, ref: order.ref }
+  // 2. Fire CallMeBot notification (non-blocking, errors are swallowed)
+  await sendCallMeBotNotification(order.order_id, humanRef, payload)
+
+  return { order_id: order.order_id, ref: humanRef }
 }
 
 // ─── WhatsApp deep-link builder ────────────────────────────────────────────────
@@ -183,7 +186,6 @@ export function buildWhatsAppMessage(
     ``,
     notes ? `Note: ${notes}` : '',
     notes ? `` : '',
-    `Order ref: ${orderId}`,
     customer.email ? `Email: ${customer.email}` : '',
   ]
     .filter((line) => line !== undefined)

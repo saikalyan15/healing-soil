@@ -19,12 +19,12 @@ export default function TrackOrderPage() {
         <div className="rounded-xl border border-[#D6CFC4] bg-white p-8 shadow-sm">
           <h2 className="mb-6 font-serif text-2xl text-[#1A1A14]">Check status on WhatsApp</h2>
           <p className="mb-8 font-sans text-sm text-[#666666]">
-            The fastest way to get an update on your order or shipping status 
-            is to message us directly.
+            The fastest way to get an update is to message us directly. 
+            Just send a WhatsApp from your registered mobile number—no order number required.
           </p>
           
           <a
-            href="https://wa.me/917483100651?text=Hi%20Healing%20Soil%2C%20I%27d%20like%20to%20check%20the%20status%20of%20my%20order."
+            href="https://wa.me/917483100651?text=Hi%20Healing%20Soil%2C%20I%27d%20like%20to%20check%20the%20status%20of%20my%20order%20from%20this%20mobile%20number."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#1E5631] px-8 py-4 font-sans text-base font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"

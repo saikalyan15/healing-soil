@@ -159,7 +159,9 @@ export default function OrderForm() {
       clearOrder()
       router.push(`/order/confirmation?ref=${ref || order_id}`)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      setError(
+        "We're sorry, but we couldn't process your order right now. Please message us on WhatsApp and we'll help you place your order manually."
+      )
       setLoading(false)
     }
   }
@@ -329,9 +331,19 @@ export default function OrderForm() {
       </div>
 
       {error && (
-        <p className="rounded border border-red-200 bg-red-50 px-3 py-2 font-sans text-sm text-red-600">
-          {error}
-        </p>
+        <div className="rounded border border-red-200 bg-red-50 px-4 py-3">
+          <p className="font-sans text-sm font-medium text-red-800">
+            {error}
+          </p>
+          <a
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Healing Soil, I'm having trouble placing my order on the website. Can you help me?")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block font-sans text-sm font-bold text-[#1E5631] underline"
+          >
+            Message us on WhatsApp →
+          </a>
+        </div>
       )}
 
       <button
