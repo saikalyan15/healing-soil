@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 import Header from '@/components/Header'
 import TrustStrip from '@/components/TrustStrip'
@@ -51,6 +52,7 @@ export default function RootLayout({
         <main className="pb-[60px]">{children}</main>
         <Footer />
         <OrderTray />
+        <GoogleAnalytics gaId="G-EWQR3K5MW7" />
       </body>
     </html>
   )
