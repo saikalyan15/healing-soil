@@ -37,7 +37,7 @@ export default async function ShopPage() {
           '@type': 'ListItem',
           position: i + 1,
           name: p.name,
-          url: `https://healingsoil.in/shop#${p.slug}`,
+          url: `https://healingsoil.in/shop/${p.slug}`,
           item: {
             '@type': 'Product',
             name: p.name,

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
 
@@ -24,7 +25,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isLong = product.description.length > 80
 
   return (
-    <div className="group flex flex-col rounded-lg border border-[#D6CFC4] bg-white overflow-hidden transition-shadow hover:shadow-md">
+    <Link
+      href={`/shop/${product.slug}`}
+      className="group flex flex-col rounded-lg border border-[#D6CFC4] bg-white overflow-hidden transition-shadow hover:shadow-md"
+    >
       {/* Image */}
       <div className="relative aspect-square w-full overflow-hidden bg-[#F7F5F0]">
         {product.image_url ? (
@@ -62,7 +66,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </p>
           {isLong && (
             <button
-              onClick={() => setExpanded((v) => !v)}
+              onClick={(e) => { e.preventDefault(); setExpanded((v) => !v) }}
               className="mt-1 font-sans text-xs text-[#1E5631] hover:underline"
             >
               {expanded ? 'Show less' : 'Read more'}
@@ -77,7 +81,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Button */}
       <div className="px-4 pb-4">
         <button
-          onClick={handleAddToOrder}
+          onClick={(e) => { e.preventDefault(); handleAddToOrder() }}
           disabled={!product.in_stock}
           className={`w-full rounded py-2.5 font-sans text-sm font-medium transition-colors ${
             added
@@ -90,6 +94,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           {added ? 'Added to Cart ✓' : 'Add to Cart'}
         </button>
       </div>
-    </div>
+    </Link>
   )
 }
