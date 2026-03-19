@@ -23,18 +23,22 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Healing Soil — Handmade Soaps from Goa',
+  title: {
+    template: '%s | Healing Soil',
+    default: 'Healing Soil — Handmade Natural Soaps from Goa',
+  },
   description:
     'Healing Soil crafts small-batch, handmade natural soaps rooted in the spirit of Goa. Regenerative ingredients, slow living, and care for the earth.',
   metadataBase: new URL('https://healingsoil.in'),
   openGraph: {
-    title: 'Healing Soil — Handmade Soaps from Goa',
+    title: 'Healing Soil — Handmade Natural Soaps from Goa',
     description:
       'Healing Soil crafts small-batch, handmade natural soaps rooted in the spirit of Goa.',
     url: 'https://healingsoil.in',
     siteName: 'Healing Soil',
     locale: 'en_IN',
     type: 'website',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps from Goa' }],
   },
 }
 

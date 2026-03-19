@@ -31,10 +31,19 @@ export default async function HomePage() {
 
   const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'LocalBusiness',
     name: 'Healing Soil',
     url: 'https://healingsoil.in',
     description: 'Handmade soaps from Goa, India. Small-batch, no chemicals, made to order.',
+    image: 'https://healingsoil.in/og-image.jpg',
+    logo: 'https://healingsoil.in/logo.png',
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'Goa',
+      addressCountry: 'IN',
+    },
+    areaServed: 'IN',
+    priceRange: '₹₹',
     sameAs: [
       'https://instagram.com/healingsoil.in',
       'https://www.facebook.com/profile.php?id=61576352186521',

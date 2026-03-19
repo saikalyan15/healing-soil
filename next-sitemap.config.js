@@ -13,14 +13,17 @@ const config = {
     '/checkout',
     '/order',
     '/order/confirmation',
-    '/about',            // 301 → /our-story
-    '/our-stories',      // 301 → /stories
-    '/eco-picks',        // 301 → /
+    '/order/track',
+    '/about',                // 301 → /our-story
+    '/our-products',         // 301 → /shop
+    '/our-stories',          // 301 → /stories
+    '/eco-picks',            // 301 → /
     '/healing-pillars',
     '/slow-living',
     '/mental-health',
     '/regenerative-living',
     '/my-account',
+    '/icon.png',             // App Router favicon picked up as route
   ],
 
   robotsTxtOptions: {
@@ -74,9 +77,21 @@ const config = {
       '/privacy-policy': 0.3,
     }
 
+    const changefreqMap = {
+      '/': 'weekly',
+      '/shop': 'weekly',
+      '/our-story': 'monthly',
+      '/ingredients': 'monthly',
+      '/contact': 'monthly',
+      '/reviews': 'monthly',
+      '/blog': 'weekly',
+      '/stories': 'weekly',
+      '/privacy-policy': 'yearly',
+    }
+
     return {
       loc: path,
-      changefreq: config.changefreq,
+      changefreq: changefreqMap[path] ?? config.changefreq ?? 'monthly',
       priority: priorities[path] ?? config.priority,
       lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
     }
