@@ -20,6 +20,47 @@ export const metadata: Metadata = {
   },
 }
 
+const faqItems = [
+  {
+    q: 'Are these soaps really chemical-free?',
+    a: 'Our soaps contain no synthetic additives — no SLS, no artificial fragrance, no parabens, and no preservatives. Every ingredient is something you can read and recognise.',
+  },
+  {
+    q: 'What is the difference between glycerin, goat milk, and shea butter soap?',
+    a: 'Glycerin soap is light and clear, best for oily or normal skin. Goat milk soap is creamier and more nourishing, suited to sensitive, dry, or eczema-prone skin. Shea butter soap is the richest of the three, best for very dry skin or anyone who wants to skip a separate moisturiser.',
+  },
+  {
+    q: 'Do you ship across India?',
+    a: 'Yes, we ship pan-India.',
+  },
+  {
+    q: 'How long does delivery take?',
+    a: 'Because every bar is made to order, delivery typically takes 7–10 days. This includes the time to make, cure, and ship your soap.',
+  },
+  {
+    q: 'How do I order?',
+    a: 'You can order through our website or reach us on WhatsApp. Both work.',
+  },
+  {
+    q: 'Are these soaps safe for sensitive skin?',
+    a: 'Yes. Our soaps contain no synthetic fragrance or harsh foaming agents, which are the most common triggers for skin reactions. The goat milk and shea butter bases are especially gentle.',
+  },
+  {
+    q: 'Is this a made-to-order product?',
+    a: 'Yes. Every bar is made after you order. We do not hold pre-made stock, which keeps ingredients fresh and means no preservatives are needed.',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+}
+
 export default async function ShopPage() {
   const products = await getProducts().catch(() => [])
 
@@ -64,6 +105,10 @@ export default async function ShopPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
 
@@ -108,6 +153,27 @@ export default async function ShopPage() {
         )}
 
       </div>
+
+      {/* ── FAQ ─────────────────────────────────────────────────────────────── */}
+      <div className="border-t border-[#D6CFC4] bg-white">
+        <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+          <h2 className="mb-8 font-serif text-3xl text-[#1E5631]">Frequently asked questions</h2>
+          <div className="divide-y divide-[#D6CFC4]">
+            {faqItems.map(({ q, a }) => (
+              <details key={q} className="group py-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-base font-medium text-[#1A1A14] hover:text-[#1E5631]">
+                  {q}
+                  <span className="flex-shrink-0 text-[#C9A84C] transition-transform group-open:rotate-45" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-[#666666]">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }

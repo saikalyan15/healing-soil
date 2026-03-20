@@ -50,11 +50,57 @@ export default async function HomePage() {
     ],
   }
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Are these soaps really chemical-free?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Our soaps contain no synthetic additives — no SLS, no artificial fragrance, no parabens, and no preservatives. Every ingredient is something you can read and recognise.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the difference between glycerin, goat milk, and shea butter soap?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Glycerin soap is light and clear, best for oily or normal skin. Goat milk soap is creamier and more nourishing, suited to sensitive, dry, or eczema-prone skin. Shea butter soap is the richest of the three, best for very dry skin or anyone who wants to skip a separate moisturiser.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do you ship across India?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, we ship pan-India.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'How long does delivery take?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Because every bar is made to order, delivery typically takes 7–10 days. This includes the time to make, cure, and ship your soap.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I order?',
+        acceptedAnswer: { '@type': 'Answer', text: 'You can order through our website or reach us on WhatsApp. Both work.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are these soaps safe for sensitive skin?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. Our soaps contain no synthetic fragrance or harsh foaming agents, which are the most common triggers for skin reactions. The goat milk and shea butter bases are especially gentle.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is this a made-to-order product?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. Every bar is made after you order. We do not hold pre-made stock, which keeps ingredients fresh and means no preservatives are needed.' },
+      },
+    ],
+  }
+
   return (
     <div className="bg-[#F7F5F0]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* ── Section 1: Hero ─────────────────────────────────────────────────── */}
