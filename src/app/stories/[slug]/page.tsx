@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getBlogPosts, getPostBySlug } from '@/lib/blog'
+import StoryCTA from '@/components/StoryCTA'
 
 type Props = { params: { slug: string } }
 
@@ -128,6 +129,9 @@ export default function StoryPostPage({ params }: Props) {
         <div className="prose-custom">
           <MDXRemote source={post.content ?? ''} components={mdxComponents} />
         </div>
+
+        {/* Shop CTA — only for soap and slow-living stories */}
+        {post.cta === 'shop' && <StoryCTA />}
 
         {/* Author */}
         <p className="mt-10 border-t border-[#D6CFC4] pt-6 font-sans text-sm text-[#999]">

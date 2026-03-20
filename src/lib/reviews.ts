@@ -61,7 +61,7 @@ export const reviews: Review[] = [
     occupation: 'Housewife',
     comment:
       'Allergic to all the commercial soaps due to skin sensitivity. These were the only soaps that my skin did not react to',
-    featured: false,
+    featured: true,
   },
   {
     id: 'review-007',

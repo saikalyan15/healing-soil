@@ -16,7 +16,8 @@
       "Bash(magick --version)",
       "Bash(convert --version)",
       "Bash(python3 -c \":*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(find \"E:/Projects/healing-soil/content/stories\" -name \"*.mdx\" -exec basename {})"
     ]
   }
 }

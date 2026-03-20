@@ -12,6 +12,7 @@ export type Post = {
   category: string
   featuredImage?: string
   author: string
+  cta?: string
   content?: string  // only present when fetched via getPostBySlug
 }
 
@@ -33,6 +34,7 @@ function parseMdxFile(filePath: string, slug: string, includeContent = false): P
     category: data.category ?? 'general',
     featuredImage: data.featuredImage ?? undefined,
     author: data.author ?? 'Healing Soil',
+    cta: data.cta ?? undefined,
     ...(includeContent ? { content } : {}),
   }
 }
