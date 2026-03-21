@@ -107,10 +107,10 @@ async function sendOwnerEmail(
 // ─── Order submission ──────────────────────────────────────────────────────────
 
 /**
- * Submit a new order to SoapLedger, then fire a CallMeBot WhatsApp alert.
+ * Submit a new order to SoapLedger, then fire an owner email notification via Resend.
  *
  * - If SoapLedger POST fails → throws (caller should show error to user)
- * - If CallMeBot fails      → logs error, does NOT throw (order is never lost)
+ * - If Resend fails          → logs error, does NOT throw (order is never lost)
  *
  * @returns Object with order_id (UUID) and ref (human-readable)
  */
