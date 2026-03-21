@@ -17,7 +17,10 @@
       "Bash(convert --version)",
       "Bash(python3 -c \":*)",
       "Bash(python:*)",
-      "Bash(find \"E:/Projects/healing-soil/content/stories\" -name \"*.mdx\" -exec basename {})"
+      "Bash(find \"E:/Projects/healing-soil/content/stories\" -name \"*.mdx\" -exec basename {})",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)"
     ]
   }
 }

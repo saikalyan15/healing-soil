@@ -56,52 +56,51 @@ function getApiHeaders(): HeadersInit {
   }
 }
 
-// ─── CallMeBot notification ────────────────────────────────────────────────────
+// ─── Owner email notification via Resend ──────────────────────────────────────
 
 /**
- * Sends a WhatsApp notification via CallMeBot to the store owner.
+ * Sends an order notification email to the store owner via Resend.
  * NEVER throws — a failed notification must never block or lose an order.
  */
-async function sendCallMeBotNotification(
+async function sendOwnerEmail(
   orderId: string,
   ref: string,
   payload: OrderPayload
 ): Promise<void> {
   try {
-    const apiKey = process.env.CALLMEBOT_API_KEY
-    const phone = process.env.CALLMEBOT_PHONE
+    const apiKey = process.env.RESEND_API_KEY
+    const to = process.env.NOTIFY_EMAIL_TO
 
-    if (!apiKey || !phone) {
-      console.warn('[CallMeBot] API key or phone not configured — skipping notification')
+    if (!apiKey || !to) {
+      console.warn('[Resend] RESEND_API_KEY or NOTIFY_EMAIL_TO not configured — skipping notification')
       return
     }
 
+    const { Resend } = await import('resend')
+    const resend = new Resend(apiKey)
+
     const subtotal = payload.items.reduce((sum, item) => sum + item.price * item.qty, 0)
     const total = subtotal + payload.shipping
+    const waLink = `https://wa.me/${payload.customer.phone.replace(/\D/g, '')}`
 
-    const message = [
-      `🧼 New Order — ${ref}`,
-      `Customer: ${payload.customer.name} (${payload.customer.phone})`,
-      `Items: ${payload.items.length}`,
-      `Total: ₹${total} (inc. ₹${payload.shipping} shipping)`,
-      `View: https://soap-ledger.vercel.app/orders/${orderId}`,
-    ].join('\n')
-
-    const url = new URL('https://api.callmebot.com/whatsapp.php')
-    url.searchParams.set('phone', phone)
-    url.searchParams.set('text', message)
-    url.searchParams.set('apikey', apiKey)
-
-    const res = await fetch(url.toString(), { method: 'GET' })
-
-    if (!res.ok) {
-      console.error(
-        `[CallMeBot] Notification failed: ${res.status} ${res.statusText}`
-      )
-    }
+    await resend.emails.send({
+      from: 'orders@healingsoil.in',
+      to: to.split(',').map((e) => e.trim()),
+      subject: `New Order — ${ref}`,
+      html: `
+        <h2 style="color:#1E5631">New Order: ${ref}</h2>
+        <p><strong>Customer:</strong> ${payload.customer.name}</p>
+        <p><strong>Phone:</strong> <a href="${waLink}">${payload.customer.phone}</a></p>
+        <p><strong>Address:</strong> ${payload.customer.address}</p>
+        <p><strong>Items:</strong> ${payload.items.length}</p>
+        <p><strong>Total:</strong> ₹${total} (incl. ₹${payload.shipping} shipping)</p>
+        ${payload.notes ? `<p><strong>Notes:</strong> ${payload.notes}</p>` : ''}
+        <p><a href="https://soap-ledger.vercel.app/orders/${orderId}">View in SoapLedger →</a></p>
+      `,
+    })
   } catch (err) {
     // Log but never propagate — the order is already saved in SoapLedger
-    console.error('[CallMeBot] Unexpected error sending notification:', err)
+    console.error('[Resend] Unexpected error sending notification:', err)
   }
 }
 
@@ -138,8 +137,8 @@ export async function submitOrder(payload: OrderPayload): Promise<{ order_id: st
   // Fallback: if SoapLedger doesn't return a 'ref', create a simple one from timestamp
   const humanRef = order.ref || `WEB-${Date.now().toString().slice(-6)}`
 
-  // 2. Fire CallMeBot notification (non-blocking, errors are swallowed)
-  await sendCallMeBotNotification(order.order_id, humanRef, payload)
+  // 2. Fire owner email notification (non-blocking, errors are swallowed)
+  await sendOwnerEmail(order.order_id, humanRef, payload)
 
   return { order_id: order.order_id, ref: humanRef }
 }
