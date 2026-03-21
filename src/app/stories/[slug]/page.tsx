@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} — Healing Soil`,
     description: post.excerpt,
+    robots: { index: false, follow: false },
     alternates: { canonical: `/stories/${params.slug}` },
     openGraph: {
       title: post.title,

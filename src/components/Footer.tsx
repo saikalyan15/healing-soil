@@ -4,7 +4,6 @@ const footerNav = [
   { label: 'Shop', href: '/shop' },
   { label: 'Our Story', href: '/our-story' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Stories', href: '/stories' },
   { label: 'Track Order', href: '/order/track' },
   { label: 'Reviews', href: '/reviews' },
   { label: 'Contact', href: '/contact' },

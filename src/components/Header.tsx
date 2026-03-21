@@ -10,7 +10,7 @@ import { useOrderStore } from '@/lib/store'
 const navLinks = [
   { label: 'Shop', href: '/shop' },
   { label: 'Our Story', href: '/our-story' },
-  { label: 'Stories', href: '/stories' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ]
 

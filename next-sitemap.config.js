@@ -24,6 +24,8 @@ const config = {
     '/regenerative-living',
     '/my-account',
     '/icon.png',             // App Router favicon picked up as route
+    '/stories',              // noindex — off-topic content, kept for backlinks
+    '/stories/*',
   ],
 
   robotsTxtOptions: {
@@ -54,12 +56,7 @@ const config = {
         priority: 0.7,
         lastmod: new Date().toISOString(),
       })),
-      ...storySlugs.map((slug) => ({
-        loc: `/stories/${slug}`,
-        changefreq: 'monthly',
-        priority: 0.6,
-        lastmod: new Date().toISOString(),
-      })),
+      // Stories excluded from sitemap — pages are noindex, kept for backlinks only
     ]
   },
 
@@ -74,7 +71,6 @@ const config = {
       '/reviews': 0.7,
       '/faq': 0.7,
       '/blog': 0.6,
-      '/stories': 0.6,
       '/privacy-policy': 0.3,
     }
 
@@ -87,7 +83,6 @@ const config = {
       '/reviews': 'monthly',
       '/faq': 'monthly',
       '/blog': 'weekly',
-      '/stories': 'weekly',
       '/privacy-policy': 'yearly',
     }
 

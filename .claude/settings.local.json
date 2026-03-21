@@ -20,7 +20,10 @@
       "Bash(find \"E:/Projects/healing-soil/content/stories\" -name \"*.mdx\" -exec basename {})",
       "Bash(npm install:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(find /e/Projects/healing-soil/src -name *schema* -o -name *seo* -o -name *meta*)",
+      "Bash(npm audit:*)",
+      "Bash(xargs -I {} head -100 {})"
     ]
   }
 }
