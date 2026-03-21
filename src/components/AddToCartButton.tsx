@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
+import { sendGAEvent } from '@next/third-parties/google'
 
 export default function AddToCartButton({ product }: { product: Product }) {
   const addItem = useOrderStore((s) => s.addItem)
@@ -10,6 +11,11 @@ export default function AddToCartButton({ product }: { product: Product }) {
 
   function handleAdd() {
     addItem(product)
+    sendGAEvent('event', 'add_to_cart', {
+      currency: 'INR',
+      value: product.price,
+      items: [{ item_id: product.id, item_name: product.name, price: product.price, quantity: 1 }],
+    })
     setAdded(true)
     setTimeout(() => setAdded(false), 1500)
   }

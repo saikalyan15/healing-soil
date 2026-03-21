@@ -6,6 +6,7 @@ import { reviewsForProduct } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import AddToCartButton from '@/components/AddToCartButton'
 import ProductImage from '@/components/ProductImage'
+import ProductViewTracker from './ProductViewTracker'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -77,6 +78,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="bg-[#F7F5F0] min-h-screen">
+      <ProductViewTracker id={product.id} name={product.name} price={product.price} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}

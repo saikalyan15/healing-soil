@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { sendGAEvent } from '@next/third-parties/google'
 import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import { buildWhatsAppMessage, type LineItem, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
@@ -76,6 +77,18 @@ export default function OrderForm() {
 
   const total = subtotal + shipping
 
+  const checkoutFiredRef = useRef(false)
+
+  function handleFirstFocus() {
+    if (checkoutFiredRef.current) return
+    checkoutFiredRef.current = true
+    sendGAEvent('event', 'begin_checkout', {
+      currency: 'INR',
+      value: total,
+      items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
+    })
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
@@ -132,6 +145,14 @@ export default function OrderForm() {
       }
 
       const { order_id, ref } = data
+
+      sendGAEvent('event', 'purchase', {
+        transaction_id: ref || order_id,
+        currency: 'INR',
+        value: total,
+        shipping: shipping,
+        items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
+      })
 
       const waMessage = buildWhatsAppMessage(
         ref || order_id, // Primary friendly reference
@@ -266,6 +287,7 @@ export default function OrderForm() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onFocus={handleFirstFocus}
             placeholder="Enter your full name"
             autoComplete="name"
             className="w-full rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"

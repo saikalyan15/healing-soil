@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
+import { sendGAEvent } from '@next/third-parties/google'
 
 const WA_NUMBER = '917483100651'
 
@@ -24,6 +25,13 @@ export default function WhatsAppFallback() {
   }, [])
 
   if (!href) return null
+
+  function handleWhatsAppClick() {
+    sendGAEvent('event', 'whatsapp_confirm_clicked', {
+      event_category: 'order_funnel',
+      event_label: 'confirmation_page',
+    })
+  }
 
   return (
     <div className="space-y-4">
@@ -53,6 +61,7 @@ export default function WhatsAppFallback() {
       {/* Primary WhatsApp CTA */}
       <a
         href={href}
+        onClick={handleWhatsAppClick}
         target="_blank"
         rel="noopener noreferrer"
         className="flex w-full items-center justify-center gap-3 rounded-lg bg-[#25D366] px-6 py-4 font-sans text-base font-bold text-white shadow-sm transition-colors hover:bg-[#1ebe5d]"
