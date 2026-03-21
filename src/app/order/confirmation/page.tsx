@@ -103,6 +103,19 @@ export default function ConfirmationPage({ searchParams }: Props) {
         >
           Track My Order
         </Link>
+
+        <p className="mt-8 font-sans text-xs text-[#999999]">
+          Having trouble placing your order?{' '}
+          <a
+            href="https://wa.me/917483100651"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[#1E5631] underline"
+          >
+            Message us on WhatsApp
+          </a>{' '}
+          and we&apos;ll sort it out.
+        </p>
       </div>
     </div>
   )
