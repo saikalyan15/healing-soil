@@ -23,7 +23,18 @@
       "Bash(npm run:*)",
       "Bash(find /e/Projects/healing-soil/src -name *schema* -o -name *seo* -o -name *meta*)",
       "Bash(npm audit:*)",
-      "Bash(xargs -I {} head -100 {})"
+      "Bash(xargs -I {} head -100 {})",
+      "WebSearch",
+      "WebFetch(domain:www.interakt.shop)",
+      "WebFetch(domain:www.bepragma.ai)",
+      "WebFetch(domain:www.wati.io)",
+      "WebFetch(domain:blog.campaignhq.co)",
+      "WebFetch(domain:blog.catlog.shop)",
+      "WebFetch(domain:www.hello-charles.com)",
+      "WebFetch(domain:www.flowcart.ai)",
+      "WebFetch(domain:insiderone.com)",
+      "WebFetch(domain:baymard.com)",
+      "WebFetch(domain:www.convertcart.com)"
     ]
   }
 }
