@@ -44,7 +44,7 @@ async function handler(request: NextRequest) {
 
   try {
     if (tag) {
-      revalidateTag(tag)
+      revalidateTag(tag, {})
       console.log(`[Revalidate] Tag purged: ${tag}`)
     }
     if (path) {

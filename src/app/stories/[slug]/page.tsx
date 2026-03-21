@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { MDXContent } from '@/components/MDXContent'
 import { getBlogPosts, getPostBySlug } from '@/lib/blog'
 import StoryCTA from '@/components/StoryCTA'
 
-type Props = { params: { slug: string } }
+type Props = { params: Promise<{ slug: string }> }
 
 // ─── Static params ─────────────────────────────────────────────────────────────
 
@@ -16,17 +16,18 @@ export function generateStaticParams() {
 // ─── Metadata ──────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostBySlug(params.slug, 'stories')
+  const { slug } = await params
+  const post = getPostBySlug(slug, 'stories')
   if (!post) return {}
   return {
     title: `${post.title} — Healing Soil`,
     description: post.excerpt,
     robots: { index: false, follow: false },
-    alternates: { canonical: `/stories/${params.slug}` },
+    alternates: { canonical: `/stories/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `/stories/${params.slug}`,
+      url: `/stories/${slug}`,
       siteName: 'Healing Soil',
       type: 'article',
       publishedTime: post.date,
@@ -85,8 +86,9 @@ function formatDate(dateStr: string): string {
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
-export default function StoryPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug, 'stories')
+export default async function StoryPostPage({ params }: Props) {
+  const { slug } = await params
+  const post = getPostBySlug(slug, 'stories')
   if (!post) notFound()
 
   return (
@@ -128,7 +130,7 @@ export default function StoryPostPage({ params }: Props) {
 
         {/* MDX content */}
         <div className="prose-custom">
-          <MDXRemote source={post.content ?? ''} components={mdxComponents} />
+          <MDXContent source={post.content ?? ''} components={mdxComponents} />
         </div>
 
         {/* Shop CTA — only for soap and slow-living stories */}

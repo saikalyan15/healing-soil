@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 }
 
 type Props = {
-  searchParams: { ref?: string }
+  searchParams: Promise<{ ref?: string }>
 }
 
-export default function ConfirmationPage({ searchParams }: Props) {
-  const ref = searchParams.ref ?? 'unknown'
+export default async function ConfirmationPage({ searchParams }: Props) {
+  const { ref = 'unknown' } = await searchParams
 
   return (
     <div className="min-h-screen bg-[#F7F5F0] py-16">

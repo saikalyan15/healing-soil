@@ -34,7 +34,13 @@
       "WebFetch(domain:www.flowcart.ai)",
       "WebFetch(domain:insiderone.com)",
       "WebFetch(domain:baymard.com)",
-      "WebFetch(domain:www.convertcart.com)"
+      "WebFetch(domain:www.convertcart.com)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm info:*)",
+      "Bash(vercel env:*)",
+      "Bash(npx vercel:*)",
+      "Bash(env)"
     ]
   }
 }

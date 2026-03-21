@@ -2,12 +2,12 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { MDXContent } from '@/components/MDXContent'
 import { getBlogPosts, getPostBySlug } from '@/lib/blog'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 
-type Props = { params: { slug: string } }
+type Props = { params: Promise<{ slug: string }> }
 
 // ─── Static params ─────────────────────────────────────────────────────────────
 
@@ -18,16 +18,17 @@ export function generateStaticParams() {
 // ─── Metadata ──────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostBySlug(params.slug, 'blog')
+  const { slug } = await params
+  const post = getPostBySlug(slug, 'blog')
   if (!post) return {}
   return {
     title: `${post.title} — Healing Soil`,
     description: post.excerpt,
-    alternates: { canonical: `/blog/${params.slug}` },
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `/blog/${params.slug}`,
+      url: `/blog/${slug}`,
       siteName: 'Healing Soil',
       type: 'article',
       publishedTime: post.date,
@@ -86,8 +87,9 @@ function formatDate(dateStr: string): string {
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug, 'blog')
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params
+  const post = getPostBySlug(slug, 'blog')
   if (!post) notFound()
 
   const pullQuote = reviews[2]
@@ -114,7 +116,7 @@ export default function BlogPostPage({ params }: Props) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://healingsoil.in/blog/${params.slug}`,
+      '@id': `https://healingsoil.in/blog/${slug}`,
     },
   }
 
@@ -161,7 +163,7 @@ export default function BlogPostPage({ params }: Props) {
 
         {/* MDX content */}
         <div className="prose-custom">
-          <MDXRemote source={post.content ?? ''} components={mdxComponents} />
+          <MDXContent source={post.content ?? ''} components={mdxComponents} />
         </div>
 
         {/* Author */}
