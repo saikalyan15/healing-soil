@@ -21,7 +21,7 @@ export default function WhatsAppFallback() {
     } catch {
       // sessionStorage blocked (private mode, etc.)
     }
-    setIsDesktop(typeof navigator !== 'undefined' && navigator.maxTouchPoints === 0)
+    setIsDesktop(!/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent))
   }, [])
 
   if (!href) return null
