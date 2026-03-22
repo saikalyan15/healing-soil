@@ -34,6 +34,10 @@ export default function ReturnsPage() {
           </a>
           . We will replace or refund at our discretion.
         </p>
+        <p>
+          Natural variation in colour, texture, shape and marbling is not considered a defect. It
+          is inherent to handmade soap and proof it was made fresh for you.
+        </p>
         <p>We do not offer refunds for change of mind.</p>
       </div>
     </div>
