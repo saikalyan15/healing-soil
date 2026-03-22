@@ -1,19 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { submitOrder, type OrderPayload } from '@/lib/orders'
+import { z } from 'zod'
+import { submitOrder } from '@/lib/orders'
+
+const orderSchema = z.object({
+  customer_name: z.string().min(1),
+  customer_phone: z.string().regex(/^[6-9]\d{9}$/, 'Invalid Indian mobile number'),
+  address: z.string().min(1),
+  items: z.array(z.object({
+    product_slug: z.string().min(1),
+    price: z.number().positive(),
+    qty: z.number().int().positive(),
+  })).min(1),
+  shipping: z.number().nonnegative(),
+  notes: z.string().optional(),
+})
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { customer_name, customer_phone, items, address, shipping, notes } = body
+    const result = orderSchema.safeParse(body)
 
-    // We need to submit first to get the human-readable ref
+    if (!result.success) {
+      return NextResponse.json({ error: 'Invalid request', details: result.error.flatten() }, { status: 400 })
+    }
+
+    const { customer_name, customer_phone, items, address, shipping, notes } = result.data
+
     const { order_id, ref } = await submitOrder({
       customer: {
         name: customer_name,
         phone: customer_phone,
         address: address,
       },
-      items: items.map((i: any) => ({
+      items: items.map((i) => ({
         product_id: i.product_slug,
         price: i.price,
         qty: i.qty,
@@ -23,9 +42,6 @@ export async function POST(req: NextRequest) {
       source: 'Website Order',
     })
 
-    // No need to update notes in SoapLedger via API here if it doesn't support it,
-    // but the website and WhatsApp will now both have the consistent 'ref'.
-    
     return NextResponse.json({ order_id, ref })
   } catch (err) {
     console.error('[POST /api/orders]', err)
