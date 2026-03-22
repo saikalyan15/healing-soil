@@ -28,8 +28,7 @@ export async function POST(req: NextRequest) {
     
     return NextResponse.json({ order_id, ref })
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error'
-    console.error('[POST /api/orders]', message)
-    return NextResponse.json({ error: message }, { status: 500 })
+    console.error('[POST /api/orders]', err)
+    return NextResponse.json({ error: 'Order could not be processed. Please try again.' }, { status: 500 })
   }
 }
