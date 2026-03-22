@@ -116,7 +116,9 @@ async function sendOwnerEmail(
  */
 export async function submitOrder(payload: OrderPayload): Promise<{ order_id: string; ref: string }> {
   const body = JSON.stringify(payload)
-  console.log('[SoapLedger Request Payload]:', body)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('[SoapLedger Request Payload]:', body)
+  }
 
   // 1. POST to SoapLedger
   const res = await fetch(`${getApiBase()}/api/orders/incoming`, {
