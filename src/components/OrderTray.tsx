@@ -1,14 +1,16 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 
 export default function OrderTray() {
   const items = useOrderStore((s) => s.items)
   const total = useOrderStore((s) => s.total)
   const itemCount = useOrderStore((s) => s.itemCount)
+  const pathname = usePathname()
 
-  if (itemCount === 0) return null
+  if (itemCount === 0 || pathname === '/order') return null
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-[#C9A84C] bg-white shadow-lg">
