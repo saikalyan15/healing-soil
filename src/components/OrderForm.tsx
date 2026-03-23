@@ -5,7 +5,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { sendGAEvent } from '@next/third-parties/google'
 import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
-import { buildWhatsAppMessage, type LineItem, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
+import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -71,18 +71,25 @@ export default function OrderForm() {
   const [orderRef, setOrderRef] = useState('')
   const [waHref, setWaHref] = useState('')
   const [isMobile, setIsMobile] = useState(false)
-  const submittedRef = useRef(false)
 
   useEffect(() => {
     setIsMobile(/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent))
   }, [])
 
-  // Redirect to shop if cart is empty — but not after a successful order submission
+  // Redirect to shop only if cart is empty while still on the form step
   useEffect(() => {
-    if (items.length === 0 && !submittedRef.current) {
+    if (items.length === 0 && step === 'form') {
       router.push('/shop')
     }
-  }, [items.length, router])
+  }, [items.length, step, router])
+
+  // Clear the cart once we've moved to step 2 — done here so the redirect
+  // guard above already sees step === 'send' and does not fire
+  useEffect(() => {
+    if (step === 'send') {
+      clearOrder()
+    }
+  }, [step, clearOrder])
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
@@ -182,8 +189,6 @@ export default function OrderForm() {
         notes.trim() || undefined
       )
 
-      submittedRef.current = true
-      clearOrder()
       setOrderRef(humanRef)
       setWaHref(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`)
       setStep('send')
