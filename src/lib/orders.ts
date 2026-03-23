@@ -151,12 +151,12 @@ export async function submitOrder(payload: OrderPayload): Promise<{ order_id: st
  * Builds the pre-filled WhatsApp message string for a wa.me deep link.
  *
  * Usage (in a Client Component):
- *   const msg = buildWhatsAppMessage(orderId, customer, items, shipping)
+ *   const msg = buildWhatsAppMessage(ref, customer, items, shipping)
  *   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`)
  */
 export function buildWhatsAppMessage(
-  orderId: string,
-  customer: { name: string; email?: string },
+  ref: string,
+  customer: { name: string },
   items: WhatsAppLineItem[],
   shipping: ShippingAddress,
   shippingCost: number,
@@ -172,6 +172,8 @@ export function buildWhatsAppMessage(
   return [
     `Hi Healing Soil! 🌿`,
     ``,
+    `Order: #${ref}`,
+    ``,
     `I'd like to place an order:`,
     ``,
     itemLines,
@@ -184,10 +186,8 @@ export function buildWhatsAppMessage(
     `${shipping.name}`,
     `${shipping.address_line_1}`,
     `Phone: ${shipping.phone}`,
-    ``,
-    notes ? `Note: ${notes}` : '',
     notes ? `` : '',
-    customer.email ? `Email: ${customer.email}` : '',
+    notes ? `Note: ${notes}` : '',
   ]
     .filter((line) => line !== undefined)
     .join('\n')
