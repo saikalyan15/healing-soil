@@ -1,9 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { QRCodeSVG } from 'qrcode.react'
 import { sendGAEvent } from '@next/third-parties/google'
-import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
 
@@ -13,15 +11,8 @@ const SHIPPING_NORTH = 150
 const WA_NUMBER = '917483100651'
 
 const NORTH_INDIA_STATES = [
-  'Delhi',
-  'Haryana',
-  'Himachal Pradesh',
-  'Jammu and Kashmir',
-  'Ladakh',
-  'Punjab',
-  'Rajasthan',
-  'Uttar Pradesh',
-  'Uttarakhand',
+  'Delhi', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Ladakh',
+  'Punjab', 'Rajasthan', 'Uttar Pradesh', 'Uttarakhand',
 ]
 
 const ALL_STATES = [
@@ -52,8 +43,11 @@ function WhatsAppIcon() {
   )
 }
 
-export default function OrderForm() {
-  const router = useRouter()
+type Props = {
+  onSuccess: (ref: string, waHref: string) => void
+}
+
+export default function OrderForm({ onSuccess }: Props) {
   const items = useOrderStore((s) => s.items)
   const clearOrder = useOrderStore((s) => s.clearOrder)
   const updateQty = useOrderStore((s) => s.updateQty)
@@ -66,30 +60,6 @@ export default function OrderForm() {
   const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-
-  const [step, setStep] = useState<'form' | 'send'>('form')
-  const [orderRef, setOrderRef] = useState('')
-  const [waHref, setWaHref] = useState('')
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    setIsMobile(/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent))
-  }, [])
-
-  // Redirect to shop only if cart is empty while still on the form step
-  useEffect(() => {
-    if (items.length === 0 && step === 'form') {
-      router.push('/shop')
-    }
-  }, [items.length, step, router])
-
-  // Clear the cart once we've moved to step 2 — done here so the redirect
-  // guard above already sees step === 'send' and does not fire
-  useEffect(() => {
-    if (step === 'send') {
-      clearOrder()
-    }
-  }, [step, clearOrder])
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
@@ -158,7 +128,7 @@ export default function OrderForm() {
           customer_phone: normalizedPhone,
           items: lineItems,
           address: fullAddress,
-          shipping: shipping,
+          shipping,
           notes: notes.trim() || undefined,
         }),
       })
@@ -176,7 +146,7 @@ export default function OrderForm() {
         transaction_id: humanRef,
         currency: 'INR',
         value: total,
-        shipping: shipping,
+        shipping,
         items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
       })
 
@@ -189,9 +159,12 @@ export default function OrderForm() {
         notes.trim() || undefined
       )
 
-      setOrderRef(humanRef)
-      setWaHref(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`)
-      setStep('send')
+      const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
+
+      // Clear cart first, then hand off to parent — orderPlacedRef in parent
+      // is already set before clearOrder() triggers any re-render
+      clearOrder()
+      onSuccess(humanRef, waHref)
     } catch (err) {
       setError(
         "We're sorry, but we couldn't process your order right now. Please message us on WhatsApp and we'll help you place your order manually."
@@ -199,79 +172,6 @@ export default function OrderForm() {
       setLoading(false)
     }
   }
-
-  // ─── Step 2: Send on WhatsApp ─────────────────────────────────────────────────
-
-  if (step === 'send') {
-    return (
-      <div className="space-y-6 text-center">
-
-        {/* Checkmark */}
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#1E5631]">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </div>
-
-        <div>
-          <h2 className="font-serif text-2xl text-[#1A1A14]">
-            Your order is ready — send it on WhatsApp to place it
-          </h2>
-          <p className="mt-1 font-sans text-sm text-[#999]">Order #{orderRef}</p>
-        </div>
-
-        <p className="font-sans text-sm text-[#444444]">
-          Send us your order on WhatsApp. We&apos;ll confirm it and send you a payment link.
-        </p>
-
-        {isMobile ? (
-          <div className="space-y-2">
-            <a
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => sendGAEvent('event', 'whatsapp_send_clicked', { event_category: 'order_funnel', event_label: 'order_form_step2' })}
-              className="flex w-full items-center justify-center gap-3 rounded-lg bg-[#25D366] px-6 py-4 font-sans text-base font-bold text-white shadow-sm transition-colors hover:bg-[#1ebe5d]"
-            >
-              <WhatsAppIcon />
-              Send on WhatsApp →
-            </a>
-            <p className="font-sans text-xs text-[#666666]">
-              WhatsApp opens with your order ready. Just tap Send.
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-3 rounded-xl border border-[#25D366] bg-white p-6">
-            <QRCodeSVG value={waHref} size={180} className="mx-auto" />
-            <p className="font-sans text-sm font-semibold text-[#1A1A14]">
-              Point your phone camera at this.
-            </p>
-            <p className="font-sans text-xs text-[#666666]">
-              WhatsApp opens with your order — tap Send to place it.
-            </p>
-          </div>
-        )}
-
-        <p className="font-sans text-xs text-[#999999]">
-          After you send: we&apos;ll confirm your order and send you a payment link on WhatsApp.
-        </p>
-
-        <p className="font-sans text-xs text-[#999999]">
-          Having trouble?{' '}
-          <a
-            href={`https://wa.me/${WA_NUMBER}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-[#1E5631] underline"
-          >
-            Message us directly
-          </a>
-        </p>
-      </div>
-    )
-  }
-
-  // ─── Step 1: Order form ───────────────────────────────────────────────────────
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -440,9 +340,7 @@ export default function OrderForm() {
 
       {error && (
         <div className="rounded border border-red-200 bg-red-50 px-4 py-3">
-          <p className="font-sans text-sm font-medium text-red-800">
-            {error}
-          </p>
+          <p className="font-sans text-sm font-medium text-red-800">{error}</p>
           <a
             href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Healing Soil, I'm having trouble placing my order on the website. Can you help me?")}`}
             target="_blank"
