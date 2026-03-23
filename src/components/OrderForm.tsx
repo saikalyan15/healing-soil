@@ -71,17 +71,18 @@ export default function OrderForm() {
   const [orderRef, setOrderRef] = useState('')
   const [waHref, setWaHref] = useState('')
   const [isMobile, setIsMobile] = useState(false)
+  const submittedRef = useRef(false)
 
   useEffect(() => {
     setIsMobile(/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent))
   }, [])
 
-  // Only redirect to shop if the cart is empty and we haven't moved to the send step yet
+  // Redirect to shop if cart is empty — but not after a successful order submission
   useEffect(() => {
-    if (items.length === 0 && step === 'form') {
+    if (items.length === 0 && !submittedRef.current) {
       router.push('/shop')
     }
-  }, [items.length, router, step])
+  }, [items.length, router])
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
@@ -181,6 +182,7 @@ export default function OrderForm() {
         notes.trim() || undefined
       )
 
+      submittedRef.current = true
       clearOrder()
       setOrderRef(humanRef)
       setWaHref(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`)

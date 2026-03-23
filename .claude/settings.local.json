@@ -40,7 +40,8 @@
       "Bash(npm info:*)",
       "Bash(vercel env:*)",
       "Bash(npx vercel:*)",
-      "Bash(env)"
+      "Bash(env)",
+      "Bash(npx next:*)"
     ]
   }
 }

@@ -4,7 +4,7 @@ import { submitOrder } from '@/lib/orders'
 
 const orderSchema = z.object({
   customer_name: z.string().min(1),
-  customer_phone: z.string().regex(/^[6-9]\d{9}$/, 'Invalid Indian mobile number'),
+  customer_phone: z.string().regex(/^(91)?[6-9]\d{9}$/, 'Invalid Indian mobile number'),
   address: z.string().min(1),
   items: z.array(z.object({
     product_slug: z.string().min(1),
