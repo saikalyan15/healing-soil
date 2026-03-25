@@ -33,6 +33,9 @@ const nextConfig = {
       { source: '/contact-us',                           destination: '/contact',  permanent: true },
       { source: '/about',                                destination: '/our-story',permanent: true },
       { source: '/eco-picks',                            destination: '/',         permanent: true },
+      { source: '/our-stories-2',                        destination: '/stories',  permanent: true },
+      { source: '/our-stories-2/',                       destination: '/stories',  permanent: true },
+      { source: '/recommends/:path*',                    destination: '/stories',  permanent: true },
     ]
   },
 }
