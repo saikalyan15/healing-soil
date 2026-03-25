@@ -47,7 +47,8 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProductBySlug(slug)
   if (!product) notFound()
 
-  const productReviews = reviewsForProduct(slug).slice(0, 2)
+  const allProductReviews = reviewsForProduct(slug)
+  const productReviews = allProductReviews.slice(0, 2)
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -65,6 +66,23 @@ export default async function ProductPage({ params }: Props) {
         : 'https://schema.org/OutOfStock',
       seller: { '@type': 'Organization', name: 'Healing Soil' },
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: 5,
+      bestRating: 5,
+      worstRating: 1,
+      reviewCount: allProductReviews.length,
+    },
+    review: productReviews.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      reviewBody: r.comment,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: 5,
+        bestRating: 5,
+      },
+    })),
   }
 
   const breadcrumbSchema = {
