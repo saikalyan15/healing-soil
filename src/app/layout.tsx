@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   description:
     'Healing Soil crafts small-batch, handmade natural soaps rooted in the spirit of Goa. Regenerative ingredients, slow living, and care for the earth.',
   metadataBase: new URL('https://healingsoil.in'),
+  verification: {
+    google: '2DgyjvWpPPDWaK3g3Qv5lQlj_4A5VM5tXUWE6wms14c',
+  },
   openGraph: {
     title: 'Healing Soil — Handmade Natural Soaps from Goa',
     description:
