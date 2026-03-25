@@ -40,7 +40,8 @@
       "Bash(npm info:*)",
       "Bash(vercel env:*)",
       "Bash(npx vercel:*)",
-      "Bash(env)"
+      "Bash(env)",
+      "Bash(du -sh \"e:/Projects/healing-soil/public/products/\"*)"
     ]
   }
 }

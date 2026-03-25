@@ -122,8 +122,8 @@ export default async function HomePage() {
 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.length > 0 ? (
-              featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              featuredProducts.map((product, i) => (
+                <ProductCard key={product.id} product={product} priority={i < 2} />
               ))
             ) : (
               /* Fallback skeleton when API is unavailable */
