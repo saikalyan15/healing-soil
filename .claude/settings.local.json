@@ -41,7 +41,8 @@
       "Bash(vercel env:*)",
       "Bash(npx vercel:*)",
       "Bash(env)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(head -50 /e/Projects/healing-soil/content/blog/*.mdx)"
     ]
   }
 }
