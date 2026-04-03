@@ -105,7 +105,7 @@ export const reviews: Review[] = [
     occupation: ‘Software Professional’,
     rating: 5,
     comment:
-      ‘Absolutely loving the honey oats glycerine  soap. It’s very gentle on the skin . Even without the heavy lather, it leaves me feeling so refreshed.’,
+      ‘Absolutely loving the honey oats glycerine soap. It\’s very gentle on the skin. Even without the heavy lather, it leaves me feeling so refreshed.’,
     featured: false,
   },
 ]
