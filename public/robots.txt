@@ -1,11 +1,6 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /wp-admin/
-Disallow: /wp-content/
-Disallow: /wp-includes/
-Disallow: /wp-login.php
-Disallow: /wp-*.php
 
 # Host
 Host: https://healingsoil.in
