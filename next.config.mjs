@@ -24,11 +24,30 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // www → non-www
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.healingsoil.in' }],
+        destination: 'https://healingsoil.in/:path*',
+        permanent: true,
+      },
+      // Old WordPress blog slug
+      { source: '/blog/why-we-dont-use-chemicals',        destination: '/blog/what-makes-soap-chemical-free', permanent: true },
+      // Old WordPress category pages
+      { source: '/category/slow-living',                  destination: '/stories', permanent: true },
+      { source: '/category/slow-livings',                 destination: '/stories', permanent: true },
+      { source: '/category/slow-livings/',                destination: '/stories', permanent: true },
+      { source: '/slow-livings',                          destination: '/stories', permanent: true },
+      { source: '/slow-livings/',                         destination: '/stories', permanent: true },
+      { source: '/handmade-soap-sensitive-skin',          destination: '/stories/handmade-soap-sensitive-skin', permanent: true },
+      { source: '/handmade-soap-sensitive-skin/',         destination: '/stories/handmade-soap-sensitive-skin', permanent: true },
       { source: '/our-stories',                          destination: '/stories',  permanent: true },
       { source: '/our-stories/:path*',                   destination: '/stories/:path*', permanent: true },
-      { source: '/healing-pillars/slow-living',          destination: '/stories',  permanent: true },
-      { source: '/healing-pillars/mental-health',        destination: '/stories',  permanent: true },
-      { source: '/healing-pillars/regenerative-living',  destination: '/stories',  permanent: true },
+      { source: '/healing-pillars',                      destination: '/stories',  permanent: true },
+      { source: '/healing-pillars/:path*',               destination: '/stories',  permanent: true },
+      { source: '/slow-living',                          destination: '/stories',  permanent: true },
+      { source: '/mental-health',                        destination: '/stories',  permanent: true },
+      { source: '/regenerative-living',                  destination: '/stories',  permanent: true },
       { source: '/our-products',                         destination: '/shop',     permanent: true },
       { source: '/contact-us',                           destination: '/contact',  permanent: true },
       { source: '/about',                                destination: '/our-story',permanent: true },

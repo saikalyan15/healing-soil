@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Track Your Order — Healing Soil',
   description: 'Check the status of your Healing Soil order via WhatsApp.',
+  robots: { index: false, follow: false },
 }
 
 export default function TrackOrderPage() {

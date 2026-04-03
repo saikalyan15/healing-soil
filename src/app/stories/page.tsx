@@ -5,6 +5,7 @@ export const metadata = {
   title: 'Life on the Farm — Healing Soil Stories',
   description:
     'Stories from a farm in South Goa — slow living, growing food, and what happens when you leave the city behind.',
+  robots: { index: false, follow: false },
   alternates: { canonical: '/stories' },
   openGraph: {
     title: 'Life on the Farm — Healing Soil Stories',
