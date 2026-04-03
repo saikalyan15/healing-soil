@@ -32,7 +32,10 @@ const nextConfig = {
         permanent: true,
       },
       // Old WordPress blog slug
-      { source: '/blog/why-we-dont-use-chemicals',        destination: '/blog/what-makes-soap-chemical-free', permanent: true },
+      { source: '/blog/why-we-dont-use-chemicals',        destination: '/blog/what-makes-soap-chemical-free',                              permanent: true },
+      { source: '/blog/natural-soap-for-eczema-dry-skin', destination: '/blog/best-natural-soap-for-eczema',                                  permanent: true },
+      { source: '/blog/shea-butter-soap-benefits',        destination: '/blog/understanding-the-benefits-of-shea-butter-in-soap',             permanent: true },
+      { source: '/blog/goat-milk-soap-for-sensitive-skin',destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin',       permanent: true },
       // Old WordPress category pages
       { source: '/category/slow-living',                  destination: '/stories', permanent: true },
       { source: '/category/slow-livings',                 destination: '/stories', permanent: true },
