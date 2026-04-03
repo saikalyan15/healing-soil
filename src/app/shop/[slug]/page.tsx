@@ -114,7 +114,7 @@ export default async function ProductPage({ params }: Props) {
       reviewBody: r.comment,
       reviewRating: {
         '@type': 'Rating',
-        ratingValue: 5,
+        ratingValue: r.rating,
         bestRating: 5,
       },
     })),
