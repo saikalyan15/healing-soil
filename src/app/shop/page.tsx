@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const faqItems = [
   {
     q: 'Are these soaps really chemical-free?',
-    a: 'Our soaps contain no synthetic additives — no SLS, no artificial fragrance, no parabens, and no preservatives. Every ingredient is something you can read and recognise.',
+    a: 'Our soaps contain no synthetic additives: no SLS, no artificial fragrance, no parabens, no preservatives. Every ingredient is something you can read and recognise.',
   },
   {
     q: 'What is the difference between glycerin, goat milk, and shea butter soap?',

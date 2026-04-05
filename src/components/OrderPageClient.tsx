@@ -63,7 +63,7 @@ export default function OrderPageClient() {
 
         <div>
           <h2 className="font-serif text-2xl text-[#1A1A14]">
-            Your order is ready — send it on WhatsApp to place it
+            Your order is ready. Send it on WhatsApp to place it.
           </h2>
           <p className="mt-1 font-sans text-sm text-[#999]">Order #{orderRef}</p>
         </div>
@@ -95,7 +95,7 @@ export default function OrderPageClient() {
               Point your phone camera at this.
             </p>
             <p className="font-sans text-xs text-[#666666]">
-              WhatsApp opens with your order — tap Send to place it.
+              WhatsApp opens with your order. Tap Send to place it.
             </p>
           </div>
         )}

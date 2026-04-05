@@ -22,7 +22,7 @@ export default function ShopClient({ products }: ShopClientProps) {
         <span className="mt-0.5 text-lg leading-none">🌿</span>
         <p className="font-sans text-[13px] leading-relaxed text-[#666666]">
           <span className="font-medium text-[#1A1A14]">Every bar is made to order by hand.</span>{' '}
-          Images are illustrative — natural ingredients mean the colour, texture and marbling of
+          Images are illustrative. Natural ingredients mean the colour, texture and marbling of
           your soap will vary slightly from what you see. That variation is not a flaw; it is proof
           it was made fresh, just for you.
         </p>

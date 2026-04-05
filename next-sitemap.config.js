@@ -16,7 +16,7 @@ const config = {
     '/order/track',
     '/about',                // 301 → /our-story
     '/our-products',         // 301 → /shop
-    '/our-stories',          // 301 → /stories
+    '/our-stories',          // 301 → /blog
     '/eco-picks',            // 301 → /
     '/healing-pillars',
     '/slow-living',
@@ -24,8 +24,6 @@ const config = {
     '/regenerative-living',
     '/my-account',
     '/icon.png',             // App Router favicon picked up as route
-    '/stories',              // noindex — off-topic content, kept for backlinks
-    '/stories/*',
   ],
 
   robotsTxtOptions: {
@@ -56,7 +54,12 @@ const config = {
         priority: 0.7,
         lastmod: new Date().toISOString(),
       })),
-      // Stories excluded from sitemap — pages are noindex, kept for backlinks only
+      ...storySlugs.map((slug) => ({
+        loc: `/blog/${slug}`,
+        changefreq: 'monthly',
+        priority: 0.6,
+        lastmod: new Date().toISOString(),
+      })),
     ]
   },
 

@@ -71,7 +71,7 @@ export default function ReviewsPage() {
           What our customers say
         </h1>
         <p className="mb-12 font-sans text-base text-[#666666]">
-          Real feedback from real customers. No edits, no stars — just their words.
+          Real feedback from real customers. No edits, no stars. Just their words.
         </p>
 
         {/* Featured reviews */}

@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
-import { getBlogPosts } from '@/lib/blog'
+import { getAllPosts } from '@/lib/blog'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const limit = parseInt(searchParams.get('limit') ?? '0', 10)
 
-  let posts = getBlogPosts('blog')
+  let posts = getAllPosts()
 
   if (limit > 0) posts = posts.slice(0, limit)
 
