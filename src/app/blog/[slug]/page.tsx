@@ -4,8 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
-import { reviews } from '@/lib/reviews'
-import ReviewCard from '@/components/ReviewCard'
+import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -93,8 +92,6 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlugFromEither(slug)
   if (!post) notFound()
 
-  const pullQuote = reviews[2]
-
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -180,12 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
           /* Soap/skincare post: pull quote + product CTA */
           <>
             <div className="mt-10">
-              <ReviewCard
-                quote={pullQuote.comment}
-                name={pullQuote.author}
-                location={pullQuote.location}
-                featured={false}
-              />
+              <RandomReview />
             </div>
 
             <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">

@@ -89,7 +89,11 @@ export function getAllPosts(): Post[] {
  * Returns null if not found in either.
  */
 export function getPostBySlugFromEither(slug: string): Post | null {
-  return getPostBySlug(slug, 'blog') ?? getPostBySlug(slug, 'stories')
+  const blogPost = getPostBySlug(slug, 'blog')
+  if (blogPost) return { ...blogPost, source: 'blog' }
+  const storyPost = getPostBySlug(slug, 'stories')
+  if (storyPost) return { ...storyPost, source: 'stories' }
+  return null
 }
 
 /**
