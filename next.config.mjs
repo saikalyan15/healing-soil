@@ -49,6 +49,9 @@ const nextConfig = {
       { source: '/handmade-soap-sensitive-skin',         destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
       { source: '/handmade-soap-sensitive-skin/',        destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
       { source: '/our-stories',                          destination: '/blog',     permanent: true },
+      // Specific pagination page must come before the wildcard to avoid /blog/2/ (404)
+      { source: '/our-stories/2',                        destination: '/blog',     permanent: true },
+      { source: '/our-stories/2/',                       destination: '/blog',     permanent: true },
       { source: '/our-stories/:path*',                   destination: '/blog/:path*', permanent: true },
       { source: '/healing-pillars',                      destination: '/blog',     permanent: true },
       { source: '/healing-pillars/:path*',               destination: '/blog',     permanent: true },
@@ -62,6 +65,24 @@ const nextConfig = {
       { source: '/our-stories-2',                        destination: '/blog',     permanent: true },
       { source: '/our-stories-2/',                       destination: '/blog',     permanent: true },
       { source: '/recommends/:path*',                    destination: '/blog',     permanent: true },
+      // WordPress RSS feed URLs — go directly to /blog (not via the category redirect above)
+      { source: '/slow-living/feed/:path*',              destination: '/blog',     permanent: true },
+      { source: '/mental-health/feed/:path*',            destination: '/blog',     permanent: true },
+      { source: '/regenerative-living/feed/:path*',      destination: '/blog',     permanent: true },
+      { source: '/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain/feed/:path*', destination: '/blog/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain', permanent: true },
+      // Old WordPress post slugs at root level — go directly to /blog/[slug] (not via /stories which would chain)
+      { source: '/an-attempt-at-homemade-drinks',        destination: '/blog/an-attempt-at-homemade-drinks',        permanent: true },
+      { source: '/an-attempt-at-homemade-drinks/',       destination: '/blog/an-attempt-at-homemade-drinks',        permanent: true },
+      { source: '/why-play-is-essential-for-a-fulfilling-life-even-as-adults',  destination: '/blog/why-play-is-essential-for-a-fulfilling-life-even-as-adults', permanent: true },
+      { source: '/why-play-is-essential-for-a-fulfilling-life-even-as-adults/', destination: '/blog/why-play-is-essential-for-a-fulfilling-life-even-as-adults', permanent: true },
+      { source: '/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration',  destination: '/blog/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration', permanent: true },
+      { source: '/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration/', destination: '/blog/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration', permanent: true },
+      { source: '/the-mango-tree-and-the-art-of-resilience',  destination: '/blog/the-mango-tree-and-the-art-of-resilience', permanent: true },
+      { source: '/the-mango-tree-and-the-art-of-resilience/', destination: '/blog/the-mango-tree-and-the-art-of-resilience', permanent: true },
+      { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice',  destination: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', permanent: true },
+      { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice/', destination: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', permanent: true },
+      { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go',  destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
+      { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go/', destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
     ]
   },
 }
