@@ -4,14 +4,14 @@ import Link from 'next/link'
 import { getFeaturedProducts } from '@/lib/products'
 
 export const metadata: Metadata = {
-  title: 'Healing Soil — Handmade Soaps from Goa',
+  title: { absolute: 'Healing Soil | Natural Chemical-Free Handmade Soaps from Goa' },
   description:
-    'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals. Made to order and shipped across India.',
+    'Natural handmade soaps from a South Goa farm. No SLS, no parabens. Glycerin & goat milk with real neem, tulsi & honey. Made to order, ships across India.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Healing Soil — Handmade Soaps from Goa',
+    title: 'Healing Soil | Natural Chemical-Free Handmade Soaps from Goa',
     description:
-      'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals.',
+      'Natural handmade soaps from a South Goa farm. No SLS, no parabens. Glycerin & goat milk with real neem, tulsi & honey. Made to order, ships across India.',
     url: '/',
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps from Goa' }],
