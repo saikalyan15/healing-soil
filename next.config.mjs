@@ -44,6 +44,8 @@ const nextConfig = {
       { source: '/category/slow-living',                 destination: '/blog',     permanent: true },
       { source: '/category/slow-livings',                destination: '/blog',     permanent: true },
       { source: '/category/slow-livings/',               destination: '/blog',     permanent: true },
+      { source: '/category/regenerative-living',         destination: '/blog',     permanent: true },
+      { source: '/category/regenerative-living/',        destination: '/blog',     permanent: true },
       { source: '/slow-livings',                         destination: '/blog',     permanent: true },
       { source: '/slow-livings/',                        destination: '/blog',     permanent: true },
       { source: '/handmade-soap-sensitive-skin',         destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
