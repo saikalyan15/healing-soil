@@ -7,6 +7,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const nextConfig = {
   devIndicators: { appIsrStatus: false, buildActivity: false },
   turbopack: { root: __dirname },
+  images: {
+    unoptimized: true,
+  },
 
   async headers() {
     return [
