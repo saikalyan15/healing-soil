@@ -1,4 +1,5 @@
 // lib/products.ts — SoapLedger API integration for Healing Soil products
+import { unstable_cache } from 'next/cache'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -79,30 +80,33 @@ function normalise(raw: SoapLedgerProduct): Product {
 
 /**
  * Fetch all products from SoapLedger.
- * Cached with ISR — revalidates once every 24 hours or on-demand via tag.
+ * Cached in the Data Cache for 5 minutes, or busted on demand via revalidateTag('products').
+ * Pages using this should be force-dynamic — only the data result is cached, not the HTML.
  */
-export async function getProducts(): Promise<Product[]> {
-  const res = await fetch(`${getApiBase()}/api/products`, {
-    headers: getApiHeaders(),
-    next: {
-      revalidate: 86400, // 24 hours fallback
-      tags: ['products'], // Enable on-demand revalidation
-    },
-    // In development, we bypass cache entirely
-    ...(process.env.NODE_ENV === 'development' && { cache: 'no-store' }),
-  })
+export const getProducts = unstable_cache(
+  async (): Promise<Product[]> => {
+    const res = await fetch(`${getApiBase()}/api/products`, {
+      headers: getApiHeaders(),
+      cache: 'no-store', // unstable_cache owns the caching layer
+    })
 
-  if (!res.ok) {
-    throw new Error(
-      `SoapLedger getProducts failed: ${res.status} ${res.statusText}`
-    )
+    if (!res.ok) {
+      throw new Error(
+        `SoapLedger getProducts failed: ${res.status} ${res.statusText}`
+      )
+    }
+
+    const json: SoapLedgerProduct[] = await res.json()
+    return (Array.isArray(json) ? json : [])
+      .map(normalise)
+      .sort((a, b) => a.display_order - b.display_order)
+  },
+  ['products'],
+  {
+    revalidate: 300, // 5-minute fallback TTL
+    tags: ['products'], // bust with revalidateTag('products') from SoapLedger
   }
-
-  const json: SoapLedgerProduct[] = await res.json()
-  return (Array.isArray(json) ? json : [])
-    .map(normalise)
-    .sort((a, b) => a.display_order - b.display_order)
-}
+)
 
 /**
  * Fetch featured products for the homepage, capped at 4.

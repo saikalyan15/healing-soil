@@ -1,20 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getProducts, getProductBySlug } from '@/lib/products'
+import { getProductBySlug } from '@/lib/products'
 import { reviewsForProduct } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import AddToCartButton from '@/components/AddToCartButton'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
 
+export const dynamic = 'force-dynamic'
+
 type Props = {
   params: Promise<{ slug: string }>
-}
-
-export async function generateStaticParams() {
-  const products = await getProducts().catch(() => [])
-  return products.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

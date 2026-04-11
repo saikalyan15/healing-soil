@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { getProducts } from '@/lib/products'
+
+export const dynamic = 'force-dynamic'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import ShopClient from '@/components/ShopClient'

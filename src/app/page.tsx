@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getFeaturedProducts } from '@/lib/products'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: { absolute: 'Healing Soil | Natural Chemical-Free Handmade Soaps from Goa' },
   description:
