@@ -3,23 +3,23 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
-import { getBlogPosts, getPostBySlug } from '@/lib/blog'
-import { reviews } from '@/lib/reviews'
-import ReviewCard from '@/components/ReviewCard'
+import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
+import RandomReview from '@/components/RandomReview'
+import StoryCTA from '@/components/StoryCTA'
 
 type Props = { params: Promise<{ slug: string }> }
 
 // ─── Static params ─────────────────────────────────────────────────────────────
 
 export function generateStaticParams() {
-  return getBlogPosts('blog').map((p) => ({ slug: p.slug }))
+  return getAllPosts().map((p) => ({ slug: p.slug }))
 }
 
 // ─── Metadata ──────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = getPostBySlug(slug, 'blog')
+  const post = getPostBySlugFromEither(slug)
   if (!post) return {}
   return {
     title: `${post.title} — Healing Soil`,
@@ -89,10 +89,8 @@ function formatDate(dateStr: string): string {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  const post = getPostBySlug(slug, 'blog')
+  const post = getPostBySlugFromEither(slug)
   if (!post) notFound()
-
-  const pullQuote = reviews[2]
 
   const blogSchema = {
     '@context': 'https://schema.org',
@@ -157,6 +155,7 @@ export default async function BlogPostPage({ params }: Props) {
               fill
               className="object-cover"
               priority
+              unoptimized={post.featuredImage.startsWith('/stories/')}
             />
           </div>
         )}
@@ -171,31 +170,32 @@ export default async function BlogPostPage({ params }: Props) {
           Written by <span className="font-medium text-[#1A1A14]">{post.author}</span>
         </p>
 
-        {/* Pull quote review */}
-        <div className="mt-10">
-          <ReviewCard
-            quote={pullQuote.comment}
-            name={pullQuote.author}
-            location={pullQuote.location}
-            featured={false}
-          />
-        </div>
+        {post.source === 'stories' ? (
+          /* Farm life post: show StoryCTA only when cta flag is set */
+          post.cta === 'shop' && <StoryCTA />
+        ) : (
+          /* Soap/skincare post: pull quote + product CTA */
+          <>
+            <div className="mt-10">
+              <RandomReview />
+            </div>
 
-        {/* Product CTA */}
-        <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
-          <p className="mb-1 font-serif text-2xl text-[#1E5631]">
-            Try our handmade soaps
-          </p>
-          <p className="mb-4 font-sans text-sm text-[#666666]">
-            Made to order from our farm in Goa. No chemicals. No shortcuts.
-          </p>
-          <Link
-            href="/shop"
-            className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
-          >
-            Shop the collection
-          </Link>
-        </div>
+            <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
+              <p className="mb-1 font-serif text-2xl text-[#1E5631]">
+                Try our handmade soaps
+              </p>
+              <p className="mb-4 font-sans text-sm text-[#666666]">
+                Made to order from our farm in Goa. No chemicals. No shortcuts.
+              </p>
+              <Link
+                href="/shop"
+                className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
+              >
+                Shop the collection
+              </Link>
+            </div>
+          </>
+        )}
 
       </article>
     </div>

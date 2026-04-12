@@ -13,6 +13,7 @@ export type Post = {
   featuredImage?: string
   author: string
   cta?: string
+  source?: 'blog' | 'stories'
   content?: string  // only present when fetched via getPostBySlug
 }
 
@@ -72,6 +73,27 @@ export function getPostBySlug(slug: string, dir: 'blog' | 'stories'): Post | nul
   const filePath = path.join(contentDir(dir), `${slug}.mdx`)
   if (!fs.existsSync(filePath)) return null
   return parseMdxFile(filePath, slug, true)
+}
+
+/**
+ * Returns all posts from both blog and stories, merged and sorted by date descending.
+ */
+export function getAllPosts(): Post[] {
+  const blogPosts = getBlogPosts('blog').map(p => ({ ...p, source: 'blog' as const }))
+  const storyPosts = getBlogPosts('stories').map(p => ({ ...p, source: 'stories' as const }))
+  return [...blogPosts, ...storyPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+/**
+ * Returns a single post searching blog dir first, then stories dir.
+ * Returns null if not found in either.
+ */
+export function getPostBySlugFromEither(slug: string): Post | null {
+  const blogPost = getPostBySlug(slug, 'blog')
+  if (blogPost) return { ...blogPost, source: 'blog' }
+  const storyPost = getPostBySlug(slug, 'stories')
+  if (storyPost) return { ...storyPost, source: 'stories' }
+  return null
 }
 
 /**

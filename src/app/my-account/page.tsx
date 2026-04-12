@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+}
+
 export default function MyAccountPage() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-20">

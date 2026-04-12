@@ -3,15 +3,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getFeaturedProducts } from '@/lib/products'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
-  title: 'Healing Soil — Handmade Soaps from Goa',
+  title: { absolute: 'Healing Soil | Natural Chemical-Free Handmade Soaps from Goa' },
   description:
-    'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals. Made to order and shipped across India.',
+    'Natural handmade soaps from a South Goa farm. No SLS, no parabens. Glycerin & goat milk with real neem, tulsi & honey. Made to order, ships across India.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Healing Soil — Handmade Soaps from Goa',
+    title: 'Healing Soil | Natural Chemical-Free Handmade Soaps from Goa',
     description:
-      'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals.',
+      'Natural handmade soaps from a South Goa farm. No SLS, no parabens. Glycerin & goat milk with real neem, tulsi & honey. Made to order, ships across India.',
     url: '/',
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps from Goa' }],
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
   },
 }
 import { featuredReviews, shortReviews } from '@/lib/reviews'
-import { getBlogPosts } from '@/lib/blog'
+import { getAllPosts } from '@/lib/blog'
 import ProductCard from '@/components/ProductCard'
 import ReviewCard from '@/components/ReviewCard'
 import BlogCard from '@/components/BlogCard'
@@ -27,7 +29,7 @@ import BlogCard from '@/components/BlogCard'
 export default async function HomePage() {
   // Graceful fallback if SoapLedger env vars are not yet configured
   const featuredProducts = await getFeaturedProducts().catch(() => [])
-  const latestPosts = getBlogPosts('blog').slice(0, 2)
+  const latestPosts = getAllPosts().slice(0, 3)
 
   const organizationSchema = {
     '@context': 'https://schema.org',
@@ -122,8 +124,8 @@ export default async function HomePage() {
 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.length > 0 ? (
-              featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              featuredProducts.map((product, i) => (
+                <ProductCard key={product.id} product={product} priority={i < 2} />
               ))
             ) : (
               /* Fallback skeleton when API is unavailable */
@@ -138,54 +140,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Section 4: How It Works ─────────────────────────────────────────── */}
-      <section className="w-full bg-[#F7F5F0] py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <h2 className="mb-10 text-center font-serif text-4xl text-[#1E5631]">
-            How ordering works
-          </h2>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-            {[
-              {
-                n: '1',
-                icon: <BrowseIcon />,
-                title: 'Browse and choose',
-                body: 'Pick the soaps you want from our collection — every bar lists its ingredients.',
-              },
-              {
-                n: '2',
-                icon: <WhatsAppStepIcon />,
-                title: 'Order on WhatsApp',
-                body: 'We confirm availability and send you a payment link — no payment upfront.',
-              },
-              {
-                n: '3',
-                icon: <ShipIcon />,
-                title: 'Made fresh and shipped',
-                body: 'Your soap is made after payment and dispatched within a few days.',
-              },
-            ].map((step) => (
-              <div key={step.n} className="flex flex-col items-center gap-4 text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#C9A84C] text-[#1E5631]">
-                  {step.icon}
-                </div>
-                <span className="font-sans text-xs font-bold uppercase tracking-widest text-[#C9A84C]">
-                  Step {step.n}
-                </span>
-                <h3 className="font-serif text-xl text-[#1A1A14]">{step.title}</h3>
-                <p className="font-sans text-sm leading-relaxed text-[#666666]">{step.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Section 5: Founder Story ─────────────────────────────────────────── */}
+      {/* ── Section 3: Founder + Farm ───────────────────────────────────────── */}
       <section className="w-full bg-white py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="flex flex-col items-center gap-10 md:flex-row md:items-center md:gap-14">
 
-            {/* Photo */}
+          {/* Founder quote */}
+          <div className="flex flex-col items-center gap-10 md:flex-row md:items-center md:gap-14">
             <div className="flex-shrink-0">
               <div
                 className="relative h-[280px] w-[280px] overflow-hidden rounded-full"
@@ -193,24 +153,22 @@ export default async function HomePage() {
               >
                 <Image
                   src="/founder.jpg"
-                  alt="Deepanjali — founder of Healing Soil"
+                  alt="Deepanjali, founder of Healing Soil"
                   fill
                   className="object-cover"
                   sizes="280px"
                 />
               </div>
             </div>
-
-            {/* Text */}
             <div className="flex-1 text-center md:text-left">
               <h2 className="mb-4 font-serif text-4xl leading-snug text-[#1E5631]">
                 Made by Deepanjali,<br className="hidden md:block" /> on a farm in Goa
               </h2>
               <p className="mb-6 font-sans text-base leading-[1.8] text-[#1A1A14]">
                 I left a corporate career to grow food and live slowly. The soaps started as a
-                personal project — I wanted something clean for my skin that I could also feel good
+                personal project. I wanted something clean for my skin that I could also feel good
                 about making. Three years later, every bar still leaves my hands before it leaves
-                the farm.
+                the farm. The soaps are just the beginning of what this land makes possible.
               </p>
               <Link
                 href="/our-story"
@@ -219,8 +177,47 @@ export default async function HomePage() {
                 Read our full story
               </Link>
             </div>
-
           </div>
+
+          {/* Farm photo strip */}
+          <div className="mt-12">
+            <p className="mb-5 text-center font-sans text-xs font-semibold uppercase tracking-[0.18em] text-[#C9A84C]">
+              Where your soap is made
+            </p>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/stories/farm-cashew-tree.jpg"
+                  alt="Cashew tree on the Healing Soil farm, South Goa"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 33vw, 25vw"
+                  unoptimized
+                />
+              </div>
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/stories/farm-coconut-canopy.jpg"
+                  alt="Coconut palms at golden hour on the farm"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 33vw, 25vw"
+                  unoptimized
+                />
+              </div>
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/stories/farm-dog-resting.jpg"
+                  alt="A dog resting on the farm path in South Goa"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 33vw, 25vw"
+                  unoptimized
+                />
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -265,7 +262,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Section 8: Latest Blog Posts ────────────────────────────────────── */}
+      {/* ── Latest Blog Posts ───────────────────────────────────────────────── */}
       {latestPosts.length > 0 && (
         <section className="w-full bg-white py-16">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -278,7 +275,7 @@ export default async function HomePage() {
                 Read all posts →
               </Link>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {latestPosts.map((post) => (
                 <BlogCard key={post.slug} post={post} dir="blog" />
               ))}
@@ -287,7 +284,52 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Section 9: Final CTA ─────────────────────────────────────────────── */}
+      {/* ── How It Works ─────────────────────────────────────────────────────── */}
+      <section className="w-full bg-[#F7F5F0] py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="mb-2 text-center font-serif text-4xl text-[#1E5631]">
+            How ordering works
+          </h2>
+          <p className="mb-10 text-center font-sans text-sm text-[#666666]">
+            No login, no checkout maze. Just pick, message, and receive.
+          </p>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            {[
+              {
+                n: '1',
+                icon: <BrowseIcon />,
+                title: 'Browse and choose',
+                body: 'Pick the soaps you want from our collection. Every bar lists its ingredients.',
+              },
+              {
+                n: '2',
+                icon: <WhatsAppStepIcon />,
+                title: 'Order on WhatsApp',
+                body: 'We confirm availability and send you a payment link. No payment upfront.',
+              },
+              {
+                n: '3',
+                icon: <ShipIcon />,
+                title: 'Made fresh and shipped',
+                body: 'Your soap is made after payment and dispatched within a few days.',
+              },
+            ].map((step) => (
+              <div key={step.n} className="flex flex-col items-center gap-4 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#C9A84C] text-[#1E5631]">
+                  {step.icon}
+                </div>
+                <span className="font-sans text-xs font-bold uppercase tracking-widest text-[#C9A84C]">
+                  Step {step.n}
+                </span>
+                <h3 className="font-serif text-xl text-[#1A1A14]">{step.title}</h3>
+                <p className="font-sans text-sm leading-relaxed text-[#666666]">{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ────────────────────────────────────────────────────────── */}
       <section className="w-full bg-[#1E5631] py-20">
         <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
           <h2 className="mb-3 font-serif text-[40px] leading-tight text-white">

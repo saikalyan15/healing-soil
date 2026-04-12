@@ -5,7 +5,6 @@ import { revalidateTag, revalidatePath } from 'next/cache'
  * On-demand revalidation endpoint.
  *
  * Usage:
- * GET  /api/revalidate?tag=products&secret=...
  * POST /api/revalidate { "tag": "products", "secret": "..." }
  */
 
@@ -14,22 +13,14 @@ async function handler(request: NextRequest) {
   let tag: string | null = null
   let path: string | null = null
 
-  // Try query params first
-  const { searchParams } = new URL(request.url)
-  secret = searchParams.get('secret')
-  tag = searchParams.get('tag')
-  path = searchParams.get('path')
-
-  // If POST and missing data, try body
-  if (request.method === 'POST' && (!secret || (!tag && !path))) {
-    try {
-      const body = await request.json()
-      secret = secret || body.secret
-      tag = tag || body.tag
-      path = path || body.path
-    } catch (e) {
-      // Body might not be JSON or might be empty
-    }
+  // Read from JSON body
+  try {
+    const body = await request.json()
+    secret = body.secret
+    tag = body.tag
+    path = body.path
+  } catch (e) {
+    // Body might not be JSON or might be empty
   }
 
   // Security check
@@ -62,10 +53,6 @@ async function handler(request: NextRequest) {
     console.error('[Revalidate Error]', message)
     return NextResponse.json({ message }, { status: 500 })
   }
-}
-
-export async function GET(request: NextRequest) {
-  return handler(request)
 }
 
 export async function POST(request: NextRequest) {

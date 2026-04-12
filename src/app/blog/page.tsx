@@ -1,14 +1,14 @@
-import { getBlogPosts } from '@/lib/blog'
+import { getAllPosts } from '@/lib/blog'
 import BlogGrid from '@/components/BlogGrid'
 
 export const metadata = {
   title: 'From the Farm — Healing Soil Blog',
   description:
-    'Writing about handmade soap, natural ingredients, skin science, and slow living from a farm in South Goa.',
+    'Writing about handmade soap, natural ingredients, slow living, and farm life from South Goa.',
   alternates: { canonical: '/blog' },
   openGraph: {
     title: 'From the Farm — Healing Soil Blog',
-    description: 'Writing about handmade soap, natural ingredients, and the science of skin.',
+    description: 'Soap, slow living, and stories from a farm in South Goa.',
     url: '/blog',
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil blog — from the farm' }],
@@ -17,7 +17,7 @@ export const metadata = {
 }
 
 export default function BlogPage() {
-  const posts = getBlogPosts('blog')
+  const posts = getAllPosts()
 
   return (
     <div className="bg-[#F7F5F0]">
@@ -27,7 +27,7 @@ export default function BlogPage() {
             From the farm
           </h1>
           <p className="font-sans text-lg text-[#666666]">
-            Writing about handmade soap, natural ingredients, and the science of skin.
+            Soap, slow living, and stories from a farm in South Goa.
           </p>
         </div>
 

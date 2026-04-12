@@ -27,6 +27,7 @@ export default function BlogCard({ post, dir }: BlogCardProps) {
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            unoptimized={post.featuredImage.startsWith('/stories/')}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-[#1E5631]">

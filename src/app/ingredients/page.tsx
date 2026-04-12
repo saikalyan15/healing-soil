@@ -29,7 +29,7 @@ const ingredients = [
   {
     name: 'Neem',
     description:
-      'An ancient remedy for skin conditions — neem is antifungal, antibacterial, and anti-inflammatory. Particularly effective for oily skin, acne, and scalp health.',
+      'An ancient remedy for skin conditions: neem is antifungal, antibacterial, and anti-inflammatory. Particularly effective for oily skin, acne, and scalp health.',
   },
   {
     name: 'Tulsi',
@@ -39,7 +39,7 @@ const ingredients = [
   {
     name: 'Goat Milk',
     description:
-      'Naturally rich in lactic acid, goat milk gently exfoliates dead skin cells and brightens the complexion. It is also intensely nourishing — ideal for dry or sensitive skin.',
+      'Naturally rich in lactic acid, goat milk gently exfoliates dead skin cells and brightens the complexion. It is also intensely nourishing, ideal for dry or sensitive skin.',
   },
   {
     name: 'Honey',
@@ -54,7 +54,7 @@ const ingredients = [
   {
     name: 'Kesar (Saffron)',
     description:
-      'One of the most prized skin ingredients in Ayurveda — saffron brightens the complexion and reduces pigmentation over time. A little goes a long way.',
+      'One of the most prized skin ingredients in Ayurveda: saffron brightens the complexion and reduces pigmentation over time. A little goes a long way.',
   },
   {
     name: 'Haldi (Turmeric)',
@@ -89,8 +89,8 @@ export default function IngredientsPage() {
             What goes into every bar
           </h1>
           <p className="font-sans text-lg leading-relaxed text-[#666666]">
-            We use a clean base — either glycerin or goat milk — and add ingredients we know and
-            trust. Here is what and why.
+            We use a clean glycerin or goat milk base and add ingredients we know and trust.
+            Here is what and why.
           </p>
         </div>
 

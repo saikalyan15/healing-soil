@@ -8,9 +8,10 @@ import type { Product } from '@/lib/products'
 
 type ProductCardProps = {
   product: Product
+  priority?: boolean
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
   const [expanded, setExpanded] = useState(false)
@@ -36,6 +37,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.image_url}
             alt={product.name}
             fill
+            priority={priority}
             className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />

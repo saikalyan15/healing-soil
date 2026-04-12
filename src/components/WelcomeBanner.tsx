@@ -14,9 +14,7 @@ export default function WelcomeBanner() {
   useEffect(() => {
     const isHome = pathname === '/'
     if (isHome && itemCount > 0) {
-      // Small delay for effect
-      const timer = setTimeout(() => setVisible(true), 1000)
-      return () => clearTimeout(timer)
+      setVisible(true)
     } else {
       setVisible(false)
     }

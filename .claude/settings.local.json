@@ -41,7 +41,14 @@
       "Bash(vercel env:*)",
       "Bash(npx vercel:*)",
       "Bash(env)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(head -50 /e/Projects/healing-soil/content/blog/*.mdx)",
+      "Bash(wc -l /e/Projects/healing-soil/content/blog/*.mdx)",
+      "Bash(sed -i 's/^category: Slow Living$/category: slow-living/' content/stories/*.mdx)",
+      "Bash(sed -i 's/^category: 🧠 Mental Health$/category: mental-health/' content/stories/*.mdx)",
+      "Bash(sed -i 's/^category: Regenerative Living$/category: regenerative-living/' content/stories/*.mdx)",
+      "Bash(sed -i 's/^category: DIY + Upcycling$/category: diy/' content/stories/*.mdx)",
+      "Bash(sed -i 's/^category: farm life$/category: farm-life/' content/stories/*.mdx)"
     ]
   }
 }

@@ -5,11 +5,11 @@ import ReviewCard from '@/components/ReviewCard'
 export const metadata = {
   title: 'Our Story — Healing Soil',
   description:
-    'From Bangalore to a farm in South Goa — how Healing Soil began and why we make soap the way we do.',
+    'From Bangalore to a farm in South Goa: how Healing Soil began and why we make soap the way we do.',
   alternates: { canonical: '/our-story' },
   openGraph: {
     title: 'Our Story — Healing Soil',
-    description: 'From Bangalore to a farm in South Goa — how Healing Soil began and why we make soap the way we do.',
+    description: 'From Bangalore to a farm in South Goa: how Healing Soil began and why we make soap the way we do.',
     url: '/our-story',
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Deepanjali, founder of Healing Soil' }],
@@ -31,13 +31,13 @@ export default function OurStoryPage() {
         <div className="mb-14 flex flex-col gap-8 sm:flex-row sm:items-start">
           <p className="flex-1 font-sans text-lg leading-relaxed text-[#1A1A14]">
             We moved from Bangalore to a farm in South Goa in September 2023. What started as a
-            search for slower, quieter living turned into something we did not expect — making soap.
+            search for slower, quieter living turned into something we did not expect: making soap.
             The land, the pace, and the ingredients around us made it feel inevitable.
           </p>
           <div className="flex-shrink-0 self-start sm:self-auto">
             <Image
               src="/founder.jpg"
-              alt="Deepanjali — founder of Healing Soil"
+              alt="Deepanjali, founder of Healing Soil"
               width={280}
               height={280}
               className="rounded-full object-cover"
@@ -73,7 +73,7 @@ export default function OurStoryPage() {
           <p className="font-sans text-base leading-relaxed text-[#1A1A14]">
             Commercial soaps strip the skin. They are detergents with fragrance, not soap. We use
             glycerin and goat milk bases, then add real ingredients. Nothing synthetic. Nothing
-            harsh. Your skin knows the difference — and once you switch, it is very hard to go back.
+            harsh. Your skin knows the difference. Once you switch, it is very hard to go back.
           </p>
         </section>
 
@@ -82,7 +82,7 @@ export default function OurStoryPage() {
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Made to order</h2>
           <p className="font-sans text-base leading-relaxed text-[#1A1A14]">
             We do not stock shelves. Every bar is made after you order it. That means it is fresh,
-            it is made for you, and we never waste. Small batch, slow process, made by hand — that
+            it is made for you, and we never waste. Small batch, slow process, made by hand. That
             is the only way we know how to do it.
           </p>
         </section>
