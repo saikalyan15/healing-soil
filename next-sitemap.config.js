@@ -47,7 +47,48 @@ const config = {
     const blogSlugs = getSlugsByDir('blog')
     const storySlugs = getSlugsByDir('stories')
 
+    const staticPaths = [
+      '/',
+      '/shop',
+      '/our-story',
+      '/ingredients',
+      '/contact',
+      '/reviews',
+      '/faq',
+      '/returns',
+      '/privacy-policy',
+    ]
+
+    // Product pages are dynamic at runtime, so list their canonical URLs explicitly.
+    const productSlugs = [
+      'gift-soap-pouch',
+      'ginger-rosemary-glycerin-soap',
+      'ginger-rosemary-goat-milk-soap',
+      'honey-and-oats-goatmilk-soap',
+      'honey-kesar-haldi-sheabutter-soap',
+      'honey-oats-glycerin-soap',
+      'kesar-haldi-goat-milk-soap',
+      'loofah-soaps',
+      'neem-tulsi-glycerin-soap',
+      'neem-tulsi-goatmilk-soap',
+      'orange',
+      'orange-goatmilk-soap',
+      'pomegranate-glycerine',
+      'pomegranate-goatmilk-soap',
+      'red-rose-soap',
+      'rice-rose-goatmilk-soap',
+      'sheabutter-kesar-gulab',
+      'travel-soaps',
+    ]
+
     return [
+      ...staticPaths.map((loc) => ({ loc })),
+      ...productSlugs.map((slug) => ({
+        loc: `/shop/${slug}`,
+        changefreq: 'weekly',
+        priority: 0.8,
+        lastmod: new Date().toISOString(),
+      })),
       ...blogSlugs.map((slug) => ({
         loc: `/blog/${slug}`,
         changefreq: 'monthly',
@@ -99,3 +140,4 @@ const config = {
 }
 
 module.exports = config
+
