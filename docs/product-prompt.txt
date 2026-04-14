@@ -1,4 +1,5 @@
 
+Prompt:
 Can you generate an image taking this image as reference
 A square, high-end product photograph of a handmade soap bar placed on soft, slightly wrinkled natural linen fabric.
 
@@ -11,3 +12,18 @@ Minimal composition, calm and premium aesthetic, artisanal skincare photography 
 No text, no watermark. 
 
 If labels are there retain it with the exact text. Dont change it
+
+Prompt :
+
+A square, high-end product photograph of a round handmade glycerin soap with a natural loofah embedded fully inside the soap.
+
+The soap is translucent amber/orange, with the loofah clearly visible through the soap but completely encased within it, with a smooth glossy outer surface (no exposed fibers outside).
+
+The soap is placed slightly off-center at a gentle 45-degree angle on soft, slightly wrinkled beige linen fabric. A few scattered dried flower petals are placed subtly around it.
+
+Warm, diffused natural light creates soft shadows and highlights the soap’s translucency and the internal texture of the loofah.
+
+Shallow depth of field, warm earthy tones, minimal composition, premium artisanal skincare photography style.
+
+No text, no watermark.
+make the surface glass like and smooth
