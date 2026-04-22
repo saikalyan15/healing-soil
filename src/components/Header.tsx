@@ -30,8 +30,8 @@ export default function Header() {
             alt="Healing Soil"
             width={160}
             height={60}
-            className="h-[60px] w-auto object-contain"
-            style={{ width: 'auto' }}
+            className="object-contain"
+            style={{ height: '60px', width: 'auto' }}
             priority
           />
         </Link>
