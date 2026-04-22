@@ -24,24 +24,28 @@ export const metadata: Metadata = {
   },
 }
 
-const BUNDLE_SLUG_MATCHERS = [
-  /honey.*oat/i,
-  /neem.*tulsi/i,
-  /kesar.*haldi/i,
-  /travel/i,
+// Exact slugs for the starter bundle (Stage 2 offer in docs/growth-strategy.md).
+// Fallback regex catches drift if a slug is renamed; specific enough to
+// disambiguate from sibling products (e.g. neem-tulsi-glycerin vs goatmilk).
+const BUNDLE_DEFINITIONS: { slug: string; fallback: RegExp }[] = [
+  { slug: 'honey-oats-glycerin-soap', fallback: /honey.*oat.*glycerin/i },
+  { slug: 'neem-tulsi-goatmilk-soap', fallback: /neem.*tulsi.*goat/i },
+  { slug: 'kesar-haldi-goat-milk-soap', fallback: /kesar.*haldi.*goat/i },
+  { slug: 'travel-soaps', fallback: /travel/i },
 ]
 
 function pickBundleDefaults(products: { id: string; slug: string }[]): string[] {
   const used = new Set<string>()
   const picked: string[] = []
-  for (const matcher of BUNDLE_SLUG_MATCHERS) {
-    const found = products.find((p) => matcher.test(p.slug) && !used.has(p.id))
+  for (const def of BUNDLE_DEFINITIONS) {
+    const exact = products.find((p) => p.slug === def.slug && !used.has(p.id))
+    const found = exact ?? products.find((p) => def.fallback.test(p.slug) && !used.has(p.id))
     if (found) {
       picked.push(found.id)
       used.add(found.id)
     }
   }
-  // Top up from remaining products if any matcher missed
+  // Top up from remaining products if any slot missed (defensive, not expected)
   for (const p of products) {
     if (picked.length >= 4) break
     if (!used.has(p.id)) {
