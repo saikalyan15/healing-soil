@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProductBySlug } from '@/lib/products'
-import { reviewsForProduct } from '@/lib/reviews'
+import { reviewsForProduct, featuredReviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import AddToCartButton from '@/components/AddToCartButton'
 import ProductImage from '@/components/ProductImage'
@@ -44,8 +44,10 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProductBySlug(slug)
   if (!product) notFound()
 
-  const allProductReviews = reviewsForProduct(slug)
-  const productReviews = allProductReviews.slice(0, 2)
+  const productSpecificReviews = reviewsForProduct(slug)
+  const displayReviews = productSpecificReviews.length > 0
+    ? productSpecificReviews.slice(0, 2)
+    : featuredReviews.slice(0, 2)
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -65,10 +67,7 @@ export default async function ProductPage({ params }: Props) {
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
         applicableCountry: 'IN',
-        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-        merchantReturnDays: 2,
-        returnMethod: 'https://schema.org/ReturnByMail',
-        returnFees: 'https://schema.org/FreeReturn',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
       },
       shippingDetails: {
         '@type': 'OfferShippingDetails',
@@ -85,36 +84,38 @@ export default async function ProductPage({ params }: Props) {
           '@type': 'ShippingDeliveryTime',
           handlingTime: {
             '@type': 'QuantitativeValue',
-            minValue: 3,
-            maxValue: 5,
+            minValue: 4,
+            maxValue: 4,
             unitCode: 'DAY',
           },
           transitTime: {
             '@type': 'QuantitativeValue',
             minValue: 3,
-            maxValue: 5,
+            maxValue: 7,
             unitCode: 'DAY',
           },
         },
       },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: 5,
-      bestRating: 5,
-      worstRating: 1,
-      reviewCount: allProductReviews.length,
-    },
-    review: productReviews.map((r) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: r.author },
-      reviewBody: r.comment,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: r.rating,
+    ...(productSpecificReviews.length > 0 && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: 5,
         bestRating: 5,
+        worstRating: 1,
+        reviewCount: productSpecificReviews.length,
       },
-    })),
+      review: productSpecificReviews.slice(0, 2).map((r) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.author },
+        reviewBody: r.comment,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: r.rating,
+          bestRating: 5,
+        },
+      })),
+    }),
   }
 
   const breadcrumbSchema = {
@@ -239,11 +240,11 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         {/* Reviews */}
-        {productReviews.length > 0 && (
+        {displayReviews.length > 0 && (
           <div className="mt-10 border-t border-[#D6CFC4] pt-10">
             <h2 className="font-serif text-2xl text-[#1A1A14] mb-6">What customers say</h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {productReviews.map((r) => (
+              {displayReviews.map((r) => (
                 <ReviewCard
                   key={r.id}
                   quote={r.comment}

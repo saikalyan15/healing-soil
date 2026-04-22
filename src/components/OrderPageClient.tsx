@@ -162,7 +162,7 @@ export default function OrderPageClient() {
               {[
                 { title: 'Place Order', desc: 'Confirm your items and delivery address.' },
                 { title: 'Confirmation', desc: 'We check your order and send you a UPI QR code for payment.' },
-                { title: 'Made to Order', desc: 'Every bar is handmade fresh. Total time to reach you is 8–15 days.' },
+                { title: 'Made to Order', desc: 'Every bar is handmade fresh. Shipped in 4 days. Arrives in 3 to 7 days depending on your city.' },
                 { title: 'Shipping', desc: 'Your soaps are sent via India Post Speed Post from South Goa.' },
                 { title: 'Tracking', desc: 'India Post Speed Post notifies you via SMS on the day of delivery.' },
               ].map((s, i) => (

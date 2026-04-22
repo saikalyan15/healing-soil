@@ -12,7 +12,7 @@ export const metadata = {
     description: 'From Bangalore to a farm in South Goa: how Healing Soil began and why we make soap the way we do.',
     url: '/our-story',
     siteName: 'Healing Soil',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Deepanjali, founder of Healing Soil' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil farm in South Goa' }],
     type: 'website',
   },
 }
@@ -35,14 +35,16 @@ export default function OurStoryPage() {
             The land, the pace, and the ingredients around us made it feel inevitable.
           </p>
           <div className="flex-shrink-0 self-start sm:self-auto">
-            <Image
-              src="/founder.jpg"
-              alt="Deepanjali, founder of Healing Soil"
-              width={280}
-              height={280}
-              className="rounded-full object-cover"
-              priority
-            />
+            <div className="relative h-[280px] w-[280px] overflow-hidden rounded-full">
+              <Image
+                src="/stories/farm-cashew-tree.jpg"
+                alt="Cashew tree on the Healing Soil farm in South Goa"
+                fill
+                className="object-cover"
+                sizes="280px"
+                priority
+              />
+            </div>
           </div>
         </div>
 

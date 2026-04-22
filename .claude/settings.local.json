@@ -48,7 +48,27 @@
       "Bash(sed -i 's/^category: 🧠 Mental Health$/category: mental-health/' content/stories/*.mdx)",
       "Bash(sed -i 's/^category: Regenerative Living$/category: regenerative-living/' content/stories/*.mdx)",
       "Bash(sed -i 's/^category: DIY + Upcycling$/category: diy/' content/stories/*.mdx)",
-      "Bash(sed -i 's/^category: farm life$/category: farm-life/' content/stories/*.mdx)"
+      "Bash(sed -i 's/^category: farm life$/category: farm-life/' content/stories/*.mdx)",
+      "Bash(git -C \"e:/Projects/Healing-Soil-Suite/healing-soil\" status)",
+      "Bash(git -C \"e:/Projects/Healing-Soil-Suite/healing-soil\" log --oneline -10)",
+      "Bash(awk 'NR>=4 && NR<=40 {print NR\": \"length\\($0\\)\" bytes\"}' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR>=40 && NR<=155 {print NR\": \"length\\($0\\)\" bytes\"}' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==26' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==10' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==28' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==31' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==33' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==34' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==40' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==41' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==44' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==47' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==51' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==54' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==61' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==64' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==68' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")",
+      "Bash(awk 'NR==71' \"C:/Users/sai/.claude/projects/e--Projects-Healing-Soil-Suite-healing-soil/524104e6-0960-4e68-8c14-cbd168fccc71.jsonl\")"
     ]
   }
 }

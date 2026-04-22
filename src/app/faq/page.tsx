@@ -30,7 +30,7 @@ const faqItems = [
   },
   {
     q: 'How long does delivery take?',
-    a: 'Because every bar is made to order, delivery typically takes 7–10 days. This includes the time to make, cure, and ship your soap.',
+    a: 'Shipped in 4 days. Arrives in 3 to 7 days depending on your city.',
   },
   {
     q: 'How do I order?',

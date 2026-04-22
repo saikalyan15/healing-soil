@@ -40,7 +40,7 @@ export default function TrackOrderPage() {
               {[
                 { step: '1', title: 'Order Received', desc: 'We check your order and confirm details on WhatsApp.' },
                 { step: '2', title: 'Payment', desc: 'We send a UPI QR code. No Cash on Delivery (COD) is available.' },
-                { step: '3', title: 'Made to Order', desc: 'Your soaps are handmade fresh. Total time to reach you is 8–15 days.' },
+                { step: '3', title: 'Made to Order', desc: 'Your soaps are handmade fresh. Shipped in 4 days. Arrives in 3 to 7 days depending on your city.' },
                 { step: '4', title: 'Speed Post', desc: 'We ship via India Post. They will notify you via SMS on the day of delivery.' },
               ].map((item) => (
                 <li key={item.step} className="flex gap-3">

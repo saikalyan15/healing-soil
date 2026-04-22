@@ -119,11 +119,11 @@ export const featuredReviews: Review[] = reviews.filter((r) => r.featured)
 export const shortReviews: Review[] = reviews.filter((r) => !r.featured)
 
 /**
- * Returns all reviews linked to a specific product slug.
- * Falls back to returning all reviews if no slug match is found,
- * so UIs always have something to display.
+ * Returns reviews linked to a specific product slug, or an empty array if none.
+ * Callers that need brand-level fallback content for UI display should fall back
+ * to featuredReviews themselves — schema consumers must see the empty array,
+ * since claiming an aggregateRating across unrelated products is misleading.
  */
 export function reviewsForProduct(slug: string): Review[] {
-  const matched = reviews.filter((r) => r.productSlug === slug)
-  return matched.length > 0 ? matched : reviews
+  return reviews.filter((r) => r.productSlug === slug)
 }

@@ -41,7 +41,7 @@ export default async function ConfirmationPage() {
               <div>
                 <p className="font-sans text-sm font-bold text-[#1A1A14]">Made to Order</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  Every bar is handmade fresh just for you. Total time to reach you via India Post is 8–15 days.
+                  Every bar is handmade fresh just for you. Shipped in 4 days. Arrives in 3 to 7 days depending on your city.
                 </p>
               </div>
             </div>
