@@ -101,11 +101,10 @@ export default async function HomePage() {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-16 sm:px-6 md:flex-row md:gap-16 md:py-24">
           <div className="flex-1 text-center md:text-left">
             <h1 className="mb-5 font-serif text-[clamp(34px,4.6vw,52px)] leading-tight text-[#1E5631]">
-              The only soap her skin<br className="hidden md:block" /> didn&rsquo;t react to.
+              Handmade soap from Goa.<br className="hidden md:block" /> No SLS. Made to order.
             </h1>
             <p className="mb-8 font-sans text-lg leading-relaxed text-[#666666]">
-              Handmade soap from a Goa farm. Made to order. For skin that has stopped getting
-              along with commercial soap.
+              For skin that has stopped getting along with commercial soap.
             </p>
 
             {krutika && (
