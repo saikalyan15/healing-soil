@@ -5,6 +5,7 @@ import { getProducts } from '@/lib/products'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import BundlePicker from '@/components/BundlePicker'
+import VideoTestimonial from '@/components/VideoTestimonial'
 
 export const dynamic = 'force-dynamic'
 
@@ -237,6 +238,19 @@ export default async function HomePage() {
             Every bar is made to order with fresh ingredients from the farm. No two batches are
             identical, and we will not pretend they are. What we can promise: the ingredients are
             real, the process is transparent, and if the bar arrives damaged, we replace it.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Section 5b: Karyn video testimonial ─────────────────────────────── */}
+      <section className="w-full bg-white py-16">
+        <div className="mx-auto max-w-xl px-4 sm:px-6">
+          <h2 className="mb-6 text-center font-serif text-3xl text-[#1E5631]">
+            In her own words
+          </h2>
+          <VideoTestimonial />
+          <p className="mt-4 text-center font-sans text-sm text-[#999]">
+            Karyn &mdash; on switching to handmade soap
           </p>
         </div>
       </section>

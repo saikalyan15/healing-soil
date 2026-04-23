@@ -139,6 +139,28 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
       answer: 'Shea butter could be a leave-on product like a cream or balm, but it is strong in soap because the soap works at the moment of maximum exposure to skin. The conditioning happens while you are washing, not an hour later. Shea butter fills the microscopic gaps in the skin\'s surface layer, slows transepidermal water loss, and has natural anti-inflammatory properties that are especially valuable for reactive or dry skin.',
     },
   ],
+  'sls-free-soap-india': [
+    {
+      question: 'What is SLS in soap?',
+      answer: 'SLS stands for sodium lauryl sulfate. It is a synthetic detergent added to soap and body wash to create fast, dense lather. It is cheap to manufacture with and very effective at removing oil, which is why it appears in most commercial soap bars sold in India. The problem is it removes more than dirt. It strips the protective oil layer your skin produces naturally, which leads to dryness, tightness, and irritation with regular use.',
+    },
+    {
+      question: 'Why does my skin feel dry and tight after showering?',
+      answer: 'If your skin feels tight or dry immediately after washing, the most common cause is the soap you are using. Most commercial soap bars contain SLS or SLES, which strip the skin\'s natural oil barrier. Your skin then tries to rebuild that barrier, but daily washing with an SLS-based product keeps disrupting the cycle. Switching to an SLS-free soap is usually one of the first things worth trying.',
+    },
+    {
+      question: 'How do I check if my soap contains SLS?',
+      answer: 'Look at the ingredient list on the back of the bar or box. SLS and its close relative SLES appear near the top of the list if present. Look for: sodium lauryl sulfate, sodium laureth sulfate, sodium coco sulfate, or ammonium lauryl sulfate. If none of those words appear, the soap is at least SLS-free. Also watch for "fragrance" or "parfum" listed without further detail, which often means synthetic fragrance.',
+    },
+    {
+      question: 'Is SLS-free soap better for Indian skin?',
+      answer: 'For people who bathe twice a day in a hot, humid climate, SLS-free soap is generally gentler. Indian skin types vary, but the combination of frequent washing, hard water in many cities, and high heat means SLS contact adds up quickly. An SLS-free bar cleans without stripping, which suits most skin types and is especially helpful for sensitive, dry, or reactive skin.',
+    },
+    {
+      question: 'What is the difference between SLS and SLES?',
+      answer: 'SLES (sodium laureth sulfate) is a modified version of SLS that is slightly milder. Some brands swap SLS for SLES and market the product as gentler. It is somewhat less harsh, but it still functions as a detergent and still strips skin oils with regular use. Truly SLS-free soap uses neither compound. The lather comes from the soap-making process itself, not from added foaming agents.',
+    },
+  ],
 }
 
 // ─── Page ──────────────────────────────────────────────────────────────────────

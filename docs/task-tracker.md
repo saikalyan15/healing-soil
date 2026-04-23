@@ -11,7 +11,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-04-24
+Last updated: 2026-04-24 (session 2)
 
 ---
 
@@ -70,12 +70,12 @@ Biggest unused lever. Fix the inventory first, then optimise what ranks, then wr
 | 3.7a | Add llms.txt at domain root | Claude | DONE | Done 2026-04-24. [public/llms.txt](../public/llms.txt) — brand facts, product categories, canonical URLs, key ingredient claims, FAQs. LLM retrieval signal. |
 | 3.7b | Add Organization schema site-wide | Claude | DONE | Done 2026-04-24. JSON-LD added to [layout.tsx](../src/app/layout.tsx) — name, URL, logo, foundingLocation (Goa), areaServed (IN), sameAs (Instagram). |
 | 3.7c | Build hub page /guide/handmade-soap-india | Claude | DONE | Done 2026-04-24. [src/app/guide/handmade-soap-india/page.tsx](../src/app/guide/handmade-soap-india/page.tsx). ~2,000 words. Article + FAQPage schema (5 Q&As). Links to all 9 blog posts + 2 stories. Targets "handmade soap India" head term. |
-| 3.8 | Write "SLS-free soap India" blog post | Owner | TODO | 1K–3K monthly searches, LOW competition, HIGH intent. Highest single content opportunity. Owner writes draft (voice); Claude formats, adds schema, internal links. |
+| 3.8 | Write "SLS-free soap India" blog post | Claude | DONE | Done 2026-04-24. [sls-free-soap-india.mdx](../content/blog/sls-free-soap-india.mdx). FAQPage schema (5 Q&As) added to [blog/[slug]/page.tsx](../src/app/blog/%5Bslug%5D/page.tsx). BlogInlineCTA and end-of-post bundle card auto-wired. |
 | 3.9 | Write "The problem with commercial soap: SLS and parabens" blog post | Owner | TODO | Companion to 3.8. HIGH intent. |
 | 3.10 | Write "Handmade soap Goa" blog post | Owner | TODO | 100–500 searches, VERY LOW competition. Local-origin anchor, target `/shop`. |
 | 3.11 | Write "Handmade soap Bangalore" blog post | Owner | TODO | Bangalore-heavy buyer base; low competition. |
 | 3.12 | Write "Natural soap for sensitive skin India" blog post | Owner | TODO | 500–1K searches. Anchors to the Krutika LP story and the starter bundle. |
-| 3.13 | Set up Google Business Profile | Owner | TODO | Free. business.google.com. Name, category (handmade goods / soap), service area, WhatsApp, website, photos. Highest local-SEO trust signal at this scale. |
+| 3.13 | Set up Google Business Profile | Owner | BLOCKED | Blocked: business not formally registered. Revisit when registration is complete. |
 | 3.14 | Add "leave a Google review" link to delivered-order WhatsApp flow | Owner | TODO | After 3.13 is live. Every delivered order → WhatsApp message with the Google review link. |
 
 ---
