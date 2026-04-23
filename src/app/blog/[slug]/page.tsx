@@ -6,6 +6,7 @@ import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
 import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
+import BlogInlineCTA from '@/components/BlogInlineCTA'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -85,6 +86,61 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+// ─── FAQ mapping ───────────────────────────────────────────────────────────────
+
+const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = {
+  'glycerin-vs-goat-milk-soap': [
+    {
+      question: 'What is glycerin soap?',
+      answer: 'Glycerin is a natural byproduct of soap-making. Commercial manufacturers remove it because it sells separately. Healing Soil keeps glycerin in the bar. Glycerin draws moisture gently into your skin; the lather is light and the feeling after washing is clean without being heavy. Glycerin soap suits oily skin or combination skin, or anyone who wants cleansing without added weight.',
+    },
+    {
+      question: 'What is goat milk soap?',
+      answer: 'Goat milk soap replaces water in the soap base. Goat milk contains lactic acid that gently removes dead skin cells, natural fats that skin absorbs easily, and vitamins A–E. The bar feels creamy; skin feels nourished, not just clean. Goat milk soap is versatile and suits sensitive skin, dry skin, eczema-prone skin, and anyone switching from commercial soap for the first time.',
+    },
+    {
+      question: 'What is shea butter soap?',
+      answer: 'Shea butter is the most nourishing of the three bases. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. The lather is thick and creamy; the feeling is conditioning rather than just clean. Shea butter soap suits dry skin, mature skin, winter skin, and anyone who feels tight after showering. It is too rich for oily or acne-prone skin.',
+    },
+    {
+      question: 'How do I choose the right soap base for my skin?',
+      answer: 'If your skin is oily or breaking out, start with glycerin. If you have sensitive, dry, or combination skin, start with goat milk. If your skin is very dry, tight, or mature, choose shea butter. When in doubt, goat milk is usually the right answer.',
+    },
+  ],
+  'shea-butter-goat-milk-soap-dry-sensitive-skin': [
+    {
+      question: 'Why do dry skin and sensitive skin often come together?',
+      answer: 'Healthy skin has a protective barrier of oils, proteins, and moisture. This barrier keeps hydration in and irritants out. Chronically dry skin means this barrier is compromised. When the barrier is thin, irritants get through more easily. So dryness and sensitivity feed each other. Commercial soap accelerates this cycle by stripping the barrier with synthetic foaming agents and synthetic fragrance.',
+    },
+    {
+      question: 'How does shea butter soap help dry, sensitive skin?',
+      answer: 'Shea butter contains compounds that do not break down during soap-making. When you wash, these intact molecules are deposited on your skin and do not rinse away. Shea butter has natural anti-inflammatory properties, fills the skin barrier rather than coating it, and slows moisture loss. It also does not clog pores despite its richness.',
+    },
+    {
+      question: 'How does goat milk soap help sensitive skin?',
+      answer: 'Goat milk contains lactic acid (a gentle alpha-hydroxy acid) that dissolves the bonds holding dead skin cells on the surface, allowing them to lift without scrubbing. Goat milk is naturally rich in vitamins A, B2–B12, C, D, E, and minerals. Its pH is closer to skin\'s natural pH, reducing disruption. Goat milk soap is deeply nourishing without the richness that could feel heavy.',
+    },
+    {
+      question: 'How do I choose between shea butter and goat milk soap?',
+      answer: 'If your skin is very dry, gets rough in patches, or worsens significantly in winter, choose shea butter soap for intensive moisture. If your skin is mildly to moderately dry or sensitive and you want gentle nourishment without heaviness, choose goat milk soap. Goat milk is the easier place to start if you are not sure.',
+    },
+  ],
+  'understanding-the-benefits-of-shea-butter-in-soap': [
+    {
+      question: 'What is shea butter?',
+      answer: 'Shea butter comes from the nut of the shea tree (Vitellaria paradoxa), which grows across the savannah belt of West and Central Africa. The nut is dried, crushed, and pressed to extract the fat. Raw shea butter contains fatty acids (oleic, stearic, linoleic, palmitic), vitamins A, E, and F, and non-saponifiable compounds that do not convert to soap during saponification. This is what makes shea butter valuable in soap.',
+    },
+    {
+      question: 'Does shea butter clog pores?',
+      answer: 'No. Shea butter has a low comedogenic rating and does not tend to block pores despite its richness. This makes it workable for combination skin and for people who want moisturising benefits without the risk of congestion.',
+    },
+    {
+      question: 'Why does shea butter belong in soap?',
+      answer: 'Shea butter could be a leave-on product like a cream or balm, but it is strong in soap because the soap works at the moment of maximum exposure to skin. The conditioning happens while you are washing, not an hour later. Shea butter fills the microscopic gaps in the skin\'s surface layer, slows transepidermal water loss, and has natural anti-inflammatory properties that are especially valuable for reactive or dry skin.',
+    },
+  ],
+}
+
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function BlogPostPage({ params }: Props) {
@@ -118,12 +174,32 @@ export default async function BlogPostPage({ params }: Props) {
     },
   }
 
+  const faqs = faqsBySlug[slug] || []
+  const faqSchema = faqs.length > 0 && {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+
   return (
     <div className="bg-[#F7F5F0]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <article className="mx-auto max-w-[720px] px-4 py-16 sm:px-6">
 
         {/* Category + date */}
@@ -160,6 +236,9 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
+        {/* Inline bundle CTA — visible for soap/skincare posts only */}
+        {post.source !== 'stories' && <BlogInlineCTA />}
+
         {/* MDX content */}
         <div className="prose-custom">
           <MDXContent source={post.content ?? ''} components={mdxComponents} />
@@ -182,18 +261,28 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
               <p className="mb-1 font-serif text-2xl text-[#1E5631]">
-                Try our handmade soaps
+                Try the starter bundle
               </p>
-              <p className="mb-4 font-sans text-sm text-[#666666]">
-                Made to order from our farm in Goa. No chemicals. No shortcuts.
+              <p className="mb-1 font-sans text-sm text-[#666666]">
+                Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
+              </p>
+              <p className="mb-4 font-sans text-xs text-[#999]">
+                Shipped in 4 days. Free shipping included.
               </p>
               <Link
-                href="/shop"
+                href="/#bundle"
                 className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
               >
-                Shop the collection
+                See the starter bundle
               </Link>
             </div>
+
+            <p className="mt-8 font-sans text-sm text-[#999]">
+              Want the full picture?{' '}
+              <Link href="/guide/handmade-soap-india" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+                Read our complete guide to handmade soap in India.
+              </Link>
+            </p>
           </>
         )}
 
