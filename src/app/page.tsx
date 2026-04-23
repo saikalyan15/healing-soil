@@ -178,36 +178,16 @@ export default async function HomePage() {
       {/* ── Section 3: Mechanism ───────────────────────────────────────────── */}
       <section className="w-full bg-[#F7F5F0] py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <div className="space-y-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-            <p>
-              Two things make our soap behave differently from commercial soap.
-            </p>
-            <p>
-              The first is glycerin. Saponification produces glycerin naturally. Commercial soap
-              removes it because glycerin sells for more on its own, in face creams and lotions.
-              Ours stays in the bar.
-            </p>
-            <p>
-              The second is what is missing. There is no SLS, the detergent that gives most
-              commercial bars their thick foam. SLS is also one of the more common reasons
-              sensitive skin reacts to soap.
-            </p>
-            <p>
-              That is why our soap does not foam the way you are used to, and why someone who
-              reacts to commercial soap may not react to ours.
-            </p>
-          </div>
-          <div className="mt-8 rounded-lg border border-[#D6CFC4] bg-white p-5">
-            <p className="font-sans text-sm leading-relaxed text-[#666666]">
-              The glycerin and goat milk bases come from a manufacturer we have used since the
-              start. The neem and tulsi are grown on our farm in Goa. We combine them, cure each
-              batch, and ship after your order.
-            </p>
-          </div>
-          <p className="mt-6 font-sans text-sm leading-relaxed text-[#666666]">
-            Every bar is made to order. No two batches are identical, and we will not pretend they
-            are. If the bar arrives damaged, we replace it.
+          <p className="font-sans text-base leading-[1.8] text-[#1A1A14]">
+            No SLS. Glycerin stays in the bar. That is why it does not foam the way commercial
+            soap does, and why skin that reacts to commercial soap often does not react to ours.
           </p>
+          <div className="mt-6 rounded-lg border border-[#D6CFC4] bg-white p-5">
+            <p className="font-sans text-sm leading-relaxed text-[#666666]">
+              The bases come from a manufacturer we have used since the start. Neem and tulsi are
+              grown on our farm in Goa. Made to order. If the bar arrives damaged, we replace it.
+            </p>
+          </div>
         </div>
       </section>
 
