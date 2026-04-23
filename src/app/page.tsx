@@ -178,9 +178,6 @@ export default async function HomePage() {
       {/* ── Section 3: Mechanism ───────────────────────────────────────────── */}
       <section className="w-full bg-[#F7F5F0] py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <h2 className="mb-6 font-serif text-4xl leading-tight text-[#1E5631]">
-            Why our soap doesn&rsquo;t lather the way you&rsquo;re used to
-          </h2>
           <div className="space-y-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
             <p>
               Two things make our soap behave differently from commercial soap.
