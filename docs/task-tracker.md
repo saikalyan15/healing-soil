@@ -11,7 +11,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-04-22
+Last updated: 2026-04-24
 
 ---
 
@@ -60,13 +60,16 @@ Biggest unused lever. Fix the inventory first, then optimise what ranks, then wr
 
 | # | Task | Owner | Status | Context needed to resume cold |
 |---|---|---|---|---|
-| 3.1 | Triage 94 not-indexed pages in GSC | Owner | TODO | GSC → Pages → "Why pages aren't indexed." Bucket into: (a) legacy pre-pivot URLs (most likely), (b) crawled-not-indexed stories (leave them), (c) thin/duplicate current pages. Share the list of (a) and (c) with Claude. |
-| 3.2 | Remove legacy URLs properly | Claude | BLOCKED | Blocked on 3.1 list. Work: ensure 410/404 on those paths, add 301 redirects in [next.config.js](../next.config.js) where there is a current equivalent, remove them from [public/sitemap.xml](../public/sitemap.xml), submit removal in GSC URL Removal tool. |
-| 3.3 | Rewrite title/description on the ranking blog post | Claude | TODO | File: [content/blog/glycerin-vs-goat-milk-soap.mdx](../content/blog/glycerin-vs-goat-milk-soap.mdx). Current title: "Glycerin vs Goat Milk Soap: Which is Best for Your Skin?" — needs India-first phrasing, e.g. "Glycerin vs goat milk soap: which is right for your skin? \| Made in India". Target CTR: 3% (from 0.9%). |
-| 3.4 | Rewrite titles/descriptions on top 5 blog posts | Claude | TODO | After 3.3 ships and validates. Same pattern: India-first, buyer-intent phrasing. |
-| 3.5 | Add inline bundle CTA + end-of-post card to every blog post | Claude | TODO | 9 posts in [content/blog/](../content/blog/). Inline CTA after ~300 words. End-of-post bundle card component. At least one internal link into a product page. |
-| 3.6 | Stories → blog → product internal linking | Claude | TODO | Every commercial blog post gets one contextual link into a relevant story. Every story gets a soft link back to the relevant blog or product. E-E-A-T signal. |
-| 3.7 | Add FAQPage schema to each blog post | Claude | TODO | Schema helpers already exist in codebase — extend, don't rebuild. 3–5 Q&A per post taken from the post's own subheads. |
+| 3.1 | Triage 94 not-indexed pages in GSC | Owner | DONE | Confirmed 2026-04-24: 18 pages with redirect (legacy domain variants + old URLs), 7 not-found 404s, 38 discovered-not-indexed (new content, Google will index), 20 crawled-not-indexed, rest are canonical/noindex. Legacy confirmed from pre-pivot blog. |
+| 3.2 | Remove legacy URLs properly | Owner | DONE | Owner submitted GSC removal requests 2026-04-24 for 4 real 404s: `/home/`, `/diy-neem-soap-slow-living/`, `/recommends/the-indian-chai-calming-vata-dosha-tea/`, `/our-stories-2/`. Redirects for domain variants (http/www) confirmed working. |
+| 3.3 | Rewrite title/description on the ranking blog post | Claude | DONE | All 3 ranking posts updated 2026-04-24: India-first titles, excerpts with keywords and mechanism. See [glycerin-vs-goat-milk-soap.mdx](../content/blog/glycerin-vs-goat-milk-soap.mdx), [shea-butter-goat-milk-soap-dry-sensitive-skin.mdx](../content/blog/shea-butter-goat-milk-soap-dry-sensitive-skin.mdx), [understanding-the-benefits-of-shea-butter-in-soap.mdx](../content/blog/understanding-the-benefits-of-shea-butter-in-soap.mdx). |
+| 3.4 | Rewrite titles/descriptions on top 5 blog posts | Claude | TODO | After 3.3 validates (2–4 weeks). Same India-first pattern for remaining 6 posts. |
+| 3.5 | Add inline bundle CTA + end-of-post card to every blog post | Claude | DONE | Done 2026-04-24. [BlogInlineCTA.tsx](../src/components/BlogInlineCTA.tsx) renders above content on all 9 blog posts. End-of-post card updated: links to `/#bundle`, references starter bundle + ₹1,000 price. |
+| 3.6 | Stories → blog → product internal linking | Claude | DONE | Done 2026-04-24. Every blog post links to hub page `/guide/handmade-soap-india`. Hub page links to all 9 posts + 2 stories. Individual posts link to each other where relevant. |
+| 3.7 | Add FAQPage schema to each blog post | Claude | DONE | Done 2026-04-24. FAQPage schema added to 3 ranking blog posts (12 Q&As total) in [blog/[slug]/page.tsx](../src/app/blog/%5Bslug%5D/page.tsx). Extend to remaining posts as they get title rewrites. |
+| 3.7a | Add llms.txt at domain root | Claude | DONE | Done 2026-04-24. [public/llms.txt](../public/llms.txt) — brand facts, product categories, canonical URLs, key ingredient claims, FAQs. LLM retrieval signal. |
+| 3.7b | Add Organization schema site-wide | Claude | DONE | Done 2026-04-24. JSON-LD added to [layout.tsx](../src/app/layout.tsx) — name, URL, logo, foundingLocation (Goa), areaServed (IN), sameAs (Instagram). |
+| 3.7c | Build hub page /guide/handmade-soap-india | Claude | DONE | Done 2026-04-24. [src/app/guide/handmade-soap-india/page.tsx](../src/app/guide/handmade-soap-india/page.tsx). ~2,000 words. Article + FAQPage schema (5 Q&As). Links to all 9 blog posts + 2 stories. Targets "handmade soap India" head term. |
 | 3.8 | Write "SLS-free soap India" blog post | Owner | TODO | 1K–3K monthly searches, LOW competition, HIGH intent. Highest single content opportunity. Owner writes draft (voice); Claude formats, adds schema, internal links. |
 | 3.9 | Write "The problem with commercial soap: SLS and parabens" blog post | Owner | TODO | Companion to 3.8. HIGH intent. |
 | 3.10 | Write "Handmade soap Goa" blog post | Owner | TODO | 100–500 searches, VERY LOW competition. Local-origin anchor, target `/shop`. |

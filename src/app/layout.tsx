@@ -51,8 +51,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Healing Soil',
+    url: 'https://healingsoil.in',
+    logo: 'https://healingsoil.in/logo.png',
+    description: 'Handmade natural soaps from Goa, India. SLS-free, made to order, for sensitive skin.',
+    foundingLocation: 'Goa, India',
+    areaServed: 'IN',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Sales',
+      url: 'https://healingsoil.in',
+    },
+    sameAs: [
+      'https://www.instagram.com/healingsoil.in',
+    ],
+  }
+
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body>
         <WelcomeBanner />
         <Header />
