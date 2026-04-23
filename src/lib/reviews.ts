@@ -63,7 +63,7 @@ export const reviews: Review[] = [
   {
     id: 'review-006',
     author: 'Krutika',
-    location: 'Bangalore',
+    location: 'Goa',
     occupation: 'Housewife',
     rating: 5,
     comment:
