@@ -63,7 +63,7 @@ export default async function HomePage() {
 
   const krutika = reviews.find((r) => r.id === 'review-006')
   const riya = reviews.find((r) => r.id === 'review-010')
-  const gridReviews = ['review-002', 'review-009', 'review-007', 'review-008']
+  const gridReviews = ['review-002', 'review-009']
     .map((id) => reviews.find((r) => r.id === id))
     .filter((r): r is NonNullable<typeof r> => r != null)
 
@@ -207,6 +207,10 @@ export default async function HomePage() {
               batch, and ship after your order.
             </p>
           </div>
+          <p className="mt-6 font-sans text-sm leading-relaxed text-[#666666]">
+            Every bar is made to order. No two batches are identical, and we will not pretend they
+            are. If the bar arrives damaged, we replace it.
+          </p>
         </div>
       </section>
 
@@ -214,9 +218,6 @@ export default async function HomePage() {
       {riya && (
         <section className="w-full bg-white py-16">
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
-            <h2 className="mb-8 text-center font-serif text-4xl text-[#1E5631]">
-              What it actually feels like
-            </h2>
             <ReviewCard
               quote={riya.comment}
               name={riya.author}
@@ -228,26 +229,9 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Section 5: Promises ────────────────────────────────────────────── */}
-      <section className="w-full bg-[#F7F5F0] py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <h2 className="mb-6 font-serif text-4xl text-[#1E5631]">
-            What we can and cannot promise
-          </h2>
-          <p className="font-sans text-base leading-[1.8] text-[#1A1A14]">
-            Every bar is made to order with fresh ingredients from the farm. No two batches are
-            identical, and we will not pretend they are. What we can promise: the ingredients are
-            real, the process is transparent, and if the bar arrives damaged, we replace it.
-          </p>
-        </div>
-      </section>
-
       {/* ── Section 5b: Karyn video testimonial ─────────────────────────────── */}
-      <section className="w-full bg-white py-16">
-        <div className="mx-auto max-w-xl px-4 sm:px-6">
-          <h2 className="mb-6 text-center font-serif text-3xl text-[#1E5631]">
-            In her own words
-          </h2>
+      <section className="w-full bg-[#F7F5F0] py-16">
+        <div className="mx-auto max-w-[360px] px-4 sm:px-6">
           <VideoTestimonial />
           <p className="mt-4 text-center font-sans text-sm text-[#999]">
             Karyn &mdash; on switching to handmade soap
@@ -259,9 +243,6 @@ export default async function HomePage() {
       {gridReviews.length > 0 && (
         <section className="w-full bg-white py-16">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <h2 className="mb-8 text-center font-serif text-4xl text-[#1E5631]">
-              Four more reviews from Bangalore
-            </h2>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               {gridReviews.map((r) => (
                 <ReviewCard

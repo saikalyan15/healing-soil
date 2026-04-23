@@ -10,7 +10,7 @@ export default function VideoTestimonial() {
   }
 
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-[#1A1A14]/5">
+    <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl bg-[#1A1A14]/5">
       <video
         ref={videoRef}
         src="/reviews/Karyn-testimonial.mp4"
