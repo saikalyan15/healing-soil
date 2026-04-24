@@ -91,6 +91,10 @@ function formatDate(dateStr: string): string {
 const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = {
   'glycerin-vs-goat-milk-soap': [
     {
+      question: 'What is the difference between glycerin and goat milk soap base?',
+      answer: 'A glycerin soap base keeps the glycerin that forms naturally during the soap-making process. Most commercial manufacturers remove it to sell separately. Glycerin draws moisture gently into the skin; the lather is light and the feeling after washing is clean without heaviness. A goat milk soap base replaces water with goat milk, which contains natural fats and vitamins. The bar has a creamy lather and leaves skin feeling nourished rather than just clean. Glycerin suits oily or normal skin; goat milk suits sensitive or dry skin and is the more versatile of the two.',
+    },
+    {
       question: 'What is glycerin soap?',
       answer: 'Glycerin is a natural byproduct of soap-making. Commercial manufacturers remove it because it sells separately. Healing Soil keeps glycerin in the bar. Glycerin draws moisture gently into your skin; the lather is light and the feeling after washing is clean without being heavy. Glycerin soap suits oily skin or combination skin, or anyone who wants cleansing without added weight.',
     },
@@ -99,12 +103,8 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
       answer: 'Goat milk soap replaces water in the soap base. Goat milk contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. The bar feels creamy; skin feels nourished, not just clean. Goat milk soap is versatile and suits sensitive skin, dry skin, and anyone switching from commercial soap for the first time.',
     },
     {
-      question: 'What is shea butter soap?',
-      answer: 'Shea butter is the most nourishing of the three bases. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. The lather is thick and creamy; the feeling is conditioning rather than just clean. Shea butter soap suits dry skin, mature skin, winter skin, and anyone who feels tight after showering. It is too rich for oily skin.',
-    },
-    {
       question: 'How do I choose the right soap base for my skin?',
-      answer: 'If your skin is oily or breaking out, start with glycerin. If you have sensitive, dry, or combination skin, start with goat milk. If your skin is very dry, tight, or mature, choose shea butter. When in doubt, goat milk is usually the right answer.',
+      answer: 'If your skin is oily or breaking out, start with the glycerin soap base. If you have sensitive, dry, or reactive skin, start with goat milk — it is the most versatile base. If your skin is very dry, tight after every shower, or feels rough in patches, choose shea butter. When in doubt, goat milk is usually the right answer.',
     },
   ],
   'shea-butter-goat-milk-soap-dry-sensitive-skin': [

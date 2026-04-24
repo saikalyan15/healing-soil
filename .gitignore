@@ -43,3 +43,9 @@ next-env.d.ts
 
 # claude code
 .claude/
+
+# gsc mcp cache (contains real analytics data)
+tools/gsc-mcp/cache/
+tools/gsc-mcp/node_modules/
+
+*.log
