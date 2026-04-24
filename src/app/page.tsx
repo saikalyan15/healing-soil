@@ -71,7 +71,7 @@ export default async function HomePage() {
 
   const krutika = reviews.find((r) => r.id === 'review-006')
   const riya = reviews.find((r) => r.id === 'review-010')
-  const gridReviews = ['review-002', 'review-009']
+  const gridReviews = ['review-002', 'review-001']
     .map((id) => reviews.find((r) => r.id === id))
     .filter((r): r is NonNullable<typeof r> => r != null)
 
