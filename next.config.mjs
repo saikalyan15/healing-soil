@@ -36,9 +36,13 @@ const nextConfig = {
       },
       // Old WordPress blog slug
       { source: '/blog/why-we-dont-use-chemicals',        destination: '/blog/what-makes-soap-chemical-free',                              permanent: true },
-      { source: '/blog/natural-soap-for-eczema-dry-skin', destination: '/blog/best-natural-soap-for-eczema',                                  permanent: true },
+      { source: '/blog/natural-soap-for-eczema-dry-skin', destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
       { source: '/blog/shea-butter-soap-benefits',        destination: '/blog/understanding-the-benefits-of-shea-butter-in-soap',             permanent: true },
       { source: '/blog/goat-milk-soap-for-sensitive-skin',destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin',       permanent: true },
+      // Unpublished posts — redirect to closest live alternative
+      { source: '/blog/best-natural-soap-for-eczema',     destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
+      { source: '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog',                                             permanent: true },
+      { source: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog',                    permanent: true },
       // /stories → /blog (stories merged into blog)
       // :slug pattern [^.]+ excludes file extensions so static assets (images) are not caught
       { source: '/stories',                              destination: '/blog',     permanent: true },
@@ -84,8 +88,8 @@ const nextConfig = {
       { source: '/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration/', destination: '/blog/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration', permanent: true },
       { source: '/the-mango-tree-and-the-art-of-resilience',  destination: '/blog/the-mango-tree-and-the-art-of-resilience', permanent: true },
       { source: '/the-mango-tree-and-the-art-of-resilience/', destination: '/blog/the-mango-tree-and-the-art-of-resilience', permanent: true },
-      { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice',  destination: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', permanent: true },
-      { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice/', destination: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', permanent: true },
+      { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice',  destination: '/blog', permanent: true },
+      { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice/', destination: '/blog', permanent: true },
       { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go',  destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
       { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go/', destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
     ]

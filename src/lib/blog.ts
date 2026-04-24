@@ -15,6 +15,7 @@ export type Post = {
   cta?: string
   source?: 'blog' | 'stories'
   content?: string  // only present when fetched via getPostBySlug
+  published?: boolean
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -36,6 +37,7 @@ function parseMdxFile(filePath: string, slug: string, includeContent = false): P
     featuredImage: data.featuredImage ?? undefined,
     author: data.author ?? 'Healing Soil',
     cta: data.cta ?? undefined,
+    published: data.published !== false,
     ...(includeContent ? { content } : {}),
   }
 }
@@ -53,10 +55,12 @@ export function getBlogPosts(dir: 'blog' | 'stories'): Post[] {
 
   const files = fs.readdirSync(dirPath).filter((f) => f.endsWith('.mdx'))
 
-  const posts = files.map((file) => {
-    const slug = file.replace(/\.mdx$/, '')
-    return parseMdxFile(path.join(dirPath, file), slug)
-  })
+  const posts = files
+    .map((file) => {
+      const slug = file.replace(/\.mdx$/, '')
+      return parseMdxFile(path.join(dirPath, file), slug)
+    })
+    .filter((p) => p.published !== false)
 
   return posts.sort((a, b) => {
     const da = new Date(a.date).getTime()
@@ -72,7 +76,9 @@ export function getBlogPosts(dir: 'blog' | 'stories'): Post[] {
 export function getPostBySlug(slug: string, dir: 'blog' | 'stories'): Post | null {
   const filePath = path.join(contentDir(dir), `${slug}.mdx`)
   if (!fs.existsSync(filePath)) return null
-  return parseMdxFile(filePath, slug, true)
+  const post = parseMdxFile(filePath, slug, true)
+  if (post.published === false) return null
+  return post
 }
 
 /**

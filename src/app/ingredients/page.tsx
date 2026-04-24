@@ -19,62 +19,62 @@ const ingredients = [
   {
     name: 'Coconut Oil',
     description:
-      'Creates a rich, cleansing lather that removes dirt without stripping the skin\'s natural oils. Its antibacterial properties make it especially good for acne-prone or sensitive skin.',
+      'Creates a rich, cleansing lather and helps the bar stay firm. One of the most common base oils in handmade soap, known for its clean rinse.',
   },
   {
     name: 'Shea Butter',
     description:
-      'Deeply moisturising and packed with fatty acids that repair the skin barrier. Leaves the skin soft and supple long after you step out of the shower.',
+      'A rich, nourishing oil pressed from the shea tree nut. Gives the bar a creamy feel and leaves the skin feeling soft after washing. Does not fully saponify, so some deposits on the skin during use.',
   },
   {
     name: 'Neem',
     description:
-      'An ancient remedy for skin conditions: neem is antifungal, antibacterial, and anti-inflammatory. Particularly effective for oily skin, acne, and scalp health.',
+      'A traditional Indian botanical with a distinctive earthy scent. Used in Ayurvedic personal care for centuries. Adds a natural, herbal character to the bar.',
   },
   {
     name: 'Tulsi',
     description:
-      'Holy basil has powerful purifying properties that cleanse the skin deep in the pores. It also calms redness and helps even out skin tone with regular use.',
+      'Holy basil, grown on our farm in South Goa. A familiar ingredient in Indian home remedies and traditional personal care. Has a fresh, slightly herbal fragrance.',
   },
   {
     name: 'Goat Milk',
     description:
-      'Naturally rich in lactic acid, goat milk gently exfoliates dead skin cells and brightens the complexion. It is also intensely nourishing, ideal for dry or sensitive skin.',
+      'Replaces water in the soap base, giving the bar a naturally creamy lather. Contains natural fats that feel gentle on the skin. Leaves a soft, comfortable feeling after washing.',
   },
   {
     name: 'Honey',
     description:
-      'A natural humectant that draws moisture into the skin and locks it in. Raw honey is also antibacterial, making it excellent for blemish-prone skin.',
+      'A natural humectant that gives the bar a smooth, slightly glossy quality. Contributes to the overall feel of the lather and is used in traditional personal care across many cultures.',
   },
   {
     name: 'Oats',
     description:
-      'Finely milled oats soothe irritated, itchy, or inflamed skin on contact. They form a protective film that calms the skin while providing gentle physical exfoliation.',
+      'Finely milled oats add a gentle texture to the bar and give the lather a milky, soft quality. A long-standing ingredient in traditional personal care routines.',
   },
   {
     name: 'Kesar (Saffron)',
     description:
-      'One of the most prized skin ingredients in Ayurveda: saffron brightens the complexion and reduces pigmentation over time. A little goes a long way.',
+      'One of the most valued botanicals in Ayurveda. Used in traditional Indian personal care and known for its warm, distinctive colour and scent. A little goes a long way.',
   },
   {
     name: 'Haldi (Turmeric)',
     description:
-      'Curcumin in turmeric is a potent anti-inflammatory and antioxidant that helps fade dark spots and even skin tone. Used in Indian skincare for centuries.',
+      'Used in Indian households and personal care traditions for generations. Gives the bar a warm, golden colour and a subtle earthy scent. A staple of Ayurvedic practice.',
   },
   {
     name: 'Ginger',
     description:
-      'Stimulates circulation and helps remove toxins from the surface of the skin. Ginger\'s warming effect can help reduce puffiness and give the skin a healthy glow.',
+      'Adds a warm, spicy note to the bar\'s scent. Used in traditional personal care for its invigorating quality. Gives the bar a distinctive, uplifting character.',
   },
   {
     name: 'Rosemary',
     description:
-      'Rich in antioxidants that protect the skin from environmental damage and slow the signs of ageing. Its natural fragrance is uplifting without being synthetic.',
+      'A hardy herb with a fresh, herbal scent. Used as a natural fragrance in the bar. Grown in home gardens and valued in traditional personal care across many cultures.',
   },
   {
     name: 'Loofah',
     description:
-      'Natural loofah fibres provide physical exfoliation that removes dead skin and improves texture over time. Far gentler than synthetic scrubs and fully biodegradable.',
+      'A natural plant fibre embedded in the bar. Gives the soap a textured surface for a thorough wash. Fully plant-derived and biodegradable.',
   },
 ]
 

@@ -52,7 +52,7 @@ const faqSchema = {
       name: 'What is SLS and why does it matter for Indian skin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sodium lauryl sulfate (SLS) is a synthetic detergent used in most commercial soaps to create a dense, foamy lather. It is also one of the more common causes of skin reactions, particularly for people with sensitive or dry skin. Indian skin, especially in hot and humid climates, is already exposed to significant barrier stress from heat, sweat, and pollution. Avoiding SLS reduces one daily irritant from the equation.',
+        text: 'Sodium lauryl sulfate (SLS) is a synthetic detergent used in most commercial soaps to create a dense, foamy lather. It strips the skin\'s natural oils with every wash. Indian skin, especially in hot and humid climates, is already under significant daily stress from heat, sweat, and pollution. Avoiding SLS removes one unnecessary daily irritant from the equation.',
       },
     },
     {
@@ -60,7 +60,7 @@ const faqSchema = {
       name: 'Which soap base is best for sensitive skin in India?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Goat milk soap is usually the most versatile starting point for sensitive skin. It contains lactic acid for gentle exfoliation, vitamins A through E, and fats that absorb easily without clogging pores. Its pH is closer to skin\'s natural pH than most soaps. Glycerin soap is a good alternative for oily-sensitive skin. Shea butter is the right choice when sensitivity comes with severe dryness.',
+        text: 'Goat milk soap is usually the most versatile starting point for sensitive skin. It contains natural fats that absorb easily, vitamins in their naturally occurring form, and gives a creamy, gentle lather. Glycerin soap is a good alternative for oily or combination skin. Shea butter is the right choice when the skin is very dry.',
       },
     },
     {
@@ -68,7 +68,7 @@ const faqSchema = {
       name: 'How do I read a soap ingredients label in India?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Look for sodium lauryl sulfate (SLS) or sodium laureth sulfate (SLES) — avoid if you have sensitive skin. Synthetic fragrance is listed as "fragrance" or "parfum" and is one of the leading causes of skin reactions. Parabens appear as methylparaben, propylparaben, or butylparaben — these are preservatives worth avoiding. A short, readable ingredients list with names you recognise is a good sign. The order matters: ingredients are listed from highest to lowest concentration.',
+        text: 'Look for sodium lauryl sulfate (SLS) or sodium laureth sulfate (SLES) near the top of the list — these are synthetic detergents that strip skin oils. Synthetic fragrance is listed as "fragrance" or "parfum" and is a common source of reactions in people with sensitive skin. Parabens appear as methylparaben, propylparaben, or butylparaben. A short, readable ingredients list with names you recognise is a good sign. Ingredients are listed from highest to lowest concentration.',
       },
     },
     {
@@ -87,7 +87,6 @@ const blogLinks = [
   { href: '/blog/shea-butter-goat-milk-soap-dry-sensitive-skin', label: 'Shea butter + goat milk soap for dry, sensitive skin' },
   { href: '/blog/understanding-the-benefits-of-shea-butter-in-soap', label: 'Shea butter in soap: what it does and what it cannot' },
   { href: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', label: 'What makes goat milk soap beneficial for sensitive skin' },
-  { href: '/blog/best-natural-soap-for-eczema', label: 'The best natural soap for eczema: what to look for' },
   { href: '/blog/neem-tulsi-soap-benefits', label: 'Neem and tulsi soap: what these two ingredients actually do' },
   { href: '/blog/what-makes-soap-chemical-free', label: 'What does "chemical-free soap" actually mean?' },
   { href: '/blog/why-handmade-soap-lasts-longer', label: 'Why our handmade soap lasts longer than you expect' },
@@ -142,10 +141,10 @@ export default function HandmadeSoapIndiaGuide() {
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Avoid</h3>
         <ul className="mb-5 list-disc pl-6 font-sans text-base leading-relaxed text-[#1A1A14] space-y-2">
-          <li><strong>Sodium Lauryl Sulfate (SLS)</strong> or Sodium Laureth Sulfate (SLES) — the primary synthetic detergent. Strips the skin barrier. Common cause of reactions for sensitive skin.</li>
-          <li><strong>Fragrance</strong> or <strong>Parfum</strong> — synthetic fragrance compounds grouped under one word. One of the most common causes of contact dermatitis. Even bars marketed as &ldquo;gentle&rdquo; contain it.</li>
-          <li><strong>Parabens</strong> — methylparaben, propylparaben, butylparaben. Synthetic preservatives. Lower priority to avoid than SLS and fragrance, but a clean label leaves them out.</li>
-          <li><strong>Triclosan</strong> — an antibacterial compound found in some bars. Disrupts the skin microbiome with regular use.</li>
+          <li><strong>Sodium Lauryl Sulfate (SLS)</strong> or Sodium Laureth Sulfate (SLES) — the primary synthetic detergent in most commercial bars. Strips natural skin oils with every wash.</li>
+          <li><strong>Fragrance</strong> or <strong>Parfum</strong> — synthetic fragrance compounds grouped under one word. A common source of reactions for people with sensitive skin. Even bars marketed as &ldquo;gentle&rdquo; often contain it.</li>
+          <li><strong>Parabens</strong> — methylparaben, propylparaben, butylparaben. Synthetic preservatives. Lower priority than SLS and fragrance, but a clean label leaves them out.</li>
+          <li><strong>Triclosan</strong> — a synthetic additive found in some bars. Worth avoiding where the bar lists it.</li>
         </ul>
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Good signs</h3>
@@ -175,9 +174,9 @@ export default function HandmadeSoapIndiaGuide() {
           Read more: <Link href="/blog/glycerin-vs-goat-milk-soap" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Glycerin vs goat milk soap: which suits Indian skin?</Link>
         </p>
 
-        <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Goat milk — for sensitive, dry, or eczema-prone skin</h3>
+        <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Goat milk — for sensitive or dry skin</h3>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Goat milk replaces water in the soap base. It contains lactic acid — a gentle alpha-hydroxy acid that dissolves dead skin cell bonds without any scrubbing. It also contains fats that skin absorbs easily and vitamins A through E. The bar feels creamy. After washing, skin feels nourished rather than just clean. Goat milk is the most versatile base: it suits sensitive skin, dry skin, and anyone switching from commercial soap for the first time.
+          Goat milk replaces water in the soap base. It contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. The bar feels creamy. After washing, skin feels nourished rather than just clean. Goat milk is the most versatile base: it suits sensitive skin, dry skin, and anyone switching from commercial soap for the first time.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Read more: <Link href="/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">What makes goat milk soap beneficial for sensitive skin</Link> and <Link href="/blog/shea-butter-goat-milk-soap-dry-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Shea butter + goat milk for dry, sensitive skin</Link>.
@@ -185,7 +184,7 @@ export default function HandmadeSoapIndiaGuide() {
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Shea butter — for very dry, mature, or tight-feeling skin</h3>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Shea butter is the most nourishing of the three. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. It fills the skin barrier rather than coating it, slows moisture loss, and has documented anti-inflammatory properties. The lather is thick and creamy. After washing, skin feels conditioned rather than stripped. It is too rich for oily or acne-prone skin.
+          Shea butter is the most nourishing of the three. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. The lather is thick and creamy. After washing, skin feels conditioned rather than stripped. It is too rich for oily skin.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Read more: <Link href="/blog/understanding-the-benefits-of-shea-butter-in-soap" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Shea butter in soap: what it does and what it cannot</Link>
@@ -210,13 +209,10 @@ export default function HandmadeSoapIndiaGuide() {
           Ingredients that come from somewhere
         </h2>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Neem and tulsi have been used for skin and hygiene across India for centuries. Both have documented antibacterial and antifungal properties. In a soap, neem leaf extract helps manage acne-prone and oily skin; tulsi supports sensitive skin under stress. When these ingredients are grown on the farm rather than bought as synthetic extracts, the provenance is traceable.
+          Neem and tulsi have been used in personal care and home routines across India for generations. Both are central to Ayurvedic practice and are grown on our farm in South Goa. In a soap, they contribute a distinctive earthy, herbal scent and a feel that is recognisably traditional. When these ingredients are grown on the farm rather than bought as synthetic extracts, the provenance is traceable.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Read more: <Link href="/blog/neem-tulsi-soap-benefits" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Neem and tulsi soap: what these two ingredients actually do</Link>
-        </p>
-        <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          For skin dealing with eczema, the ingredient list matters more than any claim on the front of the pack. Read more: <Link href="/blog/best-natural-soap-for-eczema" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">The best natural soap for eczema: what to look for</Link>
         </p>
 
         {/* Section 6 — Handmade vs industrial */}

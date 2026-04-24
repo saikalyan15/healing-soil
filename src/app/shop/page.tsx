@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     q: 'What is the difference between glycerin, goat milk, and shea butter soap?',
-    a: 'Glycerin soap is light and clear, best for oily or normal skin. Goat milk soap is creamier and more nourishing, suited to sensitive, dry, or eczema-prone skin. Shea butter soap is the richest of the three, best for very dry skin or anyone who wants to skip a separate moisturiser.',
+    a: 'Glycerin soap is light and clear, best for oily or normal skin. Goat milk soap is creamier and more nourishing, suited to sensitive or dry skin. Shea butter soap is the richest of the three, best for very dry skin or anyone who wants to skip a separate moisturiser.',
   },
   {
     q: 'Do you ship across India?',
@@ -44,8 +44,8 @@ const faqItems = [
     a: 'You can order through our website or reach us on WhatsApp. Both work.',
   },
   {
-    q: 'Are these soaps safe for sensitive skin?',
-    a: 'Yes. Our soaps contain no synthetic fragrance or harsh foaming agents, which are the most common triggers for skin reactions. The goat milk and shea butter bases are especially gentle.',
+    q: 'Are these soaps suitable for sensitive skin?',
+    a: 'Yes. Our soaps contain no synthetic fragrance, no SLS, and no parabens — the ingredients most likely to cause problems for people with sensitive skin. The goat milk and shea butter bases give a particularly gentle, creamy lather.',
   },
   {
     q: 'Is this a made-to-order product?',

@@ -96,11 +96,11 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'What is goat milk soap?',
-      answer: 'Goat milk soap replaces water in the soap base. Goat milk contains lactic acid that gently removes dead skin cells, natural fats that skin absorbs easily, and vitamins A–E. The bar feels creamy; skin feels nourished, not just clean. Goat milk soap is versatile and suits sensitive skin, dry skin, eczema-prone skin, and anyone switching from commercial soap for the first time.',
+      answer: 'Goat milk soap replaces water in the soap base. Goat milk contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. The bar feels creamy; skin feels nourished, not just clean. Goat milk soap is versatile and suits sensitive skin, dry skin, and anyone switching from commercial soap for the first time.',
     },
     {
       question: 'What is shea butter soap?',
-      answer: 'Shea butter is the most nourishing of the three bases. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. The lather is thick and creamy; the feeling is conditioning rather than just clean. Shea butter soap suits dry skin, mature skin, winter skin, and anyone who feels tight after showering. It is too rich for oily or acne-prone skin.',
+      answer: 'Shea butter is the most nourishing of the three bases. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. The lather is thick and creamy; the feeling is conditioning rather than just clean. Shea butter soap suits dry skin, mature skin, winter skin, and anyone who feels tight after showering. It is too rich for oily skin.',
     },
     {
       question: 'How do I choose the right soap base for my skin?',
@@ -110,15 +110,15 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   'shea-butter-goat-milk-soap-dry-sensitive-skin': [
     {
       question: 'Why do dry skin and sensitive skin often come together?',
-      answer: 'Healthy skin has a protective barrier of oils, proteins, and moisture. This barrier keeps hydration in and irritants out. Chronically dry skin means this barrier is compromised. When the barrier is thin, irritants get through more easily. So dryness and sensitivity feed each other. Commercial soap accelerates this cycle by stripping the barrier with synthetic foaming agents and synthetic fragrance.',
+      answer: 'Healthy skin has a protective barrier of oils, proteins, and moisture. When that barrier is compromised, moisture escapes more easily and skin becomes less tolerant of everyday products. Commercial soap can worsen this cycle — synthetic foaming agents strip the barrier and synthetic fragrance is a common source of reactions.',
     },
     {
       question: 'How does shea butter soap help dry, sensitive skin?',
-      answer: 'Shea butter contains compounds that do not break down during soap-making. When you wash, these intact molecules are deposited on your skin and do not rinse away. Shea butter has natural anti-inflammatory properties, fills the skin barrier rather than coating it, and slows moisture loss. It also does not clog pores despite its richness.',
+      answer: 'Shea butter contains compounds that do not break down during soap-making. When you wash, these intact molecules are deposited on your skin and do not rinse away. The result is skin that feels conditioned after washing rather than stripped. Shea butter is also rich without clogging pores.',
     },
     {
-      question: 'How does goat milk soap help sensitive skin?',
-      answer: 'Goat milk contains lactic acid (a gentle alpha-hydroxy acid) that dissolves the bonds holding dead skin cells on the surface, allowing them to lift without scrubbing. Goat milk is naturally rich in vitamins A, B2–B12, C, D, E, and minerals. Its pH is closer to skin\'s natural pH, reducing disruption. Goat milk soap is deeply nourishing without the richness that could feel heavy.',
+      question: 'How does goat milk soap suit sensitive skin?',
+      answer: 'Goat milk contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. Its pH is closer to skin\'s natural range than most soaps, so washing with it tends to feel gentler. The lather is creamy and the feeling afterwards is nourished rather than tight.',
     },
     {
       question: 'How do I choose between shea butter and goat milk soap?',
@@ -136,7 +136,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Why does shea butter belong in soap?',
-      answer: 'Shea butter could be a leave-on product like a cream or balm, but it is strong in soap because the soap works at the moment of maximum exposure to skin. The conditioning happens while you are washing, not an hour later. Shea butter fills the microscopic gaps in the skin\'s surface layer, slows transepidermal water loss, and has natural anti-inflammatory properties that are especially valuable for reactive or dry skin.',
+      answer: 'Shea butter could be a leave-on product like a cream or balm, but it works well in soap because the conditioning happens at the moment of washing rather than an hour later. It fills the microscopic gaps in the skin\'s surface layer and slows moisture loss — especially valuable for very dry or reactive skin.',
     },
   ],
   'handmade-soap-goa': [
@@ -186,11 +186,11 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   'natural-soap-sensitive-skin-india': [
     {
       question: 'What causes sensitive skin in India?',
-      answer: 'Sensitive skin is often a reaction to something in the routine rather than a fixed skin type. In India, the most common causes are SLS in commercial soap — which strips the skin\'s natural oil barrier — and synthetic fragrance, one of the most common contact allergens in everyday skincare. Removing these, particularly by switching to an SLS-free soap without synthetic fragrance, often reduces sensitivity significantly.',
+      answer: 'Sensitive skin is often a response to something in the routine rather than a fixed skin type. In India, the most common culprits are SLS in commercial soap — which strips the skin\'s natural oils — and synthetic fragrance, which is a common source of reactions for people with sensitive skin. Removing these, particularly by switching to an SLS-free soap without synthetic fragrance, often makes a meaningful difference.',
     },
     {
       question: 'Can switching to natural soap help sensitive skin?',
-      answer: 'For many people, yes. The main change is removing SLS and synthetic fragrance — the two most common irritants in commercial soap. Switching to an SLS-free, fragrance-free soap reduces daily contact with these compounds. The tightness after washing often reduces in the first week. Underlying dryness typically improves within two to three weeks. For skin with a diagnosed condition like eczema or rosacea, a soap switch is one part of management, not a treatment.',
+      answer: 'For many people, yes. The main change is removing SLS and synthetic fragrance from the daily wash routine. Switching to an SLS-free, fragrance-free soap reduces daily contact with synthetic additives. The tightness after washing often reduces in the first week. Underlying dryness typically improves within two to three weeks.',
     },
     {
       question: 'Which soap base is best for sensitive skin in India?',
@@ -198,7 +198,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'What ingredients in commercial soap irritate sensitive skin?',
-      answer: 'The most common are: SLS and SLES — detergents that strip skin oils with every wash; synthetic fragrance listed as "fragrance" or "parfum" — a frequent contact allergen; parabens such as methylparaben and propylparaben — preservatives that can cause reactions in sensitive skin; and PEG compounds. Removing these from your soap routine is the most direct way to reduce irritation from the product itself.',
+      answer: 'The most common are: SLS and SLES — synthetic detergents that strip skin oils with every wash; synthetic fragrance listed as "fragrance" or "parfum" — a common source of reactions for sensitive skin; parabens such as methylparaben and propylparaben — synthetic preservatives; and PEG compounds. Removing these from your soap routine is the most direct way to reduce reactions from the product itself.',
     },
     {
       question: 'How do I know if a soap is genuinely natural?',
