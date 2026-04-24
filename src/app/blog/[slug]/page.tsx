@@ -139,6 +139,72 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
       answer: 'Shea butter could be a leave-on product like a cream or balm, but it is strong in soap because the soap works at the moment of maximum exposure to skin. The conditioning happens while you are washing, not an hour later. Shea butter fills the microscopic gaps in the skin\'s surface layer, slows transepidermal water loss, and has natural anti-inflammatory properties that are especially valuable for reactive or dry skin.',
     },
   ],
+  'handmade-soap-goa': [
+    {
+      question: 'Is Healing Soil soap actually made in Goa?',
+      answer: 'Yes. The soap is made and cured in Goa. The soap bases — glycerin, goat milk, shea butter — are sourced from a manufacturer we have worked with consistently. The botanicals we describe as farm-grown, neem and tulsi, are grown on our property in Goa, dried under the sun there, and added by hand to each batch.',
+    },
+    {
+      question: 'What does small-batch soap mean?',
+      answer: 'Small-batch means the batch size is small enough that the soap does not need a long shelf life engineered through preservatives and synthetic stabilisers. We make to order: when you place an order, we make the batch, cure it for the right amount of time, and ship. The bar you receive was made for your order, not sourced from stock that has been sitting in a warehouse.',
+    },
+    {
+      question: 'Can handmade soap from Goa be shipped across India?',
+      answer: 'Yes. Healing Soil ships pan-India. The window from order to dispatch is seven to ten days — the making and curing time, not a processing delay. Free shipping is included.',
+    },
+    {
+      question: 'What is the difference between farm-grown and sourced ingredients in handmade soap?',
+      answer: 'Farm-grown means the ingredient was grown on our property in Goa and added directly to the batch. Sourced means it was purchased from a supplier. We are specific about which is which: the soap bases are sourced from a known manufacturer; the neem and tulsi we describe as farm-grown are genuinely grown and processed by us on the farm.',
+    },
+    {
+      question: 'Why is handmade soap from Goa different from commercial soap?',
+      answer: 'The practical difference is in ingredients and shelf life. Commercial soap usually contains SLS, a synthetic detergent that strips skin oils, and is manufactured months before use. Small-batch handmade soap skips SLS entirely, uses no synthetic preservatives, and is made to order — so the bar you receive was cured recently, not held in a warehouse. The result is a cleaner ingredient list and a gentler effect on skin.',
+    },
+  ],
+  'handmade-soap-bangalore': [
+    {
+      question: 'Does Healing Soil deliver handmade soap to Bangalore?',
+      answer: 'Yes. Healing Soil ships pan-India from Goa. The window from order to dispatch is seven to ten days — the making and curing time. Delivery to Bangalore typically adds one to two days after dispatch.',
+    },
+    {
+      question: 'Why does Bangalore water affect skin?',
+      answer: "Bangalore's water supply tends toward moderate to high mineral hardness, particularly in zones served by KRS reservoir water. Hard water reacts with soap to reduce lather, leading people to use more soap. As the water dries, minerals deposit on skin as a film that can feel tight or dry. Combined with SLS-based commercial soap — which strips skin oils — the dryness compounds. Many people in Bangalore dealing with persistent skin dryness have never identified this combination as the cause.",
+    },
+    {
+      question: 'What soap is best for skin in Bangalore?',
+      answer: 'No single soap works for everyone, but the pattern that helps most people in Bangalore is SLS-free, no synthetic fragrance, and a base matched to skin type. Glycerin suits oily or combination skin. Goat milk suits sensitive or dry skin. Shea butter suits very dry skin. The Healing Soil starter bundle covers all three bases for ₹1,000 — a practical way to find which one works without committing to a full bar of each.',
+    },
+    {
+      question: 'How do I check if my soap contains SLS?',
+      answer: 'Read the ingredient list on the bar or box. SLS and SLES appear near the top if present — they are primary ingredients, not traces. Look for: sodium lauryl sulfate, sodium laureth sulfate, sodium coco sulfate. If none of those appear, the soap is at least SLS-free. Also look for "fragrance" or "parfum" listed without further detail, which usually means synthetic fragrance.',
+    },
+    {
+      question: 'Is there a connection between Healing Soil and Bangalore?',
+      answer: 'Yes. The people behind Healing Soil spent years in Bangalore before moving to Goa to start the farm and soap business. The Bangalore buyer base is not a coincidence — it is where many of our earliest customers came from. The story of that move is on the site.',
+    },
+  ],
+  'natural-soap-sensitive-skin-india': [
+    {
+      question: 'What causes sensitive skin in India?',
+      answer: 'Sensitive skin is often a reaction to something in the routine rather than a fixed skin type. In India, the most common causes are SLS in commercial soap — which strips the skin\'s natural oil barrier — and synthetic fragrance, one of the most common contact allergens in everyday skincare. Removing these, particularly by switching to an SLS-free soap without synthetic fragrance, often reduces sensitivity significantly.',
+    },
+    {
+      question: 'Can switching to natural soap help sensitive skin?',
+      answer: 'For many people, yes. The main change is removing SLS and synthetic fragrance — the two most common irritants in commercial soap. Switching to an SLS-free, fragrance-free soap reduces daily contact with these compounds. The tightness after washing often reduces in the first week. Underlying dryness typically improves within two to three weeks. For skin with a diagnosed condition like eczema or rosacea, a soap switch is one part of management, not a treatment.',
+    },
+    {
+      question: 'Which soap base is best for sensitive skin in India?',
+      answer: 'Goat milk is the most versatile base for sensitive skin. It contains lactic acid that gently removes dead skin cells, natural fats that absorb easily, and a pH closer to skin\'s natural pH. For very dry or reactive skin that gets tight or develops redness, shea butter is the richer option. For mild sensitivity with oily or combination skin, glycerin is a good starting point.',
+    },
+    {
+      question: 'What ingredients in commercial soap irritate sensitive skin?',
+      answer: 'The most common are: SLS and SLES — detergents that strip skin oils with every wash; synthetic fragrance listed as "fragrance" or "parfum" — a frequent contact allergen; parabens such as methylparaben and propylparaben — preservatives that can cause reactions in sensitive skin; and PEG compounds. Removing these from your soap routine is the most direct way to reduce irritation from the product itself.',
+    },
+    {
+      question: 'How do I know if a soap is genuinely natural?',
+      answer: 'The word "natural" is not regulated for cosmetics in India. Look at the ingredient list instead. A genuinely gentle bar will not contain sodium lauryl sulfate, sodium laureth sulfate, parabens, synthetic fragrance, or PEG compounds. Handmade soap bases often use INCI names — standardised Latin-origin names like "butyrospermum parkii butter" for shea butter. These look technical but are simply the international naming convention for real ingredients.',
+    },
+  ],
   'sls-free-soap-india': [
     {
       question: 'What is SLS in soap?',
