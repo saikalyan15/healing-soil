@@ -148,7 +148,7 @@ export default async function HomePage() {
           </div>
 
           <div className="relative w-full max-w-[520px] flex-shrink-0 md:w-[48%]">
-            <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-2xl md:rotate-2">
+            <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-2xl">
               <Image
                 src="/hero-soap.jpg"
                 alt="Healing Soil handmade soaps from a South Goa farm"
@@ -157,12 +157,6 @@ export default async function HomePage() {
                 priority
                 sizes="(max-width: 768px) 100vw, 48vw"
               />
-            </div>
-            {/* Aesthetic badge */}
-            <div className="absolute -bottom-4 -left-4 hidden h-32 w-32 items-center justify-center rounded-full bg-[#C9A84C] p-4 text-center shadow-lg md:flex">
-              <p className="font-serif text-sm font-bold leading-tight text-[#1A1A14]">
-                Glycerin<br />Retained<br />Soap
-              </p>
             </div>
           </div>
         </div>
