@@ -127,6 +127,10 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   ],
   'understanding-the-benefits-of-shea-butter-in-soap': [
     {
+      question: 'What are the benefits of shea butter soap?',
+      answer: 'Shea butter soap leaves a conditioning deposit on skin after every wash. It does not clog pores despite its richness. The non-saponifiable compounds in shea butter — cinnamic acid esters and lupeol — survive the soap-making process and are deposited on skin while you wash. The result is a wash that feels gentle rather than harsh, and skin that tends to feel soft rather than stripped.',
+    },
+    {
       question: 'What is shea butter?',
       answer: 'Shea butter comes from the nut of the shea tree (Vitellaria paradoxa), which grows across the savannah belt of West and Central Africa. The nut is dried, crushed, and pressed to extract the fat. Raw shea butter contains fatty acids (oleic, stearic, linoleic, palmitic), vitamins A, E, and F, and non-saponifiable compounds that do not convert to soap during saponification. This is what makes shea butter valuable in soap.',
     },
@@ -136,7 +140,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Why does shea butter belong in soap?',
-      answer: 'Shea butter could be a leave-on product like a cream or balm, but it works well in soap because the conditioning happens at the moment of washing rather than an hour later. It fills the microscopic gaps in the skin\'s surface layer and slows moisture loss — especially valuable for very dry or reactive skin.',
+      answer: 'Shea butter could be a leave-on product like a cream or balm, but it works well in soap because the conditioning happens at the moment of washing rather than requiring a separate step. The non-saponifiable compounds survive the soap-making process and are deposited on skin while you wash — which is why skin tends to feel softer after washing with a shea butter bar.',
     },
   ],
   'handmade-soap-goa': [
