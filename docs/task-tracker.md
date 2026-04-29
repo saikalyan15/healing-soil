@@ -4,14 +4,13 @@ Living status for the "bring customers to the website" plan. Update the **Status
 
 **Source docs** (read these for "why," not for status):
 - [growth-strategy.md](growth-strategy.md) — Stage 1–3 research + site diagnosis (April 2026)
-- [home-page-copy.md](home-page-copy.md) — Stage 4 LP copy ready to ship
 - [HealingSoil-BuildPlan-FINAL.docx](HealingSoil-BuildPlan-FINAL.docx) — original March 2026 build plan
 - Plan this tracker executes: `C:\Users\sai\.claude\plans\how-to-bring-customers-binary-bengio.md`
 
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-04-24 (session 2)
+Last updated: 2026-04-28 (session 3 — category pages added after GSC diagnosis)
 
 ---
 
@@ -21,7 +20,7 @@ Ship the LP rewrite and the 3 small conversion fixes first. This is the single h
 
 | # | Task | Owner | Status | Context needed to resume cold |
 |---|---|---|---|---|
-| 1.1 | Implement drafted LP copy into home page | Claude | DONE | Source: [home-page-copy.md](home-page-copy.md). Target: [src/app/page.tsx](../src/app/page.tsx). Section order from growth-strategy.md §"Home page section order". Use existing review data from [src/lib/reviews.ts](../src/lib/reviews.ts). |
+| 1.1 | Implement drafted LP copy into home page | Claude | DONE | Implemented in [src/app/page.tsx](../src/app/page.tsx). Section order: Hero → Bundle → Mechanism → Riya secondary → Promises → Reviews grid → Soft close. |
 | 1.2 | Scrub maker name across 4 surfaces | Claude | DONE | Verified 2026-04-22: no maker name in page.tsx, our-story/page.tsx, or privacy-policy/page.tsx. our-story now shows farm-cashew-tree.jpg, not founder photo. |
 | 1.3 | Replace `public/founder.jpg` | Owner | TODO | File still exists at `public/founder.jpg` (not referenced by any page, but should be deleted or replaced). Replace with farm shot or hands shot. |
 | 1.4 | Build "pick 4" bundle block on home | Claude | DONE | BundlePicker component live at `#bundle`. Hero CTA anchors to `#bundle`. Default SKUs wired in. |
@@ -77,6 +76,11 @@ Biggest unused lever. Fix the inventory first, then optimise what ranks, then wr
 | 3.12 | Write "Natural soap for sensitive skin India" blog post | Owner | TODO | 500–1K searches. Anchors to the Krutika LP story and the starter bundle. |
 | 3.13 | Set up Google Business Profile | Owner | BLOCKED | Blocked: business not formally registered. Revisit when registration is complete. |
 | 3.14 | Add "leave a Google review" link to delivered-order WhatsApp flow | Owner | TODO | After 3.13 is live. Every delivered order → WhatsApp message with the Google review link. |
+| 3.15 | Build `/goat-milk-soap` category page | Claude | TODO | Planned in [gsc-traffic-diagnosis-2026-04-28.md](gsc-traffic-diagnosis-2026-04-28.md). Execution brief in [category-pages-execution.md](category-pages-execution.md) §"Session 1". Template: [src/app/shea-butter-soap/page.tsx](../src/app/shea-butter-soap/page.tsx). Highest search volume of the three (1K–5K monthly "goat milk soap" India). Ship first. |
+| 3.16 | Build `/soap-for-sensitive-skin` category page | Claude | TODO | Execution brief in [category-pages-execution.md](category-pages-execution.md) §"Session 2". Closest to LP narrative (Krutika story). Most compliance-sensitive of the three — see brief for extra-strict CDSCO checks. Ship after 3.15. |
+| 3.17 | Build `/glycerin-soap` category page | Claude | TODO | Execution brief in [category-pages-execution.md](category-pages-execution.md) §"Session 3". Page where the mechanism story (glycerin retained because it sells for more separately) goes deepest. Ship after 3.16. |
+| 3.18 | Decide fate of `content/blog/best-natural-soap-for-eczema.mdx` | Owner | TODO | Currently `published: false` but lives in repo with eczema-as-condition framing — CDSCO violation if it ever ships. Recommendation: delete (Option A in [category-pages-execution.md](category-pages-execution.md) §"Session 4"). Overlaps with 3.16 anyway. |
+| 3.19 | Monthly GSC snapshot on the 1st of each month | Owner | TODO (recurring) | Replaces weekly checks — weekly is noise at this volume. On the 1st, record clicks, impressions, position, distinct ranking queries in [growth-strategy.md](growth-strategy.md) monthly check-in table. Apply Country=India filter when reading. No tactical changes mid-month. 90-day re-evaluation gate is 2026-07-28 per [gsc-traffic-diagnosis-2026-04-28.md](gsc-traffic-diagnosis-2026-04-28.md). |
 
 ---
 

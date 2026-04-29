@@ -1,6 +1,6 @@
 # Healing Soil Growth Strategy
 
-Last updated: 2026-04-22. Status: Stage 1, 2, 3 closed. Stage 4 (copy) drafted, see [home-page-copy.md](home-page-copy.md). Site diagnosis closed. Bundle decision closed. Next: implementation pass.
+Last updated: 2026-04-29. Status: Stage 1–4 closed. LP implemented in [src/app/page.tsx](../src/app/page.tsx). Site diagnosis closed. Bundle decision closed. Next: category pages (see task-tracker.md §3.15–3.17).
 
 Single source of truth for the LP and growth work. Read this first before any copy or LP work.
 
@@ -135,7 +135,7 @@ Implications for Stage 3:
 ## Next actions
 
 1. ~~Stage 3: home-page outline~~ done. See "Home page section order" above.
-2. ~~Stage 4: write copy~~ drafted. See [home-page-copy.md](home-page-copy.md).
+2. ~~Stage 4: write copy~~ done. Implemented in [src/app/page.tsx](../src/app/page.tsx).
 3. **Implementation pass (next session):** ship in one PR — wire copy from `home-page-copy.md` into [src/app/page.tsx](../src/app/page.tsx), build the bundle "pick 4" frontend block, scrub maker name across the 4 surfaces in the site diagnosis, replace `public/founder.jpg`, unify delivery time across the 6 surfaces, fix Schema.org on `/shop/[slug]` (remove FreeReturn, fix per-product aggregateRating fallback in [src/lib/reviews.ts:126-129](../src/lib/reviews.ts#L126-L129)).
 4. Owner: rename anonymous reviewers ([review-003, 004, 005](../src/lib/reviews.ts#L39)) with first names. Permission granted 2026-04-22, lookup pending. review-004 ("does not lather up like regular ones") is the priority — strong VOC quote currently wasted on anonymous attribution.
 5. Add referral share block to post-submit screen ([src/components/OrderPageClient.tsx](../src/components/OrderPageClient.tsx) `step='send'`).
