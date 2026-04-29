@@ -28,10 +28,10 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="Healing Soil"
-            width={160}
-            height={60}
+            width={200}
+            height={80}
             className="object-contain"
-            style={{ height: '60px', width: 'auto' }}
+            style={{ height: '72px', width: 'auto' }}
             priority
           />
         </Link>
