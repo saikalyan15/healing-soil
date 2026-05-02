@@ -106,6 +106,31 @@ Start at 221 followers. Dialled-down cadence: 3 posts/week (one is a reel). Alte
 
 ---
 
+## Layer 6 — Programmatic SEO (Month 1–6)
+
+Execution detail in [docs/execution-plan.md](execution-plan.md). Keyword list in [docs/keyword-list.md](keyword-list.md). Competitor analysis in [docs/competitive-analysis-bangalore.md](competitive-analysis-bangalore.md).
+
+**Architecture:** data files in `src/data/` drive dynamic routes. `publishedAt` field controls which pages are live. Release 20–50 pages per batch by setting dates and redeploying. 100 target keywords across 6 clusters.
+
+| # | Task | Owner | Status | Context needed to resume cold |
+|---|---|---|---|---|
+| 6.1 | Build comparison page infrastructure | Claude | TODO | Phase 1A in execution-plan.md. New files: `src/data/comparisons.ts`, `src/app/compare/[slug]/page.tsx`, `src/components/programmatic/ComparisonPage.tsx`. Template: `src/app/shea-butter-soap/page.tsx`. |
+| 6.2 | Build ingredient page infrastructure | Claude | TODO | Phase 1B. New files: `src/data/ingredients.ts`, `src/app/ingredient/[slug]/page.tsx`, `src/components/programmatic/IngredientPage.tsx`. |
+| 6.3 | Build city page infrastructure | Claude | TODO | Phase 1C. New files: `src/data/cities.ts`, `src/app/soap/[city]/page.tsx`, `src/components/programmatic/CityPage.tsx`. |
+| 6.4 | Extend next-sitemap.config.js | Claude | TODO | Phase 1D. Add `additionalPaths` for compare/ingredient/soap routes. Filter to publishedAt <= today. |
+| 6.5 | Populate + ship 5 GSC-confirmed comparison pages | Claude | TODO | Phase 2A. Slugs: glycerin-vs-goat-milk-soap, goat-milk-vs-shea-butter-soap, shea-butter-vs-glycerin-soap, neem-vs-tulsi-soap, honey-vs-oats-soap. All at positions 5–11 in GSC already. |
+| 6.6 | Build SLS-free landing page `/sls-free-soap` | Claude | TODO | Phase 2C. Upgrade `content/blog/sls-free-soap-india.mdx` to a landing page. "SLS free soap India" already at position 9.3 in GSC. |
+| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | TODO | Phase 3. Data in `src/data/ingredients.ts`. Priority order in execution-plan.md §Phase 3. Farm-grown ingredients: neem, tulsi. Sourced: everything else. |
+| 6.8 | Ship occasion pages (8 pages) | Claude | TODO | Phase 4A. Slugs: gift-soap-india, travel-soap-india, soap-for-dry-skin, natural-soap-for-her, eco-friendly-soap-india, corporate-gift-soap, neem-tulsi-soap, kesar-haldi-soap. |
+| 6.9 | Ship 5 more comparison pages | Claude | TODO | Phase 4B. Includes handmade-vs-commercial-soap — mechanism story (glycerin removal) goes deepest here. |
+| 6.10 | Ship Tier 1 city pages (7 cities) | Claude | TODO | Phase 5. Cities: Bangalore, Mumbai, Pune, Delhi, Hyderabad, Chennai, Goa. `/soap/bangalore` is highest priority — competes directly with Nivre Natural. |
+| 6.11 | Ship ingredient × base combination pages | Claude | TODO | Phase 6. ~18 pages, one per product. Flat keyword-rich URLs e.g. `/neem-goat-milk-soap`. Data file: `src/data/combinations.ts`. |
+| 6.12 | Ship Tier 2 city pages (20 cities) | Claude | TODO | Phase 7A. Cities listed in execution-plan.md. Use same template as 6.10. |
+| 6.13 | Build Ayurvedic pages (6 pages) | Claude | TODO | Phase 7B. Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Keywords: "Ayurvedic soap India", "Ayurvedic neem tulsi soap". Traditional framing only — no therapeutic claims. |
+| 6.14 | Monthly GSC review: add programmatic impressions row | Owner | TODO (recurring) | On the 1st of each month, record impressions from compare/*, ingredient/*, soap/* routes separately from blog impressions. Target: 500+ comparison impressions by Aug 2026. |
+
+---
+
 ## Monthly check-in metrics (track these, not vanity)
 
 Record numbers on the first of each month so trend is visible.

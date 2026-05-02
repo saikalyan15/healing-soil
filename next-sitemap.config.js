@@ -59,6 +59,30 @@ const config = {
       '/privacy-policy',
     ]
 
+    // Programmatic SEO data
+    const today = new Date().toISOString().split('T')[0]
+    
+    const extractLiveSlugs = (filePath) => {
+      const fullPath = path.resolve(process.cwd(), filePath)
+      if (!fs.existsSync(fullPath)) return []
+      const content = fs.readFileSync(fullPath, 'utf8')
+      const slugs = []
+      // [\s\S]*? handles multi-line objects that contain nested arrays (e.g. faqs: [{...}])
+      // Only matches entries with a real date string — null entries are skipped naturally
+      const entryRegex = /slug:\s*['"]([^'"]+)['"][\s\S]*?publishedAt:\s*'(\d{4}-\d{2}-\d{2})'/g
+      let match
+      while ((match = entryRegex.exec(content)) !== null) {
+        if (match[2] <= today) {
+          slugs.push(match[1])
+        }
+      }
+      return slugs
+    }
+
+    const compareSlugs = extractLiveSlugs('src/data/comparisons.ts')
+    const ingredientSlugs = extractLiveSlugs('src/data/ingredients.ts')
+    const citySlugs = extractLiveSlugs('src/data/cities.ts')
+
     // Product pages are dynamic at runtime, so list their canonical URLs explicitly.
     const productSlugs = [
       'gift-soap-pouch',
@@ -97,6 +121,24 @@ const config = {
       })),
       ...storySlugs.map((slug) => ({
         loc: `/blog/${slug}`,
+        changefreq: 'monthly',
+        priority: 0.6,
+        lastmod: new Date().toISOString(),
+      })),
+      ...compareSlugs.map((slug) => ({
+        loc: `/compare/${slug}`,
+        changefreq: 'monthly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })),
+      ...ingredientSlugs.map((slug) => ({
+        loc: `/ingredient/${slug}`,
+        changefreq: 'monthly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })),
+      ...citySlugs.map((slug) => ({
+        loc: `/soap/${slug}`,
         changefreq: 'monthly',
         priority: 0.6,
         lastmod: new Date().toISOString(),
@@ -140,4 +182,3 @@ const config = {
 }
 
 module.exports = config
-
