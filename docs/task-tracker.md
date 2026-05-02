@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-04-28 (session 3 — category pages added after GSC diagnosis)
+Last updated: 2026-05-02 (session 5 — 5 more comparison pages + 7 ingredient pages batch 1 shipped)
 
 ---
 
@@ -76,9 +76,9 @@ Biggest unused lever. Fix the inventory first, then optimise what ranks, then wr
 | 3.12 | Write "Natural soap for sensitive skin India" blog post | Owner | TODO | 500–1K searches. Anchors to the Krutika LP story and the starter bundle. |
 | 3.13 | Set up Google Business Profile | Owner | BLOCKED | Blocked: business not formally registered. Revisit when registration is complete. |
 | 3.14 | Add "leave a Google review" link to delivered-order WhatsApp flow | Owner | TODO | After 3.13 is live. Every delivered order → WhatsApp message with the Google review link. |
-| 3.15 | Build `/goat-milk-soap` category page | Claude | TODO | Planned in [gsc-traffic-diagnosis-2026-04-28.md](gsc-traffic-diagnosis-2026-04-28.md). Execution brief in [category-pages-execution.md](category-pages-execution.md) §"Session 1". Template: [src/app/shea-butter-soap/page.tsx](../src/app/shea-butter-soap/page.tsx). Highest search volume of the three (1K–5K monthly "goat milk soap" India). Ship first. |
-| 3.16 | Build `/soap-for-sensitive-skin` category page | Claude | TODO | Execution brief in [category-pages-execution.md](category-pages-execution.md) §"Session 2". Closest to LP narrative (Krutika story). Most compliance-sensitive of the three — see brief for extra-strict CDSCO checks. Ship after 3.15. |
-| 3.17 | Build `/glycerin-soap` category page | Claude | TODO | Execution brief in [category-pages-execution.md](category-pages-execution.md) §"Session 3". Page where the mechanism story (glycerin retained because it sells for more separately) goes deepest. Ship after 3.16. |
+| 3.15 | Build `/goat-milk-soap` category page | Claude | DONE | Shipped 2026-05-02. [src/app/goat-milk-soap/page.tsx](../src/app/goat-milk-soap/page.tsx). Filters `p.base === 'Goat Milk'`. FAQPage + BreadcrumbList schema. BlogInlineCTA. |
+| 3.16 | Build `/soap-for-sensitive-skin` category page | Claude | DONE | Shipped 2026-05-02. [src/app/soap-for-sensitive-skin/page.tsx](../src/app/soap-for-sensitive-skin/page.tsx). Shows all in-stock products. CDSCO checked — uses "suitable for sensitive skin" (skin type only). |
+| 3.17 | Build `/glycerin-soap` category page | Claude | DONE | Shipped 2026-05-02. [src/app/glycerin-soap/page.tsx](../src/app/glycerin-soap/page.tsx). Filters `p.base === 'Glycerine'`. Mechanism story (glycerin retained) included in copy. |
 | 3.18 | Decide fate of `content/blog/best-natural-soap-for-eczema.mdx` | Owner | TODO | Currently `published: false` but lives in repo with eczema-as-condition framing — CDSCO violation if it ever ships. Recommendation: delete (Option A in [category-pages-execution.md](category-pages-execution.md) §"Session 4"). Overlaps with 3.16 anyway. |
 | 3.19 | Monthly GSC snapshot on the 1st of each month | Owner | TODO (recurring) | Replaces weekly checks — weekly is noise at this volume. On the 1st, record clicks, impressions, position, distinct ranking queries in [growth-strategy.md](growth-strategy.md) monthly check-in table. Apply Country=India filter when reading. No tactical changes mid-month. 90-day re-evaluation gate is 2026-07-28 per [gsc-traffic-diagnosis-2026-04-28.md](gsc-traffic-diagnosis-2026-04-28.md). |
 
@@ -114,15 +114,15 @@ Execution detail in [docs/execution-plan.md](execution-plan.md). Keyword list in
 
 | # | Task | Owner | Status | Context needed to resume cold |
 |---|---|---|---|---|
-| 6.1 | Build comparison page infrastructure | Claude | TODO | Phase 1A in execution-plan.md. New files: `src/data/comparisons.ts`, `src/app/compare/[slug]/page.tsx`, `src/components/programmatic/ComparisonPage.tsx`. Template: `src/app/shea-butter-soap/page.tsx`. |
-| 6.2 | Build ingredient page infrastructure | Claude | TODO | Phase 1B. New files: `src/data/ingredients.ts`, `src/app/ingredient/[slug]/page.tsx`, `src/components/programmatic/IngredientPage.tsx`. |
-| 6.3 | Build city page infrastructure | Claude | TODO | Phase 1C. New files: `src/data/cities.ts`, `src/app/soap/[city]/page.tsx`, `src/components/programmatic/CityPage.tsx`. |
-| 6.4 | Extend next-sitemap.config.js | Claude | TODO | Phase 1D. Add `additionalPaths` for compare/ingredient/soap routes. Filter to publishedAt <= today. |
-| 6.5 | Populate + ship 5 GSC-confirmed comparison pages | Claude | TODO | Phase 2A. Slugs: glycerin-vs-goat-milk-soap, goat-milk-vs-shea-butter-soap, shea-butter-vs-glycerin-soap, neem-vs-tulsi-soap, honey-vs-oats-soap. All at positions 5–11 in GSC already. |
-| 6.6 | Build SLS-free landing page `/sls-free-soap` | Claude | TODO | Phase 2C. Upgrade `content/blog/sls-free-soap-india.mdx` to a landing page. "SLS free soap India" already at position 9.3 in GSC. |
-| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | TODO | Phase 3. Data in `src/data/ingredients.ts`. Priority order in execution-plan.md §Phase 3. Farm-grown ingredients: neem, tulsi. Sourced: everything else. |
+| 6.1 | Build comparison page infrastructure | Claude | DONE | Shipped 2026-05-02. `src/data/comparisons.ts`, `src/app/compare/[slug]/page.tsx`, `src/components/programmatic/ComparisonPage.tsx`. `dynamicParams = false` set. |
+| 6.2 | Build ingredient page infrastructure | Claude | DONE | Shipped 2026-05-02. `src/data/ingredients.ts`, `src/app/ingredient/[slug]/page.tsx`, `src/components/programmatic/IngredientPage.tsx`. |
+| 6.3 | Build city page infrastructure | Claude | DONE | Shipped 2026-05-02. `src/data/cities.ts`, `src/app/soap/[city]/page.tsx`, `src/components/programmatic/CityPage.tsx`. |
+| 6.4 | Extend next-sitemap.config.js | Claude | DONE | Shipped 2026-05-02. `additionalPaths` added for compare/ingredient/soap routes. Regex bug fixed to handle multi-line entries with nested FAQ arrays. |
+| 6.5 | Populate + ship 5 GSC-confirmed comparison pages | Claude | DONE | Shipped 2026-05-02. All 5 in `src/data/comparisons.ts` with `publishedAt: '2026-05-02'`. CDSCO-reviewed. |
+| 6.6 | Build SLS-free landing page `/sls-free-soap` | Claude | DONE | Shipped 2026-05-02. `src/app/sls-free-soap/page.tsx`. Targets "SLS free soap India" (GSC position 9.3). Cross-links to blog post. |
+| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | WIP | Batch 1 DONE 2026-05-02: neem, tulsi, goat-milk, glycerin, shea-butter, honey, oats live at `/ingredient/[slug]`. Batch 2 TODO: kesar, haldi, rose, pomegranate, orange, ginger, rosemary. |
 | 6.8 | Ship occasion pages (8 pages) | Claude | TODO | Phase 4A. Slugs: gift-soap-india, travel-soap-india, soap-for-dry-skin, natural-soap-for-her, eco-friendly-soap-india, corporate-gift-soap, neem-tulsi-soap, kesar-haldi-soap. |
-| 6.9 | Ship 5 more comparison pages | Claude | TODO | Phase 4B. Includes handmade-vs-commercial-soap — mechanism story (glycerin removal) goes deepest here. |
+| 6.9 | Ship 5 more comparison pages | Claude | DONE | Shipped 2026-05-02: neem-tulsi-vs-kesar-haldi-soap, ginger-rosemary-vs-neem-tulsi-soap, honey-oats-vs-kesar-haldi-soap, pomegranate-vs-orange-soap, handmade-vs-commercial-soap. ComparisonPage.tsx fixed to conditionally hide empty productsB section. |
 | 6.10 | Ship Tier 1 city pages (7 cities) | Claude | TODO | Phase 5. Cities: Bangalore, Mumbai, Pune, Delhi, Hyderabad, Chennai, Goa. `/soap/bangalore` is highest priority — competes directly with Nivre Natural. |
 | 6.11 | Ship ingredient × base combination pages | Claude | TODO | Phase 6. ~18 pages, one per product. Flat keyword-rich URLs e.g. `/neem-goat-milk-soap`. Data file: `src/data/combinations.ts`. |
 | 6.12 | Ship Tier 2 city pages (20 cities) | Claude | TODO | Phase 7A. Cities listed in execution-plan.md. Use same template as 6.10. |

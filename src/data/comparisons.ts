@@ -190,5 +190,199 @@ export const comparisons: ComparisonPage[] = [
       }
     ],
     publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'neem-tulsi-vs-kesar-haldi-soap',
+    title: 'Neem Tulsi vs Kesar Haldi Soap: Two Ayurvedic Favourites',
+    h1: 'Neem Tulsi vs Kesar Haldi: Choosing Your Soap',
+    metaDescription: 'Comparing two traditional Ayurvedic blends. Learn the difference between the earthy feel of Neem Tulsi and the warm presence of Kesar Haldi.',
+    subjectA: {
+      name: 'Neem & Tulsi',
+      slug: 'ingredient/neem',
+      tagline: 'Farm-grown herbs combined for a traditional wash. This blend pairs the earthy presence of neem with the herbaceous scent of tulsi.',
+      pros: ['Uses farm-grown Goa herbs', 'Earthy and herbal scent', 'Traditionally used in Indian care'],
+      feel: 'Earthy and herbal'
+    },
+    subjectB: {
+      name: 'Kesar & Haldi',
+      slug: 'ingredient/kesar',
+      tagline: 'Warm and golden ingredients from Ayurvedic tradition. Kesar and haldi are valued for their gentle feel and traditional presence in personal care.',
+      pros: ['Warm Ayurvedic tradition', 'Natural golden colour', 'Gentle feel on skin'],
+      feel: 'Warm and golden'
+    },
+    verdict: 'The choice between these two depends on the experience you prefer. Neem and tulsi offer an earthy, herbaceous wash that feels grounded and fresh. Kesar and haldi provide a warmer, more traditional feel that many find gentle for daily use. Both are available in our goat milk and glycerin bases.',
+    relatedProductsA: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProductsB: ['kesar-haldi-goat-milk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    faqs: [
+      {
+        q: 'Which one is better for daily use?',
+        a: 'Both blends are gentle enough for daily use on the face and body. The choice often comes down to whether you prefer an earthy or a warm scent profile.'
+      },
+      {
+        q: 'Do these soaps have synthetic colours?',
+        a: 'No, the colours come from the natural ingredients themselves. The golden hue of the kesar and haldi bars is derived from the traditional botanicals used in the batch.'
+      },
+      {
+        q: 'Are the herbs farm-grown?',
+        a: 'Our neem and tulsi are grown on our farm in South Goa. We harvest and sun-dry them by hand before they are added to our small-batch soap orders.'
+      }
+    ],
+    publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'ginger-rosemary-vs-neem-tulsi-soap',
+    title: 'Ginger Rosemary vs Neem Tulsi Soap: Scent and Feel Compared',
+    h1: 'Ginger Rosemary vs Neem Tulsi: Which Scent is Right for You?',
+    metaDescription: 'Comparing the uplifting Ginger Rosemary blend with the earthy Neem Tulsi. Find the right scent profile for your morning routine.',
+    subjectA: {
+      name: 'Ginger & Rosemary',
+      slug: 'ingredient/ginger',
+      tagline: 'An uplifting and aromatic combination. The warmth of ginger pairs with the fresh, woody notes of rosemary for an invigorating wash.',
+      pros: ['Uplifting aromatic scent', 'Warming feel on skin', 'Invigorating morning wash'],
+      feel: 'Warm and aromatic'
+    },
+    subjectB: {
+      name: 'Neem & Tulsi',
+      slug: 'ingredient/neem',
+      tagline: 'Farm-grown herbs combined for a traditional wash. This blend pairs the earthy presence of neem with the herbaceous scent of tulsi.',
+      pros: ['Uses farm-grown Goa herbs', 'Earthy and herbal scent', 'Traditionally used in Indian care'],
+      feel: 'Earthy and herbal'
+    },
+    verdict: 'Ginger and rosemary provide an aromatic, uplifting experience that is excellent for a morning shower. Neem and tulsi offer a more grounded, traditional wash with an earthy scent profile. Both options provide a gentle lather that cleans without stripping the skin.',
+    relatedProductsA: ['ginger-rosemary-glycerin-soap'],
+    relatedProductsB: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    faqs: [
+      {
+        q: 'Does ginger feel spicy on the skin?',
+        a: 'The ginger provides a mild warming sensation rather than a spicy one. It contributes to an invigorating feel during the wash without being harsh.'
+      },
+      {
+        q: 'Is rosemary good for the hair?',
+        a: 'Rosemary is traditionally valued in personal care for its clean, woody scent. While our bars are primarily for the body and face, many people enjoy the aromatic presence of rosemary in their routine.'
+      },
+      {
+        q: 'Which one is more traditional?',
+        a: 'Neem and tulsi are staples of traditional Ayurvedic personal care in India. Ginger and rosemary offer a more contemporary aromatic profile while still using natural ingredients.'
+      }
+    ],
+    publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'honey-oats-vs-kesar-haldi-soap',
+    title: 'Honey Oats vs Kesar Haldi Soap: Smooth vs Warm',
+    h1: 'Honey Oats vs Kesar Haldi: Two Gentle Choices',
+    metaDescription: 'Comparing the smooth, moisturising feel of Honey Oats with the warm tradition of Kesar Haldi. Both suitable for sensitive skin.',
+    subjectA: {
+      name: 'Honey & Oats',
+      slug: 'ingredient/honey',
+      tagline: 'A smooth and moisturising combination. Honey acts as a natural humectant while finely processed oats provide a very gentle texture.',
+      pros: ['Honey as a natural humectant', 'Gentle texture from oats', 'Softening feel after wash'],
+      feel: 'Smooth and moisturising'
+    },
+    subjectB: {
+      name: 'Kesar & Haldi',
+      slug: 'ingredient/kesar',
+      tagline: 'Warm and golden ingredients from Ayurvedic tradition. Kesar and haldi are valued for their gentle feel and traditional presence in personal care.',
+      pros: ['Warm Ayurvedic tradition', 'Natural golden colour', 'Gentle feel on skin'],
+      feel: 'Warm and golden'
+    },
+    verdict: 'Honey and oats are ideal if you prefer a bar with a very mild texture and a moisturising feel. Kesar and haldi are for those who value traditional Ayurvedic ingredients and a warm, smooth wash. Both are excellent choices for those seeking a gentle alternative to commercial soap.',
+    relatedProductsA: ['honey-oats-glycerin-soap', 'honey-and-oats-goatmilk-soap'],
+    relatedProductsB: ['kesar-haldi-goat-milk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    faqs: [
+      {
+        q: 'Is the honey real?',
+        a: 'Yes, we use real honey in our soap batches. It is valued for its natural humectant properties, which help to draw moisture to the skin.'
+      },
+      {
+        q: 'Are the oats scratchy?',
+        a: 'No, the oats are finely processed to ensure they provide a gentle, soft texture rather than a scratchy one. They are suitable for sensitive skin.'
+      },
+      {
+        q: 'Which one smells sweeter?',
+        a: 'Honey and oats have a very mild, naturally sweet scent. Kesar and haldi have a warmer, more herbaceous and earthy aromatic profile.'
+      }
+    ],
+    publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'pomegranate-vs-orange-soap',
+    title: 'Pomegranate vs Orange Soap: Two Fruit Ingredients Compared',
+    h1: 'Pomegranate vs Orange Soap: Which Fruit Ingredient to Choose?',
+    metaDescription: 'Comparing the rich feel of pomegranate with the bright scent of orange. Learn how these fruit-based ingredients behave in handmade soap.',
+    subjectA: {
+      name: 'Pomegranate',
+      slug: 'ingredient/pomegranate',
+      tagline: 'A rich and deep ingredient for a nourishing wash. Pomegranate is valued for its presence in traditional care and its contribution to a dense lather.',
+      pros: ['Rich and nourishing feel', 'Deep and natural presence', 'Gentle on all skin types'],
+      feel: 'Rich and deep'
+    },
+    subjectB: {
+      name: 'Orange',
+      slug: 'ingredient/orange',
+      tagline: 'A bright and fresh citrus experience. Orange oil provides a natural, uplifting scent that makes for a refreshing wash.',
+      pros: ['Natural citrus scent', 'Fresh and clean feel', 'Uplifting morning wash'],
+      feel: 'Bright and fresh'
+    },
+    verdict: 'Pomegranate is the choice for those who want a richer, more grounded feel during their wash. Orange is ideal for those who prefer a bright, citrusy scent to start their day. Both are available in our nourishing goat milk base, providing a creamy lather.',
+    relatedProductsA: ['pomegranate-glycerine', 'pomegranate-goatmilk-soap'],
+    relatedProductsB: ['orange-goatmilk-soap'],
+    faqs: [
+      {
+        q: 'Do these soaps use synthetic scents?',
+        a: 'No, the scents come from natural oils and ingredients. The orange bar uses natural citrus oil for its bright and fresh aromatic profile.'
+      },
+      {
+        q: 'Is pomegranate good for the face?',
+        a: 'Yes, our pomegranate bars are gentle enough for use on both the face and the body, providing a nourishing feel without being heavy.'
+      },
+      {
+        q: 'Which one lathers more?',
+        a: 'Both ingredients are used in bases that produce a creamy, soft lather. The pomegranate in goat milk base provides a particularly dense and soft foam.'
+      }
+    ],
+    publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'handmade-vs-commercial-soap',
+    title: 'Handmade vs Commercial Soap: What Is the Difference?',
+    h1: 'Handmade vs Commercial Soap: What Changes When You Switch',
+    metaDescription: 'Learn why handmade soap feels different on your skin. We compare natural glycerin retention and SLS-free bases with commercial detergent bars.',
+    subjectA: {
+      name: 'Handmade Soap',
+      slug: '',
+      tagline: 'Traditionally made in small batches. These bars retain natural glycerin and use SLS-free bases for a wash that feels soft and conditioning.',
+      pros: ['Retains natural glycerin', 'No SLS or synthetic fragrance', 'Made in small batches in Goa'],
+      feel: 'Soft and conditioning'
+    },
+    subjectB: {
+      name: 'Commercial Soap',
+      slug: '',
+      tagline: 'Mass-produced for a long shelf life. Often classified as detergent bars, these use SLS for fast foam and typically remove natural glycerin.',
+      pros: ['Widely available', 'Consistent fast lather', 'Very long shelf life'],
+      feel: 'Clean but stripping'
+    },
+    verdict: 'The primary difference between the two is glycerin. Commercial manufacturers typically remove the natural glycerin to sell separately, replacing it with SLS for lather. Handmade soap keeps the glycerin in the bar, providing a humectant wash that leaves skin feeling soft rather than stripped.',
+    relatedProductsA: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerine', 'neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap', 'orange-goatmilk-soap', 'rice-rose-goatmilk-soap', 'pomegranate-goatmilk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProductsB: [],
+    faqs: [
+      {
+        q: 'Why does handmade soap feel different?',
+        a: 'Handmade soap feels different because it still contains natural glycerin. Glycerin is a humectant that draws moisture to the skin, which is why your skin feels soft after washing instead of tight.'
+      },
+      {
+        q: 'Is the lather weaker in handmade soap?',
+        a: 'The lather is different but not weaker. Commercial soap uses SLS to create an aggressive, airy foam, while handmade soap produces a creamier, denser lather from natural oils.'
+      },
+      {
+        q: 'Why is commercial soap cheaper?',
+        a: 'Commercial soap is mass-produced using inexpensive synthetic detergents and the valuable glycerin is removed to be sold separately. Handmade soap uses higher-quality bases and retains all its natural benefits.'
+      },
+      {
+        q: 'Does handmade soap last as long?',
+        a: 'If kept dry between uses, a handmade bar can last as long as a commercial one. Because they are rich in glycerin, they should not be left sitting in a pool of water.'
+      }
+    ],
+    publishedAt: '2026-05-02'
   }
 ]

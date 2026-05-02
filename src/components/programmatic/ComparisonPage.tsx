@@ -102,14 +102,16 @@ const ComparisonPage: React.FC<Props> = ({ comparison, productsA, productsB }) =
           </div>
         </div>
 
-        <div className="mb-12 border-t border-[#D6CFC4] pt-8">
-          <h3 className="mb-6 font-serif text-2xl text-[#1E5631]">{comparison.subjectB.name} range</h3>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {productsB.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
+        {productsB.length > 0 && (
+          <div className="mb-12 border-t border-[#D6CFC4] pt-8">
+            <h3 className="mb-6 font-serif text-2xl text-[#1E5631]">{comparison.subjectB.name} range</h3>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {productsB.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <BlogInlineCTA />
 
