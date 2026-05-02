@@ -66,6 +66,7 @@ const nextConfig = {
       { source: '/healing-pillars/:path*',               destination: '/blog',     permanent: true },
       { source: '/slow-living',                          destination: '/blog',     permanent: true },
       { source: '/mental-health',                        destination: '/blog',     permanent: true },
+      { source: '/mental-health/',                       destination: '/blog',     permanent: true },
       { source: '/regenerative-living',                  destination: '/blog',     permanent: true },
       { source: '/home',                                  destination: '/',         permanent: true },
       { source: '/home/',                                 destination: '/',         permanent: true },
@@ -96,6 +97,15 @@ const nextConfig = {
       { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice/', destination: '/blog', permanent: true },
       { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go',  destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
       { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go/', destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
+      // Root-level WP slugs missing from earlier config
+      { source: '/seven-days-without-paracetamol-how-we-beat-the-flu',  destination: '/blog', permanent: true },
+      { source: '/seven-days-without-paracetamol-how-we-beat-the-flu/', destination: '/blog', permanent: true },
+      { source: '/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain',  destination: '/blog/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain', permanent: true },
+      { source: '/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain/', destination: '/blog/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain', permanent: true },
+      { source: '/mental-health-slow-living-useless-activities',  destination: '/blog/mental-health-slow-living-useless-activities', permanent: true },
+      { source: '/mental-health-slow-living-useless-activities/', destination: '/blog/mental-health-slow-living-useless-activities', permanent: true },
+      { source: '/caterpillar-content-writing-lessons',  destination: '/blog/caterpillar-content-writing-lessons', permanent: true },
+      { source: '/caterpillar-content-writing-lessons/', destination: '/blog/caterpillar-content-writing-lessons', permanent: true },
     ]
   },
 }
