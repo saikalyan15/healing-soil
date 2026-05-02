@@ -85,9 +85,9 @@ export default async function HomePage() {
     image: 'https://healingsoil.in/og-image.jpg',
     logo: 'https://healingsoil.in/logo.png',
     address: {
-      '@type': 'PostalAddress',
-      addressRegion: 'Goa',
-      addressCountry: 'IN',
+      "@type": "PostalAddress",
+      "addressRegion": "Goa",
+      "addressCountry": "IN"
     },
     areaServed: 'IN',
     priceRange: '₹₹',

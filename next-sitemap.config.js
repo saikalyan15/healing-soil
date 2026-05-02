@@ -112,19 +112,19 @@ const config = {
       ...productSlugs.map((slug) => ({
         loc: `/shop/${slug}`,
         changefreq: 'weekly',
-        priority: 0.8,
+        priority: 0.9,
         lastmod: new Date().toISOString(),
       })),
       ...blogSlugs.map((slug) => ({
         loc: `/blog/${slug}`,
         changefreq: 'monthly',
-        priority: 0.7,
+        priority: 0.8,
         lastmod: new Date().toISOString(),
       })),
       ...storySlugs.map((slug) => ({
         loc: `/blog/${slug}`,
         changefreq: 'monthly',
-        priority: 0.6,
+        priority: 0.7,
         lastmod: new Date().toISOString(),
       })),
       ...compareSlugs.map((slug) => ({
@@ -154,7 +154,7 @@ const config = {
       ...ayurvedicSlugs.map((slug) => ({
         loc: `/ayurvedic-soap/${slug}`,
         changefreq: 'monthly',
-        priority: 0.7,
+        priority: 0.8,
         lastmod: new Date().toISOString(),
       })),
     ]

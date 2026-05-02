@@ -53,13 +53,20 @@ export default function RootLayout({
 }) {
   const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'Store',
     name: 'Healing Soil',
     url: 'https://healingsoil.in',
     logo: 'https://healingsoil.in/logo.png',
+    image: 'https://healingsoil.in/og-image.jpg',
     description: 'Handmade natural soaps from Goa, India. SLS-free, made to order, for sensitive skin.',
     foundingLocation: 'Goa, India',
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'Goa',
+      addressCountry: 'IN',
+    },
     areaServed: 'IN',
+    priceRange: '₹₹',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Sales',
@@ -67,7 +74,30 @@ export default function RootLayout({
     },
     sameAs: [
       'https://www.instagram.com/healingsoil.in',
+      'https://www.facebook.com/profile.php?id=61576352186521',
     ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Handmade Soap Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Small-batch Soap Making',
+            description: 'Custom handmade soaps made in small batches on our Goa farm.'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Natural Ingredient Sourcing',
+            description: 'Sourcing and harvesting farm-grown botanicals like Neem and Tulsi.'
+          }
+        }
+      ]
+    }
   }
 
   return (
