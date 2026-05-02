@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { comparisons } from '@/data/comparisons'
 import ComparisonPage from '@/components/programmatic/ComparisonPage'
+import { getProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -44,5 +45,15 @@ export default async function Page({ params }: Props) {
     notFound()
   }
 
-  return <ComparisonPage comparison={comparison} />
+  const allProducts = await getProducts()
+  const productsA = allProducts.filter((p) => comparison.relatedProductsA.includes(p.slug))
+  const productsB = allProducts.filter((p) => comparison.relatedProductsB.includes(p.slug))
+
+  return (
+    <ComparisonPage 
+      comparison={comparison} 
+      productsA={productsA} 
+      productsB={productsB} 
+    />
+  )
 }

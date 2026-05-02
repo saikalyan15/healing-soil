@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { cities } from '@/data/cities'
 import CityPage from '@/components/programmatic/CityPage'
+import { getProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ city: string }> }
 
@@ -47,5 +48,8 @@ export default async function Page({ params }: Props) {
     notFound()
   }
 
-  return <CityPage city={cityData} />
+  const allProducts = await getProducts()
+  const products = allProducts.filter((p) => p.in_stock)
+
+  return <CityPage city={cityData} products={products} />
 }

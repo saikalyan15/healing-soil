@@ -1,12 +1,15 @@
 import React from 'react'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
+import ProductCard from '@/components/ProductCard'
+import type { Product } from '@/lib/products'
 import type { CityPage as CityPageType } from '@/data/cities'
 
 type Props = {
   city: CityPageType
+  products: Product[]
 }
 
-const CityPage: React.FC<Props> = ({ city }) => {
+const CityPage: React.FC<Props> = ({ city, products }) => {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -49,13 +52,12 @@ const CityPage: React.FC<Props> = ({ city }) => {
           )}
         </div>
 
-        <div className="mb-10 border-t border-[#D6CFC4] pt-8">
-          <p className="mb-4 font-sans text-sm font-medium text-[#1A1A14]">Browse our collection</p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-             {/* Stub for product grid */}
-             <div className="rounded border border-[#D6CFC4] p-4 text-center text-sm text-[#666]">
-               Full Product Grid
-             </div>
+        <div className="mb-12 border-t border-[#D6CFC4] pt-8">
+          <h3 className="mb-6 font-serif text-2xl text-[#1E5631]">Browse our collection</h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {products.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         </div>
 

@@ -1,13 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
+import ProductCard from '@/components/ProductCard'
+import type { Product } from '@/lib/products'
 import type { ComparisonPage as ComparisonPageType } from '@/data/comparisons'
 
 type Props = {
   comparison: ComparisonPageType
+  productsA: Product[]
+  productsB: Product[]
 }
 
-const ComparisonPage: React.FC<Props> = ({ comparison }) => {
+const ComparisonPage: React.FC<Props> = ({ comparison, productsA, productsB }) => {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -39,31 +43,31 @@ const ComparisonPage: React.FC<Props> = ({ comparison }) => {
             {comparison.metaDescription}
           </p>
 
-          {/* Comparison table stub */}
+          {/* Comparison table */}
           <div className="mb-10 overflow-x-auto">
             <table className="w-full border-collapse font-sans text-sm">
               <thead>
                 <tr className="bg-[#EAE7DE]">
-                  <th className="border border-[#D6CFC4] p-3 text-left">Feature</th>
-                  <th className="border border-[#D6CFC4] p-3 text-left">{comparison.subjectA.name}</th>
-                  <th className="border border-[#D6CFC4] p-3 text-left">{comparison.subjectB.name}</th>
+                  <th className="border border-[#D6CFC4] p-3 text-left text-[#1A1A14]">Feature</th>
+                  <th className="border border-[#D6CFC4] p-3 text-left text-[#1A1A14]">{comparison.subjectA.name}</th>
+                  <th className="border border-[#D6CFC4] p-3 text-left text-[#1A1A14]">{comparison.subjectB.name}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-[#D6CFC4] p-3 font-medium">Feel</td>
-                  <td className="border border-[#D6CFC4] p-3">{comparison.subjectA.feel}</td>
-                  <td className="border border-[#D6CFC4] p-3">{comparison.subjectB.feel}</td>
+                  <td className="border border-[#D6CFC4] p-3 font-medium text-[#1A1A14]">Feel</td>
+                  <td className="border border-[#D6CFC4] p-3 text-[#1A1A14]">{comparison.subjectA.feel}</td>
+                  <td className="border border-[#D6CFC4] p-3 text-[#1A1A14]">{comparison.subjectB.feel}</td>
                 </tr>
                 <tr>
-                  <td className="border border-[#D6CFC4] p-3 font-medium">Key Pros</td>
-                  <td className="border border-[#D6CFC4] p-3">
-                    <ul className="list-disc pl-4">
+                  <td className="border border-[#D6CFC4] p-3 font-medium text-[#1A1A14]">Key Pros</td>
+                  <td className="border border-[#D6CFC4] p-3 text-[#1A1A14]">
+                    <ul className="list-disc pl-4 space-y-1">
                       {comparison.subjectA.pros.map((p, i) => <li key={i}>{p}</li>)}
                     </ul>
                   </td>
-                  <td className="border border-[#D6CFC4] p-3">
-                    <ul className="list-disc pl-4">
+                  <td className="border border-[#D6CFC4] p-3 text-[#1A1A14]">
+                    <ul className="list-disc pl-4 space-y-1">
                       {comparison.subjectB.pros.map((p, i) => <li key={i}>{p}</li>)}
                     </ul>
                   </td>
@@ -88,17 +92,22 @@ const ComparisonPage: React.FC<Props> = ({ comparison }) => {
           </p>
         </div>
 
-        {/* Product grids would go here in full implementation */}
-        <div className="mb-10 border-t border-[#D6CFC4] pt-8">
-          <p className="mb-4 font-sans text-sm font-medium text-[#1A1A14]">Related products</p>
-          <div className="grid grid-cols-2 gap-4">
-             {/* Stub for related products */}
-             <div className="rounded border border-[#D6CFC4] p-4 text-center text-sm text-[#666]">
-               Products for {comparison.subjectA.name}
-             </div>
-             <div className="rounded border border-[#D6CFC4] p-4 text-center text-sm text-[#666]">
-               Products for {comparison.subjectB.name}
-             </div>
+        {/* Product grids */}
+        <div className="mb-12 border-t border-[#D6CFC4] pt-8">
+          <h3 className="mb-6 font-serif text-2xl text-[#1E5631]">{comparison.subjectA.name} range</h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {productsA.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-12 border-t border-[#D6CFC4] pt-8">
+          <h3 className="mb-6 font-serif text-2xl text-[#1E5631]">{comparison.subjectB.name} range</h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {productsB.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         </div>
 

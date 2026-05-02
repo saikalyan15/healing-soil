@@ -1,12 +1,15 @@
 import React from 'react'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
+import ProductCard from '@/components/ProductCard'
+import type { Product } from '@/lib/products'
 import type { IngredientPage as IngredientPageType } from '@/data/ingredients'
 
 type Props = {
   ingredient: IngredientPageType
+  products: Product[]
 }
 
-const IngredientPage: React.FC<Props> = ({ ingredient }) => {
+const IngredientPage: React.FC<Props> = ({ ingredient, products }) => {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -53,13 +56,12 @@ const IngredientPage: React.FC<Props> = ({ ingredient }) => {
           </p>
         </div>
 
-        <div className="mb-10 border-t border-[#D6CFC4] pt-8">
-          <p className="mb-4 font-sans text-sm font-medium text-[#1A1A14]">Products containing {ingredient.name}</p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-             {/* Stub for related products */}
-             <div className="rounded border border-[#D6CFC4] p-4 text-center text-sm text-[#666]">
-               Product Grid
-             </div>
+        <div className="mb-12 border-t border-[#D6CFC4] pt-8">
+          <h3 className="mb-6 font-serif text-2xl text-[#1E5631]">Products containing {ingredient.name}</h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {products.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         </div>
 

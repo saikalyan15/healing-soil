@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ingredients } from '@/data/ingredients'
 import IngredientPage from '@/components/programmatic/IngredientPage'
+import { getProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -44,5 +45,8 @@ export default async function Page({ params }: Props) {
     notFound()
   }
 
-  return <IngredientPage ingredient={ingredient} />
+  const allProducts = await getProducts()
+  const products = allProducts.filter((p) => ingredient.relatedProducts.includes(p.slug))
+
+  return <IngredientPage ingredient={ingredient} products={products} />
 }
