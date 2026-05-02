@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-05-02 (session 5 — 5 more comparison pages + 7 ingredient pages batch 1 shipped)
+Last updated: 2026-05-02 (session 6 — ingredient batch 2, 8 occasion pages, 27 city pages, 6 Ayurvedic pages built; all publishedAt: null; routes fixed)
 
 ---
 
@@ -112,6 +112,16 @@ Execution detail in [docs/execution-plan.md](execution-plan.md). Keyword list in
 
 **Architecture:** data files in `src/data/` drive dynamic routes. `publishedAt` field controls which pages are live. Release 20–50 pages per batch by setting dates and redeploying. 100 target keywords across 6 clusters.
 
+**Checkin = deploy (auto-deploy pipeline).** Always build new entries with `publishedAt: null`. When ready to release a batch, run the stamp script, review the git diff, then check in:
+
+```sh
+node scripts/stamp-batch.js src/data/ingredients.ts 7
+node scripts/stamp-batch.js src/data/cities.ts 7
+node scripts/stamp-batch.js src/data/occasions.ts 8
+```
+
+Adjust the file path and count for whichever batch you are releasing. The script stamps the next N `publishedAt: null` entries with today's date in order.
+
 | # | Task | Owner | Status | Context needed to resume cold |
 |---|---|---|---|---|
 | 6.1 | Build comparison page infrastructure | Claude | DONE | Shipped 2026-05-02. `src/data/comparisons.ts`, `src/app/compare/[slug]/page.tsx`, `src/components/programmatic/ComparisonPage.tsx`. `dynamicParams = false` set. |
@@ -120,13 +130,13 @@ Execution detail in [docs/execution-plan.md](execution-plan.md). Keyword list in
 | 6.4 | Extend next-sitemap.config.js | Claude | DONE | Shipped 2026-05-02. `additionalPaths` added for compare/ingredient/soap routes. Regex bug fixed to handle multi-line entries with nested FAQ arrays. |
 | 6.5 | Populate + ship 5 GSC-confirmed comparison pages | Claude | DONE | Shipped 2026-05-02. All 5 in `src/data/comparisons.ts` with `publishedAt: '2026-05-02'`. CDSCO-reviewed. |
 | 6.6 | Build SLS-free landing page `/sls-free-soap` | Claude | DONE | Shipped 2026-05-02. `src/app/sls-free-soap/page.tsx`. Targets "SLS free soap India" (GSC position 9.3). Cross-links to blog post. |
-| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | WIP | Batch 1 DONE 2026-05-02: neem, tulsi, goat-milk, glycerin, shea-butter, honey, oats live at `/ingredient/[slug]`. Batch 2 TODO: kesar, haldi, rose, pomegranate, orange, ginger, rosemary. |
-| 6.8 | Ship occasion pages (8 pages) | Claude | TODO | Phase 4A. Slugs: gift-soap-india, travel-soap-india, soap-for-dry-skin, natural-soap-for-her, eco-friendly-soap-india, corporate-gift-soap, neem-tulsi-soap, kesar-haldi-soap. |
+| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | DONE | Batch 1 (2026-05-02, live): neem, tulsi, goat-milk, glycerin, shea-butter, honey, oats. Batch 2 (publishedAt: null, ready to stamp): kesar, haldi, rose, pomegranate, orange, ginger, rosemary. |
+| 6.8 | Ship occasion pages (8 pages) | Claude | DONE | Built 2026-05-02 (publishedAt: null). Route: `src/app/occasion/[slug]/page.tsx`. Component: `OccasionPage.tsx`. All 8 slugs in `src/data/occasions.ts`. Stamp to release. |
 | 6.9 | Ship 5 more comparison pages | Claude | DONE | Shipped 2026-05-02: neem-tulsi-vs-kesar-haldi-soap, ginger-rosemary-vs-neem-tulsi-soap, honey-oats-vs-kesar-haldi-soap, pomegranate-vs-orange-soap, handmade-vs-commercial-soap. ComparisonPage.tsx fixed to conditionally hide empty productsB section. |
-| 6.10 | Ship Tier 1 city pages (7 cities) | Claude | TODO | Phase 5. Cities: Bangalore, Mumbai, Pune, Delhi, Hyderabad, Chennai, Goa. `/soap/bangalore` is highest priority — competes directly with Nivre Natural. |
+| 6.10 | Ship Tier 1 city pages (7 cities) | Claude | DONE | Built 2026-05-02 (publishedAt: null). All 7 in `src/data/cities.ts`. Route `src/app/soap/[city]/page.tsx` already existed. Stamp to release. |
 | 6.11 | Ship ingredient × base combination pages | Claude | TODO | Phase 6. ~18 pages, one per product. Flat keyword-rich URLs e.g. `/neem-goat-milk-soap`. Data file: `src/data/combinations.ts`. |
-| 6.12 | Ship Tier 2 city pages (20 cities) | Claude | TODO | Phase 7A. Cities listed in execution-plan.md. Use same template as 6.10. |
-| 6.13 | Build Ayurvedic pages (6 pages) | Claude | TODO | Phase 7B. Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Keywords: "Ayurvedic soap India", "Ayurvedic neem tulsi soap". Traditional framing only — no therapeutic claims. |
+| 6.12 | Ship Tier 2 city pages (20 cities) | Claude | DONE | Built 2026-05-02 (publishedAt: null). All 20 in `src/data/cities.ts`. Stamp to release in batches. |
+| 6.13 | Build Ayurvedic pages (6 pages) | Claude | DONE | Built 2026-05-02 (publishedAt: null). Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Component: `AyurvedicPage.tsx`. Data: `src/data/ayurvedic.ts`. Stamp to release. |
 | 6.14 | Monthly GSC review: add programmatic impressions row | Owner | TODO (recurring) | On the 1st of each month, record impressions from compare/*, ingredient/*, soap/* routes separately from blog impressions. Target: 500+ comparison impressions by Aug 2026. |
 
 ---

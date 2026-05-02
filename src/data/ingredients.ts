@@ -194,5 +194,187 @@ export const ingredients: IngredientPage[] = [
       }
     ],
     publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'kesar',
+    name: 'Kesar (Saffron)',
+    title: 'Kesar (Saffron) in Handmade Soap: Golden Care | Healing Soil',
+    metaDescription: 'Discover the traditional use of kesar (saffron) in handmade soap. Sourced from Kashmir for a warm and gentle wash that leaves skin feeling soft.',
+    tagline: 'A prized ingredient in traditional care. Kesar is valued for its warm, golden presence and its ability to provide a gentle and soft feel after washing.',
+    origin: 'Our saffron is sourced from trusted producers in Kashmir, ensuring a high-quality botanical addition to our soap batches.',
+    traditionalUse: 'Kesar has been used in Ayurvedic personal care for generations. It is traditionally valued for its gentle nature and its contribution to a rich, golden wash.',
+    feel: 'Warm and smooth feel with a subtle, earthy floral scent. It contributes to a creamy lather that is suitable for all skin types.',
+    relatedProducts: ['kesar-haldi-goat-milk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    faqs: [
+      {
+        q: 'Does kesar soap stain the skin?',
+        a: 'No, the saffron is used in proportions that provide a natural golden hue to the bar without leaving any stain on the skin.'
+      },
+      {
+        q: 'Is saffron soap good for the face?',
+        a: 'Yes, our kesar soaps are very gentle and are suitable for daily use on both the face and the body.'
+      },
+      {
+        q: 'Where do you source your saffron?',
+        a: 'We source our kesar from Kashmir, where it is traditionally grown and harvested to maintain its purity.'
+      }
+    ],
+    publishedAt: null
+  },
+  {
+    slug: 'haldi',
+    name: 'Haldi (Turmeric)',
+    title: 'Haldi (Turmeric) in Handmade Soap: Traditional Care | Healing Soil',
+    metaDescription: 'Learn about the use of haldi (turmeric) in handmade soap. Sourced from Indian farms for a grounded wash rooted in Ayurvedic tradition.',
+    tagline: 'A staple of Indian personal care. Haldi is one of the most widely used ingredients in traditional care, valued for its grounded presence.',
+    origin: 'Sourced from reliable Indian farms, our turmeric is selected for its purity and traditional quality before being added to our soap.',
+    traditionalUse: 'Haldi is traditionally used in Ayurvedic personal care. It is a cornerstone of Indian routines, valued for its gentle cleansing properties and traditional framing.',
+    feel: 'Earthy and grounded feel with a natural, herbaceous scent. It contributes to a soft lather that leaves skin feeling refreshed.',
+    relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-sheabutter-soap'],
+    faqs: [
+      {
+        q: 'Will turmeric soap turn my skin yellow?',
+        a: 'No, we use haldi in specific amounts that provide a natural colour to the soap bar while rinsing away cleanly from the skin.'
+      },
+      {
+        q: 'Is it suitable for daily use?',
+        a: 'Yes, our haldi soaps are formulated to be gentle and are suitable for daily personal care routines.'
+      },
+      {
+        q: 'Do you use real turmeric root?',
+        a: 'Yes, we use real turmeric powder in our small-batch soap orders to ensure a traditional and honest wash.'
+      }
+    ],
+    publishedAt: null
+  },
+  {
+    slug: 'rose',
+    name: 'Rose',
+    title: 'Rose in Handmade Soap: Gentle Floral Care | Healing Soil',
+    metaDescription: 'Experience the gentle floral presence of rose in our handmade soaps. Sourced from Indian producers for a soft and moisturising wash.',
+    tagline: 'A timeless botanical for personal care. Rose is valued for its gentle floral presence and its ability to leave skin feeling soft and moisturised.',
+    origin: 'We use rose oil and dried petals sourced from Indian producers who specialise in traditional floral extractions.',
+    traditionalUse: 'Rose has been used in personal care across cultures for centuries. In traditional routines, it is valued for its mild nature and pleasing floral scent.',
+    feel: 'Soft and floral feel with a delicate, natural rose scent. It provides a gentle lather that contributes to a moisturising wash.',
+    relatedProducts: ['sheabutter-kesar-gulab', 'rice-rose-goatmilk-soap'],
+    faqs: [
+      {
+        q: 'Do you use synthetic rose fragrance?',
+        a: 'No, we use natural rose oil and botanicals. The scent is mild and authentic, not like the strong synthetic perfumes found in commercial bars.'
+      },
+      {
+        q: 'Are there real petals in the soap?',
+        a: 'Yes, some of our rose-based bars include sun-dried rose petals for a gentle texture and visual appeal.'
+      },
+      {
+        q: 'Is rose soap good for sensitive skin?',
+        a: 'Yes, rose is traditionally used for its gentle properties, making it a suitable choice for those with sensitive skin types.'
+      }
+    ],
+    publishedAt: null
+  },
+  {
+    slug: 'pomegranate',
+    name: 'Pomegranate',
+    title: 'Pomegranate in Handmade Soap: Rich and Nourishing | Healing Soil',
+    metaDescription: 'Discover the rich presence of pomegranate in our handmade soaps. Sourced from Indian farms for a nourishing and deep cleansing experience.',
+    tagline: 'A rich and deep fruit-based ingredient. Pomegranate is valued for its presence in traditional care and its contribution to a nourishing wash.',
+    origin: 'Sourced from Indian farms, pomegranate is processed to retain its natural qualities before being added to our soap bases.',
+    traditionalUse: 'Pomegranate is used in traditional care for its rich and nourishing presence. It is often included in routines for its ability to provide a grounded wash.',
+    feel: 'Deep and rich feel with a subtle, fruity undertone. It contributes to a dense, creamy lather that leaves skin feeling soft.',
+    relatedProducts: ['pomegranate-glycerine', 'pomegranate-goatmilk-soap'],
+    faqs: [
+      {
+        q: 'What does pomegranate soap smell like?',
+        a: 'It has a very mild and subtle fruity scent. It is not overpowering and provides a natural aromatic experience during your wash.'
+      },
+      {
+        q: 'Is pomegranate soap suitable for all skin types?',
+        a: 'Yes, our pomegranate soaps are made with gentle bases that are suitable for oily, normal, and dry skin types.'
+      },
+      {
+        q: 'Do you use real pomegranate?',
+        a: 'Yes, we use pomegranate-derived ingredients in our batches to ensure a rich and honest personal care experience.'
+      }
+    ],
+    publishedAt: null
+  },
+  {
+    slug: 'orange',
+    name: 'Orange',
+    title: 'Orange in Handmade Soap: Bright and Fresh | Healing Soil',
+    metaDescription: 'Brighten your routine with orange in our handmade soaps. Using natural orange oil for an uplifting and fresh citrus wash.',
+    tagline: 'A bright and fresh citrus experience. Orange is valued for its uplifting scent and its contribution to a refreshing personal care routine.',
+    origin: 'We use natural orange oil derived from Indian citrus fruits, selected for its bright and authentic aromatic profile.',
+    traditionalUse: 'Citrus ingredients have been used in personal care for their bright, uplifting scent. Orange is traditionally valued for its ability to provide a fresh feel.',
+    feel: 'Bright and fresh feel with a natural citrus scent. It provides an uplifting wash and a gentle lather that cleans without stripping.',
+    relatedProducts: ['orange-goatmilk-soap'],
+    faqs: [
+      {
+        q: 'Is the orange scent strong?',
+        a: 'The scent is fresh and noticeable but natural. It comes from real citrus oil rather than synthetic perfumes, so it does not linger too heavily.'
+      },
+      {
+        q: 'Can I use orange soap in the morning?',
+        a: 'Many customers prefer our orange-based bars for their morning wash because of the bright and uplifting citrus aroma.'
+      },
+      {
+        q: 'Is orange oil harsh on skin?',
+        a: 'No, we use natural orange oil in balanced proportions within our gentle soap bases to ensure a refreshing yet mild wash.'
+      }
+    ],
+    publishedAt: null
+  },
+  {
+    slug: 'ginger',
+    name: 'Ginger',
+    title: 'Ginger in Handmade Soap: Warming Aromatic | Healing Soil',
+    metaDescription: 'Learn about the warming presence of ginger in our handmade soap. Sourced from Indian farms for an invigorating and traditional wash.',
+    tagline: 'A warming and aromatic traditional ingredient. Ginger is valued for its invigorating presence and its long history in Ayurvedic care.',
+    origin: 'Sourced from Indian farms, ginger is prepared carefully to maintain its aromatic warmth before being added to our batches.',
+    traditionalUse: 'Ginger is used in Ayurvedic personal care for its warming aromatic presence. It is traditionally valued for its ability to provide an invigorating wash.',
+    feel: 'Warming and aromatic feel with a spicy, fresh scent. It contributes to a gentle lather that leaves skin feeling clean and refreshed.',
+    relatedProducts: ['ginger-rosemary-glycerin-soap'],
+    faqs: [
+      {
+        q: 'Does ginger soap feel spicy?',
+        a: 'It provides a mild warming sensation rather than a sharp spicy one. It is designed to be invigorating while remaining gentle on the skin.'
+      },
+      {
+        q: 'What are the benefits of ginger in soap?',
+        a: 'Ginger is traditionally used for its warming properties and its fresh, aromatic scent, making for an invigorating personal care experience.'
+      },
+      {
+        q: 'Do you use real ginger?',
+        a: 'Yes, we use real ginger-derived ingredients in our soap to ensure an authentic and traditional wash.'
+      }
+    ],
+    publishedAt: null
+  },
+  {
+    slug: 'rosemary',
+    name: 'Rosemary',
+    title: 'Rosemary in Handmade Soap: Clean and Woody | Healing Soil',
+    metaDescription: 'Discover the clean and woody scent of rosemary in our handmade soaps. Sourced from Indian herb producers for a fresh and grounded wash.',
+    tagline: 'A clean and woody aromatic herb. Rosemary is valued for its fresh scent and its traditional presence in personal care routines.',
+    origin: 'Our rosemary is sourced from Indian herb producers who provide high-quality botanicals for our small-batch soap orders.',
+    traditionalUse: 'Rosemary is valued in personal care for its clean, woody aromatic quality. It is traditionally used in routines for its fresh and grounded feel.',
+    feel: 'Clean and fresh feel with a woody, herbaceous scent. It provides a gentle lather that pairs well with other warming ingredients like ginger.',
+    relatedProducts: ['ginger-rosemary-glycerin-soap'],
+    faqs: [
+      {
+        q: 'What does rosemary soap smell like?',
+        a: 'Rosemary has a clean, woody, and slightly herbal scent. It provides a very fresh and grounded aromatic profile during your wash.'
+      },
+      {
+        q: 'Is rosemary soap good for the hair?',
+        a: 'While our bars are primarily designed for the face and body, rosemary is a botanical that many people enjoy for its clean scent in all areas of care.'
+      },
+      {
+        q: 'Do you use synthetic rosemary scent?',
+        a: 'No, we use natural rosemary botanicals. The scent is authentic and fresh, derived directly from the herb itself.'
+      }
+    ],
+    publishedAt: null
   }
 ]
