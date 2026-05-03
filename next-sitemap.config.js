@@ -84,6 +84,7 @@ const config = {
     const citySlugs = extractLiveSlugs('src/data/cities.ts')
     const occasionSlugs = extractLiveSlugs('src/data/occasions.ts')
     const ayurvedicSlugs = extractLiveSlugs('src/data/ayurvedic.ts')
+    const combinationSlugs = extractLiveSlugs('src/data/combinations.ts')
 
     // Product pages are dynamic at runtime, so list their canonical URLs explicitly.
     const productSlugs = [
@@ -155,6 +156,12 @@ const config = {
         loc: `/ayurvedic-soap/${slug}`,
         changefreq: 'monthly',
         priority: 0.8,
+        lastmod: new Date().toISOString(),
+      })),
+      ...combinationSlugs.map((slug) => ({
+        loc: `/${slug}`,
+        changefreq: 'monthly',
+        priority: 0.7,
         lastmod: new Date().toISOString(),
       })),
     ]

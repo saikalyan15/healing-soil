@@ -9,10 +9,11 @@ Last updated: 2026-05-02. Master document: read this when resuming any SEO sessi
 - [competitive-analysis-bangalore.md](competitive-analysis-bangalore.md) — competitor breakdown
 - [keyword-list.md](keyword-list.md) — 100 target keywords with GSC data
 
-**Current state (2026-05-02):**
-- 13 soap blog posts live, 1 hub page, 1 category page (`/shea-butter-soap`)
-- Tasks 3.15–3.17 (goat milk, sensitive skin, glycerin category pages) = next in queue
-- GSC: comparison queries already at positions 5–11 — fastest wins available
+**Current state (2026-05-03):**
+- 13 soap blog posts live, 1 hub page, 4 category pages (`/shea-butter-soap`, `/goat-milk-soap`, `/soap-for-sensitive-skin`, `/glycerin-soap`)
+- Phases 1–6 infrastructure complete. All programmatic pages built and waiting to stamp.
+- Ready to stamp: ingredient batch 2 (7 pages), 8 occasion pages, 7 Tier 1 city pages, 20 Tier 2 city pages, 6 Ayurvedic pages, 13 combination pages
+- Next publish window: ~2 weeks from 2026-05-02 batch to let Google crawl the first wave
 
 ---
 
@@ -276,23 +277,29 @@ CDSCO note for `/soap-for-dry-skin`: "suitable for dry skin" (skin type) — nev
 
 ---
 
-## Phase 6 — Combination pages (Month 3–4)
+## Phase 6 — Combination pages (Month 3–4) — DONE (2026-05-03)
 
-~18–35 pages. One page per product = one ingredient × base combination. These are the most specific long-tail pages.
+13 pages built, all `publishedAt: null`. Route: `src/app/[combo]/page.tsx` (flat root-level dynamic segment, `dynamicParams = false`). Component: `src/components/programmatic/CombinationPage.tsx`. Data: `src/data/combinations.ts`.
 
-Derive from the 18 existing products. Each product maps to 1–2 combination slugs:
+To release: `node scripts/stamp-batch.js src/data/combinations.ts 13`
 
-| Product | Combination slug | Keyword |
+| Combination slug | Primary keyword | Product slug |
 |---|---|---|
-| Honey Oats Glycerin Soap | `/honey-glycerin-soap` | honey glycerin soap India |
-| Neem Tulsi Goat Milk Soap | `/neem-goat-milk-soap` | neem goat milk soap India |
-| Kesar Haldi Goat Milk Soap | `/kesar-goat-milk-soap` | turmeric goat milk soap India |
-| Ginger Rosemary Glycerin Soap | `/ginger-glycerin-soap` | ginger glycerin soap India |
-| Shea Butter Kesar Gulab | `/kesar-shea-butter-soap` | kesar shea butter soap |
-| Pomegranate Goat Milk Soap | `/pomegranate-goat-milk-soap` | pomegranate goat milk soap |
-| ... (one per product) | | |
+| `/neem-goat-milk-soap` | neem goat milk soap India | neem-tulsi-goatmilk-soap |
+| `/neem-glycerin-soap` | neem glycerin soap India | neem-tulsi-glycerin-soap |
+| `/honey-goat-milk-soap` | honey goat milk soap India | honey-and-oats-goatmilk-soap |
+| `/honey-glycerin-soap` | honey glycerin soap India | honey-oats-glycerin-soap |
+| `/honey-shea-butter-soap` | honey shea butter soap India | honey-kesar-haldi-sheabutter-soap |
+| `/kesar-goat-milk-soap` | kesar goat milk soap India | kesar-haldi-goat-milk-soap |
+| `/kesar-shea-butter-soap` | kesar shea butter soap | sheabutter-kesar-gulab |
+| `/orange-goat-milk-soap` | orange goat milk soap India | orange-goatmilk-soap |
+| `/pomegranate-goat-milk-soap` | pomegranate goat milk soap | pomegranate-goatmilk-soap |
+| `/pomegranate-glycerin-soap` | pomegranate glycerin soap | pomegranate-glycerine |
+| `/rose-goat-milk-soap` | rose goat milk soap India | rice-rose-goatmilk-soap |
+| `/ginger-glycerin-soap` | ginger glycerin soap India | ginger-rosemary-glycerin-soap |
+| `/ginger-goat-milk-soap` | ginger goat milk soap India | ginger-rosemary-goat-milk-soap |
 
-These pages are short — 200–300 words, a product hero, FAQ (3 Q&As), and bundle CTA. Their value is precision: a buyer searching "neem goat milk soap India" finds an exact match.
+Note: 13 pages (not 18) — gift packs, loofah, and travel multi-packs do not map cleanly to ingredient x base combinations and were excluded.
 
 ---
 
