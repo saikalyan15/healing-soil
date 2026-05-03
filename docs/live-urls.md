@@ -80,6 +80,7 @@ All at `/blog/[slug]`. These are editorial — they rank for informational queri
 | https://healingsoil.in/blog/what-makes-soap-chemical-free | chemical free soap India |
 | https://healingsoil.in/blog/why-handmade-soap-lasts-longer | handmade soap lasts longer |
 | https://healingsoil.in/blog/why-we-make-soap-in-small-batches | small batch soap India |
+| https://healingsoil.in/blog/pomegranate-peel-soap | pomegranate soap India |
 
 ---
 

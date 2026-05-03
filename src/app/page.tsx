@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const BUNDLE_DEFINITIONS: { slug: string; fallback: RegExp }[] = [
   { slug: 'honey-oats-glycerin-soap', fallback: /honey.*oat.*glycerin/i },
   { slug: 'neem-tulsi-goatmilk-soap', fallback: /neem.*tulsi.*goat/i },
-  { slug: 'kesar-haldi-goat-milk-soap', fallback: /kesar.*haldi.*goat/i },
+  { slug: 'pomegranate-goatmilk-soap', fallback: /pomegranate.*goat/i },
   { slug: 'travel-soaps', fallback: /travel/i },
 ]
 
