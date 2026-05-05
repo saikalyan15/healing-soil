@@ -56,6 +56,7 @@ export default async function ProductPage({ params }: Props) {
     description: product.description,
     image: product.image_url || undefined,
     brand: { '@type': 'Brand', name: 'Healing Soil' },
+    sku: product.slug,
     offers: {
       '@type': 'Offer',
       price: product.price,

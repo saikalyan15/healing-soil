@@ -86,6 +86,8 @@ export default async function ShopPage() {
             name: p.name,
             description: p.description,
             image: p.image_url || undefined,
+            brand: { '@type': 'Brand', name: 'Healing Soil' },
+            sku: p.slug,
             offers: {
               '@type': 'Offer',
               price: p.price,
