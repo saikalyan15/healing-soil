@@ -105,14 +105,12 @@ export default function OrderPageClient() {
         </p>
 
         <p className="font-sans text-xs text-[#999999]">
-          Having trouble?{' '}
+          No WhatsApp?{' '}
           <a
-            href={`https://wa.me/${WA_NUMBER}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:healingsoil.in@gmail.com"
             className="font-medium text-[#1E5631] underline"
           >
-            Message us directly
+            Email us at healingsoil.in@gmail.com
           </a>
         </p>
       </div>
