@@ -2,19 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Post } from '@/lib/blog'
 
-type BlogCardProps = {
-  post: Post
-  dir: 'blog' | 'stories'
-}
-
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   if (isNaN(d.getTime())) return dateStr
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-export default function BlogCard({ post, dir }: BlogCardProps) {
-  const href = `/${dir}/${post.slug}`
+export default function BlogCard({ post }: { post: Post }) {
+  const href = `/blog/${post.slug}`
 
   return (
     <article className="group flex flex-col rounded-lg border border-[#D6CFC4] bg-white overflow-hidden transition-shadow hover:shadow-md">

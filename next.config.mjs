@@ -34,6 +34,11 @@ const nextConfig = {
         destination: 'https://healingsoil.in/:path*',
         permanent: true,
       },
+      // Block/Redirect WordPress noise to reduce GSC clutter
+      { source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
+      { source: '/wp-content/:path*',                    destination: '/blog',     permanent: true },
+      { source: '/wp-admin/:path*',                      destination: '/blog',     permanent: true },
+      { source: '/xmlrpc.php',                           destination: '/blog',     permanent: true },
       // Old WordPress blog slug
       { source: '/blog/why-we-dont-use-chemicals',        destination: '/blog/what-makes-soap-chemical-free',                              permanent: true },
       { source: '/blog/natural-soap-for-eczema-dry-skin', destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
@@ -44,11 +49,13 @@ const nextConfig = {
       { source: '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog',                                             permanent: true },
       { source: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog',                    permanent: true },
       // /stories → /blog (stories merged into blog)
-      // :slug pattern [^.]+ excludes file extensions so static assets (images) are not caught
+      // We handle both slashed and non-slashed variants to avoid double-hops
       { source: '/stories',                              destination: '/blog',     permanent: true },
+      { source: '/stories/',                             destination: '/blog',     permanent: true },
       { source: '/stories/:slug([^.]+)',                 destination: '/blog/:slug', permanent: true },
       // Old WordPress category pages
       { source: '/category/slow-living',                 destination: '/blog',     permanent: true },
+      { source: '/category/slow-living/',                destination: '/blog',     permanent: true },
       { source: '/category/slow-livings',                destination: '/blog',     permanent: true },
       { source: '/category/slow-livings/',               destination: '/blog',     permanent: true },
       { source: '/category/regenerative-living',         destination: '/blog',     permanent: true },
@@ -58,33 +65,40 @@ const nextConfig = {
       { source: '/handmade-soap-sensitive-skin',         destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
       { source: '/handmade-soap-sensitive-skin/',        destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
       { source: '/our-stories',                          destination: '/blog',     permanent: true },
-      // Specific pagination page must come before the wildcard to avoid /blog/2/ (404)
+      { source: '/our-stories/',                         destination: '/blog',     permanent: true },
       { source: '/our-stories/2',                        destination: '/blog',     permanent: true },
       { source: '/our-stories/2/',                       destination: '/blog',     permanent: true },
       { source: '/our-stories/:path*',                   destination: '/blog/:path*', permanent: true },
       { source: '/healing-pillars',                      destination: '/blog',     permanent: true },
+      { source: '/healing-pillars/',                     destination: '/blog',     permanent: true },
       { source: '/healing-pillars/:path*',               destination: '/blog',     permanent: true },
       { source: '/slow-living',                          destination: '/blog',     permanent: true },
+      { source: '/slow-living/',                         destination: '/blog',     permanent: true },
       { source: '/mental-health',                        destination: '/blog',     permanent: true },
       { source: '/mental-health/',                       destination: '/blog',     permanent: true },
       { source: '/regenerative-living',                  destination: '/blog',     permanent: true },
+      { source: '/regenerative-living/',                 destination: '/blog',     permanent: true },
       { source: '/home',                                  destination: '/',         permanent: true },
       { source: '/home/',                                 destination: '/',         permanent: true },
       { source: '/diy-neem-soap-slow-living',             destination: '/blog/neem-tulsi-soap-benefits', permanent: true },
       { source: '/diy-neem-soap-slow-living/',            destination: '/blog/neem-tulsi-soap-benefits', permanent: true },
       { source: '/our-products',                         destination: '/shop',     permanent: true },
+      { source: '/our-products/',                        destination: '/shop',     permanent: true },
       { source: '/contact-us',                           destination: '/contact',  permanent: true },
+      { source: '/contact-us/',                          destination: '/contact',  permanent: true },
       { source: '/about',                                destination: '/our-story',permanent: true },
+      { source: '/about/',                               destination: '/our-story',permanent: true },
       { source: '/eco-picks',                            destination: '/',         permanent: true },
+      { source: '/eco-picks/',                           destination: '/',         permanent: true },
       { source: '/our-stories-2',                        destination: '/blog',     permanent: true },
       { source: '/our-stories-2/',                       destination: '/blog',     permanent: true },
       { source: '/recommends/:path*',                    destination: '/blog',     permanent: true },
-      // WordPress RSS feed URLs — go directly to /blog (not via the category redirect above)
+      // WordPress RSS feed URLs — go directly to /blog
       { source: '/slow-living/feed/:path*',              destination: '/blog',     permanent: true },
       { source: '/mental-health/feed/:path*',            destination: '/blog',     permanent: true },
       { source: '/regenerative-living/feed/:path*',      destination: '/blog',     permanent: true },
       { source: '/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain/feed/:path*', destination: '/blog/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain', permanent: true },
-      // Old WordPress post slugs at root level — go directly to /blog/[slug] (not via /stories which would chain)
+      // Old WordPress post slugs at root level
       { source: '/an-attempt-at-homemade-drinks',        destination: '/blog/an-attempt-at-homemade-drinks',        permanent: true },
       { source: '/an-attempt-at-homemade-drinks/',       destination: '/blog/an-attempt-at-homemade-drinks',        permanent: true },
       { source: '/why-play-is-essential-for-a-fulfilling-life-even-as-adults',  destination: '/blog/why-play-is-essential-for-a-fulfilling-life-even-as-adults', permanent: true },
@@ -97,7 +111,6 @@ const nextConfig = {
       { source: '/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice/', destination: '/blog', permanent: true },
       { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go',  destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
       { source: '/just-do-it-said-the-mango-tree-a-lesson-in-letting-go/', destination: '/blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go', permanent: true },
-      // Root-level WP slugs missing from earlier config
       { source: '/seven-days-without-paracetamol-how-we-beat-the-flu',  destination: '/blog', permanent: true },
       { source: '/seven-days-without-paracetamol-how-we-beat-the-flu/', destination: '/blog', permanent: true },
       { source: '/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain',  destination: '/blog/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain', permanent: true },

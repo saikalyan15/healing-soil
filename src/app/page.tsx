@@ -350,7 +350,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <Link
-                href="/our-stories"
+                href="/blog"
                 className="font-sans text-sm font-bold text-[#1E5631] underline decoration-[#C9A84C] decoration-2 underline-offset-4 hover:text-[#C9A84C]"
               >
                 Read All Stories
@@ -359,7 +359,7 @@ export default async function HomePage() {
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {recentPosts.map((post) => (
-                <BlogCard key={post.slug} post={post} dir={post.source || 'blog'} />
+                <BlogCard key={post.slug} post={post} />
               ))}
             </div>
           </div>

@@ -55,11 +55,22 @@ export default function Footer() {
               >
                 {link.label}
               </Link>
-              {i < footerNav.length - 1 && (
-                <span className="text-cream/20" aria-hidden="true">·</span>
-              )}
+              <span className="text-cream/20" aria-hidden="true">·</span>
             </span>
           ))}
+          <Link
+            href="/returns"
+            className="font-sans text-sm text-gold transition-colors hover:text-gold/70"
+          >
+            Returns
+          </Link>
+          <span className="text-cream/20" aria-hidden="true">·</span>
+          <Link
+            href="/privacy-policy"
+            className="font-sans text-sm text-gold transition-colors hover:text-gold/70"
+          >
+            Privacy
+          </Link>
         </nav>
 
       </div>

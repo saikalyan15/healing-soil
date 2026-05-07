@@ -4,12 +4,7 @@ import { useState } from 'react'
 import BlogCard from './BlogCard'
 import type { Post } from '@/lib/blog'
 
-type BlogGridProps = {
-  posts: Post[]
-  dir: 'blog' | 'stories'
-}
-
-export default function BlogGrid({ posts, dir }: BlogGridProps) {
+export default function BlogGrid({ posts }: { posts: Post[] }) {
   const categories = ['All', ...Array.from(new Set(posts.map((p) => p.category)))]
   const [active, setActive] = useState('All')
 
@@ -42,7 +37,7 @@ export default function BlogGrid({ posts, dir }: BlogGridProps) {
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((post) => (
-            <BlogCard key={post.slug} post={post} dir={dir} />
+            <BlogCard key={post.slug} post={post} />
           ))}
         </div>
       )}

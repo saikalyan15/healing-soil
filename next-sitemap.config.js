@@ -125,7 +125,7 @@ const config = {
       ...storySlugs.map((slug) => ({
         loc: `/blog/${slug}`,
         changefreq: 'monthly',
-        priority: 0.7,
+        priority: 0.8,
         lastmod: new Date().toISOString(),
       })),
       ...compareSlugs.map((slug) => ({
@@ -177,8 +177,8 @@ const config = {
       '/contact': 0.7,
       '/reviews': 0.7,
       '/faq': 0.7,
-      '/blog': 0.6,
-      '/privacy-policy': 0.3,
+      '/blog': 0.7,
+      '/privacy-policy': 0.5,
     }
 
     const changefreqMap = {

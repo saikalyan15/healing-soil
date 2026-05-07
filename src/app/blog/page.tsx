@@ -34,7 +34,7 @@ export default function BlogPage() {
         {posts.length === 0 ? (
           <p className="font-sans text-sm text-[#999]">No posts yet — check back soon.</p>
         ) : (
-          <BlogGrid posts={posts} dir="blog" />
+          <BlogGrid posts={posts} />
         )}
       </div>
     </div>

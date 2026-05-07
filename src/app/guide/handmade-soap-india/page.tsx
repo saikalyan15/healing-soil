@@ -238,13 +238,13 @@ export default function HandmadeSoapIndiaGuide() {
         </p>
         <ul className="mb-5 list-disc pl-6 font-sans text-base leading-relaxed text-[#1A1A14] space-y-2">
           <li>
-            <Link href="/stories/handmade-soap-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+            <Link href="/blog/handmade-soap-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
               Handmade soap for sensitive skin: why commercial bars irritate
             </Link>{' '}
             — what we learned after moving to a farm about SLS, parabens, and why removing a daily irritant is often all sensitive skin needs.
           </li>
           <li>
-            <Link href="/stories/diy-neem-soap-slow-living" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+            <Link href="/blog/diy-neem-soap-slow-living" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
               From a sagging neem branch to DIY soap
             </Link>{' '}
             — how a monsoon-bent neem branch turned into a DIY session that stocked the bathroom for three months.
