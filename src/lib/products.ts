@@ -126,5 +126,17 @@ export async function getFeaturedProducts(): Promise<Product[]> {
  */
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const all = await getProducts()
-  return all.find((p) => p.slug === slug) ?? null
+  
+  // Handle slug aliases for SEO consistency
+  const effectiveSlug = slug === 'orange-glycerin-soap' ? 'orange' : slug
+  
+  const product = all.find((p) => p.slug === effectiveSlug)
+  if (!product) return null
+
+  // If we matched via an alias, return the product with the alias slug
+  if (slug === 'orange-glycerin-soap') {
+    return { ...product, slug: 'orange-glycerin-soap' }
+  }
+
+  return product
 }

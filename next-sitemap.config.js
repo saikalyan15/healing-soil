@@ -98,7 +98,7 @@ const config = {
       'loofah-soaps',
       'neem-tulsi-glycerin-soap',
       'neem-tulsi-goatmilk-soap',
-      'orange',
+      'orange-glycerin-soap',
       'orange-goatmilk-soap',
       'pomegranate-glycerine',
       'pomegranate-goatmilk-soap',

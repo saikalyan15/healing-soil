@@ -50,8 +50,8 @@ const nextConfig = {
       { source: '/blog/best-natural-soap-for-eczema',     destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
       { source: '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog',                                             permanent: true },
       { source: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog',                    permanent: true },
-      // /stories → /blog (stories merged into blog)
-      // We handle both slashed and non-slashed variants to avoid double-hops
+      { source: '/shop/orange',                          destination: '/shop/orange-glycerin-soap', permanent: true },
+      { source: '/shop/orange-goatmilk-soap',            destination: '/shop/orange-goatmilk-soap', permanent: false }, // Placeholder to keep logic clean if needed
       { source: '/stories',                              destination: '/blog',     permanent: true },
       { source: '/stories/',                             destination: '/blog',     permanent: true },
       { source: '/stories/:slug([^.]+)',                 destination: '/blog/:slug', permanent: true },
