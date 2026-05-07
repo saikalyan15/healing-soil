@@ -34,11 +34,11 @@ const nextConfig = {
         destination: 'https://healingsoil.in/:path*',
         permanent: true,
       },
-      // Block/Redirect WordPress noise to reduce GSC clutter
       { source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
       { source: '/wp-content/:path*',                    destination: '/blog',     permanent: true },
       { source: '/wp-admin/:path*',                      destination: '/blog',     permanent: true },
-      { source: '/wp-:path*.php',                        destination: '/blog',     permanent: true },
+      { source: '/wp-login.php',                         destination: '/blog',     permanent: true },
+      { source: '/wp-signup.php',                        destination: '/blog',     permanent: true },
       { source: '/xmlrpc.php',                           destination: '/blog',     permanent: true },
       // Old WordPress blog slug
       { source: '/blog/why-we-dont-use-chemicals',        destination: '/blog/what-makes-soap-chemical-free',                              permanent: true },
