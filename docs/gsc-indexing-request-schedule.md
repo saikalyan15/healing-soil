@@ -33,7 +33,7 @@ https://healingsoil.in/blog/why-handmade-soap-lasts-longer
 
 ---
 
-## Day 3 — 2026-05-06
+## Day 3 — 2026-05-06 ✅ Done
 Core site pages.
 
 ```
