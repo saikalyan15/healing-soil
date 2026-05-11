@@ -219,7 +219,7 @@ export const ingredients: IngredientPage[] = [
         a: 'We source our kesar from Kashmir, where it is traditionally grown and harvested to maintain its purity.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'haldi',
@@ -245,7 +245,7 @@ export const ingredients: IngredientPage[] = [
         a: 'Yes, we use real turmeric powder in our small-batch soap orders to ensure a traditional and honest wash.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'rose',
@@ -271,7 +271,7 @@ export const ingredients: IngredientPage[] = [
         a: 'Yes, rose is traditionally used for its gentle properties, making it a suitable choice for those with sensitive skin types.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'pomegranate',
@@ -297,7 +297,7 @@ export const ingredients: IngredientPage[] = [
         a: 'Yes, we use pomegranate-derived ingredients in our batches to ensure a rich and honest personal care experience.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'orange',
@@ -323,7 +323,7 @@ export const ingredients: IngredientPage[] = [
         a: 'No, we use natural orange oil in balanced proportions within our gentle soap bases to ensure a refreshing yet mild wash.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'ginger',
@@ -349,7 +349,7 @@ export const ingredients: IngredientPage[] = [
         a: 'Yes, we use real ginger-derived ingredients in our soap to ensure an authentic and traditional wash.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'rosemary',
@@ -375,6 +375,6 @@ export const ingredients: IngredientPage[] = [
         a: 'No, we use natural rosemary botanicals. The scent is authentic and fresh, derived directly from the herb itself.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   }
 ]

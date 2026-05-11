@@ -48,7 +48,7 @@ export const occasions: OccasionPage[] = [
         a: 'Yes, it is a practical yet luxurious choice for corporate gifting. It reflects a commitment to natural products and supports small-batch craftsmanship.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'travel-soap-india',
@@ -72,7 +72,7 @@ export const occasions: OccasionPage[] = [
         a: 'Our standard bars are designed to be efficient and compact. You can also easily cut a bar into smaller pieces if you prefer a custom travel size.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'soap-for-dry-skin',
@@ -105,7 +105,7 @@ export const occasions: OccasionPage[] = [
         a: 'Our soaps are formulated without SLS or harsh detergents, making them gentle enough for daily use even on dry or sensitive skin.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'natural-soap-for-her',
@@ -138,7 +138,7 @@ export const occasions: OccasionPage[] = [
         a: 'Yes, our rose bars include sun-dried petals for a gentle texture and an authentic botanical experience.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'eco-friendly-soap-india',
@@ -162,7 +162,7 @@ export const occasions: OccasionPage[] = [
         a: 'Small-batch production allows us to manage resources efficiently, avoid overproduction, and ensure that every bar is made with care and minimal waste.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'corporate-gift-soap',
@@ -186,7 +186,7 @@ export const occasions: OccasionPage[] = [
         a: 'Since our soap is made to order and needs time to cure, we recommend reaching out at least three to four weeks in advance for bulk orders.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'neem-tulsi-soap',
@@ -210,7 +210,7 @@ export const occasions: OccasionPage[] = [
         a: 'Yes, our neem tulsi bars are made with gentle bases and are suitable for daily use on both the face and the body.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
   {
     slug: 'kesar-haldi-soap',
@@ -238,6 +238,6 @@ export const occasions: OccasionPage[] = [
         a: 'Yes, our kesar haldi soaps are built on gentle bases like goat milk and shea butter, which are suitable for sensitive skin types.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-11'
   },
 ]

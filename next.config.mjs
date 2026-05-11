@@ -51,9 +51,11 @@ const nextConfig = {
       { source: '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog',                                             permanent: true },
       { source: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog',                    permanent: true },
       { source: '/shop/orange',                          destination: '/shop/orange-glycerin-soap', permanent: true },
-      { source: '/shop/orange-goatmilk-soap',            destination: '/shop/orange-goatmilk-soap', permanent: false }, // Placeholder to keep logic clean if needed
       { source: '/stories',                              destination: '/blog',     permanent: true },
       { source: '/stories/',                             destination: '/blog',     permanent: true },
+      // Retired stories - direct to /blog (avoid chain)
+      { source: '/stories/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog', permanent: true },
+      { source: '/stories/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog', permanent: true },
       { source: '/stories/:slug([^.]+)',                 destination: '/blog/:slug', permanent: true },
       // Old WordPress category pages
       { source: '/category/slow-living',                 destination: '/blog',     permanent: true },

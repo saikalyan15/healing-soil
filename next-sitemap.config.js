@@ -17,6 +17,10 @@ const config = {
     '/about',                // 301 → /our-story
     '/our-products',         // 301 → /shop
     '/our-stories',          // 301 → /blog
+    '/stories/*',            // 301 → /blog/*
+    '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', // 301 → /blog
+    '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', // 301 → /blog
+    '/shop/orange',          // 301 → /shop/orange-glycerin-soap
     '/eco-picks',            // 301 → /
     '/healing-pillars',
     '/slow-living',
