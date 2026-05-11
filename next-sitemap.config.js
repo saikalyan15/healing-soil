@@ -87,6 +87,7 @@ const config = {
     const combinationSlugs = extractLiveSlugs('src/data/combinations.ts')
 
     // Product pages are dynamic at runtime, so list their canonical URLs explicitly.
+    // Note: 'orange' is omitted — it 301s to orange-glycerin-soap.
     const productSlugs = [
       'gift-soap-pouch',
       'ginger-rosemary-glycerin-soap',
@@ -108,6 +109,12 @@ const config = {
       'travel-soaps',
     ]
 
+    // Stories that are retired and redirect to /blog — exclude from sitemap.
+    const excludedStorySlugs = new Set([
+      'seven-days-without-paracetamol-how-we-beat-the-flu',
+      'transform-your-mental-health-how-mindful-cooking-became-my-healing-practice',
+    ])
+
     return [
       ...staticPaths.map((loc) => ({ loc })),
       ...productSlugs.map((slug) => ({
@@ -122,12 +129,14 @@ const config = {
         priority: 0.8,
         lastmod: new Date().toISOString(),
       })),
-      ...storySlugs.map((slug) => ({
-        loc: `/blog/${slug}`,
-        changefreq: 'monthly',
-        priority: 0.8,
-        lastmod: new Date().toISOString(),
-      })),
+      ...storySlugs
+        .filter((slug) => !excludedStorySlugs.has(slug))
+        .map((slug) => ({
+          loc: `/blog/${slug}`,
+          changefreq: 'monthly',
+          priority: 0.8,
+          lastmod: new Date().toISOString(),
+        })),
       ...compareSlugs.map((slug) => ({
         loc: `/compare/${slug}`,
         changefreq: 'monthly',
