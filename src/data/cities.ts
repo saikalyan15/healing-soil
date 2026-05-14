@@ -29,7 +29,7 @@ export const cities: CityPage[] = [
         a: 'Yes, we offer cash on delivery options for our customers in Bangalore to make the ordering process as convenient as possible.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'mumbai',
@@ -50,7 +50,7 @@ export const cities: CityPage[] = [
         a: 'Yes, all our soaps are genuinely SLS-free and made without parabens or synthetic fragrances, making them gentle for daily use.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'pune',
@@ -71,7 +71,7 @@ export const cities: CityPage[] = [
         a: 'Yes, once your order is dispatched from Goa, we will share a tracking link so you can monitor its progress to your doorstep.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'delhi',
@@ -92,7 +92,7 @@ export const cities: CityPage[] = [
         a: 'We offer three distinct bases: goat milk for a creamy wash, glycerin for a light feel, and shea butter for intensive conditioning.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'hyderabad',
@@ -113,7 +113,7 @@ export const cities: CityPage[] = [
         a: 'We recommend keeping the bar in a well-draining soap dish between uses to allow it to dry completely.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'chennai',
@@ -134,7 +134,7 @@ export const cities: CityPage[] = [
         a: 'We recommend starting with our goat milk base if you have sensitive or dry skin, or our glycerin base for a lighter, clean wash.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'goa',
@@ -156,7 +156,7 @@ export const cities: CityPage[] = [
         a: 'We grow several of our key botanicals, including neem and tulsi, right here on our farm in South Goa.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-14'
   },
   {
     slug: 'kolkata',

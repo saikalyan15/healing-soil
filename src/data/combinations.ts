@@ -41,7 +41,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes, it carries a mild earthy and herbaceous scent from the farm-grown neem and tulsi. It is natural and grounded, not overpowering.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'neem-glycerin-soap',
@@ -69,7 +69,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes. Our neem is grown on our Goa farm, harvested and processed by hand, and added directly to each small batch.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'honey-goat-milk-soap',
@@ -97,7 +97,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes. We source real honey from suppliers in Goa and use it directly in our soap batches. We do not use synthetic honey fragrance.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'honey-glycerin-soap',
@@ -125,7 +125,7 @@ export const combinations: CombinationPage[] = [
         a: 'No. The mild sweetness comes from the real honey used in the batch. We do not use synthetic perfumes or additives.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'honey-shea-butter-soap',
@@ -153,7 +153,7 @@ export const combinations: CombinationPage[] = [
         a: 'No. We use haldi in proportions that give the bar its warm colour but rinse away cleanly from skin during use.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'kesar-goat-milk-soap',
@@ -181,7 +181,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes. It is gentle enough for daily face and body use. The goat milk base and natural botanicals make it suitable for sensitive skin types.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'kesar-shea-butter-soap',
@@ -209,7 +209,7 @@ export const combinations: CombinationPage[] = [
         a: 'We use natural rose botanicals in our batches, not synthetic rose fragrance. The scent is authentic and mild.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'orange-goat-milk-soap',
@@ -237,7 +237,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes. It is made for daily face and body use. The goat milk base is gentle enough for everyday use.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'pomegranate-goat-milk-soap',
@@ -265,7 +265,7 @@ export const combinations: CombinationPage[] = [
         a: 'The goat milk version has a creamier, denser lather due to the natural fats in the base. The glycerin version is lighter and cleaner in texture.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'pomegranate-glycerin-soap',
@@ -293,7 +293,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes. The glycerin base is non-heavy and provides a thorough clean without adding oils, making it a suitable choice for oily or combination skin types.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'rose-goat-milk-soap',
@@ -321,7 +321,7 @@ export const combinations: CombinationPage[] = [
         a: 'Rice is added for its mild and gentle texture, providing a soft feel during the wash without being scratchy.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'ginger-glycerin-soap',
@@ -349,7 +349,7 @@ export const combinations: CombinationPage[] = [
         a: 'Yes. We use no SLS or synthetic fragrances, and the glycerin base is gentle. If you prefer a creamier feel, we also offer a goat milk version of this bar.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
   {
     slug: 'ginger-goat-milk-soap',
@@ -377,6 +377,6 @@ export const combinations: CombinationPage[] = [
         a: 'No. The ginger provides a mild warming sensation during the wash, not a sharp spicy feeling. It is balanced by the gentle goat milk base.',
       },
     ],
-    publishedAt: null,
+    publishedAt: '2026-05-14',
   },
 ]
