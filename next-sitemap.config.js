@@ -41,6 +41,10 @@ const config = {
       return fs
         .readdirSync(dirPath)
         .filter((f) => f.endsWith('.mdx'))
+        .filter((f) => {
+          const content = fs.readFileSync(path.join(dirPath, f), 'utf8')
+          return !content.includes('published: false')
+        })
         .map((f) => f.replace(/\.mdx$/, ''))
     }
 
