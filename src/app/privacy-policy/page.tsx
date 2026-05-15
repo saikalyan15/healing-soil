@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
           <p>
             Healing Soil is a small-batch handmade soap brand based on a farm in South Goa, India.
             We sell natural soaps and wellness products through our website at{' '}
-            <a href="https://healingsoil.in" className="text-green-primary underline">healingsoil.in</a>.
+            <a href="/" className="text-green-primary underline">healingsoil.in</a>.
           </p>
           <p className="mt-3">
             If you have any questions about this policy, you can reach us at{' '}

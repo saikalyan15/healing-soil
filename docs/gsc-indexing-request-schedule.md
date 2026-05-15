@@ -78,14 +78,17 @@ https://healingsoil.in/blog/why-play-is-essential-for-a-fulfilling-life-even-as-
 
 ---
 
-## Skipped — redirect sources (no point requesting indexing)
+## Skipped — Redirect Sources (Will always show "Page with redirect")
 
-These URLs exist in GSC's "Discovered" list but redirect away. They will show as "Page with redirect" once crawled. Do not request indexing.
+These URLs redirect to final versions. Google Search Console will **correctly** flag these as "Page with redirect" and they will **never** be indexed. This is intended behavior and not a failure.
 
+Do not request indexing or click "Validate Fix" for these:
 ```
+https://healingsoil.in/shop/orange                             → /shop/orange-glycerin-soap
 https://healingsoil.in/blog/best-natural-soap-for-eczema         → /blog/natural-soap-sensitive-skin-india
 https://healingsoil.in/blog/seven-days-without-paracetamol-how-we-beat-the-flu → /blog
 https://healingsoil.in/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice → /blog
+https://healingsoil.in/stories/just-do-it-said-the-mango-tree-a-lesson-in-letting-go → /blog/just-do-it-said-the-mango-tree-a-lesson-in-letting-go
 ```
 
 ---

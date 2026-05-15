@@ -53,9 +53,17 @@ const nextConfig = {
       { source: '/shop/orange',                          destination: '/shop/orange-glycerin-soap', permanent: true },
       { source: '/stories',                              destination: '/blog',     permanent: true },
       { source: '/stories/',                             destination: '/blog',     permanent: true },
-      // Retired stories - direct to /blog (avoid chain)
+      
+      // Retired stories - direct to final destinations (avoiding chains)
       { source: '/stories/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog', permanent: true },
       { source: '/stories/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog', permanent: true },
+      { source: '/stories/how-to-make-handmade-soap-last-longer', destination: '/blog/why-handmade-soap-lasts-longer', permanent: true },
+      { source: '/stories/natural-soap-for-eczema-dry-skin',      destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
+      { source: '/stories/shea-butter-soap-benefits',             destination: '/blog/understanding-the-benefits-of-shea-butter-in-soap', permanent: true },
+      { source: '/stories/goat-milk-soap-for-sensitive-skin',     destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', permanent: true },
+      { source: '/stories/best-natural-soap-for-eczema',          destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
+      
+      // Generic story move
       { source: '/stories/:slug([^.]+)',                 destination: '/blog/:slug', permanent: true },
       // Old WordPress category pages
       { source: '/category/slow-living',                 destination: '/blog',     permanent: true },
