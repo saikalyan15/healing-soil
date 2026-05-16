@@ -177,7 +177,7 @@ export const cities: CityPage[] = [
         a: 'We accept various payment methods, including UPI, credit/debit cards, and cash on delivery for your convenience.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'ahmedabad',
@@ -198,7 +198,7 @@ export const cities: CityPage[] = [
         a: 'Yes, we have a starter bundle that includes different bases, allowing you to find the one that best suits your skin type.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'jaipur',
@@ -219,7 +219,7 @@ export const cities: CityPage[] = [
         a: 'With proper storage in a dry soap dish, a single bar can typically last for 4 to 6 weeks of daily use.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'surat',
@@ -240,7 +240,7 @@ export const cities: CityPage[] = [
         a: 'We use minimal and recyclable packaging for all our orders to Surat, reflecting our commitment to mindful waste reduction.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'lucknow',
@@ -261,7 +261,7 @@ export const cities: CityPage[] = [
         a: 'No, we do not use animal fats. Our bases are made from high-quality vegetable oils and goat milk.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'kochi',
@@ -282,7 +282,7 @@ export const cities: CityPage[] = [
         a: 'Absolutely. We will provide a tracking link once your order is dispatched from our Goa workshop.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'coimbatore',
@@ -303,7 +303,7 @@ export const cities: CityPage[] = [
         a: 'Yes, our natural and gentle formulas are suitable for the whole family, from children to adults.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'indore',
@@ -324,7 +324,7 @@ export const cities: CityPage[] = [
         a: 'Yes, we use real botanicals like neem, tulsi, and turmeric in our soap batches to ensure an honest wash.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'bhopal',
@@ -345,7 +345,7 @@ export const cities: CityPage[] = [
         a: 'You can contact us directly via the website or WhatsApp to discuss bulk ordering and custom selections.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'nagpur',
@@ -366,7 +366,7 @@ export const cities: CityPage[] = [
         a: 'Yes, our goat milk base produces a noticeably creamy and soft lather that feels nourishing on the skin.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'chandigarh',
@@ -387,7 +387,7 @@ export const cities: CityPage[] = [
         a: 'No, we provide free shipping on all orders to Chandigarh and across India, regardless of the order value.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'bhubaneswar',
@@ -408,7 +408,7 @@ export const cities: CityPage[] = [
         a: 'We use minimal yet sturdy packaging to ensure your handmade soaps arrive in perfect condition.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'guwahati',
@@ -429,7 +429,7 @@ export const cities: CityPage[] = [
         a: 'No, we use traditional methods and natural ingredients, avoiding synthetic preservatives and parabens.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'dehradun',
@@ -450,7 +450,7 @@ export const cities: CityPage[] = [
         a: 'Our soaps are cured correctly in Goa to ensure a high-quality bar. We typically dispatch 7 to 10 days after an order is placed.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'mysore',
@@ -471,7 +471,7 @@ export const cities: CityPage[] = [
         a: 'We focus on our own farm-grown ingredients like neem and tulsi, as well as other traditional botanicals for our unique aromatic profiles.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'vadodara',
@@ -492,7 +492,7 @@ export const cities: CityPage[] = [
         a: 'Our goat milk base is a versatile and popular choice for daily use, providing a creamy and gentle lather.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'visakhapatnam',
@@ -513,7 +513,7 @@ export const cities: CityPage[] = [
         a: 'Yes, you can browse our collection and curate your own selection of bars for delivery to Visakhapatnam.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'thane',
@@ -534,7 +534,7 @@ export const cities: CityPage[] = [
         a: 'Yes, we provide cash on delivery options for our customers in Thane for a convenient ordering experience.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'nashik',
@@ -555,7 +555,7 @@ export const cities: CityPage[] = [
         a: 'No, we use only natural essential oils and botanicals to provide our bars with their unique and gentle scents.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'rajkot',
@@ -576,6 +576,6 @@ export const cities: CityPage[] = [
         a: 'We will share a tracking link with you once your order is dispatched from our workshop in Goa.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
 ]
