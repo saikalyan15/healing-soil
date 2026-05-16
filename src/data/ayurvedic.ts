@@ -35,7 +35,7 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'The soap has a natural, earthy, and herbaceous scent derived from the botanicals themselves. It is mild and grounded, not overpowering like synthetic perfumes.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'kesar-haldi',
@@ -60,7 +60,7 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'Yes, our kesar haldi soaps are built on nourishing bases like goat milk and shea butter, which are traditionally used for their gentle and soft feel.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'goat-milk',
@@ -92,7 +92,7 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'No, we use only natural essential oils and botanicals to provide our goat milk soaps with their unique and gentle aromatic profiles.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'honey-oats',
@@ -121,7 +121,7 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'Our honey and oats combination in a glycerin base is a light and clean option that is very well-suited for oily or combination skin types.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'shea-butter',
@@ -146,7 +146,7 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'Our soaps are made and cured in Goa. Orders are typically dispatched within 7 to 10 days to ensure you receive a high-quality, recently cured bar.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
   {
     slug: 'ginger-rosemary',
@@ -171,6 +171,6 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'Yes, our ginger rosemary bars are built on a gentle glycerin base that is suitable for daily use on both the face and the body.'
       }
     ],
-    publishedAt: null
+    publishedAt: '2026-05-16'
   },
 ]

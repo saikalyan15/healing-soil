@@ -136,7 +136,7 @@ Adjust the file path and count for whichever batch you are releasing. The script
 | 6.10 | Ship Tier 1 city pages (7 cities) | Claude | DONE | All 7 live (2026-05-14): bangalore, mumbai, pune, delhi, hyderabad, chennai, goa. |
 | 6.11 | Ship ingredient × base combination pages | Claude | DONE | All 13 live as of 2026-05-16 (0 drafts). `src/data/combinations.ts`. |
 | 6.12 | Ship Tier 2 city pages (20 cities) | Claude | DONE | All 20 stamped and live 2026-05-16. Cities: kolkata, ahmedabad, jaipur, surat, lucknow, kochi, coimbatore, indore, bhopal, nagpur, chandigarh, bhubaneswar, guwahati, dehradun, mysore, vadodara, visakhapatnam, thane, nashik, rajkot. |
-| 6.13 | Build Ayurvedic pages (6 pages) | Claude | DONE | Built 2026-05-02 (publishedAt: null). Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Component: `AyurvedicPage.tsx`. Data: `src/data/ayurvedic.ts`. **Still draft — stamp to release next.** |
+| 6.13 | Build Ayurvedic pages (6 pages) | Claude | DONE | All 6 live 2026-05-16. Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Pages: neem-tulsi, kesar-haldi, goat-milk, honey-oats, shea-butter, ginger-rosemary. |
 | 6.15 | Add sheep milk vs goat milk comparison | Claude | DONE | Added to `src/data/comparisons.ts` 2026-05-16. publishedAt: '2026-05-16'. GSC was showing this query with impressions but no page targeting it. relatedProductsB empty (we don't sell sheep milk). |
 | 6.14 | Monthly GSC review: add programmatic impressions row | Owner | TODO (recurring) | On the 1st of each month, record impressions from compare/*, ingredient/*, soap/* routes separately from blog impressions. Target: 500+ comparison impressions by Aug 2026. |
 
