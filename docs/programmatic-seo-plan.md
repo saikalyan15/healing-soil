@@ -1,18 +1,28 @@
 # Programmatic SEO Plan — Healing Soil (healingsoil.in)
 
-Last updated: 2026-05-02. Status: Strategy approved, implementation not started.
+Last updated: 2026-05-16. Status: **All planned pages implemented and live. ~80 pSEO pages live as of 2026-05-16.**
 Read `task-tracker.md` for current task status. Read `growth-strategy.md` for LP and audience context.
 
 ---
 
-## Context
+## Implementation summary (as of 2026-05-16)
 
-The site has 13 soap blog posts, 1 hub page (`/guide/handmade-soap-india`), and 3 planned category pages (tasks 3.15–3.17). Programmatic SEO adds a long-tail layer: hundreds of targeted pages generated from structured data files, published in weekly batches of 20–50.
+All 7 page types from the plan have been built and published. Every `src/data/` file has 0 draft entries remaining.
 
-**GSC signal (last 28 days) drives the priority order:**
-- Comparison queries (glycerin vs goat milk, shea butter vs glycerin) already appear at positions 5–11. Fastest page-1 wins.
-- "Shea butter soap" has 30 impressions at position 41 — category page needed.
-- City queries have almost no signal yet — long-tail volume play for months 3–6.
+| Type | Pages live | Route | Notes |
+|---|---|---|---|
+| Comparison pages | 11 | `/compare/[slug]` | 10 original + sheep-milk-vs-goat-milk added 2026-05-16 from GSC gap |
+| Ingredient pages | 14 | `/ingredient/[slug]` | All 14 from plan |
+| City pages | 27 | `/soap/[city]` | 7 Tier 1 (2026-05-14) + 20 Tier 2 (2026-05-16) |
+| Combination pages | 13 | `/[combo]` | All 13 ingredient×base combos from product catalog |
+| Occasion pages | 8 | `/occasion/[slug]` | All 8 from plan |
+| Ayurvedic pages | 6 | `/ayurvedic-soap/[slug]` | Released 2026-05-16 |
+| Category pages | 3+ | flat routes | `/goat-milk-soap`, `/glycerin-soap`, `/soap-for-sensitive-skin` |
+| **Total** | **~80** | | |
+
+**GSC signal (2026-05-16, 28-day view):** 13 clicks · 1.94K impressions · 0.7% CTR · avg position 11. Trend is up — impressions accelerating vs 3-month baseline.
+
+**What's next:** No more pages to stamp. Next milestone is monitoring impressions from new batches (check GSC in 2–4 weeks) and considering Tier 3 expansion (ingredient × city cross-pages) once 80 pages are indexed and earning signal.
 
 **Scale target:** 200 quality pages in 6 months, data model scales to 5,000 via three-way combinations (ingredient × base × city) later. SKUs stay roughly fixed at 18.
 
