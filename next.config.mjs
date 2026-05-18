@@ -27,14 +27,7 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // www → non-www
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.healingsoil.in' }],
-        destination: 'https://healingsoil.in/:path*',
-        permanent: true,
-      },
-      { source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
+{ source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
       { source: '/wp-content/:path*',                    destination: '/blog',     permanent: true },
       { source: '/wp-admin/:path*',                      destination: '/blog',     permanent: true },
       { source: '/wp-login.php',                         destination: '/blog',     permanent: true },
