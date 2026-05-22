@@ -1,6 +1,6 @@
 # Programmatic SEO Plan — Healing Soil (healingsoil.in)
 
-Last updated: 2026-05-16. Status: **All planned pages implemented and live. ~80 pSEO pages live as of 2026-05-16.**
+Last updated: 2026-05-22. Status: **Tier 3 launched. ~458 pSEO pages live as of 2026-05-22.**
 Read `task-tracker.md` for current task status. Read `growth-strategy.md` for LP and audience context.
 
 ---
@@ -18,11 +18,12 @@ All 7 page types from the plan have been built and published. Every `src/data/` 
 | Occasion pages | 8 | `/occasion/[slug]` | All 8 from plan |
 | Ayurvedic pages | 6 | `/ayurvedic-soap/[slug]` | Released 2026-05-16 |
 | Category pages | 3+ | flat routes | `/goat-milk-soap`, `/glycerin-soap`, `/soap-for-sensitive-skin` |
-| **Total** | **~80** | | |
+| **Ingredient × city pages** | **378** | `/soap/[city]/[ingredient]` | Tier 3 — all 14 ingredients × 27 cities, released 2026-05-22 |
+| **Total** | **~458** | | |
 
 **GSC signal (2026-05-16, 28-day view):** 13 clicks · 1.94K impressions · 0.7% CTR · avg position 11. Trend is up — impressions accelerating vs 3-month baseline.
 
-**What's next:** No more pages to stamp. Next milestone is monitoring impressions from new batches (check GSC in 2–4 weeks) and considering Tier 3 expansion (ingredient × city cross-pages) once 80 pages are indexed and earning signal.
+**What's next:** Tier 3 (ingredient × city) is live at 378 pages. Next milestone is checking GSC in 2–4 weeks (from 2026-05-22) for indexing and impressions on the new batch. After signal is confirmed, consider Tier 4: ingredient × city × base three-way combinations (recommended only after ~500 pages are indexed and earning).
 
 **Scale target:** 200 quality pages in 6 months, data model scales to 5,000 via three-way combinations (ingredient × base × city) later. SKUs stay roughly fixed at 18.
 
