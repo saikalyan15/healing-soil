@@ -32,7 +32,7 @@ const config = {
 
   robotsTxtOptions: {
     policies: [
-      { userAgent: '*', allow: '/' },
+      { userAgent: '*', allow: '/', disallow: ['/*?wc-ajax='] },
     ],
     additionalSitemaps: [],
   },
