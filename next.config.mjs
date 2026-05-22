@@ -56,8 +56,10 @@ const nextConfig = {
       { source: '/stories/goat-milk-soap-for-sensitive-skin',     destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', permanent: true },
       { source: '/stories/best-natural-soap-for-eczema',          destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
       
-      // Generic story move
+      // Generic story move (slug-only — no dots, so image files fall through to the catch-all below)
       { source: '/stories/:slug([^.]+)',                 destination: '/blog/:slug', permanent: true },
+      // Catch-all for /stories/ with file extensions (old WP media files like .avif, .jpg)
+      { source: '/stories/:path*',                       destination: '/blog',      permanent: true },
       // Old WordPress category pages
       { source: '/category/slow-living',                 destination: '/blog',     permanent: true },
       { source: '/category/slow-living/',                destination: '/blog',     permanent: true },
@@ -124,6 +126,11 @@ const nextConfig = {
       { source: '/mental-health-slow-living-useless-activities/', destination: '/blog/mental-health-slow-living-useless-activities', permanent: true },
       { source: '/caterpillar-content-writing-lessons',  destination: '/blog/caterpillar-content-writing-lessons', permanent: true },
       { source: '/caterpillar-content-writing-lessons/', destination: '/blog/caterpillar-content-writing-lessons', permanent: true },
+      // Missing root-level story slugs from old WordPress
+      { source: '/the-tank-that-taught-me-to-think-again',  destination: '/blog/the-tank-that-taught-me-to-think-again', permanent: true },
+      { source: '/the-tank-that-taught-me-to-think-again/', destination: '/blog/the-tank-that-taught-me-to-think-again', permanent: true },
+      // Retired product page
+      { source: '/shop/valentines-special-soap',         destination: '/shop',      permanent: true },
     ]
   },
 }
