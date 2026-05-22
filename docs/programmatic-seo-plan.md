@@ -5,21 +5,27 @@ Read `task-tracker.md` for current task status. Read `growth-strategy.md` for LP
 
 ---
 
-## Implementation summary (as of 2026-05-16)
+## Implementation summary (as of 2026-05-22)
 
-All 7 page types from the plan have been built and published. Every `src/data/` file has 0 draft entries remaining.
+| Type | Live | Planned | Status | Route |
+|---|---|---|---|---|
+| Comparison pages | 11 | ~20 | 55% — 9 more possible | `/compare/[slug]` |
+| Ingredient pages | 14 | 15 | 93% — 1 more possible | `/ingredient/[slug]` |
+| City pages | 27 | 35 | 77% — 8 Tier 3 cities possible | `/soap/[city]` |
+| Combination pages | 13 | 30–50 | 30% — tied to product catalog | `/[combo]` |
+| Occasion pages | 8 | 12 | 67% — 4 more possible | `/occasion/[slug]` |
+| Ayurvedic pages | 6 | 12 | 50% — 6 more possible | `/ayurvedic-soap/[slug]` |
+| Category pages | 5 | 10+ | 50% — more flat routes possible | flat routes |
+| **Ingredient × city pages** | **378** | **378** | **100%** | `/soap/[city]/[ingredient]` |
+| **Total** | **462** | **~500** | **~92%** | |
 
-| Type | Pages live | Route | Notes |
-|---|---|---|---|
-| Comparison pages | 11 | `/compare/[slug]` | 10 original + sheep-milk-vs-goat-milk added 2026-05-16 from GSC gap |
-| Ingredient pages | 14 | `/ingredient/[slug]` | All 14 from plan |
-| City pages | 27 | `/soap/[city]` | 7 Tier 1 (2026-05-14) + 20 Tier 2 (2026-05-16) |
-| Combination pages | 13 | `/[combo]` | All 13 ingredient×base combos from product catalog |
-| Occasion pages | 8 | `/occasion/[slug]` | All 8 from plan |
-| Ayurvedic pages | 6 | `/ayurvedic-soap/[slug]` | Released 2026-05-16 |
-| Category pages | 3+ | flat routes | `/goat-milk-soap`, `/glycerin-soap`, `/soap-for-sensitive-skin` |
-| **Ingredient × city pages** | **378** | `/soap/[city]/[ingredient]` | Tier 3 — all 14 ingredients × 27 cities, released 2026-05-22 |
-| **Total** | **~458** | | |
+> Ingredient × city pages dominate the count. The original 7 page types (84 pages) cover the long-tail keyword variety; the 378 cross-pages add geo depth.
+
+**GSC signal (2026-05-16, 28-day view):** 13 clicks · 1.94K impressions · 0.7% CTR · avg position 11. Trend is up — impressions accelerating vs 3-month baseline.
+
+**What's next:** Tier 3 (ingredient × city) is live at 378 pages. Next milestone is checking GSC in 2–4 weeks (from 2026-05-22) for indexing and impressions on the new batch. After signal is confirmed, consider Tier 4: ingredient × city × base three-way combinations (recommended only after ~500 pages are indexed and earning).
+
+**Scale target:** 6-month target was 200 pages — already exceeded at 462. Next milestone: 1,000 pages via Tier 4 three-way combinations.
 
 **GSC signal (2026-05-16, 28-day view):** 13 clicks · 1.94K impressions · 0.7% CTR · avg position 11. Trend is up — impressions accelerating vs 3-month baseline.
 
