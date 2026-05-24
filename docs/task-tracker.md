@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-05-24 (session 8 — GSC data reviewed; meta descriptions on top 3 compare pages improved; internal links added from 5 blog posts to unindexed compare + ingredient pages)
+Last updated: 2026-05-24 (session 8 — GSC reviewed; compare page metas improved; blog internal links added; 1.5 referral block, 1.10 privacy policy, 4.4 reel scripts all done; all Claude-owned tasks now complete)
 
 ---
 
@@ -24,12 +24,12 @@ Ship the LP rewrite and the 3 small conversion fixes first. This is the single h
 | 1.2 | Scrub maker name across 4 surfaces | Claude | DONE | Verified 2026-04-22: no maker name in page.tsx, our-story/page.tsx, or privacy-policy/page.tsx. our-story now shows farm-cashew-tree.jpg, not founder photo. |
 | 1.3 | Replace `public/founder.jpg` | Owner | TODO | File still exists at `public/founder.jpg` (not referenced by any page, but should be deleted or replaced). Replace with farm shot or hands shot. |
 | 1.4 | Build "pick 4" bundle block on home | Claude | DONE | BundlePicker component live at `#bundle`. Hero CTA anchors to `#bundle`. Default SKUs wired in. |
-| 1.5 | Add referral share block to post-order screen | Claude | TODO | Target: [src/components/OrderPageClient.tsx](../src/components/OrderPageClient.tsx) `step='send'` block. WhatsApp deep link with prefilled text + LP URL. Line: "If this works for you, send our page to someone who might need it. That is how most of our customers found us." |
+| 1.5 | Add referral share block to post-order screen | Claude | DONE | Added below the "No WhatsApp?" line in [src/components/OrderPageClient.tsx](../src/components/OrderPageClient.tsx) `step='send'` block. WhatsApp share link with prefilled message pointing to healingsoil.in. |
 | 1.6 | Unify delivery time copy across 6 surfaces | Claude | DONE | Verified 2026-04-22: canonical line live on page.tsx, shop/page.tsx:40, OrderPageClient.tsx:165, order/confirmation/page.tsx:44, order/track/page.tsx:43. |
 | 1.7 | Fix Product Schema.org on `/shop/[slug]` | Claude | DONE | Verified 2026-04-22: return policy is `MerchantReturnNotPermitted`. aggregateRating only fires when product-specific reviews exist (empty array returned otherwise per reviews.ts:127). |
 | 1.8 | Install Meta Pixel | Claude | BLOCKED | Blocked on 1.10 (privacy policy). Target: [src/app/layout.tsx](../src/app/layout.tsx) alongside GA4. Owner to provide Pixel ID after creating a Meta Business account if not yet done. |
 | 1.9 | Add email capture (footer + post-order) | Claude | BLOCKED | Blocked on 1.10 and on owner picking Brevo vs MailerLite (both have free tiers — Brevo: 300 emails/day, MailerLite: 12k/mo up to 1k subs). Owner to create account and share API key. |
-| 1.10 | Privacy policy page update | Claude | TODO | Existing page at `src/app/privacy-policy/page.tsx`. Needs clause for Meta Pixel + email list (Brevo/MailerLite) + retention policy. Prerequisite for 1.8 and 1.9. |
+| 1.10 | Privacy policy page update | Claude | DONE | Done 2026-05-24. Added Meta Pixel clause to analytics section, new "Email communications" section, updated retention to 3-year specific period, updated date to May 2026. Unblocks 1.8 and 1.9. |
 | 1.11 | Confirm Instagram bio link points to healingsoil.in | Owner | TODO | Build plan Table 1 "Fix the Funnel Now" — check the IG bio link is `https://healingsoil.in` (or `/shop`), not a WhatsApp community link and not the retired `/our-products`. |
 | 1.12 | Update Instagram bio text | Owner | TODO | 3 lines: "Handmade soaps from Goa. / No chemicals. Small batch. Made to order. / Shop via link below." |
 | 1.13 | Turn on Instagram DM notifications | Owner | TODO | Settings → Notifications → Messages and Calls → all on. Build plan called "Lost DMs" a concrete revenue leak. |
@@ -93,7 +93,7 @@ Start at 221 followers. Dialled-down cadence: 3 posts/week (one is a reel). Alte
 | 4.1 | Weekly product or ingredient post | Owner | TODO | Close-up, in use, or ingredient callout. Caption line 1: "Order via link in bio." |
 | 4.2 | Weekly customer review post | Owner | TODO | Screenshot of a real review or clean graphic over a product photo. Primary trust-transfer unlock (no founder face). |
 | 4.3 | Weekly reel — rotate types | Owner | TODO | Alternate: (a) process — soap cutting/curing/packing, silent + captions, (b) ingredient storytelling (15-sec per ingredient), (c) customer UGC from 2.3, (d) before/after skin-feel stories via WhatsApp. |
-| 4.4 | Atomise 23 story posts into reel scripts | Claude | TODO | One-pager per story with: hook (3 sec), body (12 sec), end card ("link in bio"). Deliverable: a single markdown file `docs/reel-scripts.md` that owner can work through. |
+| 4.4 | Atomise 23 story posts into reel scripts | Claude | DONE | Done 2026-05-24. 21 active stories scripted (2 retired excluded) in [docs/reel-scripts.md](reel-scripts.md). Each script: hook (3s), body (12s), end card. Production notes and priority order included. |
 
 ---
 

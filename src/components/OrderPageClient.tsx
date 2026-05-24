@@ -113,6 +113,22 @@ export default function OrderPageClient() {
             Email us at healingsoil.in@gmail.com
           </a>
         </p>
+
+        <div className="border-t border-[#E8E4DE] pt-4">
+          <p className="font-sans text-xs text-[#666666]">
+            If this works for you, send our page to someone who might need it.
+            That is how most of our customers found us.
+          </p>
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent('Found a really good soap brand from Goa — handmade, no SLS, genuinely gentle on skin. Worth checking out: https://healingsoil.in')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex items-center gap-1.5 font-sans text-xs font-medium text-[#25D366] hover:underline"
+          >
+            <WhatsAppIcon />
+            Share Healing Soil on WhatsApp
+          </a>
+        </div>
       </div>
     )
   }

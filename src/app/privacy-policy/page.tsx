@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-20">
       <h1 className="font-serif text-4xl text-green-primary mb-2">Privacy Policy</h1>
-      <p className="font-sans text-sm text-[#888] mb-10">Last updated: April 2025</p>
+      <p className="font-sans text-sm text-[#888] mb-10">Last updated: May 2026</p>
 
       <div className="font-sans text-base leading-relaxed text-[#444] space-y-10">
 
@@ -99,6 +99,21 @@ export default function PrivacyPolicyPage() {
                 Microsoft&apos;s Privacy Statement
               </a>.
             </li>
+            <li>
+              <strong>Meta Pixel (Facebook)</strong> — used to measure the effectiveness of any
+              advertising we run on Meta platforms (Facebook, Instagram) and to reach people with
+              similar interests. Meta may use cookies to associate activity across sessions. You can
+              manage your ad preferences at{' '}
+              <a
+                href="https://www.facebook.com/privacy/explanation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-primary underline"
+              >
+                Meta&apos;s Privacy Centre
+              </a>
+              {' '}or opt out through your device&apos;s ad settings.
+            </li>
           </ul>
           <p className="mt-3">
             Both tools may place cookies in your browser. You can manage or delete cookies at any time
@@ -107,11 +122,26 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
+          <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">Email communications</h2>
+          <p>
+            If you subscribe to our email list, we collect your email address to send you updates
+            about new products, occasional offers, and Healing Soil stories. We use a third-party
+            email service to manage our list and send emails. Your address is not shared with other
+            parties for their own use. You can unsubscribe at any time by clicking the unsubscribe
+            link in any email we send, or by writing to us at{' '}
+            <a href="mailto:hello@healingsoil.in" className="text-green-primary underline">
+              hello@healingsoil.in
+            </a>.
+          </p>
+        </section>
+
+        <section>
           <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">Data retention</h2>
           <p>
-            Order information is retained for as long as necessary to fulfil the order and comply
-            with any applicable legal or tax obligations. Analytics data is retained according to
-            the default retention settings of Google Analytics and Microsoft Clarity.
+            Order information (name, phone number, address, and order details) is retained for
+            three years to meet applicable accounting and tax obligations under Indian law. Email
+            addresses are retained until you unsubscribe or request deletion. Analytics data is
+            retained per the default settings of each service.
           </p>
         </section>
 
