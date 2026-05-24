@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-05-02 (session 6 — ingredient batch 2, 8 occasion pages, 27 city pages, 6 Ayurvedic pages built; all publishedAt: null; routes fixed)
+Last updated: 2026-05-23 (session 7 — GSC + GA4 metrics snapshot recorded; 404 traffic flagged)
 
 ---
 
@@ -148,7 +148,7 @@ Record numbers on the first of each month so trend is visible.
 | Month | Website orders | GSC clicks | Reorder rate | Email list size | IG followers | Notes |
 |---|---|---|---|---|---|---|
 | 2026-04 (baseline) | 0 | ~8 | 21% | 0 | 221 | Pre-plan baseline |
-| 2026-05 | | | | | | |
+| 2026-05 (mid-month snapshot May 23) | 2 (website, Apr 25–May 22) | 18 clicks (+44%) · 2,330 impr (+43%) · pos 13.5 · CTR 0.8% (28-day GSC) | — | 0 | — | 117 pages indexed (up from ~60 in Feb); 527 discovered in sitemap — programmatic batch indexing in progress. Top GSC page: glycerin-vs-goat-milk-soap blog (8 clicks). www. duplicate getting 3 clicks separately (declining -63%, canonical winning). 404 page: 11 GA hits — check GSC Pages → Not found. Pomegranate story #2 most-viewed (77 GA views). Organic search sessions: 41 (GA4). |
 | 2026-06 | | | | | | |
 | 2026-07 | | | | | | |
 
