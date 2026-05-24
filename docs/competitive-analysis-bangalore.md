@@ -1,6 +1,6 @@
 # Competitive Analysis — Handmade Soap Bangalore
 
-Analyzed: 2026-05-02. Competitors ranking for "handmade soap Bangalore" and related queries.
+Analyzed: 2026-05-02. Last updated: 2026-05-16. Competitors ranking for "handmade soap Bangalore" and related queries.
 
 ---
 
@@ -128,29 +128,42 @@ Analyzed: 2026-05-02. Competitors ranking for "handmade soap Bangalore" and rela
 
 ## How Healing Soil beats them
 
-### 1. Own the comparison cluster (fastest win)
+### 1. Comparison cluster — owned (11 pages live)
 
-GSC shows Healing Soil already at positions 5–11 for "glycerin vs goat milk soap", "shea butter vs glycerin", etc. None of the competitors have any comparison content. Build the `/compare/[slug]` pages (Type 1 in the programmatic SEO plan) and take page 1 for the entire comparison cluster. This is uncontested and has real search volume.
+As of 2026-05-02, GSC showed Healing Soil at positions 5–11 for "glycerin vs goat milk soap", "shea butter vs glycerin", etc. All 11 comparison pages are now live at `/compare/[slug]`. None of the 4 competitors have a single comparison page. The entire cluster is uncontested.
 
 ### 2. Mechanism story is a moat nobody can copy
 
-The glycerin story — "commercial soap manufacturers remove glycerin from the bar because glycerin sells for more separately, so you get a drying bar that strips your skin" — is true, specific, and compelling. None of the competitors mention this. It answers the buyer's real question (why does commercial soap leave my skin feeling tight?) and positions Healing Soil's soap as the logical fix. This runs through the home page LP, the comparison pages, the ingredient pages, and the blog posts. No competitor can copy this without copying Healing Soil's exact story.
+The glycerin story — "commercial soap manufacturers remove glycerin from the bar because glycerin sells for more separately, so you get a drying bar that strips your skin" — is true, specific, and compelling. None of the competitors mention this. It answers the buyer's real question (why does commercial soap leave my skin feeling tight?) and positions Healing Soil's soap as the logical fix. This is live across the home page LP, comparison pages, ingredient pages, and blog posts. No competitor can copy this without copying Healing Soil's exact story.
 
 ### 3. Farm origin is unique
 
-Zero competitors have a farm. "Grown on our Goa farm" for neem, tulsi, and other ingredients is a genuine provenance claim nobody else can make. This goes into every ingredient page and every comparison page as a trust signal.
+Zero competitors have a farm. "Grown on our Goa farm" for neem, tulsi, and other ingredients is a genuine provenance claim nobody else can make. It is embedded in all 14 ingredient pages and all 11 comparison pages.
 
-### 4. Bangalore social proof is sharper
+### 4. Bangalore social proof is sharper — and now on a dedicated page
 
-Turiyam has testimonials without city attribution. Nivre lists a Bangalore address. Healing Soil has 4 named Bangalore reviewers (Snehal Rane, Sonia, Shubhada, Samyuktha) — these are more credible to a Bangalore buyer than a physical address. A buyer in Koramangala reading "Samyuktha, Bangalore" is reading about someone who could be their neighbour.
+Turiyam has testimonials without city attribution. Nivre lists a Bangalore address but has no Bangalore-specific content. `/soap/bangalore` is live with Bangalore-specific copy, named reviewers (Lisha, Snehal), a hard water FAQ, and cash-on-delivery confirmation. A buyer searching "handmade soap Bangalore" lands on a page written for them specifically — none of the competitors do this.
 
 ### 5. CDSCO compliance is a competitive moat
 
-Nivre uses "calm irritation" and "protect delicate skin." If they ever get flagged, they have to rewrite their positioning. Healing Soil's restrained language (suitable for sensitive skin, gentle lather, no SLS) is legally clean and actually builds trust with ingredient-reading buyers who are sceptical of overclaiming. The less Healing Soil claims, the more credible the claims it does make.
+Nivre uses "calm irritation" and "protect delicate skin." If they ever get flagged, they have to rewrite their positioning. Healing Soil's restrained language (suitable for sensitive skin, gentle lather, no SLS) is legally clean and builds trust with ingredient-reading buyers who are sceptical of overclaiming. The less Healing Soil claims, the more credible the claims it does make.
 
-### 6. Programmatic SEO — the entire long-tail is empty
+### 6. Programmatic SEO — ~80 pages live with zero competition
 
-Nobody has ingredient pages, city pages, comparison pages, or occasion pages. The programmatic plan builds 200 quality pages over 6 months in a space that has zero competition. Each page that indexes is a page that none of these competitors will appear on.
+As of 2026-05-16, all 7 planned page types are live:
+
+| Type | Pages live | Competitor equivalent |
+| --- | --- | --- |
+| Comparison pages | 11 | 0 across all 4 competitors |
+| Ingredient pages | 14 | 0 |
+| City pages (Tier 1 + Tier 2) | 27 | Nivre has 1 Bangalore URL |
+| Ingredient × base combination pages | 13 | 0 |
+| Occasion pages | 8 | 0 |
+| Ayurvedic pages | 6 | 0 |
+| Category pages | 3+ | 0 (Turiyam is closest but diluted across hair, face, candles) |
+| **Total** | **~80** | |
+
+GSC signal (28-day view, 2026-05-16): 13 clicks · 1,940 impressions · avg position 11. Impressions are accelerating vs the 3-month baseline before launch.
 
 ### 7. Free shipping at ₹1,000 beats Fika's ₹2,500
 
@@ -158,9 +171,18 @@ The ₹1,000 bundle hits the free shipping threshold automatically. Fika require
 
 ---
 
-## Priority actions from this analysis
+## Priority actions — updated 2026-05-16
 
-1. **Comparison pages first.** Nobody has them. GSC already shows Healing Soil at positions 5–11. These are the fastest page-1 wins.
-2. **City pages for Bangalore specifically.** Make `/soap/bangalore` a proper transactional landing page — not just an editorial blog post. Nivre has a Bangalore URL; counter it with a better page.
-3. **SLS-free page.** None of the competitors own this query. The existing `sls-free-soap-india.mdx` blog post is a starting point — build a dedicated landing page too.
-4. **Never compete on price.** All 4 competitors use discounts (Buy 2 Get 1, 10% off, FIKA10) as their primary lever. Healing Soil's starter bundle at ₹1,000 with free shipping is already good. Do not add a discount code — it signals desperation in a premium category.
+| Action | Status | Notes |
+| --- | --- | --- |
+| Comparison pages | **Done** | 11 pages live since 2026-05-02 |
+| `/soap/bangalore` transactional landing page | **Done** | Live since 2026-05-14 with city-specific copy and named reviewers |
+| SLS-free dedicated landing page | **Done** | `/sls-free-soap` live since 2026-05-02 |
+| Never compete on price | **Ongoing** | No discount codes added; ₹1,000 free shipping threshold unchanged |
+
+### What is actually next
+
+1. **Monitor GSC impressions on the new batches.** Check in 2–4 weeks: comparison and city pages should start earning impressions. Target: 500+ comparison impressions by Aug 2026. Record monthly on the 1st (task 6.14 in task-tracker).
+2. **Tier 3 expansion.** Once the 80 pages are indexed and earning signal, consider ingredient × city cross-pages (13 ingredients × 35 cities = ~450 pages). Do not build until there is GSC signal from existing pages.
+3. **Google Business Profile.** Blocked on business registration. This closes the one remaining gap Nivre has (physical Bangalore address as a local SEO signal).
+4. **Do not add discounts.** All 4 competitors rely on discount codes. Holding the line on price is a competitive position, not a missed conversion lever.

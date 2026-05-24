@@ -384,5 +384,43 @@ export const comparisons: ComparisonPage[] = [
       }
     ],
     publishedAt: '2026-05-02'
+  },
+  {
+    slug: 'sheep-milk-vs-goat-milk-soap',
+    title: 'Sheep Milk vs Goat Milk Soap: What Is the Difference?',
+    h1: 'Sheep Milk vs Goat Milk Soap: A Simple Comparison',
+    metaDescription: 'Comparing sheep milk and goat milk soap bases. Learn about the fat content, lather, and feel of each, and which suits your skin type.',
+    subjectA: {
+      name: 'Goat Milk Base',
+      slug: 'goat-milk-soap',
+      tagline: 'Widely available and gentle for everyday use.',
+      pros: ['Creamy, soft lather', 'Naturally occurring vitamins and fats', 'Suitable for sensitive skin'],
+      feel: 'Soft and nourishing'
+    },
+    subjectB: {
+      name: 'Sheep Milk Base',
+      slug: '',
+      tagline: 'Richer in fat content, less commonly found.',
+      pros: ['Higher fat content than goat milk', 'Very creamy texture', 'Traditional use in some European soaps'],
+      feel: 'Very rich and creamy'
+    },
+    verdict: 'Both goat milk and sheep milk soap are gentle alternatives to standard commercial bars. Sheep milk has a slightly higher fat content, which can make the bar feel richer. Goat milk is more commonly used in Indian handmade soap and is widely recognised for its gentle, nourishing lather. Our soaps use a goat milk base sourced for quality and consistency.',
+    relatedProductsA: ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap', 'orange-goatmilk-soap', 'rice-rose-goatmilk-soap', 'pomegranate-goatmilk-soap'],
+    relatedProductsB: [],
+    faqs: [
+      {
+        q: 'Is sheep milk soap better than goat milk soap?',
+        a: 'Both are gentle and nourishing. Sheep milk has a higher fat content, which can make the lather feel richer. Goat milk is more widely used and equally gentle for sensitive skin.'
+      },
+      {
+        q: 'Do you sell sheep milk soap?',
+        a: 'We use a goat milk base in our handmade bars. Goat milk is well-suited to Indian skin types and is available throughout our range in combination with ingredients like neem, tulsi, kesar, and honey.'
+      },
+      {
+        q: 'Is goat milk soap suitable for sensitive skin?',
+        a: 'Yes, goat milk soap is traditionally used for its gentle nature. Our goat milk bars are free from SLS and synthetic fragrance, making them suitable for sensitive skin types.'
+      }
+    ],
+    publishedAt: '2026-05-16'
   }
 ]

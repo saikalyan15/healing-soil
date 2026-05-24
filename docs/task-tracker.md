@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-05-23 (session 7 — GSC + GA4 metrics snapshot recorded; 404 traffic flagged)
+Last updated: 2026-05-24 (session 8 — GSC data reviewed; meta descriptions on top 3 compare pages improved; internal links added from 5 blog posts to unindexed compare + ingredient pages)
 
 ---
 
@@ -79,7 +79,7 @@ Biggest unused lever. Fix the inventory first, then optimise what ranks, then wr
 | 3.15 | Build `/goat-milk-soap` category page | Claude | DONE | Shipped 2026-05-02. [src/app/goat-milk-soap/page.tsx](../src/app/goat-milk-soap/page.tsx). Filters `p.base === 'Goat Milk'`. FAQPage + BreadcrumbList schema. BlogInlineCTA. |
 | 3.16 | Build `/soap-for-sensitive-skin` category page | Claude | DONE | Shipped 2026-05-02. [src/app/soap-for-sensitive-skin/page.tsx](../src/app/soap-for-sensitive-skin/page.tsx). Shows all in-stock products. CDSCO checked — uses "suitable for sensitive skin" (skin type only). |
 | 3.17 | Build `/glycerin-soap` category page | Claude | DONE | Shipped 2026-05-02. [src/app/glycerin-soap/page.tsx](../src/app/glycerin-soap/page.tsx). Filters `p.base === 'Glycerine'`. Mechanism story (glycerin retained) included in copy. |
-| 3.18 | Decide fate of `content/blog/best-natural-soap-for-eczema.mdx` | Owner | TODO | Currently `published: false` but lives in repo with eczema-as-condition framing — CDSCO violation if it ever ships. Recommendation: delete (Option A in [category-pages-execution.md](category-pages-execution.md) §"Session 4"). Overlaps with 3.16 anyway. |
+| 3.18 | Decide fate of `content/blog/best-natural-soap-for-eczema.mdx` | Owner | DONE | File is gone — not found anywhere in repo as of 2026-05-16. No action needed. |
 | 3.19 | Monthly GSC snapshot on the 1st of each month | Owner | TODO (recurring) | Replaces weekly checks — weekly is noise at this volume. On the 1st, record clicks, impressions, position, distinct ranking queries in [growth-strategy.md](growth-strategy.md) monthly check-in table. Apply Country=India filter when reading. No tactical changes mid-month. 90-day re-evaluation gate is 2026-07-28 per [gsc-traffic-diagnosis-2026-04-28.md](gsc-traffic-diagnosis-2026-04-28.md). |
 
 ---
@@ -130,13 +130,14 @@ Adjust the file path and count for whichever batch you are releasing. The script
 | 6.4 | Extend next-sitemap.config.js | Claude | DONE | Shipped 2026-05-02. `additionalPaths` added for compare/ingredient/soap routes. Regex bug fixed to handle multi-line entries with nested FAQ arrays. |
 | 6.5 | Populate + ship 5 GSC-confirmed comparison pages | Claude | DONE | Shipped 2026-05-02. All 5 in `src/data/comparisons.ts` with `publishedAt: '2026-05-02'`. CDSCO-reviewed. |
 | 6.6 | Build SLS-free landing page `/sls-free-soap` | Claude | DONE | Shipped 2026-05-02. `src/app/sls-free-soap/page.tsx`. Targets "SLS free soap India" (GSC position 9.3). Cross-links to blog post. |
-| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | DONE | Batch 1 (2026-05-02, live): neem, tulsi, goat-milk, glycerin, shea-butter, honey, oats. Batch 2 (publishedAt: null, ready to stamp): kesar, haldi, rose, pomegranate, orange, ginger, rosemary. |
-| 6.8 | Ship occasion pages (8 pages) | Claude | DONE | Built 2026-05-02 (publishedAt: null). Route: `src/app/occasion/[slug]/page.tsx`. Component: `OccasionPage.tsx`. All 8 slugs in `src/data/occasions.ts`. Stamp to release. |
-| 6.9 | Ship 5 more comparison pages | Claude | DONE | Shipped 2026-05-02: neem-tulsi-vs-kesar-haldi-soap, ginger-rosemary-vs-neem-tulsi-soap, honey-oats-vs-kesar-haldi-soap, pomegranate-vs-orange-soap, handmade-vs-commercial-soap. ComparisonPage.tsx fixed to conditionally hide empty productsB section. |
-| 6.10 | Ship Tier 1 city pages (7 cities) | Claude | DONE | Built 2026-05-02 (publishedAt: null). All 7 in `src/data/cities.ts`. Route `src/app/soap/[city]/page.tsx` already existed. Stamp to release. |
-| 6.11 | Ship ingredient × base combination pages | Claude | DONE | Built 2026-05-03 (publishedAt: null). 13 pages derived from actual product catalog. Route: `src/app/[combo]/page.tsx` (flat root-level, dynamicParams=false). Component: `src/components/programmatic/CombinationPage.tsx`. Data: `src/data/combinations.ts`. Stamp to release: `node scripts/stamp-batch.js src/data/combinations.ts 13`. |
-| 6.12 | Ship Tier 2 city pages (20 cities) | Claude | DONE | Built 2026-05-02 (publishedAt: null). All 20 in `src/data/cities.ts`. Stamp to release in batches. |
-| 6.13 | Build Ayurvedic pages (6 pages) | Claude | DONE | Built 2026-05-02 (publishedAt: null). Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Component: `AyurvedicPage.tsx`. Data: `src/data/ayurvedic.ts`. Stamp to release. |
+| 6.7 | Ship 14 ingredient pages (2 batches of 7) | Claude | DONE | All 14 live as of 2026-05-16 (0 drafts). Batch 1 (2026-05-02): neem, tulsi, goat-milk, glycerin, shea-butter, honey, oats. Batch 2 (released in batch 3 deploy): kesar, haldi, rose, pomegranate, orange, ginger, rosemary. |
+| 6.8 | Ship occasion pages (8 pages) | Claude | DONE | All 8 live as of 2026-05-16 (0 drafts). `src/data/occasions.ts`. |
+| 6.9 | Ship 5 more comparison pages | Claude | DONE | All 5 live: neem-tulsi-vs-kesar-haldi-soap, ginger-rosemary-vs-neem-tulsi-soap, honey-oats-vs-kesar-haldi-soap, pomegranate-vs-orange-soap, handmade-vs-commercial-soap. |
+| 6.10 | Ship Tier 1 city pages (7 cities) | Claude | DONE | All 7 live (2026-05-14): bangalore, mumbai, pune, delhi, hyderabad, chennai, goa. |
+| 6.11 | Ship ingredient × base combination pages | Claude | DONE | All 13 live as of 2026-05-16 (0 drafts). `src/data/combinations.ts`. |
+| 6.12 | Ship Tier 2 city pages (20 cities) | Claude | DONE | All 20 stamped and live 2026-05-16. Cities: kolkata, ahmedabad, jaipur, surat, lucknow, kochi, coimbatore, indore, bhopal, nagpur, chandigarh, bhubaneswar, guwahati, dehradun, mysore, vadodara, visakhapatnam, thane, nashik, rajkot. |
+| 6.13 | Build Ayurvedic pages (6 pages) | Claude | DONE | All 6 live 2026-05-16. Route: `src/app/ayurvedic-soap/[slug]/page.tsx`. Pages: neem-tulsi, kesar-haldi, goat-milk, honey-oats, shea-butter, ginger-rosemary. |
+| 6.15 | Add sheep milk vs goat milk comparison | Claude | DONE | Added to `src/data/comparisons.ts` 2026-05-16. publishedAt: '2026-05-16'. GSC was showing this query with impressions but no page targeting it. relatedProductsB empty (we don't sell sheep milk). |
 | 6.14 | Monthly GSC review: add programmatic impressions row | Owner | TODO (recurring) | On the 1st of each month, record impressions from compare/*, ingredient/*, soap/* routes separately from blog impressions. Target: 500+ comparison impressions by Aug 2026. |
 
 ---

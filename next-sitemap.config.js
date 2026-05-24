@@ -32,7 +32,7 @@ const config = {
 
   robotsTxtOptions: {
     policies: [
-      { userAgent: '*', allow: '/' },
+      { userAgent: '*', allow: '/', disallow: ['/*?wc-ajax='] },
     ],
     additionalSitemaps: [],
   },
@@ -93,6 +93,21 @@ const config = {
     const occasionSlugs = extractLiveSlugs('src/data/occasions.ts')
     const ayurvedicSlugs = extractLiveSlugs('src/data/ayurvedic.ts')
     const combinationSlugs = extractLiveSlugs('src/data/combinations.ts')
+
+    // City-ingredient cross-pages use ingredientSlug: field, not slug:
+    const extractCityIngredientSlugs = (filePath) => {
+      const fullPath = path.resolve(process.cwd(), filePath)
+      if (!fs.existsSync(fullPath)) return []
+      const content = fs.readFileSync(fullPath, 'utf8')
+      const slugs = []
+      const entryRegex = /ingredientSlug:\s*['"]([^'"]+)['"][\s\S]*?publishedAt:\s*'(\d{4}-\d{2}-\d{2})'/g
+      let match
+      while ((match = entryRegex.exec(content)) !== null) {
+        if (match[2] <= today) slugs.push(match[1])
+      }
+      return slugs
+    }
+    const enabledCityIngredientSlugs = extractCityIngredientSlugs('src/data/city-ingredients.ts')
 
     // Product pages are dynamic at runtime, so list their canonical URLs explicitly.
     // Note: 'orange' is omitted — it 301s to orange-glycerin-soap.
@@ -181,6 +196,14 @@ const config = {
         priority: 0.7,
         lastmod: new Date().toISOString(),
       })),
+      ...enabledCityIngredientSlugs.flatMap((ingredientSlug) =>
+        citySlugs.map((citySlug) => ({
+          loc: `/soap/${citySlug}/${ingredientSlug}`,
+          changefreq: 'monthly',
+          priority: 0.6,
+          lastmod: new Date().toISOString(),
+        }))
+      ),
     ]
   },
 

@@ -1,18 +1,35 @@
 # Programmatic SEO Plan — Healing Soil (healingsoil.in)
 
-Last updated: 2026-05-02. Status: Strategy approved, implementation not started.
+Last updated: 2026-05-22. Status: **Tier 3 launched. ~458 pSEO pages live as of 2026-05-22.**
 Read `task-tracker.md` for current task status. Read `growth-strategy.md` for LP and audience context.
 
 ---
 
-## Context
+## Implementation summary (as of 2026-05-22)
 
-The site has 13 soap blog posts, 1 hub page (`/guide/handmade-soap-india`), and 3 planned category pages (tasks 3.15–3.17). Programmatic SEO adds a long-tail layer: hundreds of targeted pages generated from structured data files, published in weekly batches of 20–50.
+| Type | Live | Planned | Status | Route |
+|---|---|---|---|---|
+| Comparison pages | 11 | ~20 | 55% — 9 more possible | `/compare/[slug]` |
+| Ingredient pages | 14 | 15 | 93% — 1 more possible | `/ingredient/[slug]` |
+| City pages | 27 | 35 | 77% — 8 Tier 3 cities possible | `/soap/[city]` |
+| Combination pages | 13 | 30–50 | 30% — tied to product catalog | `/[combo]` |
+| Occasion pages | 8 | 12 | 67% — 4 more possible | `/occasion/[slug]` |
+| Ayurvedic pages | 6 | 12 | 50% — 6 more possible | `/ayurvedic-soap/[slug]` |
+| Category pages | 5 | 10+ | 50% — more flat routes possible | flat routes |
+| **Ingredient × city pages** | **378** | **378** | **100%** | `/soap/[city]/[ingredient]` |
+| **Total** | **462** | **~500** | **~92%** | |
 
-**GSC signal (last 28 days) drives the priority order:**
-- Comparison queries (glycerin vs goat milk, shea butter vs glycerin) already appear at positions 5–11. Fastest page-1 wins.
-- "Shea butter soap" has 30 impressions at position 41 — category page needed.
-- City queries have almost no signal yet — long-tail volume play for months 3–6.
+> Ingredient × city pages dominate the count. The original 7 page types (84 pages) cover the long-tail keyword variety; the 378 cross-pages add geo depth.
+
+**GSC signal (2026-05-16, 28-day view):** 13 clicks · 1.94K impressions · 0.7% CTR · avg position 11. Trend is up — impressions accelerating vs 3-month baseline.
+
+**What's next:** Tier 3 (ingredient × city) is live at 378 pages. Next milestone is checking GSC in 2–4 weeks (from 2026-05-22) for indexing and impressions on the new batch. After signal is confirmed, consider Tier 4: ingredient × city × base three-way combinations (recommended only after ~500 pages are indexed and earning).
+
+**Scale target:** 6-month target was 200 pages — already exceeded at 462. Next milestone: 1,000 pages via Tier 4 three-way combinations.
+
+**GSC signal (2026-05-16, 28-day view):** 13 clicks · 1.94K impressions · 0.7% CTR · avg position 11. Trend is up — impressions accelerating vs 3-month baseline.
+
+**What's next:** Tier 3 (ingredient × city) is live at 378 pages. Next milestone is checking GSC in 2–4 weeks (from 2026-05-22) for indexing and impressions on the new batch. After signal is confirmed, consider Tier 4: ingredient × city × base three-way combinations (recommended only after ~500 pages are indexed and earning).
 
 **Scale target:** 200 quality pages in 6 months, data model scales to 5,000 via three-way combinations (ingredient × base × city) later. SKUs stay roughly fixed at 18.
 

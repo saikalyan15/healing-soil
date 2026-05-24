@@ -108,6 +108,16 @@ export const reviews: Review[] = [
       'Absolutely loving the honey oats glycerine soap. It\'s very gentle on the skin. Even without the heavy lather, it leaves me feeling so refreshed.',
     featured: false,
   },
+  {
+    id: 'review-011',
+    author: 'Sunil M',
+    location: 'Kerala',
+    productSlug: 'ginger-rosemary-glycerin',
+    rating: 5,
+    comment:
+      'I tried the Ginger Rosemary Glycerin Soap for a week after switching from Himalaya. The difference was remarkable. My skin felt genuinely better.',
+    featured: true,
+  },
 ]
 
 // ─── Derived exports ───────────────────────────────────────────────────────────
