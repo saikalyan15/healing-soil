@@ -226,7 +226,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#F7F5F0] shadow-inner lg:aspect-square">
               <Image
-                src="/stories/farm-coconut-canopy.jpg"
+                src="/images/farm-coconut-canopy.jpg"
                 alt="Our farm canopy in South Goa"
                 fill
                 className="object-cover"

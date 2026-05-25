@@ -37,7 +37,7 @@ export default function OurStoryPage() {
           <div className="flex-shrink-0 self-start sm:self-auto">
             <div className="relative h-[280px] w-[280px] overflow-hidden rounded-full">
               <Image
-                src="/stories/farm-cashew-tree.jpg"
+                src="/images/farm-cashew-tree.jpg"
                 alt="Cashew tree on the Healing Soil farm in South Goa"
                 fill
                 className="object-cover"
