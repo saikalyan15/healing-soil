@@ -3,6 +3,7 @@ export type CityPage = {
   displayName: string
   state: string
   deliveryNote: string    // "Ships from Goa in 4 days, arrives in 3–7"
+  climateNote: string     // unique city-specific context: climate, water, local culture
   reviewerNote?: string   // "We have customers in [city]..." - only if true
   faqs: { q: string; a: string }[]
   publishedAt: string | null
@@ -14,6 +15,7 @@ export const cities: CityPage[] = [
     displayName: 'Bangalore',
     state: 'Karnataka',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Bangalore via reliable courier partners. Orders are typically processed and dispatched within 7 to 10 days of being placed.',
+    climateNote: "Bangalore's mild climate is gentle on skin year-round, but the city's notably hard water can leave a residue with commercial soaps — handmade soap that lathers from natural saponification tends to rinse more cleanly. The city's health-conscious culture has made SLS-free personal care a popular choice across neighbourhoods like Koramangala and Indiranagar.",
     reviewerNote: 'We have many loyal customers in Bangalore, including Lisha and Snehal, who value our commitment to high-quality, SLS-free personal care.',
     faqs: [
       {
@@ -36,6 +38,7 @@ export const cities: CityPage[] = [
     displayName: 'Mumbai',
     state: 'Maharashtra',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Mumbai via reliable courier partners. Every bar is made to order to ensure freshness.',
+    climateNote: "Mumbai's coastal humidity — especially through the long monsoon months — means your soap needs a well-draining dish to stay firm between uses. Our glycerin and goat milk bars are popular in the city for their light, clean rinse without chalky residue, even in the hard tap water found across many Mumbai areas.",
     faqs: [
       {
         q: 'Do you ship to all areas in Mumbai?',
@@ -57,6 +60,7 @@ export const cities: CityPage[] = [
     displayName: 'Pune',
     state: 'Maharashtra',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Pune using trusted courier services. Our small-batch process ensures high quality in every bar.',
+    climateNote: "Pune's moderate climate shifts between a dry, warm summer and a wetter monsoon season, which can make skin feel tight one month and oily the next. Our three bases — goat milk, glycerin, and shea butter — let you choose the feel that suits whichever season you are in.",
     faqs: [
       {
         q: 'What is the shipping cost to Pune?',
@@ -78,6 +82,7 @@ export const cities: CityPage[] = [
     displayName: 'Delhi',
     state: 'NCR',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Delhi and the NCR region via reliable courier partners. Each order is made to order with care.',
+    climateNote: "Delhi's extreme seasonal swings — dusty, dry summers pushing past 44°C, followed by cold, dry winter air — are hard on skin, and the city's notoriously hard tap water can compound the feeling of dryness after washing. Our bars are made without synthetic detergents so they rinse clean even in hard-water areas.",
     faqs: [
       {
         q: 'How long is the curing time before shipping to Delhi?',
@@ -99,6 +104,7 @@ export const cities: CityPage[] = [
     displayName: 'Hyderabad',
     state: 'Telangana',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Hyderabad via trusted courier partners. Our soaps are free from synthetic additives.',
+    climateNote: "Hyderabad runs hot and dry for most of the year, and the city's hard water is a common frustration for residents who notice a tight, stiff feeling after washing with detergent-based soaps. Our bars lather from saponified natural oils rather than synthetic foaming agents, which tends to rinse cleaner in hard-water areas like much of the city.",
     faqs: [
       {
         q: 'Do you use synthetic fragrance in your soap?',
@@ -120,6 +126,7 @@ export const cities: CityPage[] = [
     displayName: 'Chennai',
     state: 'Tamil Nadu',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Chennai using reliable courier services. Every order is crafted with traditional care.',
+    climateNote: "Chennai's year-round heat and coastal humidity make a lightweight, non-greasy wash a practical daily priority. Our glycerin base is a popular choice in coastal South Indian cities for its light, refreshing lather that doesn't leave a heavy residue in warm, sticky weather.",
     faqs: [
       {
         q: 'Are the ingredients locally sourced?',
@@ -141,6 +148,7 @@ export const cities: CityPage[] = [
     displayName: 'Goa',
     state: 'Goa',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to all parts of the state. As we are local, you can expect a reliable and efficient delivery process.',
+    climateNote: "Being local means we understand Goa's salt-tinged coastal air and high year-round humidity — conditions where heavy commercial soaps can feel stale quickly. Our bars are made to order in small batches on the farm, so you always receive a freshly cured bar rather than one that has sat in a warehouse.",
     reviewerNote: 'We are proud to serve our local community in Goa, where customers like Krutika value our traditional and SLS-free approach to personal care.',
     faqs: [
       {
@@ -163,6 +171,7 @@ export const cities: CityPage[] = [
     displayName: 'Kolkata',
     state: 'West Bengal',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Kolkata via trusted courier partners. Our soaps are made in small batches for quality.',
+    climateNote: "Kolkata's long, humid summer — stretching from April well into October — makes a thorough, clean wash part of the daily routine. Our SLS-free bars rely on natural saponification rather than synthetic detergents, which tends to feel less stripping in consistently humid weather.",
     faqs: [
       {
         q: 'Is shipping to Kolkata free?',
@@ -184,6 +193,7 @@ export const cities: CityPage[] = [
     displayName: 'Ahmedabad',
     state: 'Gujarat',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Ahmedabad via reliable courier partners. Every bar is SLS-free and made with care.',
+    climateNote: "Ahmedabad's intense summers and low humidity can leave skin feeling parched, and the city's hard water can amplify that tight, dry feeling after a commercial soap wash. Our goat milk and shea butter bases are popular in dry Gujarat cities for the soft, non-drying feel they leave behind.",
     faqs: [
       {
         q: 'Do your soaps contain parabens?',
@@ -205,6 +215,7 @@ export const cities: CityPage[] = [
     displayName: 'Jaipur',
     state: 'Rajasthan',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Jaipur using trusted courier services. Our soaps are crafted for a gentle wash.',
+    climateNote: "Jaipur's dry, desert-adjacent climate means the air draws moisture from skin quickly, making a nourishing base like shea butter or goat milk a practical everyday choice. Kesar Haldi soap — with its warm, earthy scent — has long been a favourite in Rajasthan for its connection to traditional personal care.",
     faqs: [
       {
         q: 'Is the soap suitable for dry weather in Jaipur?',
@@ -226,6 +237,7 @@ export const cities: CityPage[] = [
     displayName: 'Surat',
     state: 'Gujarat',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Surat via reliable courier partners. Each bar is made to order to ensure quality.',
+    climateNote: "Surat's coastal humidity, combined with its fast-paced diamond and textile industry lifestyle, makes a clean, no-residue wash a daily essential. Our glycerin base is well-suited to warm, humid coastal climates for its light lather and easy rinse.",
     faqs: [
       {
         q: 'Do you ship to industrial areas in Surat?',
@@ -247,6 +259,7 @@ export const cities: CityPage[] = [
     displayName: 'Lucknow',
     state: 'Uttar Pradesh',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Lucknow via trusted courier partners. Our process follows traditional soap-making methods.',
+    climateNote: "Lucknow carries a deep cultural tradition of attentive personal care, from its famous attar perfumeries to its history of refined Nawabi grooming — handmade soap scented with real botanicals rather than synthetic fragrance fits naturally into that sensibility. The city's hot, humid summers also make a gentle, non-drying wash a practical daily need.",
     faqs: [
       {
         q: 'What is the dispatch time to Lucknow?',
@@ -268,6 +281,7 @@ export const cities: CityPage[] = [
     displayName: 'Kochi',
     state: 'Kerala',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Kochi using reliable courier services. Our ingredients are chosen for a gentle wash.',
+    climateNote: "Kochi's tropical coast and Kerala's deep Ayurvedic heritage make it one of India's most naturally receptive cities for plant-based personal care. The year-round humidity here means your soap should live in a well-draining dish between uses — our bars are dense and long-lasting when stored correctly.",
     faqs: [
       {
         q: 'Do you use coconut oil in your soaps?',
@@ -289,6 +303,7 @@ export const cities: CityPage[] = [
     displayName: 'Coimbatore',
     state: 'Tamil Nadu',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Coimbatore via trusted courier partners. Every bar is crafted with traditional care.',
+    climateNote: "Coimbatore's warm, relatively dry climate — compared to the coastal cities of Tamil Nadu — means skin appreciates a nourishing base like goat milk for daily use. The city's strong textile heritage also reflects an appreciation for honest, chemical-free formulations where what goes in is exactly what is on the label.",
     faqs: [
       {
         q: 'Is delivery to Coimbatore free?',
@@ -310,6 +325,7 @@ export const cities: CityPage[] = [
     displayName: 'Indore',
     state: 'Madhya Pradesh',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Indore via reliable courier partners. Our soaps are made in small batches for quality.',
+    climateNote: "Indore's hot summers regularly push temperatures above 40°C, and the hard water common in central India can leave a stiff feeling after washing with detergent-based soaps. Our bars lather from natural saponification rather than synthetic foaming agents, which tends to rinse more cleanly in hard-water areas.",
     faqs: [
       {
         q: 'What bases do you offer for Indore delivery?',
@@ -331,6 +347,7 @@ export const cities: CityPage[] = [
     displayName: 'Bhopal',
     state: 'Madhya Pradesh',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Bhopal using trusted courier services. Our ingredients are chosen for a nourishing wash.',
+    climateNote: "Bhopal's lakeside setting gives it a slightly more moderate microclimate than Indore, but the central Indian heat means a fresh, clean wash matters daily. Our small-batch soaps ship from Goa on order, so every bar arrives well-cured and at its best rather than having sat on a shelf for months.",
     faqs: [
       {
         q: 'Do your soaps contain synthetic dyes?',
@@ -352,6 +369,7 @@ export const cities: CityPage[] = [
     displayName: 'Nagpur',
     state: 'Maharashtra',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Nagpur via reliable courier partners. Every bar is crafted with intention and care.',
+    climateNote: "Nagpur is consistently ranked among India's hottest cities during peak summer, and as the orange capital of the country, it has a natural affinity for citrus in everyday life. Our orange soap — made with real citrus oil — has become a popular choice in the city for its light, uplifting scent and clean lather.",
     faqs: [
       {
         q: 'How long does shipping to Nagpur take?',
@@ -373,6 +391,7 @@ export const cities: CityPage[] = [
     displayName: 'Chandigarh',
     state: 'Punjab/Haryana',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Chandigarh via trusted courier partners. Our soaps are free from harsh chemicals.',
+    climateNote: "Chandigarh's cold, dry winters are tough on skin — the drop in humidity pulls moisture more aggressively than in coastal cities, and the planned city's residents are known for being particular about the quality of their everyday products. Our shea butter base is the most recommended choice here through the winter months for its rich, conditioning lather.",
     faqs: [
       {
         q: 'Are your soaps SLS-free?',
@@ -394,6 +413,7 @@ export const cities: CityPage[] = [
     displayName: 'Bhubaneswar',
     state: 'Odisha',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Bhubaneswar using reliable courier services. Every order is made to order.',
+    climateNote: "Bhubaneswar's tropical climate brings high humidity through much of the year, making a light-rinsing soap an everyday preference. The city's deep temple heritage and connection to traditional Odia culture also align well with plant-based personal care made from natural botanicals rather than synthetic additives.",
     faqs: [
       {
         q: 'Do you ship to all parts of Bhubaneswar?',
@@ -415,6 +435,7 @@ export const cities: CityPage[] = [
     displayName: 'Guwahati',
     state: 'Assam',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Guwahati via trusted courier partners. Our soaps represent honest, small-batch care.',
+    climateNote: "Guwahati receives some of the heaviest rainfall in India during the monsoon months, and the Northeast's naturally soft water means our bars lather freely without the chalky residue common in hard-water cities. This makes handmade soap a particularly good match for daily use here.",
     faqs: [
       {
         q: 'What is the delivery time to Guwahati?',
@@ -436,6 +457,7 @@ export const cities: CityPage[] = [
     displayName: 'Dehradun',
     state: 'Uttarakhand',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Dehradun using reliable courier services. Each bar is crafted with traditional care.',
+    climateNote: "Dehradun's cool Himalayan foothills climate and clean mountain air make it a city where residents tend to be thoughtful about what goes on their skin. The drier winter months from December to February are when our goat milk and shea butter bases see the most interest in the region.",
     faqs: [
       {
         q: 'Is the soap suitable for the weather in Dehradun?',
@@ -457,6 +479,7 @@ export const cities: CityPage[] = [
     displayName: 'Mysore',
     state: 'Karnataka',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Mysore via trusted courier partners. Our soaps are free from synthetic additives.',
+    climateNote: "Mysore has its own proud soap heritage — Mysore Sandal Soap has been made here for over a century — and residents understand the difference between a quality bar and a commodity one. Our soaps take a different approach to that tradition: goat milk, glycerin, and shea butter bases with farm-grown botanicals from Goa.",
     faqs: [
       {
         q: 'Are these soaps similar to traditional Mysore soap?',
@@ -478,6 +501,7 @@ export const cities: CityPage[] = [
     displayName: 'Vadodara',
     state: 'Gujarat',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Vadodara via reliable courier partners. Every bar is crafted with intention.',
+    climateNote: "Vadodara's hot, dry interior Gujarat climate means skin needs a wash that doesn't strip natural moisture further. Our goat milk and shea butter bases are often chosen by customers in dry-climate cities for the soft, non-tight feeling they leave after rinsing — without any synthetic moisturising additives.",
     faqs: [
       {
         q: 'Are the soaps made with real herbs?',
@@ -499,6 +523,7 @@ export const cities: CityPage[] = [
     displayName: 'Visakhapatnam',
     state: 'Andhra Pradesh',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Visakhapatnam using reliable courier services. Every order is made to order.',
+    climateNote: "Visakhapatnam's Bay of Bengal position gives it a warm, humid coastal climate year-round, with salt air that makes a clean-rinsing soap a daily practical choice. To get the most from your bar in Vizag's humidity, a well-draining soap dish makes a real difference in how long it lasts.",
     faqs: [
       {
         q: 'How long does a bar of soap last in humidity?',
@@ -520,6 +545,7 @@ export const cities: CityPage[] = [
     displayName: 'Thane',
     state: 'Maharashtra',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Thane via trusted courier partners. Our small-batch process ensures high quality.',
+    climateNote: "Thane shares Mumbai's monsoon-heavy coastal climate and its notoriously hard water, making a natural soap that lathers from plant-based oils a practical everyday choice. Our bars are popular across the Mumbai Metropolitan Region for their clean-rinsing feel regardless of water quality.",
     faqs: [
       {
         q: 'What is the shipping time to Thane?',
@@ -541,6 +567,7 @@ export const cities: CityPage[] = [
     displayName: 'Nashik',
     state: 'Maharashtra',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Nashik using reliable courier services. Each order is crafted with care.',
+    climateNote: "Nashik sits at nearly 600 metres elevation, giving it a cooler and drier character than coastal Maharashtra — the crisp air makes a daily wash feel more considered than routine. The city's connection to natural practices, from its vineyards to its pilgrimage heritage, reflects well in its appetite for clean-label personal care.",
     faqs: [
       {
         q: 'Do you use real orange oil in your soap?',
@@ -562,6 +589,7 @@ export const cities: CityPage[] = [
     displayName: 'Rajkot',
     state: 'Gujarat',
     deliveryNote: 'We ship handmade soap from our workshop in South Goa to Rajkot via trusted courier partners. Our soaps represent honest personal care.',
+    climateNote: "Rajkot's intense Saurashtra summer heat — regularly touching 42°C — makes a quick, clean wash essential, and the region's hard water pairs better with natural soap than with synthetic detergents that can leave a film. Our glycerin base is a popular choice in Rajkot for its light, non-heavy lather.",
     faqs: [
       {
         q: 'Is shipping to Rajkot free?',
