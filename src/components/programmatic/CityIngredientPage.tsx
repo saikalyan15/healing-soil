@@ -72,8 +72,12 @@ const CityIngredientPage: React.FC<Props> = ({ city, ingredient, products }) => 
           {ingredient.name} Soap Delivered to {city.displayName}
         </h1>
 
-        <p className="mb-10 font-sans text-lg leading-relaxed text-[#1A1A14]">
+        <p className="mb-6 font-sans text-lg leading-relaxed text-[#1A1A14]">
           {ingredient.name} soap, made in small batches on our farm in South Goa, shipped directly to {city.displayName}, {city.state}. No SLS, no parabens, no synthetic fragrance.
+        </p>
+
+        <p className="mb-10 font-sans text-base leading-[1.8] text-[#4A4A3A]">
+          {city.climateNote}
         </p>
 
         <div className="prose-custom">
