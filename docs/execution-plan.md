@@ -1,19 +1,22 @@
 # Execution Plan — Healing Soil Programmatic SEO
 
-Last updated: 2026-05-02. Master document: read this when resuming any SEO session.
+Last updated: 2026-05-26. Master document: read this when resuming any SEO session.
 
 **Source documents (read these for context):**
 - [growth-strategy.md](growth-strategy.md) — LP, audience, offer (Stage 1–4 done)
-- [task-tracker.md](task-tracker.md) — current build status (tasks 3.15–3.17 are next)
+- [task-tracker.md](task-tracker.md) — current build status (all Layer 6 tasks DONE; next: GSC validation actions 3.20–3.21, blog posts 3.9–3.12)
 - [programmatic-seo-plan.md](programmatic-seo-plan.md) — architecture and data model detail
 - [competitive-analysis-bangalore.md](competitive-analysis-bangalore.md) — competitor breakdown
 - [keyword-list.md](keyword-list.md) — 100 target keywords with GSC data
 
-**Current state (2026-05-03):**
-- 13 soap blog posts live, 1 hub page, 4 category pages (`/shea-butter-soap`, `/goat-milk-soap`, `/soap-for-sensitive-skin`, `/glycerin-soap`)
-- Phases 1–6 infrastructure complete. All programmatic pages built and waiting to stamp.
-- Ready to stamp: ingredient batch 2 (7 pages), 8 occasion pages, 7 Tier 1 city pages, 20 Tier 2 city pages, 6 Ayurvedic pages, 13 combination pages
-- Next publish window: ~2 weeks from 2026-05-02 batch to let Google crawl the first wave
+**Current state (2026-05-26):**
+
+- 13 soap blog posts live, 1 hub page, 4 category pages, 1 SLS-free LP
+- All Layer 6 programmatic pages live and indexed: 14 ingredient pages, 8 occasion pages, 10 comparison pages, 7 Tier 1 + 20 Tier 2 city pages, 13 combination pages, 6 Ayurvedic pages
+- **530 pages indexed** (up from ~60 in Feb). Impressions +48% in 28 days. Position 14.4.
+- 47 crawled-not-indexed (city+ingredient combination pages) fixed 2026-05-25 — geographic content added; awaiting re-crawl
+- Two minor GSC issues pending owner validation: `/mental-health` redirect error, `/shop/orange` duplicate canonical (see tasks 3.20–3.21)
+- Next build focus: blog gap-fill posts (3.9–3.12), then 3.4 title rewrites once 3.3 validates
 
 ---
 
