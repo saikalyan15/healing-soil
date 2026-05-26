@@ -27,7 +27,7 @@ Ship the LP rewrite and the 3 small conversion fixes first. This is the single h
 | 1.5 | Add referral share block to post-order screen | Claude | DONE | Added below the "No WhatsApp?" line in [src/components/OrderPageClient.tsx](../src/components/OrderPageClient.tsx) `step='send'` block. WhatsApp share link with prefilled message pointing to healingsoil.in. |
 | 1.6 | Unify delivery time copy across 6 surfaces | Claude | DONE | Verified 2026-04-22: canonical line live on page.tsx, shop/page.tsx:40, OrderPageClient.tsx:165, order/confirmation/page.tsx:44, order/track/page.tsx:43. |
 | 1.7 | Fix Product Schema.org on `/shop/[slug]` | Claude | DONE | Verified 2026-04-22: return policy is `MerchantReturnNotPermitted`. aggregateRating only fires when product-specific reviews exist (empty array returned otherwise per reviews.ts:127). |
-| 1.8 | Install Meta Pixel | Claude | BLOCKED | Blocked on 1.10 (privacy policy). Target: [src/app/layout.tsx](../src/app/layout.tsx) alongside GA4. Owner to provide Pixel ID after creating a Meta Business account if not yet done. |
+| 1.8 | Install Meta Pixel | Claude | BLOCKED | Privacy policy done (1.10). Meta Business account confirmed active 2026-05-26 with Facebook + Instagram connected. **Only remaining blocker: owner to share the Pixel ID.** Target: [src/app/layout.tsx](../src/app/layout.tsx) alongside GA4. |
 | 1.9 | Add email capture (footer + post-order) | Claude | BLOCKED | Blocked on 1.10 and on owner picking Brevo vs MailerLite (both have free tiers — Brevo: 300 emails/day, MailerLite: 12k/mo up to 1k subs). Owner to create account and share API key. |
 | 1.10 | Privacy policy page update | Claude | DONE | Done 2026-05-24. Added Meta Pixel clause to analytics section, new "Email communications" section, updated retention to 3-year specific period, updated date to May 2026. Unblocks 1.8 and 1.9. |
 | 1.11 | Confirm Instagram bio link points to healingsoil.in | Owner | TODO | Build plan Table 1 "Fix the Funnel Now" — check the IG bio link is `https://healingsoil.in` (or `/shop`), not a WhatsApp community link and not the retired `/our-products`. |
@@ -35,7 +35,7 @@ Ship the LP rewrite and the 3 small conversion fixes first. This is the single h
 | 1.13 | Turn on Instagram DM notifications | Owner | TODO | Settings → Notifications → Messages and Calls → all on. Build plan called "Lost DMs" a concrete revenue leak. |
 | 1.14 | Set up Instagram Saved Replies | Owner | TODO | Create 3: (a) how to order, (b) ingredient questions, (c) do you ship to [city]. Template copy in HealingSoil-BuildPlan-FINAL.docx Table 1. |
 | 1.15 | Change Instagram profile picture to a soap bar | Owner | TODO | Currently soil. Build plan specifically called out: buyer needs to see the product, not the brand metaphor. |
-| 1.16 | Connect Facebook page to Instagram in Meta Business Suite | Owner | TODO | Unified inbox so no DM is missed. business.facebook.com. |
+| 1.16 | Connect Facebook page to Instagram in Meta Business Suite | Owner | DONE | Meta Business account active 2026-05-26 with Facebook + Instagram already integrated. |
 
 ---
 

@@ -170,13 +170,13 @@ JULY 28   90-day evaluation gate
 Priority  Task
 ────────────────────────────────────────────────────────
 TODAY     GSC validate fix × 2 (5 min)
+TODAY     Share Meta Pixel ID → Claude installs it in layout.tsx
 WEEK 1    WhatsApp 10 reviewers — reorder nudge
 WEEK 1    WhatsApp 10 reviewers — referral ask
 WEEK 1    Instagram: bio link, bio text, profile photo, DM notifications
 WEEK 2    Send UGC brief to 10 customers (free travel soap for video)
 WEEK 2    Build day-35 reorder reminder list from SoapLedger
 ONGOING   3 posts/week on Instagram (1 product, 1 review, 1 reel)
-DEFERRED  Meta Pixel — needs Meta Business account + Pixel ID
 DEFERRED  Email capture — needs Brevo or MailerLite account
 DEFERRED  Google Business Profile — needs business registration
 ```
