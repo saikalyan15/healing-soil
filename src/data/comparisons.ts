@@ -3,6 +3,7 @@ export type ComparisonPage = {
   title: string
   h1: string
   metaDescription: string
+  canonicalOverride?: string  // if set, rel=canonical points here instead of /compare/[slug]
   subjectA: { name: string; slug: string; tagline: string; pros: string[]; feel: string }
   subjectB: { name: string; slug: string; tagline: string; pros: string[]; feel: string }
   verdict: string
@@ -15,9 +16,10 @@ export type ComparisonPage = {
 export const comparisons: ComparisonPage[] = [
   {
     slug: 'glycerin-vs-goat-milk-soap',
-    title: 'Glycerin vs Goat Milk Soap Base: Which to Choose?',
-    h1: 'Glycerin vs Goat Milk Soap: A Simple Guide',
-    metaDescription: 'Glycerin soap gives a light, clean feel. Goat milk soap gives a creamy, nourishing feel. Side-by-side guide — which soap base suits your skin? Handmade in Goa, no SLS.',
+    title: 'Glycerin vs Goat Milk Soap Base: Side-by-Side for Your Skin Type',
+    h1: 'Glycerin vs Goat Milk Soap Base: Pick the Right One for Your Skin',
+    metaDescription: 'Quick side-by-side: glycerin soap base is light and cleansing; goat milk soap base is creamy and nourishing. Choose by skin type. Handmade in Goa, no SLS or parabens.',
+    canonicalOverride: '/blog/glycerin-vs-goat-milk-soap',
     subjectA: {
       name: 'Glycerine Base',
       slug: 'glycerin-soap',
@@ -91,9 +93,9 @@ export const comparisons: ComparisonPage[] = [
   },
   {
     slug: 'shea-butter-vs-glycerin-soap',
-    title: 'Shea Butter vs Glycerin Soap: Rich vs Light',
-    h1: 'Shea Butter vs Glycerin: A Comparison',
-    metaDescription: 'Shea butter soap is rich and conditioning. Glycerin soap is light and easy-rinsing. Simple guide to choosing between both bases — handmade in Goa, no SLS.',
+    title: 'Shea Butter vs Glycerin Soap Base: Side-by-Side for Your Skin Type',
+    h1: 'Shea Butter vs Glycerin Soap Base: Pick the Right One',
+    metaDescription: 'Quick side-by-side: shea butter soap base is rich and conditioning; glycerin soap base is light and cleansing. Choose by skin type. Handmade in Goa, no SLS or parabens.',
     subjectA: {
       name: 'Shea Butter Base',
       slug: 'shea-butter-soap',

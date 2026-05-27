@@ -18,10 +18,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const comparison = comparisons.find((c) => c.slug === slug)
   if (!comparison) return {}
 
+  const canonicalUrl = comparison.canonicalOverride ?? `/compare/${slug}`
+
   return {
     title: `${comparison.title} — Healing Soil`,
     description: comparison.metaDescription,
-    alternates: { canonical: `/compare/${slug}` },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title: comparison.title,
       description: comparison.metaDescription,

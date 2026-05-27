@@ -231,6 +231,46 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
       answer: 'SLES (sodium laureth sulfate) is a modified version of SLS that is slightly milder. Some brands swap SLS for SLES and market the product as gentler. It is somewhat less harsh, but it still functions as a detergent and still strips skin oils with regular use. Truly SLS-free soap uses neither compound. The lather comes from the soap-making process itself, not from added foaming agents.',
     },
   ],
+  'goat-milk-soap-base-vs-glycerin-soap-base': [
+    {
+      question: 'What is the difference between goat milk soap base and glycerin soap base?',
+      answer: 'A goat milk soap base replaces water with goat milk in the saponification process. This adds natural fats and vitamins to the bar, producing a creamier lather and a more nourishing feel after washing. A glycerin soap base is water-based but retains the natural glycerin produced during soap-making, which draws moisture into skin. Glycerin gives a lighter, cleaner wash; goat milk gives a richer, more nourishing wash.',
+    },
+    {
+      question: 'Is goat milk soap base better than glycerin soap base?',
+      answer: 'It depends on your skin type. Goat milk soap base suits sensitive, dry, or combination skin better — the natural fats leave skin feeling soft rather than tight after washing, and it is versatile enough for most skin types. Glycerin soap base suits oily or normal skin better — it cleanses without adding richness or weight. If you are not sure which to choose, goat milk is the safer starting point.',
+    },
+    {
+      question: 'Which soap base is best for sensitive skin in India?',
+      answer: 'Goat milk soap base is generally the best choice for sensitive skin. It contains no SLS or synthetic fragrance, its pH is closer to skin\'s natural range than most cleansers, and the natural fats in the milk prevent the dryness that often triggers reactivity. Glycerin soap base is also a gentle option, but goat milk is more nourishing and suits a wider range of sensitive skin types.',
+    },
+    {
+      question: 'Can I use both goat milk and glycerin soap base?',
+      answer: 'Yes. Many people use different bases for face and body, or switch seasonally. Goat milk is often preferred for the face and for dry or winter conditions; glycerin works well for the body or in warmer, more humid months when a lighter wash is preferred. The Healing Soil starter bundle includes both bases so you can find what works for your skin.',
+    },
+  ],
+  'goat-milk-soap-benefits': [
+    {
+      question: 'What are the benefits of goat milk soap?',
+      answer: 'Goat milk soap replaces water with milk, adding natural fats and vitamins to every wash. The natural fats leave skin feeling soft rather than stripped. Retained glycerin draws moisture gently into skin. The pH is closer to skin\'s natural range than most cleansers, making it suitable for sensitive skin. And because a properly made bar contains no SLS, parabens, or synthetic fragrance, the usual daily irritants are absent.',
+    },
+    {
+      question: 'What is goat milk soap good for?',
+      answer: 'Goat milk soap suits a wide range of skin types and uses. It works well as a daily body wash and face wash for sensitive, dry, or combination skin. It is gentle enough for children and for people transitioning from commercial soap. It is also practical as a travel bar since one bar covers face and body and lasts longer than commercial soap.',
+    },
+    {
+      question: 'Is goat milk soap better than regular soap?',
+      answer: 'For most skin types, yes. Regular commercial soap typically contains SLS, which strips the skin\'s natural oils, and synthetic fragrance, which is a common source of daily irritation. Goat milk soap contains neither. The fat composition means skin feels nourished after washing rather than tight. The practical difference is most noticeable within the first two weeks of switching.',
+    },
+    {
+      question: 'Can I use goat milk soap on my face every day?',
+      answer: 'Yes. Goat milk soap is mild enough for daily face use. The gentle lather, absence of SLS and synthetic fragrance, and fat composition that leaves skin feeling nourished rather than dry make it a practical daily face wash for most skin types.',
+    },
+    {
+      question: 'How is goat milk soap different from glycerin soap?',
+      answer: 'Both are handmade bases that retain natural glycerin. The difference is in richness and feel. Glycerin soap gives a lighter, cleaner wash that suits oily or combination skin. Goat milk soap has a creamier lather and leaves skin feeling more nourished, which suits sensitive or dry skin better. Goat milk is the more versatile starting point if you are not sure which to choose.',
+    },
+  ],
 }
 
 // ─── Page ──────────────────────────────────────────────────────────────────────

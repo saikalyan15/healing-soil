@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ingredientData = ingredients.find((i) => i.slug === ingredientSlug)
   if (!cityData || !ingredientData) return {}
 
-  const title = `${ingredientData.name} Soap Delivered to ${cityData.displayName} | Healing Soil`
-  const description = `Handmade ${ingredientData.name.toLowerCase()} soap made in Goa, delivered to ${cityData.displayName}, ${cityData.state}. SLS-free, no parabens, natural ingredients.`
+  const title = `${ingredientData.name} Soap in ${cityData.displayName} – Handmade, SLS-Free | Healing Soil`
+  const description = `Handmade ${ingredientData.name.toLowerCase()} soap in small batches in Goa, delivered to ${cityData.displayName}. SLS-free, no parabens, no synthetic fragrance. Ships in 7–10 days.`
 
   return {
     title,
