@@ -75,7 +75,9 @@ function normalise(raw: SoapLedgerProduct): Product {
     is_featured: raw.is_featured,
     category: raw.category,
     display_order: raw.display_order ?? 9999,
-    texture: raw.texture ?? null,
+    texture: (['smooth', 'mildly-textured', 'textured', 'loofah'] as const).includes(raw.texture as never)
+      ? raw.texture
+      : null,
   }
 }
 

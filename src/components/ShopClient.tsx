@@ -4,6 +4,14 @@ import { useState } from 'react'
 import ProductCard from './ProductCard'
 import type { Product } from '@/lib/products'
 
+const TEXTURE_DESCRIPTIONS: Record<string, string> = {
+  smooth: 'No added exfoliants. Plain lather, straightforward wash.',
+  'mildly-textured': 'Fine particles with a barely-there feel. Not scratchy.',
+  textured: 'Visible botanicals or grit from ingredients like neem powder, oat flakes, or dried petals.',
+  loofah: 'Embedded loofah for strong physical exfoliation.',
+  mixed: 'A pack containing bars of different textures.',
+}
+
 type ShopClientProps = {
   products: Product[]
 }
@@ -14,19 +22,21 @@ const TEXTURE_FILTERS = [
   { value: 'mildly-textured', label: 'Mildly Textured' },
   { value: 'textured', label: 'Textured' },
   { value: 'loofah', label: 'Loofah' },
+  { value: 'mixed', label: 'Mixed' },
 ]
 
 export default function ShopClient({ products }: ShopClientProps) {
   const categories = ['All', ...Array.from(new Set(products.map((p) => p.category)))]
   const [active, setActive] = useState('All')
   const [activeTexture, setActiveTexture] = useState('all')
+  const [showTextureGuide, setShowTextureGuide] = useState(false)
 
   const filtered = products
     .filter((p) => active === 'All' || p.category === active)
     .filter((p) => {
       if (activeTexture === 'all') return true
-      const t = p.texture ?? 'smooth'
-      return t === activeTexture
+      if (activeTexture === 'mixed') return !p.texture
+      return p.texture === activeTexture
     })
 
   return (
@@ -62,7 +72,7 @@ export default function ShopClient({ products }: ShopClientProps) {
       )}
 
       {/* Texture filter tabs */}
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div className="mb-2 flex flex-wrap items-center gap-2">
         {TEXTURE_FILTERS.map((t) => (
           <button
             key={t.value}
@@ -76,7 +86,27 @@ export default function ShopClient({ products }: ShopClientProps) {
             {t.label}
           </button>
         ))}
+        <button
+          onClick={() => setShowTextureGuide((v) => !v)}
+          className="ml-1 font-sans text-xs text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+        >
+          {showTextureGuide ? 'Hide guide' : 'What do these mean?'}
+        </button>
       </div>
+
+      {showTextureGuide && (
+        <div className="mb-6 rounded-lg border border-[#D6CFC4] bg-white px-4 py-4">
+          <ul className="space-y-2">
+            {TEXTURE_FILTERS.filter((t) => t.value !== 'all').map((t) => (
+              <li key={t.value} className="flex gap-2 font-sans text-sm">
+                <span className="font-medium text-[#1A1A14] min-w-[110px]">{t.label}</span>
+                <span className="text-[#666666]">{TEXTURE_DESCRIPTIONS[t.value]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
 
       {/* Product grid */}
       {filtered.length === 0 ? (

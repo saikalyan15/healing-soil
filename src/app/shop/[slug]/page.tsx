@@ -180,9 +180,30 @@ export default async function ProductPage({ params }: Props) {
           {/* Details */}
           <div className="flex flex-col gap-5">
             <div>
-              <span className="inline-block font-sans text-xs font-medium text-[#1E5631] bg-[#E8F0EB] px-2.5 py-1 rounded-full mb-3">
-                {product.base} Base
-              </span>
+              <div className="mb-3 flex flex-wrap gap-2">
+                <span className="inline-block font-sans text-xs font-medium text-[#1E5631] bg-[#E8F0EB] px-2.5 py-1 rounded-full">
+                  {product.base} Base
+                </span>
+                {(() => {
+                  const textureLabels: Record<string, { label: string; description: string }> = {
+                    smooth: { label: 'Smooth', description: 'Plain lather, no added exfoliants.' },
+                    'mildly-textured': { label: 'Mildly Textured', description: 'Fine particles with a gentle, barely-there feel.' },
+                    textured: { label: 'Textured', description: 'Visible botanicals or grit — a more thorough wash.' },
+                    loofah: { label: 'Loofah', description: 'Embedded loofah for strong physical exfoliation.' },
+                  }
+                  const t = product.texture ? textureLabels[product.texture] : null
+                  const label = t?.label ?? 'Mixed'
+                  const description = t?.description ?? 'A pack containing bars of different textures.'
+                  return (
+                    <span
+                      title={description}
+                      className="inline-block font-sans text-xs font-medium text-[#666666] border border-[#D6CFC4] bg-[#F7F5F0] px-2.5 py-1 rounded-full cursor-default"
+                    >
+                      {label}
+                    </span>
+                  )
+                })()}
+              </div>
               <h1 className="font-serif text-4xl leading-tight text-[#1A1A14]">
                 {product.name}
               </h1>

@@ -31,7 +31,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
     textured: 'Textured',
     loofah: 'Loofah',
   }
-  const textureLabelText = product.texture ? textureLabel[product.texture] : null
+  const textureLabelText = product.texture ? textureLabel[product.texture] : 'Mixed'
 
   return (
     <Link

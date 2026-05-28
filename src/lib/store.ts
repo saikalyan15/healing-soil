@@ -11,14 +11,36 @@ export type OrderItem = {
   image_url: string
 }
 
+export type OrderPreferences = {
+  texture: string   // 'no-preference' | 'smooth' | 'mildly-textured' | 'textured' | 'loofah'
+  scent: string     // 'no-preference' | 'light' | 'unscented'
+  avoid: string     // free text
+}
+
+export const DEFAULT_PREFERENCES: OrderPreferences = {
+  texture: 'no-preference',
+  scent: 'no-preference',
+  avoid: '',
+}
+
+export function formatPreferencesAsNote(prefs: OrderPreferences): string {
+  const lines: string[] = []
+  if (prefs.texture !== 'no-preference') lines.push(`Texture preference: ${prefs.texture}`)
+  if (prefs.scent !== 'no-preference') lines.push(`Scent preference: ${prefs.scent}`)
+  if (prefs.avoid.trim()) lines.push(`Avoid: ${prefs.avoid.trim()}`)
+  return lines.join(' | ')
+}
+
 type OrderStore = {
   items: OrderItem[]
   total: number
   itemCount: number
+  preferences: OrderPreferences
   addItem: (product: Product) => void
   removeItem: (product_id: string) => void
   updateQty: (product_id: string, qty: number) => void
   clearOrder: () => void
+  setPreferences: (prefs: Partial<OrderPreferences>) => void
 }
 
 const calculateTotals = (items: OrderItem[]) => ({
@@ -32,6 +54,7 @@ export const useOrderStore = create<OrderStore>()(
       items: [],
       total: 0,
       itemCount: 0,
+      preferences: DEFAULT_PREFERENCES,
 
       addItem: (product) => {
         const { items } = get()
@@ -74,15 +97,19 @@ export const useOrderStore = create<OrderStore>()(
         set({ items: nextItems, ...calculateTotals(nextItems) })
       },
 
-      clearOrder: () => set({ items: [], total: 0, itemCount: 0 }),
+      clearOrder: () => set({ items: [], total: 0, itemCount: 0, preferences: DEFAULT_PREFERENCES }),
+
+      setPreferences: (prefs) =>
+        set((state) => ({ preferences: { ...state.preferences, ...prefs } })),
     }),
     {
       name: 'healing-soil-order',
       // Persist the essential state
-      partialize: (state) => ({ 
+      partialize: (state) => ({
         items: state.items,
         total: state.total,
-        itemCount: state.itemCount 
+        itemCount: state.itemCount,
+        preferences: state.preferences,
       }),
     }
   )
