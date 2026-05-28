@@ -22,13 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlugFromEither(slug)
   if (!post) return {}
+  const metaTitle = post.seoTitle ?? post.title
+  const metaDescription = post.seoDescription ?? post.excerpt
   return {
-    title: `${post.title} — Healing Soil`,
-    description: post.excerpt,
+    title: `${metaTitle} — Healing Soil`,
+    description: metaDescription,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       url: `/blog/${slug}`,
       siteName: 'Healing Soil',
       type: 'article',
@@ -198,7 +200,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Which soap base is best for sensitive skin in India?',
-      answer: 'Goat milk is the most versatile base for sensitive skin. It contains lactic acid that gently removes dead skin cells, natural fats that absorb easily, and a pH closer to skin\'s natural pH. For very dry or reactive skin that gets tight or develops redness, shea butter is the richer option. For mild sensitivity with oily or combination skin, glycerin is a good starting point.',
+      answer: 'Goat milk is the most versatile base for sensitive skin. It contains natural fats that absorb easily and a pH closer to skin\'s natural range, which makes it feel gentle without stripping. For very dry or reactive skin that gets tight or develops redness, shea butter is the richer option. For mild sensitivity with oily or combination skin, glycerin is a good starting point.',
     },
     {
       question: 'What ingredients in commercial soap irritate sensitive skin?',

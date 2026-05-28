@@ -7,7 +7,7 @@ const TEXTURE_OPTIONS = [
   { value: 'smooth', label: 'Smooth — plain lather, no exfoliants' },
   { value: 'mildly-textured', label: 'Mildly Textured — fine particles, gentle feel' },
   { value: 'textured', label: 'Textured — visible grit (neem, oats, marigold)' },
-  { value: 'loofah', label: 'Loofah — embedded loofah, strong exfoliation' },
+  { value: 'loofah', label: 'Loofah — embedded loofah mesh, firm textured wash' },
 ]
 
 const SCENT_OPTIONS = [

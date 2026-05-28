@@ -76,7 +76,7 @@ export const reviews: Review[] = [
     location: 'Bangalore',
     occupation: 'Small Business Owner',
     rating: 5,
-    comment: 'The soaps are amazing and very mild and exfoliating',
+    comment: 'The soaps are amazing. Very mild — my skin doesn\'t feel stripped after every wash the way it used to.',
     featured: false,
   },
   {

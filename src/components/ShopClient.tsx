@@ -5,10 +5,10 @@ import ProductCard from './ProductCard'
 import type { Product } from '@/lib/products'
 
 const TEXTURE_DESCRIPTIONS: Record<string, string> = {
-  smooth: 'No added exfoliants. Plain lather, straightforward wash.',
+  smooth: 'Plain lather, straightforward wash. Nothing added.',
   'mildly-textured': 'Fine particles with a barely-there feel. Not scratchy.',
   textured: 'Visible botanicals or grit from ingredients like neem powder, oat flakes, or dried petals.',
-  loofah: 'Embedded loofah for strong physical exfoliation.',
+  loofah: 'Embedded loofah mesh for a firm, thorough wash.',
   mixed: 'A pack containing bars of different textures.',
 }
 

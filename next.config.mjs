@@ -27,6 +27,7 @@ const nextConfig = {
 
   async redirects() {
     return [
+      { source: '/compare/glycerin-vs-goat-milk-soap', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
 { source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
       { source: '/wp-content/:path*',                    destination: '/blog',     permanent: true },
       { source: '/wp-admin/:path*',                      destination: '/blog',     permanent: true },

@@ -16,6 +16,8 @@ export type Post = {
   source?: 'blog' | 'stories'
   content?: string  // only present when fetched via getPostBySlug
   published?: boolean
+  seoTitle?: string
+  seoDescription?: string
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -38,6 +40,8 @@ function parseMdxFile(filePath: string, slug: string, includeContent = false): P
     author: data.author ?? 'Healing Soil',
     cta: data.cta ?? undefined,
     published: data.published !== false,
+    seoTitle: data.seoTitle ?? undefined,
+    seoDescription: data.seoDescription ?? undefined,
     ...(includeContent ? { content } : {}),
   }
 }

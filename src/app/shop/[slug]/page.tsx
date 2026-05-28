@@ -185,18 +185,16 @@ export default async function ProductPage({ params }: Props) {
                   {product.base} Base
                 </span>
                 {(() => {
-                  const textureLabels: Record<string, { label: string; description: string }> = {
-                    smooth: { label: 'Smooth', description: 'Plain lather, no added exfoliants.' },
-                    'mildly-textured': { label: 'Mildly Textured', description: 'Fine particles with a gentle, barely-there feel.' },
-                    textured: { label: 'Textured', description: 'Visible botanicals or grit — a more thorough wash.' },
-                    loofah: { label: 'Loofah', description: 'Embedded loofah for strong physical exfoliation.' },
+                  const textureLabels: Record<string, string> = {
+                    smooth: 'Smooth',
+                    'mildly-textured': 'Mildly Textured',
+                    textured: 'Textured',
+                    loofah: 'Loofah',
                   }
-                  const t = product.texture ? textureLabels[product.texture] : null
-                  const label = t?.label ?? 'Mixed'
-                  const description = t?.description ?? 'A pack containing bars of different textures.'
+                  const label = (product.texture ? textureLabels[product.texture] : null) ?? 'Mixed'
                   return (
                     <span
-                      title={description}
+                      title={label}
                       className="inline-block font-sans text-xs font-medium text-[#666666] border border-[#D6CFC4] bg-[#F7F5F0] px-2.5 py-1 rounded-full cursor-default"
                     >
                       {label}
