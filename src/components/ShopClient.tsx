@@ -8,12 +8,26 @@ type ShopClientProps = {
   products: Product[]
 }
 
+const TEXTURE_FILTERS = [
+  { value: 'all', label: 'All textures' },
+  { value: 'smooth', label: 'Smooth' },
+  { value: 'mildly-textured', label: 'Mildly Textured' },
+  { value: 'textured', label: 'Textured' },
+  { value: 'loofah', label: 'Loofah' },
+]
+
 export default function ShopClient({ products }: ShopClientProps) {
   const categories = ['All', ...Array.from(new Set(products.map((p) => p.category)))]
   const [active, setActive] = useState('All')
+  const [activeTexture, setActiveTexture] = useState('all')
 
-  const filtered =
-    active === 'All' ? products : products.filter((p) => p.category === active)
+  const filtered = products
+    .filter((p) => active === 'All' || p.category === active)
+    .filter((p) => {
+      if (activeTexture === 'all') return true
+      const t = p.texture ?? 'smooth'
+      return t === activeTexture
+    })
 
   return (
     <div>
@@ -46,6 +60,23 @@ export default function ShopClient({ products }: ShopClientProps) {
           ))}
         </div>
       )}
+
+      {/* Texture filter tabs */}
+      <div className="mb-8 flex flex-wrap gap-2">
+        {TEXTURE_FILTERS.map((t) => (
+          <button
+            key={t.value}
+            onClick={() => setActiveTexture(t.value)}
+            className={`rounded-full px-4 py-1.5 font-sans text-sm font-medium capitalize transition-colors ${
+              activeTexture === t.value
+                ? 'bg-[#1E5631] text-white'
+                : 'border border-[#D6CFC4] bg-white text-[#666666] hover:border-[#1E5631] hover:text-[#1E5631]'
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
 
       {/* Product grid */}
       {filtered.length === 0 ? (

@@ -18,6 +18,7 @@ export type Product = {
   is_featured: boolean
   category: string          // e.g. "face", "body", "hair", "gift"
   display_order: number     // controls sort order in the shop
+  texture: 'smooth' | 'mildly-textured' | 'textured' | 'loofah' | null
 }
 
 /** Raw shape returned by the SoapLedger API — field names differ from our internal type */
@@ -35,6 +36,7 @@ type SoapLedgerProduct = {
   is_featured: boolean
   category: string
   display_order: number | null
+  texture: 'smooth' | 'mildly-textured' | 'textured' | 'loofah' | null
 }
 
 // The SoapLedger list endpoint returns a plain JSON array (no envelope)
@@ -73,6 +75,7 @@ function normalise(raw: SoapLedgerProduct): Product {
     is_featured: raw.is_featured,
     category: raw.category,
     display_order: raw.display_order ?? 9999,
+    texture: raw.texture ?? null,
   }
 }
 

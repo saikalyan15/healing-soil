@@ -25,6 +25,14 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   const displayPrice = product.price_range || `₹${product.price}`
   const isLong = product.description.length > 80
 
+  const textureLabel: Record<string, string> = {
+    smooth: 'Smooth',
+    'mildly-textured': 'Mildly Textured',
+    textured: 'Textured',
+    loofah: 'Loofah',
+  }
+  const textureLabelText = product.texture ? textureLabel[product.texture] : null
+
   return (
     <Link
       href={`/shop/${product.slug}`}
@@ -62,6 +70,11 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         <h3 className="font-serif text-[20px] text-[#1A1A14] leading-snug">
           {product.name}
         </h3>
+        {textureLabelText && (
+          <span className="self-start rounded-full border border-[#D6CFC4] bg-[#F7F5F0] px-2.5 py-0.5 font-sans text-[11px] text-[#666666]">
+            {textureLabelText}
+          </span>
+        )}
         <div className="flex-1">
           <p className={`font-sans text-[14px] text-[#666666] leading-relaxed ${!expanded && isLong ? 'line-clamp-2' : ''}`}>
             {product.description}
