@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { sendGAEvent } from '@next/third-parties/google'
 import { useOrderStore } from '@/lib/store'
+import { formatPreferencesAsNote } from '@/lib/store'
 import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
+import OrderPreferences from './OrderPreferences'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -52,12 +54,12 @@ export default function OrderForm({ onSuccess }: Props) {
   const clearOrder = useOrderStore((s) => s.clearOrder)
   const updateQty = useOrderStore((s) => s.updateQty)
   const removeItem = useOrderStore((s) => s.removeItem)
+  const preferences = useOrderStore((s) => s.preferences)
 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [state, setState] = useState('')
-  const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -99,6 +101,8 @@ export default function OrderForm({ onSuccess }: Props) {
     const normalizedPhone = normalizePhone(phone)
     const fullAddress = `${address.trim()}, ${state}`
 
+    const preferencesNote = formatPreferencesAsNote(preferences)
+
     const lineItems = items.map((i) => ({
       product_id: i.product_id,
       product_slug: i.product_slug,
@@ -129,7 +133,7 @@ export default function OrderForm({ onSuccess }: Props) {
           items: lineItems,
           address: fullAddress,
           shipping,
-          notes: notes.trim() || undefined,
+          notes: preferencesNote || undefined,
         }),
       })
 
@@ -156,7 +160,7 @@ export default function OrderForm({ onSuccess }: Props) {
         whatsappItems,
         shippingAddress,
         shipping,
-        notes.trim() || undefined
+        preferencesNote || undefined
       )
 
       const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
@@ -324,19 +328,9 @@ export default function OrderForm({ onSuccess }: Props) {
           />
         </div>
 
-        <div>
-          <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
-            Order Notes (Optional)
-          </label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Landmarks, special instructions, or skin concerns..."
-            rows={2}
-            className="w-full resize-none rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
-          />
-        </div>
       </div>
+
+      <OrderPreferences />
 
       {error && (
         <div className="rounded border border-red-200 bg-red-50 px-4 py-3">
