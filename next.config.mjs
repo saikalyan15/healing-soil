@@ -130,6 +130,14 @@ const nextConfig = {
       // Missing root-level story slugs from old WordPress
       { source: '/the-tank-that-taught-me-to-think-again',  destination: '/blog/the-tank-that-taught-me-to-think-again', permanent: true },
       { source: '/the-tank-that-taught-me-to-think-again/', destination: '/blog/the-tank-that-taught-me-to-think-again', permanent: true },
+      { source: '/the-red-okra-the-art-of-slow-living',     destination: '/blog/the-red-okra-the-art-of-slow-living',    permanent: true },
+      { source: '/the-red-okra-the-art-of-slow-living/',    destination: '/blog/the-red-okra-the-art-of-slow-living',    permanent: true },
+      { source: '/when-the-sole-gives-up-before-the-soul',  destination: '/blog/when-the-sole-gives-up-before-the-soul', permanent: true },
+      { source: '/when-the-sole-gives-up-before-the-soul/', destination: '/blog/when-the-sole-gives-up-before-the-soul', permanent: true },
+      // WordPress author archive pages
+      { source: '/author/:path*',                           destination: '/our-story',                                   permanent: true },
+      // WordPress per-post RSS feed URLs
+      { source: '/caterpillar-content-writing-lessons/feed/:path*', destination: '/blog/caterpillar-content-writing-lessons', permanent: true },
       // Retired product page
       { source: '/shop/valentines-special-soap',         destination: '/shop',      permanent: true },
     ]
