@@ -109,7 +109,7 @@ export default async function HomePage() {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-12 sm:px-6 md:flex-row md:gap-16 md:py-24">
           <div className="z-10 flex-1 text-center md:text-left">
             <h1 className="mb-5 font-serif text-[clamp(34px,4.6vw,52px)] font-normal leading-[1.1] text-[#1E5631]">
-              The soap her skin<br className="hidden md:block" /> didn&rsquo;t react to.
+              The soap her skin{' '}<br className="hidden md:block" />didn&rsquo;t react to.
             </h1>
             <p className="mb-8 font-sans text-base leading-relaxed text-[#666] md:text-lg">
               If your skin reacts to most soaps, this is what we make in small batches on our farm in South Goa.

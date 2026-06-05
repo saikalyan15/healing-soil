@@ -1,22 +1,23 @@
 # Execution Plan — Healing Soil Programmatic SEO
 
-Last updated: 2026-05-26. Master document: read this when resuming any SEO session.
+Last updated: 2026-06-05. Master document: read this when resuming any SEO session.
 
 **Source documents (read these for context):**
-- [growth-strategy.md](growth-strategy.md) — LP, audience, offer (Stage 1–4 done)
-- [task-tracker.md](task-tracker.md) — current build status (all Layer 6 tasks DONE; next: GSC validation actions 3.20–3.21, blog posts 3.9–3.12)
-- [programmatic-seo-plan.md](programmatic-seo-plan.md) — architecture and data model detail
+- [growth-strategy.md](growth-strategy.md) — LP, audience, offer, brand constraints (Stage 1–4 done)
+- [task-tracker.md](task-tracker.md) — live status board; read this first every session
 - [competitive-analysis-bangalore.md](competitive-analysis-bangalore.md) — competitor breakdown
 - [keyword-list.md](keyword-list.md) — 100 target keywords with GSC data
 
-**Current state (2026-05-26):**
+**Current state (2026-06-05):**
 
-- 13 soap blog posts live, 1 hub page, 4 category pages, 1 SLS-free LP
-- All Layer 6 programmatic pages live and indexed: 14 ingredient pages, 8 occasion pages, 10 comparison pages, 7 Tier 1 + 20 Tier 2 city pages, 13 combination pages, 6 Ayurvedic pages
-- **530 pages indexed** (up from ~60 in Feb). Impressions +48% in 28 days. Position 14.4.
-- 47 crawled-not-indexed (city+ingredient combination pages) fixed 2026-05-25 — geographic content added; awaiting re-crawl
-- Two minor GSC issues pending owner validation: `/mental-health` redirect error, `/shop/orange` duplicate canonical (see tasks 3.20–3.21)
-- Next build focus: blog gap-fill posts (3.9–3.12), then 3.4 title rewrites once 3.3 validates
+- 546 pages indexed (up from 530 on May 26, ~60 in Feb). Programmatic batch fully indexed.
+- 15 blog posts live, 1 hub page, 4 category pages, 1 SLS-free LP, 378 ingredient × city pages, 14 ingredient pages, 10 comparison pages, 8 occasion pages, 27 city pages, 13 combination pages, 6 Ayurvedic pages
+- GSC performance (May 8–Jun 4): 28 clicks, ~3,000+ impressions, avg position 7–9 on compare pages, 0.7% CTR overall
+- Compare pages confirmed working: glycerin-vs-goat-milk (428 impr, pos 8.1), goat-milk-vs-shea-butter (318 impr, pos 8.7), shea-butter-vs-glycerin (155 impr, pos 7.6)
+- **Critical gap identified**: /blog/goat-milk-soap-benefits at position 55.9 with 300 impressions — thin content, needs deepening (task 7.1)
+- **CTR gap identified**: /shop/marigold-soap at position 5.5, 93 impressions, 0 clicks — title/meta mismatch (task 7.2); compare pages at 0.5% CTR vs expected 2–3% (task 7.3)
+- GSC issues still pending owner validation: `/mental-health` redirect error (task 3.20), `/shop/orange` duplicate canonical (task 3.21)
+- Next build focus: content depth + CTR fixes (tasks 7.1–7.3), then evaluate Tier 4 (ingredient × city × base three-way) once current pages cross 500 impressions/month
 
 ---
 

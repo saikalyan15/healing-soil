@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import EmailCapture from './EmailCapture'
 
 const footerNav = [
   { label: 'Shop', href: '/shop' },
@@ -42,6 +43,16 @@ export default function Footer() {
             >
               <FacebookIcon />
             </a>
+          </div>
+        </div>
+
+        {/* Email capture */}
+        <div className="mt-6 text-center">
+          <p className="mb-2 font-sans text-sm text-cream/60">
+            Restocking updates and slow-living notes. No spam.
+          </p>
+          <div className="mx-auto max-w-sm">
+            <EmailCapture variant="footer" />
           </div>
         </div>
 

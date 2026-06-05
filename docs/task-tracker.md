@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-05-26 (session 9 — GSC full audit: 530 pages indexed confirmed, all programmatic pages live; 47 crawled-not-indexed fixed by owner (geographic content added); 3.11 confirmed done; 3.20–3.21 added for GSC validation actions; execution-plan.md current state updated)
+Last updated: 2026-06-05 (session 10 — June GA/GSC data analyzed; June metrics row filled; tasks 3.22–3.24 added; 6 stale/deferred docs archived to docs/archive/; active docs now: task-tracker.md, execution-plan.md, growth-strategy.md)
 
 ---
 
@@ -27,14 +27,14 @@ Ship the LP rewrite and the 3 small conversion fixes first. This is the single h
 | 1.5 | Add referral share block to post-order screen | Claude | DONE | Added below the "No WhatsApp?" line in [src/components/OrderPageClient.tsx](../src/components/OrderPageClient.tsx) `step='send'` block. WhatsApp share link with prefilled message pointing to healingsoil.in. |
 | 1.6 | Unify delivery time copy across 6 surfaces | Claude | DONE | Verified 2026-04-22: canonical line live on page.tsx, shop/page.tsx:40, OrderPageClient.tsx:165, order/confirmation/page.tsx:44, order/track/page.tsx:43. |
 | 1.7 | Fix Product Schema.org on `/shop/[slug]` | Claude | DONE | Verified 2026-04-22: return policy is `MerchantReturnNotPermitted`. aggregateRating only fires when product-specific reviews exist (empty array returned otherwise per reviews.ts:127). |
-| 1.8 | Install Meta Pixel | Claude | BLOCKED | Privacy policy done (1.10). Meta Business account confirmed active 2026-05-26 with Facebook + Instagram connected. **Only remaining blocker: owner to share the Pixel ID.** Target: [src/app/layout.tsx](../src/app/layout.tsx) alongside GA4. |
-| 1.9 | Add email capture (footer + post-order) | Claude | BLOCKED | Blocked on 1.10 and on owner picking Brevo vs MailerLite (both have free tiers — Brevo: 300 emails/day, MailerLite: 12k/mo up to 1k subs). Owner to create account and share API key. |
+| 1.8 | Install Meta Pixel | Claude | DONE | Done 2026-06-06. Pixel ID 1321242129962420 installed in [src/app/layout.tsx](../src/app/layout.tsx) alongside GA4 and Clarity. Fires PageView on every page load. |
+| 1.9 | Add email capture (footer + post-order) | Claude | DONE | Done 2026-06-06. MailerLite chosen. API key in .env.local. API route at [src/app/api/subscribe/route.ts](../src/app/api/subscribe/route.ts). Component at [src/components/EmailCapture.tsx](../src/components/EmailCapture.tsx). Live in footer (dark variant) and post-order send screen (inline variant). |
 | 1.10 | Privacy policy page update | Claude | DONE | Done 2026-05-24. Added Meta Pixel clause to analytics section, new "Email communications" section, updated retention to 3-year specific period, updated date to May 2026. Unblocks 1.8 and 1.9. |
-| 1.11 | Confirm Instagram bio link points to healingsoil.in | Owner | TODO | Build plan Table 1 "Fix the Funnel Now" — check the IG bio link is `https://healingsoil.in` (or `/shop`), not a WhatsApp community link and not the retired `/our-products`. |
-| 1.12 | Update Instagram bio text | Owner | TODO | 3 lines: "Handmade soaps from Goa. / No chemicals. Small batch. Made to order. / Shop via link below." |
-| 1.13 | Turn on Instagram DM notifications | Owner | TODO | Settings → Notifications → Messages and Calls → all on. Build plan called "Lost DMs" a concrete revenue leak. |
+| 1.11 | Confirm Instagram bio link points to healingsoil.in | Owner | DONE | Done 2026-06-06. Links set to: (1) healingsoil.in, (2) WhatsApp. WhatsApp catalog removed. Website in position 1. |
+| 1.12 | Update Instagram bio text | Owner | DONE | Done 2026-06-06. Bio: "Handmade soaps from Goa / No SLS. No parabens. Small batch. Made to order. / Plastic-free packaging / Shop via link below." |
+| 1.13 | Turn on Instagram DM notifications | Owner | DONE | Done 2026-06-05. |
 | 1.14 | Set up Instagram Saved Replies | Owner | TODO | Create 3: (a) how to order, (b) ingredient questions, (c) do you ship to [city]. Template copy in HealingSoil-BuildPlan-FINAL.docx Table 1. |
-| 1.15 | Change Instagram profile picture to a soap bar | Owner | TODO | Currently soil. Build plan specifically called out: buyer needs to see the product, not the brand metaphor. |
+| 1.15 | Change Instagram profile picture to a soap bar | Owner | DONE | Done 2026-06-06. Three soaps, natural setting, product visible. |
 | 1.16 | Connect Facebook page to Instagram in Meta Business Suite | Owner | DONE | Meta Business account active 2026-05-26 with Facebook + Instagram already integrated. |
 
 ---
@@ -81,8 +81,8 @@ Biggest unused lever. Fix the inventory first, then optimise what ranks, then wr
 | 3.17 | Build `/glycerin-soap` category page | Claude | DONE | Shipped 2026-05-02. [src/app/glycerin-soap/page.tsx](../src/app/glycerin-soap/page.tsx). Filters `p.base === 'Glycerine'`. Mechanism story (glycerin retained) included in copy. |
 | 3.18 | Decide fate of `content/blog/best-natural-soap-for-eczema.mdx` | Owner | DONE | File is gone — not found anywhere in repo as of 2026-05-16. No action needed. |
 | 3.19 | Monthly GSC snapshot on the 1st of each month | Owner | TODO (recurring) | Replaces weekly checks — weekly is noise at this volume. On the 1st, record clicks, impressions, position, distinct ranking queries in [growth-strategy.md](growth-strategy.md) monthly check-in table. Apply Country=India filter when reading. No tactical changes mid-month. 90-day re-evaluation gate is 2026-07-28 per [gsc-traffic-diagnosis-2026-04-28.md](gsc-traffic-diagnosis-2026-04-28.md). **June 1 watchlist:** (a) crawled-not-indexed count — should drop from 47 as city+ingredient pages re-indexed after geographic content fix; (b) `/soap/bangalore` and `/blog/handmade-soap-bangalore` — check for first impressions on Bangalore queries; (c) compare/\* and ingredient/\* impressions row (task 6.14). |
-| 3.20 | GSC: validate fix for `/mental-health` redirect error | Owner | TODO | Redirect IS in next.config.mjs (line 84 — `/mental-health` → `/blog`). No code fix needed. Go to GSC → Indexing → Pages → Redirect errors → click URL → "Validate Fix." Google will re-crawl and clear it. |
-| 3.21 | GSC: validate fix for `/shop/orange` duplicate canonical | Owner | TODO | Redirect IS in next.config.mjs (line 46 — `/shop/orange` → `/shop/orange-glycerin-soap`). Google actually picked the correct canonical already — this is benign. Go to GSC → Indexing → Pages → Duplicate canonical → click URL → "Validate Fix." |
+| 3.20 | GSC: validate fix for `/mental-health` redirect error | Owner | DONE | Validated 2026-06-05. |
+| 3.21 | GSC: validate fix for `/shop/orange` duplicate canonical | Owner | DONE | Validated 2026-06-05. |
 
 ---
 
@@ -144,6 +144,18 @@ Adjust the file path and count for whichever batch you are releasing. The script
 
 ---
 
+## Layer 7 — Content depth and CTR fixes (June 2026, from GA/GSC analysis)
+
+Identified from May 8–Jun 4 GA + GSC data. These are the highest-leverage actions before building new pages.
+
+| # | Task | Owner | Status | Context needed to resume cold |
+|---|---|---|---|---|
+| 7.1 | Deepen /blog/goat-milk-soap-benefits | Claude | TODO | Page is indexed at position 55.9 with 300 impressions/month — meaning demand exists but content is not competitive. Expand to 1,200–1,500 words. Add: what goat milk actually contributes to the soap base (fat content, lactic acid context in non-therapeutic terms), comparison table vs glycerin base, FAQ section covering the 20+ query variants visible in GSC (benefits for skin, in Tamil, soap base benefits, etc.). No therapeutic claims per CDSCO. File: [content/blog/goat-milk-soap-benefits.mdx](../content/blog/goat-milk-soap-benefits.mdx). |
+| 7.2 | Fix title + meta on /shop/marigold-soap | Claude | TODO | Page sits at position 5.5 with 93 impressions but 0 clicks. "marigold sabun" query is hitting position 2 with 10 impressions. Title likely reads as generic. Rewrite to: "Marigold Soap — Handmade in Goa, Ships Across India \| Healing Soil". Rewrite meta description to match the query intent with a sensory hook (colour, scent, feel). File: product entry in [src/lib/products.ts](../src/lib/products.ts) or [src/app/shop/[slug]/page.tsx](../src/app/shop/%5Bslug%5D/page.tsx). |
+| 7.3 | Rewrite meta descriptions on top 3 compare pages | Claude | TODO | These pages are indexed at positions 7–9 but CTR is 0.5% vs expected 2–3%. Pages: /compare/glycerin-vs-goat-milk-soap (428 impr, 2 clicks), /compare/goat-milk-vs-shea-butter-soap (318 impr, 0 clicks), /compare/shea-butter-vs-glycerin-soap (155 impr, 1 click). Rewrite each meta description as a direct answer to the comparison question in 150 chars. Example pattern: "Goat milk base is richer and creamier; glycerin base is lighter. Here is which suits your skin and how they differ." Data: [src/data/comparisons.ts](../src/data/comparisons.ts). |
+
+---
+
 ## Monthly check-in metrics (track these, not vanity)
 
 Record numbers on the first of each month so trend is visible.
@@ -152,7 +164,7 @@ Record numbers on the first of each month so trend is visible.
 |---|---|---|---|---|---|---|
 | 2026-04 (baseline) | 0 | ~8 | 21% | 0 | 221 | Pre-plan baseline |
 | 2026-05 (updated May 26) | 2 (website, Apr 25–May 22) | 17 clicks (+35%) · 2,520 impr (+48%) · pos 14.4 · CTR 0.7% (28-day GSC) | — | 0 | — | **530 pages indexed** (up from 117 on May 23 — programmatic batch fully indexed). 106 not indexed: 37 legacy redirects (known), 9 alternate canonicals (intentional), 5 x 404s (investigate), 47 crawled-not-indexed (diagnosed thin content on ingredient pages — fixed 2026-05-25: city-wise geographic content added to ingredient pages; awaiting re-crawl), 4 discovered-not-indexed (in queue), 1 redirect error (investigate), 1 Google-override canonical (investigate). Top GSC pages (28d): glycerin-vs-goat-milk-soap blog 9 clicks, home 3 clicks, compare/glycerin-vs-goat-milk-soap 2 clicks, pomegranate-peel-soap 1 click, shea-butter-vs-glycerin-soap 1 click. Position dipped from 13.5 to 14.4 — expected as 400+ new pages pulled average down. |
-| 2026-06 | | | | | | |
+| 2026-06 (as of Jun 5) | 2 (GA key events May 8–Jun 4) | 28 clicks · ~3,000+ impr · pos ~7–9 on compare pages · CTR 0.7% avg | — | 0 | — | **546 pages indexed**. Compare pages earning impressions at positions 7–9 (architecture confirmed working). Critical gaps: /blog/goat-milk-soap-benefits at position 55.9 with 300 impressions (content too thin) · /shop/marigold-soap at position 5.5 with 93 impressions and 0 clicks (title/meta mismatch) · compare page CTRs below expected at positions 7–9. See tasks 3.22–3.24. |
 | 2026-07 | | | | | | |
 
 **Targets by end of 2026-07 (90 days):** website orders ≥ 8/month; GSC clicks ≥ 40/month; reorder rate ≥ 30%; email list ≥ 150; IG followers 500–700.

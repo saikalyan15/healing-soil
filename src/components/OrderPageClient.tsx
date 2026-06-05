@@ -6,6 +6,7 @@ import { sendGAEvent } from '@next/third-parties/google'
 import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import OrderForm from './OrderForm'
+import EmailCapture from './EmailCapture'
 
 const WA_NUMBER = '917483100651'
 
@@ -128,6 +129,13 @@ export default function OrderPageClient() {
             <WhatsAppIcon />
             Share Healing Soil on WhatsApp
           </a>
+        </div>
+
+        <div className="border-t border-[#E8E4DE] pt-4 text-left">
+          <p className="mb-2 font-sans text-xs text-[#666666]">
+            Want to know when new soaps are ready?
+          </p>
+          <EmailCapture variant="inline" />
         </div>
       </div>
     )
