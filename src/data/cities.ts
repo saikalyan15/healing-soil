@@ -14,7 +14,7 @@ export const cities: CityPage[] = [
     slug: 'bangalore',
     displayName: 'Bangalore',
     state: 'Karnataka',
-    deliveryNote: 'We ship handmade soap from our workshop in South Goa to Bangalore via reliable courier partners. Orders are typically processed and dispatched within 7 to 10 days of being placed.',
+    deliveryNote: 'We ship handmade soap from our workshop in South Goa to Bangalore via India Post Speed Post. We dispatch in 2 days and most Bangalore orders arrive in 5 days.',
     climateNote: "Bangalore's mild climate is gentle on skin year-round, but the city's notably hard water can leave a residue with commercial soaps — handmade soap that lathers from natural saponification tends to rinse more cleanly. The city's health-conscious culture has made SLS-free personal care a popular choice across neighbourhoods like Koramangala and Indiranagar.",
     reviewerNote: 'We have many loyal customers in Bangalore, including Lisha and Snehal, who value our commitment to high-quality, SLS-free personal care.',
     faqs: [
