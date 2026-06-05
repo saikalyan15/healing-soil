@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-06-05 (session 10 — June GA/GSC data analyzed; June metrics row filled; tasks 3.22–3.24 added; 6 stale/deferred docs archived to docs/archive/; active docs now: task-tracker.md, execution-plan.md, growth-strategy.md)
+Last updated: 2026-06-06 (session 11 — SoapLedger outreach extended with referral feature; tasks 2.2 and 2.4 marked DONE)
 
 ---
 
@@ -46,9 +46,9 @@ Ship the LP rewrite and the 3 small conversion fixes first. This is the single h
 | # | Task | Owner | Status | Context needed to resume cold |
 |---|---|---|---|---|
 | 2.1 | WhatsApp the 10 existing reviewers — reorder nudge | Owner | TODO | One personalised message each. Suggest a soap they haven't tried. 10 reviewers listed in [src/lib/reviews.ts](../src/lib/reviews.ts). |
-| 2.2 | WhatsApp the 10 existing reviewers — referral ask | Owner | TODO | Separate message from 2.1. Ask: "send our page to one person whose skin has been giving them trouble." |
+| 2.2 | WhatsApp the 10 existing reviewers — referral ask | Owner | DONE | Done 2026-06-06. Used new Referral Ask section in SoapLedger /outreach page (built session 11). Three message templates available. Customers re-appear after 60 days. |
 | 2.3 | Send UGC briefs to 10 customers | Owner | TODO | Offer: free travel soap (₹50 cost) in exchange for a 30-sec phone video review. Collect videos in one folder; they become material for Layer 4 reels. |
-| 2.4 | Build day-35 reorder reminder list | Owner | TODO | Pull customer list from SoapLedger filtered by `delivered_at >= 35 days ago AND no reorder`. Manual WhatsApp nudge for now — do not automate yet. |
+| 2.4 | Build day-35 reorder reminder list | Owner | DONE | Done — SoapLedger /outreach "Due Now" section already does this. Uses per-customer soap lifecycle (bars × 30 days, adjusted by actual reorder history). Go to /outreach when customers are due. |
 | 2.5 | Rename the 3 anonymous reviewers | Owner | BLOCKED | Blocked on first-name lookup (permission granted 2026-04-22). Once named, Claude updates [src/lib/reviews.ts:39-61](../src/lib/reviews.ts). review-004 ("does not lather up like regular ones") is priority. |
 
 ---
@@ -150,9 +150,9 @@ Identified from May 8–Jun 4 GA + GSC data. These are the highest-leverage acti
 
 | # | Task | Owner | Status | Context needed to resume cold |
 |---|---|---|---|---|
-| 7.1 | Deepen /blog/goat-milk-soap-benefits | Claude | TODO | Page is indexed at position 55.9 with 300 impressions/month — meaning demand exists but content is not competitive. Expand to 1,200–1,500 words. Add: what goat milk actually contributes to the soap base (fat content, lactic acid context in non-therapeutic terms), comparison table vs glycerin base, FAQ section covering the 20+ query variants visible in GSC (benefits for skin, in Tamil, soap base benefits, etc.). No therapeutic claims per CDSCO. File: [content/blog/goat-milk-soap-benefits.mdx](../content/blog/goat-milk-soap-benefits.mdx). |
-| 7.2 | Fix title + meta on /shop/marigold-soap | Claude | TODO | Page sits at position 5.5 with 93 impressions but 0 clicks. "marigold sabun" query is hitting position 2 with 10 impressions. Title likely reads as generic. Rewrite to: "Marigold Soap — Handmade in Goa, Ships Across India \| Healing Soil". Rewrite meta description to match the query intent with a sensory hook (colour, scent, feel). File: product entry in [src/lib/products.ts](../src/lib/products.ts) or [src/app/shop/[slug]/page.tsx](../src/app/shop/%5Bslug%5D/page.tsx). |
-| 7.3 | Rewrite meta descriptions on top 3 compare pages | Claude | TODO | These pages are indexed at positions 7–9 but CTR is 0.5% vs expected 2–3%. Pages: /compare/glycerin-vs-goat-milk-soap (428 impr, 2 clicks), /compare/goat-milk-vs-shea-butter-soap (318 impr, 0 clicks), /compare/shea-butter-vs-glycerin-soap (155 impr, 1 click). Rewrite each meta description as a direct answer to the comparison question in 150 chars. Example pattern: "Goat milk base is richer and creamier; glycerin base is lighter. Here is which suits your skin and how they differ." Data: [src/data/comparisons.ts](../src/data/comparisons.ts). |
+| 7.1 | Deepen /blog/goat-milk-soap-benefits | Claude | DONE | Done 2026-06-06. seoTitle updated to target "goat milk soap benefits" directly. Added India context section (hard water, climate, Ayurvedic tradition, ~170 words). Added 6-question FAQ section in MDX body and matching FAQPage schema in faqsBySlug. Post now ~1,400 words. File: [content/blog/goat-milk-soap-benefits.mdx](../content/blog/goat-milk-soap-benefits.mdx). |
+| 7.2 | Fix title + meta on /shop/marigold-soap | Claude | DONE | Done 2026-06-06. Added PRODUCT_META_OVERRIDES map in [src/app/shop/[slug]/page.tsx](../src/app/shop/%5Bslug%5D/page.tsx). New title: "Handmade Marigold Soap from Goa \| Ships Across India \| Healing Soil". New description: sensory hook (golden petals, creamy lather, earthy scent, no SLS). |
+| 7.3 | Rewrite meta descriptions on top 3 compare pages | Claude | DONE | Done 2026-06-06. Updated [src/data/comparisons.ts](../src/data/comparisons.ts). Each now opens with a direct base comparison in 150 chars. Removed em-dash from goat-milk-vs-shea-butter entry. Pattern: "X base is [quality]. Y base is [different quality]. Which suits your skin, compared here." |
 
 ---
 

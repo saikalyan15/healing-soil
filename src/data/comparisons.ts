@@ -18,7 +18,7 @@ export const comparisons: ComparisonPage[] = [
     slug: 'glycerin-vs-goat-milk-soap',
     title: 'Glycerin vs Goat Milk Soap Base: Side-by-Side for Your Skin Type',
     h1: 'Glycerin vs Goat Milk Soap Base: Pick the Right One for Your Skin',
-    metaDescription: 'Quick side-by-side: glycerin soap base is light and cleansing; goat milk soap base is creamy and nourishing. Choose by skin type. Handmade in Goa, no SLS or parabens.',
+    metaDescription: 'Goat milk base is creamier, with natural fats. Glycerin base is lighter and rinses clean. Which suits your skin, compared here. Handmade in Goa, no SLS.',
     canonicalOverride: '/blog/glycerin-vs-goat-milk-soap',
     subjectA: {
       name: 'Glycerine Base',
@@ -57,7 +57,7 @@ export const comparisons: ComparisonPage[] = [
     slug: 'goat-milk-vs-shea-butter-soap',
     title: 'Goat Milk vs Shea Butter Soap: Comparing the Bases',
     h1: 'Goat Milk vs Shea Butter: Choosing Your Soap Base',
-    metaDescription: 'Goat milk soap: gentle enough for daily use on most skin. Shea butter soap: richer conditioning, better for very dry or tight skin. Compared side by side — handmade in Goa.',
+    metaDescription: 'Shea butter base is richer and more conditioning. Goat milk base is gentler and suits most skin types. Which one is right, compared here. Handmade in Goa, no SLS.',
     subjectA: {
       name: 'Goat Milk Base',
       slug: 'goat-milk-soap',
@@ -95,7 +95,7 @@ export const comparisons: ComparisonPage[] = [
     slug: 'shea-butter-vs-glycerin-soap',
     title: 'Shea Butter vs Glycerin Soap Base: Side-by-Side for Your Skin Type',
     h1: 'Shea Butter vs Glycerin Soap Base: Pick the Right One',
-    metaDescription: 'Quick side-by-side: shea butter soap base is rich and conditioning; glycerin soap base is light and cleansing. Choose by skin type. Handmade in Goa, no SLS or parabens.',
+    metaDescription: 'Shea butter base is rich and leaves a conditioning feel. Glycerin base is lighter and rinses clean. They sit at opposite ends of the feel spectrum. Handmade in Goa.',
     subjectA: {
       name: 'Shea Butter Base',
       slug: 'shea-butter-soap',

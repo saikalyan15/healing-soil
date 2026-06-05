@@ -167,6 +167,32 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
       answer: 'The practical difference is in ingredients and shelf life. Commercial soap usually contains SLS, a synthetic detergent that strips skin oils, and is manufactured months before use. Small-batch handmade soap skips SLS entirely, uses no synthetic preservatives, and is made to order — so the bar you receive was cured recently, not held in a warehouse. The result is a cleaner ingredient list and a gentler effect on skin.',
     },
   ],
+  'goat-milk-soap-benefits': [
+    {
+      question: 'What are the main benefits of goat milk soap?',
+      answer: 'Goat milk soap replaces water in the soap base with milk, bringing in natural fats and vitamins. It cleans without stripping — skin feels nourished after washing, not tight or dry. The absence of SLS, retained natural glycerin, and no synthetic fragrance are what most people notice over time.',
+    },
+    {
+      question: 'Is goat milk soap good for sensitive skin?',
+      answer: 'Yes. The pH of goat milk is closer to skin\'s natural range than most synthetic cleansers, and there is no SLS or synthetic fragrance — two of the most common daily irritants. Most people with reactive skin find they can use it daily on face and body without trouble.',
+    },
+    {
+      question: 'What is the difference between goat milk soap and regular commercial soap?',
+      answer: 'Commercial soap typically contains SLS, a synthetic detergent that strips natural skin oils, plus synthetic fragrance and artificial preservatives. Goat milk soap contains none of these. The short ingredient list is the practical difference — it cleans without removing what skin needs to stay balanced.',
+    },
+    {
+      question: 'Does goat milk soap lather well?',
+      answer: 'Yes, but differently from commercial soap. The lather is creamy and dense rather than heavy and foamy. In hard water, it performs better than SLS-based soap because the lather comes from the natural fat content of the milk, not a surfactant.',
+    },
+    {
+      question: 'How long does a goat milk soap bar last?',
+      answer: 'A full-size handmade bar lasts approximately four to five weeks with daily face and body use. A soap dish that lets the bar drain between uses extends its life considerably — sitting in water dissolves the bar faster than use does.',
+    },
+    {
+      question: 'Is goat milk soap suitable for the face?',
+      answer: 'Yes. The gentle lather and absence of synthetic fragrance make it suitable for most facial skin types, including combination and sensitive skin. Many people use one bar for face and body both.',
+    },
+  ],
   'handmade-soap-bangalore': [
     {
       question: 'Does Healing Soil deliver handmade soap to Bangalore?',
@@ -249,28 +275,6 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     {
       question: 'Can I use both goat milk and glycerin soap base?',
       answer: 'Yes. Many people use different bases for face and body, or switch seasonally. Goat milk is often preferred for the face and for dry or winter conditions; glycerin works well for the body or in warmer, more humid months when a lighter wash is preferred. The Healing Soil starter bundle includes both bases so you can find what works for your skin.',
-    },
-  ],
-  'goat-milk-soap-benefits': [
-    {
-      question: 'What are the benefits of goat milk soap?',
-      answer: 'Goat milk soap replaces water with milk, adding natural fats and vitamins to every wash. The natural fats leave skin feeling soft rather than stripped. Retained glycerin draws moisture gently into skin. The pH is closer to skin\'s natural range than most cleansers, making it suitable for sensitive skin. And because a properly made bar contains no SLS, parabens, or synthetic fragrance, the usual daily irritants are absent.',
-    },
-    {
-      question: 'What is goat milk soap good for?',
-      answer: 'Goat milk soap suits a wide range of skin types and uses. It works well as a daily body wash and face wash for sensitive, dry, or combination skin. It is gentle enough for children and for people transitioning from commercial soap. It is also practical as a travel bar since one bar covers face and body and lasts longer than commercial soap.',
-    },
-    {
-      question: 'Is goat milk soap better than regular soap?',
-      answer: 'For most skin types, yes. Regular commercial soap typically contains SLS, which strips the skin\'s natural oils, and synthetic fragrance, which is a common source of daily irritation. Goat milk soap contains neither. The fat composition means skin feels nourished after washing rather than tight. The practical difference is most noticeable within the first two weeks of switching.',
-    },
-    {
-      question: 'Can I use goat milk soap on my face every day?',
-      answer: 'Yes. Goat milk soap is mild enough for daily face use. The gentle lather, absence of SLS and synthetic fragrance, and fat composition that leaves skin feeling nourished rather than dry make it a practical daily face wash for most skin types.',
-    },
-    {
-      question: 'How is goat milk soap different from glycerin soap?',
-      answer: 'Both are handmade bases that retain natural glycerin. The difference is in richness and feel. Glycerin soap gives a lighter, cleaner wash that suits oily or combination skin. Goat milk soap has a creamier lather and leaves skin feeling more nourished, which suits sensitive or dry skin better. Goat milk is the more versatile starting point if you are not sure which to choose.',
     },
   ],
 }

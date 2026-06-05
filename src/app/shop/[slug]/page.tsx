@@ -14,13 +14,21 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: string }> = {
+  'marigold-soap': {
+    title: 'Handmade Marigold Soap from Goa | Ships Across India | Healing Soil',
+    description: 'Golden marigold petals from our Goa farm, handcrafted into a bar. Creamy lather, earthy floral scent. No SLS or synthetic fragrance. Ships India-wide.',
+  },
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const product = await getProductBySlug(slug)
   if (!product) return {}
 
-  const title = `${product.name} | Healing Soil, Goa`
-  const description = `${product.description} Made by hand in South Goa. ${product.price_range}.`
+  const override = PRODUCT_META_OVERRIDES[slug]
+  const title = override?.title ?? `${product.name} | Healing Soil, Goa`
+  const description = override?.description ?? `${product.description} Made by hand in South Goa. ${product.price_range}.`
 
   return {
     title,
