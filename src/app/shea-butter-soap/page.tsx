@@ -91,7 +91,7 @@ const faqSchema = {
       name: 'How is Healing Soil shea butter soap different from commercial soap?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Commercial shea butter soaps often add SLS as the primary detergent and use synthetic fragrance, then list shea butter as a trace ingredient for marketing purposes. Healing Soil shea butter soap uses shea butter as the base — not a trace addition — and contains no SLS, parabens, or synthetic fragrance. It is made to order in small batches in Goa and ships in seven to ten days.',
+        text: 'Commercial shea butter soaps often add SLS as the primary detergent and use synthetic fragrance, then list shea butter as a trace ingredient for marketing purposes. Healing Soil shea butter soap uses shea butter as the base — not a trace addition — and contains no SLS, parabens, or synthetic fragrance. It is made to order in small batches in Goa and ships in 2 days.',
       },
     },
   ],
@@ -168,7 +168,7 @@ export default function SheaButterSoapPage() {
             Made in small batches in Goa. No SLS, parabens, or synthetic fragrance. ₹400 per bar.
           </p>
           <p className="mb-4 font-sans text-xs text-[#999]">
-            Ships in 7–10 days. Free shipping pan-India.
+            Ships in 2 days. Free shipping pan-India.
           </p>
           <Link
             href="/shop"
@@ -191,8 +191,7 @@ export default function SheaButterSoapPage() {
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Healing Soil shea butter soap uses shea butter as the base. No SLS. No sodium laureth
           sulfate. No synthetic fragrance. The soap is made to order in small batches at the farm in
-          South Goa, cured for the right amount of time, and shipped when ready. The seven to ten day
-          window between order and dispatch is the making and curing time, not a logistics delay.
+          South Goa, cured for the right amount of time, and shipped when ready. It ships in 2 days from dispatch. Arrives in 4-7 days depending on your city.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">

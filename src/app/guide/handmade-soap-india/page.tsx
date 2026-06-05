@@ -274,7 +274,7 @@ export default function HandmadeSoapIndiaGuide() {
           <p className="mb-1 font-sans text-sm text-[#666666]">
             Four soaps to find the one your skin agrees with. ₹1,000. Free shipping.
           </p>
-          <p className="mb-4 font-sans text-xs text-[#999]">Shipped in 4 days. Arrives in 3 to 7 days depending on your city.</p>
+          <p className="mb-4 font-sans text-xs text-[#999]">Shipped in 2 days. Arrives in 4-7 days depending on your city.</p>
           <Link
             href="/#bundle"
             className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"

@@ -142,7 +142,7 @@ export default async function HomePage() {
                 Try the starter bundle (₹1,000)
               </Link>
               <p className="font-sans text-xs font-medium leading-relaxed text-[#666666]">
-                Free shipping. Shipped in 4 days from Goa.
+                Free shipping. Shipped in 2 days from Goa.
               </p>
             </div>
           </div>

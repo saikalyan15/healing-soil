@@ -156,7 +156,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Can handmade soap from Goa be shipped across India?',
-      answer: 'Yes. Healing Soil ships pan-India. The window from order to dispatch is seven to ten days — the making and curing time, not a processing delay. Free shipping is included.',
+      answer: 'Yes. Healing Soil ships pan-India. Shipped in 2 days from Goa. Arrives in 4-7 days depending on your city. Free shipping is included.',
     },
     {
       question: 'What is the difference between farm-grown and sourced ingredients in handmade soap?',
@@ -196,7 +196,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   'handmade-soap-bangalore': [
     {
       question: 'Does Healing Soil deliver handmade soap to Bangalore?',
-      answer: 'Yes. Healing Soil ships pan-India from Goa. The window from order to dispatch is seven to ten days — the making and curing time. Delivery to Bangalore typically adds one to two days after dispatch.',
+      answer: 'Yes. Healing Soil ships pan-India from Goa. Shipped in 2 days. Delivery to Bangalore typically takes 3 days after dispatch, so most Bangalore orders arrive in 5 days total.',
     },
     {
       question: 'Why does Bangalore water affect skin?',
@@ -405,7 +405,7 @@ export default async function BlogPostPage({ params }: Props) {
                 Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
               </p>
               <p className="mb-4 font-sans text-xs text-[#999]">
-                Shipped in 4 days. Free shipping included.
+                Shipped in 2 days. Free shipping included.
               </p>
               <Link
                 href="/#bundle"

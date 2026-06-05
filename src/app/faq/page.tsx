@@ -30,7 +30,7 @@ const faqItems = [
   },
   {
     q: 'How long does delivery take?',
-    a: 'Shipped in 4 days. Arrives in 3 to 7 days depending on your city.',
+    a: 'Shipped in 2 days. Arrives in 4-7 days depending on your city.',
   },
   {
     q: 'How do I order?',
