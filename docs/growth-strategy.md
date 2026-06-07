@@ -44,7 +44,7 @@ Top inferred objections: (1) "handcraft soap is just fancy branding" (belief), (
 
 > Every bar is made to order with fresh ingredients from the farm. No two batches are identical, and we will not pretend they are. What we can promise: the ingredients are real, the process is transparent, and if the bar arrives damaged, we replace it.
 
-**Shipping:** 4 days dispatch + 3 days transit = 7 days real. State the real number everywhere. Suggested line: "Shipped in 4 days, arrives in 3 to 7 depending on your city." India only, Speed Post.
+**Shipping:** 2 days dispatch + 3 days transit = 5 days real (updated 2026-06-07). State the real number everywhere. Suggested line: "Ships in 2 days, arrives in 5 to 7 depending on your city." India only, Speed Post.
 
 **Single desired action:** buy the ₹1,000 starter bundle.
 

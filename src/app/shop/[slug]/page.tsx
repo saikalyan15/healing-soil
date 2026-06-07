@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getProductBySlug } from '@/lib/products'
+import { getProductBySlug, getProducts } from '@/lib/products'
 import { reviewsForProduct, featuredReviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import AddToCartButton from '@/components/AddToCartButton'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
+import ProductCard from '@/components/ProductCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,6 +19,46 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   'marigold-soap': {
     title: 'Handmade Marigold Soap from Goa | Ships Across India | Healing Soil',
     description: 'Golden marigold petals from our Goa farm, handcrafted into a bar. Creamy lather, earthy floral scent. No SLS or synthetic fragrance. Ships India-wide.',
+  },
+  'neem-tulsi-glycerin-soap': {
+    title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
+    description: 'Neem and tulsi in a pure glycerin base — Ayurvedic herbs known for skin-balancing properties. Made to order in South Goa. No SLS, no parabens. Ships across India.',
+  },
+  'neem-tulsi-goatmilk-soap': {
+    title: 'Neem Tulsi Goat Milk Soap | Handmade in Goa | Healing Soil',
+    description: 'Creamy goat milk with sun-dried neem and tulsi. Richer lather than glycerin, with a gentle herbal scent and moisturising finish. Made to order in South Goa.',
+  },
+  'honey-oats-glycerin-soap': {
+    title: 'Honey Oats Glycerin Soap for Sensitive Skin | Healing Soil, Goa',
+    description: 'Real honey and oat flakes in a glycerin soap base. Gentle on reactive and dry skin. Handmade in small batches in South Goa. Free shipping across India.',
+  },
+  'loofah-soaps': {
+    title: 'Natural Loofah Soap | Handmade Glycerin Soap from Goa | Healing Soil',
+    description: 'A full slice of sun-dried loofah embedded in a glycerin soap base. Textured surface, no synthetic scrubbers. Made to order in South Goa. Ships across India.',
+  },
+  'sheabutter-kesar-gulab': {
+    title: 'Shea Butter Soap with Saffron and Rose | Handmade in Goa | Healing Soil',
+    description: 'The most indulgent bar in our range. Shea butter, saffron, and rose — made to order in small batches in South Goa. No SLS or synthetic fragrance.',
+  },
+  'pomegranate-goatmilk-soap': {
+    title: 'Pomegranate Goat Milk Soap | Handmade in Goa | Healing Soil',
+    description: 'Rich goat milk with pomegranate peel. Creamy lather, deep wine-red colour. Made to order in South Goa, ships across India.',
+  },
+  'red-rose-soap': {
+    title: 'Rose Shaped Handmade Soap | Pure Rose Essential Oil | Healing Soil Goa',
+    description: 'A handmade soap shaped like a rose, made with pure rose essential oil and vitamin E. Soft, creamy lather with a delicate floral scent. Made to order in South Goa.',
+  },
+  'kesar-haldi-goat-milk-soap': {
+    title: 'Kesar Haldi Goat Milk Soap | Saffron Turmeric Soap from Goa | Healing Soil',
+    description: 'Saffron and turmeric in a creamy goat milk base — long celebrated in Indian skincare. Handmade in small batches in South Goa. No SLS, no parabens.',
+  },
+  'ginger-rosemary-glycerin-soap': {
+    title: 'Ginger Rosemary Glycerin Soap | Handmade in Goa | Healing Soil',
+    description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Free shipping across India.',
+  },
+  'travel-soaps': {
+    title: 'Travel Size Handmade Soap | 30g Mini Bars from Goa | Healing Soil',
+    description: 'Compact 30g bars of our handmade soaps — same natural ingredients, same small-batch quality. Perfect for travel or to try before committing to a full bar.',
   },
 }
 
@@ -57,6 +98,11 @@ export default async function ProductPage({ params }: Props) {
     ? productSpecificReviews.slice(0, 2)
     : featuredReviews.slice(0, 2)
 
+  const allProducts = await getProducts().catch(() => [])
+  const related = allProducts
+    .filter(p => p.slug !== slug && p.base === product.base && p.in_stock)
+    .slice(0, 3)
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -93,8 +139,8 @@ export default async function ProductPage({ params }: Props) {
           '@type': 'ShippingDeliveryTime',
           handlingTime: {
             '@type': 'QuantitativeValue',
-            minValue: 4,
-            maxValue: 4,
+            minValue: 2,
+            maxValue: 2,
             unitCode: 'DAY',
           },
           transitTime: {
@@ -225,6 +271,10 @@ export default async function ProductPage({ params }: Props) {
 
             <AddToCartButton product={product} />
 
+            <p className="font-sans text-xs text-[#666] text-center">
+              Free shipping across India · Made to order · Ships in 2 days
+            </p>
+
             {/* WhatsApp CTA */}
             <a
               href={`https://wa.me/917483100651?text=Hi%2C%20I%27d%20like%20to%20order%20${encodeURIComponent(product.name)}%20from%20Healing%20Soil`}
@@ -281,6 +331,20 @@ export default async function ProductPage({ params }: Props) {
                   occupation={r.occupation}
                   featured={false}
                 />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Related Products */}
+        {related.length > 0 && (
+          <div className="mt-10 border-t border-[#D6CFC4] pt-10">
+            <h2 className="font-serif text-2xl text-[#1A1A14] mb-6">
+              More {product.base} soaps
+            </h2>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
           </div>
