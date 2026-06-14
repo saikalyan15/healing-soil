@@ -12,6 +12,9 @@ const TEXTURE_DESCRIPTIONS: Record<string, string> = {
   mixed: 'A pack containing bars of different textures.',
 }
 
+// Slugs that surface when "Gifts" quick-filter is active
+const GIFT_SLUGS = new Set(['gift-soap-pouch', 'kids-collection', 'travel-soaps'])
+
 type ShopClientProps = {
   products: Product[]
 }
@@ -28,12 +31,17 @@ const TEXTURE_FILTERS = [
 export default function ShopClient({ products }: ShopClientProps) {
   const categories = ['All', ...Array.from(new Set(products.map((p) => p.category)))]
   const [active, setActive] = useState('All')
+  const [giftsActive, setGiftsActive] = useState(false)
   const [activeTexture, setActiveTexture] = useState('all')
   const [showTextureGuide, setShowTextureGuide] = useState(false)
 
   const filtered = products
-    .filter((p) => active === 'All' || p.category === active)
     .filter((p) => {
+      if (giftsActive) return GIFT_SLUGS.has(p.slug)
+      return active === 'All' || p.category === active
+    })
+    .filter((p) => {
+      if (giftsActive) return true  // don't apply texture filter in gifts view
       if (activeTexture === 'all') return true
       if (activeTexture === 'mixed') return !p.texture
       return p.texture === activeTexture
@@ -52,8 +60,31 @@ export default function ShopClient({ products }: ShopClientProps) {
         </p>
       </div>
 
-      {/* Category filter tabs */}
-      {categories.length > 1 && (
+      {/* Gifts quick-filter */}
+      <div className="mb-4">
+        <button
+          onClick={() => {
+            setGiftsActive((v) => !v)
+            setActive('All')
+            setActiveTexture('all')
+          }}
+          className={`inline-flex items-center gap-2 rounded-full px-5 py-2 font-sans text-sm font-semibold transition-colors ${
+            giftsActive
+              ? 'bg-[#C9A84C] text-white'
+              : 'border-2 border-[#C9A84C] bg-white text-[#C9A84C] hover:bg-[#C9A84C] hover:text-white'
+          }`}
+        >
+          🎁 Shop Gifts
+        </button>
+        {giftsActive && (
+          <p className="mt-2 font-sans text-xs text-[#666666]">
+            Gift soap pouches, kids collection, and travel sets — ready to wrap.
+          </p>
+        )}
+      </div>
+
+      {/* Category filter tabs — hidden when gifts filter is active */}
+      {!giftsActive && categories.length > 1 && (
         <div className="mb-8 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <button
@@ -71,40 +102,43 @@ export default function ShopClient({ products }: ShopClientProps) {
         </div>
       )}
 
-      {/* Texture filter tabs */}
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        {TEXTURE_FILTERS.map((t) => (
-          <button
-            key={t.value}
-            onClick={() => setActiveTexture(t.value)}
-            className={`rounded-full px-4 py-1.5 font-sans text-sm font-medium capitalize transition-colors ${
-              activeTexture === t.value
-                ? 'bg-[#1E5631] text-white'
-                : 'border border-[#D6CFC4] bg-white text-[#666666] hover:border-[#1E5631] hover:text-[#1E5631]'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-        <button
-          onClick={() => setShowTextureGuide((v) => !v)}
-          className="ml-1 font-sans text-xs text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
-        >
-          {showTextureGuide ? 'Hide guide' : 'What do these mean?'}
-        </button>
-      </div>
-
-      {showTextureGuide && (
-        <div className="mb-6 rounded-lg border border-[#D6CFC4] bg-white px-4 py-4">
-          <ul className="space-y-2">
-            {TEXTURE_FILTERS.filter((t) => t.value !== 'all').map((t) => (
-              <li key={t.value} className="flex gap-2 font-sans text-sm">
-                <span className="font-medium text-[#1A1A14] min-w-[110px]">{t.label}</span>
-                <span className="text-[#666666]">{TEXTURE_DESCRIPTIONS[t.value]}</span>
-              </li>
+      {/* Texture filter tabs — hidden when gifts filter is active */}
+      {!giftsActive && (
+        <>
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            {TEXTURE_FILTERS.map((t) => (
+              <button
+                key={t.value}
+                onClick={() => setActiveTexture(t.value)}
+                className={`rounded-full px-4 py-1.5 font-sans text-sm font-medium capitalize transition-colors ${
+                  activeTexture === t.value
+                    ? 'bg-[#1E5631] text-white'
+                    : 'border border-[#D6CFC4] bg-white text-[#666666] hover:border-[#1E5631] hover:text-[#1E5631]'
+                }`}
+              >
+                {t.label}
+              </button>
             ))}
-          </ul>
-        </div>
+            <button
+              onClick={() => setShowTextureGuide((v) => !v)}
+              className="ml-1 font-sans text-xs text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+            >
+              {showTextureGuide ? 'Hide guide' : 'What do these mean?'}
+            </button>
+          </div>
+          {showTextureGuide && (
+            <div className="mb-6 rounded-lg border border-[#D6CFC4] bg-white px-4 py-4">
+              <ul className="space-y-2">
+                {TEXTURE_FILTERS.filter((t) => t.value !== 'all').map((t) => (
+                  <li key={t.value} className="flex gap-2 font-sans text-sm">
+                    <span className="font-medium text-[#1A1A14] min-w-[110px]">{t.label}</span>
+                    <span className="text-[#666666]">{TEXTURE_DESCRIPTIONS[t.value]}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </>
       )}
 
 

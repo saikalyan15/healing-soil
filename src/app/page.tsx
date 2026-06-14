@@ -135,14 +135,22 @@ export default async function HomePage() {
             )}
 
             <div className="flex flex-col items-center gap-4 md:items-start">
-              <Link
-                href="#bundle"
-                className="w-full rounded bg-[#1E5631] px-10 py-4 text-center font-sans text-sm font-bold text-white transition-all hover:bg-[#153d22] active:scale-[0.98] sm:w-auto md:px-12 md:py-5 md:text-base"
-              >
-                Try the starter bundle (₹1,000)
-              </Link>
+              <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href="#bundle"
+                  className="w-full rounded bg-[#1E5631] px-10 py-4 text-center font-sans text-sm font-bold text-white transition-all hover:bg-[#153d22] active:scale-[0.98] sm:w-auto md:px-12 md:py-5 md:text-base"
+                >
+                  Try the starter bundle (₹1,000)
+                </Link>
+                <Link
+                  href="/shop"
+                  className="w-full rounded border-2 border-[#1E5631] px-8 py-4 text-center font-sans text-sm font-bold text-[#1E5631] transition-all hover:bg-[#1E5631] hover:text-white active:scale-[0.98] sm:w-auto md:px-10 md:py-5 md:text-base"
+                >
+                  Browse individual soaps
+                </Link>
+              </div>
               <p className="font-sans text-xs font-medium leading-relaxed text-[#666666]">
-                Free shipping. Shipped in 2 days from Goa.
+                Free shipping · Ships in 2 days from Goa · Individual soaps from ₹200
               </p>
             </div>
           </div>
