@@ -16,6 +16,7 @@ export type Product = {
   image_url: string
   in_stock: boolean
   is_featured: boolean
+  is_gift: boolean          // surfaces under the "Shop Gifts" filter; set in SoapLedger
   category: string          // e.g. "face", "body", "hair", "gift"
   display_order: number     // controls sort order in the shop
   texture: 'smooth' | 'mildly-textured' | 'textured' | 'loofah' | null
@@ -34,6 +35,7 @@ type SoapLedgerProduct = {
   image_url: string
   in_stock: boolean
   is_featured: boolean
+  is_gift: boolean
   category: string
   display_order: number | null
   texture: 'smooth' | 'mildly-textured' | 'textured' | 'loofah' | null
@@ -73,6 +75,7 @@ function normalise(raw: SoapLedgerProduct): Product {
     image_url: raw.image_url ?? '',
     in_stock: raw.in_stock,
     is_featured: raw.is_featured,
+    is_gift: raw.is_gift ?? false,
     category: raw.category,
     display_order: raw.display_order ?? 9999,
     texture: (['smooth', 'mildly-textured', 'textured', 'loofah'] as const).includes(raw.texture as never)

@@ -12,9 +12,6 @@ const TEXTURE_DESCRIPTIONS: Record<string, string> = {
   mixed: 'A pack containing bars of different textures.',
 }
 
-// Slugs that surface when "Gifts" quick-filter is active
-const GIFT_SLUGS = new Set(['gift-soap-pouch', 'kids-collection', 'travel-soaps'])
-
 type ShopClientProps = {
   products: Product[]
 }
@@ -37,7 +34,7 @@ export default function ShopClient({ products }: ShopClientProps) {
 
   const filtered = products
     .filter((p) => {
-      if (giftsActive) return GIFT_SLUGS.has(p.slug)
+      if (giftsActive) return p.is_gift
       return active === 'All' || p.category === active
     })
     .filter((p) => {
