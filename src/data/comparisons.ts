@@ -55,9 +55,9 @@ export const comparisons: ComparisonPage[] = [
   },
   {
     slug: 'goat-milk-vs-shea-butter-soap',
-    title: 'Goat Milk vs Shea Butter Soap: Comparing the Bases',
+    title: 'Goat Milk vs Shea Butter Soap: Which Suits Your Skin?',
     h1: 'Goat Milk vs Shea Butter: Choosing Your Soap Base',
-    metaDescription: 'Shea butter base is richer and more conditioning. Goat milk base is gentler and suits most skin types. Which one is right, compared here. Handmade in Goa, no SLS.',
+    metaDescription: 'Dry, tight skin? Shea butter is richer. Sensitive skin? Goat milk is gentler. A quick side by side to pick your bar. Handmade in Goa, SLS-free.',
     subjectA: {
       name: 'Goat Milk Base',
       slug: 'goat-milk-soap',
