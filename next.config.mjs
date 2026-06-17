@@ -30,6 +30,8 @@ const nextConfig = {
       // www → non-www canonical redirect
       { source: '/:path*', has: [{ type: 'host', value: 'www.healingsoil.in' }], destination: 'https://healingsoil.in/:path*', permanent: true },
       // /compare/glycerin-vs-goat-milk-soap is a live page with canonicalOverride in comparisons.ts — no redirect needed
+      // Secondary blog post on the same topic — consolidate into the original
+      { source: '/blog/goat-milk-soap-base-vs-glycerin-soap-base', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
 { source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
       { source: '/wp-content/:path*',                    destination: '/blog',     permanent: true },
       { source: '/wp-admin/:path*',                      destination: '/blog',     permanent: true },
