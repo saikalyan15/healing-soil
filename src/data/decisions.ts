@@ -41,7 +41,7 @@ export const decisions: DecisionPage[] = [
         a: 'No. All Healing Soil soaps are SLS-free and paraben-free. The lather comes from the natural soap-making process, not from synthetic foaming agents.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'oily-skin',
@@ -71,7 +71,7 @@ export const decisions: DecisionPage[] = [
         a: 'Commercial manufacturers often remove the natural glycerin from soap to sell separately. The bar that remains relies on SLS for lather and can strip the skin. Healing Soil glycerin soap retains all its natural glycerin, providing a gentle wash that cleanses without disrupting the skin\'s moisture balance.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'mature-skin',
@@ -97,7 +97,7 @@ export const decisions: DecisionPage[] = [
         a: 'Yes. Our shea butter soaps are gentle enough for daily face use. Shea butter has a low comedogenic rating, meaning it provides a conditioning feel without blocking pores — which makes it suitable for the face as well as the body.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'men',
@@ -127,7 +127,7 @@ export const decisions: DecisionPage[] = [
         a: 'A full-size bar lasts approximately four to five weeks with daily use. Keeping the bar on a draining soap dish between uses extends its life significantly — the bar dissolves faster when left sitting in water than it does through use.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'women-over-40',
@@ -153,7 +153,7 @@ export const decisions: DecisionPage[] = [
         a: 'Yes. All Healing Soil soaps are gentle enough for daily face use. The shea butter and goat milk bases are particularly suitable for the face — they clean without stripping and leave skin feeling soft rather than tight.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'best-handmade-soap-india',
@@ -183,7 +183,7 @@ export const decisions: DecisionPage[] = [
         a: 'Yes. We ship pan-India from Goa. Orders are dispatched in two days and typically arrive in four to seven days depending on your city. Free shipping is included on all orders.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'goa-humidity',
@@ -213,7 +213,7 @@ export const decisions: DecisionPage[] = [
         a: 'Yes. We ship across India including Goa. Since the farm is in South Goa, deliveries within Goa are among the fastest — typically two to three days total.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   },
   {
     slug: 'monsoon',
@@ -243,6 +243,6 @@ export const decisions: DecisionPage[] = [
         a: 'Keep the bar on a well-draining soap dish and store spare bars in a cool, dry spot — not in the bathroom where humidity is highest. Handmade soap contains natural glycerin which attracts moisture, so storage matters more in humid seasons. A bar kept dry between uses lasts four to five weeks.'
       }
     ],
-    publishedAt: '2026-06-19'
+    publishedAt: '2026-06-18'
   }
 ]
