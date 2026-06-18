@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -110,6 +111,17 @@ export default function HandmadeSoapIndiaGuide() {
         <h1 className="mb-4 font-serif text-4xl leading-tight text-[#1E5631] sm:text-5xl">
           The complete guide to handmade soap in India
         </h1>
+
+        <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-lg">
+          <Image
+            src="/images/guide/guide-handmade-soap-india.png"
+            alt="Handmade soap bars curing on a wooden rack at the Healing Soil farm in Goa"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
         <p className="mb-10 font-sans text-lg leading-relaxed text-[#666666]">
           What commercial soap does to your skin, how to read a label, which base suits your skin type, and why the soap you use every day matters more than most skincare products combined.
         </p>
