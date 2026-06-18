@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
 import ProductCard from '@/components/ProductCard'
@@ -45,6 +46,18 @@ const IngredientPage: React.FC<Props> = ({ ingredient, products }) => {
         <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1E5631] sm:text-5xl">
           {ingredient.name} in Handmade Soap
         </h1>
+
+        {ingredient.image && (
+          <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-lg">
+            <Image
+              src={ingredient.image}
+              alt={`${ingredient.name} — used in Healing Soil handmade soap`}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
 
         <div className="prose-custom">
           <p className="mb-5 font-sans text-lg leading-relaxed text-[#1A1A14]">

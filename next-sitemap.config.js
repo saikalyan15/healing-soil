@@ -90,6 +90,7 @@ const config = {
 
     const compareSlugs = extractLiveSlugs('src/data/comparisons.ts')
     const ingredientSlugs = extractLiveSlugs('src/data/ingredients.ts')
+    const decisionSlugs = extractLiveSlugs('src/data/decisions.ts')
     const citySlugs = extractLiveSlugs('src/data/cities.ts')
     const occasionSlugs = extractLiveSlugs('src/data/occasions.ts')
     const ayurvedicSlugs = extractLiveSlugs('src/data/ayurvedic.ts')
@@ -165,6 +166,12 @@ const config = {
         loc: `/compare/${slug}`,
         changefreq: 'monthly',
         priority: 0.7,
+        lastmod: new Date().toISOString(),
+      })),
+      ...decisionSlugs.map((slug) => ({
+        loc: `/soap-for/${slug}`,
+        changefreq: 'monthly',
+        priority: 0.8,
         lastmod: new Date().toISOString(),
       })),
       ...ingredientSlugs.map((slug) => ({

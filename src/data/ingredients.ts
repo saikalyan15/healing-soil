@@ -7,6 +7,7 @@ export type IngredientPage = {
   origin: string         // "Grown on our Goa farm" or "Sourced from..."
   traditionalUse: string // Ayurvedic framing only, CDSCO-safe
   feel: string           // "gentle lather", "creamy texture"
+  image?: string         // path relative to /public, e.g. /images/ingredients/ingredient-neem.png
   relatedProducts: string[]
   faqs: { q: string; a: string }[]
   publishedAt: string | null
@@ -22,6 +23,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Grown on our farm in South Goa, harvested by hand, and sun-dried before adding to our small-batch soap orders.',
     traditionalUse: 'Neem has been used in Ayurvedic personal care for centuries. It is one of the most widely used botanicals in traditional Indian care for a grounded, fresh wash.',
     feel: 'Earthy, natural scent that lingers gently. It provides a clean lather and pairs well with both goat milk and glycerin bases.',
+    image: '/images/ingredients/ingredient-neem.png',
     relatedProducts: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
@@ -48,6 +50,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Grown on our farm in South Goa alongside our neem trees, harvested by hand and sun-dried for each batch.',
     traditionalUse: 'Tulsi is traditionally used in Ayurvedic personal care for its herbaceous qualities. It is often paired with neem to create a balanced, traditional wash.',
     feel: 'Herbaceous and clean scent that provides a refreshing experience. It contributes to a gentle lather that leaves skin feeling soft.',
+    image: '/images/ingredients/ingredient-tulsi.png',
     relatedProducts: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
@@ -178,6 +181,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Finely processed oats added directly to our soap batches. They are selected and prepared to be gentle enough for daily use.',
     traditionalUse: 'Oats have a long history in personal care for their mild and soothing properties. In soap, they provide a very light texture that helps with a gentle clean.',
     feel: 'Mildly textured feel that many find helpful for a thorough wash. It is suitable for sensitive skin and often paired with honey for a soft finish.',
+    image: '/images/ingredients/ingredient-oats.png',
     relatedProducts: ['honey-oats-glycerin-soap', 'honey-and-oats-goatmilk-soap'],
     faqs: [
       {
@@ -230,6 +234,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Sourced from reliable Indian farms, our turmeric is selected for its purity and traditional quality before being added to our soap.',
     traditionalUse: 'Haldi is traditionally used in Ayurvedic personal care. It is a cornerstone of Indian routines, valued for its gentle cleansing properties and traditional framing.',
     feel: 'Earthy and grounded feel with a natural, herbaceous scent. It contributes to a soft lather that leaves skin feeling refreshed.',
+    image: '/images/ingredients/ingredient-haldi.png',
     relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-sheabutter-soap'],
     faqs: [
       {
@@ -282,6 +287,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Sourced from Indian farms, pomegranate is processed to retain its natural qualities before being added to our soap bases.',
     traditionalUse: 'Pomegranate is used in traditional care for its rich and nourishing presence. It is often included in routines for its ability to provide a grounded wash.',
     feel: 'Deep and rich feel with a subtle, fruity undertone. It contributes to a dense, creamy lather that leaves skin feeling soft.',
+    image: '/images/ingredients/ingredient-pomegranate.png',
     relatedProducts: ['pomegranate-glycerine', 'pomegranate-goatmilk-soap'],
     faqs: [
       {
