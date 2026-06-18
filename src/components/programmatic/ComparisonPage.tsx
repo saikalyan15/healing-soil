@@ -5,6 +5,24 @@ import ProductCard from '@/components/ProductCard'
 import type { Product } from '@/lib/products'
 import type { ComparisonPage as ComparisonPageType } from '@/data/comparisons'
 
+const SUBJECT_INGREDIENT_LINKS: Record<string, string[]> = {
+  'Glycerine Base': ['glycerin'],
+  'Goat Milk Base': ['goat-milk'],
+  'Shea Butter Base': ['shea-butter'],
+  'Neem': ['neem'],
+  'Neem & Tulsi': ['neem', 'tulsi'],
+  'Tulsi': ['tulsi'],
+  'Honey': ['honey'],
+  'Honey & Oats': ['honey', 'oats'],
+  'Oats': ['oats'],
+  'Kesar & Haldi': ['kesar', 'haldi'],
+  'Kesar (Saffron)': ['kesar'],
+  'Haldi (Turmeric)': ['haldi'],
+  'Ginger & Rosemary': ['ginger', 'rosemary'],
+  'Pomegranate': ['pomegranate'],
+  'Orange': ['orange'],
+}
+
 type Props = {
   comparison: ComparisonPageType
   productsA: Product[]
@@ -77,14 +95,38 @@ const ComparisonPage: React.FC<Props> = ({ comparison, productsA, productsB }) =
           </div>
 
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">{comparison.subjectA.name}</h2>
-          <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
+          <p className="mb-3 font-sans text-base leading-[1.8] text-[#1A1A14]">
             {comparison.subjectA.tagline}
           </p>
+          {SUBJECT_INGREDIENT_LINKS[comparison.subjectA.name] && (
+            <p className="mb-5 font-sans text-sm text-[#666]">
+              {SUBJECT_INGREDIENT_LINKS[comparison.subjectA.name].map((slug, i) => (
+                <span key={slug}>
+                  {i > 0 && ' · '}
+                  <Link href={`/ingredient/${slug}`} className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+                    Read about {slug.replace('-', ' ')}
+                  </Link>
+                </span>
+              ))}
+            </p>
+          )}
 
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">{comparison.subjectB.name}</h2>
-          <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
+          <p className="mb-3 font-sans text-base leading-[1.8] text-[#1A1A14]">
             {comparison.subjectB.tagline}
           </p>
+          {SUBJECT_INGREDIENT_LINKS[comparison.subjectB.name] && (
+            <p className="mb-5 font-sans text-sm text-[#666]">
+              {SUBJECT_INGREDIENT_LINKS[comparison.subjectB.name].map((slug, i) => (
+                <span key={slug}>
+                  {i > 0 && ' · '}
+                  <Link href={`/ingredient/${slug}`} className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+                    Read about {slug.replace('-', ' ')}
+                  </Link>
+                </span>
+              ))}
+            </p>
+          )}
 
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">The Verdict</h2>
           <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">

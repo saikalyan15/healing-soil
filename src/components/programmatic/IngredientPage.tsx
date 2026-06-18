@@ -1,8 +1,10 @@
 import React from 'react'
+import Link from 'next/link'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
 import ProductCard from '@/components/ProductCard'
 import type { Product } from '@/lib/products'
 import type { IngredientPage as IngredientPageType } from '@/data/ingredients'
+import { comparisons } from '@/data/comparisons'
 
 type Props = {
   ingredient: IngredientPageType
@@ -10,6 +12,15 @@ type Props = {
 }
 
 const IngredientPage: React.FC<Props> = ({ ingredient, products }) => {
+  const today = new Date().toISOString().split('T')[0]
+  const relatedComparisons = comparisons.filter(c =>
+    c.publishedAt !== null &&
+    c.publishedAt <= today &&
+    ingredient.relatedProducts.some(slug =>
+      c.relatedProductsA.includes(slug) || c.relatedProductsB.includes(slug)
+    )
+  )
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -64,6 +75,24 @@ const IngredientPage: React.FC<Props> = ({ ingredient, products }) => {
             ))}
           </div>
         </div>
+
+        {relatedComparisons.length > 0 && (
+          <div className="mb-12 border-t border-[#D6CFC4] pt-8">
+            <h3 className="mb-4 font-serif text-2xl text-[#1E5631]">How does {ingredient.name} compare?</h3>
+            <ul className="space-y-2">
+              {relatedComparisons.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={c.canonicalOverride ?? `/compare/${c.slug}`}
+                    className="font-sans text-sm text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+                  >
+                    {c.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <BlogInlineCTA />
 
