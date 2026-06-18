@@ -8,11 +8,42 @@ import AddToCartButton from '@/components/AddToCartButton'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
 import ProductCard from '@/components/ProductCard'
+import { comparisons } from '@/data/comparisons'
 
 export const dynamic = 'force-dynamic'
 
 type Props = {
   params: Promise<{ slug: string }>
+}
+
+const INGREDIENT_SLUG: Record<string, string> = {
+  'neem': 'neem',
+  'tulsi': 'tulsi',
+  'goat milk': 'goat-milk',
+  'glycerin': 'glycerin',
+  'glycerine': 'glycerin',
+  'shea butter': 'shea-butter',
+  'honey': 'honey',
+  'oats': 'oats',
+  'oat': 'oats',
+  'kesar': 'kesar',
+  'saffron': 'kesar',
+  'haldi': 'haldi',
+  'turmeric': 'haldi',
+  'rose': 'rose',
+  'pomegranate': 'pomegranate',
+  'orange': 'orange',
+  'ginger': 'ginger',
+  'rosemary': 'rosemary',
+}
+
+function getIngredientSlug(name: string): string | null {
+  const lower = name.toLowerCase().trim()
+  if (INGREDIENT_SLUG[lower]) return INGREDIENT_SLUG[lower]
+  for (const [key, slug] of Object.entries(INGREDIENT_SLUG)) {
+    if (lower.includes(key)) return slug
+  }
+  return null
 }
 
 const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: string }> = {
@@ -102,6 +133,13 @@ export default async function ProductPage({ params }: Props) {
   const related = allProducts
     .filter(p => p.slug !== slug && p.base === product.base && p.in_stock)
     .slice(0, 3)
+
+  const today = new Date().toISOString().split('T')[0]
+  const relevantComparisons = comparisons.filter(c =>
+    c.publishedAt !== null &&
+    c.publishedAt <= today &&
+    (c.relatedProductsA.includes(slug) || c.relatedProductsB.includes(slug))
+  )
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -295,14 +333,26 @@ export default async function ProductPage({ params }: Props) {
           <div className="mt-12 border-t border-[#D6CFC4] pt-10">
             <h2 className="font-serif text-2xl text-[#1A1A14] mb-4">Ingredients</h2>
             <ul className="flex flex-wrap gap-2">
-              {product.ingredients.map((ing) => (
-                <li
-                  key={ing}
-                  className="font-sans text-sm text-[#444] bg-white border border-[#D6CFC4] px-3 py-1 rounded-full"
-                >
-                  {ing}
-                </li>
-              ))}
+              {product.ingredients.map((ing) => {
+                const ingSlug = getIngredientSlug(ing)
+                return ingSlug ? (
+                  <li key={ing}>
+                    <Link
+                      href={`/ingredient/${ingSlug}`}
+                      className="font-sans text-sm text-[#444] bg-white border border-[#D6CFC4] px-3 py-1 rounded-full hover:border-[#1E5631] hover:text-[#1E5631] transition-colors inline-block"
+                    >
+                      {ing}
+                    </Link>
+                  </li>
+                ) : (
+                  <li
+                    key={ing}
+                    className="font-sans text-sm text-[#444] bg-white border border-[#D6CFC4] px-3 py-1 rounded-full"
+                  >
+                    {ing}
+                  </li>
+                )
+              })}
             </ul>
           </div>
         )}
@@ -347,6 +397,25 @@ export default async function ProductPage({ params }: Props) {
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Comparison links */}
+        {relevantComparisons.length > 0 && (
+          <div className="mt-10 border-t border-[#D6CFC4] pt-10">
+            <h2 className="font-serif text-2xl text-[#1A1A14] mb-4">How does this compare?</h2>
+            <ul className="space-y-2">
+              {relevantComparisons.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={c.canonicalOverride ?? `/compare/${c.slug}`}
+                    className="font-sans text-sm text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+                  >
+                    {c.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 

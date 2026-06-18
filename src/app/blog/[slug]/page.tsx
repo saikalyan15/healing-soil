@@ -4,9 +4,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
+import { getProducts } from '@/lib/products'
 import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
+import ProductCard from '@/components/ProductCard'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -86,6 +88,27 @@ function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   if (isNaN(d.getTime())) return dateStr
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+// ─── Per-post product links ────────────────────────────────────────────────────
+
+const relatedProductsBySlug: Record<string, string[]> = {
+  'goat-milk-soap-benefits': ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap'],
+  'goat-milk-soap-base-vs-glycerin-soap-base': ['honey-oats-glycerin-soap', 'neem-tulsi-goatmilk-soap', 'honey-and-oats-goatmilk-soap'],
+  'glycerin-vs-goat-milk-soap': ['honey-oats-glycerin-soap', 'neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+  'what-makes-goat-milk-soap-beneficial-for-sensitive-skin': ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'rice-rose-goatmilk-soap'],
+  'shea-butter-goat-milk-soap-dry-sensitive-skin': ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap', 'neem-tulsi-goatmilk-soap'],
+  'understanding-the-benefits-of-shea-butter-in-soap': ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+  'neem-tulsi-soap-benefits': ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+  'garden-to-bar-marigold-soap': ['marigold-soap'],
+  'pomegranate-peel-soap': ['pomegranate-goatmilk-soap', 'pomegranate-glycerine'],
+  'sls-free-soap-india': ['neem-tulsi-goatmilk-soap', 'honey-oats-glycerin-soap', 'sheabutter-kesar-gulab'],
+  'sls-parabens-soap-india': ['neem-tulsi-goatmilk-soap', 'honey-oats-glycerin-soap', 'sheabutter-kesar-gulab'],
+  'natural-soap-sensitive-skin-india': ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap'],
+  'handmade-soap-bangalore': ['neem-tulsi-goatmilk-soap', 'honey-oats-glycerin-soap', 'kesar-haldi-goat-milk-soap'],
+  'handmade-soap-goa': ['neem-tulsi-goatmilk-soap', 'honey-oats-glycerin-soap', 'sheabutter-kesar-gulab'],
+  'why-handmade-soap-lasts-longer': ['neem-tulsi-goatmilk-soap', 'honey-oats-glycerin-soap', 'sheabutter-kesar-gulab'],
+  'why-we-make-soap-in-small-batches': ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-glycerin-soap'],
 }
 
 // ─── FAQ mapping ───────────────────────────────────────────────────────────────
@@ -286,6 +309,11 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlugFromEither(slug)
   if (!post) notFound()
 
+  const relatedSlugs = relatedProductsBySlug[slug] ?? []
+  const relatedProducts = relatedSlugs.length > 0
+    ? (await getProducts().catch(() => [])).filter(p => relatedSlugs.includes(p.slug) && p.in_stock)
+    : []
+
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -397,23 +425,34 @@ export default async function BlogPostPage({ params }: Props) {
               <RandomReview />
             </div>
 
-            <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
-              <p className="mb-1 font-serif text-2xl text-[#1E5631]">
-                Try the starter bundle
-              </p>
-              <p className="mb-1 font-sans text-sm text-[#666666]">
-                Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
-              </p>
-              <p className="mb-4 font-sans text-xs text-[#999]">
-                Shipped in 2 days. Free shipping included.
-              </p>
-              <Link
-                href="/#bundle"
-                className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
-              >
-                See the starter bundle
-              </Link>
-            </div>
+            {relatedProducts.length > 0 ? (
+              <div className="mt-8">
+                <p className="mb-4 font-serif text-2xl text-[#1E5631]">Shop these soaps</p>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {relatedProducts.map((p) => (
+                    <ProductCard key={p.id} product={p} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
+                <p className="mb-1 font-serif text-2xl text-[#1E5631]">
+                  Try the starter bundle
+                </p>
+                <p className="mb-1 font-sans text-sm text-[#666666]">
+                  Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
+                </p>
+                <p className="mb-4 font-sans text-xs text-[#999]">
+                  Shipped in 2 days. Free shipping included.
+                </p>
+                <Link
+                  href="/#bundle"
+                  className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
+                >
+                  See the starter bundle
+                </Link>
+              </div>
+            )}
 
             <p className="mt-8 font-sans text-sm text-[#999]">
               Want the full picture?{' '}
