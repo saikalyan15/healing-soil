@@ -28,12 +28,17 @@ const config = {
     '/mental-health',
     '/regenerative-living',
     '/my-account',
+    '/distributor-soap-squares-catalog',
     '/icon.png',             // App Router favicon picked up as route
   ],
 
   robotsTxtOptions: {
     policies: [
-      { userAgent: '*', allow: '/', disallow: ['/*?wc-ajax='] },
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/*?wc-ajax=', '/distributor-soap-squares-catalog'],
+      },
     ],
     additionalSitemaps: [],
   },
