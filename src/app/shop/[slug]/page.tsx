@@ -9,6 +9,7 @@ import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
 import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
+import { canonicalSlugFor } from '@/lib/product-slugs'
 
 export const dynamic = 'force-dynamic'
 
@@ -55,7 +56,7 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
     description: 'Neem and tulsi in a pure glycerin base — Ayurvedic herbs known for skin-balancing properties. Made to order in South Goa. No SLS, no parabens. Ships across India.',
   },
-  'neem-tulsi-goatmilk-soap': {
+  'neem-tulsi-goat-milk-soap': {
     title: 'Neem Tulsi Goat Milk Soap | Handmade in Goa | Healing Soil',
     description: 'Creamy goat milk with sun-dried neem and tulsi. Richer lather than glycerin, with a gentle herbal scent and moisturising finish. Made to order in South Goa.',
   },
@@ -67,11 +68,11 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     title: 'Natural Loofah Soap | Handmade Glycerin Soap from Goa | Healing Soil',
     description: 'A full slice of sun-dried loofah embedded in a glycerin soap base. Textured surface, no synthetic scrubbers. Made to order in South Goa. Ships across India.',
   },
-  'sheabutter-kesar-gulab': {
+  'shea-butter-kesar-gulab': {
     title: 'Shea Butter Soap with Saffron and Rose | Handmade in Goa | Healing Soil',
     description: 'The most indulgent bar in our range. Shea butter, saffron, and rose — made to order in small batches in South Goa. No SLS or synthetic fragrance.',
   },
-  'pomegranate-goatmilk-soap': {
+  'pomegranate-goat-milk-soap': {
     title: 'Pomegranate Goat Milk Soap | Handmade in Goa | Healing Soil',
     description: 'Rich goat milk with pomegranate peel. Creamy lather, deep wine-red colour. Made to order in South Goa, ships across India.',
   },
@@ -98,18 +99,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProductBySlug(slug)
   if (!product) return {}
 
-  const override = PRODUCT_META_OVERRIDES[slug]
+  const canonicalSlug = canonicalSlugFor(product.slug)
+  const override = PRODUCT_META_OVERRIDES[canonicalSlug]
   const title = override?.title ?? `${product.name} | Healing Soil, Goa`
   const description = override?.description ?? `${product.description} Made by hand in South Goa. ${product.price_range}.`
 
   return {
     title,
     description,
-    alternates: { canonical: `/shop/${slug}` },
+    alternates: { canonical: `/shop/${canonicalSlug}` },
     openGraph: {
       title,
       description,
-      url: `/shop/${slug}`,
+      url: `/shop/${canonicalSlug}`,
       siteName: 'Healing Soil',
       images: product.image_url
         ? [{ url: product.image_url, alt: product.name }]
@@ -123,22 +125,23 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params
   const product = await getProductBySlug(slug)
   if (!product) notFound()
+  const canonicalSlug = canonicalSlugFor(product.slug)
 
-  const productSpecificReviews = reviewsForProduct(slug)
+  const productSpecificReviews = reviewsForProduct(canonicalSlug)
   const displayReviews = productSpecificReviews.length > 0
     ? productSpecificReviews.slice(0, 2)
     : featuredReviews.slice(0, 2)
 
   const allProducts = await getProducts().catch(() => [])
   const related = allProducts
-    .filter(p => p.slug !== slug && p.base === product.base && p.in_stock)
+    .filter(p => canonicalSlugFor(p.slug) !== canonicalSlug && p.base === product.base && p.in_stock)
     .slice(0, 3)
 
   const today = new Date().toISOString().split('T')[0]
   const relevantComparisons = comparisons.filter(c =>
     c.publishedAt !== null &&
     c.publishedAt <= today &&
-    (c.relatedProductsA.includes(slug) || c.relatedProductsB.includes(slug))
+    (c.relatedProductsA.includes(canonicalSlug) || c.relatedProductsB.includes(canonicalSlug))
   )
 
   const productSchema = {
@@ -216,7 +219,7 @@ export default async function ProductPage({ params }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Shop', item: 'https://healingsoil.in/shop' },
-      { '@type': 'ListItem', position: 2, name: product.name, item: `https://healingsoil.in/shop/${slug}` },
+      { '@type': 'ListItem', position: 2, name: product.name, item: `https://healingsoil.in/shop/${canonicalSlug}` },
     ],
   }
 

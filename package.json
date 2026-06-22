@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "sitemap": "next-sitemap",
-    "start": "next start"
+    "start": "next start",
+    "validate:products": "node scripts/validate-product-slugs.mjs"
   },
   "dependencies": {
     "@react-email/render": "^2.0.4",

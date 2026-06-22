@@ -24,7 +24,7 @@ export const ingredients: IngredientPage[] = [
     traditionalUse: 'Neem has been used in Ayurvedic personal care for centuries. It is one of the most widely used botanicals in traditional Indian care for a grounded, fresh wash.',
     feel: 'Earthy, natural scent that lingers gently. It provides a clean lather and pairs well with both goat milk and glycerin bases.',
     image: '/images/ingredients/ingredient-neem.png',
-    relatedProducts: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
         q: 'Does neem soap smell strong?',
@@ -51,7 +51,7 @@ export const ingredients: IngredientPage[] = [
     traditionalUse: 'Tulsi is traditionally used in Ayurvedic personal care for its herbaceous qualities. It is often paired with neem to create a balanced, traditional wash.',
     feel: 'Herbaceous and clean scent that provides a refreshing experience. It contributes to a gentle lather that leaves skin feeling soft.',
     image: '/images/ingredients/ingredient-tulsi.png',
-    relatedProducts: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
         q: 'What does tulsi soap smell like?',
@@ -77,7 +77,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Sourced from local farms near our property in Goa. We use goat milk as a complete base rather than adding it to a pre-made mix.',
     traditionalUse: 'Goat milk has been used in personal care for centuries. Its natural fats and vitamins survive the soap-making process and contribute to a soft, creamy wash.',
     feel: 'Creamy and soft lather that feels distinctly richer than a standard glycerin base. It is particularly suitable for sensitive or dry skin.',
-    relatedProducts: ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap', 'orange-goatmilk-soap', 'rice-rose-goatmilk-soap', 'pomegranate-goatmilk-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap', 'rice-rose-goat-milk-soap', 'pomegranate-goat-milk-soap'],
     faqs: [
       {
         q: 'Why use goat milk instead of water?',
@@ -103,7 +103,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Glycerin is not an added ingredient; it forms naturally during the saponification process and is kept intact in all Healing Soil soaps.',
     traditionalUse: 'Glycerin is a humectant that draws moisture from the air to the skin. Retaining it in the bar is a hallmark of traditional, small-batch soap-making.',
     feel: 'Light, clean lather that rinses away easily. It leaves the skin feeling hydrated and soft rather than stripped or tight.',
-    relatedProducts: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerine'],
+    relatedProducts: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerin-soap'],
     faqs: [
       {
         q: 'Why do commercial brands remove glycerin?',
@@ -129,7 +129,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Sourced from West Africa where it is traditionally extracted from the nuts of the shea tree using time-honoured methods.',
     traditionalUse: 'Shea butter has been used in personal care for generations. In soap, it contributes to a rich feel that is highly valued for mature or very dry skin.',
     feel: 'Rich, dense lather that provides a conditioning sensation. It is the most nourishing of our three bases and leaves skin feeling very soft.',
-    relatedProducts: ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Will shea butter soap clog my pores?',
@@ -155,7 +155,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Locally sourced from suppliers in Goa. We use real honey in our soap batches, never synthetic honey fragrances or extracts.',
     traditionalUse: 'Honey has been used in personal care since ancient times. It is valued for its ability to draw moisture to the skin and its gentle presence in handmade soap.',
     feel: 'Smooth texture with a very mild, naturally sweet scent. It leaves the skin feeling soft and moisturised after every wash.',
-    relatedProducts: ['honey-oats-glycerin-soap', 'honey-and-oats-goatmilk-soap', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['honey-oats-glycerin-soap', 'honey-oats-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Can I use honey soap on my face?',
@@ -182,7 +182,7 @@ export const ingredients: IngredientPage[] = [
     traditionalUse: 'Oats have a long history in personal care for their mild and soothing properties. In soap, they provide a very light texture that helps with a gentle clean.',
     feel: 'Mildly textured feel that many find helpful for a thorough wash. It is suitable for sensitive skin and often paired with honey for a soft finish.',
     image: '/images/ingredients/ingredient-oats.png',
-    relatedProducts: ['honey-oats-glycerin-soap', 'honey-and-oats-goatmilk-soap'],
+    relatedProducts: ['honey-oats-glycerin-soap', 'honey-oats-goat-milk-soap'],
     faqs: [
       {
         q: 'Are the oats scratchy on skin?',
@@ -208,7 +208,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Our saffron is sourced from trusted producers in Kashmir, ensuring a high-quality botanical addition to our soap batches.',
     traditionalUse: 'Kesar has been used in Ayurvedic personal care for generations. It is traditionally valued for its gentle nature and its contribution to a rich, golden wash.',
     feel: 'Warm and smooth feel with a subtle, earthy floral scent. It contributes to a creamy lather that is suitable for all skin types.',
-    relatedProducts: ['kesar-haldi-goat-milk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['kesar-haldi-goat-milk-soap', 'shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Does kesar soap stain the skin?',
@@ -235,7 +235,7 @@ export const ingredients: IngredientPage[] = [
     traditionalUse: 'Haldi is traditionally used in Ayurvedic personal care. It is a cornerstone of Indian routines, valued for its gentle cleansing properties and traditional framing.',
     feel: 'Earthy and grounded feel with a natural, herbaceous scent. It contributes to a soft lather that leaves skin feeling refreshed.',
     image: '/images/ingredients/ingredient-haldi.png',
-    relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Will turmeric soap turn my skin yellow?',
@@ -261,7 +261,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'We use rose oil and dried petals sourced from Indian producers who specialise in traditional floral extractions.',
     traditionalUse: 'Rose has been used in personal care across cultures for centuries. In traditional routines, it is valued for its mild nature and pleasing floral scent.',
     feel: 'Soft and floral feel with a delicate, natural rose scent. It provides a gentle lather that contributes to a moisturising wash.',
-    relatedProducts: ['sheabutter-kesar-gulab', 'rice-rose-goatmilk-soap'],
+    relatedProducts: ['shea-butter-kesar-gulab', 'rice-rose-goat-milk-soap'],
     faqs: [
       {
         q: 'Do you use synthetic rose fragrance?',
@@ -288,7 +288,7 @@ export const ingredients: IngredientPage[] = [
     traditionalUse: 'Pomegranate is used in traditional care for its rich and nourishing presence. It is often included in routines for its ability to provide a grounded wash.',
     feel: 'Deep and rich feel with a subtle, fruity undertone. It contributes to a dense, creamy lather that leaves skin feeling soft.',
     image: '/images/ingredients/ingredient-pomegranate.png',
-    relatedProducts: ['pomegranate-glycerine', 'pomegranate-goatmilk-soap'],
+    relatedProducts: ['pomegranate-glycerin-soap', 'pomegranate-goat-milk-soap'],
     faqs: [
       {
         q: 'What does pomegranate soap smell like?',
@@ -314,7 +314,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'We use natural orange oil derived from Indian citrus fruits, selected for its bright and authentic aromatic profile.',
     traditionalUse: 'Citrus ingredients have been used in personal care for their bright, uplifting scent. Orange is traditionally valued for its ability to provide a fresh feel.',
     feel: 'Bright and fresh feel with a natural citrus scent. It provides an uplifting wash and a gentle lather that cleans without stripping.',
-    relatedProducts: ['orange-goatmilk-soap'],
+    relatedProducts: ['orange-goat-milk-soap'],
     faqs: [
       {
         q: 'Is the orange scent strong?',

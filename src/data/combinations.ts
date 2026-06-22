@@ -26,7 +26,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Goat milk is used as the complete soap base rather than added as a supplement. Its natural fats create a creamy, dense lather that feels noticeably different from a standard bar.',
     whyCombination: 'Neem and tulsi carry an earthy, herbaceous character that pairs naturally with the soft, creamy base of goat milk. The botanicals provide grounding while the milk base keeps the bar gentle enough for everyday use.',
     feel: 'A rich, earthy lather with a natural farm scent. The goat milk base gives the bar a creamy quality that rinses cleanly and leaves skin feeling soft.',
-    relatedProducts: ['neem-tulsi-goatmilk-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap'],
     faqs: [
       {
         q: 'What is neem tulsi goat milk soap?',
@@ -82,7 +82,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'The goat milk base creates a dense, creamy lather with natural fats that make the bar feel distinctly richer than a standard soap. It is particularly comfortable for dry or sensitive skin types.',
     whyCombination: 'Honey and oats are both traditionally used for their mild, gentle qualities in personal care. Combined with a goat milk base, they create a bar with a creamy texture and a naturally sweet, soft scent.',
     feel: 'Creamy, smooth lather with a naturally mild sweetness. The oats add a gentle texture and the goat milk base leaves skin feeling soft after rinsing.',
-    relatedProducts: ['honey-and-oats-goatmilk-soap'],
+    relatedProducts: ['honey-oats-goat-milk-soap'],
     faqs: [
       {
         q: 'What does honey goat milk soap feel like?',
@@ -138,7 +138,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Shea butter provides the richest and most conditioning of our three bases. It creates a dense lather with a soft feel that is particularly suited to skin that needs more nourishment.',
     whyCombination: 'Honey, kesar and haldi are all traditionally used together in Indian personal care routines. Paired with a shea butter base, they create a bar with a warm, earthy character and a rich, luxurious feel.',
     feel: 'Rich, dense lather with a warm, earthy scent from the kesar and haldi. It rinses completely and leaves skin feeling soft and nourished.',
-    relatedProducts: ['honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'What is in the honey shea butter soap?',
@@ -194,7 +194,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Shea butter creates the richest base we use. It produces a dense, conditioning lather that feels luxurious and leaves skin feeling very soft after rinsing.',
     whyCombination: 'Kesar and rose are a classic pairing in Ayurvedic personal care — the warm earthiness of saffron balanced by the gentle floral note of rose. The shea butter base adds depth and richness to the wash.',
     feel: 'Rich, creamy lather with a warm floral scent. It rinses completely and leaves skin feeling very soft and nourished.',
-    relatedProducts: ['sheabutter-kesar-gulab'],
+    relatedProducts: ['shea-butter-kesar-gulab'],
     faqs: [
       {
         q: 'What does kesar rose shea butter soap smell like?',
@@ -222,7 +222,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'The goat milk base creates a creamy, dense lather with natural fats. It pairs well with the bright orange scent, grounding it in a soft, nourishing wash experience.',
     whyCombination: 'The fresh, bright citrus character of orange contrasts pleasantly with the creamy, mild goat milk base. The result is a bar that feels uplifting and fresh while remaining gentle and nourishing.',
     feel: 'Creamy lather with a bright, natural citrus scent. It rinses cleanly and leaves skin feeling refreshed and soft.',
-    relatedProducts: ['orange-goatmilk-soap'],
+    relatedProducts: ['orange-goat-milk-soap'],
     faqs: [
       {
         q: 'What does orange goat milk soap smell like?',
@@ -250,7 +250,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Goat milk creates a dense, creamy lather as the full soap base. Its natural fats make the bar feel richer and more nourishing than a standard glycerin bar.',
     whyCombination: 'Pomegranate\'s rich, deep character pairs well with the creamy softness of a goat milk base. Together they create a bar that feels indulgent but remains gentle enough for daily use.',
     feel: 'Dense, creamy lather with a subtle, fruity undertone. It rinses completely and leaves skin feeling soft and nourished.',
-    relatedProducts: ['pomegranate-goatmilk-soap'],
+    relatedProducts: ['pomegranate-goat-milk-soap'],
     faqs: [
       {
         q: 'What does pomegranate goat milk soap feel like?',
@@ -278,7 +278,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Natural glycerin is retained in the bar during the soap-making process. As a humectant, it draws moisture during the wash and creates a light, clean lather that rinses away without heaviness.',
     whyCombination: 'Pomegranate\'s rich character is balanced by the clean, light nature of a glycerin base. The result is a bar that feels nourishing without being heavy — a good choice for oily or normal skin types.',
     feel: 'Light, clean lather with a subtle, fruity depth from the pomegranate. It rinses away completely and leaves skin feeling refreshed.',
-    relatedProducts: ['pomegranate-glycerine'],
+    relatedProducts: ['pomegranate-glycerin-soap'],
     faqs: [
       {
         q: 'What is pomegranate glycerin soap?',
@@ -306,7 +306,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Goat milk as the full soap base creates a creamy, soft lather with natural fats. It pairs gently with the delicate floral notes of rose for a nourishing daily experience.',
     whyCombination: 'Rose and rice are traditional pairings in Indian personal care — the floral note of rose complemented by the mild texture of rice. The goat milk base adds creaminess and softness to complete the bar.',
     feel: 'Creamy, soft lather with a delicate natural rose scent. It rinses completely and leaves skin feeling very soft.',
-    relatedProducts: ['rice-rose-goatmilk-soap'],
+    relatedProducts: ['rice-rose-goat-milk-soap'],
     faqs: [
       {
         q: 'What does rose goat milk soap smell like?',

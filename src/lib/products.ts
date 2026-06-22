@@ -1,5 +1,6 @@
 // lib/products.ts — SoapLedger API integration for Healing Soil products
 import { unstable_cache } from 'next/cache'
+import { canonicalProductName, canonicalSlugFor, productSlugMatches } from './product-slugs'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -65,8 +66,8 @@ function normalise(raw: SoapLedgerProduct): Product {
   const price = parseFloat(raw.price) || 0
   return {
     id: raw.id,
-    name: raw.name,
-    slug: raw.slug,
+    name: canonicalProductName(raw.name),
+    slug: canonicalSlugFor(raw.slug),
     base: raw.base_type,
     price,
     price_range: raw.price_range ?? `₹${price}`,
@@ -134,17 +135,5 @@ export async function getFeaturedProducts(): Promise<Product[]> {
  */
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const all = await getProducts()
-  
-  // Handle slug aliases for SEO consistency
-  const effectiveSlug = slug === 'orange-glycerin-soap' ? 'orange' : slug
-  
-  const product = all.find((p) => p.slug === effectiveSlug)
-  if (!product) return null
-
-  // If we matched via an alias, return the product with the alias slug
-  if (slug === 'orange-glycerin-soap') {
-    return { ...product, slug: 'orange-glycerin-soap' }
-  }
-
-  return product
+  return all.find((p) => productSlugMatches(p.slug, slug)) ?? null
 }

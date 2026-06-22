@@ -21,7 +21,7 @@ export const decisions: DecisionPage[] = [
     intro: 'Dry skin feels tight after washing because most commercial soaps contain SLS, a detergent that strips the skin\'s natural oils. Switching the base changes the experience completely. The right soap leaves skin feeling soft and conditioned rather than stripped.',
     primaryBase: 'Shea Butter',
     recommendation: 'Shea butter is the richest base we make. It contains natural fats that survive the soap-making process and are deposited on skin during the wash, leaving a conditioning feel behind. Goat milk is the lighter option — still nourishing, better for mild dryness. Start with shea butter if your skin feels tight after every shower.',
-    recommendedProducts: ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap', 'neem-tulsi-goatmilk-soap'],
+    recommendedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap', 'neem-tulsi-goat-milk-soap'],
     relatedComparisons: ['goat-milk-vs-shea-butter-soap', 'shea-butter-vs-glycerin-soap'],
     faqs: [
       {
@@ -81,7 +81,7 @@ export const decisions: DecisionPage[] = [
     intro: 'As skin matures it tends to feel drier and less supple after washing. This is partly because natural oil production slows, and partly because SLS-based soaps accelerate moisture loss. A richer soap base makes a noticeable difference — the skin feels soft after washing rather than tight.',
     primaryBase: 'Shea Butter',
     recommendation: 'Shea butter provides the most conditioning wash of our three bases. The natural fats in shea butter survive the soap-making process and are left on skin during the wash, providing a soft, nourished feel without a separate moisturising step. For those who prefer something slightly lighter, goat milk is the second choice.',
-    recommendedProducts: ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap', 'rice-rose-goatmilk-soap'],
+    recommendedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap', 'rice-rose-goat-milk-soap'],
     relatedComparisons: ['goat-milk-vs-shea-butter-soap', 'shea-butter-vs-glycerin-soap'],
     faqs: [
       {
@@ -107,7 +107,7 @@ export const decisions: DecisionPage[] = [
     intro: 'The difference between handmade and commercial soap is not about gender — it is about what is in the bar. Most commercial soap marketed to men contains SLS and synthetic fragrance. The result is a clean that comes at the cost of stripping the skin\'s natural barrier. These soaps feel different: a complete clean, no stripped feeling, no synthetic scent that lingers all day.',
     primaryBase: 'Glycerin',
     recommendation: 'Ginger and rosemary is the most popular choice for those who want a clean, aromatic wash without synthetic fragrance. The scent is natural and fades after the wash — it does not linger like a perfumed commercial bar. Neem and tulsi is the earthy alternative, grounded and traditional. Both are in a glycerin base for a thorough, light clean.',
-    recommendedProducts: ['ginger-rosemary-glycerin-soap', 'neem-tulsi-glycerin-soap', 'neem-tulsi-goatmilk-soap'],
+    recommendedProducts: ['ginger-rosemary-glycerin-soap', 'neem-tulsi-glycerin-soap', 'neem-tulsi-goat-milk-soap'],
     relatedComparisons: ['handmade-vs-commercial-soap', 'glycerin-vs-goat-milk-soap'],
     faqs: [
       {
@@ -137,7 +137,7 @@ export const decisions: DecisionPage[] = [
     intro: 'Skin in its forties tends to prefer a more nourishing wash. Not because it needs medical treatment — but because the daily stripping of natural oils by SLS-based soaps accumulates over years, and a gentler bar makes the difference immediately noticeable. These soaps use traditional Ayurvedic ingredients — kesar, rose, goat milk — chosen for the richness of the wash they provide.',
     primaryBase: 'Shea Butter',
     recommendation: 'The kesar and gulab shea butter bar is our most nourishing option — shea butter with saffron and rose, three ingredients with a long history in traditional Indian personal care. The rice and rose goat milk bar is lighter but still conditioning, with a gentle floral presence. Both are SLS-free and made without synthetic fragrance.',
-    recommendedProducts: ['sheabutter-kesar-gulab', 'rice-rose-goatmilk-soap', 'honey-kesar-haldi-sheabutter-soap'],
+    recommendedProducts: ['shea-butter-kesar-gulab', 'rice-rose-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
     relatedComparisons: ['goat-milk-vs-shea-butter-soap', 'shea-butter-vs-glycerin-soap'],
     faqs: [
       {
@@ -163,7 +163,7 @@ export const decisions: DecisionPage[] = [
     intro: 'The handmade soap market in India has grown considerably, but the word "handmade" is not regulated — commercial brands use it loosely. Genuinely handmade soap is made in small batches, retains natural glycerin, uses no SLS or synthetic fragrance, and is made to order rather than held in warehouse stock. This is what we make in South Goa.',
     primaryBase: 'Goat Milk',
     recommendation: 'Our most popular bars reflect the range: neem and tulsi goat milk for those who want traditional Ayurvedic botanicals with a creamy base; kesar and haldi goat milk for a warm, golden wash; honey and oats glycerin for a light, gentle daily bar. Each is made to order, shipped in two days.',
-    recommendedProducts: ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-glycerin-soap', 'sheabutter-kesar-gulab'],
+    recommendedProducts: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
     relatedComparisons: ['handmade-vs-commercial-soap', 'glycerin-vs-goat-milk-soap', 'goat-milk-vs-shea-butter-soap'],
     faqs: [
       {
@@ -193,7 +193,7 @@ export const decisions: DecisionPage[] = [
     intro: 'Goa\'s coastal humidity is relentless for much of the year. Heavy soaps that leave a conditioning film on the skin feel uncomfortable in this climate — you want something that cleanses thoroughly and rinses clean. The good news is that the answer is a gentler soap, not a harsher one.',
     primaryBase: 'Glycerin',
     recommendation: 'In Goa\'s humidity, glycerin is the right base — it cleanses thoroughly and rinses away completely without leaving any residue. The orange goat milk bar is a popular choice for those who want something slightly richer: the natural citrus scent is uplifting and the goat milk base is light enough to wear well in a coastal climate. Neem and tulsi in glycerin is the daily workhorse.',
-    recommendedProducts: ['orange-goatmilk-soap', 'neem-tulsi-glycerin-soap', 'honey-oats-glycerin-soap'],
+    recommendedProducts: ['orange-goat-milk-soap', 'neem-tulsi-glycerin-soap', 'honey-oats-glycerin-soap'],
     relatedComparisons: ['glycerin-vs-goat-milk-soap', 'handmade-vs-commercial-soap'],
     faqs: [
       {
@@ -223,7 +223,7 @@ export const decisions: DecisionPage[] = [
     intro: 'Monsoon in India changes what your skin needs. The combination of humidity, sweat, and frequent washing calls for a soap that cleanses thoroughly without over-stripping. Neem and tulsi have been staples of Indian personal care during the rainy season for generations — both are traditionally valued for their role in a clean, grounded daily wash.',
     primaryBase: 'Glycerin',
     recommendation: 'Neem and tulsi glycerin is the monsoon bar we reach for first. The glycerin base rinses clean in humidity, and neem and tulsi are traditional Ayurvedic botanicals with a long history in Indian personal care during the rainy season. For those who prefer a creamier wash, neem tulsi goat milk provides the same botanicals in a richer base.',
-    recommendedProducts: ['neem-tulsi-glycerin-soap', 'neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap'],
+    recommendedProducts: ['neem-tulsi-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap'],
     relatedComparisons: ['glycerin-vs-goat-milk-soap', 'neem-vs-tulsi-soap', 'handmade-vs-commercial-soap'],
     faqs: [
       {

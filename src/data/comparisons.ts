@@ -35,8 +35,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Soft and creamy'
     },
     verdict: 'If you prefer a light wash that leaves skin feeling clean without heaviness, glycerin is a practical choice. If you want a creamier lather and a more nourishing feel, goat milk is traditionally preferred for sensitive or dry skin.',
-    relatedProductsA: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerine'],
-    relatedProductsB: ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap', 'orange-goatmilk-soap'],
+    relatedProductsA: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerin-soap'],
+    relatedProductsB: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap'],
     faqs: [
       {
         q: 'Is glycerin soap better for oily skin?',
@@ -73,8 +73,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Very rich'
     },
     verdict: 'Goat milk is an excellent all-rounder for daily use on sensitive skin. Shea butter is the richer option, providing a more intensive conditioning feel that is helpful when skin feels particularly dry or tight.',
-    relatedProductsA: ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'rice-rose-goatmilk-soap', 'pomegranate-goatmilk-soap'],
-    relatedProductsB: ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProductsA: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'rice-rose-goat-milk-soap', 'pomegranate-goat-milk-soap'],
+    relatedProductsB: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Which is better for very dry skin?',
@@ -111,7 +111,7 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Light'
     },
     verdict: 'These two bases sit at opposite ends of the feel spectrum. Shea butter is for those who want their soap to leave a conditioning layer behind. Glycerin is for those who want a simple, light wash that cleans without residue.',
-    relatedProductsA: ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProductsA: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     relatedProductsB: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap'],
     faqs: [
       {
@@ -145,8 +145,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Herbaceous and clean'
     },
     verdict: 'Neem and Tulsi are often used together because they complement each other well. Neem is traditionally used for its cleansing properties, while Tulsi is valued for its herbaceous presence in Ayurvedic personal care.',
-    relatedProductsA: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
-    relatedProductsB: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProductsA: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProductsB: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
         q: 'Where do you source your Neem and Tulsi?',
@@ -179,8 +179,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Textured and soft'
     },
     verdict: 'Honey is ideal if you want a smooth bar that leaves skin feeling moisturised. Oats provide a very mild texture to the wash that many find helpful for a thorough yet gentle clean.',
-    relatedProductsA: ['honey-and-oats-goatmilk-soap', 'honey-oats-glycerin-soap', 'honey-kesar-haldi-sheabutter-soap'],
-    relatedProductsB: ['honey-and-oats-goatmilk-soap', 'honey-oats-glycerin-soap'],
+    relatedProductsA: ['honey-oats-goat-milk-soap', 'honey-oats-glycerin-soap', 'honey-kesar-haldi-shea-butter-soap'],
+    relatedProductsB: ['honey-oats-goat-milk-soap', 'honey-oats-glycerin-soap'],
     faqs: [
       {
         q: 'Do you use real honey?',
@@ -213,8 +213,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Warm and golden'
     },
     verdict: 'The choice between these two depends on the experience you prefer. Neem and tulsi offer an earthy, herbaceous wash that feels grounded and fresh. Kesar and haldi provide a warmer, more traditional feel that many find gentle for daily use. Both are available in our goat milk and glycerin bases.',
-    relatedProductsA: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
-    relatedProductsB: ['kesar-haldi-goat-milk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProductsA: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProductsB: ['kesar-haldi-goat-milk-soap', 'shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Which one is better for daily use?',
@@ -252,7 +252,7 @@ export const comparisons: ComparisonPage[] = [
     },
     verdict: 'Ginger and rosemary provide an aromatic, uplifting experience that is excellent for a morning shower. Neem and tulsi offer a more grounded, traditional wash with an earthy scent profile. Both options provide a gentle lather that cleans without stripping the skin.',
     relatedProductsA: ['ginger-rosemary-glycerin-soap'],
-    relatedProductsB: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProductsB: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
         q: 'Does ginger feel spicy on the skin?',
@@ -289,8 +289,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Warm and golden'
     },
     verdict: 'Honey and oats are ideal if you prefer a bar with a very mild texture and a moisturising feel. Kesar and haldi are for those who value traditional Ayurvedic ingredients and a warm, smooth wash. Both are excellent choices for those seeking a gentle alternative to commercial soap.',
-    relatedProductsA: ['honey-oats-glycerin-soap', 'honey-and-oats-goatmilk-soap'],
-    relatedProductsB: ['kesar-haldi-goat-milk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProductsA: ['honey-oats-glycerin-soap', 'honey-oats-goat-milk-soap'],
+    relatedProductsB: ['kesar-haldi-goat-milk-soap', 'shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Is the honey real?',
@@ -327,8 +327,8 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Bright and fresh'
     },
     verdict: 'Pomegranate is the choice for those who want a richer, more grounded feel during their wash. Orange is ideal for those who prefer a bright, citrusy scent to start their day. Both are available in our nourishing goat milk base, providing a creamy lather.',
-    relatedProductsA: ['pomegranate-glycerine', 'pomegranate-goatmilk-soap'],
-    relatedProductsB: ['orange-goatmilk-soap'],
+    relatedProductsA: ['pomegranate-glycerin-soap', 'pomegranate-goat-milk-soap'],
+    relatedProductsB: ['orange-goat-milk-soap'],
     faqs: [
       {
         q: 'Do these soaps use synthetic scents?',
@@ -365,7 +365,7 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Clean but stripping'
     },
     verdict: 'The primary difference between the two is glycerin. Commercial manufacturers typically remove the natural glycerin to sell separately, replacing it with SLS for lather. Handmade soap keeps the glycerin in the bar, providing a humectant wash that leaves skin feeling soft rather than stripped.',
-    relatedProductsA: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerine', 'neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap', 'orange-goatmilk-soap', 'rice-rose-goatmilk-soap', 'pomegranate-goatmilk-soap', 'sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProductsA: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap', 'rice-rose-goat-milk-soap', 'pomegranate-goat-milk-soap', 'shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     relatedProductsB: [],
     faqs: [
       {
@@ -407,7 +407,7 @@ export const comparisons: ComparisonPage[] = [
       feel: 'Very rich and creamy'
     },
     verdict: 'Both goat milk and sheep milk soap are gentle alternatives to standard commercial bars. Sheep milk has a slightly higher fat content, which can make the bar feel richer. Goat milk is more commonly used in Indian handmade soap and is widely recognised for its gentle, nourishing lather. Our soaps use a goat milk base sourced for quality and consistency.',
-    relatedProductsA: ['neem-tulsi-goatmilk-soap', 'kesar-haldi-goat-milk-soap', 'honey-and-oats-goatmilk-soap', 'orange-goatmilk-soap', 'rice-rose-goatmilk-soap', 'pomegranate-goatmilk-soap'],
+    relatedProductsA: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap', 'rice-rose-goat-milk-soap', 'pomegranate-goat-milk-soap'],
     relatedProductsB: [],
     faqs: [
       {
