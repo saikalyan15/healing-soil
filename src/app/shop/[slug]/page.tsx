@@ -49,8 +49,8 @@ function getIngredientSlug(name: string): string | null {
 
 const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: string }> = {
   'marigold-soap': {
-    title: 'Handmade Marigold Soap from Goa | Ships Across India | Healing Soil',
-    description: 'Golden marigold petals from our Goa farm, handcrafted into a bar. Creamy lather, earthy floral scent. No SLS or synthetic fragrance. Ships India-wide.',
+    title: 'Marigold Soap Handmade in Goa | Natural Floral Bar | Healing Soil',
+    description: 'Marigold soap with golden petals, creamy lather, and an earthy floral scent. Handmade in South Goa, SLS-free, and ships across India.',
   },
   'neem-tulsi-glycerin-soap': {
     title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
@@ -89,8 +89,8 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Free shipping across India.',
   },
   'travel-soaps': {
-    title: 'Travel Size Handmade Soap | 30g Mini Bars from Goa | Healing Soil',
-    description: 'Compact 30g bars of our handmade soaps — same natural ingredients, same small-batch quality. Perfect for travel or to try before committing to a full bar.',
+    title: 'Small Travel Soap Bars | 30g Handmade Mini Soaps | Healing Soil',
+    description: 'Small travel soap bars in 30g sizes. Handmade in Goa, easy to pack, SLS-free, and ideal for trips, guest kits, or trying different soaps.',
   },
 }
 

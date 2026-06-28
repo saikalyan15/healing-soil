@@ -60,6 +60,9 @@ const config = {
 
     const blogSlugs = getSlugsByDir('blog')
     const storySlugs = getSlugsByDir('stories')
+    const redirectedBlogSlugs = new Set([
+      'goat-milk-soap-base-vs-glycerin-soap-base',
+    ])
 
     const staticPaths = [
       '/',
@@ -127,6 +130,7 @@ const config = {
       'honey-oats-glycerin-soap',
       'kesar-haldi-goat-milk-soap',
       'loofah-soaps',
+      'marigold-soap',
       'neem-tulsi-glycerin-soap',
       'neem-tulsi-goatmilk-soap',
       'orange-glycerin-soap',
@@ -153,12 +157,14 @@ const config = {
         priority: 0.9,
         lastmod: new Date().toISOString(),
       })),
-      ...blogSlugs.map((slug) => ({
-        loc: `/blog/${slug}`,
-        changefreq: 'monthly',
-        priority: 0.8,
-        lastmod: new Date().toISOString(),
-      })),
+      ...blogSlugs
+        .filter((slug) => !redirectedBlogSlugs.has(slug))
+        .map((slug) => ({
+          loc: `/blog/${slug}`,
+          changefreq: 'monthly',
+          priority: 0.8,
+          lastmod: new Date().toISOString(),
+        })),
       ...storySlugs
         .filter((slug) => !excludedStorySlugs.has(slug))
         .map((slug) => ({
