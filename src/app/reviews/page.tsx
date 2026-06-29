@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import ReviewCard from '@/components/ReviewCard'
-import { featuredReviews, shortReviews } from '@/lib/reviews'
+import { featuredReviews, reviews, shortReviews } from '@/lib/reviews'
 
 export const metadata: Metadata = {
   title: 'Customer Reviews — Healing Soil',
   description:
-    'Read what customers say about Healing Soil handmade soaps from Goa. Real reviews from real people — no edits, no stars.',
+    'Read what customers say about Healing Soil handmade soaps from Goa. Real reviews from real people, lightly formatted for clarity.',
   alternates: { canonical: '/reviews' },
   openGraph: {
     title: 'Customer Reviews — Healing Soil',
@@ -29,7 +29,7 @@ export default function ReviewsPage() {
       ratingValue: '5',
       bestRating: '5',
       worstRating: '1',
-      reviewCount: '10',
+      reviewCount: String(reviews.length),
     },
     review: [
       {
@@ -56,6 +56,12 @@ export default function ReviewsPage() {
         reviewBody: 'Absolutely loving the honey oats glycerine soap. It is very gentle on the skin. Even without the heavy lather, it leaves me feeling so refreshed.',
         reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
       },
+      {
+        '@type': 'Review',
+        author: { '@type': 'Person', name: 'Harsha Singh' },
+        reviewBody: 'The smell and texture are amazing. It feels really nice so far.',
+        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      },
     ],
   }
 
@@ -71,7 +77,7 @@ export default function ReviewsPage() {
           What our customers say
         </h1>
         <p className="mb-12 font-sans text-base text-[#666666]">
-          Real feedback from real customers. No edits, no stars. Just their words.
+          Real feedback from real customers, lightly formatted for clarity.
         </p>
 
         {/* Featured reviews */}

@@ -118,6 +118,15 @@ export const reviews: Review[] = [
       'I tried the Ginger Rosemary Glycerin Soap for a week after switching from Himalaya. The difference was remarkable. My skin felt genuinely better.',
     featured: true,
   },
+  {
+    id: 'review-012',
+    author: 'Harsha Singh',
+    location: 'Jaipur',
+    rating: 5,
+    comment:
+      'The smell and texture are amazing. It feels really nice so far.',
+    featured: false,
+  },
 ]
 
 // ─── Derived exports ───────────────────────────────────────────────────────────
