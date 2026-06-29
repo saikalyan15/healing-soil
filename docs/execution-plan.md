@@ -289,17 +289,17 @@ To release: `node scripts/stamp-batch.js src/data/combinations.ts 13`
 
 | Combination slug | Primary keyword | Product slug |
 |---|---|---|
-| `/neem-goat-milk-soap` | neem goat milk soap India | neem-tulsi-goatmilk-soap |
+| `/neem-goat-milk-soap` | neem goat milk soap India | neem-tulsi-goat-milk-soap |
 | `/neem-glycerin-soap` | neem glycerin soap India | neem-tulsi-glycerin-soap |
-| `/honey-goat-milk-soap` | honey goat milk soap India | honey-and-oats-goatmilk-soap |
+| `/honey-goat-milk-soap` | honey goat milk soap India | honey-oats-goat-milk-soap |
 | `/honey-glycerin-soap` | honey glycerin soap India | honey-oats-glycerin-soap |
-| `/honey-shea-butter-soap` | honey shea butter soap India | honey-kesar-haldi-sheabutter-soap |
+| `/honey-shea-butter-soap` | honey shea butter soap India | honey-kesar-haldi-shea-butter-soap |
 | `/kesar-goat-milk-soap` | kesar goat milk soap India | kesar-haldi-goat-milk-soap |
-| `/kesar-shea-butter-soap` | kesar shea butter soap | sheabutter-kesar-gulab |
-| `/orange-goat-milk-soap` | orange goat milk soap India | orange-goatmilk-soap |
-| `/pomegranate-goat-milk-soap` | pomegranate goat milk soap | pomegranate-goatmilk-soap |
-| `/pomegranate-glycerin-soap` | pomegranate glycerin soap | pomegranate-glycerine |
-| `/rose-goat-milk-soap` | rose goat milk soap India | rice-rose-goatmilk-soap |
+| `/kesar-shea-butter-soap` | kesar shea butter soap | shea-butter-kesar-gulab |
+| `/orange-goat-milk-soap` | orange goat milk soap India | orange-goat-milk-soap |
+| `/pomegranate-goat-milk-soap` | pomegranate goat milk soap | pomegranate-goat-milk-soap |
+| `/pomegranate-glycerin-soap` | pomegranate glycerin soap | pomegranate-glycerin-soap |
+| `/rose-goat-milk-soap` | rose goat milk soap India | rice-rose-goat-milk-soap |
 | `/ginger-glycerin-soap` | ginger glycerin soap India | ginger-rosemary-glycerin-soap |
 | `/ginger-goat-milk-soap` | ginger goat milk soap India | ginger-rosemary-goat-milk-soap |
 

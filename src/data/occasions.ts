@@ -14,15 +14,15 @@ const allProductSlugs = [
   'honey-oats-glycerin-soap',
   'neem-tulsi-glycerin-soap',
   'ginger-rosemary-glycerin-soap',
-  'pomegranate-glycerine',
-  'neem-tulsi-goatmilk-soap',
+  'pomegranate-glycerin-soap',
+  'neem-tulsi-goat-milk-soap',
   'kesar-haldi-goat-milk-soap',
-  'honey-and-oats-goatmilk-soap',
-  'orange-goatmilk-soap',
-  'rice-rose-goatmilk-soap',
-  'pomegranate-goatmilk-soap',
-  'sheabutter-kesar-gulab',
-  'honey-kesar-haldi-sheabutter-soap',
+  'honey-oats-goat-milk-soap',
+  'orange-goat-milk-soap',
+  'rice-rose-goat-milk-soap',
+  'pomegranate-goat-milk-soap',
+  'shea-butter-kesar-gulab',
+  'honey-kesar-haldi-shea-butter-soap',
 ]
 
 export const occasions: OccasionPage[] = [
@@ -82,14 +82,14 @@ export const occasions: OccasionPage[] = [
     tagline: 'Gentle cleansing with a moisturising feel. We use nourishing bases like shea butter and goat milk to ensure your skin feels soft after every wash.',
     content: 'Dry skin requires a soap that cleans without stripping away natural oils. Our small-batch process retains glycerin, a natural humectant that helps skin stay hydrated. By using bases rich in natural fats, we provide a creamy lather that contributes to a soft and comfortable skin feel.',
     relatedProducts: [
-      'sheabutter-kesar-gulab',
-      'honey-kesar-haldi-sheabutter-soap',
-      'neem-tulsi-goatmilk-soap',
+      'shea-butter-kesar-gulab',
+      'honey-kesar-haldi-shea-butter-soap',
+      'neem-tulsi-goat-milk-soap',
       'kesar-haldi-goat-milk-soap',
-      'honey-and-oats-goatmilk-soap',
-      'orange-goatmilk-soap',
-      'rice-rose-goatmilk-soap',
-      'pomegranate-goatmilk-soap',
+      'honey-oats-goat-milk-soap',
+      'orange-goat-milk-soap',
+      'rice-rose-goat-milk-soap',
+      'pomegranate-goat-milk-soap',
     ],
     faqs: [
       {
@@ -115,13 +115,13 @@ export const occasions: OccasionPage[] = [
     tagline: 'A sensory journey through natural botanicals. Discover our collection of gentle, aromatic bars designed for a nourishing personal care routine.',
     content: 'Our collection for her features soft floral notes and moisturising ingredients. Each bar is a blend of traditional care and modern mindfulness, handmade on our Goa farm. From the delicate scent of rose to the rich feel of honey and kesar, these soaps provide a gentle wash and a moment of daily luxury.',
     relatedProducts: [
-      'rice-rose-goatmilk-soap',
-      'sheabutter-kesar-gulab',
-      'pomegranate-goatmilk-soap',
-      'pomegranate-glycerine',
-      'honey-and-oats-goatmilk-soap',
+      'rice-rose-goat-milk-soap',
+      'shea-butter-kesar-gulab',
+      'pomegranate-goat-milk-soap',
+      'pomegranate-glycerin-soap',
+      'honey-oats-goat-milk-soap',
       'honey-oats-glycerin-soap',
-      'honey-kesar-haldi-sheabutter-soap',
+      'honey-kesar-haldi-shea-butter-soap',
       'kesar-haldi-goat-milk-soap',
     ],
     faqs: [
@@ -195,7 +195,7 @@ export const occasions: OccasionPage[] = [
     h1: 'Neem tulsi soap India',
     tagline: 'A cornerstone of traditional personal care. Our neem and tulsi are grown on our farm in South Goa, harvested and sun-dried for each batch.',
     content: 'Neem and tulsi are two of the most respected botanicals in Indian tradition. Combined in our gentle soap bases, they provide a wash that feels grounded and fresh. Whether you choose our creamy goat milk base or our light glycerin base, you experience the authentic aromatic profile of these farm-grown herbs.',
-    relatedProducts: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
         q: 'Are the herbs real or just fragrance?',
@@ -221,8 +221,8 @@ export const occasions: OccasionPage[] = [
     content: 'The combination of saffron and turmeric is a time-honoured tradition in Indian care. Our kesar haldi soaps provide a warm, golden wash that leaves skin feeling soft and refreshed. Made in small batches in Goa, these bars represent an honest approach to traditional personal care without the use of SLS or parabens.',
     relatedProducts: [
       'kesar-haldi-goat-milk-soap',
-      'sheabutter-kesar-gulab',
-      'honey-kesar-haldi-sheabutter-soap',
+      'shea-butter-kesar-gulab',
+      'honey-kesar-haldi-shea-butter-soap',
     ],
     faqs: [
       {

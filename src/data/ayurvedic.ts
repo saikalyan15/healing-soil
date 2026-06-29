@@ -20,7 +20,7 @@ export const ayurvedic: AyurvedicPage[] = [
     h1: 'Ayurvedic neem tulsi soap',
     intro: 'Neem and tulsi are foundational botanicals in traditional care routines across India. Our small-batch soap combines these farm-grown herbs in gentle bases to provide a wash that respects your skin\'s natural balance. By avoiding SLS and synthetic additives, we ensure an authentic personal care experience.',
     traditionalContext: 'In traditional Ayurvedic personal care, neem is valued for its grounded presence and cleansing qualities. Tulsi, or Holy Basil, is traditionally used for its herbaceous aromatic profile. Together, they create a balanced wash that has been a staple of Indian care routines for generations.',
-    relatedProducts: ['neem-tulsi-goatmilk-soap', 'neem-tulsi-glycerin-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
       {
         q: 'Are the neem and tulsi leaves fresh?',
@@ -45,7 +45,7 @@ export const ayurvedic: AyurvedicPage[] = [
     h1: 'Ayurvedic kesar haldi soap',
     intro: 'Kesar and haldi represent one of the most cherished combinations in traditional Indian personal care. Our handmade bars use real saffron and turmeric to provide a warm, golden wash that leaves your skin feeling soft and refreshed. Crafted in small batches, these soaps avoid harsh detergents like SLS.',
     traditionalContext: 'Kesar (saffron) and haldi (turmeric) have been cornerstones of Ayurvedic personal care for centuries. Saffron is traditionally valued for its gentle nature and golden hue, while turmeric is used for its grounded presence. This combination is traditionally preferred for a soft and radiant skin feel.',
-    relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Where do you source your kesar?',
@@ -71,12 +71,12 @@ export const ayurvedic: AyurvedicPage[] = [
     intro: 'Goat milk is a versatile and traditional base for natural personal care. Our soaps use goat milk as a foundation, providing a creamier lather and a more nourishing feel than standard water-based bars. Made in small batches in Goa, these bars are genuinely SLS-free and suitable for sensitive skin.',
     traditionalContext: 'Goat milk has a long history in personal care across various cultures, including its use in traditional Indian routines. Its natural fats and vitamins are valued for their ability to provide a soft and moisturising feel. In an Ayurvedic context, it is preferred for its gentle nature and closeness to the skin\'s natural range.',
     relatedProducts: [
-      'neem-tulsi-goatmilk-soap',
+      'neem-tulsi-goat-milk-soap',
       'kesar-haldi-goat-milk-soap',
-      'honey-and-oats-goatmilk-soap',
-      'orange-goatmilk-soap',
-      'rice-rose-goatmilk-soap',
-      'pomegranate-goatmilk-soap',
+      'honey-oats-goat-milk-soap',
+      'orange-goat-milk-soap',
+      'rice-rose-goat-milk-soap',
+      'pomegranate-goat-milk-soap',
     ],
     faqs: [
       {
@@ -104,8 +104,8 @@ export const ayurvedic: AyurvedicPage[] = [
     traditionalContext: 'Honey has been used in personal care since ancient times, valued in traditional routines for its ability to draw moisture to the skin. Oats are traditionally used for their mild and soothing properties. In an Ayurvedic framing, this combination provides a gentle yet thorough clean that respects the skin\'s natural oils.',
     relatedProducts: [
       'honey-oats-glycerin-soap',
-      'honey-and-oats-goatmilk-soap',
-      'honey-kesar-haldi-sheabutter-soap',
+      'honey-oats-goat-milk-soap',
+      'honey-kesar-haldi-shea-butter-soap',
     ],
     faqs: [
       {
@@ -131,7 +131,7 @@ export const ayurvedic: AyurvedicPage[] = [
     h1: 'Natural Ayurvedic soap for dry skin',
     intro: 'For skin that feels dry or tight, our shea butter base provides a rich and conditioning personal care solution. We use traditional soap-making methods to ensure that natural glycerin is retained, contributing to a moisturising feel after every wash. These small-batch soaps from Goa are free from SLS and harsh detergents.',
     traditionalContext: 'While shea butter is traditionally sourced from West Africa, its use in personal care has become a global standard for rich conditioning. In traditional care routines, it is valued for its high fat content and its ability to leave a soft, protective feel on the skin. It is an ideal choice for mature or very dry skin types.',
-    relatedProducts: ['sheabutter-kesar-gulab', 'honey-kesar-haldi-sheabutter-soap'],
+    relatedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     faqs: [
       {
         q: 'Which base is best for very dry skin?',

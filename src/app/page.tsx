@@ -32,8 +32,8 @@ export const metadata: Metadata = {
 // Exact slugs for the starter bundle (Stage 2 offer in docs/growth-strategy.md).
 const BUNDLE_DEFINITIONS: { slug: string; fallback: RegExp }[] = [
   { slug: 'honey-oats-glycerin-soap', fallback: /honey.*oat.*glycerin/i },
-  { slug: 'neem-tulsi-goatmilk-soap', fallback: /neem.*tulsi.*goat/i },
-  { slug: 'pomegranate-goatmilk-soap', fallback: /pomegranate.*goat/i },
+  { slug: 'neem-tulsi-goat-milk-soap', fallback: /neem.*tulsi.*goat/i },
+  { slug: 'pomegranate-goat-milk-soap', fallback: /pomegranate.*goat/i },
   { slug: 'travel-soaps', fallback: /travel/i },
 ]
 

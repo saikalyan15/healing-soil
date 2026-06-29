@@ -7,6 +7,7 @@ const orderSchema = z.object({
   customer_phone: z.string().regex(/^(91)?[6-9]\d{9}$/, 'Invalid Indian mobile number'),
   address: z.string().min(1),
   items: z.array(z.object({
+    product_id: z.string().min(1),
     product_slug: z.string().min(1),
     price: z.number().positive(),
     qty: z.number().int().positive(),
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
         address: address,
       },
       items: items.map((i) => ({
-        product_id: i.product_slug,
+        product_id: i.product_id,
         price: i.price,
         qty: i.qty,
       })),

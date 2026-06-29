@@ -9,6 +9,7 @@ import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
 import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
+import { canonicalSlugFor } from '@/lib/product-slugs'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,14 +49,14 @@ function getIngredientSlug(name: string): string | null {
 
 const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: string }> = {
   'marigold-soap': {
-    title: 'Handmade Marigold Soap from Goa | Ships Across India | Healing Soil',
-    description: 'Golden marigold petals from our Goa farm, handcrafted into a bar. Creamy lather, earthy floral scent. No SLS or synthetic fragrance. Ships India-wide.',
+    title: 'Marigold Soap Handmade in Goa | Marigold Sabun | Healing Soil',
+    description: 'Marigold soap with golden petals, creamy lather, and an earthy floral scent. Handmade marigold sabun from South Goa, SLS-free, ships across India.',
   },
   'neem-tulsi-glycerin-soap': {
     title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
     description: 'Neem and tulsi in a pure glycerin base — Ayurvedic herbs known for skin-balancing properties. Made to order in South Goa. No SLS, no parabens. Ships across India.',
   },
-  'neem-tulsi-goatmilk-soap': {
+  'neem-tulsi-goat-milk-soap': {
     title: 'Neem Tulsi Goat Milk Soap | Handmade in Goa | Healing Soil',
     description: 'Creamy goat milk with sun-dried neem and tulsi. Richer lather than glycerin, with a gentle herbal scent and moisturising finish. Made to order in South Goa.',
   },
@@ -65,13 +66,13 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   },
   'loofah-soaps': {
     title: 'Natural Loofah Soap | Handmade Glycerin Soap from Goa | Healing Soil',
-    description: 'A full slice of sun-dried loofah embedded in a glycerin soap base. Textured surface, no synthetic scrubbers. Made to order in South Goa. Ships across India.',
+    description: 'Natural loofah soap with a sun-dried loofah slice in a glycerin base. Textured body bar for feet, elbows, and knees. Handmade in Goa.',
   },
-  'sheabutter-kesar-gulab': {
+  'shea-butter-kesar-gulab': {
     title: 'Shea Butter Soap with Saffron and Rose | Handmade in Goa | Healing Soil',
     description: 'The most indulgent bar in our range. Shea butter, saffron, and rose — made to order in small batches in South Goa. No SLS or synthetic fragrance.',
   },
-  'pomegranate-goatmilk-soap': {
+  'pomegranate-goat-milk-soap': {
     title: 'Pomegranate Goat Milk Soap | Handmade in Goa | Healing Soil',
     description: 'Rich goat milk with pomegranate peel. Creamy lather, deep wine-red colour. Made to order in South Goa, ships across India.',
   },
@@ -88,9 +89,27 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Free shipping across India.',
   },
   'travel-soaps': {
-    title: 'Travel Size Handmade Soap | 30g Mini Bars from Goa | Healing Soil',
-    description: 'Compact 30g bars of our handmade soaps — same natural ingredients, same small-batch quality. Perfect for travel or to try before committing to a full bar.',
+    title: 'Small Travel Soap Bars | 30g Handmade Mini Soaps | Healing Soil',
+    description: 'Small travel soap bars in 30g sizes. Mini handmade soaps from Goa, easy to pack, SLS-free, and ideal for trips, guest kits, or trying different soaps.',
   },
+}
+
+const PRODUCT_SUPPORT_LINKS: Record<string, { href: string; label: string }[]> = {
+  'travel-soaps': [
+    { href: '/blog/small-travel-soap-bars-india', label: 'small soap for travel' },
+    { href: '/occasion/travel-soap-india', label: 'travel soap India guide' },
+    { href: '/blog/natural-soap-sensitive-skin-india', label: 'soap for sensitive skin in India' },
+  ],
+  'marigold-soap': [
+    { href: '/blog/marigold-soap-benefits', label: 'marigold soap benefits' },
+    { href: '/guide/handmade-soap-india', label: 'complete handmade soap guide' },
+    { href: '/shop/red-rose-soap', label: 'rose shaped handmade soap' },
+  ],
+  'loofah-soaps': [
+    { href: '/blog/loofah-soap-benefits-and-how-to-use', label: 'loofah soap benefits and how to use it' },
+    { href: '/compare/loofah-soap-vs-regular-soap', label: 'loofah soap vs regular soap' },
+    { href: '/soap-for/exfoliation', label: 'best soap for exfoliation' },
+  ],
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -98,18 +117,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProductBySlug(slug)
   if (!product) return {}
 
-  const override = PRODUCT_META_OVERRIDES[slug]
+  const canonicalSlug = canonicalSlugFor(product.slug)
+  const override = PRODUCT_META_OVERRIDES[canonicalSlug]
   const title = override?.title ?? `${product.name} | Healing Soil, Goa`
   const description = override?.description ?? `${product.description} Made by hand in South Goa. ${product.price_range}.`
 
   return {
     title,
     description,
-    alternates: { canonical: `/shop/${slug}` },
+    alternates: { canonical: `/shop/${canonicalSlug}` },
     openGraph: {
       title,
       description,
-      url: `/shop/${slug}`,
+      url: `/shop/${canonicalSlug}`,
       siteName: 'Healing Soil',
       images: product.image_url
         ? [{ url: product.image_url, alt: product.name }]
@@ -123,23 +143,25 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params
   const product = await getProductBySlug(slug)
   if (!product) notFound()
+  const canonicalSlug = canonicalSlugFor(product.slug)
 
-  const productSpecificReviews = reviewsForProduct(slug)
+  const productSpecificReviews = reviewsForProduct(canonicalSlug)
   const displayReviews = productSpecificReviews.length > 0
     ? productSpecificReviews.slice(0, 2)
     : featuredReviews.slice(0, 2)
 
   const allProducts = await getProducts().catch(() => [])
   const related = allProducts
-    .filter(p => p.slug !== slug && p.base === product.base && p.in_stock)
+    .filter(p => canonicalSlugFor(p.slug) !== canonicalSlug && p.base === product.base && p.in_stock)
     .slice(0, 3)
 
   const today = new Date().toISOString().split('T')[0]
   const relevantComparisons = comparisons.filter(c =>
     c.publishedAt !== null &&
     c.publishedAt <= today &&
-    (c.relatedProductsA.includes(slug) || c.relatedProductsB.includes(slug))
+    (c.relatedProductsA.includes(canonicalSlug) || c.relatedProductsB.includes(canonicalSlug))
   )
+  const supportingLinks = PRODUCT_SUPPORT_LINKS[canonicalSlug] ?? []
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -216,7 +238,7 @@ export default async function ProductPage({ params }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Shop', item: 'https://healingsoil.in/shop' },
-      { '@type': 'ListItem', position: 2, name: product.name, item: `https://healingsoil.in/shop/${slug}` },
+      { '@type': 'ListItem', position: 2, name: product.name, item: `https://healingsoil.in/shop/${canonicalSlug}` },
     ],
   }
 
@@ -412,6 +434,25 @@ export default async function ProductPage({ params }: Props) {
                     className="font-sans text-sm text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
                   >
                     {c.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Supporting content */}
+        {supportingLinks.length > 0 && (
+          <div className="mt-10 border-t border-[#D6CFC4] pt-10">
+            <h2 className="font-serif text-2xl text-[#1A1A14] mb-4">Related reading</h2>
+            <ul className="space-y-2">
+              {supportingLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-sans text-sm text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+                  >
+                    {link.label}
                   </Link>
                 </li>
               ))}
