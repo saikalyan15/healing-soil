@@ -49,8 +49,8 @@ function getIngredientSlug(name: string): string | null {
 
 const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: string }> = {
   'marigold-soap': {
-    title: 'Marigold Soap Handmade in Goa | Natural Floral Bar | Healing Soil',
-    description: 'Marigold soap with golden petals, creamy lather, and an earthy floral scent. Handmade in South Goa, SLS-free, and ships across India.',
+    title: 'Marigold Soap Handmade in Goa | Marigold Sabun | Healing Soil',
+    description: 'Marigold soap with golden petals, creamy lather, and an earthy floral scent. Handmade marigold sabun from South Goa, SLS-free, ships across India.',
   },
   'neem-tulsi-glycerin-soap': {
     title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
@@ -66,7 +66,7 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   },
   'loofah-soaps': {
     title: 'Natural Loofah Soap | Handmade Glycerin Soap from Goa | Healing Soil',
-    description: 'A full slice of sun-dried loofah embedded in a glycerin soap base. Textured surface, no synthetic scrubbers. Made to order in South Goa. Ships across India.',
+    description: 'Natural loofah soap with a sun-dried loofah slice in a glycerin base. Textured body bar for feet, elbows, and knees. Handmade in Goa.',
   },
   'shea-butter-kesar-gulab': {
     title: 'Shea Butter Soap with Saffron and Rose | Handmade in Goa | Healing Soil',
@@ -90,8 +90,26 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   },
   'travel-soaps': {
     title: 'Small Travel Soap Bars | 30g Handmade Mini Soaps | Healing Soil',
-    description: 'Small travel soap bars in 30g sizes. Handmade in Goa, easy to pack, SLS-free, and ideal for trips, guest kits, or trying different soaps.',
+    description: 'Small travel soap bars in 30g sizes. Mini handmade soaps from Goa, easy to pack, SLS-free, and ideal for trips, guest kits, or trying different soaps.',
   },
+}
+
+const PRODUCT_SUPPORT_LINKS: Record<string, { href: string; label: string }[]> = {
+  'travel-soaps': [
+    { href: '/blog/small-travel-soap-bars-india', label: 'small soap for travel' },
+    { href: '/occasion/travel-soap-india', label: 'travel soap India guide' },
+    { href: '/blog/natural-soap-sensitive-skin-india', label: 'soap for sensitive skin in India' },
+  ],
+  'marigold-soap': [
+    { href: '/blog/marigold-soap-benefits', label: 'marigold soap benefits' },
+    { href: '/guide/handmade-soap-india', label: 'complete handmade soap guide' },
+    { href: '/shop/red-rose-soap', label: 'rose shaped handmade soap' },
+  ],
+  'loofah-soaps': [
+    { href: '/blog/loofah-soap-benefits-and-how-to-use', label: 'loofah soap benefits and how to use it' },
+    { href: '/compare/loofah-soap-vs-regular-soap', label: 'loofah soap vs regular soap' },
+    { href: '/soap-for/exfoliation', label: 'best soap for exfoliation' },
+  ],
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -143,6 +161,7 @@ export default async function ProductPage({ params }: Props) {
     c.publishedAt <= today &&
     (c.relatedProductsA.includes(canonicalSlug) || c.relatedProductsB.includes(canonicalSlug))
   )
+  const supportingLinks = PRODUCT_SUPPORT_LINKS[canonicalSlug] ?? []
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -415,6 +434,25 @@ export default async function ProductPage({ params }: Props) {
                     className="font-sans text-sm text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
                   >
                     {c.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Supporting content */}
+        {supportingLinks.length > 0 && (
+          <div className="mt-10 border-t border-[#D6CFC4] pt-10">
+            <h2 className="font-serif text-2xl text-[#1A1A14] mb-4">Related reading</h2>
+            <ul className="space-y-2">
+              {supportingLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-sans text-sm text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+                  >
+                    {link.label}
                   </Link>
                 </li>
               ))}

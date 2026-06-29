@@ -109,6 +109,11 @@ const relatedProductsBySlug: Record<string, string[]> = {
   'handmade-soap-goa': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
   'why-handmade-soap-lasts-longer': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
   'why-we-make-soap-in-small-batches': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-glycerin-soap'],
+  'best-soap-for-rainy-season-india': ['neem-tulsi-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap'],
+  'small-travel-soap-bars-india': ['travel-soaps', 'honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap'],
+  'marigold-soap-benefits': ['marigold-soap', 'red-rose-soap', 'shea-butter-kesar-gulab'],
+  'pomegranate-soap-benefits': ['pomegranate-goat-milk-soap', 'pomegranate-glycerin-soap', 'orange-goat-milk-soap'],
+  'loofah-soap-benefits-and-how-to-use': ['loofah-soaps', 'honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap'],
 }
 
 // ─── FAQ mapping ───────────────────────────────────────────────────────────────
