@@ -40,6 +40,13 @@ const CityPage: React.FC<Props> = ({ city, products }) => {
             Handmade in small batches on our Goa farm, shipped to {city.displayName}, {city.state}.
           </p>
 
+          <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">
+            What we recommend for {city.displayName}
+          </h2>
+          <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
+            {city.climateNote}
+          </p>
+
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">How we ship</h2>
           <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
             {city.deliveryNote}
