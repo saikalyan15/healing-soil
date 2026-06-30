@@ -20,6 +20,9 @@ export const CANONICAL_PRODUCT_SLUGS = [
   'travel-soaps',
   'red-rose-soap',
   'valentines-special-soap',
+  'soap-squares-creamy-box',
+  'soap-squares-light-box',
+  'soap-squares-rich-box',
 ] as const
 
 export const PRODUCT_SLUG_ALIASES = {

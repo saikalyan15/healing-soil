@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import ProductCard from './ProductCard'
 import type { Product } from '@/lib/products'
+import { isSoapSquaresProduct, soapSquaresBoxDetails } from '@/lib/soap-squares'
 
 const TEXTURE_DESCRIPTIONS: Record<string, string> = {
   smooth: 'Plain lather, straightforward wash. Nothing added.',
@@ -26,13 +28,21 @@ const TEXTURE_FILTERS = [
 ]
 
 export default function ShopClient({ products }: ShopClientProps) {
-  const categories = ['All', ...Array.from(new Set(products.map((p) => p.category)))]
+  const soapSquareProducts = products
+    .filter(isSoapSquaresProduct)
+    .sort((a, b) => {
+      const aIndex = soapSquaresBoxDetails.findIndex((box) => box.slug === a.slug)
+      const bIndex = soapSquaresBoxDetails.findIndex((box) => box.slug === b.slug)
+      return aIndex - bIndex
+    })
+  const regularProducts = products.filter((p) => !isSoapSquaresProduct(p))
+  const categories = ['All', ...Array.from(new Set(regularProducts.map((p) => p.category)))]
   const [active, setActive] = useState('All')
   const [giftsActive, setGiftsActive] = useState(false)
   const [activeTexture, setActiveTexture] = useState('all')
   const [showTextureGuide, setShowTextureGuide] = useState(false)
 
-  const filtered = products
+  const filtered = regularProducts
     .filter((p) => {
       if (giftsActive) return p.is_gift
       return active === 'All' || p.category === active
@@ -46,6 +56,57 @@ export default function ShopClient({ products }: ShopClientProps) {
 
   return (
     <div>
+      {soapSquareProducts.length > 0 && (
+        <section className="mb-10 rounded-lg border border-[#D6CFC4] bg-white p-4 sm:p-6">
+          <div className="mb-5 max-w-3xl">
+            <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-wide text-[#C9A84C]">
+              New discovery boxes
+            </p>
+            <h2 className="font-serif text-3xl leading-tight text-[#1A1A14]">
+              Soap Squares Discovery Box
+            </h2>
+            <p className="mt-2 font-sans text-sm leading-relaxed text-[#666666]">
+              Four mini handmade soaps in one kraft box. Pick Light, Creamy, or Rich.
+              Each box includes assorted Soap Squares from the current batch.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {soapSquareProducts.map((product) => {
+              const detail = soapSquaresBoxDetails.find((box) => box.slug === product.slug)
+              return (
+                <Link
+                  key={product.id}
+                  href={`/shop/${product.slug}`}
+                  className="group flex h-full flex-col rounded-lg border border-[#D6CFC4] bg-[#F7F5F0] p-4 transition-colors hover:border-[#1E5631] hover:bg-white"
+                >
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <span className="rounded-full bg-[#1E5631] px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-wide text-white">
+                      {detail?.badge}
+                    </span>
+                    <span className="font-sans text-lg font-bold text-[#1E5631]">
+                      ₹{product.price.toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-2xl leading-tight text-[#1A1A14]">
+                    {detail?.shortLabel}
+                  </h3>
+                  <p className="mt-1 font-sans text-sm font-medium text-[#1E5631]">
+                    {detail?.contents}
+                  </p>
+                  <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-[#666666]">
+                    {detail?.selectionCopy}
+                  </p>
+                  <span className="mt-4 inline-flex items-center font-sans text-sm font-semibold text-[#1E5631] group-hover:text-[#C9A84C]">
+                    Choose this box
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
       {/* Handmade variation notice */}
       <div className="mb-8 flex items-start gap-3 rounded-lg border border-[#D6CFC4] bg-white px-4 py-3">
         <span className="mt-0.5 text-lg leading-none">🌿</span>
@@ -75,7 +136,7 @@ export default function ShopClient({ products }: ShopClientProps) {
         </button>
         {giftsActive && (
           <p className="mt-2 font-sans text-xs text-[#666666]">
-            Gift soap pouches, kids collection, and travel sets — ready to wrap.
+            Gift soap pouches, Soap Squares Discovery Boxes, and travel sets — ready to wrap.
           </p>
         )}
       </div>

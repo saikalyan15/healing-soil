@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getProductBySlug, getProducts } from '@/lib/products'
+import { getSoapSquaresBoxDetail, isSoapSquaresProduct, soapSquaresBoxDetails } from '@/lib/soap-squares'
 import { reviewsForProduct, featuredReviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import AddToCartButton from '@/components/AddToCartButton'
@@ -48,6 +50,18 @@ function getIngredientSlug(name: string): string | null {
 }
 
 const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: string }> = {
+  'soap-squares-creamy-box': {
+    title: 'Soap Squares Discovery Box - Creamy | Healing Soil',
+    description: 'Four 50g goat milk Soap Squares in one kraft box. A simple way to try creamy-feeling handmade soaps, keep guest soaps, or gift a small-batch set.',
+  },
+  'soap-squares-light-box': {
+    title: 'Soap Squares Discovery Box - Light | Healing Soil',
+    description: 'Four 50g glycerin Soap Squares in one kraft box. A lighter way to try handmade soaps, keep guest soaps, or gift a small-batch set.',
+  },
+  'soap-squares-rich-box': {
+    title: 'Soap Squares Discovery Box - Rich | Healing Soil',
+    description: 'Four 50g Soap Squares in one kraft box, with a richer-feeling mix of shea butter and goat milk handmade soaps.',
+  },
   'marigold-soap': {
     title: 'Marigold Soap Handmade in Goa | Marigold Sabun | Healing Soil',
     description: 'Marigold soap with golden petals, creamy lather, and an earthy floral scent. Handmade marigold sabun from South Goa, SLS-free, ships across India.',
@@ -152,7 +166,12 @@ export default async function ProductPage({ params }: Props) {
 
   const allProducts = await getProducts().catch(() => [])
   const related = allProducts
-    .filter(p => canonicalSlugFor(p.slug) !== canonicalSlug && p.base === product.base && p.in_stock)
+    .filter(p =>
+      !isSoapSquaresProduct(p) &&
+      canonicalSlugFor(p.slug) !== canonicalSlug &&
+      p.base === product.base &&
+      p.in_stock
+    )
     .slice(0, 3)
 
   const today = new Date().toISOString().split('T')[0]
@@ -162,6 +181,7 @@ export default async function ProductPage({ params }: Props) {
     (c.relatedProductsA.includes(canonicalSlug) || c.relatedProductsB.includes(canonicalSlug))
   )
   const supportingLinks = PRODUCT_SUPPORT_LINKS[canonicalSlug] ?? []
+  const soapSquaresDetail = getSoapSquaresBoxDetail(canonicalSlug)
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -350,6 +370,92 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
 
+        {soapSquaresDetail && (
+          <div className="mt-12 rounded-lg border border-[#D6CFC4] bg-white p-5 sm:p-6">
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-wide text-[#C9A84C]">
+                  {soapSquaresDetail.badge}
+                </p>
+                <h2 className="font-serif text-3xl leading-tight text-[#1A1A14]">
+                  Pick the box by feel, not by comparing every soap.
+                </h2>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-[#666666]">
+                  Each box includes four assorted Soap Squares from the selected base family.
+                  We rotate the exact variants by the current batch, so you get variety without
+                  needing to build a custom box.
+                </p>
+
+                <dl className="mt-5 grid gap-3 sm:grid-cols-3">
+                  {[
+                    ['4 Soap Squares', 'One kraft box'],
+                    ['50g each', 'Mini handmade bars'],
+                    ['200g total', 'Assorted variants'],
+                  ].map(([term, desc]) => (
+                    <div key={term} className="rounded border border-[#D6CFC4] bg-[#F7F5F0] p-3">
+                      <dt className="font-sans text-sm font-bold text-[#1E5631]">{term}</dt>
+                      <dd className="mt-1 font-sans text-xs text-[#666666]">{desc}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                  {soapSquaresBoxDetails.map((box) => {
+                    const isActive = box.slug === canonicalSlug
+                    return (
+                      <Link
+                        key={box.slug}
+                        href={`/shop/${box.slug}`}
+                        className={`rounded border p-3 transition-colors ${
+                          isActive
+                            ? 'border-[#1E5631] bg-[#E8F0EB]'
+                            : 'border-[#D6CFC4] bg-white hover:border-[#1E5631]'
+                        }`}
+                      >
+                        <p className="font-sans text-xs font-semibold uppercase tracking-wide text-[#C9A84C]">
+                          {box.badge}
+                        </p>
+                        <p className="mt-1 font-serif text-xl leading-tight text-[#1A1A14]">
+                          {box.shortLabel}
+                        </p>
+                        <p className="mt-1 font-sans text-xs leading-relaxed text-[#666666]">
+                          {box.contents}
+                        </p>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-3 font-sans text-sm font-semibold text-[#1A1A14]">
+                  Possible colors and textures
+                </p>
+                <div className="grid grid-cols-3 gap-3">
+                  {soapSquaresDetail.supportImages.map((image) => (
+                    <div
+                      key={image.src}
+                      className="relative aspect-square overflow-hidden rounded border border-[#D6CFC4] bg-[#F7F5F0]"
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 30vw, 160px"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 font-sans text-xs leading-relaxed text-[#666666]">
+                  Images show real 50g Soap Square references. The exact mix may change with the
+                  current batch, but the base family will match the box you choose.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Ingredients */}
         {product.ingredients.length > 0 && (
           <div className="mt-12 border-t border-[#D6CFC4] pt-10">
@@ -383,9 +489,9 @@ export default async function ProductPage({ params }: Props) {
         <div className="mt-10 border-t border-[#D6CFC4] pt-10">
           <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">How it is made</h2>
           <p className="font-sans text-base leading-relaxed text-[#444] max-w-2xl">
-            Made by hand in small batches on a farm in South Goa. We use a {product.base.toLowerCase()} base,
-            with herbs and botanicals grown on the farm or sourced from trusted suppliers.
-            Scented with essential oils only, no synthetic fragrances.
+            {isSoapSquaresProduct(product)
+              ? 'Made by hand in small batches on a farm in South Goa. Each Discovery Box is packed with four assorted 50g Soap Squares from the selected base family, wrapped and boxed for discovery, guest bathrooms, or gifting.'
+              : `Made by hand in small batches on a farm in South Goa. We use a ${product.base.toLowerCase()} base, with herbs and botanicals grown on the farm or sourced from trusted suppliers. Scented with essential oils only, no synthetic fragrances.`}
           </p>
         </div>
 

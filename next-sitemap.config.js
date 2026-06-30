@@ -141,6 +141,9 @@ const config = {
       'rice-rose-goatmilk-soap',
       'sheabutter-kesar-gulab',
       'travel-soaps',
+      'soap-squares-creamy-box',
+      'soap-squares-light-box',
+      'soap-squares-rich-box',
     ]
 
     // Stories that are retired and redirect to /blog — exclude from sitemap.
