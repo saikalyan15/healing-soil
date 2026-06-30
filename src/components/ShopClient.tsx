@@ -81,7 +81,7 @@ export default function ShopClient({ products }: ShopClientProps) {
                   href={`/shop/${product.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-lg border border-[#D6CFC4] bg-[#F7F5F0] transition-colors hover:border-[#1E5631] hover:bg-white"
                 >
-                  <div className="relative aspect-[4/3] bg-[#EDE8E0]">
+                  <div className="relative aspect-square bg-[#EDE8E0]">
                     {product.image_url && (
                       <Image
                         src={product.image_url}
