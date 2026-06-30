@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import ProductCard from './ProductCard'
 import type { Product } from '@/lib/products'
@@ -78,28 +79,41 @@ export default function ShopClient({ products }: ShopClientProps) {
                 <Link
                   key={product.id}
                   href={`/shop/${product.slug}`}
-                  className="group flex h-full flex-col rounded-lg border border-[#D6CFC4] bg-[#F7F5F0] p-4 transition-colors hover:border-[#1E5631] hover:bg-white"
+                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-[#D6CFC4] bg-[#F7F5F0] transition-colors hover:border-[#1E5631] hover:bg-white"
                 >
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <span className="rounded-full bg-[#1E5631] px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-wide text-white">
-                      {detail?.badge}
-                    </span>
-                    <span className="font-sans text-lg font-bold text-[#1E5631]">
-                      ₹{product.price.toLocaleString('en-IN')}
+                  <div className="relative aspect-[4/3] bg-[#EDE8E0]">
+                    {product.image_url && (
+                      <Image
+                        src={product.image_url}
+                        alt={product.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="rounded-full bg-[#1E5631] px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-wide text-white">
+                        {detail?.badge}
+                      </span>
+                      <span className="font-sans text-lg font-bold text-[#1E5631]">
+                        ₹{product.price.toLocaleString('en-IN')}
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-2xl leading-tight text-[#1A1A14]">
+                      {detail?.shortLabel}
+                    </h3>
+                    <p className="mt-1 font-sans text-sm font-medium text-[#1E5631]">
+                      {detail?.contents}
+                    </p>
+                    <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-[#666666]">
+                      {detail?.selectionCopy}
+                    </p>
+                    <span className="mt-4 inline-flex items-center font-sans text-sm font-semibold text-[#1E5631] group-hover:text-[#C9A84C]">
+                      Choose this box
                     </span>
                   </div>
-                  <h3 className="font-serif text-2xl leading-tight text-[#1A1A14]">
-                    {detail?.shortLabel}
-                  </h3>
-                  <p className="mt-1 font-sans text-sm font-medium text-[#1E5631]">
-                    {detail?.contents}
-                  </p>
-                  <p className="mt-3 flex-1 font-sans text-sm leading-relaxed text-[#666666]">
-                    {detail?.selectionCopy}
-                  </p>
-                  <span className="mt-4 inline-flex items-center font-sans text-sm font-semibold text-[#1E5631] group-hover:text-[#C9A84C]">
-                    Choose this box
-                  </span>
                 </Link>
               )
             })}
