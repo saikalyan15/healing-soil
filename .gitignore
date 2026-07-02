@@ -47,5 +47,7 @@ next-env.d.ts
 # gsc mcp cache (contains real analytics data)
 tools/gsc-mcp/cache/
 tools/gsc-mcp/node_modules/
+tools/ga4-mcp/cache/
+tools/ga4-mcp/node_modules/
 
 *.log
