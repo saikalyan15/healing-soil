@@ -228,7 +228,7 @@ export const decisions: DecisionPage[] = [
     faqs: [
       {
         q: 'Why does skin feel different during monsoon?',
-        a: 'Monsoon brings a combination of high humidity, heat, and sweat. Skin can feel simultaneously oily and uncomfortable. The humidity means skin is rarely truly dry, but increased sweating and frequent washing with harsh soaps can leave it feeling stripped. A gentle, SLS-free soap removes sweat and dirt without that harsh after-feel.'
+        a: 'Monsoon brings a combination of high humidity, heat, and sweat. Skin can feel simultaneously oily and uncomfortable. A gentle, SLS-free soap rinses clean after sweat and humidity without a harsh after-feel.'
       },
       {
         q: 'Why are neem and tulsi good for monsoon?',
@@ -246,11 +246,11 @@ export const decisions: DecisionPage[] = [
     publishedAt: '2026-06-18'
   },
   {
-    slug: 'exfoliation',
-    title: 'Best Soap for Exfoliation | Natural Loofah Soap | Healing Soil',
-    h1: 'Best Soap for Exfoliation',
-    metaDescription: 'For a textured body wash, choose a natural loofah soap. Use it lightly on feet, elbows, and knees, and keep a smooth bar for daily full-body bathing.',
-    intro: 'Exfoliation in a soap context means texture. A loofah soap gives a more thorough-feeling body wash because the natural loofah adds grip to the bar. It is best for areas like feet, elbows, and knees rather than delicate areas or daily face use.',
+    slug: 'loofah-body-soap',
+    title: 'Loofah Body Soap | Textured Handmade Bar | Healing Soil',
+    h1: 'Loofah Body Soap',
+    metaDescription: 'A textured loofah body soap for feet, elbows, and knees. Glycerin base, natural loofah slice, SLS-free, handmade in Goa.',
+    intro: 'Loofah body soap is for people who enjoy a textured wash. The natural loofah slice adds grip to the bar, making it useful for areas like feet, elbows, and knees rather than delicate areas or daily face use.',
     primaryBase: 'Glycerin',
     recommendation: 'Our loofah soap uses a glycerin base because glycerin rinses clean and keeps the bar feeling light. Use light pressure and let the texture do the work. For everyday full-body bathing, keep a smooth glycerin or goat milk bar alongside it.',
     recommendedProducts: ['loofah-soaps', 'honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap'],
@@ -258,7 +258,7 @@ export const decisions: DecisionPage[] = [
     faqs: [
       {
         q: 'Is loofah soap good for daily use?',
-        a: 'It can be used as often as your skin is comfortable with the texture, but many people prefer it a few times a week on feet, elbows, and knees. A smooth bar is better for daily full-body use.'
+        a: 'It can be used as often as your skin is comfortable with the texture, but many people prefer it on feet, elbows, and knees. A smooth bar is better for daily full-body use.'
       },
       {
         q: 'Should I use loofah soap on my face?',

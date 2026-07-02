@@ -68,7 +68,7 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   },
   'neem-tulsi-glycerin-soap': {
     title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
-    description: 'Neem and tulsi in a pure glycerin base — Ayurvedic herbs known for skin-balancing properties. Made to order in South Goa. No SLS, no parabens. Ships across India.',
+    description: 'Neem and tulsi in a pure glycerin base for a clean herbal feel. Made to order in South Goa. No SLS, no parabens. Ships across India.',
   },
   'neem-tulsi-goat-milk-soap': {
     title: 'Neem Tulsi Goat Milk Soap | Handmade in Goa | Healing Soil',

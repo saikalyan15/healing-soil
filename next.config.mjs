@@ -48,6 +48,8 @@ const nextConfig = {
       { source: '/blog/best-natural-soap-for-eczema',     destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
       { source: '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog',                                             permanent: true },
       { source: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog',                    permanent: true },
+      { source: '/soap-for/exfoliation',                  destination: '/soap-for/loofah-body-soap', permanent: true },
+      { source: '/soap-for/exfoliation/',                 destination: '/soap-for/loofah-body-soap', permanent: true },
       { source: '/shop/orange',                          destination: '/shop/orange-glycerin-soap', permanent: true },
       { source: '/stories',                              destination: '/blog',     permanent: true },
       { source: '/stories/',                             destination: '/blog',     permanent: true },
