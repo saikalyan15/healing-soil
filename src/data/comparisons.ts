@@ -16,9 +16,9 @@ export type ComparisonPage = {
 export const comparisons: ComparisonPage[] = [
   {
     slug: 'glycerin-vs-goat-milk-soap',
-    title: 'Glycerin vs Goat Milk Soap Base: Side-by-Side for Your Skin Type',
-    h1: 'Glycerin vs Goat Milk Soap Base: Pick the Right One for Your Skin',
-    metaDescription: 'Goat milk base is creamier, with natural fats. Glycerin base is lighter and rinses clean. Which suits your skin, compared here. Handmade in Goa, no SLS.',
+    title: 'Glycerin vs Goat Milk Soap Base | Lather and Feel',
+    h1: 'Glycerin vs Goat Milk Soap Base: Lather and Feel',
+    metaDescription: 'Compare glycerin and goat milk soap bases by lather, rinse feel, and daily-use fit. Light glycerin or creamy goat milk, handmade in Goa.',
     canonicalOverride: '/blog/glycerin-vs-goat-milk-soap',
     subjectA: {
       name: 'Glycerine Base',
@@ -55,9 +55,9 @@ export const comparisons: ComparisonPage[] = [
   },
   {
     slug: 'goat-milk-vs-shea-butter-soap',
-    title: 'Goat Milk vs Shea Butter Soap Base: Dry or Sensitive Skin?',
-    h1: 'Goat Milk vs Shea Butter Soap Base: Choosing the Right Bar',
-    metaDescription: 'Goat milk is creamy and gentle. Shea butter is richer for dry skin. Compare lather, feel, and skin type fit before choosing your soap.',
+    title: 'Goat Milk vs Shea Butter Soap Base | Lather and Feel',
+    h1: 'Goat Milk vs Shea Butter Soap Base: Lather and Feel',
+    metaDescription: 'Compare goat milk and shea butter soap bases by richness, lather, and after-wash feel. Creamy or richer handmade bars from Goa.',
     subjectA: {
       name: 'Goat Milk Base',
       slug: 'goat-milk-soap',
@@ -93,9 +93,9 @@ export const comparisons: ComparisonPage[] = [
   },
   {
     slug: 'shea-butter-vs-glycerin-soap',
-    title: 'Shea Butter vs Glycerin Soap: Which Base Should You Use?',
-    h1: 'Shea Butter vs Glycerin Soap Base: Pick the Right One',
-    metaDescription: 'Shea butter base is rich and leaves a conditioning feel. Glycerin base is lighter and rinses clean. They sit at opposite ends of the feel spectrum. Handmade in Goa.',
+    title: 'Shea Butter vs Glycerin Soap Base | Rich or Light?',
+    h1: 'Shea Butter vs Glycerin Soap Base: Rich or Light?',
+    metaDescription: 'Compare shea butter and glycerin soap bases by richness, lather, and rinse feel. Choose a richer or lighter handmade bar from Goa.',
     subjectA: {
       name: 'Shea Butter Base',
       slug: 'shea-butter-soap',
