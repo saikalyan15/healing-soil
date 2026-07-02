@@ -63,8 +63,8 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     description: 'Four 50g Soap Squares in one kraft box, with a richer-feeling mix of shea butter and goat milk handmade soaps.',
   },
   'marigold-soap': {
-    title: 'Marigold Soap Handmade in Goa | Marigold Sabun | Healing Soil',
-    description: 'Marigold soap with golden petals, creamy lather, and an earthy floral scent. Handmade marigold sabun from South Goa, SLS-free, ships across India.',
+    title: 'Marigold Soap India | Handmade Floral Bar from Goa',
+    description: 'A small-batch marigold soap with golden petals, creamy lather, and a gentle floral feel. SLS-free and handmade in Goa.',
   },
   'neem-tulsi-glycerin-soap': {
     title: 'Neem Tulsi Glycerin Soap | Handmade in Goa | Healing Soil',
@@ -76,7 +76,7 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   },
   'honey-oats-glycerin-soap': {
     title: 'Honey Oats Glycerin Soap for Sensitive Skin | Healing Soil, Goa',
-    description: 'Real honey and oat flakes in a glycerin soap base. Gentle on reactive and dry skin. Handmade in small batches in South Goa. Free shipping across India.',
+    description: 'Real honey and oat flakes in a glycerin soap base. A gentle daily bar with a soft, mild feel. Handmade in small batches in South Goa.',
   },
   'loofah-soaps': {
     title: 'Natural Loofah Soap | Handmade Glycerin Soap from Goa | Healing Soil',
@@ -122,7 +122,6 @@ const PRODUCT_SUPPORT_LINKS: Record<string, { href: string; label: string }[]> =
   'loofah-soaps': [
     { href: '/blog/loofah-soap-benefits-and-how-to-use', label: 'loofah soap benefits and how to use it' },
     { href: '/compare/loofah-soap-vs-regular-soap', label: 'loofah soap vs regular soap' },
-    { href: '/soap-for/exfoliation', label: 'best soap for exfoliation' },
   ],
 }
 
