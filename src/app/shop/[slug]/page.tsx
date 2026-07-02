@@ -103,8 +103,8 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Free shipping across India.',
   },
   'travel-soaps': {
-    title: 'Small Travel Soap Bars | 30g Handmade Mini Soaps | Healing Soil',
-    description: 'Small travel soap bars in 30g sizes. Mini handmade soaps from Goa, easy to pack, SLS-free, and ideal for trips, guest kits, or trying different soaps.',
+    title: 'Mini Travel Soap Bars India | 30g Handmade Soaps',
+    description: '30g mini handmade soap bars from Goa for travel, guest kits, and trying different bases. SLS-free, easy to pack, and made in small batches.',
   },
 }
 
