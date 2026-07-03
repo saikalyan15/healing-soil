@@ -29,6 +29,11 @@ const DecisionPage: React.FC<Props> = ({ decision, products }) => {
     decision.relatedComparisons.includes(c.slug) && c.publishedAt !== null
   )
 
+  // First in-stock product in the decision's own priority order
+  const primaryProduct = decision.recommendedProducts
+    .map((slug) => products.find((p) => p.slug === slug))
+    .find(Boolean)
+
   return (
     <div className="bg-[#F7F5F0]">
       <script
@@ -57,6 +62,14 @@ const DecisionPage: React.FC<Props> = ({ decision, products }) => {
           <p className="font-sans text-base leading-relaxed text-[#1A1A14]">
             {decision.recommendation}
           </p>
+          {primaryProduct && (
+            <Link
+              href={`/shop/${primaryProduct.slug}`}
+              className="mt-4 inline-block rounded-md bg-[#1E5631] px-5 py-2.5 font-sans text-sm font-medium text-white hover:bg-[#174427]"
+            >
+              Start with {primaryProduct.name}
+            </Link>
+          )}
         </div>
 
         {/* Products */}

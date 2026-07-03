@@ -84,6 +84,7 @@ const faqSchema = {
 }
 
 const blogLinks = [
+  { href: '/blog/natural-soap-sensitive-skin-india', label: 'Natural soap for sensitive skin in India: what works and what to avoid' },
   { href: '/blog/glycerin-vs-goat-milk-soap', label: 'Glycerin vs goat milk soap: which suits Indian skin?' },
   { href: '/blog/shea-butter-goat-milk-soap-dry-sensitive-skin', label: 'Shea butter + goat milk soap for dry, sensitive skin' },
   { href: '/blog/understanding-the-benefits-of-shea-butter-in-soap', label: 'Shea butter in soap: what it does and what it cannot' },
@@ -167,7 +168,7 @@ export default function HandmadeSoapIndiaGuide() {
           <li>Named plant extracts — neem leaf extract, tulsi extract — rather than &ldquo;herbal blend&rdquo; or &ldquo;botanical complex.&rdquo;</li>
         </ul>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Read more: <Link href="/blog/what-makes-soap-chemical-free" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">What does &ldquo;chemical-free soap&rdquo; actually mean?</Link>
+          Read more: <Link href="/blog/what-makes-soap-chemical-free" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">What does &ldquo;chemical-free soap&rdquo; actually mean?</Link> and, if your skin prefers mild products, <Link href="/blog/natural-soap-sensitive-skin-india" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">natural soap for sensitive skin in India</Link>.
         </p>
 
         {/* Section 3 — Three bases */}

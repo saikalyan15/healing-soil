@@ -10,7 +10,7 @@ Living status for the "bring customers to the website" plan. Update the **Status
 **Status values:** `TODO` · `WIP` · `DONE` · `BLOCKED` (add a note why)
 **Owner values:** `Claude` (code / content edits inside repo) · `Owner` (manual / off-repo / requires your accounts)
 
-Last updated: 2026-06-06 (session 11 — SoapLedger outreach extended with referral feature; tasks 2.2 and 2.4 marked DONE)
+Last updated: 2026-07-03 (session 12 — July GSC/GA snapshot recorded; pomegranate + shea + loofah + sensitive-skin CTR/depth fixes; recommendation CTA button added to all /soap-for/ decision pages; GA4 MCP connector registered for Claude Code)
 
 ---
 
@@ -165,6 +165,6 @@ Record numbers on the first of each month so trend is visible.
 | 2026-04 (baseline) | 0 | ~8 | 21% | 0 | 221 | Pre-plan baseline |
 | 2026-05 (updated May 26) | 2 (website, Apr 25–May 22) | 17 clicks (+35%) · 2,520 impr (+48%) · pos 14.4 · CTR 0.7% (28-day GSC) | — | 0 | — | **530 pages indexed** (up from 117 on May 23 — programmatic batch fully indexed). 106 not indexed: 37 legacy redirects (known), 9 alternate canonicals (intentional), 5 x 404s (investigate), 47 crawled-not-indexed (diagnosed thin content on ingredient pages — fixed 2026-05-25: city-wise geographic content added to ingredient pages; awaiting re-crawl), 4 discovered-not-indexed (in queue), 1 redirect error (investigate), 1 Google-override canonical (investigate). Top GSC pages (28d): glycerin-vs-goat-milk-soap blog 9 clicks, home 3 clicks, compare/glycerin-vs-goat-milk-soap 2 clicks, pomegranate-peel-soap 1 click, shea-butter-vs-glycerin-soap 1 click. Position dipped from 13.5 to 14.4 — expected as 400+ new pages pulled average down. |
 | 2026-06 (as of Jun 5) | 2 (GA key events May 8–Jun 4) | 28 clicks · ~3,000+ impr · pos ~7–9 on compare pages · CTR 0.7% avg | — | 0 | — | **546 pages indexed**. Compare pages earning impressions at positions 7–9 (architecture confirmed working). Critical gaps: /blog/goat-milk-soap-benefits at position 55.9 with 300 impressions (content too thin) · /shop/marigold-soap at position 5.5 with 93 impressions and 0 clicks (title/meta mismatch) · compare page CTRs below expected at positions 7–9. See tasks 3.22–3.24. |
-| 2026-07 | | | | | | |
+| 2026-07 (as of Jul 3) | 0 tracked (2 WhatsApp-click key events, Jun 5–Jul 2) | ~30 clicks (28d) · ~3,000+ impr · CTR ~0.7% | — | — | — | **GA (28d): 251 sessions, 195 users, 60% organic search.** Daily sessions jumped to ~23/day Jun 29–Jul 2 (vs 5–8 earlier in June) — monsoon cluster working: "best soap for monsoon in india" pos 2.3 / 6.7% CTR; rainy-season blog + /soap-for/monsoon are #2/#3 landing pages. Jun 29 pSEO wave (pomegranate-benefits, loofah, rainy-season posts) too new to rank-judge. Jul 2 snippet rewrites (travel, monsoon, comparisons, marigold, sensitive-skin) awaiting re-crawl — judge ~Jul 15, don't re-touch. Funnel is now the constraint: top 3 organic landing pages = 84 sessions, 0 key events; 32 view_item → 3 add_to_cart → 0 purchases. Owner: mark add_to_cart + view_item as GA4 key events; fix GA4 currency (USD → INR). |
 
 **Targets by end of 2026-07 (90 days):** website orders ≥ 8/month; GSC clicks ≥ 40/month; reorder rate ≥ 30%; email list ≥ 150; IG followers 500–700.
