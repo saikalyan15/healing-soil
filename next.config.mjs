@@ -63,10 +63,8 @@ const nextConfig = {
       { source: '/stories/goat-milk-soap-for-sensitive-skin',     destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', permanent: true },
       { source: '/stories/best-natural-soap-for-eczema',          destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
       
-      // Generic story move (slug-only — no dots, so image files fall through to the catch-all below)
+      // Generic story move (slug-only — no dots, so files in public/stories can still load)
       { source: '/stories/:slug([^.]+)',                 destination: '/blog/:slug', permanent: true },
-      // Catch-all for /stories/ with file extensions (old WP media files like .avif, .jpg)
-      { source: '/stories/:path*',                       destination: '/blog',      permanent: true },
       // Old WordPress category pages
       { source: '/category/slow-living',                 destination: '/blog',     permanent: true },
       { source: '/category/slow-living/',                destination: '/blog',     permanent: true },
