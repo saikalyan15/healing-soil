@@ -75,6 +75,72 @@ async function queryGSC(auth, body) {
   return res.data.rows || [];
 }
 
+async function inspectUrl(auth, inspectionUrl) {
+  const sc = google.searchconsole({ version: "v1", auth });
+  const res = await sc.urlInspection.index.inspect({
+    requestBody: {
+      siteUrl: SITE_URL,
+      inspectionUrl,
+      languageCode: "en-US",
+    },
+  });
+
+  const result = res.data.inspectionResult || {};
+  const index = result.indexStatusResult || {};
+
+  return {
+    url: inspectionUrl,
+    inspectionResultLink: result.inspectionResultLink || null,
+    verdict: index.verdict || null,
+    coverageState: index.coverageState || null,
+    robotsTxtState: index.robotsTxtState || null,
+    indexingState: index.indexingState || null,
+    pageFetchState: index.pageFetchState || null,
+    lastCrawlTime: index.lastCrawlTime || null,
+    googleCanonical: index.googleCanonical || null,
+    userCanonical: index.userCanonical || null,
+    crawledAs: index.crawledAs || null,
+    sitemap: index.sitemap || [],
+    referringUrls: index.referringUrls || [],
+  };
+}
+
+function getSitemapUrls({ sitemapPath = path.join(process.cwd(), "public", "sitemap.xml"), limit = 100 } = {}) {
+  if (!fs.existsSync(sitemapPath)) {
+    throw new Error(`Sitemap not found: ${sitemapPath}`);
+  }
+
+  const xml = fs.readFileSync(sitemapPath, "utf8");
+  return [...xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)]
+    .map((match) => match[1].trim())
+    .filter(Boolean)
+    .slice(0, limit);
+}
+
+function groupInspectionResults(results) {
+  const groups = {};
+
+  for (const item of results) {
+    const key = item.coverageState || item.verdict || "UNKNOWN";
+    if (!groups[key]) {
+      groups[key] = { count: 0, urls: [] };
+    }
+    groups[key].count += 1;
+    groups[key].urls.push({
+      url: item.url,
+      verdict: item.verdict,
+      lastCrawlTime: item.lastCrawlTime,
+      pageFetchState: item.pageFetchState,
+      indexingState: item.indexingState,
+      googleCanonical: item.googleCanonical,
+      userCanonical: item.userCanonical,
+      inspectionResultLink: item.inspectionResultLink,
+    });
+  }
+
+  return groups;
+}
+
 // ── Tool implementations ────────────────────────────────────────────────────
 
 async function getTopQueries({ limit = 20 } = {}) {
@@ -216,6 +282,63 @@ async function getOpportunities() {
   return { _cached: false, _fetchedAt: new Date().toISOString(), data };
 }
 
+async function inspectUrls({ urls = [] } = {}) {
+  if (!Array.isArray(urls) || urls.length === 0) {
+    throw new Error("Pass a non-empty urls array");
+  }
+  if (urls.length > 50) {
+    throw new Error("Inspect at most 50 URLs per call to avoid burning URL Inspection quota");
+  }
+
+  const auth = getAuth();
+  const data = [];
+
+  for (const url of urls) {
+    data.push(await inspectUrl(auth, url));
+  }
+
+  return {
+    _cached: false,
+    _fetchedAt: new Date().toISOString(),
+    data,
+    groups: groupInspectionResults(data),
+  };
+}
+
+async function inspectSitemapIndexing({ limit = 50, pathPrefix = "" } = {}) {
+  const safeLimit = Math.min(Math.max(Number(limit) || 50, 1), 200);
+  const cacheKey = `inspect_sitemap_${safeLimit}_${pathPrefix.replace(/[^a-z0-9_-]/gi, "_") || "all"}`;
+  const cached = cacheGet(cacheKey);
+  if (cached) return { _cached: true, _fetchedAt: cached.fetchedAt, data: cached.data };
+
+  const auth = getAuth();
+  const urls = getSitemapUrls({ limit: 1000 })
+    .filter((url) => {
+      if (!pathPrefix) return true;
+      try {
+        return new URL(url).pathname.startsWith(pathPrefix);
+      } catch {
+        return false;
+      }
+    })
+    .slice(0, safeLimit);
+
+  const results = [];
+  for (const url of urls) {
+    results.push(await inspectUrl(auth, url));
+  }
+
+  const data = {
+    inspected: results.length,
+    pathPrefix: pathPrefix || null,
+    groups: groupInspectionResults(results),
+    results,
+  };
+
+  cacheSet(cacheKey, data);
+  return { _cached: false, _fetchedAt: new Date().toISOString(), data };
+}
+
 // ── MCP server wiring ───────────────────────────────────────────────────────
 
 const server = new Server(
@@ -265,6 +388,41 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: [],
       },
     },
+    {
+      name: "inspect_urls",
+      description:
+        "Inspect specific URLs with the Google Search Console URL Inspection API and return coverageState, indexingState, crawl status, canonicals, and inspection links.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          urls: {
+            type: "array",
+            items: { type: "string" },
+            description: "Absolute URLs from the verified Search Console property. Maximum 50 per call.",
+          },
+        },
+        required: ["urls"],
+      },
+    },
+    {
+      name: "inspect_sitemap_indexing",
+      description:
+        "Inspect URLs from public/sitemap.xml with the URL Inspection API and group them by coverageState, including Crawled - currently not indexed.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          limit: {
+            type: "number",
+            description: "Number of sitemap URLs to inspect. Default 50, maximum 200.",
+          },
+          pathPrefix: {
+            type: "string",
+            description: "Optional pathname prefix filter, for example /soap/ or /blog/.",
+          },
+        },
+        required: [],
+      },
+    },
   ],
 }));
 
@@ -279,6 +437,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       result = await getTopQueries(args);
     } else if (name === "get_ctr_outliers") {
       result = await getCtrOutliers(args);
+    } else if (name === "inspect_urls") {
+      result = await inspectUrls(args);
+    } else if (name === "inspect_sitemap_indexing") {
+      result = await inspectSitemapIndexing(args);
     } else {
       return { content: [{ type: "text", text: `Unknown tool: ${name}` }], isError: true };
     }
