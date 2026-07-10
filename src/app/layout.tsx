@@ -108,17 +108,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-      </head>
-      <body>
-        <WelcomeBanner />
-        <Header />
-        <TrustStrip />
-        <main className="pb-[60px]">{children}</main>
-        <Footer />
-        <OrderTray />
-        <MetaPixelEvents />
-        <GoogleAnalytics gaId="G-EWQR3K5MW7" />
-        <Script id="meta-pixel" strategy="afterInteractive">
+        {/* beforeInteractive so window.fbq exists before any client component's
+            first-mount effect (e.g. ViewContent on a hard page load) can call it */}
+        <Script id="meta-pixel" strategy="beforeInteractive">
           {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -130,6 +122,16 @@ s.parentNode.insertBefore(t,s)}(window,document,'script',
 fbq('init','1321242129962420');
 fbq('track','PageView');`}
         </Script>
+      </head>
+      <body>
+        <WelcomeBanner />
+        <Header />
+        <TrustStrip />
+        <main className="pb-[60px]">{children}</main>
+        <Footer />
+        <OrderTray />
+        <MetaPixelEvents />
+        <GoogleAnalytics gaId="G-EWQR3K5MW7" />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
