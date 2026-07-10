@@ -6,6 +6,7 @@ import { useOrderStore } from '@/lib/store'
 import { formatPreferencesAsNote } from '@/lib/store'
 import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
 import OrderPreferences from './OrderPreferences'
+import { trackMetaPurchaseOnce } from '@/lib/meta-pixel'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -152,6 +153,15 @@ export default function OrderForm({ onSuccess }: Props) {
         value: total,
         shipping,
         items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
+      })
+      trackMetaPurchaseOnce(humanRef, {
+        value: total,
+        currency: 'INR',
+        content_ids: items.map((i) => i.product_slug),
+        content_type: 'product',
+        // Total quantity across line items, not distinct SKU count — a more
+        // accurate "items purchased" signal for Meta than items.length.
+        num_items: items.reduce((sum, item) => sum + item.qty, 0),
       })
 
       const waMessage = buildWhatsAppMessage(

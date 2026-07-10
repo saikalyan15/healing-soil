@@ -4,17 +4,27 @@ import { useState } from 'react'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
 import { sendGAEvent } from '@next/third-parties/google'
+import { trackMetaEvent } from '@/lib/meta-pixel'
 
 export default function AddToCartButton({ product }: { product: Product }) {
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
 
   function handleAdd() {
+    if (!product.in_stock) return
+
     addItem(product)
     sendGAEvent('event', 'add_to_cart', {
       currency: 'INR',
       value: product.price,
       items: [{ item_id: product.id, item_name: product.name, price: product.price, quantity: 1 }],
+    })
+    trackMetaEvent('AddToCart', {
+      value: product.price,
+      currency: 'INR',
+      content_ids: [product.slug],
+      content_name: product.name,
+      content_type: 'product',
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 1500)

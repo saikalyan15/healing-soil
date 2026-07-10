@@ -8,6 +8,7 @@ import TrustStrip from '@/components/TrustStrip'
 import Footer from '@/components/Footer'
 import OrderTray from '@/components/OrderTray'
 import WelcomeBanner from '@/components/WelcomeBanner'
+import MetaPixelEvents from '@/components/MetaPixelEvents'
 
 const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
@@ -115,6 +116,7 @@ export default function RootLayout({
         <main className="pb-[60px]">{children}</main>
         <Footer />
         <OrderTray />
+        <MetaPixelEvents />
         <GoogleAnalytics gaId="G-EWQR3K5MW7" />
         <Script id="meta-pixel" strategy="afterInteractive">
           {`!function(f,b,e,v,n,t,s)

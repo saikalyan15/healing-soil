@@ -7,6 +7,7 @@ import { getSoapSquaresBoxDetail, isSoapSquaresProduct, soapSquaresBoxDetails } 
 import { reviewsForProduct, featuredReviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import AddToCartButton from '@/components/AddToCartButton'
+import ProductViewEvent from '@/components/ProductViewEvent'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
 import ProductCard from '@/components/ProductCard'
@@ -262,6 +263,8 @@ export default async function ProductPage({ params }: Props) {
   }
 
   return (
+    <>
+      <ProductViewEvent product={product} />
     <div className="bg-[#F7F5F0] min-h-screen">
       <ProductViewTracker id={product.id} name={product.name} price={product.price} />
       <script
@@ -567,5 +570,6 @@ export default async function ProductPage({ params }: Props) {
 
       </div>
     </div>
+    </>
   )
 }

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import OrderForm from './OrderForm'
 import EmailCapture from './EmailCapture'
+import { trackMetaInitiateCheckoutOnce } from '@/lib/meta-pixel'
 
 const WA_NUMBER = '917483100651'
 
@@ -21,6 +22,8 @@ function WhatsAppIcon() {
 export default function OrderPageClient() {
   const router = useRouter()
   const itemCount = useOrderStore((s) => s.itemCount)
+  const items = useOrderStore((s) => s.items)
+  const total = useOrderStore((s) => s.total)
 
   const [step, setStep] = useState<'form' | 'send'>('form')
   const [orderRef, setOrderRef] = useState('')
@@ -30,6 +33,20 @@ export default function OrderPageClient() {
   // Set synchronously before any clearOrder() call so the redirect guard
   // below never fires during the cart-clear re-render
   const orderPlacedRef = useRef(false)
+
+  useEffect(() => {
+    if (itemCount === 0) return
+    const cartSignature = items
+      .map((item) => `${item.product_slug}:${item.qty}`)
+      .sort()
+      .join(',')
+    trackMetaInitiateCheckoutOnce(cartSignature, {
+      value: total,
+      currency: 'INR',
+      content_ids: items.map((item) => item.product_slug),
+      num_items: itemCount,
+    })
+  }, [itemCount, items, total])
 
   useEffect(() => {
     setIsMobile(/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent))

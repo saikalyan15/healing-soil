@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { sendGAEvent } from '@next/third-parties/google'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
+import { trackMetaEvent } from '@/lib/meta-pixel'
 
 type BundlePickerProps = {
   products: Product[]
@@ -38,6 +39,13 @@ export default function BundlePicker({ products, defaultIds }: BundlePickerProps
         price: p.price,
         quantity: 1,
       })),
+    })
+    trackMetaEvent('AddToCart', {
+      value: total,
+      currency: 'INR',
+      content_ids: selection.map((p) => p.slug),
+      content_name: 'Build Your Own Bundle',
+      content_type: 'product',
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
