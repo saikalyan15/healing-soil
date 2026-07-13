@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { submitOrder } from '@/lib/orders'
+import { sendPurchaseCapiEvent } from '@/lib/meta-capi'
 
 const orderSchema = z.object({
   customer_name: z.string().min(1),
@@ -41,6 +42,22 @@ export async function POST(req: NextRequest) {
       shipping: shipping,
       notes: notes,
       source: 'Website Order',
+    })
+
+    const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
+
+    await sendPurchaseCapiEvent({
+      eventId: ref || order_id,
+      value: subtotal + shipping,
+      currency: 'INR',
+      contentIds: items.map((i) => i.product_slug),
+      numItems: items.reduce((sum, i) => sum + i.qty, 0),
+      phone: customer_phone,
+      eventSourceUrl: req.nextUrl.origin + '/order',
+      clientIpAddress: req.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
+      clientUserAgent: req.headers.get('user-agent') ?? undefined,
+      fbp: req.cookies.get('_fbp')?.value,
+      fbc: req.cookies.get('_fbc')?.value,
     })
 
     return NextResponse.json({ order_id, ref })
