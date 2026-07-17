@@ -364,7 +364,7 @@ export const comparisons: ComparisonPage[] = [
       pros: ['Widely available', 'Consistent fast lather', 'Very long shelf life'],
       feel: 'Clean but stripping'
     },
-    verdict: 'The primary difference between the two is glycerin. Commercial manufacturers typically remove the natural glycerin to sell separately, replacing it with SLS for lather. Handmade soap keeps the glycerin in the bar, providing a humectant wash that leaves skin feeling soft rather than stripped.',
+    verdict: 'The primary difference between the two is glycerin. Commercial manufacturers typically remove the natural glycerin to sell separately, replacing it with SLS for lather. Handmade soap keeps the glycerin in the bar, providing a humectant wash that leaves skin feeling soft rather than stripped. Scale is the other difference: commercial bars are made in large batches to a fixed formula months before they reach a shelf, while handmade bars are cured in small batches and sold closer to when they were made. For most people, switching is noticeable within the first week — skin feels less tight after a shower, and the lather has a creamier, denser quality instead of an aggressive foam.',
     relatedProductsA: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap', 'rice-rose-goat-milk-soap', 'pomegranate-goat-milk-soap', 'shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
     relatedProductsB: [],
     faqs: [

@@ -23,51 +23,61 @@ const ingredients = [
   },
   {
     name: 'Shea Butter',
+    slug: 'shea-butter',
     description:
       'A rich, nourishing oil pressed from the shea tree nut. Gives the bar a creamy feel and leaves the skin feeling soft after washing. Does not fully saponify, so some deposits on the skin during use.',
   },
   {
     name: 'Neem',
+    slug: 'neem',
     description:
       'A traditional Indian botanical with a distinctive earthy scent. Used in Ayurvedic personal care for centuries. Adds a natural, herbal character to the bar.',
   },
   {
     name: 'Tulsi',
+    slug: 'tulsi',
     description:
       'Holy basil, grown on our farm in South Goa. A familiar ingredient in Indian home remedies and traditional personal care. Has a fresh, slightly herbal fragrance.',
   },
   {
     name: 'Goat Milk',
+    slug: 'goat-milk',
     description:
       'Replaces water in the soap base, giving the bar a naturally creamy lather. Contains natural fats that feel gentle on the skin. Leaves a soft, comfortable feeling after washing.',
   },
   {
     name: 'Honey',
+    slug: 'honey',
     description:
       'A natural humectant that gives the bar a smooth, slightly glossy quality. Contributes to the overall feel of the lather and is used in traditional personal care across many cultures.',
   },
   {
     name: 'Oats',
+    slug: 'oats',
     description:
       'Finely milled oats add a gentle texture to the bar and give the lather a milky, soft quality. A long-standing ingredient in traditional personal care routines.',
   },
   {
     name: 'Kesar (Saffron)',
+    slug: 'kesar',
     description:
       'One of the most valued botanicals in Ayurveda. Used in traditional Indian personal care and known for its warm, distinctive colour and scent. A little goes a long way.',
   },
   {
     name: 'Haldi (Turmeric)',
+    slug: 'haldi',
     description:
       'Used in Indian households and personal care traditions for generations. Gives the bar a warm, golden colour and a subtle earthy scent. A staple of Ayurvedic practice.',
   },
   {
     name: 'Ginger',
+    slug: 'ginger',
     description:
       'Adds a warm, spicy note to the bar\'s scent. Used in traditional personal care for its invigorating quality. Gives the bar a distinctive, uplifting character.',
   },
   {
     name: 'Rosemary',
+    slug: 'rosemary',
     description:
       'A hardy herb with a fresh, herbal scent. Used as a natural fragrance in the bar. Grown in home gardens and valued in traditional personal care across many cultures.',
   },
@@ -101,10 +111,26 @@ export default function IngredientsPage() {
               key={item.name}
               className="rounded-lg border border-[#D6CFC4] bg-white p-5"
             >
-              <h3 className="mb-2 font-serif text-xl text-[#1E5631]">{item.name}</h3>
+              <h3 className="mb-2 font-serif text-xl text-[#1E5631]">
+                {item.slug ? (
+                  <Link href={`/ingredient/${item.slug}`} className="hover:underline">
+                    {item.name}
+                  </Link>
+                ) : (
+                  item.name
+                )}
+              </h3>
               <p className="font-sans text-sm leading-relaxed text-[#666666]">
                 {item.description}
               </p>
+              {item.slug && (
+                <Link
+                  href={`/ingredient/${item.slug}`}
+                  className="mt-2 inline-block font-sans text-xs font-medium text-[#C9A84C] hover:underline"
+                >
+                  Read more →
+                </Link>
+              )}
             </div>
           ))}
         </div>
