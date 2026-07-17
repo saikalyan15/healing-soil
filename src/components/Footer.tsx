@@ -70,10 +70,24 @@ export default function Footer() {
             </span>
           ))}
           <Link
+            href="/terms"
+            className="font-sans text-sm text-gold transition-colors hover:text-gold/70"
+          >
+            Terms
+          </Link>
+          <span className="text-cream/20" aria-hidden="true">·</span>
+          <Link
+            href="/shipping-policy"
+            className="font-sans text-sm text-gold transition-colors hover:text-gold/70"
+          >
+            Shipping
+          </Link>
+          <span className="text-cream/20" aria-hidden="true">·</span>
+          <Link
             href="/returns"
             className="font-sans text-sm text-gold transition-colors hover:text-gold/70"
           >
-            Returns
+            Cancellation &amp; Refunds
           </Link>
           <span className="text-cream/20" aria-hidden="true">·</span>
           <Link

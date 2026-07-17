@@ -46,8 +46,28 @@ function WhatsAppIcon() {
   )
 }
 
+declare global {
+  interface Window {
+    Razorpay: new (options: Record<string, unknown>) => {
+      open: () => void
+      on: (event: string, handler: (response: unknown) => void) => void
+    }
+  }
+}
+
+function loadRazorpayScript(): Promise<boolean> {
+  if (typeof window !== 'undefined' && window.Razorpay) return Promise.resolve(true)
+  return new Promise((resolve) => {
+    const script = document.createElement('script')
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js'
+    script.onload = () => resolve(true)
+    script.onerror = () => resolve(false)
+    document.body.appendChild(script)
+  })
+}
+
 type Props = {
-  onSuccess: (ref: string, waHref: string) => void
+  onSuccess: (ref: string, waHref: string, paid: boolean) => void
 }
 
 export default function OrderForm({ onSuccess }: Props) {
@@ -87,21 +107,23 @@ export default function OrderForm({ onSuccess }: Props) {
     })
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setError('')
+  const [paymentDismissed, setPaymentDismissed] = useState(false)
 
-    if (!name.trim()) { setError('Please enter your full name.'); return }
-    if (!validateIndianPhone(phone)) { setError('Please enter a valid Indian mobile number.'); return }
-    if (!state) { setError('Please select your state.'); return }
-    if (!address.trim()) { setError('Please enter your delivery address.'); return }
-    if (items.length === 0) { setError('Your order is empty.'); return }
+  function validateForm(): boolean {
+    if (!name.trim()) { setError('Please enter your full name.'); return false }
+    if (!validateIndianPhone(phone)) { setError('Please enter a valid Indian mobile number.'); return false }
+    if (!state) { setError('Please select your state.'); return false }
+    if (!address.trim()) { setError('Please enter your delivery address.'); return false }
+    if (items.length === 0) { setError('Your order is empty.'); return false }
+    return true
+  }
 
-    setLoading(true)
-
+  // Saves the order to SoapLedger, fires attribution events, builds the
+  // WhatsApp message, and hands off to the parent's "send" step. Shared by
+  // both the paid (Razorpay) path and the WhatsApp-only fallback path.
+  async function submitToSoapLedgerAndProceed(paymentId?: string) {
     const normalizedPhone = normalizePhone(phone)
     const fullAddress = `${address.trim()}, ${state}`
-
     const preferencesNote = formatPreferencesAsNote(preferences)
 
     const lineItems = items.map((i) => ({
@@ -124,61 +146,161 @@ export default function OrderForm({ onSuccess }: Props) {
       address_line_1: fullAddress,
     }
 
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customer_name: name.trim(),
+        customer_phone: normalizedPhone,
+        items: lineItems,
+        address: fullAddress,
+        shipping,
+        notes: preferencesNote || undefined,
+        payment_id: paymentId,
+      }),
+    })
+
+    const data = await res.json().catch(() => ({}))
+
+    if (!res.ok) {
+      throw new Error(data.error || `Server error ${res.status}`)
+    }
+
+    const { order_id, ref } = data
+    const humanRef = ref || order_id
+
+    sendGAEvent('event', 'purchase', {
+      transaction_id: humanRef,
+      currency: 'INR',
+      value: total,
+      shipping,
+      items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
+    })
+    trackMetaPurchaseOnce(humanRef, {
+      value: total,
+      currency: 'INR',
+      content_ids: items.map((i) => i.product_slug),
+      content_type: 'product',
+      // Total quantity across line items, not distinct SKU count — a more
+      // accurate "items purchased" signal for Meta than items.length.
+      num_items: items.reduce((sum, item) => sum + item.qty, 0),
+    })
+
+    const waMessage = buildWhatsAppMessage(
+      humanRef,
+      { name: name.trim() },
+      whatsappItems,
+      shippingAddress,
+      shipping,
+      preferencesNote || undefined,
+      paymentId
+    )
+
+    const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
+
+    // Clear cart first, then hand off to parent — orderPlacedRef in parent
+    // is already set before clearOrder() triggers any re-render
+    clearOrder()
+    onSuccess(humanRef, waHref, Boolean(paymentId))
+  }
+
+  // ── Primary path: pay now via Razorpay, then hand off to WhatsApp ─────────
+  async function handlePayNow(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    setPaymentDismissed(false)
+    if (!validateForm()) return
+
+    setLoading(true)
+
     try {
-      const res = await fetch('/api/orders', {
+      const orderRes = await fetch('/api/razorpay/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customer_name: name.trim(),
-          customer_phone: normalizedPhone,
-          items: lineItems,
-          address: fullAddress,
+          items: items.map((i) => ({ product_id: i.product_id, qty: i.qty })),
           shipping,
-          notes: preferencesNote || undefined,
         }),
       })
 
-      const data = await res.json().catch(() => ({}))
-
-      if (!res.ok) {
-        throw new Error(data.error || `Server error ${res.status}`)
+      const orderData = await orderRes.json().catch(() => ({}))
+      if (!orderRes.ok) {
+        throw new Error(orderData.error || `Server error ${orderRes.status}`)
       }
 
-      const { order_id, ref } = data
-      const humanRef = ref || order_id
+      const scriptLoaded = await loadRazorpayScript()
+      if (!scriptLoaded) {
+        throw new Error('Could not load the payment widget.')
+      }
 
-      sendGAEvent('event', 'purchase', {
-        transaction_id: humanRef,
-        currency: 'INR',
-        value: total,
-        shipping,
-        items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
-      })
-      trackMetaPurchaseOnce(humanRef, {
-        value: total,
-        currency: 'INR',
-        content_ids: items.map((i) => i.product_slug),
-        content_type: 'product',
-        // Total quantity across line items, not distinct SKU count — a more
-        // accurate "items purchased" signal for Meta than items.length.
-        num_items: items.reduce((sum, item) => sum + item.qty, 0),
+      const razorpay = new window.Razorpay({
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        order_id: orderData.order_id,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: 'Healing Soil',
+        description: 'Handmade natural soap order',
+        prefill: {
+          name: name.trim(),
+          contact: normalizePhone(phone),
+        },
+        theme: { color: '#1E5631' },
+        handler: async (response: unknown) => {
+          const r = response as {
+            razorpay_order_id: string
+            razorpay_payment_id: string
+            razorpay_signature: string
+          }
+          try {
+            const verifyRes = await fetch('/api/razorpay/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(r),
+            })
+            const verifyData = await verifyRes.json().catch(() => ({}))
+
+            if (!verifyRes.ok || !verifyData.verified) {
+              throw new Error('Payment could not be verified')
+            }
+
+            await submitToSoapLedgerAndProceed(r.razorpay_payment_id)
+          } catch (err) {
+            setError(
+              "Your payment went through, but we couldn't confirm it automatically. Please message us on WhatsApp with your payment details and we'll sort it out right away."
+            )
+            setLoading(false)
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setLoading(false)
+            setPaymentDismissed(true)
+          },
+        },
       })
 
-      const waMessage = buildWhatsAppMessage(
-        humanRef,
-        { name: name.trim() },
-        whatsappItems,
-        shippingAddress,
-        shipping,
-        preferencesNote || undefined
+      razorpay.on('payment.failed', () => {
+        setLoading(false)
+        setPaymentDismissed(true)
+      })
+
+      razorpay.open()
+    } catch (err) {
+      setError(
+        "We're sorry, but we couldn't start the payment right now. Please message us on WhatsApp and we'll help you place your order manually."
       )
+      setLoading(false)
+    }
+  }
 
-      const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
+  // ── Fallback path: skip online payment, coordinate manually on WhatsApp ───
+  async function handleWhatsAppFallback() {
+    setError('')
+    if (!validateForm()) return
 
-      // Clear cart first, then hand off to parent — orderPlacedRef in parent
-      // is already set before clearOrder() triggers any re-render
-      clearOrder()
-      onSuccess(humanRef, waHref)
+    setLoading(true)
+    try {
+      await submitToSoapLedgerAndProceed()
     } catch (err) {
       setError(
         "We're sorry, but we couldn't process your order right now. Please message us on WhatsApp and we'll help you place your order manually."
@@ -188,7 +310,7 @@ export default function OrderForm({ onSuccess }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handlePayNow} className="space-y-6">
       {/* Order summary */}
       <div className="rounded-lg bg-[#F7F5F0] p-5">
         <div className="mb-4 flex items-center justify-between">
@@ -362,19 +484,29 @@ export default function OrderForm({ onSuccess }: Props) {
           disabled={loading || items.length === 0}
           className="flex w-full items-center justify-center gap-2 rounded bg-[#1E5631] py-3 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {loading ? (
-            'Saving your order…'
-          ) : (
-            <>
-              <WhatsAppIcon />
-              Place Order on WhatsApp
-            </>
-          )}
+          {loading ? 'Starting payment…' : `Pay ₹${total.toLocaleString('en-IN')} & Place Order`}
         </button>
-        {!loading && (
+        {!loading && !paymentDismissed && (
           <p className="text-center font-sans text-xs text-[#999999]">
-            Clicking this saves your order and shows you how to send it on WhatsApp in one step.
+            Pay securely, then we&apos;ll confirm your order on WhatsApp.
           </p>
+        )}
+
+        {paymentDismissed && !loading && (
+          <div className="rounded border border-[#D6CFC4] bg-[#F7F5F0] px-4 py-3 text-center">
+            <p className="font-sans text-xs text-[#666666]">
+              No worries — you can also place your order now and pay via a payment link we send
+              on WhatsApp instead.
+            </p>
+            <button
+              type="button"
+              onClick={handleWhatsAppFallback}
+              className="mt-2 inline-flex items-center gap-2 font-sans text-sm font-bold text-[#1E5631] underline"
+            >
+              <WhatsAppIcon />
+              Place Order &amp; Pay via WhatsApp
+            </button>
+          </div>
         )}
       </div>
     </form>

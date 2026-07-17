@@ -44,6 +44,9 @@ next-env.d.ts
 # claude code
 .claude/
 
+# playwright automation artifacts (can contain live credentials/PII from browser sessions)
+.playwright-mcp/
+
 # gsc mcp cache (contains real analytics data)
 tools/gsc-mcp/cache/
 tools/gsc-mcp/node_modules/

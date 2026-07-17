@@ -29,6 +29,7 @@ export default function OrderPageClient() {
   const [orderRef, setOrderRef] = useState('')
   const [waHref, setWaHref] = useState('')
   const [isMobile, setIsMobile] = useState(false)
+  const [paid, setPaid] = useState(false)
 
   // Set synchronously before any clearOrder() call so the redirect guard
   // below never fires during the cart-clear re-render
@@ -60,10 +61,11 @@ export default function OrderPageClient() {
   }, [itemCount, router])
 
   // Called by OrderForm after a successful SoapLedger submission
-  function handleOrderSuccess(ref: string, href: string) {
+  function handleOrderSuccess(ref: string, href: string, wasPaid: boolean) {
     orderPlacedRef.current = true  // gate the redirect — set before clearOrder fires
     setOrderRef(ref)
     setWaHref(href)
+    setPaid(wasPaid)
     setStep('send')
   }
 
@@ -81,13 +83,15 @@ export default function OrderPageClient() {
 
         <div>
           <h2 className="font-serif text-2xl text-[#1A1A14]">
-            Your order is ready. Send it on WhatsApp to place it.
+            {paid ? 'Payment received. Confirm on WhatsApp to finish.' : 'Your order is ready. Send it on WhatsApp to place it.'}
           </h2>
           <p className="mt-1 font-sans text-sm text-[#999]">Order #{orderRef}</p>
         </div>
 
         <p className="font-sans text-sm text-[#444444]">
-          Send us your order on WhatsApp. We&apos;ll confirm it and send you a payment link.
+          {paid
+            ? "Your payment is confirmed. Send us your order details on WhatsApp so we can start making it."
+            : "Send us your order on WhatsApp. We'll confirm it and send you a payment link."}
         </p>
 
         {isMobile ? (
@@ -119,7 +123,9 @@ export default function OrderPageClient() {
         )}
 
         <p className="font-sans text-xs text-[#999999]">
-          After you send: we&apos;ll confirm your order and send you a payment link on WhatsApp.
+          {paid
+            ? "After you send: we'll start making your order fresh and share tracking once it ships."
+            : "After you send: we'll confirm your order and send you a payment link on WhatsApp."}
         </p>
 
         <p className="font-sans text-xs text-[#999999]">

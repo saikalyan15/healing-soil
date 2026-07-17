@@ -160,7 +160,8 @@ export function buildWhatsAppMessage(
   items: WhatsAppLineItem[],
   shipping: ShippingAddress,
   shippingCost: number,
-  notes?: string
+  notes?: string,
+  paymentId?: string
 ): string {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0)
   const total = subtotal + shippingCost
@@ -174,13 +175,14 @@ export function buildWhatsAppMessage(
     ``,
     `Order: #${ref}`,
     ``,
-    `I'd like to place an order:`,
+    paymentId ? `I've just placed and paid for an order:` : `I'd like to place an order:`,
     ``,
     itemLines,
     ``,
     `Subtotal: ₹${subtotal}`,
     `Shipping: ${shippingCost === 0 ? 'FREE' : `₹${shippingCost}`}`,
     `Total: ₹${total}`,
+    paymentId ? `Payment: PAID ✓ (Razorpay ${paymentId})` : '',
     ``,
     `Deliver to:`,
     `${shipping.name}`,
