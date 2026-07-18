@@ -66,6 +66,11 @@ function loadRazorpayScript(): Promise<boolean> {
   })
 }
 
+// Feature toggle — online payment via Razorpay is implemented but hidden for
+// now; the site runs the original WhatsApp-only order flow until this is
+// flipped back on. Set NEXT_PUBLIC_ENABLE_RAZORPAY=true to re-enable.
+const RAZORPAY_ENABLED = process.env.NEXT_PUBLIC_ENABLE_RAZORPAY === 'true'
+
 type Props = {
   onSuccess: (ref: string, waHref: string, paid: boolean) => void
 }
@@ -207,6 +212,12 @@ export default function OrderForm({ onSuccess }: Props) {
   // ── Primary path: pay now via Razorpay, then hand off to WhatsApp ─────────
   async function handlePayNow(e: React.FormEvent) {
     e.preventDefault()
+
+    if (!RAZORPAY_ENABLED) {
+      await handleWhatsAppFallback()
+      return
+    }
+
     setError('')
     setPaymentDismissed(false)
     if (!validateForm()) return
@@ -484,11 +495,22 @@ export default function OrderForm({ onSuccess }: Props) {
           disabled={loading || items.length === 0}
           className="flex w-full items-center justify-center gap-2 rounded bg-[#1E5631] py-3 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {loading ? 'Starting payment…' : `Pay ₹${total.toLocaleString('en-IN')} & Place Order`}
+          {RAZORPAY_ENABLED ? (
+            loading ? 'Starting payment…' : `Pay ₹${total.toLocaleString('en-IN')} & Place Order`
+          ) : loading ? (
+            'Saving your order…'
+          ) : (
+            <>
+              <WhatsAppIcon />
+              Place Order on WhatsApp
+            </>
+          )}
         </button>
         {!loading && !paymentDismissed && (
           <p className="text-center font-sans text-xs text-[#999999]">
-            Pay securely, then we&apos;ll confirm your order on WhatsApp.
+            {RAZORPAY_ENABLED
+              ? "Pay securely, then we'll confirm your order on WhatsApp."
+              : 'Clicking this saves your order and shows you how to send it on WhatsApp in one step.'}
           </p>
         )}
 

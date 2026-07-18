@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getProducts } from '@/lib/products'
-import { getRazorpayClient } from '@/lib/razorpay'
+import { getRazorpayClient, isRazorpayEnabled } from '@/lib/razorpay'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import {
   MAX_QTY_PER_ITEM,
@@ -21,6 +21,10 @@ const createOrderSchema = z.object({
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req)
+
+  if (!isRazorpayEnabled()) {
+    return NextResponse.json({ error: 'Online payment is not available right now.' }, { status: 404 })
+  }
 
   try {
     if (!checkRateLimit(`razorpay-create:${ip}`, RATE_LIMIT_PAYMENT_ATTEMPTS, RATE_LIMIT_WINDOW_MS)) {

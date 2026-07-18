@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { verifyPaymentSignature } from '@/lib/razorpay'
+import { verifyPaymentSignature, isRazorpayEnabled } from '@/lib/razorpay'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { RATE_LIMIT_WINDOW_MS, RATE_LIMIT_PAYMENT_ATTEMPTS } from '@/lib/order-limits'
 
@@ -12,6 +12,10 @@ const verifySchema = z.object({
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req)
+
+  if (!isRazorpayEnabled()) {
+    return NextResponse.json({ verified: false, error: 'Online payment is not available right now.' }, { status: 404 })
+  }
 
   try {
     if (!checkRateLimit(`razorpay-verify:${ip}`, RATE_LIMIT_PAYMENT_ATTEMPTS, RATE_LIMIT_WINDOW_MS)) {

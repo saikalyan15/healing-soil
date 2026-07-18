@@ -3,6 +3,13 @@
 import Razorpay from 'razorpay'
 import crypto from 'crypto'
 
+// Feature toggle — mirrors the client-side flag in OrderForm.tsx. Keeps the
+// payment endpoints refusing to operate while the feature is hidden, even if
+// something calls them directly.
+export function isRazorpayEnabled(): boolean {
+  return process.env.NEXT_PUBLIC_ENABLE_RAZORPAY === 'true'
+}
+
 function getKeyId(): string {
   const key = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID
   if (!key) throw new Error('NEXT_PUBLIC_RAZORPAY_KEY_ID is not set')
