@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { submitOrder } from '@/lib/orders'
 import { sendPurchaseCapiEvent } from '@/lib/meta-capi'
+import { sendPurchaseMpEvent, parseGaClientId, parseGaSessionId, GA4_SESSION_COOKIE_NAME } from '@/lib/ga4-mp'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import {
   MAX_QTY_PER_ITEM,
@@ -91,6 +92,16 @@ export async function POST(req: NextRequest) {
       clientUserAgent: req.headers.get('user-agent') ?? undefined,
       fbp: req.cookies.get('_fbp')?.value,
       fbc: req.cookies.get('_fbc')?.value,
+    })
+
+    await sendPurchaseMpEvent({
+      transactionId: ref || order_id,
+      value: subtotal + shipping,
+      currency: 'INR',
+      shipping,
+      items: items.map((i) => ({ item_id: i.product_id, price: i.price, quantity: i.qty })),
+      clientId: parseGaClientId(req.cookies.get('_ga')?.value),
+      sessionId: parseGaSessionId(req.cookies.get(GA4_SESSION_COOKIE_NAME)?.value),
     })
 
     return NextResponse.json({ order_id, ref })
