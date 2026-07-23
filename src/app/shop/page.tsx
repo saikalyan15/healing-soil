@@ -40,6 +40,10 @@ const faqItems = [
     a: 'Shipped in 2 days. Arrives in 4-7 days depending on your city.',
   },
   {
+    q: 'Is Healing Soil cold-process or melt-and-pour soap?',
+    a: 'Healing Soil is melt-and-pour, not cold-process. We melt pre-made, already-saponified glycerin, goat milk, and shea butter bases and hand-pour them with botanicals in small batches, rather than mixing raw oils and lye from scratch.',
+  },
+  {
     q: 'How do I order?',
     a: 'You can order through our website or reach us on WhatsApp. Both work.',
   },
@@ -116,8 +120,8 @@ export default async function ShopPage() {
                   '@type': 'ShippingDeliveryTime',
                   handlingTime: {
                     '@type': 'QuantitativeValue',
-                    minValue: 4,
-                    maxValue: 4,
+                    minValue: 2,
+                    maxValue: 2,
                     unitCode: 'DAY',
                   },
                   transitTime: {
@@ -155,7 +159,7 @@ export default async function ShopPage() {
             The soaps
           </h1>
           <p className="font-sans text-base leading-relaxed text-[#666666]">
-            Everything here is made by hand in small batches on a farm in South Goa. No chemicals,
+            Every Healing Soil handmade soap bar is made by hand in small batches on a farm in South Goa. No chemicals,
             no synthetics. Order and we will make it fresh for you.
           </p>
         </div>

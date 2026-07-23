@@ -51,8 +51,8 @@ const productSchema = {
         '@type': 'ShippingDeliveryTime',
         handlingTime: {
           '@type': 'QuantitativeValue',
-          minValue: 4,
-          maxValue: 4,
+          minValue: 2,
+          maxValue: 2,
           unitCode: 'DAY',
         },
         transitTime: {

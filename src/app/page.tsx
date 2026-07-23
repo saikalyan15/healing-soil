@@ -75,6 +75,39 @@ export default async function HomePage() {
     .map((id) => reviews.find((r) => r.id === id))
     .filter((r): r is NonNullable<typeof r> => r != null)
 
+  const faqItems = [
+    {
+      q: 'What is Healing Soil handmade soap made from?',
+      a: 'Healing Soil handmade soap bars are made from glycerine, goat milk, or shea butter bases, hand-poured with farm-grown botanicals like neem and tulsi. Every bar is SLS-free, paraben-free, and free of synthetic fragrance.',
+    },
+    {
+      q: 'Is Healing Soil cold-process or melt-and-pour soap?',
+      a: 'Healing Soil is melt-and-pour, not cold-process. We melt pre-made, already-saponified soap bases and hand-pour them with botanicals in small batches, rather than mixing raw oils and lye from scratch.',
+    },
+    {
+      q: 'How long does shipping take?',
+      a: 'Orders dispatch within about 2 days from our farm in South Goa. Transit typically takes another 3 to 7 days depending on your city, and shipping is free across India.',
+    },
+    {
+      q: 'Is Healing Soil soap suitable for sensitive skin?',
+      a: 'Many people with sensitive skin find Healing Soil soap gentler than commercial soap because it contains no SLS, no synthetic fragrance, and no parabens. It is a gentle alternative to commercial soap, not a treatment for any skin condition.',
+    },
+    {
+      q: 'Where is Healing Soil soap made?',
+      a: 'Every bar is made on our farm in South Goa, India, hand-poured to order in small batches.',
+    },
+  ]
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
+
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -102,6 +135,10 @@ export default async function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* ── Section 1: Hero (Krutika Review + Farm Context) ────────────────── */}
@@ -373,6 +410,28 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ── Section 7.5: FAQ ──────────────────────────────────────────────── */}
+      <section className="w-full bg-[#F7F5F0] py-16 md:py-24">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 className="mb-8 font-serif text-3xl text-[#1E5631] md:text-4xl">
+            Common questions
+          </h2>
+          <div className="divide-y divide-[#D6CFC4]">
+            {faqItems.map(({ q, a }) => (
+              <details key={q} className="group py-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-base font-medium text-[#1A1A14] hover:text-[#1E5631]">
+                  {q}
+                  <span className="flex-shrink-0 text-[#C9A84C] transition-transform group-open:rotate-45" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-[#666666]">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Section 8: Soft Close (High Intensity CTA) ────────────────────── */}
       <section className="w-full bg-[#1E5631] py-24 md:py-32">
