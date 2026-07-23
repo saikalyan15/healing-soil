@@ -98,14 +98,14 @@ export default async function GoatMilkSoapPage() {
 
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           The secret lies in the natural fats and vitamins present in goat milk. These components
-          survive the soap-making process and help to moisturise the skin while you wash. When you use
+          survive saponification and help to moisturise the skin while you wash. When you use
           a goat milk bar, you notice a softer, creamier lather that cleans without the tight, dry
           feeling often associated with commercial soap.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Our goat milk soap is made in small batches in Goa, ensuring that every bar is cured to
-          perfection before it reaches you. We use no SLS or synthetic fragrances, relying instead on
+          Our goat milk soap is made in small batches in Goa — melted, hand-poured to order, and
+          shipped within days. We use no SLS or synthetic fragrances, relying instead on
           the natural goodness of our ingredients.
         </p>
 

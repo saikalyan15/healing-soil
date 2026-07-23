@@ -75,7 +75,7 @@ const faqSchema = {
       name: 'What are the benefits of shea butter soap?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Shea butter soap leaves a conditioning deposit on skin with every wash. The non-saponifiable compounds in shea butter survive the soap-making process and are deposited on skin while you wash. The result is a wash that feels nourishing rather than stripping — skin tends to feel soft after washing. It suits dry, sensitive, and mature skin and does not clog pores.',
+        text: 'Shea butter soap leaves a conditioning deposit on skin with every wash. The non-saponifiable compounds in shea butter survive saponification and are deposited on skin while you wash. The result is a wash that feels nourishing rather than stripping — skin tends to feel soft after washing. It suits dry, sensitive, and mature skin and does not clog pores.',
       },
     },
     {
@@ -123,10 +123,11 @@ export default function SheaButterSoapPage() {
         </p>
 
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Shea butter contains compounds that do not convert to soap during the saponification process.
-          They survive manufacturing intact. When you wash with a shea butter bar, these compounds —
-          fatty acids, cinnamic acid esters, vitamins A and E — are deposited on the skin and remain
-          there after rinsing. The result is skin that feels soft, not tight.
+          Shea butter contains compounds that do not convert to soap during saponification, the
+          process the base goes through before Healing Soil melts and hand-pours it. They survive
+          that process intact. When you wash with a shea butter bar, these compounds — fatty acids,
+          cinnamic acid esters, vitamins A and E — are deposited on the skin and remain there after
+          rinsing. The result is skin that feels soft, not tight.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
@@ -191,12 +192,12 @@ export default function SheaButterSoapPage() {
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Healing Soil shea butter soap uses shea butter as the base. No SLS. No sodium laureth
           sulfate. No synthetic fragrance. The soap is made to order in small batches at the farm in
-          South Goa, cured for the right amount of time, and shipped when ready. It ships in 2 days from dispatch. Arrives in 4-7 days depending on your city.
+          South Goa — melted, hand-poured with botanicals, and shipped once it has set. It ships in 2 days from dispatch. Arrives in 4-7 days depending on your city.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Commercial soap also removes the glycerin that forms naturally during saponification because
-          glycerin is profitable to sell separately. Healing Soil soap keeps it in the bar. Shea
+          glycerin is profitable to sell separately. Healing Soil keeps it in the bar. Shea
           butter plus retained glycerin means every wash does something useful for the skin rather
           than just stripping it.
         </p>

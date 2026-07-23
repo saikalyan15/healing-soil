@@ -2,6 +2,8 @@
 
 Healing Soil is a small-batch handmade soap maker based in Goa, India. All soaps are made to order using glycerine, goat milk, or shea butter bases. SLS-free, paraben-free, no synthetic fragrance. Ships across India.
 
+**Method: melt-and-pour, not cold-process.** Healing Soil melts pre-made glycerine, goat milk, and shea butter soap bases and hand-pours them with botanicals into molds. Saponification (the chemical reaction that turns oils into soap) happens upstream, when the base itself is made — Healing Soil does not mix raw oils and lye on site. This is different from cold-process or hot-process soap-making, where the maker saponifies oils from scratch.
+
 ## Brand facts
 
 - **Founded:** 2025
@@ -25,7 +27,7 @@ Creamy, soft lather. Made with a goat milk soap base. Rich in natural fats and v
 Examples: Neem Tulsi Goat Milk, Kesar Haldi Goat Milk, Honey Oats Goat Milk, Orange Goat Milk, Rice Rose Goat Milk.
 
 ### Shea butter soap
-Rich, dense lather. Made with a shea butter soap base. Shea butter contains unsaponifiables — fats that survive the soap-making process and remain on skin after washing — leaving a nourishing feel. Suited to very dry or tight-feeling skin.
+Rich, dense lather. Made with a shea butter soap base. Shea butter contains unsaponifiables — fats that survive the saponification the base underwent before Healing Soil ever touches it, and remain on skin after washing — leaving a nourishing feel. Suited to very dry or tight-feeling skin.
 
 Examples: Shea Butter Kesar Gulab (rose, saffron, shea).
 
@@ -171,7 +173,10 @@ Goat milk soap is suited to daily cleansing, particularly for sensitive, dry, or
 They suit different skin types. Glycerine soap produces a lighter lather with a cleaner finish, better for oily or combination skin. Goat milk soap produces a creamier lather with a more nourishing feel, better for sensitive or dry skin. Both are SLS-free and made to order. Full comparison: https://healingsoil.in/blog/glycerin-vs-goat-milk-soap
 
 **What is shea butter soap?**
-Shea butter soap is made with a shea butter base. Shea butter contains a high percentage of unsaponifiables — fats that do not convert to soap during the soap-making process and remain on skin after washing. It produces a rich, dense lather and suits very dry or tight-feeling skin.
+Shea butter soap is made with a shea butter base. Shea butter contains a high percentage of unsaponifiables — fats that do not convert to soap during saponification and remain on skin after washing. It produces a rich, dense lather and suits very dry or tight-feeling skin.
+
+**Is Healing Soil cold-process soap?**
+No. Healing Soil is melt-and-pour, not cold-process. Cold-process makers mix raw oils and lye and saponify from scratch, a process that takes weeks to cure. Healing Soil melts pre-made, already-saponified glycerine, goat milk, and shea butter bases and hand-pours them with botanicals — the same small-batch, made-to-order approach, just a different starting point.
 
 **What does SLS-free mean?**
 SLS stands for sodium lauryl sulfate, a synthetic detergent used in most commercial soaps, shampoos, and dishwashing liquids. It creates thick lather quickly but is a common irritant, particularly for people with sensitive skin. SLS-free soap uses no synthetic detergents. Learn more: https://healingsoil.in/blog/sls-free-soap-india

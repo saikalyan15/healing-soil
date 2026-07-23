@@ -172,7 +172,7 @@ export const decisions: DecisionPage[] = [
       },
       {
         q: 'Is Healing Soil soap actually made in Goa?',
-        a: 'Yes. The soap is made and cured on our farm in South Goa. The botanicals we describe as farm-grown — neem and tulsi — are grown on our property, harvested by hand, and sun-dried before being added to each batch. We make to order, so your bar was made for your order, not pulled from old stock.'
+        a: 'Yes. The soap is melted and hand-poured on our farm in South Goa. The botanicals we describe as farm-grown — neem and tulsi — are grown on our property, harvested by hand, and sun-dried before being added to each batch. We make to order, so your bar was made for your order, not pulled from old stock.'
       },
       {
         q: 'Which Healing Soil soap should I start with?',
@@ -187,10 +187,10 @@ export const decisions: DecisionPage[] = [
   },
   {
     slug: 'goa-humidity',
-    title: 'Best Soap for Goa Humidity | Healing Soil',
-    h1: 'Best Soap for Goa\'s Humid Climate',
-    metaDescription: 'High humidity in Goa means heavier soaps can feel uncomfortable. A light glycerin or goat milk base cleanses without leaving residue — and it is made right here in South Goa.',
-    intro: 'Goa\'s coastal humidity is relentless for much of the year. Heavy soaps that leave a conditioning film on the skin feel uncomfortable in this climate — you want something that cleanses thoroughly and rinses clean. The good news is that the answer is a gentler soap, not a harsher one.',
+    title: 'Best Soap for Humid Weather in India | Chennai, Bangalore, Mumbai',
+    h1: 'Best Soap for India\'s Humid Climate',
+    metaDescription: 'High humidity in cities like Chennai, Bangalore, and Mumbai means heavier soaps can feel uncomfortable. A light glycerin or goat milk base cleanses without leaving residue, handmade in Goa.',
+    intro: 'Humidity across India\'s coastal and southern cities is relentless for much of the year. Heavy soaps that leave a conditioning film on the skin feel uncomfortable in this climate — you want something that cleanses thoroughly and rinses clean. The good news is that the answer is a gentler soap, not a harsher one.',
     primaryBase: 'Glycerin',
     recommendation: 'In Goa\'s humidity, glycerin is the right base — it cleanses thoroughly and rinses away completely without leaving any residue. The orange goat milk bar is a popular choice for those who want something slightly richer: the natural citrus scent is uplifting and the goat milk base is light enough to wear well in a coastal climate. Neem and tulsi in glycerin is the daily workhorse.',
     recommendedProducts: ['orange-goat-milk-soap', 'neem-tulsi-glycerin-soap', 'honey-oats-glycerin-soap'],

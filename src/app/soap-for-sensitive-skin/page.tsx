@@ -137,9 +137,10 @@ export default async function SoapForSensitiveSkinPage() {
 
         <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Our making process</h2>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Every bar of Healing Soil soap is made to order in Goa. This means we don&apos;t need to use
-          heavy synthetic preservatives to ensure a multi-year shelf life. The soap you receive has
-          been recently cured and is ready to provide a gentle, natural wash.
+          Every bar of Healing Soil soap is melted and hand-poured to order in Goa. This means we
+          don&apos;t need to use heavy synthetic preservatives to ensure a multi-year shelf life. The
+          soap you receive was made within days of your order and is ready to provide a gentle,
+          natural wash.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">

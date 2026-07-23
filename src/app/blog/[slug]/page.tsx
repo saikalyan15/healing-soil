@@ -176,11 +176,11 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   'handmade-soap-goa': [
     {
       question: 'Is Healing Soil soap actually made in Goa?',
-      answer: 'Yes. The soap is made and cured in Goa. The soap bases — glycerin, goat milk, shea butter — are sourced from a manufacturer we have worked with consistently. The botanicals we describe as farm-grown, neem and tulsi, are grown on our property in Goa, dried under the sun there, and added by hand to each batch.',
+      answer: 'Yes. The soap is melted and hand-poured in Goa. The soap bases — glycerin, goat milk, shea butter — are sourced from a manufacturer we have worked with consistently. The botanicals we describe as farm-grown, neem and tulsi, are grown on our property in Goa, dried under the sun there, and added by hand to each batch.',
     },
     {
       question: 'What does small-batch soap mean?',
-      answer: 'Small-batch means the batch size is small enough that the soap does not need a long shelf life engineered through preservatives and synthetic stabilisers. We make to order: when you place an order, we make the batch, cure it for the right amount of time, and ship. The bar you receive was made for your order, not sourced from stock that has been sitting in a warehouse.',
+      answer: 'Small-batch means the batch size is small enough that the soap does not need a long shelf life engineered through preservatives and synthetic stabilisers. We make to order: when you place an order, we melt and hand-pour the bar and ship it within about two days. The bar you receive was made for your order, not sourced from stock that has been sitting in a warehouse.',
     },
     {
       question: 'Can handmade soap from Goa be shipped across India?',
@@ -192,7 +192,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Why is handmade soap from Goa different from commercial soap?',
-      answer: 'The practical difference is in ingredients and shelf life. Commercial soap usually contains SLS, a synthetic detergent that strips skin oils, and is manufactured months before use. Small-batch handmade soap skips SLS entirely, uses no synthetic preservatives, and is made to order — so the bar you receive was cured recently, not held in a warehouse. The result is a cleaner ingredient list and a gentler effect on skin.',
+      answer: 'The practical difference is in ingredients and shelf life. Commercial soap usually contains SLS, a synthetic detergent that strips skin oils, and is manufactured months before use. Small-batch handmade soap skips SLS entirely, uses no synthetic preservatives, and is made to order — so the bar you receive was made recently, not held in a warehouse. The result is a cleaner ingredient list and a gentler effect on skin.',
     },
   ],
   'goat-milk-soap-benefits': [

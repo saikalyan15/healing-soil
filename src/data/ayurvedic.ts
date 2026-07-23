@@ -143,7 +143,7 @@ export const ayurvedic: AyurvedicPage[] = [
       },
       {
         q: 'How long does it take to ship?',
-        a: 'Our soaps are made and cured in Goa. Orders are typically dispatched within 7 to 10 days to ensure you receive a high-quality, recently cured bar.'
+        a: 'Our soaps are melted and hand-poured to order in Goa. Orders typically dispatch within 2 days, so you receive a freshly made bar rather than one pulled from old stock.'
       }
     ],
     publishedAt: '2026-05-16'

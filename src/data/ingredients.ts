@@ -99,9 +99,9 @@ export const ingredients: IngredientPage[] = [
     name: 'Glycerin',
     title: 'Glycerin in Handmade Soap: Why It Matters | Healing Soil',
     metaDescription: 'Understand why we retain natural glycerin in our soap. Learn how this humectant keeps your skin hydrated and soft after washing.',
-    tagline: 'A natural humectant retained in every bar. Glycerin is a byproduct of traditional soap-making that we choose to keep for its moisturising feel.',
-    origin: 'Glycerin is not an added ingredient; it forms naturally during the saponification process and is kept intact in all Healing Soil soaps.',
-    traditionalUse: 'Glycerin is a humectant that draws moisture from the air to the skin. Retaining it in the bar is a hallmark of traditional, small-batch soap-making.',
+    tagline: 'A natural humectant retained in every bar. Glycerin is a byproduct of saponification, the process used to make our soap bases, and we choose to keep it in for its moisturising feel.',
+    origin: 'Glycerin is not an added ingredient. It forms naturally when the soap base is made and is kept intact rather than extracted. Healing Soil is a melt-and-pour soapmaker: we melt these pre-made bases and hand-pour them with botanicals, rather than mixing oils and lye ourselves.',
+    traditionalUse: 'Glycerin is a humectant that draws moisture from the air to the skin. Retaining it in the bar, rather than stripping it out for resale, is a hallmark of small-batch soap-making.',
     feel: 'Light, clean lather that rinses away easily. It leaves the skin feeling hydrated and soft rather than stripped or tight.',
     relatedProducts: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerin-soap'],
     faqs: [

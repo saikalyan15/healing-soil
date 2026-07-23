@@ -183,7 +183,7 @@ export const occasions: OccasionPage[] = [
       },
       {
         q: 'How much lead time is needed for corporate orders?',
-        a: 'Since our soap is made to order and needs time to cure, we recommend reaching out at least three to four weeks in advance for bulk orders.'
+        a: 'Since our soap is made to order in small batches, we recommend reaching out at least three to four weeks in advance for bulk orders so we can schedule the production run.'
       }
     ],
     publishedAt: '2026-05-11'

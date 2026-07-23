@@ -116,7 +116,7 @@ export default function HandmadeSoapIndiaGuide() {
         <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-lg">
           <Image
             src="/images/guide/guide-handmade-soap-india.png"
-            alt="Handmade soap bars curing on a wooden rack at the Healing Soil farm in Goa"
+            alt="Handmade soap bars drying on a wooden rack at the Healing Soil farm in Goa"
             fill
             className="object-cover"
             priority
@@ -233,7 +233,7 @@ export default function HandmadeSoapIndiaGuide() {
           Why handmade soap behaves differently
         </h2>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Handmade soap is made in small batches, cured for several weeks, and sold without the shelf-life pressure of mass production. The process is slower by design. Each batch is slightly different because natural ingredients are not uniform.
+          Handmade soap is made in small batches and sold without the shelf-life pressure of mass production. Healing Soil bars are melt-and-pour: pre-made bases are melted and hand-poured with botanicals to order, then shipped within days, not held in stock. Each batch is slightly different because natural ingredients are not uniform.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           The result is a bar that lasts longer than most people expect — because glycerin-rich, SLS-free bars dissolve more slowly than commercial detergent bars. A single bar used correctly can last four to six weeks. Read more: <Link href="/blog/why-handmade-soap-lasts-longer" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Why our handmade soap lasts longer than you expect</Link>
@@ -247,7 +247,7 @@ export default function HandmadeSoapIndiaGuide() {
           From the farm
         </h2>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          The soap Healing Soil makes starts on a farm in South Goa. The neem and tulsi are grown there. The glycerin and goat milk bases come from a manufacturer used since the start. Everything is combined, cured, and shipped to order. If you want to understand what that looks like in practice, two stories give the full picture:
+          The soap Healing Soil makes starts on a farm in South Goa. The neem and tulsi are grown there. The glycerin and goat milk bases come from a manufacturer used since the start. Everything is melted, hand-poured, and shipped to order. If you want to understand what that looks like in practice, two stories give the full picture:
         </p>
         <ul className="mb-5 list-disc pl-6 font-sans text-base leading-relaxed text-[#1A1A14] space-y-2">
           <li>

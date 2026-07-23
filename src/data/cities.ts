@@ -85,8 +85,8 @@ export const cities: CityPage[] = [
     climateNote: "Delhi's dry summers, cold winters, dust, and hard tap water make a richer soap base more useful than a very light bar. Start with shea butter in winter or whenever your skin feels tight after bathing. Goat milk is the best year-round middle choice for a creamy, gentle lather. Use glycerin only if you prefer a lighter rinse during peak summer.",
     faqs: [
       {
-        q: 'How long is the curing time before shipping to Delhi?',
-        a: 'Our soaps are made and cured in Goa. The typical window from order to dispatch is 7 to 10 days, ensuring you receive a recently cured bar.'
+        q: 'How long before my order ships to Delhi?',
+        a: 'Our soaps are melted and hand-poured to order in Goa, then dispatched within about 2 days, so you receive a freshly made bar rather than one pulled from old stock.'
       },
       {
         q: 'Is the soap suitable for sensitive skin?',
@@ -157,7 +157,7 @@ export const cities: CityPage[] = [
     faqs: [
       {
         q: 'Do you have a physical store in Goa?',
-        a: 'We currently operate primarily as an online workshop to ensure every bar is made to order and cured correctly before reaching you.'
+        a: 'We currently operate primarily as an online workshop to ensure every bar is melted and hand-poured to order before reaching you.'
       },
       {
         q: 'Can I visit the farm in South Goa?',
@@ -183,7 +183,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Are the soaps made with natural oils?',
-        a: 'Yes, we use traditional saponified oils to create our bases, ensuring a gentle wash without the need for harsh detergents.'
+        a: "Yes. Our glycerin, goat milk, and shea butter bases are made from saponified natural oils. Healing Soil melts these pre-made bases and hand-pours them with botanicals, ensuring a gentle wash without the need for harsh detergents."
       },
       {
         q: 'How can I pay for my order from Kolkata?',
@@ -267,7 +267,7 @@ export const cities: CityPage[] = [
     faqs: [
       {
         q: 'What is the dispatch time to Lucknow?',
-        a: 'We typically dispatch orders within 7 to 10 days of placement, as every bar is made to order and needs time to cure.'
+        a: 'We typically dispatch orders within about 2 days of placement, since every bar is melted and hand-poured to order rather than pulled from stock.'
       },
       {
         q: 'Are these soaps suitable for gifting?',
@@ -472,8 +472,8 @@ export const cities: CityPage[] = [
         a: 'Yes, our kesar soaps use high-quality saffron sourced from Kashmir for a traditional personal care experience.'
       },
       {
-        q: 'What is the curing period for your soap?',
-        a: 'Our soaps are cured correctly in Goa to ensure a high-quality bar. We typically dispatch 7 to 10 days after an order is placed.'
+        q: 'How is your soap made?',
+        a: 'Our soaps are melted and hand-poured to order in Goa, from pre-made glycerin, goat milk, and shea butter bases. We typically dispatch within about 2 days of an order being placed.'
       }
     ],
     publishedAt: '2026-05-16'
@@ -535,7 +535,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Are these soaps genuinely SLS-free?',
-        a: 'Yes, all our soaps are made without SLS or any other synthetic detergents, relying on natural saponification instead.'
+        a: 'Yes, all our soaps are made without SLS or any other synthetic detergents. The lather comes from the naturally saponified oils in the base instead.'
       },
       {
         q: 'Can I get a custom selection of soaps?',
