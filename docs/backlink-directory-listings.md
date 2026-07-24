@@ -81,6 +81,99 @@ Udyam/MSME Registration No.: [paste yours here — use where a field exists]
    Product Hunt (if you ever do a proper launch post), IndiaFilings business
    directory, Trade India.
 
+## Step-by-step setup
+
+### 1. Google Business Profile
+
+1. Go to business.google.com and sign in with the `healingsoil.in@gmail.com`
+   account (not a personal Gmail — keeps ownership tied to the business).
+2. Click **Add your business to Google**. Enter the name exactly as
+   `Healing Soil` — don't let Google auto-suggest a variant.
+3. Category: primary category **Cosmetic Products Manufacturer** — verified
+   live against Google's current picker on 2026-07-24. "Soap" and
+   "handmade" return nothing usable (Soapland, soba noodle shop, handyman);
+   "cosmetic" is the term that surfaces the right category. Add a second
+   category if offered — **Cosmetics industry** or **Cosmetics shop** are
+   the next-closest real options.
+4. When asked *"Do you want to add a location customers can visit?"* → select
+   **No**. This is what makes it a service-area business and keeps the
+   address off the listing entirely.
+5. When asked *"Do you deliver goods/services to customers?"* → **Yes**. Set
+   the service area. GBP caps service areas at 20 entries — use states/major
+   cities you actually ship to a lot (Karnataka, Maharashtra, Delhi NCR,
+   Goa, etc.) rather than trying to enumerate all of India suburb by suburb.
+6. Phone: `+91 74831 00651`. Website: `https://healingsoil.in`.
+7. Verification: for service-area businesses Google usually offers phone,
+   text, or a short video call — not the postcard-by-mail option (that's
+   for address-shown listings). Follow whichever option it offers.
+8. Once verified, fill in the rest of the profile: paste the **long**
+   description from the NAP block above, add product photos (soap bars,
+   the process, packaging — avoid any photo with house numbers, street
+   signs, or anything that identifies the rental address), and set hours to
+   whatever reflects when you actually respond to WhatsApp/orders.
+9. Use the **Products** tab to add each soap base as an item, linking each
+   one to its `/shop/[slug]` page — this is itself a backlink and also
+   drives clicks straight into the shop.
+
+### 2. IndiaMART
+
+1. Go to indiamart.com → **Sell on IndiaMART** → free registration.
+2. Verify via OTP to `+91 74831 00651`.
+3. Business name: `Healing Soil`. Business type: **Proprietorship** (no GST
+   — IndiaMART allows this, you'll just show as a non-GST seller, which
+   only affects a trust badge, not listing eligibility).
+4. Category: search **Handmade Soap** / **Herbal Soap** / **Bath Soap** and
+   pick the closest matching leaf category — don't leave it at a generic
+   parent category, it hurts your search placement within IndiaMART.
+5. Location: city/state level only (**Goa**) — no street address field is
+   mandatory for a non-GST seller account.
+6. Add each soap as a **product listing**: photo, price, minimum order
+   quantity (can be 1), and a description that links back to the matching
+   `/shop/[slug]` or `/ingredient/[slug]` page on healingsoil.in.
+7. Paste the medium description into the company profile field.
+8. If there's an optional GST field, leave blank. If there's a
+   Udyam/MSME field, fill it in.
+
+### 3. JustDial
+
+1. Go to justdial.com and find **Add Free Listing** (footer link, or
+   business.justdial.com).
+2. Business name, category (search **Soap Manufacturers** or **Cosmetic
+   Product Dealers**), mobile OTP verification to `+91 74831 00651`.
+3. City: select the closest listed option to South Goa (likely **Goa**,
+   **Panaji**, or **Margao** depending on what JustDial's city list offers)
+   — do not enter a street address in the free-text fields.
+4. Add website (`https://healingsoil.in`), short description, and photos.
+5. If it asks for ID/business proof for a verified badge, the Udyam
+   certificate is the right document — but this is optional, not required
+   to go live with the free listing.
+
+### 4. Sulekha
+
+1. Go to sulekha.com → **List Your Business**.
+2. Same pattern: business name, category (search **Soap** or **Cosmetics**),
+   mobile OTP, city-level location only, website link, short description.
+3. No document upload needed for the free tier.
+
+### 5. Facebook Shop / Instagram Shop tab
+
+You already have both profiles (`facebook.com/profile.php?id=61576352186521`
+and `instagram.com/healingsoil.in`) and a Meta Ads account, so this is
+mostly configuration, not a new signup.
+
+1. Go to Commerce Manager (business.facebook.com/commerce) using the same
+   Meta Business account already used for ads.
+2. Create a catalog, or connect one if a product feed already exists from
+   the ads/Pixel setup — check before building product entries by hand.
+3. Add each soap as a catalog item: name, price, photo, and — critically —
+   the **checkout link** pointing to the matching `/shop/[slug]` page
+   (choose "checkout on another website," not Facebook's native checkout).
+4. Submit the catalog for review. Meta's commerce review can take a few
+   days; nothing to do but wait.
+5. Once approved, enable the **Shop** tab on the Facebook Page and the
+   **Shopping** tab on the Instagram profile, linking both to the same
+   catalog.
+
 ## What to avoid
 
 - Paid link packages / "SEO backlink bundles" sold on Fiverr etc. — these are
