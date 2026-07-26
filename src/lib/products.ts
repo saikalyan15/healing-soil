@@ -89,8 +89,19 @@ function normalise(raw: SoapLedgerProduct): Product {
 
 /**
  * Fetch all products from SoapLedger.
- * Cached in the Data Cache for 5 minutes, or busted on demand via revalidateTag('products').
+ * Cached in the Data Cache for 6 hours, or busted on demand via revalidateTag('products').
  * Pages using this should be force-dynamic — only the data result is cached, not the HTML.
+ *
+ * IMPORTANT — do not lower `revalidate` below ~1 hour.
+ * SoapLedger's Neon compute has a fixed 5-minute scale-to-zero delay on the Free
+ * plan. Every cache miss issues a query that wakes the compute for a full 5
+ * billed minutes, regardless of how little work the query does. A 5-minute TTL
+ * therefore matched the suspend delay exactly: with any steady traffic at all
+ * (including crawlers overnight) the database never got to sleep, which burned
+ * ~85 of the 100 monthly CU-hours by the 25th of the month.
+ *
+ * Product data is edited rarely and SoapLedger pushes revalidateTag('products')
+ * on demand after edits, so this TTL is only a safety net — long is correct.
  */
 export const getProducts = unstable_cache(
   async (): Promise<Product[]> => {
@@ -112,7 +123,7 @@ export const getProducts = unstable_cache(
   },
   ['products'],
   {
-    revalidate: 300, // 5-minute fallback TTL
+    revalidate: 21600, // 6-hour fallback TTL; on-demand busting is the primary path
     tags: ['products'], // bust with revalidateTag('products') from SoapLedger
   }
 )
