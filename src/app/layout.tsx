@@ -132,6 +132,13 @@ fbq('track','PageView');`}
         <OrderTray />
         <MetaPixelEvents />
         <GoogleAnalytics gaId="G-EWQR3K5MW7" />
+        <Script
+          id="datafast"
+          src="https://datafa.st/js/script.js"
+          data-website-id="dfid_zZkTBdrVLiRKShi4zBpnK"
+          data-domain="healingsoil.in"
+          strategy="afterInteractive"
+        />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
