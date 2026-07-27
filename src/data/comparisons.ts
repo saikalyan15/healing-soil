@@ -503,7 +503,7 @@ export const comparisons: ComparisonPage[] = [
   },
   {
     slug: 'goat-milk-soap-vs-commercial-soap',
-    title: 'Goat Milk Soap vs Commercial Soap: Creamy or Detergent-Style?',
+    title: 'Goat Milk Soap vs Commercial Soap',
     h1: 'Goat Milk Soap vs Commercial Soap: What Changes in the Wash?',
     metaDescription: 'Goat milk soap gives a creamier, softer wash. Commercial soap often relies on detergent-style foam. Compare the feel, lather, and skin-fit.',
     subjectA: {

@@ -97,7 +97,17 @@ const config = {
       return slugs
     }
 
-    const compareSlugs = extractLiveSlugs('src/data/comparisons.ts')
+    // Comparison pages whose rel=canonical points somewhere else. These must
+    // not be submitted, or the sitemap contradicts the canonical tag and
+    // Google indexes both URLs. Note the top-level `exclude` array does NOT
+    // cover these, because additionalPaths entries bypass it.
+    const canonicalOverriddenCompareSlugs = new Set([
+      'glycerin-vs-goat-milk-soap', // canonical → /blog/glycerin-vs-goat-milk-soap
+    ])
+
+    const compareSlugs = extractLiveSlugs('src/data/comparisons.ts').filter(
+      (slug) => !canonicalOverriddenCompareSlugs.has(slug)
+    )
     const ingredientSlugs = extractLiveSlugs('src/data/ingredients.ts')
     const decisionSlugs = extractLiveSlugs('src/data/decisions.ts')
     const citySlugs = extractLiveSlugs('src/data/cities.ts')
