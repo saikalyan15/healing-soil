@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { combinations } from '@/data/combinations'
+import { buildMetadata } from '@/lib/seo'
 import CombinationPage from '@/components/programmatic/CombinationPage'
 import { getProducts } from '@/lib/products'
 
@@ -18,18 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const combination = combinations.find((c) => c.slug === combo)
   if (!combination) return {}
 
-  return {
-    title: `${combination.title} — Healing Soil`,
+  return buildMetadata({
+    title: combination.title,
     description: combination.metaDescription,
-    alternates: { canonical: `/${combo}` },
-    openGraph: {
-      title: combination.title,
-      description: combination.metaDescription,
-      url: `/${combo}`,
-      siteName: 'Healing Soil',
-      type: 'article',
-    },
-  }
+    canonical: `/${combo}`,
+    ogType: 'article',
+  })
 }
 
 export const dynamicParams = false

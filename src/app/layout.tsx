@@ -25,10 +25,11 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s | Healing Soil',
-    default: 'Healing Soil — Handmade Natural Soaps from Goa',
-  },
+  // A plain string, deliberately not a `title.template`. Brand suffixing is
+  // owned by buildTitle() in src/lib/seo.ts, which appends the brand only when
+  // the title stays inside the 60 character budget. A template here would
+  // double-apply it, which is what put 510 of 535 titles over the limit.
+  title: 'Healing Soil — Handmade Natural Soaps from Goa',
   description:
     'Healing Soil crafts small-batch, handmade natural soaps rooted in the spirit of Goa. Regenerative ingredients, slow living, and care for the earth.',
   metadataBase: new URL('https://healingsoil.in'),

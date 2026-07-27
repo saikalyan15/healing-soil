@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ingredients } from '@/data/ingredients'
+import { buildMetadata } from '@/lib/seo'
 import IngredientPage from '@/components/programmatic/IngredientPage'
 import { getProducts } from '@/lib/products'
 
@@ -18,18 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ingredient = ingredients.find((i) => i.slug === slug)
   if (!ingredient) return {}
 
-  return {
-    title: `${ingredient.title} — Healing Soil`,
+  return buildMetadata({
+    title: ingredient.title,
     description: ingredient.metaDescription,
-    alternates: { canonical: `/ingredient/${slug}` },
-    openGraph: {
-      title: ingredient.title,
-      description: ingredient.metaDescription,
-      url: `/ingredient/${slug}`,
-      siteName: 'Healing Soil',
-      type: 'article',
-    },
-  }
+    canonical: `/ingredient/${slug}`,
+    ogType: 'article',
+  })
 }
 
 export const dynamicParams = false

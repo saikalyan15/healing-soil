@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ayurvedic } from '@/data/ayurvedic'
+import { buildMetadata } from '@/lib/seo'
 import AyurvedicPage from '@/components/programmatic/AyurvedicPage'
 import { getProducts } from '@/lib/products'
 
@@ -18,18 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = ayurvedic.find((a) => a.slug === slug)
   if (!page) return {}
 
-  return {
+  return buildMetadata({
     title: page.title,
     description: page.metaDescription,
-    alternates: { canonical: `/ayurvedic-soap/${slug}` },
-    openGraph: {
-      title: page.title,
-      description: page.metaDescription,
-      url: `/ayurvedic-soap/${slug}`,
-      siteName: 'Healing Soil',
-      type: 'website',
-    },
-  }
+    canonical: `/ayurvedic-soap/${slug}`,
+  })
 }
 
 export const dynamicParams = false

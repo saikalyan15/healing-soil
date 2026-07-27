@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { cities } from '@/data/cities'
 import { ingredients } from '@/data/ingredients'
 import { cityIngredientBatches } from '@/data/city-ingredients'
+import { buildMetadata } from '@/lib/seo'
 import CityIngredientPage from '@/components/programmatic/CityIngredientPage'
 import { getProducts } from '@/lib/products'
 
@@ -30,21 +31,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ingredientData = ingredients.find((i) => i.slug === ingredientSlug)
   if (!cityData || !ingredientData) return {}
 
-  const title = `${ingredientData.name} Soap in ${cityData.displayName} – Handmade, SLS-Free | Healing Soil`
-  const description = `Handmade ${ingredientData.name.toLowerCase()} soap in small batches in Goa, delivered to ${cityData.displayName}. SLS-free, no parabens, no synthetic fragrance. Ships in 7–10 days.`
+  // The previous template carried 61 characters of fixed chrome before any
+  // variable, so every one of these 378 pages exceeded the 60 character budget
+  // no matter which city or ingredient filled it in.
+  const title = `${ingredientData.name} Soap in ${cityData.displayName}`
+  const description = `Handmade ${ingredientData.name.toLowerCase()} soap made in small batches in Goa, delivered to ${cityData.displayName}. SLS-free, no parabens, no synthetic fragrance.`
 
-  return {
+  return buildMetadata({
     title,
     description,
-    alternates: { canonical: `/soap/${citySlug}/${ingredientSlug}` },
-    openGraph: {
-      title,
-      description,
-      url: `/soap/${citySlug}/${ingredientSlug}`,
-      siteName: 'Healing Soil',
-      type: 'article',
-    },
-  }
+    canonical: `/soap/${citySlug}/${ingredientSlug}`,
+    ogType: 'article',
+  })
 }
 
 export const dynamicParams = false

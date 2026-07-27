@@ -10,6 +10,7 @@ import AddToCartButton from '@/components/AddToCartButton'
 import ProductViewEvent from '@/components/ProductViewEvent'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
+import { buildTitle, buildDescription } from '@/lib/seo'
 import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
 import { canonicalSlugFor } from '@/lib/product-slugs'
@@ -103,9 +104,13 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     title: 'Ginger Rosemary Glycerin Soap | Handmade in Goa | Healing Soil',
     description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Free shipping across India.',
   },
+  // Highest-impression page on the site and previously the worst CTR: roughly
+  // 640 impressions across "travel soap" (379), "mini soap for travel" (149)
+  // and "mini soap bars" (113) returned a single click. This title leads with
+  // the dominant keyword and picks up "mini" and "bars" from the same cluster.
   'travel-soaps': {
-    title: '30g Travel Soap Bars, No Spills or Liquid Limits | Healing Soil',
-    description: 'Solid 30g soap bars for flights and travel bags, no liquid restrictions or leaks to worry about. Handmade, SLS-free, made in small batches in Goa.',
+    title: 'Mini Travel Soap Bars, 30g, No Liquid Limits',
+    description: 'Solid 30g mini soap bars for flights and travel bags. No liquid limits at security, no leaks in your luggage. Handmade and SLS-free, made in small batches in Goa.',
   },
 }
 
@@ -133,8 +138,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const canonicalSlug = canonicalSlugFor(product.slug)
   const override = PRODUCT_META_OVERRIDES[canonicalSlug]
-  const title = override?.title ?? `${product.name} | Healing Soil, Goa`
-  const description = override?.description ?? `${product.description} Made by hand in South Goa. ${product.price_range}.`
+  const title = buildTitle(override?.title ?? product.name)
+  const description = buildDescription(
+    override?.description ?? `${product.description} Made by hand in South Goa. ${product.price_range}.`
+  )
 
   return {
     title,

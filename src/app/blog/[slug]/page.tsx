@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
+import { buildTitle, buildDescription } from '@/lib/seo'
 import { getProducts } from '@/lib/products'
 import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
@@ -24,10 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlugFromEither(slug)
   if (!post) return {}
-  const metaTitle = post.seoTitle ?? post.title
-  const metaDescription = post.seoDescription ?? post.excerpt
+  // Posts without seoTitle/seoDescription fall back to the editorial title and
+  // excerpt, which run long. buildTitle/buildDescription clamp them to budget.
+  const metaTitle = buildTitle(post.seoTitle ?? post.title)
+  const metaDescription = buildDescription(post.seoDescription ?? post.excerpt)
   return {
-    title: `${metaTitle} — Healing Soil`,
+    title: metaTitle,
     description: metaDescription,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {

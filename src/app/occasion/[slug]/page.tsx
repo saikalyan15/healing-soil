@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { occasions } from '@/data/occasions'
+import { buildMetadata } from '@/lib/seo'
 import OccasionPage from '@/components/programmatic/OccasionPage'
 import { getProducts } from '@/lib/products'
 
@@ -18,18 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const occasion = occasions.find((o) => o.slug === slug)
   if (!occasion) return {}
 
-  return {
+  return buildMetadata({
     title: occasion.title,
     description: occasion.metaDescription,
-    alternates: { canonical: `/occasion/${slug}` },
-    openGraph: {
-      title: occasion.title,
-      description: occasion.metaDescription,
-      url: `/occasion/${slug}`,
-      siteName: 'Healing Soil',
-      type: 'website',
-    },
-  }
+    canonical: `/occasion/${slug}`,
+  })
 }
 
 export const dynamicParams = false

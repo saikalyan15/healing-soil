@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { decisions } from '@/data/decisions'
+import { buildMetadata } from '@/lib/seo'
 import { getProducts } from '@/lib/products'
 import DecisionPage from '@/components/programmatic/DecisionPage'
 
@@ -18,18 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const decision = decisions.find((d) => d.slug === slug)
   if (!decision) return {}
 
-  return {
+  return buildMetadata({
     title: decision.title,
     description: decision.metaDescription,
-    alternates: { canonical: `/soap-for/${slug}` },
-    openGraph: {
-      title: decision.title,
-      description: decision.metaDescription,
-      url: `/soap-for/${slug}`,
-      siteName: 'Healing Soil',
-      type: 'article',
-    },
-  }
+    canonical: `/soap-for/${slug}`,
+    ogType: 'article',
+  })
 }
 
 export const dynamicParams = false
