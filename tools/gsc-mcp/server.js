@@ -143,8 +143,68 @@ function groupInspectionResults(results) {
 
 // ── Tool implementations ────────────────────────────────────────────────────
 
-async function getTopQueries({ limit = 20 } = {}) {
-  const cacheKey = `top_queries_${limit}`;
+// The Search Analytics API ignores orderBy and always returns rows sorted by
+// clicks descending, then alphabetically by key. That means a plain rowLimit
+// pull truncates the zero-click tail mid-alphabet and silently hides demand.
+// containsFilter and minImpressions exist to work around that.
+async function getTopQueries({ limit = 20, containsFilter = "", minImpressions = 0 } = {}) {
+  const filterKey = containsFilter.replace(/[^a-z0-9_-]/gi, "_") || "none";
+  const cacheKey = `top_queries_${limit}_${filterKey}_${minImpressions}`;
+  const cached = cacheGet(cacheKey);
+  if (cached) return { _cached: true, _fetchedAt: cached.fetchedAt, data: cached.data };
+
+  const auth = getAuth();
+  const { startDate, endDate } = dateRange(DAYS);
+  const body = {
+    startDate,
+    endDate,
+    dimensions: ["query"],
+    // Over-fetch when filtering so the filter selects from the full tail
+    // rather than from an already-truncated alphabetical slice.
+    rowLimit: containsFilter || minImpressions ? 25000 : limit,
+  };
+
+  if (containsFilter) {
+    body.dimensionFilterGroups = [
+      {
+        filters: [{ dimension: "query", operator: "contains", expression: containsFilter }],
+      },
+    ];
+  }
+
+  const rows = await queryGSC(auth, body);
+  const data = rows
+    .map((r) => ({
+      query: r.keys[0],
+      impressions: Math.round(r.impressions),
+      clicks: Math.round(r.clicks),
+      ctr: parseFloat((r.ctr * 100).toFixed(1)),
+      position: parseFloat(r.position.toFixed(1)),
+    }))
+    .filter((r) => r.impressions >= minImpressions)
+    .sort((a, b) => b.impressions - a.impressions)
+    .slice(0, limit);
+
+  cacheSet(cacheKey, data);
+  return { _cached: false, _fetchedAt: new Date().toISOString(), data };
+}
+
+// GSC returns country as lowercase ISO-3166-1 alpha-3. Map the ones likely to
+// show up here; anything else falls back to the uppercased code.
+const COUNTRY_NAMES = {
+  ind: "India", usa: "United States", sgp: "Singapore", gbr: "United Kingdom",
+  are: "United Arab Emirates", aus: "Australia", can: "Canada", deu: "Germany",
+  nld: "Netherlands", fra: "France", sau: "Saudi Arabia", qat: "Qatar",
+  mys: "Malaysia", lka: "Sri Lanka", npl: "Nepal", bgd: "Bangladesh",
+  pak: "Pakistan", zaf: "South Africa", nzl: "New Zealand", irl: "Ireland",
+  che: "Switzerland", swe: "Sweden", esp: "Spain", ital: "Italy", ita: "Italy",
+  jpn: "Japan", kor: "South Korea", chn: "China", bra: "Brazil", ven: "Venezuela",
+  omn: "Oman", kwt: "Kuwait", bhr: "Bahrain", tha: "Thailand", idn: "Indonesia",
+  phl: "Philippines", vnm: "Vietnam", rus: "Russia", pol: "Poland", mex: "Mexico",
+};
+
+async function getCountries({ limit = 25 } = {}) {
+  const cacheKey = `countries_${limit}`;
   const cached = cacheGet(cacheKey);
   if (cached) return { _cached: true, _fetchedAt: cached.fetchedAt, data: cached.data };
 
@@ -153,17 +213,37 @@ async function getTopQueries({ limit = 20 } = {}) {
   const rows = await queryGSC(auth, {
     startDate,
     endDate,
-    dimensions: ["query"],
-    rowLimit: limit,
-    orderBy: [{ fieldName: "impressions", sortOrder: "DESCENDING" }],
+    dimensions: ["country"],
+    rowLimit: 500,
   });
-  const data = rows.map((r) => ({
-    query: r.keys[0],
+
+  const mapped = rows.map((r) => ({
+    countryCode: r.keys[0],
+    country: COUNTRY_NAMES[r.keys[0]] || r.keys[0].toUpperCase(),
     impressions: Math.round(r.impressions),
     clicks: Math.round(r.clicks),
     ctr: parseFloat((r.ctr * 100).toFixed(1)),
     position: parseFloat(r.position.toFixed(1)),
   }));
+
+  const totalImpressions = mapped.reduce((sum, r) => sum + r.impressions, 0);
+  const totalClicks = mapped.reduce((sum, r) => sum + r.clicks, 0);
+
+  const data = {
+    dateRange: { startDate, endDate },
+    totalImpressions,
+    totalClicks,
+    countries: mapped
+      .sort((a, b) => b.impressions - a.impressions)
+      .slice(0, limit)
+      .map((r) => ({
+        ...r,
+        impressionShare: totalImpressions
+          ? parseFloat(((r.impressions / totalImpressions) * 100).toFixed(1))
+          : 0,
+      })),
+  };
+
   cacheSet(cacheKey, data);
   return { _cached: false, _fetchedAt: new Date().toISOString(), data };
 }
@@ -361,13 +441,38 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: "get_top_queries",
       description:
-        "Return the top N queries by impressions with clicks, CTR, and average position.",
+        "Return the top N queries by impressions with clicks, CTR, and average position. Note the underlying API sorts by clicks then alphabetically, so an unfiltered pull truncates the zero-click tail mid-alphabet. Use containsFilter to search the full tail for a substring (for example a city name), or minImpressions to surface high-impression zero-click queries that a plain limit would hide.",
       inputSchema: {
         type: "object",
         properties: {
           limit: {
             type: "number",
             description: "Number of queries to return (default 20)",
+          },
+          containsFilter: {
+            type: "string",
+            description:
+              "Only return queries containing this substring, matched against the full result set rather than a truncated slice. Example: 'bangalore' or 'humid'.",
+          },
+          minImpressions: {
+            type: "number",
+            description:
+              "Only return queries with at least this many impressions. Fetches the full tail before filtering, so zero-click queries are not lost to alphabetical truncation.",
+          },
+        },
+        required: [],
+      },
+    },
+    {
+      name: "get_countries",
+      description:
+        "Return Search Console impressions, clicks, CTR and average position broken down by country, with each country's share of total impressions. Use this to answer where search traffic actually comes from. Search Console retains 16 months of country history.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          limit: {
+            type: "number",
+            description: "Number of countries to return (default 25)",
           },
         },
         required: [],
@@ -435,6 +540,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       result = await getOpportunities();
     } else if (name === "get_top_queries") {
       result = await getTopQueries(args);
+    } else if (name === "get_countries") {
+      result = await getCountries(args);
     } else if (name === "get_ctr_outliers") {
       result = await getCtrOutliers(args);
     } else if (name === "inspect_urls") {

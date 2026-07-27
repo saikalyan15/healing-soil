@@ -156,6 +156,18 @@ async function getLandingPages({ days = DAYS, limit = 20 } = {}) {
   );
 }
 
+async function getGeography({ days = DAYS, limit = 25, breakdown = "country" } = {}) {
+  const dimensions = breakdown === "city" ? ["country", "city"] : ["country"];
+  return withCache(`geography_${days}_${limit}_${breakdown}`, () =>
+    runReport({
+      dimensions,
+      metrics: ["sessions", "totalUsers", "conversions", "totalRevenue"],
+      days,
+      limit,
+    })
+  );
+}
+
 async function getDailyTrend({ days = DAYS } = {}) {
   return withCache(`daily_${days}`, () =>
     runReport({
@@ -239,6 +251,23 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
+      name: "get_geography",
+      description: "Return GA4 sessions, users, conversions and revenue broken down by country, or by country and city. Use this to answer where site visitors actually come from.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          days: { type: "number" },
+          limit: { type: "number" },
+          breakdown: {
+            type: "string",
+            enum: ["country", "city"],
+            description: "'country' for country totals (default), 'city' to break down by country and city.",
+          },
+        },
+        required: [],
+      },
+    },
+    {
       name: "get_daily_trend",
       description: "Return daily GA4 sessions, users, conversions, and event count.",
       inputSchema: {
@@ -283,6 +312,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     else if (name === "get_overview") result = await getOverview(args);
     else if (name === "get_traffic_acquisition") result = await getTrafficAcquisition(args);
     else if (name === "get_landing_pages") result = await getLandingPages(args);
+    else if (name === "get_geography") result = await getGeography(args);
     else if (name === "get_daily_trend") result = await getDailyTrend(args);
     else if (name === "get_events") result = await getEvents(args);
     else if (name === "get_conversion_events") result = await getConversionEvents(args);
