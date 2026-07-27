@@ -97,16 +97,9 @@ function normalise(raw: SoapLedgerProduct): Product {
  * pages: it runs a Vercel Function per request and was the cause of the Fluid
  * Active CPU spend.
  *
- * IMPORTANT — do not lower `revalidate` below ~1 hour.
- * SoapLedger's Neon compute has a fixed 5-minute scale-to-zero delay on the Free
- * plan. Every cache miss issues a query that wakes the compute for a full 5
- * billed minutes, regardless of how little work the query does. A 5-minute TTL
- * therefore matched the suspend delay exactly: with any steady traffic at all
- * (including crawlers overnight) the database never got to sleep, which burned
- * ~85 of the 100 monthly CU-hours by the 25th of the month.
- *
  * Product data is edited rarely and SoapLedger pushes revalidateTag('products')
- * on demand after edits, so this TTL is only a safety net — long is correct.
+ * automatically after every edit, so the TTL is only a safety net. Long is
+ * correct — see the note on the revalidate value below.
  */
 export const getProducts = unstable_cache(
   async (): Promise<Product[]> => {
@@ -140,7 +133,20 @@ export const getProducts = unstable_cache(
   },
   ['products'],
   {
-    revalidate: 21600, // 6-hour fallback TTL; on-demand busting is the primary path
+    // 24-hour fallback TTL. This is only a backstop for a webhook that failed
+    // silently — SoapLedger now POSTs revalidateTag('products') automatically on
+    // every product mutation, so that is the primary path.
+    //
+    // The route-level revalidate is derived from this value, so every page that
+    // renders products goes stale on this cadence and regenerates on the next
+    // request. At 6h that was up to 4 regenerations per page per day across ~568
+    // pages; 24h cuts that by 4x. Do not lower it without a reason: see the Neon
+    // note below.
+    //
+    // Neon compute on the Free plan has a fixed 5-minute scale-to-zero delay.
+    // Every cache miss wakes it for a full 5 billed minutes regardless of how
+    // little work the query does, so short TTLs burn CU-hours fast.
+    revalidate: 86400,
     tags: ['products'], // bust with revalidateTag('products') from SoapLedger
   }
 )
