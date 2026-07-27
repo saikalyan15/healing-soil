@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { getProducts } from '@/lib/products'
-
-export const dynamic = 'force-dynamic'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import ShopClient from '@/components/ShopClient'
@@ -67,8 +65,13 @@ const faqSchema = {
   })),
 }
 
+// Statically rendered and revalidated by the 'products' cache tag, same as the
+// other product-consuming pages. Previously force-dynamic, which ran a Vercel
+// Function on every request.
 export default async function ShopPage() {
-  const products = await getProducts().catch(() => [])
+  // Not caught on purpose — see the note in src/app/page.tsx. Caching an empty
+  // shop would be worse than serving the last good render.
+  const products = await getProducts()
 
   const krutika = reviews.find((r) => r.id === 'review-006')!
   const samyuktha = reviews.find((r) => r.id === 'review-008')!

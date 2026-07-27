@@ -90,7 +90,12 @@ function normalise(raw: SoapLedgerProduct): Product {
 /**
  * Fetch all products from SoapLedger.
  * Cached in the Data Cache for 6 hours, or busted on demand via revalidateTag('products').
- * Pages using this should be force-dynamic — only the data result is cached, not the HTML.
+ *
+ * Pages using this are statically rendered. The 'products' tag propagates from
+ * this entry to the Full Route Cache, so revalidateTag('products') rebuilds both
+ * the data and every page that renders it. Do not add force-dynamic to those
+ * pages: it runs a Vercel Function per request and was the cause of the Fluid
+ * Active CPU spend.
  *
  * IMPORTANT — do not lower `revalidate` below ~1 hour.
  * SoapLedger's Neon compute has a fixed 5-minute scale-to-zero delay on the Free
@@ -117,7 +122,19 @@ export const getProducts = unstable_cache(
     }
 
     const json: SoapLedgerProduct[] = await res.json()
-    return (Array.isArray(json) ? json : [])
+
+    // Throw rather than return [] on a malformed or empty payload. Callers render
+    // statically now, so an empty array would be cached as an empty storefront on
+    // the homepage, /shop and every product page. Throwing leaves the previous
+    // good cache entry in place. Revisit only if a genuinely empty catalogue
+    // becomes a real state worth rendering.
+    if (!Array.isArray(json) || json.length === 0) {
+      throw new Error(
+        `SoapLedger getProducts returned no usable products (${Array.isArray(json) ? 'empty array' : typeof json})`
+      )
+    }
+
+    return json
       .map(normalise)
       .sort((a, b) => a.display_order - b.display_order)
   },

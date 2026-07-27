@@ -15,10 +15,24 @@ import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
 import { canonicalSlugFor } from '@/lib/product-slugs'
 
-export const dynamic = 'force-dynamic'
-
 type Props = {
   params: Promise<{ slug: string }>
+}
+
+/**
+ * Prerender the known product pages instead of running a Vercel Function per
+ * request. dynamicParams stays at its default of true, so a product added in
+ * SoapLedger between deploys still renders on first request and is then cached.
+ */
+export async function generateStaticParams() {
+  try {
+    const products = await getProducts()
+    return products.map((p) => ({ slug: canonicalSlugFor(p.slug) }))
+  } catch {
+    // If SoapLedger is unreachable at build time, ship with no prerendered
+    // product pages rather than failing the deploy. They resolve on demand.
+    return []
+  }
 }
 
 const INGREDIENT_SLUG: Record<string, string> = {

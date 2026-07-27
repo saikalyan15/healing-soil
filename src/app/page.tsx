@@ -11,7 +11,11 @@ import TrustStrip from '@/components/TrustStrip'
 import ProductCard from '@/components/ProductCard'
 import BlogCard from '@/components/BlogCard'
 
-export const dynamic = 'force-dynamic'
+// Statically rendered and served from the Full Route Cache. Product data comes
+// from getProducts(), which is tagged 'products', so this page is rebuilt when
+// SoapLedger POSTs revalidateTag('products') to /api/revalidate, and otherwise
+// falls back to the 6h data-cache TTL. It was previously force-dynamic, which
+// ran a Vercel Function on every single request including crawler traffic.
 
 export const metadata: Metadata = {
   title: { absolute: 'Healing Soil | Handmade Soap for Skin That Reacts to Commercial Soap' },
