@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { comparisons } from '@/data/comparisons'
+import { buildMetadata } from '@/lib/seo'
 import ComparisonPage from '@/components/programmatic/ComparisonPage'
 import { getProducts } from '@/lib/products'
 
@@ -20,18 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const canonicalUrl = comparison.canonicalOverride ?? `/compare/${slug}`
 
-  return {
-    title: `${comparison.title} — Healing Soil`,
+  return buildMetadata({
+    title: comparison.title,
     description: comparison.metaDescription,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      title: comparison.title,
-      description: comparison.metaDescription,
-      url: `/compare/${slug}`,
-      siteName: 'Healing Soil',
-      type: 'article',
-    },
-  }
+    canonical: canonicalUrl,
+    ogType: 'article',
+  })
 }
 
 export const dynamicParams = false

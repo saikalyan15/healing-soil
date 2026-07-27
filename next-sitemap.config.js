@@ -19,6 +19,7 @@ const config = {
     '/our-stories',          // 301 → /blog
     '/stories/*',            // 301 → /blog/*
     '/blog/goat-milk-soap-base-vs-glycerin-soap-base',          // 301 → /blog/glycerin-vs-goat-milk-soap
+    '/compare/glycerin-vs-goat-milk-soap',                      // canonical → /blog/glycerin-vs-goat-milk-soap (canonicalOverride in src/data/comparisons.ts)
     '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', // 301 → /blog
     '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', // 301 → /blog
     '/shop/orange',          // 301 → /shop/orange-glycerin-soap
