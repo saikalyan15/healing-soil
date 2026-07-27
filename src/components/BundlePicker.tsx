@@ -16,15 +16,28 @@ export default function BundlePicker({ products, defaultIds }: BundlePickerProps
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
 
-  const initial: Product[] = defaultIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter((p): p is Product => p != null)
-
-  const [selection, setSelection] = useState<Product[]>(initial)
+  // A sold-out default would land in a slot and leave the add button dead on
+  // arrival, so swap it for the closest available bar (same base first).
+  const [selection, setSelection] = useState<Product[]>(() => {
+    const chosen: Product[] = []
+    const used = new Set<string>()
+    for (const id of defaultIds) {
+      const wanted = products.find((p) => p.id === id)
+      if (!wanted || used.has(wanted.id)) continue
+      const usable = wanted.in_stock
+        ? wanted
+        : products.find((p) => p.in_stock && !used.has(p.id) && p.base === wanted.base) ??
+          products.find((p) => p.in_stock && !used.has(p.id)) ??
+          wanted
+      chosen.push(usable)
+      used.add(usable.id)
+    }
+    return chosen
+  })
 
   function setSlot(idx: number, productId: string) {
     const next = products.find((p) => p.id === productId)
-    if (!next) return
+    if (!next || !next.in_stock) return
     setSelection((prev) => prev.map((p, i) => (i === idx ? next : p)))
   }
 
@@ -134,7 +147,9 @@ export default function BundlePicker({ products, defaultIds }: BundlePickerProps
           {added ? 'Added to cart ✓' : 'Add the bundle to cart'}
         </button>
         <p className="mt-3 font-sans text-xs text-[#666666]">
-          You can swap any soap before checkout.
+          {allAvailable
+            ? 'You can swap any soap before checkout.'
+            : 'One of these is sold out right now. Pick another soap in that slot to carry on.'}
         </p>
       </div>
     </div>

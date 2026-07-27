@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getProducts, getFeaturedProducts } from '@/lib/products'
+import { getProducts, getFeaturedProducts, type Product } from '@/lib/products'
 import { getAllPosts } from '@/lib/blog'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
@@ -41,31 +41,63 @@ const BUNDLE_DEFINITIONS: { slug: string; fallback: RegExp }[] = [
   { slug: 'travel-soaps', fallback: /travel/i },
 ]
 
-function pickBundleDefaults(products: { id: string; slug: string }[]): string[] {
+function pickBundleDefaults(products: Product[]): string[] {
   const used = new Set<string>()
   const picked: string[] = []
-  for (const def of BUNDLE_DEFINITIONS) {
-    const exact = products.find((p) => p.slug === def.slug && !used.has(p.id))
-    const found = exact ?? products.find((p) => def.fallback.test(p.slug) && !used.has(p.id))
-    if (found) {
-      picked.push(found.id)
-      used.add(found.id)
-    }
+  const take = (p: Product) => {
+    picked.push(p.id)
+    used.add(p.id)
   }
+
+  // Pass 1: claim the bundle soaps that are actually available, so a sold-out slot
+  // cannot steal a bar that a later slot matches by name.
+  const slots = BUNDLE_DEFINITIONS.map((def) => {
+    const matches = products.filter(
+      (p) => !used.has(p.id) && (p.slug === def.slug || def.fallback.test(p.slug)),
+    )
+    const inStock =
+      matches.find((p) => p.slug === def.slug && p.in_stock) ?? matches.find((p) => p.in_stock)
+    if (inStock) used.add(inStock.id)
+    return { inStock, soldOut: matches.find((p) => p.slug === def.slug) ?? matches[0] }
+  })
+
+  // Pass 2: where the soap we wanted is sold out, stand in the closest bar that is
+  // available — same base first, so goat milk stays goat milk.
+  for (const { inStock, soldOut } of slots) {
+    if (inStock) {
+      picked.push(inStock.id)
+      continue
+    }
+    const substitute =
+      (soldOut && products.find((p) => p.in_stock && !used.has(p.id) && p.base === soldOut.base)) ??
+      products.find((p) => p.in_stock && !used.has(p.id))
+    if (substitute) take(substitute)
+  }
+
+  // Top the bundle up to four slots, available bars first.
   for (const p of products) {
     if (picked.length >= 4) break
-    if (!used.has(p.id)) {
-      picked.push(p.id)
-      used.add(p.id)
-    }
+    if (!used.has(p.id) && p.in_stock) take(p)
   }
+  // Only if the shop cannot field four available bars do we fall back to sold-out
+  // ones, so the section still renders rather than collapsing.
+  for (const p of products) {
+    if (picked.length >= 4) break
+    if (!used.has(p.id)) take(p)
+  }
+
   return picked
 }
 
 export default async function HomePage() {
+  // Deliberately not caught. Under force-dynamic a swallowed failure only blanked
+  // one request; now that this page is statically cached, returning [] here would
+  // bake an empty storefront into the Full Route Cache until the next revalidation.
+  // Letting it throw means a failed background revalidation keeps serving the last
+  // good page instead, which is the graceful outcome.
   const [products, featuredProducts] = await Promise.all([
-    getProducts().catch(() => []),
-    getFeaturedProducts().catch(() => []),
+    getProducts(),
+    getFeaturedProducts(),
   ])
   
   const allPosts = getAllPosts()

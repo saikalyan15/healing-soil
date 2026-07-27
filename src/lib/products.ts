@@ -147,14 +147,26 @@ export const getProducts = unstable_cache(
 
 /**
  * Fetch featured products for the homepage, capped at 4.
- * Prefers products marked is_featured === true in SoapLedger.
- * Falls back to the first 4 products if none are marked featured,
+ * Prefers products marked is_featured === true in SoapLedger, and among those
+ * the ones actually in stock — a sold-out card is a dead slot in a four-card row,
+ * so it only keeps its place if we cannot fill the row any other way.
+ * Falls back to the rest of the catalogue if none are marked featured,
  * so the section never renders empty.
  */
 export async function getFeaturedProducts(): Promise<Product[]> {
   const all = await getProducts()
   const featured = all.filter((p) => p.is_featured)
-  return (featured.length > 0 ? featured : all).slice(0, 4)
+  const pool = featured.length > 0 ? featured : all
+  const inPool = new Set(pool.map((p) => p.id))
+
+  const ranked = [
+    ...pool.filter((p) => p.in_stock),
+    ...all.filter((p) => p.in_stock && !inPool.has(p.id)), // top the row back up
+    ...pool.filter((p) => !p.in_stock),
+    ...all.filter((p) => !p.in_stock && !inPool.has(p.id)),
+  ]
+
+  return ranked.slice(0, 4)
 }
 
 /**
