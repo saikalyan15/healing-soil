@@ -21,6 +21,7 @@ export type Product = {
   category: string          // e.g. "face", "body", "hair", "gift"
   display_order: number     // controls sort order in the shop
   texture: 'smooth' | 'mildly-textured' | 'textured' | 'loofah' | null
+  units_sold: number        // lifetime units sold, cancelled orders excluded
 }
 
 /** Raw shape returned by the SoapLedger API — field names differ from our internal type */
@@ -40,6 +41,7 @@ type SoapLedgerProduct = {
   category: string
   display_order: number | null
   texture: 'smooth' | 'mildly-textured' | 'textured' | 'loofah' | null
+  units_sold?: number       // added by SoapLedger; optional so an older API still parses
 }
 
 // The SoapLedger list endpoint returns a plain JSON array (no envelope)
@@ -82,6 +84,9 @@ function normalise(raw: SoapLedgerProduct): Product {
     texture: (['smooth', 'mildly-textured', 'textured', 'loofah'] as const).includes(raw.texture as never)
       ? raw.texture
       : null,
+    // Defaults to 0 if SoapLedger has not shipped the field yet, in which case
+    // every product ties and the featured row falls back to its old ordering.
+    units_sold: raw.units_sold ?? 0,
   }
 }
 
@@ -152,27 +157,37 @@ export const getProducts = unstable_cache(
 )
 
 /**
- * Fetch featured products for the homepage, capped at 4.
- * Prefers products marked is_featured === true in SoapLedger, and among those
- * the ones actually in stock — a sold-out card is a dead slot in a four-card row,
- * so it only keeps its place if we cannot fill the row any other way.
- * Falls back to the rest of the catalogue if none are marked featured,
- * so the section never renders empty.
+ * Fetch the products for the homepage "Most Loved by Our Community" row, capped
+ * at 4.
+ *
+ * That heading and its "best-sellers" subhead are claims about what people
+ * actually buy, so the row is ranked by units_sold from real order lines
+ * (cancelled orders excluded, computed in SoapLedger's /api/products).
+ * It used to be driven by a manual is_featured checkbox, which meant a bar
+ * nobody had ordered could sit under a best-seller heading.
+ *
+ * is_featured and display_order now only break ties. Neither can lift a product
+ * above one that has genuinely sold more, so the claim stays true.
+ *
+ * In-stock bars always outrank sold-out ones regardless of sales: a sold-out
+ * card is a dead slot in a four-card row. Sold-out best-sellers still backfill
+ * the remaining slots so the section never renders short on a small catalogue.
+ *
+ * With no order history every product ties at 0 and this degrades to the old
+ * is_featured then display_order ordering.
  */
 export async function getFeaturedProducts(): Promise<Product[]> {
   const all = await getProducts()
-  const featured = all.filter((p) => p.is_featured)
-  const pool = featured.length > 0 ? featured : all
-  const inPool = new Set(pool.map((p) => p.id))
 
-  const ranked = [
-    ...pool.filter((p) => p.in_stock),
-    ...all.filter((p) => p.in_stock && !inPool.has(p.id)), // top the row back up
-    ...pool.filter((p) => !p.in_stock),
-    ...all.filter((p) => !p.in_stock && !inPool.has(p.id)),
-  ]
+  const bySales = (a: Product, b: Product) =>
+    b.units_sold - a.units_sold ||
+    Number(b.is_featured) - Number(a.is_featured) ||
+    a.display_order - b.display_order
 
-  return ranked.slice(0, 4)
+  const inStock = all.filter((p) => p.in_stock).sort(bySales)
+  const soldOut = all.filter((p) => !p.in_stock).sort(bySales)
+
+  return [...inStock, ...soldOut].slice(0, 4)
 }
 
 /**
