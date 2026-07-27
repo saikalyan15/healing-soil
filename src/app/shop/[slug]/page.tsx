@@ -78,6 +78,12 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     title: 'Soap Squares Discovery Box - Rich | Healing Soil',
     description: 'Four 50g Soap Squares in one kraft box, with a richer-feeling mix of shea butter and goat milk handmade soaps.',
   },
+  // Without an override the 223-char short_description gets clamped mid-phrase,
+  // because its first sentence ends too early for a clean sentence-boundary cut.
+  'valentines-special-soap': {
+    title: "Valentine's Special Soap | Handmade Gift Bar",
+    description: 'A 100g handmade soap made for gifting, with essential oils and vitamin E. Gentle lather, lightly scented. Made to order in South Goa.',
+  },
   'marigold-soap': {
     title: 'Marigold Soap India | Handmade Floral Bar from Goa',
     description: 'A small-batch marigold soap with golden petals, creamy lather, and a gentle floral feel. SLS-free and handmade in Goa.',

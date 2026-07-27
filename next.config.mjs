@@ -142,8 +142,6 @@ const nextConfig = {
       { source: '/author/:path*',                           destination: '/our-story',                                   permanent: true },
       // WordPress per-post RSS feed URLs
       { source: '/caterpillar-content-writing-lessons/feed/:path*', destination: '/blog/caterpillar-content-writing-lessons', permanent: true },
-      // Retired product page
-      { source: '/shop/valentines-special-soap',         destination: '/shop',      permanent: true },
     ]
   },
 }

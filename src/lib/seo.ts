@@ -28,7 +28,7 @@ const BRAND_SUFFIX = ` | ${BRAND}`
  * codebase (pipe, em dash, en dash, hyphen), including variants carrying a
  * trailing location such as '| Healing Soil, Goa'.
  */
-const TRAILING_BRAND = /\s*[|—–-]\s*Healing Soil(?:\s*,\s*Goa)?\s*$/i
+const TRAILING_BRAND = /\s*[|—–-]\s*Healing Soil(?:\s*,?\s*Goa)?\s*$/i
 
 /**
  * Removes every trailing brand suffix, not just the last one. Several data

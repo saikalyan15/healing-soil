@@ -18,7 +18,9 @@ import BlogCard from '@/components/BlogCard'
 // ran a Vercel Function on every single request including crawler traffic.
 
 export const metadata: Metadata = {
-  title: { absolute: 'Healing Soil | Handmade Soap for Skin That Reacts to Commercial Soap' },
+  // absolute, so buildTitle does not apply — keep this within the 60 char budget
+  // by hand. The old value was 68 and truncated in results.
+  title: { absolute: 'Handmade Soap for Skin That Reacts | Healing Soil' },
   description:
     'Handmade soap from a Goa farm. SLS-free, glycerin retained. A starter bundle of 4 soaps for ₹1,000 for skin that has stopped getting along with commercial soap.',
   alternates: { canonical: '/' },
