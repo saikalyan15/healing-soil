@@ -3,12 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'The complete guide to handmade soap in India',
+  title: 'The Complete Guide to Handmade Soap in India',
   description:
-    'How to choose handmade soap for Indian skin: what SLS and parabens do, how glycerin, goat milk, and shea butter bases differ, and what to look for on an ingredients label.',
+    'How to choose handmade soap for Indian skin: what SLS and parabens do, how glycerin, goat milk and shea butter bases differ, and how to read an ingredients label.',
   alternates: { canonical: '/guide/handmade-soap-india' },
   openGraph: {
-    title: 'The complete guide to handmade soap in India | Healing Soil',
+    title: 'The Complete Guide to Handmade Soap in India',
     description:
       'How to choose handmade soap for Indian skin: SLS, parabens, glycerin, goat milk, shea butter explained.',
     url: '/guide/handmade-soap-india',
