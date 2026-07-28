@@ -106,7 +106,7 @@ function normalise(raw: SoapLedgerProduct): Product {
  * automatically after every edit, so the TTL is only a safety net. Long is
  * correct — see the note on the revalidate value below.
  */
-export const getProducts = unstable_cache(
+const getProductsCached = unstable_cache(
   async (): Promise<Product[]> => {
     const res = await fetch(`${getApiBase()}/api/products`, {
       headers: getApiHeaders(),
@@ -155,6 +155,26 @@ export const getProducts = unstable_cache(
     tags: ['products'], // bust with revalidateTag('products') from SoapLedger
   }
 )
+
+/**
+ * Every image under public/ is WebP. SoapLedger still stores image_url ending
+ * .png, and those files no longer exist, so the extension is rewritten here
+ * rather than requiring a data migration on that side.
+ *
+ * This deliberately runs OUTSIDE unstable_cache. Applying it inside normalise()
+ * would leave already-cached entries pointing at files that no longer exist
+ * until the cache expired, and the Data Cache survives both deploys and local
+ * rebuilds via .next/cache.
+ *
+ * Invariant: any product image added to public/ must be WebP.
+ */
+export async function getProducts(): Promise<Product[]> {
+  const products = await getProductsCached()
+  return products.map((p) => ({
+    ...p,
+    image_url: p.image_url.replace(/\.(png|jpe?g)$/i, '.webp'),
+  }))
+}
 
 /**
  * Fetch the products for the homepage "Most Loved by Our Community" row, capped

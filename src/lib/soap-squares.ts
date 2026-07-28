@@ -23,15 +23,15 @@ export const soapSquaresBoxDetails: SoapSquaresBoxDetail[] = [
     selectionCopy: 'Goat milk soaps with a softer, creamier feel.',
     supportImages: [
       {
-        src: `${SQUARE_IMAGE_BASE}/neem-tulsi-goatmilk-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/neem-tulsi-goatmilk-50g.webp`,
         alt: 'Neem Tulsi Goat Milk 50g Soap Square',
       },
       {
-        src: `${SQUARE_IMAGE_BASE}/honey-oats-goatmilk-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/honey-oats-goatmilk-50g.webp`,
         alt: 'Honey Oats Goat Milk 50g Soap Square',
       },
       {
-        src: `${SQUARE_IMAGE_BASE}/kesar-haldi-goatmilk-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/kesar-haldi-goatmilk-50g.webp`,
         alt: 'Kesar Haldi Goat Milk 50g Soap Square',
       },
     ],
@@ -44,15 +44,15 @@ export const soapSquaresBoxDetails: SoapSquaresBoxDetail[] = [
     selectionCopy: 'Glycerin soaps with a clean, easy lather.',
     supportImages: [
       {
-        src: `${SQUARE_IMAGE_BASE}/neem-tulsi-glycerine-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/neem-tulsi-glycerine-50g.webp`,
         alt: 'Neem Tulsi Glycerin 50g Soap Square',
       },
       {
-        src: `${SQUARE_IMAGE_BASE}/honey-oats-glycerin-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/honey-oats-glycerin-50g.webp`,
         alt: 'Honey Oats Glycerin 50g Soap Square',
       },
       {
-        src: `${SQUARE_IMAGE_BASE}/marigold-glycerine-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/marigold-glycerine-50g.webp`,
         alt: 'Marigold Glycerin 50g Soap Square',
       },
     ],
@@ -65,15 +65,15 @@ export const soapSquaresBoxDetails: SoapSquaresBoxDetail[] = [
     selectionCopy: 'A richer-feeling mix with shea butter and goat milk soaps.',
     supportImages: [
       {
-        src: `${SQUARE_IMAGE_BASE}/kesar-gulab-sheabutter-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/kesar-gulab-sheabutter-50g.webp`,
         alt: 'Kesar Gulab Shea Butter 50g Soap Square',
       },
       {
-        src: `${SQUARE_IMAGE_BASE}/honey-kesar-haldi-sheabutter-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/honey-kesar-haldi-sheabutter-50g.webp`,
         alt: 'Honey Kesar Haldi Shea Butter 50g Soap Square',
       },
       {
-        src: `${SQUARE_IMAGE_BASE}/orange-goatmilk-50g.png`,
+        src: `${SQUARE_IMAGE_BASE}/orange-goatmilk-50g.webp`,
         alt: 'Orange Goat Milk 50g Soap Square',
       },
     ],

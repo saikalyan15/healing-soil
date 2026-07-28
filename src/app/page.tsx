@@ -233,7 +233,7 @@ export default async function HomePage() {
           <div className="relative w-full max-w-[520px] flex-shrink-0 md:w-[48%]">
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-2xl">
               <Image
-                src="/hero-soap.jpg"
+                src="/hero-soap.webp"
                 alt="Healing Soil handmade soaps from a South Goa farm"
                 fill
                 className="object-cover"
@@ -309,7 +309,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#F7F5F0] shadow-inner lg:aspect-square">
               <Image
-                src="/images/farm-coconut-canopy.jpg"
+                src="/images/farm-coconut-canopy.webp"
                 alt="Our farm canopy in South Goa"
                 fill
                 className="object-cover"

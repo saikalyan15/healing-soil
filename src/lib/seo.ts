@@ -20,8 +20,8 @@ export const SITE_URL = 'https://healingsoil.in'
 /**
  * Schema.org requires absolute URLs for image fields. Product, ItemList and
  * BlogPosting were all emitting site-relative paths straight from the data
- * source (SoapLedger returns image_url as "/products/x.png", MDX frontmatter
- * uses "/blog/x.png"), which Google rejects as an invalid object and reports
+ * source (SoapLedger returns image_url as "/products/x.webp", MDX frontmatter
+ * uses "/blog/x.webp"), which Google rejects as an invalid object and reports
  * as a rich-result error rather than silently ignoring.
  *
  * Pass-through for values that are already absolute, so this is safe to apply

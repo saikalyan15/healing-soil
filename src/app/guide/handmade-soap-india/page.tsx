@@ -115,7 +115,7 @@ export default function HandmadeSoapIndiaGuide() {
 
         <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-lg">
           <Image
-            src="/images/guide/guide-handmade-soap-india.png"
+            src="/images/guide/guide-handmade-soap-india.webp"
             alt="Handmade soap bars drying on a wooden rack at the Healing Soil farm in Goa"
             fill
             className="object-cover"
