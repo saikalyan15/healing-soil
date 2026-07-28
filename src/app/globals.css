@@ -20,22 +20,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*
- * Hero Ken Burns. A slow zoom and drift on the still image, chosen over a video
- * hero so the page stays static, CDN cached and light on mobile data. Pure CSS,
- * no JavaScript, no additional bytes.
+ * Hero image settle. A single slow zoom that plays once on load and stops,
+ * chosen over a video hero so the page stays static, CDN cached and light on
+ * mobile data.
+ *
+ * Deliberately not an infinite alternate loop. Perpetual motion above the fold
+ * reads as restless rather than premium, keeps a compositor layer alive for the
+ * life of the page, and never lets the element settle. It also made the image
+ * permanently unstable, which is a problem for anything measuring the page.
  */
-@keyframes kenburns {
-  0%   { transform: scale(1) translate3d(0, 0, 0); }
-  100% { transform: scale(1.08) translate3d(-1.2%, -1.2%, 0); }
+@keyframes hero-settle {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
 }
 
-.ken-burns {
-  animation: kenburns 24s ease-in-out infinite alternate;
-  will-change: transform;
+.hero-settle {
+  animation: hero-settle 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ken-burns {
+  .hero-settle {
     animation: none;
   }
 }

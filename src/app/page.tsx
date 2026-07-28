@@ -260,18 +260,16 @@ export default async function HomePage() {
           </div>
 
           <div className="relative w-full max-w-[520px] flex-shrink-0 md:w-[48%]">
-            {/* Offset frame behind the image. Cheap way to add depth without a
-                heavier hero treatment. */}
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[#C9A84C]/35"
-            />
+            {/* No offset frame here. An earlier version had a gold border set
+                12px behind the image, but against the soft shadow it read as a
+                misalignment rather than a deliberate detail. The shadow alone
+                carries the depth. */}
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-[0_24px_60px_-20px_rgba(30,86,49,0.35)]">
               <Image
                 src="/hero-kesar-gulab.webp"
                 alt="Kesar Gulab shea butter soap, handmade in South Goa"
                 fill
-                className="ken-burns object-cover"
+                className="hero-settle object-cover"
                 priority
                 sizes="(max-width: 768px) 100vw, 48vw"
               />
