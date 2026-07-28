@@ -258,7 +258,7 @@ export default async function HomePage() {
                 </Link>
               </div>
               <p className="font-sans text-xs font-medium leading-relaxed text-[#666666]">
-                Free shipping over ₹1,000 · Ships in 2 days from Goa · Individual soaps from ₹200
+                Free shipping over ₹1,000 · Ships in 2 days from Goa · Individual soaps from ₹250
               </p>
             </div>
           </div>

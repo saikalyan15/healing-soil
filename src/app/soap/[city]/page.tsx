@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { cities } from '@/data/cities'
 import CityPage from '@/components/programmatic/CityPage'
 import { buildMetadata } from '@/lib/seo'
+import { climateFor, waterNote } from '@/data/climate'
 import { getProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ city: string }> }
@@ -19,13 +20,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cityData = cities.find((c) => c.slug === city)
   if (!cityData) return {}
 
-  // TODO (Workstream 4): retarget these from delivery intent to climate intent.
-  // GSC shows city demand only in a climate-plus-city shape ("best soap for
-  // humid weather chennai bangalore", 31 impressions at position 3.2), and
-  // nothing at all for "handmade soap in {city}". That rewrite needs the
-  // per-city humidity and water hardness data in src/data/climate.ts first.
-  const title = `Handmade Soap Delivered to ${cityData.displayName}`
-  const description = `Small batch handmade soap made in Goa, delivered to ${cityData.displayName}, ${cityData.state}. SLS-free, natural ingredients.`
+  // Retargeted from delivery intent to climate intent. GSC shows city demand
+  // only in a climate-plus-city shape: "best soap for humid weather chennai
+  // bangalore" at 31 impressions and position 3.2, "best soap for humid weather
+  // kolkata west bengal" at 27 and position 1.7. Nothing at all resembles
+  // "handmade soap in {city}", which is what these pages used to target.
+  const profile = climateFor(city)
+  const title = `Best Soap for ${cityData.displayName} Water and Weather`
+  const description = profile
+    ? `${waterNote(profile)} Handmade in small batches in South Goa, shipped to ${cityData.displayName}.`
+    : `Small batch handmade soap made in Goa, shipped to ${cityData.displayName}, ${cityData.state}. SLS-free, natural ingredients.`
 
   return buildMetadata({
     title,
