@@ -130,33 +130,29 @@ const config = {
     }
     const enabledCityIngredientSlugs = extractCityIngredientSlugs('src/data/city-ingredients.ts')
 
-    // Product pages are dynamic at runtime, so list their canonical URLs explicitly.
-    // Note: 'orange' is omitted — it 301s to orange-glycerin-soap.
-    const productSlugs = [
-      'gift-soap-pouch',
-      'ginger-rosemary-glycerin-soap',
-      'ginger-rosemary-goat-milk-soap',
-      'honey-and-oats-goatmilk-soap',
-      'honey-kesar-haldi-sheabutter-soap',
-      'honey-oats-glycerin-soap',
-      'kesar-haldi-goat-milk-soap',
-      'loofah-soaps',
-      'marigold-soap',
-      'neem-tulsi-glycerin-soap',
-      'neem-tulsi-goatmilk-soap',
-      'orange-glycerin-soap',
-      'orange-goatmilk-soap',
-      'pomegranate-glycerine',
-      'pomegranate-goatmilk-soap',
-      'red-rose-soap',
-      'rice-rose-goatmilk-soap',
-      'sheabutter-kesar-gulab',
-      'travel-soaps',
-      'valentines-special-soap',
-      'soap-squares-creamy-box',
-      'soap-squares-light-box',
-      'soap-squares-rich-box',
-    ]
+    // Product slugs are read from the pages the build actually prerendered,
+    // rather than hand-maintained here.
+    //
+    // This list used to be hardcoded and had silently drifted from SoapLedger:
+    // it still listed kesar-haldi-goat-milk-soap and rice-rose-goatmilk-soap,
+    // which no longer exist and were being submitted to Google as 404s, while
+    // omitting kesar-haldi-papaya-cucumber-soap and kids-collection-set-of-4,
+    // which do exist. Deriving it from the build output means the sitemap can
+    // only ever contain URLs that were genuinely generated.
+    //
+    // next-sitemap runs as a postbuild step, so .next is guaranteed to exist.
+    const productSlugs = (() => {
+      const dir = path.join(process.cwd(), '.next', 'server', 'app', 'shop')
+      if (!fs.existsSync(dir)) {
+        console.warn('[next-sitemap] .next/server/app/shop not found — no product URLs emitted')
+        return []
+      }
+      return fs
+        .readdirSync(dir)
+        .filter((f) => f.endsWith('.html'))
+        .map((f) => f.replace(/\.html$/, ''))
+        .sort()
+    })()
 
     // Stories that are retired and redirect to /blog — exclude from sitemap.
     const excludedStorySlugs = new Set([

@@ -51,6 +51,13 @@ const nextConfig = {
       { source: '/soap-for/exfoliation',                  destination: '/soap-for/loofah-body-soap', permanent: true },
       { source: '/soap-for/exfoliation/',                 destination: '/soap-for/loofah-body-soap', permanent: true },
       { source: '/shop/orange',                          destination: '/shop/orange-glycerin-soap', permanent: true },
+      // Products whose slug changed or which were withdrawn in SoapLedger. Both
+      // were still in the sitemap and are indexed by Google, so they showed up
+      // under "Not found (404)" in Search Console. 301 to the successor rather
+      // than leaving them dead.
+      { source: '/shop/kesar-haldi-goat-milk-soap',      destination: '/shop/kesar-haldi-papaya-cucumber-soap', permanent: true },
+      { source: '/shop/rice-rose-goatmilk-soap',         destination: '/shop', permanent: true },
+      { source: '/shop/rice-rose-goat-milk-soap',        destination: '/shop', permanent: true },
       { source: '/stories',                              destination: '/blog',     permanent: true },
       { source: '/stories/',                             destination: '/blog',     permanent: true },
       
