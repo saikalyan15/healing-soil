@@ -7,6 +7,8 @@ export const CANONICAL_PRODUCT_SLUGS = [
   'marigold-soap',
   'neem-tulsi-goat-milk-soap',
   'kesar-haldi-goat-milk-soap',
+  'kesar-haldi-papaya-cucumber-soap',
+  'kids-collection-set-of-4',
   'honey-oats-goat-milk-soap',
   'orange-goat-milk-soap',
   'rice-rose-goat-milk-soap',

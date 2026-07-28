@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
 import { buildTitle, buildDescription, absoluteUrl } from '@/lib/seo'
+import { canonicalSlugFor } from '@/lib/product-slugs'
 import { getProducts } from '@/lib/products'
 import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
@@ -96,10 +97,10 @@ function formatDate(dateStr: string): string {
 // ─── Per-post product links ────────────────────────────────────────────────────
 
 const relatedProductsBySlug: Record<string, string[]> = {
-  'goat-milk-soap-benefits': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap'],
+  'goat-milk-soap-benefits': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-papaya-cucumber-soap', 'honey-oats-goat-milk-soap'],
   'goat-milk-soap-base-vs-glycerin-soap-base': ['honey-oats-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'honey-oats-goat-milk-soap'],
   'glycerin-vs-goat-milk-soap': ['honey-oats-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
-  'what-makes-goat-milk-soap-beneficial-for-sensitive-skin': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'rice-rose-goat-milk-soap'],
+  'what-makes-goat-milk-soap-beneficial-for-sensitive-skin': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-papaya-cucumber-soap'],
   'shea-butter-goat-milk-soap-dry-sensitive-skin': ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap', 'neem-tulsi-goat-milk-soap'],
   'understanding-the-benefits-of-shea-butter-in-soap': ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
   'neem-tulsi-soap-benefits': ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
@@ -107,12 +108,12 @@ const relatedProductsBySlug: Record<string, string[]> = {
   'pomegranate-peel-soap': ['pomegranate-goat-milk-soap', 'pomegranate-glycerin-soap'],
   'sls-free-soap-india': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
   'sls-parabens-soap-india': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
-  'natural-soap-sensitive-skin-india': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap'],
-  'handmade-soap-bangalore': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'kesar-haldi-goat-milk-soap'],
+  'natural-soap-sensitive-skin-india': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-papaya-cucumber-soap', 'honey-oats-goat-milk-soap'],
+  'handmade-soap-bangalore': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'kesar-haldi-papaya-cucumber-soap'],
   'handmade-soap-goa': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
   'why-handmade-soap-lasts-longer': ['neem-tulsi-goat-milk-soap', 'honey-oats-glycerin-soap', 'shea-butter-kesar-gulab'],
-  'why-we-make-soap-in-small-batches': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-glycerin-soap'],
-  'best-soap-for-rainy-season-india': ['neem-tulsi-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap'],
+  'why-we-make-soap-in-small-batches': ['neem-tulsi-goat-milk-soap', 'kesar-haldi-papaya-cucumber-soap', 'honey-oats-glycerin-soap'],
+  'best-soap-for-rainy-season-india': ['neem-tulsi-glycerin-soap', 'neem-tulsi-goat-milk-soap', 'kesar-haldi-papaya-cucumber-soap'],
   'small-travel-soap-bars-india': ['travel-soaps', 'honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap'],
   'marigold-soap-benefits': ['marigold-soap', 'red-rose-soap', 'shea-butter-kesar-gulab'],
   'pomegranate-soap-benefits': ['pomegranate-goat-milk-soap', 'pomegranate-glycerin-soap', 'orange-goat-milk-soap'],
@@ -317,10 +318,23 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlugFromEither(slug)
   if (!post) notFound()
 
+  // relatedProductsBySlug is written in canonical slugs, but SoapLedger returns
+  // legacy forms for several products (pomegranate-glycerine,
+  // neem-tulsi-goatmilk-soap, sheabutter-kesar-gulab and others). Matching on
+  // the raw slug therefore silently found nothing for those posts, so their
+  // related-products block rendered empty.
+  //
+  // Mapping order is preserved rather than catalogue order, because the first
+  // entry is the bar the post is actually about and it is what the inline CTA
+  // features. A plain filter would return whichever product sorted first by
+  // display_order instead.
   const relatedSlugs = relatedProductsBySlug[slug] ?? []
-  const relatedProducts = relatedSlugs.length > 0
-    ? (await getProducts().catch(() => [])).filter(p => relatedSlugs.includes(p.slug) && p.in_stock)
-    : []
+  const allProducts = relatedSlugs.length > 0 ? await getProducts().catch(() => []) : []
+  const relatedProducts = relatedSlugs
+    .map((want) =>
+      allProducts.find((p) => canonicalSlugFor(p.slug) === want && p.in_stock),
+    )
+    .filter((p): p is NonNullable<typeof p> => p != null)
 
   const blogSchema = {
     '@context': 'https://schema.org',
@@ -412,8 +426,12 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
-        {/* Inline bundle CTA — visible for soap/skincare posts only */}
-        {post.source !== 'stories' && <BlogInlineCTA />}
+        {/* Inline CTA, soap/skincare posts only. Passed the post's first mapped
+            product so the reader is sent to that bar rather than to the homepage
+            bundle anchor. Falls back to the bundle when a post has no mapping. */}
+        {post.source !== 'stories' && (
+          <BlogInlineCTA product={relatedProducts[0]} />
+        )}
 
         {/* MDX content */}
         <div className="prose-custom">
