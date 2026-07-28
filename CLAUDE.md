@@ -24,3 +24,42 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
 - "gentle lather," "creamy texture," "earthy scent"
 
 **Why this matters:** CDSCO (not FSSAI — that's food) classifies soap as a drug if it makes therapeutic claims. No claims = no drug/cosmetic license needed for handmade soap.
+
+## Brand constraints (non-negotiable)
+
+- **Never name the maker in public copy.** This is a safety decision, not a style one.
+- No exaggeration beyond what the ingredient actually does.
+- No urgency. Everything is made to order, so scarcity would be invented.
+- No superlatives.
+- Transparency about which ingredients are grown on the farm and which bases are
+  sourced is a trust signal. Say which is which.
+- Eco-conscious choices appear in context, never as a headline claim.
+- Soft close only. An invitation, not a prompt.
+- No em-dashes.
+
+## Business facts
+
+- **ICP:** urban Indian woman 28–45, Bangalore-heavy, reads ingredient lists, has
+  already moved off commercial soap. Not looking for "the best soap", looking for
+  one that does not hurt her. Two recurring themes in reviews: no reaction, and
+  no heavy lather.
+- **Primary offer:** starter bundle, 4 soaps at ₹1,000. Single desired action.
+- **Farm is in Goa.** Bangalore is where customers are, never the origin.
+- **Payments are WhatsApp-only** by choice. Razorpay is built but toggled off
+  behind `NEXT_PUBLIC_ENABLE_RAZORPAY` because gateway fees are overhead at
+  current volume.
+- **Shipping:** free on orders of ₹1,000 and above. Below that ₹100, or ₹150 for
+  the nine North India states listed in `OrderForm.tsx`. Never claim
+  unconditional free shipping.
+
+## Verify against the live system, not against docs
+
+Point-in-time status documents in this repo went stale and caused repeated wrong
+conclusions. Before acting on any claim about current state, check the source:
+
+- Analytics and search: the `mcp__ga4__*` and `mcp__gsc__*` tools.
+- Product catalogue: the SoapLedger API, not any hardcoded list.
+- What is built and rendering: the build output in `.next/`, not assumptions.
+- What changed: `git log`.
+
+If a doc and the live system disagree, the live system is right.
