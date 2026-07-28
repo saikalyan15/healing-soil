@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
-import { buildTitle, buildDescription } from '@/lib/seo'
+import { buildTitle, buildDescription, absoluteUrl } from '@/lib/seo'
 import { getProducts } from '@/lib/products'
 import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
@@ -327,7 +327,9 @@ export default async function BlogPostPage({ params }: Props) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: post.featuredImage || 'https://healingsoil.in/og-image.jpg',
+    image: post.featuredImage
+      ? absoluteUrl(post.featuredImage)
+      : 'https://healingsoil.in/og-image.jpg',
     datePublished: post.date,
     author: {
       '@type': 'Organization',

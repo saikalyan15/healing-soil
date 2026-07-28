@@ -10,7 +10,7 @@ import AddToCartButton from '@/components/AddToCartButton'
 import ProductViewEvent from '@/components/ProductViewEvent'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
-import { buildTitle, buildDescription } from '@/lib/seo'
+import { buildTitle, buildDescription, absoluteUrl } from '@/lib/seo'
 import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
 import { canonicalSlugFor } from '@/lib/product-slugs'
@@ -215,7 +215,7 @@ export default async function ProductPage({ params }: Props) {
     '@type': 'Product',
     name: product.name,
     description: product.description,
-    image: product.image_url || undefined,
+    image: product.image_url ? absoluteUrl(product.image_url) : undefined,
     brand: { '@type': 'Brand', name: 'Healing Soil' },
     sku: product.slug,
     offers: {

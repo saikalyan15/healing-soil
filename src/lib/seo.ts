@@ -15,6 +15,24 @@ import type { Metadata } from 'next'
 
 export const BRAND = 'Healing Soil'
 
+export const SITE_URL = 'https://healingsoil.in'
+
+/**
+ * Schema.org requires absolute URLs for image fields. Product, ItemList and
+ * BlogPosting were all emitting site-relative paths straight from the data
+ * source (SoapLedger returns image_url as "/products/x.png", MDX frontmatter
+ * uses "/blog/x.png"), which Google rejects as an invalid object and reports
+ * as a rich-result error rather than silently ignoring.
+ *
+ * Pass-through for values that are already absolute, so this is safe to apply
+ * to fields that may already be fully qualified.
+ */
+export function absoluteUrl(pathOrUrl: string): string {
+  if (!pathOrUrl) return ''
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl
+  return `${SITE_URL}${pathOrUrl.startsWith('/') ? '' : '/'}${pathOrUrl}`
+}
+
 /** Google truncates titles around 600px, which is roughly 60 characters. */
 export const TITLE_MAX = 60
 

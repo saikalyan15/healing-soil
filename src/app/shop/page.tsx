@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getProducts } from '@/lib/products'
+import { absoluteUrl } from '@/lib/seo'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import ShopClient from '@/components/ShopClient'
@@ -92,7 +93,7 @@ export default async function ShopPage() {
             '@type': 'Product',
             name: p.name,
             description: p.description,
-            image: p.image_url || undefined,
+            image: p.image_url ? absoluteUrl(p.image_url) : undefined,
             brand: { '@type': 'Brand', name: 'Healing Soil' },
             sku: p.slug,
             offers: {

@@ -1,25 +1,25 @@
 import Link from 'next/link'
+import { buildMetadata } from '@/lib/seo'
 
-export const metadata = {
-  title: 'Ingredients — Healing Soil',
+export const metadata = buildMetadata({
+  title: 'Soap Ingredients: What Goes Into Every Bar',
   description:
-    'Every ingredient in a Healing Soil soap is chosen deliberately. Coconut oil, shea butter, neem, goat milk, and more — here is what we use and why.',
-  alternates: { canonical: '/ingredients' },
-  openGraph: {
-    title: 'Ingredients — Healing Soil',
-    description: 'Every ingredient in a Healing Soil soap is chosen deliberately. Here is what we use and why.',
-    url: '/ingredients',
-    siteName: 'Healing Soil',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Natural soap ingredients used by Healing Soil' }],
-    type: 'website',
-  },
-}
+    'Every ingredient in a Healing Soil soap is chosen deliberately. Glycerin, goat milk, shea butter, neem, tulsi, kesar and more, and what each one does to the bar.',
+  canonical: '/ingredients',
+  images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Natural soap ingredients used by Healing Soil' }],
+})
 
 const ingredients = [
   {
     name: 'Coconut Oil',
     description:
       'Creates a rich, cleansing lather and helps the bar stay firm. One of the most common base oils in handmade soap, known for its clean rinse.',
+  },
+  {
+    name: 'Glycerin',
+    slug: 'glycerin',
+    description:
+      'A natural byproduct of the soap-making process. Most commercial makers extract it and sell it separately; we keep it in the bar, which gives it a moisturising feel and a light, clean rinse.',
   },
   {
     name: 'Shea Butter',
@@ -82,6 +82,24 @@ const ingredients = [
       'A hardy herb with a fresh, herbal scent. Used as a natural fragrance in the bar. Grown in home gardens and valued in traditional personal care across many cultures.',
   },
   {
+    name: 'Rose',
+    slug: 'rose',
+    description:
+      'Pure rose essential oil, never synthetic fragrance. Gives the bar a delicate floral scent. A botanical used in personal care traditions across many cultures.',
+  },
+  {
+    name: 'Pomegranate',
+    slug: 'pomegranate',
+    description:
+      'Sun-dried peel, ground and worked into the bar. Gives a deep natural colour and a lightly textured side. The part of the fruit most people throw away.',
+  },
+  {
+    name: 'Orange',
+    slug: 'orange',
+    description:
+      'Adds a bright citrus note to the bar. A fresh, uplifting scent that sits well in a lighter glycerin base.',
+  },
+  {
     name: 'Loofah',
     description:
       'A natural plant fibre embedded in the bar. Gives the soap a textured surface for a thorough wash. Fully plant-derived and biodegradable.',
@@ -91,16 +109,25 @@ const ingredients = [
 export default function IngredientsPage() {
   return (
     <div className="bg-[#F7F5F0]">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      {/* An <article> rather than a bare <div>: this page was being crawled but
+          not indexed, and a link grid with no article semantics is a likely part
+          of why. */}
+      <article className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
 
         {/* Heading */}
         <div className="mb-12 max-w-2xl">
           <h1 className="mb-4 font-serif text-5xl leading-tight text-[#1E5631]">
             What goes into every bar
           </h1>
-          <p className="font-sans text-lg leading-relaxed text-[#666666]">
-            We use a clean glycerin or goat milk base and add ingredients we know and trust.
-            Here is what and why.
+          <p className="mb-4 font-sans text-lg leading-relaxed text-[#666666]">
+            We use a clean glycerin, goat milk or shea butter base and add ingredients we know
+            and trust. Here is what and why.
+          </p>
+          <p className="font-sans text-base leading-relaxed text-[#666666]">
+            Every bar is made to order in small batches on our farm in South Goa, with no SLS,
+            no parabens and no synthetic fragrance. Some ingredients, like neem, tulsi and
+            lemongrass, are grown on the farm itself. Others, like shea butter and the soap
+            bases, are sourced, and we would rather say so than pretend otherwise.
           </p>
         </div>
 
@@ -148,7 +175,7 @@ export default function IngredientsPage() {
           </Link>
         </div>
 
-      </div>
+      </article>
     </div>
   )
 }
