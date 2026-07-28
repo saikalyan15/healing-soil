@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getProducts, getFeaturedProducts, type Product } from '@/lib/products'
+import { canonicalSlugFor } from '@/lib/product-slugs'
 import { getAllPosts } from '@/lib/blog'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
@@ -106,11 +107,14 @@ export default async function HomePage() {
   
   const bundleDefaults = pickBundleDefaults(products)
 
-  // The founder's designated hero bar. An editorial choice, not a sales one, so
-  // it is deliberately not sourced from getFeaturedProducts(). Falls back to
-  // hiding the section rather than showing a sold-out or missing product.
+  // The designated hero bar. An editorial choice, not a sales one, so it is
+  // deliberately not sourced from getFeaturedProducts(). Falls back to hiding
+  // the section rather than showing a sold-out or missing product.
+  //
+  // Matched on the canonical slug: SoapLedger returns legacy forms for several
+  // products, and this one was renamed when its base changed.
   const heroProduct = products.find(
-    (p) => p.slug === 'shea-butter-kesar-gulab' && p.in_stock,
+    (p) => canonicalSlugFor(p.slug) === 'kesar-haldi-papaya-cucumber-soap' && p.in_stock,
   )
 
   // Named by role rather than by customer, so re-picking a review later does not
@@ -266,8 +270,8 @@ export default async function HomePage() {
                 carries the depth. */}
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-[0_24px_60px_-20px_rgba(30,86,49,0.35)]">
               <Image
-                src="/hero-kesar-gulab.webp"
-                alt="Kesar Gulab shea butter soap, handmade in South Goa"
+                src="/hero-kesar-haldi.webp"
+                alt="Kesar Haldi soap with saffron and turmeric, handmade in South Goa"
                 fill
                 className="hero-settle object-cover"
                 priority
@@ -325,15 +329,15 @@ export default async function HomePage() {
                   Our hero bar
                 </p>
                 <h2 className="mb-5 font-serif text-3xl leading-tight text-white md:text-5xl">
-                  Kesar Gulab
+                  Kesar Haldi
                 </h2>
                 <p className="mb-8 max-w-md font-sans text-base leading-[1.75] text-white/75 md:text-lg">
-                  Saffron and rose in a shea butter base. A slow, creamy lather and a warm
-                  floral scent, made to order in small batches. The most indulgent bar we make.
+                  Saffron and turmeric, two ingredients long used in Indian personal care.
+                  A warm golden bar with a soft, creamy lather, made to order in small batches.
                 </p>
 
                 <div className="mb-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 lg:justify-start">
-                  {['Shea butter base', 'Kesar and rose', '100g'].map((t) => (
+                  {['Kesar and haldi', '100g', 'Made to order'].map((t) => (
                     <span key={t} className="font-sans text-xs uppercase tracking-[0.16em] text-white/50">
                       {t}
                     </span>
