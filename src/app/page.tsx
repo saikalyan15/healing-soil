@@ -7,30 +7,29 @@ import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import BundlePicker from '@/components/BundlePicker'
 import VideoTestimonial from '@/components/VideoTestimonial'
-import TrustStrip from '@/components/TrustStrip'
 import ProductCard from '@/components/ProductCard'
 import BlogCard from '@/components/BlogCard'
 
 // Statically rendered and served from the Full Route Cache. Product data comes
 // from getProducts(), which is tagged 'products', so this page is rebuilt when
 // SoapLedger POSTs revalidateTag('products') to /api/revalidate, and otherwise
-// falls back to the 6h data-cache TTL. It was previously force-dynamic, which
+// falls back to the 24h data-cache TTL. It was previously force-dynamic, which
 // ran a Vercel Function on every single request including crawler traffic.
 
 export const metadata: Metadata = {
   // absolute, so buildTitle does not apply — keep this within the 60 char budget
-  // by hand. The old value was 68 and truncated in results.
-  title: { absolute: 'Handmade Soap for Skin That Reacts | Healing Soil' },
+  // by hand. Currently 57.
+  title: { absolute: 'Handmade Natural Soap for the Whole Family | Healing Soil' },
   description:
-    'Handmade soap from a Goa farm. SLS-free, glycerin retained. A starter bundle of 4 soaps for ₹1,000 for skin that has stopped getting along with commercial soap.',
+    'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free. Starter bundle of four soaps for ₹1,000.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Healing Soil | Handmade Soap for Skin That Reacts to Commercial Soap',
+    title: 'Handmade Natural Soap for the Whole Family | Healing Soil',
     description:
-      'Handmade soap from a farm in South Goa. SLS-free, glycerin retained. A starter bundle of 4 soaps for ₹1,000.',
+      'Handmade in small batches on our farm in South Goa, with botanicals we grow ourselves. No SLS, no parabens, no synthetic fragrance.',
     url: '/',
     siteName: 'Healing Soil',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps from Goa' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 1200, alt: 'Healing Soil handmade soaps from Goa' }],
     type: 'website',
   },
 }
@@ -106,6 +105,13 @@ export default async function HomePage() {
   const recentPosts = allPosts.slice(0, 3)
   
   const bundleDefaults = pickBundleDefaults(products)
+
+  // The founder's designated hero bar. An editorial choice, not a sales one, so
+  // it is deliberately not sourced from getFeaturedProducts(). Falls back to
+  // hiding the section rather than showing a sold-out or missing product.
+  const heroProduct = products.find(
+    (p) => p.slug === 'shea-butter-kesar-gulab' && p.in_stock,
+  )
 
   const krutika = reviews.find((r) => r.id === 'review-006')
   const riya = reviews.find((r) => r.id === 'review-010')
@@ -183,11 +189,15 @@ export default async function HomePage() {
       <section className="w-full overflow-hidden bg-[#F7F5F0]">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-12 sm:px-6 md:flex-row md:gap-16 md:py-24">
           <div className="z-10 flex-1 text-center md:text-left">
-            <h1 className="mb-5 font-serif text-[clamp(34px,4.6vw,52px)] font-normal leading-[1.1] text-[#1E5631]">
-              The soap her skin{' '}<br className="hidden md:block" />didn&rsquo;t react to.
+            <p className="mb-5 font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
+              Handcrafted in South Goa
+            </p>
+            <h1 className="mb-6 font-serif text-[clamp(36px,5vw,58px)] font-normal leading-[1.08] tracking-[-0.01em] text-[#1E5631]">
+              One bar your whole{' '}<br className="hidden md:block" />family can use.
             </h1>
-            <p className="mb-8 font-sans text-base leading-relaxed text-[#666] md:text-lg">
-              If your skin reacts to most soaps, this is what we make in small batches on our farm in South Goa.
+            <p className="mb-8 max-w-lg font-sans text-base leading-[1.75] text-[#666] md:text-lg">
+              Handmade in small batches on our farm in South Goa, with botanicals we grow
+              ourselves. No SLS, no parabens, no synthetic fragrance.
             </p>
 
             {krutika && (
@@ -231,12 +241,18 @@ export default async function HomePage() {
           </div>
 
           <div className="relative w-full max-w-[520px] flex-shrink-0 md:w-[48%]">
-            <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-2xl">
+            {/* Offset frame behind the image. Cheap way to add depth without a
+                heavier hero treatment. */}
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[#C9A84C]/35"
+            />
+            <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-[0_24px_60px_-20px_rgba(30,86,49,0.35)]">
               <Image
-                src="/hero-soap.webp"
-                alt="Healing Soil handmade soaps from a South Goa farm"
+                src="/hero-kesar-gulab.webp"
+                alt="Kesar Gulab shea butter soap, handmade in South Goa"
                 fill
-                className="object-cover"
+                className="ken-burns object-cover"
                 priority
                 sizes="(max-width: 768px) 100vw, 48vw"
               />
@@ -244,8 +260,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      <TrustStrip />
 
       {/* ── Section 2: Bundle (Primary Offer) ────────────────────────────── */}
       <section id="bundle" className="w-full bg-white py-16 scroll-mt-20 md:py-24">
@@ -270,6 +284,56 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+
+      {/* ── Section 2.5: Hero product ─────────────────────────────────────
+          A deliberate editorial pick, kept separate from "Most Loved" below,
+          which is ranked by units actually sold. Two different promises, so
+          they must not be merged: this one makes no volume claim. */}
+      {heroProduct && (
+        <section className="w-full bg-[#1E5631] py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-white/5">
+                <Image
+                  src={heroProduct.image_url || '/products/coming-soon.webp'}
+                  alt={heroProduct.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+
+              <div className="text-center lg:text-left">
+                <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
+                  Our hero bar
+                </p>
+                <h2 className="mb-5 font-serif text-3xl leading-tight text-white md:text-5xl">
+                  Kesar Gulab
+                </h2>
+                <p className="mb-8 max-w-md font-sans text-base leading-[1.75] text-white/75 md:text-lg">
+                  Saffron and rose in a shea butter base. A slow, creamy lather and a warm
+                  floral scent, made to order in small batches. The most indulgent bar we make.
+                </p>
+
+                <div className="mb-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 lg:justify-start">
+                  {['Shea butter base', 'Kesar and rose', '100g'].map((t) => (
+                    <span key={t} className="font-sans text-xs uppercase tracking-[0.16em] text-white/50">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <Link
+                  href={`/shop/${heroProduct.slug}`}
+                  className="inline-block rounded bg-[#C9A84C] px-10 py-4 font-sans text-sm font-bold text-[#1A1A14] transition-all hover:bg-white active:scale-[0.98] md:px-12 md:py-5"
+                >
+                  See the bar
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Section 3: Featured Products (Shop Context) ──────────────────── */}
       <section className="w-full bg-[#F7F5F0] py-16 md:py-24">
@@ -317,41 +381,52 @@ export default async function HomePage() {
               />
             </div>
             <div className="space-y-8 lg:pl-8">
+              <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
+                Why it is different
+              </p>
               <h2 className="font-serif text-3xl leading-tight text-[#1E5631] md:text-4xl lg:text-5xl">
-                Made differently, for skin that reacts.
+                Five things we do that most soap does not.
               </h2>
-              
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-                <div className="space-y-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1E5631]/10 font-serif text-[#1E5631]">1</div>
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-[#C9A84C]">No SLS or Parabens</h3>
-                  <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                    Commercial soaps use chemical foaming agents that strip natural oils. We don&rsquo;t.
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1E5631]/10 font-serif text-[#1E5631]">2</div>
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-[#C9A84C]">Glycerin Retained</h3>
-                  <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                    Glycerin is a natural byproduct of soap making. Commercial makers remove it; we keep it in.
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1E5631]/10 font-serif text-[#1E5631]">3</div>
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-[#C9A84C]">Farm Grown Botanicals</h3>
-                  <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                    Neem, Tulsi, and Lemongrass are grown on our farm in South Goa, harvested fresh for each batch.
-                  </p>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1E5631]/10 font-serif text-[#1E5631]">4</div>
-                  <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-[#C9A84C]">Made to Order</h3>
-                  <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                    We don&rsquo;t warehouse thousands of bars. Every batch is hand-poured when you order.
-                  </p>
-                </div>
+
+              {/* Hairline-separated list rather than a card grid. Reads as
+                  editorial rather than as a feature table. */}
+              <div className="divide-y divide-[#D6CFC4]">
+                {[
+                  {
+                    t: 'No SLS or parabens',
+                    d: 'Commercial soaps use synthetic foaming agents that strip natural oils. Ours do not.',
+                  },
+                  {
+                    t: 'Glycerin retained',
+                    d: 'Glycerin is a natural byproduct of soap making. Commercial makers extract and sell it separately. We leave it in the bar.',
+                  },
+                  {
+                    t: 'Botanicals from our farm',
+                    d: 'Neem, tulsi and lemongrass are grown in South Goa and harvested fresh for each batch. The bases are sourced, and we would rather say so.',
+                  },
+                  {
+                    t: 'Made to order',
+                    d: 'We do not warehouse thousands of bars. Every batch is hand-poured after you order.',
+                  },
+                  {
+                    t: 'Lighter on the earth',
+                    d: 'Small batches, paper wrapping, no plastic. Peels and offcuts go back to the soil they came from.',
+                  },
+                ].map((item, i) => (
+                  <div key={item.t} className="flex gap-5 py-5 first:pt-0">
+                    <span className="mt-1 font-serif text-lg leading-none text-[#C9A84C]/70">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h3 className="mb-1.5 font-sans text-sm font-semibold tracking-wide text-[#1A1A14]">
+                        {item.t}
+                      </h3>
+                      <p className="font-sans text-sm leading-[1.7] text-[#666666]">{item.d}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              
+
               <div className="pt-6">
                 <Link
                   href="/our-story"
