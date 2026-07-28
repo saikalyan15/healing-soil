@@ -113,9 +113,26 @@ export default async function HomePage() {
     (p) => p.slug === 'shea-butter-kesar-gulab' && p.in_stock,
   )
 
-  const krutika = reviews.find((r) => r.id === 'review-006')
-  const riya = reviews.find((r) => r.id === 'review-010')
-  const gridReviews = ['review-002', 'review-001', 'review-011']
+  // Named by role rather than by customer, so re-picking a review later does not
+  // leave a variable called after someone who is no longer quoted.
+  //
+  // Two reviews were deliberately dropped from this page. review-002 says the
+  // soap "helped reduce my tan", which is a pigmentation claim, and review-006
+  // says "allergic to all commercial soaps", which is a claim about a condition.
+  // Testimonials count as advertiser claims, so neither belongs on the homepage.
+  // Both remain on /reviews as genuine customer feedback.
+
+  // Short enough for the hero quote card. Gentle, no health claim.
+  const heroReview = reviews.find((r) => r.id === 'review-010')
+
+  // Long-form, and the only quote carrying both halves of the positioning:
+  // quality and gentleness, plus plastic and waste. Belongs in the wide block.
+  const featuredReview = reviews.find((r) => r.id === 'review-001')
+
+  // Sonia covers water use, Shubhada mildness, Sunil switching from a
+  // mainstream brand. Spread across two states and both genders, which the
+  // family positioning needs.
+  const gridReviews = ['review-009', 'review-007', 'review-011']
     .map((id) => reviews.find((r) => r.id === id))
     .filter((r): r is NonNullable<typeof r> => r != null)
 
@@ -200,19 +217,21 @@ export default async function HomePage() {
               ourselves. No SLS, no parabens, no synthetic fragrance.
             </p>
 
-            {krutika && (
+            {heroReview && (
               <div className="mb-8 rounded-lg border border-[#E8DFC4] bg-[#FFF8E8] p-5 text-left shadow-sm md:max-w-md">
                 <p className="font-serif text-[17px] italic leading-relaxed text-[#1A1A14]">
-                  &ldquo;{krutika.comment}.&rdquo;
+                  {/* Some reviews end in a full stop and some do not, so add one
+                      only when it is missing rather than hardcoding it. */}
+                  &ldquo;{heroReview.comment.replace(/[.!?]?$/, (m) => m || '.')}&rdquo;
                 </p>
                 <div className="mt-3 flex items-center gap-3">
                   <div className="h-0.5 w-6 bg-[#C9A84C]"></div>
                   <div>
                     <p className="font-sans text-sm font-bold text-[#1E5631]">
-                      {krutika.author}
+                      {heroReview.author}
                     </p>
                     <p className="font-sans text-[11px] uppercase tracking-wider text-[#666666]">
-                      {krutika.occupation} · {krutika.location}
+                      {heroReview.occupation} · {heroReview.location}
                     </p>
                   </div>
                 </div>
@@ -441,7 +460,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Section 5: Community Proof (Riya) ─────────────────────────────── */}
-      {riya && (
+      {featuredReview && (
         <section className="w-full bg-[#F7F5F0] py-16 md:py-24">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <div className="relative rounded-3xl bg-white p-8 shadow-sm md:p-12 lg:p-16">
@@ -449,10 +468,10 @@ export default async function HomePage() {
                 Verified Experience
               </div>
               <ReviewCard
-                quote={riya.comment}
-                name={riya.author}
-                location={riya.location}
-                occupation={riya.occupation}
+                quote={featuredReview.comment}
+                name={featuredReview.author}
+                location={featuredReview.location}
+                occupation={featuredReview.occupation}
                 featured={true}
               />
             </div>
