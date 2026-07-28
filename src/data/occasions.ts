@@ -10,20 +10,7 @@ export type OccasionPage = {
   publishedAt: string | null
 }
 
-const allProductSlugs = [
-  'honey-oats-glycerin-soap',
-  'neem-tulsi-glycerin-soap',
-  'ginger-rosemary-glycerin-soap',
-  'pomegranate-glycerin-soap',
-  'neem-tulsi-goat-milk-soap',
-  'kesar-haldi-goat-milk-soap',
-  'honey-oats-goat-milk-soap',
-  'orange-goat-milk-soap',
-  'rice-rose-goat-milk-soap',
-  'pomegranate-goat-milk-soap',
-  'shea-butter-kesar-gulab',
-  'honey-kesar-haldi-shea-butter-soap',
-]
+
 
 export const occasions: OccasionPage[] = [
   {
@@ -33,7 +20,12 @@ export const occasions: OccasionPage[] = [
     h1: 'Handmade soap gift India',
     tagline: 'A thoughtful and personal way to show you care. Handmade soap is more than just a utility; it is a sensory experience crafted with intention.',
     content: 'Choosing a handmade soap as a gift shows a preference for quality and mindfulness. Each bar from our Goa farm is made to order, ensuring your gift is fresh and unique. Whether for a birthday, anniversary, or a simple gesture of thanks, our natural soap collection offers something special for everyone.',
-    relatedProducts: allProductSlugs,
+    relatedProducts: [
+      'shea-butter-kesar-gulab',
+      'red-rose-soap',
+      'honey-kesar-haldi-shea-butter-soap',
+      'soap-squares-rich-box',
+    ],
     faqs: [
       {
         q: 'Do you offer gift wrapping?',
@@ -57,7 +49,12 @@ export const occasions: OccasionPage[] = [
     h1: 'Travel soap India',
     tagline: 'Natural care that fits in your bag. Our handmade soap bars are ideal for travel, providing a reliable and gentle wash wherever your journey takes you.',
     content: 'Traveling can be taxing on the skin, and commercial hotel soaps are often harsh. Bringing your own handmade soap ensures you maintain your natural routine. Our bars are compact, long-lasting, and free from the synthetic detergents that can leave your skin feeling dry during travel.',
-    relatedProducts: allProductSlugs,
+    relatedProducts: [
+      'travel-soaps',
+      'soap-squares-light-box',
+      'soap-squares-creamy-box',
+      'honey-oats-glycerin-soap',
+    ],
     faqs: [
       {
         q: 'How should I carry soap while traveling?',
@@ -147,7 +144,12 @@ export const occasions: OccasionPage[] = [
     h1: 'Eco-friendly soap India',
     tagline: 'Sustainable care from farm to home. We prioritise natural ingredients, small-batch making, and mindful packaging to reduce our environmental impact.',
     content: 'Being eco-friendly means looking at the entire lifecycle of a product. We make our soap to order in Goa, which eliminates the need for large-scale warehousing and reduces waste. Our formulas are free from synthetic chemicals and our packaging is designed to be minimal and recyclable, supporting a more sustainable routine.',
-    relatedProducts: allProductSlugs,
+    relatedProducts: [
+      'loofah-soaps',
+      'pomegranate-glycerin-soap',
+      'neem-tulsi-goat-milk-soap',
+      'neem-tulsi-glycerin-soap',
+    ],
     faqs: [
       {
         q: 'Is your packaging plastic-free?',
@@ -171,7 +173,12 @@ export const occasions: OccasionPage[] = [
     h1: 'Corporate gift soap India',
     tagline: 'A unique and high-quality gifting solution. Our handmade soaps offer a personal and professional way to show appreciation to clients and partners.',
     content: 'Corporate gifting should reflect your values. By choosing our handmade soaps, you support small-batch craftsmanship and provide a gift that is both practical and luxurious. We offer customisable selections and bulk ordering options to suit your specific corporate needs, all shipped from our Goa workshop.',
-    relatedProducts: allProductSlugs,
+    relatedProducts: [
+      'soap-squares-rich-box',
+      'soap-squares-creamy-box',
+      'soap-squares-light-box',
+      'shea-butter-kesar-gulab',
+    ],
     faqs: [
       {
         q: 'Can we customise the soap selection for bulk orders?',
