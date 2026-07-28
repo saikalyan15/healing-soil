@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { decisions } from '@/data/decisions'
 import { buildMetadata } from '@/lib/seo'
-import { getProducts } from '@/lib/products'
+import { getProducts, selectProducts } from '@/lib/products'
 import DecisionPage from '@/components/programmatic/DecisionPage'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -39,9 +39,7 @@ export default async function Page({ params }: Props) {
   if (!decision) notFound()
 
   const allProducts = await getProducts().catch(() => [])
-  const products = allProducts.filter(
-    (p) => decision.recommendedProducts.includes(p.slug) && p.in_stock
-  )
+  const products = selectProducts(allProducts, decision.recommendedProducts, { inStockOnly: true })
 
   return <DecisionPage decision={decision} products={products} />
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
 import ProductCard from '@/components/ProductCard'
-import type { Product } from '@/lib/products'
+import { selectProducts, type Product } from '@/lib/products'
 import type { CityPage } from '@/data/cities'
 import type { IngredientPage } from '@/data/ingredients'
 
@@ -49,7 +49,10 @@ const CityIngredientPage: React.FC<Props> = ({ city, ingredient, products }) => 
     ],
   }
 
-  const relatedProducts = products.filter((p) => ingredient.relatedProducts.includes(p.slug))
+  // The page already receives products selected by canonical slug, so a second
+  // raw-slug filter here would discard them again. Kept as a pass-through so
+  // the component still works if handed an unfiltered list.
+  const relatedProducts = selectProducts(products, ingredient.relatedProducts)
   const displayProducts = relatedProducts.length > 0 ? relatedProducts : products.filter((p) => p.in_stock).slice(0, 4)
 
   return (

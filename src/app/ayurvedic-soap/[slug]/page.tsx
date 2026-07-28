@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { ayurvedic } from '@/data/ayurvedic'
 import { buildMetadata } from '@/lib/seo'
 import AyurvedicPage from '@/components/programmatic/AyurvedicPage'
-import { getProducts } from '@/lib/products'
+import { getProducts , selectProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -40,7 +40,7 @@ export default async function Page({ params }: Props) {
   }
 
   const allProducts = await getProducts()
-  const products = allProducts.filter((p) => page.relatedProducts.includes(p.slug))
+  const products = selectProducts(allProducts, page.relatedProducts)
 
   return <AyurvedicPage page={page} products={products} />
 }

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { comparisons } from '@/data/comparisons'
 import { buildMetadata } from '@/lib/seo'
 import ComparisonPage from '@/components/programmatic/ComparisonPage'
-import { getProducts } from '@/lib/products'
+import { getProducts , selectProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -43,8 +43,8 @@ export default async function Page({ params }: Props) {
   }
 
   const allProducts = await getProducts()
-  const productsA = allProducts.filter((p) => comparison.relatedProductsA.includes(p.slug))
-  const productsB = allProducts.filter((p) => comparison.relatedProductsB.includes(p.slug))
+  const productsA = selectProducts(allProducts, comparison.relatedProductsA)
+  const productsB = selectProducts(allProducts, comparison.relatedProductsB)
 
   return (
     <ComparisonPage 

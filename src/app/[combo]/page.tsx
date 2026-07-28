@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { combinations } from '@/data/combinations'
 import { buildMetadata } from '@/lib/seo'
 import CombinationPage from '@/components/programmatic/CombinationPage'
-import { getProducts } from '@/lib/products'
+import { getProducts , selectProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ combo: string }> }
 
@@ -41,7 +41,7 @@ export default async function Page({ params }: Props) {
   }
 
   const allProducts = await getProducts()
-  const products = allProducts.filter((p) => combination.relatedProducts.includes(p.slug))
+  const products = selectProducts(allProducts, combination.relatedProducts)
 
   return <CombinationPage combination={combination} products={products} />
 }

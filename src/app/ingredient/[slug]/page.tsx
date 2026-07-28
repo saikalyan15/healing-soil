@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { ingredients } from '@/data/ingredients'
 import { buildMetadata } from '@/lib/seo'
 import IngredientPage from '@/components/programmatic/IngredientPage'
-import { getProducts } from '@/lib/products'
+import { getProducts , selectProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -41,7 +41,7 @@ export default async function Page({ params }: Props) {
   }
 
   const allProducts = await getProducts()
-  const products = allProducts.filter((p) => ingredient.relatedProducts.includes(p.slug))
+  const products = selectProducts(allProducts, ingredient.relatedProducts)
 
   return <IngredientPage ingredient={ingredient} products={products} />
 }

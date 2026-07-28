@@ -211,6 +211,35 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 /**
+ * Select products by canonical slug, preserving the order of `wanted`.
+ *
+ * Every data file lists related products by canonical slug, but SoapLedger
+ * returns legacy forms for many of them: pomegranate-glycerine,
+ * neem-tulsi-goatmilk-soap, sheabutter-kesar-gulab and others. Comparing
+ * against the raw slug therefore matched nothing, silently, and the page either
+ * rendered an empty product row or fell back to a generic one. Twelve of the
+ * fourteen ingredient pages were losing products this way and seven were
+ * matching none at all, so the goat milk page showed generic bars rather than
+ * the six goat milk soaps.
+ *
+ * Order follows `wanted` rather than the catalogue, because the first entry is
+ * usually the product the page is about. A plain filter returns display_order.
+ */
+export function selectProducts(
+  products: Product[],
+  wanted: readonly string[],
+  { inStockOnly = false }: { inStockOnly?: boolean } = {},
+): Product[] {
+  return wanted
+    .map((slug) =>
+      products.find(
+        (p) => canonicalSlugFor(p.slug) === slug && (!inStockOnly || p.in_stock),
+      ),
+    )
+    .filter((p): p is Product => p != null)
+}
+
+/**
  * Find a single product by its slug.
  * Returns null if the slug is not found.
  */

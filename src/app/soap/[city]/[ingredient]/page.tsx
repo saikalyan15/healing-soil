@@ -5,7 +5,7 @@ import { ingredients } from '@/data/ingredients'
 import { cityIngredientBatches } from '@/data/city-ingredients'
 import { buildMetadata } from '@/lib/seo'
 import CityIngredientPage from '@/components/programmatic/CityIngredientPage'
-import { getProducts } from '@/lib/products'
+import { getProducts, selectProducts } from '@/lib/products'
 
 type Props = { params: Promise<{ city: string; ingredient: string }> }
 
@@ -64,9 +64,7 @@ export default async function Page({ params }: Props) {
   }
 
   const allProducts = await getProducts()
-  const relatedProducts = allProducts.filter(
-    (p) => p.in_stock && ingredientData.relatedProducts.includes(p.slug)
-  )
+  const relatedProducts = selectProducts(allProducts, ingredientData.relatedProducts, { inStockOnly: true })
   const products = relatedProducts.length > 0
     ? relatedProducts
     : allProducts.filter((p) => p.in_stock).slice(0, 4)
