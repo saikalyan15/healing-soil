@@ -122,7 +122,7 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   },
   'ginger-rosemary-glycerin-soap': {
     title: 'Ginger Rosemary Glycerin Soap | Handmade in Goa | Healing Soil',
-    description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Free shipping across India.',
+    description: 'An invigorating 100g glycerin soap with ginger and rosemary. Warm herbal scent, light lather. Made to order in South Goa. Ships across India.',
   },
   // Highest-impression page on the site and previously the worst CTR: roughly
   // 640 impressions across "travel soap" (379), "mini soap for travel" (149)
@@ -381,7 +381,7 @@ export default async function ProductPage({ params }: Props) {
             <AddToCartButton product={product} />
 
             <p className="font-sans text-xs text-[#666] text-center">
-              Free shipping across India · Made to order · Ships in 2 days
+              Free shipping over ₹1,000 · Made to order · Ships in 2 days
             </p>
 
             {/* WhatsApp CTA */}

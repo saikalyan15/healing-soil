@@ -64,7 +64,7 @@ export const cities: CityPage[] = [
     faqs: [
       {
         q: 'What is the shipping cost to Pune?',
-        a: 'We offer free shipping on all orders across India, including deliveries to Pune, with no minimum order requirement.'
+        a: 'We ship across India, including Pune. Shipping is free on orders of ₹1,000 and above; below that it is ₹100.'
       },
       {
         q: 'Are these soaps suitable for Pune weather?',
@@ -179,7 +179,7 @@ export const cities: CityPage[] = [
     faqs: [
       {
         q: 'Is shipping to Kolkata free?',
-        a: 'Yes, we provide free shipping on all orders to Kolkata and across India, with no minimum purchase required.'
+        a: 'Yes, we ship to Kolkata and across India. Shipping is free on orders of ₹1,000 and above; below that it is ₹100.'
       },
       {
         q: 'Are the soaps made with natural oils?',
@@ -311,7 +311,7 @@ export const cities: CityPage[] = [
     faqs: [
       {
         q: 'Is delivery to Coimbatore free?',
-        a: 'Yes, we offer free shipping on all orders across India, including deliveries to Coimbatore.'
+        a: 'Yes, we ship across India, including Coimbatore. Shipping is free on orders of ₹1,000 and above; below that it is ₹100.'
       },
       {
         q: 'Do you use synthetic foaming agents?',
@@ -407,7 +407,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Is there a minimum order for free shipping?',
-        a: 'No, we provide free shipping on all orders to Chandigarh and across India, regardless of the order value.'
+        a: 'Yes. Shipping is free on orders of ₹1,000 and above; below that it is ₹100.'
       }
     ],
     publishedAt: '2026-05-16'
@@ -491,7 +491,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Is delivery to Mysore free?',
-        a: 'Yes, we offer free shipping on all orders to Mysore and across India.'
+        a: 'Yes, we ship to Mysore and across India. Shipping is free on orders of ₹1,000 and above; below that it is ₹100.'
       },
       {
         q: 'Do you use real sandalwood?',
@@ -597,7 +597,7 @@ export const cities: CityPage[] = [
     faqs: [
       {
         q: 'Is shipping to Rajkot free?',
-        a: 'Yes, we offer free shipping on all orders to Rajkot and across India, with no minimum order value.'
+        a: 'Yes, we ship to Rajkot and across India. Shipping is free on orders of ₹1,000 and above; below that it is ₹100.'
       },
       {
         q: 'What bases do you use for your soap?',

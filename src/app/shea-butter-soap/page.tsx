@@ -169,7 +169,7 @@ export default function SheaButterSoapPage() {
             Made in small batches in Goa. No SLS, parabens, or synthetic fragrance. ₹400 per bar.
           </p>
           <p className="mb-4 font-sans text-xs text-[#999]">
-            Ships in 2 days. Free shipping pan-India.
+            Ships in 2 days. Free shipping over ₹1,000.
           </p>
           <Link
             href="/shop"

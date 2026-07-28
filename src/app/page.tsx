@@ -124,7 +124,7 @@ export default async function HomePage() {
     },
     {
       q: 'How long does shipping take?',
-      a: 'Orders dispatch within about 2 days from our farm in South Goa. Transit typically takes another 3 to 7 days depending on your city, and shipping is free across India.',
+      a: 'Orders dispatch within about 2 days from our farm in South Goa. Transit typically takes another 3 to 7 days depending on your city. Shipping is free on orders of ₹1,000 and above; below that it is ₹100, or ₹150 for North India.',
     },
     {
       q: 'Is Healing Soil soap suitable for sensitive skin?',
@@ -225,7 +225,7 @@ export default async function HomePage() {
                 </Link>
               </div>
               <p className="font-sans text-xs font-medium leading-relaxed text-[#666666]">
-                Free shipping · Ships in 2 days from Goa · Individual soaps from ₹200
+                Free shipping over ₹1,000 · Ships in 2 days from Goa · Individual soaps from ₹200
               </p>
             </div>
           </div>
@@ -495,7 +495,7 @@ export default async function HomePage() {
             </Link>
           </div>
           <p className="mt-8 font-sans text-xs font-medium uppercase tracking-[0.2em] text-white/50">
-            Free shipping across India · Made in South Goa
+            Free shipping over ₹1,000 · Made in South Goa
           </p>
         </div>
       </section>

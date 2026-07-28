@@ -24,8 +24,8 @@ export default function ShippingPolicyPage() {
         <section>
           <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">Where we ship</h2>
           <p>
-            We ship pan-India from our workshop in South Goa. Shipping is free on every order,
-            with no minimum order value.
+            We ship pan-India from our workshop in South Goa. Shipping is free on orders of
+            ₹1,000 and above. Below that, shipping is ₹100, or ₹150 for North India.
           </p>
         </section>
 

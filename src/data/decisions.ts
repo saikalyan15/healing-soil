@@ -180,7 +180,7 @@ export const decisions: DecisionPage[] = [
       },
       {
         q: 'Does Healing Soil ship across India?',
-        a: 'Yes. We ship pan-India from Goa. Orders are dispatched in two days and typically arrive in four to seven days depending on your city. Free shipping is included on all orders.'
+        a: 'Yes. We ship pan-India from Goa. Orders are dispatched in two days and typically arrive in four to seven days depending on your city. Shipping is free on orders of ₹1,000 and above.'
       }
     ],
     publishedAt: '2026-06-18'
