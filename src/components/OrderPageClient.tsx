@@ -144,7 +144,7 @@ export default function OrderPageClient() {
             That is how most of our customers found us.
           </p>
           <a
-            href={`https://wa.me/?text=${encodeURIComponent('Found a really good soap brand from Goa — handmade, no SLS, genuinely gentle on skin. Worth checking out: https://healingsoil.in')}`}
+            href={`https://wa.me/?text=${encodeURIComponent('Found a really good soap brand from Goa. Handmade, no SLS, genuinely gentle on skin. Worth checking out: https://healingsoil.in')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-flex items-center gap-1.5 font-sans text-xs font-medium text-[#25D366] hover:underline"
