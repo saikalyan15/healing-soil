@@ -138,8 +138,8 @@ export const ayurvedic: AyurvedicPage[] = [
         a: 'Our shea butter base is the richest and most conditioning option we offer, making it the preferred choice for skin that feels particularly dry.'
       },
       {
-        q: 'Does it clog pores?',
-        a: 'No, shea butter is non-comedogenic, meaning it provides a rich, conditioning feel without clogging your skin\'s pores.'
+        q: 'How does shea butter soap feel?',
+        a: 'Shea butter provides a rich, conditioning feel and the creamiest lather of our three soap bases.'
       },
       {
         q: 'How long does it take to ship?',

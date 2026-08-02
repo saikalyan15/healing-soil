@@ -101,7 +101,7 @@ export const ingredients: IngredientPage[] = [
     metaDescription: 'Understand why we retain natural glycerin in our soap. Learn how this humectant keeps your skin hydrated and soft after washing.',
     tagline: 'A natural humectant retained in every bar. Glycerin is a byproduct of saponification, the process used to make our soap bases, and we choose to keep it in for its moisturising feel.',
     origin: 'Glycerin is not an added ingredient. It forms naturally when the soap base is made and is kept intact rather than extracted. Healing Soil is a melt-and-pour soapmaker: we melt these pre-made bases and hand-pour them with botanicals, rather than mixing oils and lye ourselves.',
-    traditionalUse: 'Glycerin is a humectant that draws moisture from the air to the skin. Retaining it in the bar, rather than stripping it out for resale, is a hallmark of small-batch soap-making.',
+    traditionalUse: 'Glycerin is widely used in personal care and gives soap a smooth, light lather. In our range, it is the easiest-rinsing of the three bases.',
     feel: 'Light, clean lather that rinses away easily. It leaves the skin feeling hydrated and soft rather than stripped or tight.',
     relatedProducts: ['honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap', 'ginger-rosemary-glycerin-soap', 'pomegranate-glycerin-soap'],
     faqs: [
@@ -133,7 +133,7 @@ export const ingredients: IngredientPage[] = [
     faqs: [
       {
         q: 'Will shea butter soap clog my pores?',
-        a: 'No, shea butter is non-comedogenic, meaning it provides a rich, conditioning feel without clogging pores.'
+        a: 'Shea butter provides a rich, conditioning feel and a creamy lather. Patch test any new face product before regular use.'
       },
       {
         q: 'Is it better than goat milk for dry skin?',
@@ -159,7 +159,7 @@ export const ingredients: IngredientPage[] = [
     faqs: [
       {
         q: 'Can I use honey soap on my face?',
-        a: 'Yes, our honey soaps are very gentle and suitable for use on the face. They provide a soft wash that does not strip natural oils.'
+        a: 'Yes, our honey soaps are gentle and suitable for use on the face. Use light pressure, avoid the eye area, and patch test first if your skin is sensitive.'
       },
       {
         q: 'Is the honey scent synthetic?',

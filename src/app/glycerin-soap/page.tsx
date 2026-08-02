@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'What is glycerin soap?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Glycerin soap is made with a base that retains its natural glycerin, a byproduct of the soap-making process. Glycerin is a humectant, meaning it draws moisture to the skin, providing a gentle wash that does not feel heavy or greasy.',
+        text: 'Glycerin soap uses a smooth base that creates a light lather and an easy-rinsing feel without a heavy or greasy finish.',
       },
     },
     {
@@ -91,15 +91,13 @@ export default async function GlycerinSoapPage() {
         </h1>
 
         <p className="mb-5 font-sans text-lg leading-relaxed text-[#1A1A14]">
-          Glycerin is one of the most effective natural humectants in skin care. While many commercial
-          soaps remove it, our handmade glycerin bars keep it right where it belongs: in the soap.
+          Glycerin soap is the lightest-feeling of our three bases. Our handmade glycerin bars have a
+          smooth texture and a clear or semi-transparent appearance.
         </p>
 
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          The result is a wash that feels distinctly different. Glycerin draws moisture from the air
-          to the skin, helping to keep it hydrated even after you rinse. This makes glycerin soap a
-          practical daily choice for those who want a gentle cleanse without the richness of shea
-          butter or goat milk.
+          The result is a light lather that rinses easily without the richness of shea butter or goat
+          milk. It is a practical daily choice for people who prefer a clean, low-weight finish.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">

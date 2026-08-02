@@ -40,7 +40,7 @@ export const comparisons: ComparisonPage[] = [
     faqs: [
       {
         q: 'Is glycerin soap better for oily skin?',
-        a: 'Glycerin soap is a humectant that draws moisture to the skin without adding heavy oils, making it a suitable choice for oily or combination skin types.'
+        a: 'Glycerin soap has a light lather and an easy-rinsing feel without the richness of goat milk or shea butter, making it a useful option for oily or combination skin types.'
       },
       {
         q: 'Is goat milk soap suitable for sensitive skin?',
@@ -51,7 +51,7 @@ export const comparisons: ComparisonPage[] = [
         a: 'Glycerin soap typically produces a lighter, bubbly lather, while goat milk soap produces a denser, creamier lather due to the natural fats in the milk.'
       }
     ],
-    publishedAt: '2026-05-02'
+    publishedAt: null
   },
   {
     slug: 'goat-milk-vs-shea-butter-soap',
@@ -116,7 +116,7 @@ export const comparisons: ComparisonPage[] = [
     faqs: [
       {
         q: 'Does glycerin soap dry out skin?',
-        a: 'Glycerin is a natural humectant that helps retain moisture. When made without harsh detergents like SLS, glycerin soap is a gentle choice that does not strip the skin.'
+        a: 'Glycerin soap creates a light, smooth lather. Healing Soil glycerin bars contain no SLS, parabens, or synthetic fragrance.'
       },
       {
         q: 'Is shea butter soap heavy?',
@@ -168,7 +168,7 @@ export const comparisons: ComparisonPage[] = [
       name: 'Honey',
       slug: 'ingredient/honey',
       tagline: 'Natural humectant for a soft wash.',
-      pros: ['Draws moisture to skin', 'Mild, sweet scent', 'Smooth texture'],
+      pros: ['Light lather', 'Mild, sweet scent', 'Smooth texture'],
       feel: 'Moisturising'
     },
     subjectB: {
@@ -250,7 +250,7 @@ export const comparisons: ComparisonPage[] = [
       pros: ['Uses farm-grown Goa herbs', 'Earthy and herbal scent', 'Traditionally used in Indian care'],
       feel: 'Earthy and herbal'
     },
-    verdict: 'Ginger and rosemary provide an aromatic, uplifting experience that is excellent for a morning shower. Neem and tulsi offer a more grounded, traditional wash with an earthy scent profile. Both options provide a gentle lather that cleans without stripping the skin.',
+    verdict: 'Ginger and rosemary provide an aromatic, uplifting experience that is excellent for a morning shower. Neem and tulsi offer a more grounded, traditional wash with an earthy scent profile. Both options provide a gentle lather and contain no synthetic fragrance.',
     relatedProductsA: ['ginger-rosemary-glycerin-soap'],
     relatedProductsB: ['neem-tulsi-goat-milk-soap', 'neem-tulsi-glycerin-soap'],
     faqs: [
@@ -370,7 +370,7 @@ export const comparisons: ComparisonPage[] = [
     faqs: [
       {
         q: 'Why does handmade soap feel different?',
-        a: 'Handmade soap feels different because it still contains natural glycerin. Glycerin is a humectant that draws moisture to the skin, which is why your skin feels soft after washing instead of tight.'
+        a: 'Handmade soap can feel different because the bases and batch methods vary. Healing Soil glycerin bars have a light lather, while goat milk and shea butter bars feel progressively richer.'
       },
       {
         q: 'Is the lather weaker in handmade soap?',

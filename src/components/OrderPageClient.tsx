@@ -192,8 +192,7 @@ export default function OrderPageClient() {
           <div className="rounded border-l-4 border-l-[#C9A84C] bg-[#FFF8E8] p-4">
             <p className="mb-3 font-serif text-[17px] italic leading-relaxed text-[#1A1A14]">
               &ldquo;This handmade natural soap has become a staple in my routine. My skin feels
-              noticeably softer, dryness is a thing of the past, and it has even helped reduce
-              my tan.&rdquo;
+              noticeably softer, and the lather feels gentle in my daily routine.&rdquo;
             </p>
             <div>
               <p className="font-sans text-sm font-bold text-[#1E5631]">Snehal Rane</p>

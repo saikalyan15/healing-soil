@@ -3,66 +3,15 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Shea Butter Soap — Handmade in Goa | Healing Soil',
-  description:
-    'Rich, conditioning shea butter soap made in small batches in Goa. Suited to dry, sensitive, and mature skin. No SLS, parabens, or synthetic fragrance.',
+  description: 'Rich shea butter soap with a creamy lather and conditioning feel. Small-batch, SLS-free, and made without parabens or synthetic fragrance.',
   alternates: { canonical: '/shea-butter-soap' },
   openGraph: {
     title: 'Shea Butter Soap — Handmade in Goa | Healing Soil',
-    description:
-      'Rich, conditioning shea butter soap made in small batches in Goa. Suited to dry, sensitive, and mature skin.',
+    description: 'Rich, conditioning shea butter soap made in small batches in Goa.',
     url: '/shea-butter-soap',
     siteName: 'Healing Soil',
     type: 'website',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Shea butter soap handmade in Goa' }],
-  },
-}
-
-const productSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'Shea Butter Soap',
-  description:
-    'Handmade shea butter soap made in small batches in Goa. Rich and conditioning — suited to dry, sensitive, and mature skin. No SLS, parabens, or synthetic fragrance.',
-  brand: { '@type': 'Brand', name: 'Healing Soil' },
-  offers: {
-    '@type': 'Offer',
-    price: '400',
-    priceCurrency: 'INR',
-    availability: 'https://schema.org/InStock',
-    url: 'https://healingsoil.in/shop',
-    seller: { '@type': 'Organization', name: 'Healing Soil' },
-    hasMerchantReturnPolicy: {
-      '@type': 'MerchantReturnPolicy',
-      applicableCountry: 'IN',
-      returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
-    },
-    shippingDetails: {
-      '@type': 'OfferShippingDetails',
-      shippingRate: {
-        '@type': 'MonetaryAmount',
-        value: 100,
-        currency: 'INR',
-      },
-      shippingDestination: {
-        '@type': 'DefinedRegion',
-        addressCountry: 'IN',
-      },
-      deliveryTime: {
-        '@type': 'ShippingDeliveryTime',
-        handlingTime: {
-          '@type': 'QuantitativeValue',
-          minValue: 2,
-          maxValue: 2,
-          unitCode: 'DAY',
-        },
-        transitTime: {
-          '@type': 'QuantitativeValue',
-          minValue: 3,
-          maxValue: 7,
-          unitCode: 'DAY',
-        },
-      },
-    },
   },
 }
 
@@ -72,212 +21,83 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What are the benefits of shea butter soap?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Shea butter soap leaves a conditioning deposit on skin with every wash. The non-saponifiable compounds in shea butter survive saponification and are deposited on skin while you wash. The result is a wash that feels nourishing rather than stripping — skin tends to feel soft after washing. It suits dry, sensitive, and mature skin and does not clog pores.',
-      },
+      name: 'What does shea butter add to soap?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Shea butter gives soap a rich texture, creamy lather, and conditioning after-wash feel.' },
     },
     {
       '@type': 'Question',
-      name: 'Who should use shea butter soap?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Shea butter soap is the right choice when dryness is the main concern. If your skin feels tight after showering regardless of what you use, if you have persistent dry patches on your elbows, knees, or shins, or if your skin tends to feel particularly dry in winter, shea butter is the richest and most conditioning of the three soap bases. Mature skin that leans toward dryness also tends to suit it well.',
-      },
+      name: 'Is shea butter soap suitable for sensitive skin?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Healing Soil shea butter soap is a gentle option suitable for sensitive skin. It contains no SLS, parabens, or synthetic fragrance. Patch test any new product before regular use.' },
     },
     {
       '@type': 'Question',
-      name: 'How is Healing Soil shea butter soap different from commercial soap?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Commercial shea butter soaps often add SLS as the primary detergent and use synthetic fragrance, then list shea butter as a trace ingredient for marketing purposes. Healing Soil shea butter soap uses shea butter as the base — not a trace addition — and contains no SLS, parabens, or synthetic fragrance. It is made to order in small batches in Goa and ships in 2 days.',
-      },
+      name: 'How does shea butter soap compare with goat milk soap?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Shea butter is the richer, more conditioning base. Goat milk has a creamy lather with a lighter finish.' },
     },
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://healingsoil.in' },
+    { '@type': 'ListItem', position: 2, name: 'Shea Butter Soap', item: 'https://healingsoil.in/shea-butter-soap' },
   ],
 }
 
 export default function SheaButterSoapPage() {
   return (
     <div className="bg-[#F7F5F0]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <article className="mx-auto max-w-[720px] px-4 py-16 sm:px-6">
-
-        <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1E5631] sm:text-5xl">
-          Shea butter soap
-        </h1>
+        <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1E5631] sm:text-5xl">Shea butter soap</h1>
 
         <p className="mb-5 font-sans text-lg leading-relaxed text-[#1A1A14]">
-          Most soap takes something from your skin when you wash. It removes dirt, yes — but also the
-          thin layer of oil your skin produces to protect itself. Shea butter soap works differently.
-          It cleans and leaves something behind: a conditioning deposit that keeps skin from feeling
-          stripped after the shower.
+          Shea butter is the richest of Healing Soil&apos;s three soap bases. It creates a dense bar, a creamy lather, and a conditioning feel that leaves skin feeling soft after washing.
         </p>
-
-        <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Shea butter contains compounds that do not convert to soap during saponification, the
-          process the base goes through before Healing Soil melts and hand-pours it. They survive
-          that process intact. When you wash with a shea butter bar, these compounds — fatty acids,
-          cinnamic acid esters, vitamins A and E — are deposited on the skin and remain there after
-          rinsing. The result is skin that feels soft, not tight.
-        </p>
-
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          This is not a marketing claim. It is the chemistry of how shea butter behaves in soap,
-          which is why it has been used in handmade soap for decades before it became a label trend.
+          Our bars are melted and hand-poured in small batches in Goa. They contain no SLS, parabens, or synthetic fragrance.
         </p>
 
-        {/* Who it suits */}
-        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Who it suits</h2>
-
+        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Who may prefer it</h2>
         <ul className="mb-10 space-y-3 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          <li>
-            <strong className="font-semibold">Very dry skin</strong> — if your skin feels tight after
-            every shower regardless of what you use, shea butter is the right base to try.
-          </li>
-          <li>
-            <strong className="font-semibold">Dry patches</strong> — elbows, knees, heels, and shins
-            that stay rough even with regular moisturising respond well to consistent shea butter use.
-          </li>
-          <li>
-            <strong className="font-semibold">Sensitive skin</strong> — shea butter does not clog
-            pores despite its richness, and a properly made shea butter soap has no synthetic fragrance
-            or SLS — the two most common sources of skin reactions.
-          </li>
-          <li>
-            <strong className="font-semibold">Mature skin</strong> — skin tends to feel drier with
-            age. Shea butter&apos;s richness suits skin that leans toward dryness.
-          </li>
-          <li>
-            <strong className="font-semibold">Post-shave</strong> — skin that feels raw and tight
-            after shaving responds well to shea butter&apos;s conditioning properties.
-          </li>
+          <li>People who enjoy a rich, creamy lather.</li>
+          <li>Dry and mature skin types that prefer a conditioning wash.</li>
+          <li>Sensitive skin types looking for a bar without SLS or synthetic fragrance.</li>
+          <li>Anyone who finds glycerin soap too light in cooler weather.</li>
         </ul>
 
-        {/* Shop CTA */}
         <div className="mb-10 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
-          <p className="mb-1 font-serif text-2xl text-[#1E5631]">Our shea butter soap</p>
-          <p className="mb-1 font-sans text-sm text-[#666666]">
-            Made in small batches in Goa. No SLS, parabens, or synthetic fragrance. ₹400 per bar.
-          </p>
-          <p className="mb-4 font-sans text-xs text-[#999]">
-            Ships in 2 days. Free shipping over ₹1,000.
-          </p>
-          <Link
-            href="/shop"
-            className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
-          >
-            Shop shea butter soap
-          </Link>
+          <p className="mb-1 font-serif text-2xl text-[#1E5631]">Try our shea butter bars</p>
+          <p className="mb-4 font-sans text-sm text-[#666666]">Hand-poured in Goa. Current prices and delivery estimates are shown in the shop.</p>
+          <Link href="/shop" className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]">Shop shea butter soap</Link>
         </div>
 
-        {/* What makes it different */}
-        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">What makes handmade different</h2>
-
+        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">How it compares</h2>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Most commercial soaps labelled &ldquo;shea butter&rdquo; contain SLS as the primary
-          detergent and list shea butter as a trace ingredient — enough to appear on the label, not
-          enough to change how the soap behaves on skin. The detergent strips. The shea butter does
-          not compensate for it.
+          Choose shea butter for the fullest texture. Choose goat milk for a creamy but lighter wash, or glycerin for the lightest, easiest-rinsing feel. There is no universal best base; the useful difference is how each one feels in your routine.
         </p>
-
-        <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Healing Soil shea butter soap uses shea butter as the base. No SLS. No sodium laureth
-          sulfate. No synthetic fragrance. The soap is made to order in small batches at the farm in
-          South Goa — melted, hand-poured with botanicals, and shipped once it has set. It ships in 2 days from dispatch. Arrives in 4-7 days depending on your city.
-        </p>
-
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Commercial soap also removes the glycerin that forms naturally during saponification because
-          glycerin is profitable to sell separately. Healing Soil keeps it in the bar. Shea
-          butter plus retained glycerin means every wash does something useful for the skin rather
-          than just stripping it.
+          See our <Link href="/blog/shea-butter-goat-milk-soap-dry-sensitive-skin" className="text-[#1E5631] underline underline-offset-2">shea butter and goat milk comparison</Link> or read the <Link href="/blog/understanding-the-benefits-of-shea-butter-in-soap" className="text-[#1E5631] underline underline-offset-2">shea butter ingredient guide</Link>.
         </p>
 
-        {/* FAQ */}
+        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Use and storage</h2>
+        <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
+          Wet the bar, build a creamy lather with your hands, and rinse. Keep it on a draining soap dish and let it dry between uses. If your skin is sensitive, patch test first and stop using any product that does not suit you.
+        </p>
+
         <h2 className="mb-6 font-serif text-3xl text-[#1E5631]">Common questions</h2>
-
-        <div className="mb-10 space-y-6">
-          <div>
-            <p className="mb-2 font-sans text-base font-semibold text-[#1A1A14]">
-              Is shea butter soap good for sensitive skin?
-            </p>
-            <p className="font-sans text-base leading-[1.8] text-[#1A1A14]">
-              Yes. Shea butter does not clog pores despite its richness, and a properly made shea
-              butter soap contains no synthetic fragrance or SLS — the two most common triggers for
-              sensitive skin reactions. If your skin is both dry and sensitive, shea butter is usually
-              the right base.
-            </p>
-          </div>
-          <div>
-            <p className="mb-2 font-sans text-base font-semibold text-[#1A1A14]">
-              How does shea butter soap compare to goat milk soap?
-            </p>
-            <p className="font-sans text-base leading-[1.8] text-[#1A1A14]">
-              Goat milk is gentler and more versatile — it suits most skin types including sensitive
-              skin. Shea butter is richer and more conditioning — suited to skin that is very dry or
-              that feels tight after showering. If you are not sure which to try first, the starter
-              bundle includes both.{' '}
-              <Link
-                href="/blog/shea-butter-goat-milk-soap-dry-sensitive-skin"
-                className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
-              >
-                See the full comparison.
-              </Link>
-            </p>
-          </div>
-          <div>
-            <p className="mb-2 font-sans text-base font-semibold text-[#1A1A14]">
-              Does shea butter soap work for the whole body?
-            </p>
-            <p className="font-sans text-base leading-[1.8] text-[#1A1A14]">
-              Yes. It works on the face and body. For very dry body skin — shins, elbows, heels — you
-              can hold the bar on the dry area longer than you would normally wash, letting the
-              conditioning deposit absorb while the lather does its work.
-            </p>
-          </div>
+        <div className="space-y-6">
+          {faqSchema.mainEntity.map((faq) => (
+            <div key={faq.name}>
+              <p className="mb-2 font-sans font-semibold text-[#1A1A14]">{faq.name}</p>
+              <p className="font-sans leading-[1.8] text-[#1A1A14]">{faq.acceptedAnswer.text}</p>
+            </div>
+          ))}
         </div>
-
-        {/* Internal links */}
-        <div className="border-t border-[#D6CFC4] pt-8">
-          <p className="mb-3 font-sans text-sm font-medium text-[#1A1A14]">Read more</p>
-          <ul className="space-y-2 font-sans text-sm">
-            <li>
-              <Link
-                href="/blog/understanding-the-benefits-of-shea-butter-in-soap"
-                className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
-              >
-                Benefits of shea butter soap: what it does for dry and sensitive skin
-              </Link>{' '}
-              — the full ingredient breakdown
-            </li>
-            <li>
-              <Link
-                href="/blog/shea-butter-goat-milk-soap-dry-sensitive-skin"
-                className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
-              >
-                Shea butter vs goat milk soap: which suits you?
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/guide/handmade-soap-india"
-                className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
-              >
-                Complete guide to handmade soap in India
-              </Link>
-            </li>
-          </ul>
-        </div>
-
       </article>
     </div>
   )

@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'What is the difference between handmade soap and commercial soap?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Commercial soap strips out glycerin during manufacturing because glycerin sells for more as a separate product in creams and lotions. It also adds sodium lauryl sulfate (SLS) to create thick lather. Handmade soap keeps the glycerin in the bar, uses no SLS, and is made in small batches without preservatives or synthetic fragrance. The result is a bar that cleans without stripping the skin barrier.',
+        text: 'Handmade describes the way a bar is made, not one fixed formula. Compare the complete label, the soap base, and the scent. Healing Soil makes small batches without SLS, parabens, or synthetic fragrance.',
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'What is SLS and why does it matter for Indian skin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sodium lauryl sulfate (SLS) is a synthetic detergent used in most commercial soaps to create a dense, foamy lather. It strips the skin\'s natural oils with every wash. Indian skin, especially in hot and humid climates, is already under significant daily stress from heat, sweat, and pollution. Avoiding SLS removes one unnecessary daily irritant from the equation.',
+        text: 'Sodium lauryl sulfate (SLS) is a surfactant used in some cleansing products to create fast, dense foam. SLS-free is a label preference, not a complete description of a formula, so compare every ingredient.',
       },
     },
     {
@@ -69,7 +69,7 @@ const faqSchema = {
       name: 'How do I read a soap ingredients label in India?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Look for sodium lauryl sulfate (SLS) or sodium laureth sulfate (SLES) near the top of the list — these are synthetic detergents that strip skin oils. Synthetic fragrance is listed as "fragrance" or "parfum" and is a common source of reactions in people with sensitive skin. Parabens appear as methylparaben, propylparaben, or butylparaben. A short, readable ingredients list with names you recognise is a good sign. Ingredients are listed from highest to lowest concentration.',
+        text: 'Check SLS and SLES separately because they are different ingredients. Fragrance may appear as fragrance or parfum, and parabens have names such as methylparaben or propylparaben. A clear, complete list helps you compare formulas.',
       },
     },
     {
@@ -88,7 +88,7 @@ const blogLinks = [
   { href: '/blog/glycerin-vs-goat-milk-soap', label: 'Glycerin vs goat milk soap: which suits Indian skin?' },
   { href: '/blog/shea-butter-goat-milk-soap-dry-sensitive-skin', label: 'Shea butter + goat milk soap for dry, sensitive skin' },
   { href: '/blog/understanding-the-benefits-of-shea-butter-in-soap', label: 'Shea butter in soap: what it does and what it cannot' },
-  { href: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', label: 'What makes goat milk soap beneficial for sensitive skin' },
+  { href: '/blog/goat-milk-soap-benefits', label: 'Goat milk soap: ingredients, lather, and feel' },
   { href: '/blog/neem-tulsi-soap-benefits', label: 'Neem and tulsi soap: what these two ingredients actually do' },
   { href: '/blog/what-makes-soap-chemical-free', label: 'What does "chemical-free soap" actually mean?' },
   { href: '/blog/why-handmade-soap-lasts-longer', label: 'Why our handmade soap lasts longer than you expect' },
@@ -135,10 +135,10 @@ export default function HandmadeSoapIndiaGuide() {
           Most commercial soap bars in India are not really soap. They are detergent bars — synthetic foaming agents compressed into bar form and sold in packaging that says things like &ldquo;moisturising&rdquo; and &ldquo;gentle.&rdquo;
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          The process that makes real soap also produces glycerin, a humectant that draws moisture into the skin. Commercial manufacturers remove it because glycerin sells for more as a separate product — in face creams, lotions, and serums. What is left is a bar stripped of the thing that made it gentle.
+          Soap formulas vary widely. Glycerin bases generally create a light, smooth lather; goat milk bases feel creamier; and shea butter bases provide the richest, most conditioning texture.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          To replace the cleansing power and create dense foam, sodium lauryl sulfate (SLS) is added. SLS is effective at cleaning, but it does not distinguish between dirt and the natural oils your skin needs. It strips both. For skin that is already dry or sensitive, every wash with an SLS bar is a small act of damage.
+          SLS is one ingredient used in some cleansing products to create fast foam. Healing Soil bars do not contain it, but a useful comparison should still look at the entire formula rather than a single ingredient.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Handmade soap keeps the glycerin in. It skips the SLS. The lather is lighter, the feeling after washing is different, and for people who have been reacting to commercial soap for years, the change is often noticeable within a week.
@@ -154,8 +154,8 @@ export default function HandmadeSoapIndiaGuide() {
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Avoid</h3>
         <ul className="mb-5 list-disc pl-6 font-sans text-base leading-relaxed text-[#1A1A14] space-y-2">
-          <li><strong>Sodium Lauryl Sulfate (SLS)</strong> or Sodium Laureth Sulfate (SLES) — the primary synthetic detergent in most commercial bars. Strips natural skin oils with every wash.</li>
-          <li><strong>Fragrance</strong> or <strong>Parfum</strong> — synthetic fragrance compounds grouped under one word. A common source of reactions for people with sensitive skin. Even bars marketed as &ldquo;gentle&rdquo; often contain it.</li>
+          <li><strong>Sodium Lauryl Sulfate (SLS)</strong> and Sodium Laureth Sulfate (SLES) — different surfactants that should be checked separately.</li>
+          <li><strong>Fragrance</strong> or <strong>Parfum</strong> — label terms that describe added scent without always naming each scent material.</li>
           <li><strong>Parabens</strong> — methylparaben, propylparaben, butylparaben. Synthetic preservatives. Lower priority than SLS and fragrance, but a clean label leaves them out.</li>
           <li><strong>Triclosan</strong> — a synthetic additive found in some bars. Worth avoiding where the bar lists it.</li>
         </ul>
@@ -181,7 +181,7 @@ export default function HandmadeSoapIndiaGuide() {
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Glycerin — for oily, combination, or normal skin</h3>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Glycerin is a natural byproduct of soap-making. When it stays in the bar, it draws moisture gently into the skin as you wash. The lather is light. The feeling after washing is clean without heaviness. This is the right base if your skin produces enough of its own oil and you want cleansing without adding weight. It is also a good everyday bar for normal skin in warmer months.
+          Glycerin soap has a light lather and an easy-rinsing feel. Choose it when you want a smooth daily bar without the richness of goat milk or shea butter.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Read more: <Link href="/blog/glycerin-vs-goat-milk-soap" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Glycerin vs goat milk soap: which suits Indian skin?</Link>
@@ -189,15 +189,15 @@ export default function HandmadeSoapIndiaGuide() {
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Goat milk — for sensitive or dry skin</h3>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Goat milk replaces water in the soap base. It contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. The bar feels creamy. After washing, skin feels nourished rather than just clean. Goat milk is the most versatile base: it suits sensitive skin, dry skin, and anyone switching from commercial soap for the first time.
+          Goat milk gives the soap base a creamy texture and a richer lather than glycerin. It is a versatile option suitable for sensitive and dry skin types, as well as anyone who simply prefers a creamier wash.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Read more: <Link href="/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">What makes goat milk soap beneficial for sensitive skin</Link> and <Link href="/blog/shea-butter-goat-milk-soap-dry-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Shea butter + goat milk for dry, sensitive skin</Link>.
+          Read more: <Link href="/blog/goat-milk-soap-benefits" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Goat milk soap: ingredients, lather, and feel</Link> and <Link href="/blog/shea-butter-goat-milk-soap-dry-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Shea butter + goat milk for dry, sensitive skin</Link>.
         </p>
 
         <h3 className="mb-2 mt-8 font-serif text-2xl text-[#1A1A14]">Shea butter — for very dry, mature, or tight-feeling skin</h3>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Shea butter is the most nourishing of the three. Part of it does not break down during soap-making, so it stays in the bar and deposits on your skin when you wash. The lather is thick and creamy. After washing, skin feels conditioned rather than stripped. It is too rich for oily skin.
+          Shea butter is the richest of the three bases. The lather is thick and creamy, and the after-wash feel is conditioning. Choose it when you enjoy a fuller texture.
         </p>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
           Read more: <Link href="/blog/understanding-the-benefits-of-shea-butter-in-soap" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">Shea butter in soap: what it does and what it cannot</Link>
@@ -251,10 +251,10 @@ export default function HandmadeSoapIndiaGuide() {
         </p>
         <ul className="mb-5 list-disc pl-6 font-sans text-base leading-relaxed text-[#1A1A14] space-y-2">
           <li>
-            <Link href="/blog/handmade-soap-sensitive-skin" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
-              Handmade soap for sensitive skin: why commercial bars irritate
+            <Link href="/blog/natural-soap-sensitive-skin-india" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+              Handmade soap for sensitive skin: a gentle label guide
             </Link>{' '}
-            — what we learned after moving to a farm about SLS, parabens, and why removing a daily irritant is often all sensitive skin needs.
+            — how to compare SLS, parabens, fragrance, soap bases, and after-wash feel.
           </li>
           <li>
             <Link href="/blog/diy-neem-soap-slow-living" className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">

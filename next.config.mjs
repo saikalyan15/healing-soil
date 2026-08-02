@@ -29,9 +29,14 @@ const nextConfig = {
     return [
       // www → non-www canonical redirect
       { source: '/:path*', has: [{ type: 'host', value: 'www.healingsoil.in' }], destination: 'https://healingsoil.in/:path*', permanent: true },
-      // /compare/glycerin-vs-goat-milk-soap is a live page with canonicalOverride in comparisons.ts — no redirect needed
-      // Secondary blog post on the same topic — consolidate into the original
+      // Consolidate overlapping search intent into the strongest existing URLs.
+      { source: '/compare/glycerin-vs-goat-milk-soap', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
       { source: '/blog/goat-milk-soap-base-vs-glycerin-soap-base', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
+      { source: '/blog/garden-to-bar-marigold-soap', destination: '/blog/marigold-soap-benefits', permanent: true },
+      { source: '/blog/pomegranate-soap-benefits', destination: '/blog/pomegranate-peel-soap', permanent: true },
+      { source: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', destination: '/blog/goat-milk-soap-benefits', permanent: true },
+      { source: '/blog/handmade-soap-sensitive-skin', destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
+      { source: '/blog/sls-parabens-soap-india', destination: '/blog/sls-free-soap-india', permanent: true },
 { source: '/wp-includes/:path*',                   destination: '/blog',     permanent: true },
       { source: '/wp-content/:path*',                    destination: '/blog',     permanent: true },
       { source: '/wp-admin/:path*',                      destination: '/blog',     permanent: true },
@@ -43,7 +48,7 @@ const nextConfig = {
       { source: '/blog/how-to-make-handmade-soap-last-longer', destination: '/blog/why-handmade-soap-lasts-longer',                             permanent: true },
       { source: '/blog/natural-soap-for-eczema-dry-skin', destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
       { source: '/blog/shea-butter-soap-benefits',        destination: '/blog/understanding-the-benefits-of-shea-butter-in-soap',             permanent: true },
-      { source: '/blog/goat-milk-soap-for-sensitive-skin',destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin',       permanent: true },
+      { source: '/blog/goat-milk-soap-for-sensitive-skin',destination: '/blog/goat-milk-soap-benefits',                                      permanent: true },
       // Unpublished posts — redirect to closest live alternative
       { source: '/blog/best-natural-soap-for-eczema',     destination: '/blog/natural-soap-sensitive-skin-india',                             permanent: true },
       { source: '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', destination: '/blog',                                             permanent: true },
@@ -67,7 +72,8 @@ const nextConfig = {
       { source: '/stories/how-to-make-handmade-soap-last-longer', destination: '/blog/why-handmade-soap-lasts-longer', permanent: true },
       { source: '/stories/natural-soap-for-eczema-dry-skin',      destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
       { source: '/stories/shea-butter-soap-benefits',             destination: '/blog/understanding-the-benefits-of-shea-butter-in-soap', permanent: true },
-      { source: '/stories/goat-milk-soap-for-sensitive-skin',     destination: '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', permanent: true },
+      { source: '/stories/goat-milk-soap-for-sensitive-skin',     destination: '/blog/goat-milk-soap-benefits',                              permanent: true },
+      { source: '/stories/handmade-soap-sensitive-skin',          destination: '/blog/natural-soap-sensitive-skin-india',                    permanent: true },
       { source: '/stories/best-natural-soap-for-eczema',          destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
       
       // Generic story move (slug-only — no dots, so files in public/stories can still load)
@@ -81,8 +87,8 @@ const nextConfig = {
       { source: '/category/regenerative-living/',        destination: '/blog',     permanent: true },
       { source: '/slow-livings',                         destination: '/blog',     permanent: true },
       { source: '/slow-livings/',                        destination: '/blog',     permanent: true },
-      { source: '/handmade-soap-sensitive-skin',         destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
-      { source: '/handmade-soap-sensitive-skin/',        destination: '/blog/handmade-soap-sensitive-skin', permanent: true },
+      { source: '/handmade-soap-sensitive-skin',         destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
+      { source: '/handmade-soap-sensitive-skin/',        destination: '/blog/natural-soap-sensitive-skin-india', permanent: true },
       { source: '/our-stories',                          destination: '/blog',     permanent: true },
       { source: '/our-stories/',                         destination: '/blog',     permanent: true },
       { source: '/our-stories/2',                        destination: '/blog',     permanent: true },

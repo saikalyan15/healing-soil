@@ -17,10 +17,10 @@ export const decisions: DecisionPage[] = [
     slug: 'dry-skin',
     title: 'Best Soap for Dry Skin in India | Healing Soil',
     h1: 'Best Soap for Dry Skin',
-    metaDescription: 'Dry skin needs a soap that cleans without stripping. Shea butter and goat milk bases retain natural glycerin and leave skin feeling soft. SLS-free, made in Goa.',
-    intro: 'Dry skin feels tight after washing because most commercial soaps contain SLS, a detergent that strips the skin\'s natural oils. Switching the base changes the experience completely. The right soap leaves skin feeling soft and conditioned rather than stripped.',
+    metaDescription: 'Compare rich shea butter and creamy goat milk soap for dry-feeling skin. SLS-free bars made in small batches in Goa.',
+    intro: 'If your skin often feels dry after washing, the texture of the soap base matters. Shea butter gives the richest, most conditioning feel in our range, while goat milk provides a creamier but lighter wash.',
     primaryBase: 'Shea Butter',
-    recommendation: 'Shea butter is the richest base we make. It contains natural fats that survive the soap-making process and are deposited on skin during the wash, leaving a conditioning feel behind. Goat milk is the lighter option — still nourishing, better for mild dryness. Start with shea butter if your skin feels tight after every shower.',
+    recommendation: 'Shea butter is the richest base we make and leaves a conditioning feel after rinsing. Goat milk is the lighter option with a creamy lather. Start with shea butter if you enjoy a full, nourishing wash.',
     recommendedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap', 'neem-tulsi-goat-milk-soap'],
     relatedComparisons: ['goat-milk-vs-shea-butter-soap', 'shea-butter-vs-glycerin-soap'],
     faqs: [
@@ -30,7 +30,7 @@ export const decisions: DecisionPage[] = [
       },
       {
         q: 'Why does my skin feel dry after using soap?',
-        a: 'Most commercial soap bars contain SLS (sodium lauryl sulfate), a synthetic detergent that strips the skin\'s natural oil barrier. The tightness you feel after washing is the barrier being disrupted. Switching to an SLS-free bar with a nourishing base like shea butter or goat milk typically reduces this within a week or two.'
+        a: 'Water temperature, weather, washing frequency, and the product formula can all affect the after-wash feel. Try lukewarm water, use a small amount of soap, and compare a creamy goat milk or rich shea butter base.'
       },
       {
         q: 'Is shea butter soap too heavy for daily use?',
@@ -47,8 +47,8 @@ export const decisions: DecisionPage[] = [
     slug: 'oily-skin',
     title: 'Best Soap for Oily Skin in India | Healing Soil',
     h1: 'Best Soap for Oily Skin',
-    metaDescription: 'Oily skin needs a soap that cleanses without over-stripping. A glycerin base retains natural moisture and rinses clean. SLS-free, handmade in Goa.',
-    intro: 'Oily skin is often made worse by harsh soaps. When SLS strips too much oil, the skin compensates by producing more. A gentle, SLS-free glycerin base cleanses without over-stripping, which helps skin find its balance rather than swinging between oily and dry.',
+    metaDescription: 'A light glycerin soap guide for oily and combination skin types. Easy-rinsing, SLS-free handmade bars from Goa.',
+    intro: 'For oily or combination skin types, many people prefer a light bar that rinses easily and does not leave a rich after-feel. Glycerin is the lightest of our three bases.',
     primaryBase: 'Glycerin',
     recommendation: 'Glycerin is the lightest of our three bases. It cleanses thoroughly, retains natural moisture, and rinses away completely without leaving a heavy feel. It does not add oils to the skin, which makes it the cleanest option for oily or combination skin types.',
     recommendedProducts: ['neem-tulsi-glycerin-soap', 'honey-oats-glycerin-soap', 'ginger-rosemary-glycerin-soap'],
@@ -56,7 +56,7 @@ export const decisions: DecisionPage[] = [
     faqs: [
       {
         q: 'Is glycerin soap good for oily skin?',
-        a: 'Yes. Glycerin is a humectant — it draws moisture from the air to the skin without adding oil. It cleanses without stripping, which helps avoid the heavy, over-washed feel that often comes from harsh soaps. It rinses cleanly and leaves no residue.'
+        a: 'Glycerin soap is a popular option for oily skin because the lather feels light and rinses easily without a heavy finish.'
       },
       {
         q: 'Will goat milk soap make oily skin worse?',
@@ -68,7 +68,7 @@ export const decisions: DecisionPage[] = [
       },
       {
         q: 'How is handmade glycerin soap different from commercial soap?',
-        a: 'Commercial manufacturers often remove the natural glycerin from soap to sell separately. The bar that remains relies on SLS for lather and can strip the skin. Healing Soil glycerin soap retains all its natural glycerin, providing a gentle wash that cleanses without disrupting the skin\'s moisture balance.'
+        a: 'Healing Soil glycerin soap is selected for its light lather and smooth feel. The bars contain no SLS, parabens, or synthetic fragrance and are hand-poured in small batches.'
       }
     ],
     publishedAt: '2026-06-18'
@@ -78,23 +78,23 @@ export const decisions: DecisionPage[] = [
     title: 'Best Soap for Mature Skin | Healing Soil',
     h1: 'Best Soap for Mature Skin',
     metaDescription: 'Mature skin suits a richer, more conditioning wash. Shea butter and goat milk bases give a nourishing lather without harsh detergents. SLS-free, made in Goa.',
-    intro: 'As skin matures it tends to feel drier and less supple after washing. This is partly because natural oil production slows, and partly because SLS-based soaps accelerate moisture loss. A richer soap base makes a noticeable difference — the skin feels soft after washing rather than tight.',
+    intro: 'If your skin prefers a richer wash, the base can make a noticeable difference to texture and after-feel. Shea butter is our fullest-feeling option, with goat milk as a slightly lighter alternative.',
     primaryBase: 'Shea Butter',
-    recommendation: 'Shea butter provides the most conditioning wash of our three bases. The natural fats in shea butter survive the soap-making process and are left on skin during the wash, providing a soft, nourished feel without a separate moisturising step. For those who prefer something slightly lighter, goat milk is the second choice.',
+    recommendation: 'Shea butter provides the most conditioning wash of our three bases and leaves skin feeling soft. For those who prefer something slightly lighter, goat milk is the second choice.',
     recommendedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap', 'rice-rose-goat-milk-soap'],
     relatedComparisons: ['goat-milk-vs-shea-butter-soap', 'shea-butter-vs-glycerin-soap'],
     faqs: [
       {
         q: 'What kind of soap suits mature skin?',
-        a: 'Mature skin benefits from a soap that cleans without stripping. A shea butter base provides the richest, most conditioning wash. Goat milk is a slightly lighter option that still feels nourishing. Both are SLS-free, which means they do not disrupt the skin\'s moisture balance the way commercial detergent bars do.'
+        a: 'A shea butter base provides the richest, most conditioning wash. Goat milk is a slightly lighter option that still feels nourishing. Both Healing Soil bases are made without SLS, parabens, or synthetic fragrance.'
       },
       {
         q: 'Is handmade soap better for mature skin than commercial soap?',
-        a: 'For most people, yes. Commercial soaps contain SLS which strips natural oils, leaving skin feeling tight. Handmade soap with a shea butter or goat milk base retains natural glycerin and provides a conditioning wash — which is particularly welcome when skin naturally produces fewer oils.'
+        a: 'Handmade describes the making method, not a guaranteed result. Compare the full label: Healing Soil uses shea butter and goat milk bases for a conditioning feel and makes each bar without SLS, parabens, or synthetic fragrance.'
       },
       {
         q: 'Can I use shea butter soap on my face?',
-        a: 'Yes. Our shea butter soaps are gentle enough for daily face use. Shea butter has a low comedogenic rating, meaning it provides a conditioning feel without blocking pores — which makes it suitable for the face as well as the body.'
+        a: 'Our shea butter soap can be used on the face and body. Use light pressure, avoid the eye area, and patch test first if your skin is sensitive.'
       }
     ],
     publishedAt: '2026-06-18'
@@ -103,8 +103,8 @@ export const decisions: DecisionPage[] = [
     slug: 'men',
     title: 'Best Handmade Soap for Men Switching from Commercial Soap | Healing Soil',
     h1: 'Best Soap for Men Switching from Commercial Soap',
-    metaDescription: 'If your skin feels tight after your current soap, SLS is likely the reason. Ginger rosemary and neem tulsi glycerin bases give a clean wash. Handmade in Goa.',
-    intro: 'The difference between handmade and commercial soap is not about gender — it is about what is in the bar. Most commercial soap marketed to men contains SLS and synthetic fragrance. The result is a clean that comes at the cost of stripping the skin\'s natural barrier. These soaps feel different: a complete clean, no stripped feeling, no synthetic scent that lingers all day.',
+    metaDescription: 'Compare light glycerin soaps with ginger, rosemary, neem, and tulsi. SLS-free handmade bars with natural scent, made in Goa.',
+    intro: 'Choosing soap is less about gender and more about the lather, scent, and after-wash feel you prefer. These glycerin bars feel light and use botanicals and essential oils instead of synthetic fragrance.',
     primaryBase: 'Glycerin',
     recommendation: 'Ginger and rosemary is the most popular choice for those who want a clean, aromatic wash without synthetic fragrance. The scent is natural and fades after the wash — it does not linger like a perfumed commercial bar. Neem and tulsi is the earthy alternative, grounded and traditional. Both are in a glycerin base for a thorough, light clean.',
     recommendedProducts: ['ginger-rosemary-glycerin-soap', 'neem-tulsi-glycerin-soap', 'neem-tulsi-goat-milk-soap'],
@@ -112,7 +112,7 @@ export const decisions: DecisionPage[] = [
     faqs: [
       {
         q: 'What is the best soap for men with dry skin?',
-        a: 'If your skin feels tight or dry after washing, the SLS in your current soap is likely the cause. Switching to an SLS-free goat milk or shea butter base typically resolves this. Goat milk is a good starting point — it provides a nourishing wash without feeling heavy.'
+        a: 'For a richer wash, compare goat milk and shea butter bases. Goat milk is a creamy starting point, while shea butter has the most conditioning feel.'
       },
       {
         q: 'Is handmade soap good for men with oily skin?',
@@ -134,7 +134,7 @@ export const decisions: DecisionPage[] = [
     title: 'Best Soap for Women Over 40 | Healing Soil',
     h1: 'Best Soap for Women Over 40',
     metaDescription: 'Skin that prefers a richer, conditioning wash suits a shea butter or goat milk base. Kesar, rose and traditional Ayurvedic ingredients. SLS-free, made in Goa.',
-    intro: 'Skin in its forties tends to prefer a more nourishing wash. The daily stripping of natural oils by SLS-based soaps can become more noticeable over time, and a gentler bar can feel better immediately. These soaps use traditional Ayurvedic ingredients — kesar, rose, goat milk — chosen for the richness of the wash they provide.',
+    intro: 'Some people prefer a more nourishing wash over time. These soaps use kesar, rose, goat milk, and shea butter for a rich texture and gentle botanical presence.',
     primaryBase: 'Shea Butter',
     recommendation: 'The kesar and gulab shea butter bar is our most nourishing option — shea butter with saffron and rose, three ingredients with a long history in traditional Indian personal care. The rice and rose goat milk bar is lighter but still conditioning, with a gentle floral presence. Both are SLS-free and made without synthetic fragrance.',
     recommendedProducts: ['shea-butter-kesar-gulab', 'rice-rose-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
@@ -142,7 +142,7 @@ export const decisions: DecisionPage[] = [
     faqs: [
       {
         q: 'What soap base is best for skin that feels drier than it used to?',
-        a: 'Shea butter is the richest option — it provides a conditioning wash that leaves skin feeling soft without a separate moisturising step. Goat milk is the lighter alternative, still nourishing but with a less heavy feel. Both are significantly gentler than SLS-based commercial soap.'
+        a: 'Shea butter is the richest option and leaves a conditioning feel. Goat milk is the lighter alternative, with a creamy lather and less weight after rinsing.'
       },
       {
         q: 'What makes kesar and rose good ingredients in soap?',
@@ -150,7 +150,7 @@ export const decisions: DecisionPage[] = [
       },
       {
         q: 'Can I use these soaps on my face?',
-        a: 'Yes. All Healing Soil soaps are gentle enough for daily face use. The shea butter and goat milk bases are particularly suitable for the face — they clean without stripping and leave skin feeling soft rather than tight.'
+        a: 'They can be used on the face and body. Use light pressure, avoid the eye area, and patch test a new bar before regular use.'
       }
     ],
     publishedAt: '2026-06-18'

@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'What does SLS-free mean?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'SLS-free means the soap does not contain Sodium Lauryl Sulfate or Sodium Laureth Sulfate (SLES). These are synthetic detergents used in many commercial soaps to create fast, dense lather, but they can be harsh on the skin.',
+        text: 'SLS-free means the soap does not contain sodium lauryl sulfate. SLES is a different surfactant and should be checked separately on the ingredient list. Healing Soil bars contain neither.',
       },
     },
     {
@@ -37,15 +37,15 @@ const faqSchema = {
       name: 'Is handmade soap always SLS-free?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Not necessarily. Some mass-produced "handmade" soaps still use pre-made bases that contain SLS. At Healing Soil, we use only SLS-free bases that rely on traditional saponification for their lather.',
+        text: 'Not necessarily. Handmade describes a making method, not a specific formula. Check the complete ingredient list rather than relying on the word handmade.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Why should I avoid SLS in soap?',
+      name: 'Does SLS-free describe the whole formula?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'SLS is an effective detergent, but it can be too effective. It strips away the natural oils that protect your skin, leading to dryness, tightness, and sometimes irritation, especially for those with sensitive skin.',
+        text: 'No. It only describes the absence of SLS. The base, scent, colour, and other ingredients still matter, so compare the complete label.',
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'Does SLS-free soap lather well?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, but the lather is different. Instead of the aggressive, airy foam of a commercial detergent bar, SLS-free soap produces a creamy, soft lather that cleans effectively while being much gentler on the skin.',
+        text: 'Yes. Foam depends on the complete formula and water conditions, not on SLS alone. Healing Soil bases create light or creamy lather depending on the base.',
       },
     },
   ],
@@ -99,34 +99,30 @@ export default async function SlsFreeSoapPage() {
         </h1>
 
         <p className="mb-5 font-sans text-lg leading-relaxed text-[#1A1A14]">
-          If your skin feels dry or tight after a shower, the soap is usually the reason. Most
-          commercial soap bars sold in India contain SLS: a synthetic detergent that strips your
-          skin every time you wash.
+          SLS-free is a useful label preference, but it is not the whole story. The soap base,
+          fragrance, colour, and complete ingredient list all shape how a bar feels in use.
         </p>
 
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Sodium Lauryl Sulfate (SLS) is added to soap to create lather fast and clean effectively. It
-          is also cheap to manufacture. The problem is that SLS does not just remove dirt; it removes
-          the oils your skin produces naturally to protect itself.
+          Sodium lauryl sulfate is a surfactant used in some cleansing products to create fast,
+          dense foam. Sodium laureth sulfate, or SLES, is a separate ingredient that appears under
+          its own name on the label.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
           At Healing Soil, we make soap differently. Our bars are genuinely SLS-free, relying on
-          traditional soap-making methods and natural ingredients to provide a gentle, nourishing
-          wash.
+          SLS-free bases and make every bar without parabens or synthetic fragrance.
         </p>
 
         <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">The Healing Soil difference</h2>
         <div className="prose-custom mb-10">
           <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-            Commercial manufacturers often remove the natural glycerin from soap to sell it as a
-            separate product. We keep the glycerin in our bars. Glycerin is a humectant that draws
-            moisture to the skin, making the act of washing a hydrating experience rather than a
-            stripping one.
+            Glycerin bars feel light and rinse easily, goat milk bars have a creamier lather, and
+            shea butter bars provide the richest, most conditioning feel.
           </p>
           <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
             By combining SLS-free bases with farm-grown ingredients like neem and tulsi, we create soap
-            that respects your skin&apos;s natural balance.
+            with a clear ingredient list and a gentle wash experience.
           </p>
         </div>
 
@@ -142,19 +138,19 @@ export default async function SlsFreeSoapPage() {
 
         <BlogInlineCTA />
 
-        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Why switch to SLS-free?</h2>
+        <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">What to compare on the label</h2>
         <ul className="mb-10 space-y-3 font-sans text-base leading-[1.8] text-[#1A1A14]">
           <li>
-            <strong className="font-semibold text-[#1A1A14]">Retains moisture</strong>: cleans
-            without stripping natural oils.
+            <strong className="font-semibold text-[#1A1A14]">Surfactants</strong>: check SLS and
+            SLES separately.
           </li>
           <li>
-            <strong className="font-semibold text-[#1A1A14]">Gentle on skin</strong>: suitable
-            for sensitive or reactive skin types.
+            <strong className="font-semibold text-[#1A1A14]">Fragrance</strong>: check whether the
+            scent is botanical, essential-oil based, synthetic, or absent.
           </li>
           <li>
-            <strong className="font-semibold text-[#1A1A14]">Natural lather</strong>: experience
-            the creamy feel of traditional soap.
+            <strong className="font-semibold text-[#1A1A14]">Soap base</strong>: choose glycerin,
+            goat milk, or shea butter by the lather and after-wash feel you prefer.
           </li>
         </ul>
 
@@ -180,7 +176,7 @@ export default async function SlsFreeSoapPage() {
                 href="/blog/sls-free-soap-india"
                 className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
               >
-                Deep dive: The problem with SLS in commercial soap
+                Read the SLS-free soap label guide
               </Link>
             </li>
             <li>

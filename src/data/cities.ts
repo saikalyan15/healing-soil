@@ -112,7 +112,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Is handmade soap better than commercial soap?',
-        a: 'Handmade soap retains natural glycerin, a humectant that draws moisture to the skin, providing a softer feel than many commercial detergent bars.'
+        a: 'Handmade glycerin soap has a smooth, light lather and an easy-rinsing feel. Compare the complete ingredient list because handmade describes the process, not one fixed formula.'
       },
       {
         q: 'How do I store the soap to make it last longer?',

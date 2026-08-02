@@ -73,9 +73,9 @@ export default function OurStoryPage() {
         <section className="mb-12">
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Why no chemicals</h2>
           <p className="font-sans text-base leading-relaxed text-[#1A1A14]">
-            Commercial soaps strip the skin. They are detergents with fragrance, not soap. We use
-            glycerin and goat milk bases, then add real ingredients. Nothing synthetic. Nothing
-            harsh. Your skin knows the difference. Once you switch, it is very hard to go back.
+            We wanted bars with clear labels, gentle lather, and quiet botanical scents. We use
+            glycerin, goat milk, and shea butter bases and make every bar without SLS, parabens, or
+            synthetic fragrance.
           </p>
         </section>
 

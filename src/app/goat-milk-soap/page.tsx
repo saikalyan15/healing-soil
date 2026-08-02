@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'What is goat milk soap good for?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Goat milk soap is valued for its gentle cleansing and nourishing feel. It contains natural fats that help keep skin from feeling stripped after washing, making it a versatile choice for daily personal care.',
+        text: 'Goat milk soap is valued for its creamy lather and nourishing after-wash feel, making it a versatile choice for daily personal care.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'Is goat milk soap good for sensitive skin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, goat milk soap is traditionally used in personal care for sensitive skin. Its pH is closer to the skin\'s natural range than many commercial soaps, and it provides a creamy lather that feels gentle on the skin.',
+        text: 'Goat milk soap is a gentle option suitable for sensitive skin. It provides a creamy lather, and Healing Soil bars contain no SLS, parabens, or synthetic fragrance. Patch test before regular use.',
       },
     },
     {
@@ -139,9 +139,8 @@ export default async function GoatMilkSoapPage() {
 
         <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">What makes it different</h2>
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Commercial soaps often rely on SLS (Sodium Lauryl Sulfate) to create foam. While effective at
-          cleaning, SLS can be harsh on the skin, stripping away its natural oils. Goat milk soap
-          creates a natural, creamy lather without the need for these synthetic detergents.
+          Some cleansing products use SLS (Sodium Lauryl Sulfate) to create fast foam. Healing Soil
+          goat milk soap is made without SLS and creates a naturally creamy lather from the base.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">

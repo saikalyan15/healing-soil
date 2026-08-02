@@ -19,7 +19,12 @@ const config = {
     '/our-stories',          // 301 → /blog
     '/stories/*',            // 301 → /blog/*
     '/blog/goat-milk-soap-base-vs-glycerin-soap-base',          // 301 → /blog/glycerin-vs-goat-milk-soap
-    '/compare/glycerin-vs-goat-milk-soap',                      // canonical → /blog/glycerin-vs-goat-milk-soap (canonicalOverride in src/data/comparisons.ts)
+    '/compare/glycerin-vs-goat-milk-soap',                      // 301 → /blog/glycerin-vs-goat-milk-soap
+    '/blog/garden-to-bar-marigold-soap',                        // 301 → /blog/marigold-soap-benefits
+    '/blog/pomegranate-soap-benefits',                          // 301 → /blog/pomegranate-peel-soap
+    '/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin', // 301 → /blog/goat-milk-soap-benefits
+    '/blog/handmade-soap-sensitive-skin',                       // 301 → /blog/natural-soap-sensitive-skin-india
+    '/blog/sls-parabens-soap-india',                            // 301 → /blog/sls-free-soap-india
     '/blog/seven-days-without-paracetamol-how-we-beat-the-flu', // 301 → /blog
     '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', // 301 → /blog
     '/shop/orange',          // 301 → /shop/orange-glycerin-soap
@@ -63,6 +68,10 @@ const config = {
     const storySlugs = getSlugsByDir('stories')
     const redirectedBlogSlugs = new Set([
       'goat-milk-soap-base-vs-glycerin-soap-base',
+      'garden-to-bar-marigold-soap',
+      'pomegranate-soap-benefits',
+      'what-makes-goat-milk-soap-beneficial-for-sensitive-skin',
+      'sls-parabens-soap-india',
     ])
 
     const staticPaths = [
@@ -158,6 +167,7 @@ const config = {
     const excludedStorySlugs = new Set([
       'seven-days-without-paracetamol-how-we-beat-the-flu',
       'transform-your-mental-health-how-mindful-cooking-became-my-healing-practice',
+      'handmade-soap-sensitive-skin',
     ])
 
     return [

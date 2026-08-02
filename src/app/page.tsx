@@ -121,7 +121,7 @@ export default async function HomePage() {
   // leave a variable called after someone who is no longer quoted.
   //
   // Two reviews were deliberately dropped from this page. review-002 says the
-  // soap "helped reduce my tan", which is a pigmentation claim, and review-006
+  // Exclude reviews that make results-based cosmetic claims, and review-006
   // says "allergic to all commercial soaps", which is a claim about a condition.
   // Testimonials count as advertiser claims, so neither belongs on the homepage.
   // Both remain on /reviews as genuine customer feedback.
@@ -155,7 +155,7 @@ export default async function HomePage() {
     },
     {
       q: 'Is Healing Soil soap suitable for sensitive skin?',
-      a: 'Many people with sensitive skin find Healing Soil soap gentler than commercial soap because it contains no SLS, no synthetic fragrance, and no parabens. It is a gentle alternative to commercial soap, not a treatment for any skin condition.',
+      a: 'Healing Soil soap is a gentle option suitable for sensitive skin. Every bar contains no SLS, no synthetic fragrance, and no parabens. Patch test any new personal-care product before regular use.',
     },
     {
       q: 'Where is Healing Soil soap made?',
@@ -415,7 +415,7 @@ export default async function HomePage() {
                 {[
                   {
                     t: 'No SLS or parabens',
-                    d: 'Commercial soaps use synthetic foaming agents that strip natural oils. Ours do not.',
+                    d: 'Our bars contain no SLS, parabens, or synthetic fragrance.',
                   },
                   {
                     t: 'Glycerin retained',

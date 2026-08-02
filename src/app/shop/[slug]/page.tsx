@@ -129,25 +129,29 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
   // and "mini soap bars" (113) returned a single click. This title leads with
   // the dominant keyword and picks up "mini" and "bars" from the same cluster.
   'travel-soaps': {
-    title: 'Mini Travel Soap Bars, 30g, No Liquid Limits',
-    description: 'Solid 30g mini soap bars for flights and travel bags. No liquid limits at security, no leaks in your luggage. Handmade and SLS-free, made in small batches in Goa.',
+    title: 'Mini Travel Soap Bars India | Solid 30g Bars',
+    description: 'Pack solid 30g mini soap bars for flights, short trips, gym bags, and guest stays. Handmade without SLS in small batches in Goa.',
   },
 }
 
 const PRODUCT_SUPPORT_LINKS: Record<string, { href: string; label: string }[]> = {
   'travel-soaps': [
-    { href: '/blog/small-travel-soap-bars-india', label: 'small soap for travel' },
+    { href: '/blog/small-travel-soap-bars-india', label: 'how to pack and store soap for travel' },
     { href: '/occasion/travel-soap-india', label: 'travel soap India guide' },
     { href: '/blog/natural-soap-sensitive-skin-india', label: 'soap for sensitive skin in India' },
   ],
   'marigold-soap': [
-    { href: '/blog/marigold-soap-benefits', label: 'marigold soap benefits' },
+    { href: '/blog/marigold-soap-benefits', label: 'how marigold soap is made' },
     { href: '/guide/handmade-soap-india', label: 'complete handmade soap guide' },
     { href: '/shop/red-rose-soap', label: 'rose shaped handmade soap' },
   ],
   'loofah-soaps': [
     { href: '/blog/loofah-soap-benefits-and-how-to-use', label: 'loofah soap benefits and how to use it' },
     { href: '/compare/loofah-soap-vs-regular-soap', label: 'loofah soap vs regular soap' },
+  ],
+  'pomegranate-goat-milk-soap': [
+    { href: '/blog/pomegranate-peel-soap', label: 'how pomegranate peel soap is made' },
+    { href: '/ingredient/pomegranate', label: 'pomegranate in handmade soap' },
   ],
 }
 

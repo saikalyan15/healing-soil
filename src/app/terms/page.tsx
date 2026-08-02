@@ -40,10 +40,9 @@ export default function TermsPage() {
             considered a defect.
           </p>
           <p className="mt-3">
-            Our soaps are cosmetic products intended for cleansing and everyday personal care.
-            They are not intended to diagnose, treat, cure, prevent, or otherwise be a substitute
-            for medical advice for any skin condition or disease. If you have a specific skin
-            concern, please consult a qualified dermatologist.
+            Product descriptions cover ingredients, process, scent, lather, and after-wash feel.
+            They are not medical advice. For individual health concerns, please consult a qualified
+            healthcare professional.
           </p>
         </section>
 

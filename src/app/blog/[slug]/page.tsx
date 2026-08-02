@@ -126,55 +126,39 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   'glycerin-vs-goat-milk-soap': [
     {
       question: 'What is the difference between glycerin and goat milk soap base?',
-      answer: 'A glycerin soap base keeps the glycerin that forms naturally during the soap-making process. Most commercial manufacturers remove it to sell separately. Glycerin draws moisture gently into the skin; the lather is light and the feeling after washing is clean without heaviness. A goat milk soap base replaces water with goat milk, which contains natural fats and vitamins. The bar has a creamy lather and leaves skin feeling nourished rather than just clean. Glycerin suits oily or normal skin; goat milk suits sensitive or dry skin and is the more versatile of the two.',
+      answer: 'Glycerin soap has a light, easy-rinsing lather and a smooth feel. Goat milk soap has a creamier lather and a richer after-wash feel. Both Healing Soil bases are made without SLS, parabens, or synthetic fragrance.',
     },
     {
-      question: 'What is glycerin soap?',
-      answer: 'Glycerin is a natural byproduct of soap-making. Commercial manufacturers remove it because it sells separately. Healing Soil keeps glycerin in the bar. Glycerin draws moisture gently into your skin; the lather is light and the feeling after washing is clean without being heavy. Glycerin soap suits oily skin or combination skin, or anyone who wants cleansing without added weight.',
+      question: 'Which base feels lighter?',
+      answer: 'Glycerin is the lighter-feeling option. Choose goat milk when you prefer a creamy texture and a more nourishing feel after rinsing.',
     },
     {
-      question: 'What is goat milk soap?',
-      answer: 'Goat milk soap replaces water in the soap base. Goat milk contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. The bar feels creamy; skin feels nourished, not just clean. Goat milk soap is versatile and suits sensitive skin, dry skin, and anyone switching from commercial soap for the first time.',
-    },
-    {
-      question: 'How do I choose the right soap base for my skin?',
-      answer: 'If your skin is oily or breaking out, start with the glycerin soap base. If you have sensitive, dry, or reactive skin, start with goat milk — it is the most versatile base. If your skin is very dry, tight after every shower, or feels rough in patches, choose shea butter. When in doubt, goat milk is usually the right answer.',
+      question: 'Can I try both bases?',
+      answer: 'Yes. Some people prefer glycerin in humid weather and goat milk when they want a richer wash. A draining soap dish helps either bar dry between uses.',
     },
   ],
   'shea-butter-goat-milk-soap-dry-sensitive-skin': [
     {
-      question: 'Why do dry skin and sensitive skin often come together?',
-      answer: 'Healthy skin has a protective barrier of oils, proteins, and moisture. When that barrier is compromised, moisture escapes more easily and skin becomes less tolerant of everyday products. Commercial soap can worsen this cycle — synthetic foaming agents strip the barrier and synthetic fragrance is a common source of reactions.',
-    },
-    {
-      question: 'How does shea butter soap help dry, sensitive skin?',
-      answer: 'Shea butter contains compounds that do not break down during soap-making. When you wash, these intact molecules are deposited on your skin and do not rinse away. The result is skin that feels conditioned after washing rather than stripped. Shea butter is also rich without clogging pores.',
-    },
-    {
-      question: 'How does goat milk soap suit sensitive skin?',
-      answer: 'Goat milk contains natural fats that skin absorbs easily and vitamins in the form they occur naturally in milk. Its pH is closer to skin\'s natural range than most soaps, so washing with it tends to feel gentler. The lather is creamy and the feeling afterwards is nourished rather than tight.',
+      question: 'How do shea butter and goat milk soap feel different?',
+      answer: 'Shea butter is the richest-feeling base in the range. Goat milk is creamy but lighter. Both make a gentle lather and are available without SLS, parabens, or synthetic fragrance.',
     },
     {
       question: 'How do I choose between shea butter and goat milk soap?',
-      answer: 'If your skin is very dry, gets rough in patches, or worsens significantly in winter, choose shea butter soap for intensive moisture. If your skin is mildly to moderately dry or sensitive and you want gentle nourishment without heaviness, choose goat milk soap. Goat milk is the easier place to start if you are not sure.',
+      answer: 'Choose shea butter when you enjoy a rich, conditioning wash. Choose goat milk when you want a creamy lather with a lighter finish. Both are suitable options for sensitive skin.',
     },
   ],
   'understanding-the-benefits-of-shea-butter-in-soap': [
     {
-      question: 'What are the benefits of shea butter soap?',
-      answer: 'Shea butter soap leaves a conditioning deposit on skin after every wash. It does not clog pores despite its richness. The non-saponifiable compounds in shea butter — cinnamic acid esters and lupeol — survive the soap-making process and are deposited on skin while you wash. The result is a wash that feels gentle rather than harsh, and skin that tends to feel soft rather than stripped.',
+      question: 'What does shea butter add to soap?',
+      answer: 'Shea butter gives the bar a rich, creamy texture and a conditioning after-wash feel. It is the fullest-feeling of Healing Soil\'s three soap bases.',
     },
     {
       question: 'What is shea butter?',
-      answer: 'Shea butter comes from the nut of the shea tree (Vitellaria paradoxa), which grows across the savannah belt of West and Central Africa. The nut is dried, crushed, and pressed to extract the fat. Raw shea butter contains fatty acids (oleic, stearic, linoleic, palmitic), vitamins A, E, and F, and non-saponifiable compounds that do not convert to soap during saponification. This is what makes shea butter valuable in soap.',
+      answer: 'Shea butter is a plant fat pressed from the nut of the shea tree, Vitellaria paradoxa. Soap makers use it to create a richer bar with a creamy lather.',
     },
     {
-      question: 'Does shea butter clog pores?',
-      answer: 'No. Shea butter has a low comedogenic rating and does not tend to block pores despite its richness. This makes it workable for combination skin and for people who want moisturising benefits without the risk of congestion.',
-    },
-    {
-      question: 'Why does shea butter belong in soap?',
-      answer: 'Shea butter could be a leave-on product like a cream or balm, but it works well in soap because the conditioning happens at the moment of washing rather than requiring a separate step. The non-saponifiable compounds survive the soap-making process and are deposited on skin while you wash — which is why skin tends to feel softer after washing with a shea butter bar.',
+      question: 'Who might prefer shea butter soap?',
+      answer: 'It suits people who enjoy a rich lather and want their skin to feel soft after washing. If you prefer a lighter rinse, compare it with glycerin or goat milk soap.',
     },
   ],
   'handmade-soap-goa': [
@@ -196,25 +180,25 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Why is handmade soap from Goa different from commercial soap?',
-      answer: 'The practical difference is in ingredients and shelf life. Commercial soap usually contains SLS, a synthetic detergent that strips skin oils, and is manufactured months before use. Small-batch handmade soap skips SLS entirely, uses no synthetic preservatives, and is made to order — so the bar you receive was made recently, not held in a warehouse. The result is a cleaner ingredient list and a gentler effect on skin.',
+      answer: 'Healing Soil soap is melted, hand-poured, and made to order in small batches. The bars contain no SLS, parabens, or synthetic fragrance, and the ingredient list identifies which botanicals are farm-grown and which ingredients are sourced.',
     },
   ],
   'goat-milk-soap-benefits': [
     {
-      question: 'What are the main benefits of goat milk soap?',
-      answer: 'Goat milk soap replaces water in the soap base with milk, bringing in natural fats and vitamins. It cleans without stripping — skin feels nourished after washing, not tight or dry. The absence of SLS, retained natural glycerin, and no synthetic fragrance are what most people notice over time.',
+      question: 'What does goat milk add to soap?',
+      answer: 'Goat milk gives the bar a creamy texture and a rich, gentle lather. Healing Soil goat milk bars are made without SLS, parabens, or synthetic fragrance.',
     },
     {
-      question: 'Is goat milk soap good for sensitive skin?',
-      answer: 'Yes. The pH of goat milk is closer to skin\'s natural range than most synthetic cleansers, and there is no SLS or synthetic fragrance — two of the most common daily irritants. Most people with reactive skin find they can use it daily on face and body without trouble.',
+      question: 'Is goat milk soap suitable for sensitive skin?',
+      answer: 'It is a gentle option suitable for sensitive skin. Check the full ingredient list if you have a known sensitivity, and patch test any new personal-care product before regular use.',
     },
     {
       question: 'What is the difference between goat milk soap and regular commercial soap?',
-      answer: 'Commercial soap typically contains SLS, a synthetic detergent that strips natural skin oils, plus synthetic fragrance and artificial preservatives. Goat milk soap contains none of these. The short ingredient list is the practical difference — it cleans without removing what skin needs to stay balanced.',
+      answer: 'Compare the labels rather than relying on the word handmade. Healing Soil goat milk soap has a creamy base and contains no SLS, parabens, or synthetic fragrance.',
     },
     {
       question: 'Does goat milk soap lather well?',
-      answer: 'Yes, but differently from commercial soap. The lather is creamy and dense rather than heavy and foamy. In hard water, it performs better than SLS-based soap because the lather comes from the natural fat content of the milk, not a surfactant.',
+      answer: 'Yes. It creates a creamy lather rather than a large, airy foam. Wet the bar, work it between your hands, and keep it dry between uses.',
     },
     {
       question: 'How long does a goat milk soap bar last?',
@@ -222,7 +206,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Is goat milk soap suitable for the face?',
-      answer: 'Yes. The gentle lather and absence of synthetic fragrance make it suitable for most facial skin types, including combination and sensitive skin. Many people use one bar for face and body both.',
+      answer: 'It can be used as a gentle face and body bar. Use light pressure, avoid the eye area, and stop if the product does not suit you.',
     },
   ],
   'handmade-soap-bangalore': [
@@ -232,7 +216,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Why does Bangalore water affect skin?',
-      answer: "Bangalore's water supply tends toward moderate to high mineral hardness, particularly in zones served by KRS reservoir water. Hard water reacts with soap to reduce lather, leading people to use more soap. As the water dries, minerals deposit on skin as a film that can feel tight or dry. Combined with SLS-based commercial soap — which strips skin oils — the dryness compounds. Many people in Bangalore dealing with persistent skin dryness have never identified this combination as the cause.",
+      answer: 'Water hardness varies by neighbourhood and source. Hard water can reduce lather, so use a little water at a time and rinse the bar well rather than using more soap automatically.',
     },
     {
       question: 'What soap is best for skin in Bangalore?',
@@ -249,20 +233,20 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   ],
   'natural-soap-sensitive-skin-india': [
     {
-      question: 'What causes sensitive skin in India?',
-      answer: 'Sensitive skin is often a response to something in the routine rather than a fixed skin type. In India, the most common culprits are SLS in commercial soap — which strips the skin\'s natural oils — and synthetic fragrance, which is a common source of reactions for people with sensitive skin. Removing these, particularly by switching to an SLS-free soap without synthetic fragrance, often makes a meaningful difference.',
+      question: 'What should I look for in soap for sensitive skin?',
+      answer: 'Start with a clear ingredient list, a gentle lather, and a bar made without SLS, parabens, or synthetic fragrance. Patch test a new product and change one item at a time so you can judge how it feels.',
     },
     {
-      question: 'Can switching to natural soap help sensitive skin?',
-      answer: 'For many people, yes. The main change is removing SLS and synthetic fragrance from the daily wash routine. Switching to an SLS-free, fragrance-free soap reduces daily contact with synthetic additives. The tightness after washing often reduces in the first week. Underlying dryness typically improves within two to three weeks.',
+      question: 'Does natural always mean gentle?',
+      answer: 'No. Natural is not a complete safety standard, and botanical ingredients can still be unsuitable for some people. Read the full label and patch test first.',
     },
     {
       question: 'Which soap base is best for sensitive skin in India?',
-      answer: 'Goat milk is the most versatile base for sensitive skin. It contains natural fats that absorb easily and a pH closer to skin\'s natural range, which makes it feel gentle without stripping. For very dry or reactive skin that gets tight or develops redness, shea butter is the richer option. For mild sensitivity with oily or combination skin, glycerin is a good starting point.',
+      answer: 'There is no universal best base. Goat milk gives a creamy lather, shea butter feels richer, and glycerin feels lighter. Choose by texture preference and patch test before regular use.',
     },
     {
-      question: 'What ingredients in commercial soap irritate sensitive skin?',
-      answer: 'The most common are: SLS and SLES — synthetic detergents that strip skin oils with every wash; synthetic fragrance listed as "fragrance" or "parfum" — a common source of reactions for sensitive skin; parabens such as methylparaben and propylparaben — synthetic preservatives; and PEG compounds. Removing these from your soap routine is the most direct way to reduce reactions from the product itself.',
+      question: 'What ingredients should I compare for sensitive skin?',
+      answer: 'Sensitivity is individual, so use the label to check for ingredients you already know you avoid. Healing Soil clearly states that its bars contain no SLS, parabens, or synthetic fragrance.',
     },
     {
       question: 'How do I know if a soap is genuinely natural?',
@@ -272,11 +256,11 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
   'sls-free-soap-india': [
     {
       question: 'What is SLS in soap?',
-      answer: 'SLS stands for sodium lauryl sulfate. It is a synthetic detergent added to soap and body wash to create fast, dense lather. It is cheap to manufacture with and very effective at removing oil, which is why it appears in most commercial soap bars sold in India. The problem is it removes more than dirt. It strips the protective oil layer your skin produces naturally, which leads to dryness, tightness, and irritation with regular use.',
+      answer: 'SLS stands for sodium lauryl sulfate. It is a surfactant used in some cleansing products to create fast, dense foam. Healing Soil bars are made without it.',
     },
     {
-      question: 'Why does my skin feel dry and tight after showering?',
-      answer: 'If your skin feels tight or dry immediately after washing, the most common cause is the soap you are using. Most commercial soap bars contain SLS or SLES, which strip the skin\'s natural oil barrier. Your skin then tries to rebuild that barrier, but daily washing with an SLS-based product keeps disrupting the cycle. Switching to an SLS-free soap is usually one of the first things worth trying.',
+      question: 'Does SLS-free describe the whole formula?',
+      answer: 'No. It only means the formula does not contain SLS. Read the complete ingredient list, because the base, scent, colour, and other ingredients also shape the wash experience.',
     },
     {
       question: 'How do I check if my soap contains SLS?',
@@ -284,25 +268,25 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Is SLS-free soap better for Indian skin?',
-      answer: 'For people who bathe twice a day in a hot, humid climate, SLS-free soap is generally gentler. Indian skin types vary, but the combination of frequent washing, hard water in many cities, and high heat means SLS contact adds up quickly. An SLS-free bar cleans without stripping, which suits most skin types and is especially helpful for sensitive, dry, or reactive skin.',
+      answer: 'SLS-free is a useful label preference, but skin types and formulas vary. Compare the full ingredient list and choose the lather and after-wash feel you prefer.',
     },
     {
       question: 'What is the difference between SLS and SLES?',
-      answer: 'SLES (sodium laureth sulfate) is a modified version of SLS that is slightly milder. Some brands swap SLS for SLES and market the product as gentler. It is somewhat less harsh, but it still functions as a detergent and still strips skin oils with regular use. Truly SLS-free soap uses neither compound. The lather comes from the soap-making process itself, not from added foaming agents.',
+      answer: 'SLS is sodium lauryl sulfate and SLES is sodium laureth sulfate. They are different surfactants and appear under separate names on an ingredient list. Healing Soil bars contain neither.',
     },
   ],
   'goat-milk-soap-base-vs-glycerin-soap-base': [
     {
       question: 'What is the difference between goat milk soap base and glycerin soap base?',
-      answer: 'A goat milk soap base replaces water with goat milk in the saponification process. This adds natural fats and vitamins to the bar, producing a creamier lather and a more nourishing feel after washing. A glycerin soap base is water-based but retains the natural glycerin produced during soap-making, which draws moisture into skin. Glycerin gives a lighter, cleaner wash; goat milk gives a richer, more nourishing wash.',
+      answer: 'Goat milk soap produces a creamy lather and a richer feel. Glycerin soap has a lighter lather and an easy-rinsing feel. Both Healing Soil bases are made without SLS, parabens, or synthetic fragrance.',
     },
     {
       question: 'Is goat milk soap base better than glycerin soap base?',
-      answer: 'It depends on your skin type. Goat milk soap base suits sensitive, dry, or combination skin better — the natural fats leave skin feeling soft rather than tight after washing, and it is versatile enough for most skin types. Glycerin soap base suits oily or normal skin better — it cleanses without adding richness or weight. If you are not sure which to choose, goat milk is the safer starting point.',
+      answer: 'Neither is universally better. Choose goat milk for a creamier wash or glycerin for a lighter one. You can also switch with the weather or use different bases for face and body.',
     },
     {
       question: 'Which soap base is best for sensitive skin in India?',
-      answer: 'Goat milk soap base is generally the best choice for sensitive skin. It contains no SLS or synthetic fragrance, its pH is closer to skin\'s natural range than most cleansers, and the natural fats in the milk prevent the dryness that often triggers reactivity. Glycerin soap base is also a gentle option, but goat milk is more nourishing and suits a wider range of sensitive skin types.',
+      answer: 'Both are gentle options. Goat milk feels creamier; glycerin feels lighter. If your skin is sensitive, check the full ingredient list and patch test before regular use.',
     },
     {
       question: 'Can I use both goat milk and glycerin soap base?',
@@ -364,6 +348,31 @@ export default async function BlogPostPage({ params }: Props) {
     },
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://healingsoil.in',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://healingsoil.in/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://healingsoil.in/blog/${slug}`,
+      },
+    ],
+  }
+
   const faqs = faqsBySlug[slug] || []
   const faqSchema = faqs.length > 0 && {
     '@context': 'https://schema.org',
@@ -383,6 +392,10 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {faqSchema && (
         <script

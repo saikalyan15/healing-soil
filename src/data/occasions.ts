@@ -143,7 +143,7 @@ export const occasions: OccasionPage[] = [
     metaDescription: 'Discover eco-friendly soap in India. Our handmade bars are made to order in Goa with natural ingredients and minimal waste packaging.',
     h1: 'Eco-friendly soap India',
     tagline: 'Sustainable care from farm to home. We prioritise natural ingredients, small-batch making, and mindful packaging to reduce our environmental impact.',
-    content: 'Being eco-friendly means looking at the entire lifecycle of a product. We make our soap to order in Goa, which eliminates the need for large-scale warehousing and reduces waste. Our formulas are free from synthetic chemicals and our packaging is designed to be minimal and recyclable, supporting a more sustainable routine.',
+    content: 'Being eco-friendly means looking at the entire lifecycle of a product. We make our soap to order in Goa, which avoids large-scale warehousing and reduces waste. Our bars contain no SLS, parabens, or synthetic fragrance, and our packaging is designed to be minimal and recyclable.',
     relatedProducts: [
       'loofah-soaps',
       'pomegranate-glycerin-soap',

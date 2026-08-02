@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'What soap is best for sensitive skin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The best soap for sensitive skin is one that cleans without stripping the skin\'s natural oils. Look for SLS-free bars that use gentle bases like goat milk or shea butter and avoid synthetic fragrances, which are a common source of reactions.',
+        text: 'There is no universal best soap. Start with a clear ingredient list, a gentle lather, and a bar made without SLS, parabens, or synthetic fragrance. Patch test before regular use.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'What ingredients should I avoid if I have sensitive skin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Common triggers for sensitive skin include SLS (Sodium Lauryl Sulfate), parabens, and synthetic fragrances. Many commercial soaps use these to create dense lather and strong scents, but they can be harsh on reactive skin.',
+        text: 'Sensitivity is individual. Check the complete label for ingredients you already know you avoid, and introduce one new product at a time.',
       },
     },
     {
@@ -91,15 +91,13 @@ export default async function SoapForSensitiveSkinPage() {
         </h1>
 
         <p className="mb-5 font-sans text-lg leading-relaxed text-[#1A1A14]">
-          Finding a soap that does not leave your skin feeling tight, dry, or reactive can be a
-          challenge. For many people with sensitive skin, the problem isn&apos;t the act of washing,
-          but the ingredients in the soap they use.
+          Sensitive skin often prefers a simple routine: a clear ingredient list, a mild lather, and
+          one new product at a time. The soap base also changes how rich or light the wash feels.
         </p>
 
         <p className="mb-5 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          Commercial soaps often contain harsh detergents like SLS and synthetic fragrances that
-          strip the skin of its protective oils. Our approach is different. We make soap the
-          traditional way, in small batches, using ingredients that are suitable for sensitive skin.
+          Healing Soil bars are made in small batches without SLS, parabens, or synthetic fragrance.
+          Goat milk gives a creamy lather, shea butter feels richer, and glycerin is the lightest option.
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
@@ -111,15 +109,15 @@ export default async function SoapForSensitiveSkinPage() {
         <ul className="mb-10 space-y-3 font-sans text-base leading-[1.8] text-[#1A1A14]">
           <li>
             <strong className="font-semibold text-[#1A1A14]">SLS-Free</strong>: avoid synthetic
-            foaming agents that can be harsh on reactive skin.
+            foaming agents if that is your label preference.
           </li>
           <li>
             <strong className="font-semibold text-[#1A1A14]">Fragrance-Free</strong>: we use no
-            synthetic perfumes, which are common triggers for sensitivity.
+            synthetic perfumes, for a quieter scent profile.
           </li>
           <li>
             <strong className="font-semibold text-[#1A1A14]">Glycerin-Retained</strong>: natural
-            glycerin is a humectant that helps skin stay hydrated.
+            glycerin contributes a smooth, light lather.
           </li>
         </ul>
 
@@ -145,7 +143,8 @@ export default async function SoapForSensitiveSkinPage() {
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
           We source our ingredients carefully, from the goat milk used in our most popular base to
-          the neem and tulsi grown on our farm. Honest ingredients, made well in small batches.
+          the neem and tulsi grown on our farm. Always check the product label and patch test if your
+          skin is sensitive.
         </p>
 
         <h2 className="mb-6 font-serif text-3xl text-[#1E5631]">Common questions</h2>
