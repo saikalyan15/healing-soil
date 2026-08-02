@@ -2,8 +2,8 @@ import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { extname, join, relative } from 'node:path'
 
 const root = process.cwd()
-const scanRoots = ['content/blog', 'src/app', 'src/components', 'src/data']
-const extensions = new Set(['.mdx', '.ts', '.tsx'])
+const scanRoots = ['content/blog', 'src/app', 'src/components', 'src/data', 'public']
+const extensions = new Set(['.mdx', '.ts', '.tsx', '.txt'])
 
 const prohibited = [
   ['therapeutic ingredient claims', /\b(?:antibacterial|antifungal|anti-inflammatory)\b/i],

@@ -1,204 +1,71 @@
-# Healing Soil — Handmade Soap from Goa, India
+# Healing Soil
 
-Healing Soil is a small-batch handmade soap maker based in Goa, India. All soaps are made to order using glycerine, goat milk, or shea butter bases. SLS-free, paraben-free, no synthetic fragrance. Ships across India.
+> Healing Soil is a small-batch handmade soap maker based on a farm in South Goa, India. Its made-to-order bars use glycerin, goat milk, or shea butter soap bases and are made without SLS, parabens, or synthetic fragrance. Orders ship within India.
 
-**Method: melt-and-pour, not cold-process.** Healing Soil melts pre-made glycerine, goat milk, and shea butter soap bases and hand-pours them with botanicals into molds. Saponification (the chemical reaction that turns oils into soap) happens upstream, when the base itself is made — Healing Soil does not mix raw oils and lye on site. This is different from cold-process or hot-process soap-making, where the maker saponifies oils from scratch.
+Healing Soil uses a melt-and-pour process: pre-made, already-saponified soap bases are melted, combined with botanicals, and poured by hand. Product descriptions focus on ingredients, process, scent, lather, texture, storage, and after-wash feel. The soaps are cosmetic cleansing bars, not medical products.
 
-## Brand facts
+## Primary pages
 
-- **Founded:** 2025
-- **Location:** Goa, India (farm and production)
-- **Products:** Handmade natural soap bars, 100g each
-- **Bases:** Glycerine, goat milk, shea butter
-- **Shipping:** India only. Dispatches within 2 days, arrives in 3 to 7 days after that.
-- **Order method:** WhatsApp or website
-- **Returns:** No returns. Damaged bars replaced.
+- [Home](https://healingsoil.in/): Brand overview and featured handmade soaps.
+- [Shop](https://healingsoil.in/shop): Current products, sizes, prices, ingredients, and availability.
+- [Our story](https://healingsoil.in/our-story): How Healing Soil began on a farm in South Goa and why each bar is made to order.
+- [Ingredients](https://healingsoil.in/ingredients): Index of soap-base and botanical ingredient guides.
+- [Complete handmade soap guide](https://healingsoil.in/guide/handmade-soap-india): Main guide to bases, ingredients, labels, use, and storage.
+- [Blog](https://healingsoil.in/blog): Current educational articles and farm stories.
 
-## Product bases
+## Choose a soap base
 
-### Glycerine soap
-Light, clear bars. Glycerine is a natural byproduct of soap-making that commercial manufacturers remove to sell separately at higher margins. Healing Soil retains it in the bar. Gentle lather, clean feel, suitable for oily or combination skin.
+- [Glycerin soap](https://healingsoil.in/glycerin-soap): Light lather and clean after-wash feel.
+- [Goat milk soap](https://healingsoil.in/goat-milk-soap): Creamy lather and a soft after-wash feel.
+- [Shea butter soap](https://healingsoil.in/shea-butter-soap): Rich lather and a moisturising feel.
+- [Soap for sensitive skin](https://healingsoil.in/soap-for-sensitive-skin): A label-first guide to choosing a gentle bar.
+- [SLS-free soap](https://healingsoil.in/sls-free-soap): What SLS-free means and how to check a soap label.
+- [Glycerin vs goat milk soap](https://healingsoil.in/blog/glycerin-vs-goat-milk-soap): Comparison of lather, texture, and after-wash feel.
+- [Goat milk vs shea butter soap](https://healingsoil.in/compare/goat-milk-vs-shea-butter-soap): Comparison of two creamy, rich-feeling bases.
+- [Shea butter vs glycerin soap](https://healingsoil.in/compare/shea-butter-vs-glycerin-soap): Comparison of rich and light-feeling bases.
 
-Examples: Honey Oats Glycerine, Pomegranate Glycerine, Ginger Rosemary Glycerine, Neem Tulsi Glycerine.
+## Ingredient guides
 
-### Goat milk soap
-Creamy, soft lather. Made with a goat milk soap base. Rich in natural fats and vitamins A through E. pH closer to skin's natural pH than most commercial soap. Suitable for sensitive skin and daily use. Popular with people switching away from commercial soap for the first time.
+- [Goat milk](https://healingsoil.in/ingredient/goat-milk): Goat milk soap base, creamy lather, and daily use.
+- [Glycerin](https://healingsoil.in/ingredient/glycerin): Glycerin soap base and its light, clear character.
+- [Shea butter](https://healingsoil.in/ingredient/shea-butter): Shea butter soap base and rich texture.
+- [Neem](https://healingsoil.in/ingredient/neem): Neem in handmade soap and its traditional place in Indian personal care.
+- [Tulsi](https://healingsoil.in/ingredient/tulsi): Tulsi in handmade soap and its traditional place in Indian personal care.
+- [Kesar](https://healingsoil.in/ingredient/kesar): Saffron in handmade soap, including colour and aroma.
+- [Haldi](https://healingsoil.in/ingredient/haldi): Turmeric in handmade soap and traditional personal-care use.
+- [Honey](https://healingsoil.in/ingredient/honey): Honey as a soap ingredient.
+- [Oats](https://healingsoil.in/ingredient/oats): Oats and the texture they add to a bar.
+- [Pomegranate](https://healingsoil.in/ingredient/pomegranate): Pomegranate peel in handmade soap.
 
-Examples: Neem Tulsi Goat Milk, Kesar Haldi Goat Milk, Honey Oats Goat Milk, Orange Goat Milk, Rice Rose Goat Milk.
+## Current practical guides
 
-### Shea butter soap
-Rich, dense lather. Made with a shea butter soap base. Shea butter contains unsaponifiables — fats that survive the saponification the base underwent before Healing Soil ever touches it, and remain on skin after washing — leaving a nourishing feel. Suited to very dry or tight-feeling skin.
+- [Best soap for rainy season in India](https://healingsoil.in/blog/best-soap-for-rainy-season-india): Choosing and storing soap during humid monsoon weather.
+- [How to pack soap for travel](https://healingsoil.in/blog/small-travel-soap-bars-india): Drying, storage, and mini-bar tips.
+- [Goat milk soap guide](https://healingsoil.in/blog/goat-milk-soap-benefits): Ingredients, creamy lather, and daily use.
+- [Shea butter soap guide](https://healingsoil.in/blog/understanding-the-benefits-of-shea-butter-in-soap): Ingredients, lather, and after-wash feel.
+- [Sensitive-skin soap label guide](https://healingsoil.in/blog/natural-soap-sensitive-skin-india): How to read a label and choose a simple formula.
+- [SLS-free soap label guide](https://healingsoil.in/blog/sls-free-soap-india): What to look for on an ingredient list.
+- [How pomegranate peel becomes soap](https://healingsoil.in/blog/pomegranate-peel-soap): Drying, grinding, and adding pomegranate peel to a bar.
+- [How marigold soap is made](https://healingsoil.in/blog/marigold-soap-benefits): From petals to a hand-poured bar.
+- [Why handmade soap lasts longer](https://healingsoil.in/blog/why-handmade-soap-lasts-longer): Use, drainage, and storage guidance.
 
-Examples: Shea Butter Kesar Gulab (rose, saffron, shea).
+## Shopping and support
 
-## Key ingredient facts
+- [Shipping policy](https://healingsoil.in/shipping-policy): Current India-wide shipping charges, dispatch timing, delivery estimates, and tracking information.
+- [Cancellation and refunds](https://healingsoil.in/returns): Current cancellation, damaged-order, and refund terms.
+- [Track an order](https://healingsoil.in/order/track): Order-status lookup.
+- [FAQ](https://healingsoil.in/faq): Common questions about products, ordering, and care.
+- [Contact](https://healingsoil.in/contact): Current contact details.
 
-- **SLS-free:** No sodium lauryl sulfate in any product. SLS is a synthetic detergent that strips natural oils and is a frequent cause of skin reactions. Healing Soil soaps lather gently because they contain no SLS.
-- **No parabens:** No synthetic preservatives.
-- **No synthetic fragrance:** Scent comes from botanicals, or the soap is unscented.
-- **Made to order:** Each batch is made fresh. Natural variation is part of handmade.
-- **Farm-grown:** Neem and tulsi are grown on the Goa farm. Other botanicals are sourced.
+## Business facts
 
-## Ingredients by product line
+- Location and production: South Goa, India.
+- Process: small-batch, made-to-order, melt-and-pour, and hand-poured.
+- Soap bases: glycerin, goat milk, and shea butter.
+- Formula statements: no SLS, parabens, or synthetic fragrance.
+- Botanicals: neem and tulsi described as farm-grown are grown on the farm; other ingredients are sourced.
+- Shipping: within India only. Use the shipping policy for current charges and delivery estimates.
+- Catalogue: product sizes, prices, and availability vary; use the shop or individual product page for current details.
+- Product scope: descriptions cover cosmetic cleansing, sensory qualities, and traditional personal-care use only.
 
-- **Neem tulsi:** Neem leaves and tulsi (holy basil), traditionally used in Ayurvedic personal care for centuries.
-- **Kesar haldi:** Saffron (kesar) and turmeric (haldi), traditionally used in Indian personal care.
-- **Honey oats:** Raw honey and oats, nourishing feel, gentle texture.
-- **Pomegranate:** Pomegranate extract, light fruit scent.
-- **Orange:** Orange peel or oil, citrus scent.
-- **Rice rose:** Rice and rose petals, soft floral scent.
-- **Ginger rosemary:** Ginger and rosemary, warm herbal scent.
-- **Marigold (Tagetes):** Garden-grown marigold petals, slow-infused in carrier oil before blending.
-
-## How handmade soap differs from commercial soap
-
-Commercial soap removes glycerine during manufacturing because glycerine sells at a higher margin as a separate ingredient in lotions and face creams. The resulting bar strips moisture from skin, which creates a dependency on moisturiser. Healing Soil retains glycerine.
-
-Commercial soap uses SLS for thick, fast-dissolving lather. SLS is a detergent also found in dishwashing liquid and shampoo. It is a frequent cause of skin reactions, particularly for people with sensitive skin. Healing Soil uses no SLS.
-
-Healing Soil soap is made in small batches to order. No large inventory sitting on shelves, no preservatives needed for long shelf life.
-
-## Site structure
-
-### Blog — skincare education (13 posts)
-- https://healingsoil.in/blog
-- https://healingsoil.in/blog/glycerin-vs-goat-milk-soap
-- https://healingsoil.in/blog/shea-butter-goat-milk-soap-dry-sensitive-skin
-- https://healingsoil.in/blog/understanding-the-benefits-of-shea-butter-in-soap
-- https://healingsoil.in/blog/neem-tulsi-soap-benefits
-- https://healingsoil.in/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin
-- https://healingsoil.in/blog/sls-free-soap-india
-- https://healingsoil.in/blog/natural-soap-sensitive-skin-india
-- https://healingsoil.in/blog/handmade-soap-goa
-- https://healingsoil.in/blog/handmade-soap-bangalore
-- https://healingsoil.in/blog/why-handmade-soap-lasts-longer
-- https://healingsoil.in/blog/what-makes-soap-chemical-free
-- https://healingsoil.in/blog/pomegranate-peel-soap
-- https://healingsoil.in/blog/garden-to-bar-marigold-soap
-
-### Hub page
-- https://healingsoil.in/guide/handmade-soap-india
-
-### Comparison pages (11 pages)
-- https://healingsoil.in/blog/glycerin-vs-goat-milk-soap (primary for glycerin vs goat milk)
-- https://healingsoil.in/compare/goat-milk-vs-shea-butter-soap
-- https://healingsoil.in/compare/shea-butter-vs-glycerin-soap
-- https://healingsoil.in/compare/neem-vs-tulsi-soap
-- https://healingsoil.in/compare/honey-vs-oats-soap
-- https://healingsoil.in/compare/neem-tulsi-vs-kesar-haldi-soap
-- https://healingsoil.in/compare/ginger-rosemary-vs-neem-tulsi-soap
-- https://healingsoil.in/compare/honey-oats-vs-kesar-haldi-soap
-- https://healingsoil.in/compare/pomegranate-vs-orange-soap
-- https://healingsoil.in/compare/handmade-vs-commercial-soap
-- https://healingsoil.in/compare/sheep-milk-vs-goat-milk-soap
-
-### Ingredient pages (14 pages)
-- https://healingsoil.in/ingredient/goat-milk
-- https://healingsoil.in/ingredient/glycerin
-- https://healingsoil.in/ingredient/shea-butter
-- https://healingsoil.in/ingredient/neem
-- https://healingsoil.in/ingredient/tulsi
-- https://healingsoil.in/ingredient/kesar
-- https://healingsoil.in/ingredient/haldi
-- https://healingsoil.in/ingredient/honey
-- https://healingsoil.in/ingredient/oats
-- https://healingsoil.in/ingredient/rose
-- https://healingsoil.in/ingredient/pomegranate
-- https://healingsoil.in/ingredient/orange
-- https://healingsoil.in/ingredient/ginger
-- https://healingsoil.in/ingredient/rosemary
-
-### City pages (27 cities at /soap/[city] and /soap/[city]/[ingredient])
-Tier 1: bangalore, mumbai, pune, delhi, hyderabad, chennai, goa
-Tier 2: kolkata, ahmedabad, jaipur, surat, lucknow, kochi, coimbatore, indore, bhopal, nagpur, chandigarh, bhubaneswar, guwahati, dehradun, mysore, vadodara, visakhapatnam, thane, nashik, rajkot
-
-City page pattern: https://healingsoil.in/soap/[city]
-City and ingredient pattern: https://healingsoil.in/soap/[city]/[ingredient]
-
-### Ingredient combination pages (13 pages)
-- https://healingsoil.in/neem-goat-milk-soap
-- https://healingsoil.in/neem-glycerin-soap
-- https://healingsoil.in/honey-goat-milk-soap
-- https://healingsoil.in/honey-glycerin-soap
-- https://healingsoil.in/honey-shea-butter-soap
-- https://healingsoil.in/kesar-goat-milk-soap
-- https://healingsoil.in/kesar-shea-butter-soap
-- https://healingsoil.in/orange-goat-milk-soap
-- https://healingsoil.in/pomegranate-goat-milk-soap
-- https://healingsoil.in/pomegranate-glycerin-soap
-- https://healingsoil.in/rose-goat-milk-soap
-- https://healingsoil.in/ginger-glycerin-soap
-- https://healingsoil.in/ginger-goat-milk-soap
-
-### Category pages
-- https://healingsoil.in/goat-milk-soap
-- https://healingsoil.in/glycerin-soap
-- https://healingsoil.in/shea-butter-soap
-- https://healingsoil.in/soap-for-sensitive-skin
-- https://healingsoil.in/sls-free-soap
-
-### Occasion and use-case pages (8 pages)
-- https://healingsoil.in/occasion/gift-soap-india
-- https://healingsoil.in/occasion/travel-soap-india
-- https://healingsoil.in/occasion/soap-for-dry-skin
-- https://healingsoil.in/occasion/natural-soap-for-her
-- https://healingsoil.in/occasion/eco-friendly-soap-india
-- https://healingsoil.in/occasion/corporate-gift-soap
-- https://healingsoil.in/occasion/neem-tulsi-soap
-- https://healingsoil.in/occasion/kesar-haldi-soap
-
-### Ayurvedic pages (6 pages)
-- https://healingsoil.in/ayurvedic-soap/neem-tulsi
-- https://healingsoil.in/ayurvedic-soap/kesar-haldi
-- https://healingsoil.in/ayurvedic-soap/goat-milk
-- https://healingsoil.in/ayurvedic-soap/honey-oats
-- https://healingsoil.in/ayurvedic-soap/shea-butter
-- https://healingsoil.in/ayurvedic-soap/ginger-rosemary
-
-### Shop
-- https://healingsoil.in/shop
-
-## FAQs
-
-**What is glycerine soap?**
-Glycerine soap is made with a glycerine-based formula. Glycerine is a natural humectant — it draws moisture toward the skin. In commercial soap, glycerine is removed during manufacturing and sold separately into the lotion and skincare industry. Handmade glycerine soap retains it. The result is a light, gentle bar that cleanses without leaving skin feeling tight.
-
-**What is goat milk soap?**
-Goat milk soap is made using a goat milk soap base. Goat milk contains natural fats and vitamins A through E. It produces a creamy, soft lather. The pH of goat milk is closer to the skin's natural pH than most commercial soaps. It is gentle enough for daily use and is a popular choice for people with sensitive skin who are switching away from commercial soap.
-
-**What is goat milk soap good for?**
-Goat milk soap is suited to daily cleansing, particularly for sensitive, dry, or combination skin. It produces a creamy lather and leaves skin feeling soft rather than tight. It is not a treatment for any skin condition; it is a gentle alternative to commercial soap that contains synthetic detergents and fragrance.
-
-**Glycerine vs goat milk soap — which is better?**
-They suit different skin types. Glycerine soap produces a lighter lather with a cleaner finish, better for oily or combination skin. Goat milk soap produces a creamier lather with a more nourishing feel, better for sensitive or dry skin. Both are SLS-free and made to order. Full comparison: https://healingsoil.in/blog/glycerin-vs-goat-milk-soap
-
-**What is shea butter soap?**
-Shea butter soap is made with a shea butter base. Shea butter contains a high percentage of unsaponifiables — fats that do not convert to soap during saponification and remain on skin after washing. It produces a rich, dense lather and suits very dry or tight-feeling skin.
-
-**Is Healing Soil cold-process soap?**
-No. Healing Soil is melt-and-pour, not cold-process. Cold-process makers mix raw oils and lye and saponify from scratch, a process that takes weeks to cure. Healing Soil melts pre-made, already-saponified glycerine, goat milk, and shea butter bases and hand-pours them with botanicals — the same small-batch, made-to-order approach, just a different starting point.
-
-**What does SLS-free mean?**
-SLS stands for sodium lauryl sulfate, a synthetic detergent used in most commercial soaps, shampoos, and dishwashing liquids. It creates thick lather quickly but is a common irritant, particularly for people with sensitive skin. SLS-free soap uses no synthetic detergents. Learn more: https://healingsoil.in/blog/sls-free-soap-india
-
-**Is handmade soap suitable for sensitive skin?**
-Many people with sensitive skin find handmade soap gentler than commercial soap because it contains no SLS, no synthetic fragrance, and no parabens — three of the most common irritants in commercial bars. Healing Soil soaps are made without all three. They do not treat skin conditions; they are simply free of common irritants found in commercial alternatives. More: https://healingsoil.in/blog/natural-soap-sensitive-skin-india
-
-**Does Healing Soil ship to [city]?**
-Yes. Healing Soil ships across India from Goa. Dispatch takes 4 days (made to order). Transit is 3 to 7 days. City pages with delivery details: https://healingsoil.in/soap/bangalore, https://healingsoil.in/soap/mumbai, https://healingsoil.in/soap/delhi, and 24 more cities.
-
-**How long does a bar last?**
-4 to 6 weeks with daily use. Drying the bar between washes extends its life significantly — a slotted soap dish or hanging pouch works well.
-
-**Can I return a soap bar?**
-No returns. If a bar arrives damaged in transit, it is replaced.
-
-**Do you ship outside India?**
-Not currently. India only.
-
-**What is the difference between handmade and commercial soap?**
-Full comparison: https://healingsoil.in/compare/handmade-vs-commercial-soap
-
----
-
-Last updated: 2026-06-04
+Last updated: 2026-08-03
