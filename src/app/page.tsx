@@ -270,10 +270,10 @@ export default async function HomePage() {
                 carries the depth. */}
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#1E5631]/5 shadow-[0_24px_60px_-20px_rgba(30,86,49,0.35)]">
               <Image
-                src="/hero-kesar-haldi.webp"
+                src="/products/kesar-haldi-goatmilk.webp"
                 alt="Kesar Haldi soap with saffron and turmeric, handmade in South Goa"
                 fill
-                className="hero-settle object-cover"
+                className="hero-settle object-cover brightness-[1.04] saturate-[0.92] contrast-[0.97]"
                 priority
                 sizes="(max-width: 768px) 100vw, 48vw"
               />
