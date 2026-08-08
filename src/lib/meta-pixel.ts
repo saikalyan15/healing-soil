@@ -52,6 +52,15 @@ export function trackMetaPurchaseOnce(
   trackMetaEventOnce(`meta-purchase-${orderId}`, 'Purchase', params, orderId)
 }
 
+// An unpaid WhatsApp order is a lead, not a completed sale. The order ID is
+// shared with the server-side CAPI event so Meta can deduplicate both hits.
+export function trackMetaLeadOnce(
+  orderId: string,
+  params: MetaPixelEventParams
+) {
+  trackMetaEventOnce(`meta-lead-${orderId}`, 'Lead', params, orderId)
+}
+
 // Keyed by cart contents so revisiting /order with the same cart doesn't
 // re-fire, but a genuinely different cart (items added/removed since the
 // last fire) still counts as a new checkout start.

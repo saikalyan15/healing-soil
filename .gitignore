@@ -52,5 +52,6 @@ tools/gsc-mcp/cache/
 tools/gsc-mcp/node_modules/
 tools/ga4-mcp/cache/
 tools/ga4-mcp/node_modules/
+tools/meta-ads-mcp/node_modules/
 
 *.log

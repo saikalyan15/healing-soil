@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { submitOrder } from '@/lib/orders'
-import { sendPurchaseCapiEvent } from '@/lib/meta-capi'
-import { sendPurchaseMpEvent, parseGaClientId, parseGaSessionId, GA4_SESSION_COOKIE_NAME } from '@/lib/ga4-mp'
+import { sendLeadCapiEvent, sendPurchaseCapiEvent } from '@/lib/meta-capi'
+import {
+  sendPurchaseMpEvent,
+  parseGaClientId,
+  parseGaSessionId,
+  GA4_SESSION_COOKIE_NAME,
+} from '@/lib/ga4-mp'
+import { isRazorpayEnabled, verifyPaymentSignature } from '@/lib/razorpay'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import {
   MAX_QTY_PER_ITEM,
@@ -24,7 +30,11 @@ const orderSchema = z.object({
   })).min(1).max(MAX_DISTINCT_ITEMS),
   shipping: z.number().nonnegative(),
   notes: z.string().optional(),
-  payment_id: z.string().optional(),
+  payment: z.object({
+    razorpay_order_id: z.string().min(1),
+    razorpay_payment_id: z.string().min(1),
+    razorpay_signature: z.string().min(1),
+  }).optional(),
 })
 
 export async function POST(req: NextRequest) {
@@ -47,7 +57,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid request', details: result.error.flatten() }, { status: 400 })
     }
 
-    const { customer_name, customer_phone, items, address, shipping, notes, payment_id } = result.data
+    const { customer_name, customer_phone, items, address, shipping, notes, payment } = result.data
+
+    if (payment && (!isRazorpayEnabled() || !verifyPaymentSignature({
+      orderId: payment.razorpay_order_id,
+      paymentId: payment.razorpay_payment_id,
+      signature: payment.razorpay_signature,
+    }))) {
+      console.warn('[POST /api/orders] rejected unverified payment', { ip })
+      return NextResponse.json({ error: 'Payment could not be verified' }, { status: 400 })
+    }
+
+    const isPaid = Boolean(payment)
 
     const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
     const total = subtotal + shipping
@@ -60,8 +81,8 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const combinedNotes = payment_id
-      ? [`Paid via Razorpay — payment_id: ${payment_id}`, notes].filter(Boolean).join(' | ')
+    const combinedNotes = payment
+      ? [`Paid via Razorpay — payment_id: ${payment.razorpay_payment_id}`, notes].filter(Boolean).join(' | ')
       : notes
 
     const { order_id, ref } = await submitOrder({
@@ -80,7 +101,10 @@ export async function POST(req: NextRequest) {
       source: 'Website Order',
     })
 
-    await sendPurchaseCapiEvent({
+    const eventId = ref || order_id
+    const clientId = parseGaClientId(req.cookies.get('_ga')?.value)
+    const sessionId = parseGaSessionId(req.cookies.get(GA4_SESSION_COOKIE_NAME)?.value)
+    const metaEvent = {
       eventId: ref || order_id,
       value: subtotal + shipping,
       currency: 'INR',
@@ -92,17 +116,22 @@ export async function POST(req: NextRequest) {
       clientUserAgent: req.headers.get('user-agent') ?? undefined,
       fbp: req.cookies.get('_fbp')?.value,
       fbc: req.cookies.get('_fbc')?.value,
-    })
+    }
 
-    await sendPurchaseMpEvent({
-      transactionId: ref || order_id,
-      value: subtotal + shipping,
-      currency: 'INR',
-      shipping,
-      items: items.map((i) => ({ item_id: i.product_id, price: i.price, quantity: i.qty })),
-      clientId: parseGaClientId(req.cookies.get('_ga')?.value),
-      sessionId: parseGaSessionId(req.cookies.get(GA4_SESSION_COOKIE_NAME)?.value),
-    })
+    if (isPaid) {
+      await sendPurchaseCapiEvent(metaEvent)
+      await sendPurchaseMpEvent({
+        transactionId: eventId,
+        value: subtotal + shipping,
+        currency: 'INR',
+        shipping,
+        items: items.map((i) => ({ item_id: i.product_id, price: i.price, quantity: i.qty })),
+        clientId,
+        sessionId,
+      })
+    } else {
+      await sendLeadCapiEvent(metaEvent)
+    }
 
     return NextResponse.json({ order_id, ref })
   } catch (err) {

@@ -6,7 +6,7 @@ import { useOrderStore } from '@/lib/store'
 import { formatPreferencesAsNote } from '@/lib/store'
 import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
 import OrderPreferences from './OrderPreferences'
-import { trackMetaPurchaseOnce } from '@/lib/meta-pixel'
+import { trackMetaLeadOnce, trackMetaPurchaseOnce } from '@/lib/meta-pixel'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -126,7 +126,11 @@ export default function OrderForm({ onSuccess }: Props) {
   // Saves the order to SoapLedger, fires attribution events, builds the
   // WhatsApp message, and hands off to the parent's "send" step. Shared by
   // both the paid (Razorpay) path and the WhatsApp-only fallback path.
-  async function submitToSoapLedgerAndProceed(paymentId?: string) {
+  async function submitToSoapLedgerAndProceed(payment?: {
+    razorpay_order_id: string
+    razorpay_payment_id: string
+    razorpay_signature: string
+  }) {
     const normalizedPhone = normalizePhone(phone)
     const fullAddress = `${address.trim()}, ${state}`
     const preferencesNote = formatPreferencesAsNote(preferences)
@@ -161,7 +165,7 @@ export default function OrderForm({ onSuccess }: Props) {
         address: fullAddress,
         shipping,
         notes: preferencesNote || undefined,
-        payment_id: paymentId,
+        payment,
       }),
     })
 
@@ -174,14 +178,7 @@ export default function OrderForm({ onSuccess }: Props) {
     const { order_id, ref } = data
     const humanRef = ref || order_id
 
-    sendGAEvent('event', 'purchase', {
-      transaction_id: humanRef,
-      currency: 'INR',
-      value: total,
-      shipping,
-      items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
-    })
-    trackMetaPurchaseOnce(humanRef, {
+    const attributionParams = {
       value: total,
       currency: 'INR',
       content_ids: items.map((i) => i.product_slug),
@@ -189,7 +186,25 @@ export default function OrderForm({ onSuccess }: Props) {
       // Total quantity across line items, not distinct SKU count — a more
       // accurate "items purchased" signal for Meta than items.length.
       num_items: items.reduce((sum, item) => sum + item.qty, 0),
-    })
+    }
+
+    if (payment) {
+      sendGAEvent('event', 'purchase', {
+        transaction_id: humanRef,
+        currency: 'INR',
+        value: total,
+        shipping,
+        items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
+      })
+      trackMetaPurchaseOnce(humanRef, attributionParams)
+    } else {
+      sendGAEvent('event', 'generate_lead', {
+        lead_id: humanRef,
+        currency: 'INR',
+        value: total,
+      })
+      trackMetaLeadOnce(humanRef, attributionParams)
+    }
 
     const waMessage = buildWhatsAppMessage(
       humanRef,
@@ -198,7 +213,7 @@ export default function OrderForm({ onSuccess }: Props) {
       shippingAddress,
       shipping,
       preferencesNote || undefined,
-      paymentId
+      payment?.razorpay_payment_id
     )
 
     const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
@@ -206,7 +221,7 @@ export default function OrderForm({ onSuccess }: Props) {
     // Clear cart first, then hand off to parent — orderPlacedRef in parent
     // is already set before clearOrder() triggers any re-render
     clearOrder()
-    onSuccess(humanRef, waHref, Boolean(paymentId))
+    onSuccess(humanRef, waHref, Boolean(payment))
   }
 
   // ── Primary path: pay now via Razorpay, then hand off to WhatsApp ─────────
@@ -274,7 +289,7 @@ export default function OrderForm({ onSuccess }: Props) {
               throw new Error('Payment could not be verified')
             }
 
-            await submitToSoapLedgerAndProceed(r.razorpay_payment_id)
+            await submitToSoapLedgerAndProceed(r)
           } catch (err) {
             setError(
               "Your payment went through, but we couldn't confirm it automatically. Please message us on WhatsApp with your payment details and we'll sort it out right away."

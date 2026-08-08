@@ -7,7 +7,7 @@ function sha256(value: string): string {
   return createHash('sha256').update(value.trim().toLowerCase()).digest('hex')
 }
 
-type PurchaseCapiParams = {
+type OrderCapiParams = {
   eventId: string
   value: number
   currency: string
@@ -21,14 +21,20 @@ type PurchaseCapiParams = {
   fbc?: string
 }
 
+type OrderCapiEventName = 'Purchase' | 'Lead'
+
 /**
- * Sends a Purchase event to Meta's Conversions API as a server-side backup
- * for the browser pixel event fired in OrderForm. Shares the same eventId
- * (order ref) with the pixel call so Meta deduplicates the two.
+ * Sends an order outcome to Meta's Conversions API as a server-side backup
+ * for the browser pixel event fired in OrderForm. Unpaid WhatsApp orders are
+ * Leads; verified Razorpay orders are Purchases. The shared eventId lets Meta
+ * deduplicate the browser and server hits.
  *
  * NEVER throws — a failed CAPI call must never block or lose an order.
  */
-export async function sendPurchaseCapiEvent(params: PurchaseCapiParams): Promise<void> {
+async function sendOrderCapiEvent(
+  eventName: OrderCapiEventName,
+  params: OrderCapiParams
+): Promise<void> {
   try {
     const accessToken = process.env.META_CAPI_ACCESS_TOKEN
     if (!accessToken) {
@@ -44,7 +50,7 @@ export async function sendPurchaseCapiEvent(params: PurchaseCapiParams): Promise
         body: JSON.stringify({
           data: [
             {
-              event_name: 'Purchase',
+              event_name: eventName,
               event_time: Math.floor(Date.now() / 1000),
               event_id: params.eventId,
               action_source: 'website',
@@ -71,9 +77,17 @@ export async function sendPurchaseCapiEvent(params: PurchaseCapiParams): Promise
 
     if (!res.ok) {
       const errorText = await res.text().catch(() => res.statusText)
-      console.error('[Meta CAPI] Purchase event rejected:', res.status, errorText)
+      console.error(`[Meta CAPI] ${eventName} event rejected:`, res.status, errorText)
     }
   } catch (err) {
-    console.error('[Meta CAPI] Unexpected error sending Purchase event:', err)
+    console.error(`[Meta CAPI] Unexpected error sending ${eventName} event:`, err)
   }
+}
+
+export function sendPurchaseCapiEvent(params: OrderCapiParams): Promise<void> {
+  return sendOrderCapiEvent('Purchase', params)
+}
+
+export function sendLeadCapiEvent(params: OrderCapiParams): Promise<void> {
+  return sendOrderCapiEvent('Lead', params)
 }

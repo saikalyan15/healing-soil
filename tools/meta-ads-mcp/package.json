@@ -1,0 +1,9 @@
+{
+  "name": "healing-soil-meta-ads-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pinned, read-only Meta Ads MCP runtime for Healing Soil campaign audits.",
+  "dependencies": {
+    "meta-ads-mcp-server": "1.5.1"
+  }
+}
