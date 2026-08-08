@@ -9,6 +9,7 @@ import Footer from '@/components/Footer'
 import OrderTray from '@/components/OrderTray'
 import WelcomeBanner from '@/components/WelcomeBanner'
 import MetaPixelEvents from '@/components/MetaPixelEvents'
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/seo'
 
 const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
@@ -53,53 +54,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const organizationSchema = {
+  const siteSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Store',
-    name: 'Healing Soil',
-    url: 'https://healingsoil.in',
-    logo: 'https://healingsoil.in/logo.png',
-    image: 'https://healingsoil.in/og-image.jpg',
-    description: 'Handmade natural soaps from Goa, India. SLS-free, made to order, for sensitive skin.',
-    foundingLocation: 'Goa, India',
-    address: {
-      '@type': 'PostalAddress',
-      addressRegion: 'Goa',
-      addressCountry: 'IN',
-    },
-    areaServed: 'IN',
-    priceRange: '₹₹',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Sales',
-      url: 'https://healingsoil.in',
-    },
-    sameAs: [
-      'https://www.instagram.com/healingsoil.in',
-      'https://www.facebook.com/profile.php?id=61576352186521',
-    ],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Handmade Soap Services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Small-batch Soap Making',
-            description: 'Custom handmade soaps made in small batches on our Goa farm.'
-          }
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Natural Ingredient Sourcing',
-            description: 'Sourcing and harvesting farm-grown botanicals like Neem and Tulsi.'
-          }
-        }
-      ]
-    }
+    '@graph': [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA],
   }
 
   return (
@@ -107,7 +64,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
         {/* beforeInteractive so window.fbq exists before any client component's
             first-mount effect (e.g. ViewContent on a hard page load) can call it */}

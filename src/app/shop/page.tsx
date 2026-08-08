@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getProducts } from '@/lib/products'
-import { absoluteUrl } from '@/lib/seo'
+import { absoluteUrl, ORGANIZATION_ID } from '@/lib/seo'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import ShopClient from '@/components/ShopClient'
@@ -91,6 +91,7 @@ export default async function ShopPage() {
           url: `https://healingsoil.in/shop/${p.slug}`,
           item: {
             '@type': 'Product',
+            url: `https://healingsoil.in/shop/${p.slug}`,
             name: p.name,
             description: p.description,
             image: p.image_url ? absoluteUrl(p.image_url) : undefined,
@@ -103,7 +104,7 @@ export default async function ShopPage() {
               availability: p.in_stock
                 ? 'https://schema.org/InStock'
                 : 'https://schema.org/OutOfStock',
-              seller: { '@type': 'Organization', name: 'Healing Soil' },
+              seller: { '@id': ORGANIZATION_ID },
               hasMerchantReturnPolicy: {
                 '@type': 'MerchantReturnPolicy',
                 applicableCountry: 'IN',

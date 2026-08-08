@@ -10,7 +10,7 @@ import AddToCartButton from '@/components/AddToCartButton'
 import ProductViewEvent from '@/components/ProductViewEvent'
 import ProductImage from '@/components/ProductImage'
 import ProductViewTracker from './ProductViewTracker'
-import { buildTitle, buildDescription, absoluteUrl } from '@/lib/seo'
+import { buildTitle, buildDescription, absoluteUrl, ORGANIZATION_ID } from '@/lib/seo'
 import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
 import { canonicalSlugFor } from '@/lib/product-slugs'
@@ -217,6 +217,7 @@ export default async function ProductPage({ params }: Props) {
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    url: `https://healingsoil.in/shop/${canonicalSlug}`,
     name: product.name,
     description: product.description,
     image: product.image_url ? absoluteUrl(product.image_url) : undefined,
@@ -229,7 +230,7 @@ export default async function ProductPage({ params }: Props) {
       availability: product.in_stock
         ? 'https://schema.org/InStock'
         : 'https://schema.org/OutOfStock',
-      seller: { '@type': 'Organization', name: 'Healing Soil' },
+      seller: { '@id': ORGANIZATION_ID },
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
         applicableCountry: 'IN',

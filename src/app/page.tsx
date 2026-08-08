@@ -167,34 +167,8 @@ export default async function HomePage() {
     })),
   }
 
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Healing Soil',
-    url: 'https://healingsoil.in',
-    description:
-      'Handmade soap from a farm in South Goa. SLS-free, glycerin retained. Made to order, shipped across India.',
-    image: 'https://healingsoil.in/og-image.jpg',
-    logo: 'https://healingsoil.in/logo.png',
-    address: {
-      "@type": "PostalAddress",
-      "addressRegion": "Goa",
-      "addressCountry": "IN"
-    },
-    areaServed: 'IN',
-    priceRange: '₹₹',
-    sameAs: [
-      'https://instagram.com/healingsoil.in',
-      'https://www.facebook.com/profile.php?id=61576352186521',
-    ],
-  }
-
   return (
     <div className="bg-[#F7F5F0]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

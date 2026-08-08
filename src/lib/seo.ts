@@ -17,6 +17,55 @@ export const BRAND = 'Healing Soil'
 
 export const SITE_URL = 'https://healingsoil.in'
 
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`
+export const WEBSITE_ID = `${SITE_URL}/#website`
+
+/** Canonical entity definitions reused by every page-level schema reference. */
+export const ORGANIZATION_SCHEMA = {
+  '@type': 'Store',
+  '@id': ORGANIZATION_ID,
+  name: BRAND,
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+  image: `${SITE_URL}/og-image.jpg`,
+  description:
+    'Small-batch handmade soaps made to order on a farm in South Goa. No SLS, parabens, or synthetic fragrance.',
+  foundingLocation: {
+    '@type': 'Place',
+    name: 'South Goa, India',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'Goa',
+    addressCountry: 'IN',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'India',
+  },
+  priceRange: '₹₹',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    telephone: '+91-74831-00651',
+    url: `${SITE_URL}/contact`,
+    availableLanguage: ['English', 'Hindi'],
+  },
+  sameAs: [
+    'https://www.instagram.com/healingsoil.in',
+    'https://www.facebook.com/profile.php?id=61576352186521',
+  ],
+} as const
+
+export const WEBSITE_SCHEMA = {
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  url: SITE_URL,
+  name: BRAND,
+  publisher: { '@id': ORGANIZATION_ID },
+  inLanguage: 'en-IN',
+} as const
+
 /**
  * Schema.org requires absolute URLs for image fields. Product, ItemList and
  * BlogPosting were all emitting site-relative paths straight from the data

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MDXContent } from '@/components/MDXContent'
 import { getAllPosts, getPostBySlugFromEither } from '@/lib/blog'
-import { buildTitle, buildDescription, absoluteUrl } from '@/lib/seo'
+import { buildTitle, buildDescription, absoluteUrl, ORGANIZATION_ID, WEBSITE_ID } from '@/lib/seo'
 import { canonicalSlugFor } from '@/lib/product-slugs'
 import { getProducts } from '@/lib/products'
 import RandomReview from '@/components/RandomReview'
@@ -118,6 +118,19 @@ const relatedProductsBySlug: Record<string, string[]> = {
   'marigold-soap-benefits': ['marigold-soap', 'red-rose-soap', 'shea-butter-kesar-gulab'],
   'pomegranate-soap-benefits': ['pomegranate-goat-milk-soap', 'pomegranate-glycerin-soap', 'orange-goat-milk-soap'],
   'loofah-soap-benefits-and-how-to-use': ['loofah-soaps', 'honey-oats-glycerin-soap', 'neem-tulsi-glycerin-soap'],
+}
+
+const relatedReadingBySlug: Record<string, Array<{ href: string; label: string }>> = {
+  'monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain': [
+    {
+      href: '/our-story',
+      label: 'How Healing Soil moved from Bangalore to a farm in South Goa',
+    },
+    {
+      href: '/blog/diy-neem-soap-slow-living',
+      label: 'How a monsoon-bent neem branch became a slow-living farm project',
+    },
+  ],
 }
 
 // ─── FAQ mapping ───────────────────────────────────────────────────────────────
@@ -319,6 +332,7 @@ export default async function BlogPostPage({ params }: Props) {
       allProducts.find((p) => canonicalSlugFor(p.slug) === want && p.in_stock),
     )
     .filter((p): p is NonNullable<typeof p> => p != null)
+  const relatedReading = relatedReadingBySlug[slug] ?? []
 
   const blogSchema = {
     '@context': 'https://schema.org',
@@ -329,19 +343,9 @@ export default async function BlogPostPage({ params }: Props) {
       ? absoluteUrl(post.featuredImage)
       : 'https://healingsoil.in/og-image.jpg',
     datePublished: post.date,
-    author: {
-      '@type': 'Organization',
-      name: 'Healing Soil',
-      url: 'https://healingsoil.in',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Healing Soil',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://healingsoil.in/logo.png',
-      },
-    },
+    author: { '@id': ORGANIZATION_ID },
+    publisher: { '@id': ORGANIZATION_ID },
+    isPartOf: { '@id': WEBSITE_ID },
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `https://healingsoil.in/blog/${slug}`,
@@ -451,9 +455,29 @@ export default async function BlogPostPage({ params }: Props) {
           <MDXContent source={post.content ?? ''} components={mdxComponents} />
         </div>
 
+        {relatedReading.length > 0 && (
+          <aside className="mt-10 rounded-lg border border-[#D6CFC4] bg-white p-6" aria-labelledby="related-reading-heading">
+            <h2 id="related-reading-heading" className="mb-3 font-serif text-2xl text-[#1E5631]">
+              Continue from the farm
+            </h2>
+            <ul className="space-y-2 font-sans text-sm">
+              {relatedReading.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+
         {/* Author */}
         <p className="mt-10 border-t border-[#D6CFC4] pt-6 font-sans text-sm text-[#999]">
-          Written by <span className="font-medium text-[#1A1A14]">{post.author}</span>
+          Written by{' '}
+          <Link href="/our-story" rel="author" className="font-medium text-[#1A1A14] underline underline-offset-2">
+            {post.author}
+          </Link>
         </p>
 
         {post.source === 'stories' ? (
