@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
 import { sendGAEvent } from '@next/third-parties/google'
+import { GA4_EVENT } from '@/lib/analytics'
 import { trackMetaEvent } from '@/lib/meta-pixel'
 
 export default function AddToCartButton({ product }: { product: Product }) {
@@ -14,7 +15,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
     if (!product.in_stock) return
 
     addItem(product)
-    sendGAEvent('event', 'add_to_cart', {
+    sendGAEvent('event', GA4_EVENT.ADD_TO_CART, {
       currency: 'INR',
       value: product.price,
       items: [{ item_id: product.id, item_name: product.name, price: product.price, quantity: 1 }],

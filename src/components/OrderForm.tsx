@@ -7,6 +7,7 @@ import { formatPreferencesAsNote } from '@/lib/store'
 import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } from '@/lib/orders'
 import OrderPreferences from './OrderPreferences'
 import { trackMetaLeadOnce, trackMetaPurchaseOnce } from '@/lib/meta-pixel'
+import { GA4_EVENT } from '@/lib/analytics'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -105,7 +106,7 @@ export default function OrderForm({ onSuccess }: Props) {
   function handleFirstFocus() {
     if (checkoutFiredRef.current) return
     checkoutFiredRef.current = true
-    sendGAEvent('event', 'begin_checkout', {
+    sendGAEvent('event', GA4_EVENT.BEGIN_CHECKOUT, {
       currency: 'INR',
       value: total,
       items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
@@ -189,7 +190,7 @@ export default function OrderForm({ onSuccess }: Props) {
     }
 
     if (payment) {
-      sendGAEvent('event', 'purchase', {
+      sendGAEvent('event', GA4_EVENT.PURCHASE, {
         transaction_id: humanRef,
         currency: 'INR',
         value: total,
@@ -198,7 +199,7 @@ export default function OrderForm({ onSuccess }: Props) {
       })
       trackMetaPurchaseOnce(humanRef, attributionParams)
     } else {
-      sendGAEvent('event', 'generate_lead', {
+      sendGAEvent('event', GA4_EVENT.GENERATE_LEAD, {
         lead_id: humanRef,
         currency: 'INR',
         value: total,

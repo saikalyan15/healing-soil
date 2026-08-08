@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { sendGAEvent } from '@next/third-parties/google'
+import { GA4_EVENT } from '@/lib/analytics'
 import { useRouter } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import OrderForm from './OrderForm'
@@ -100,7 +101,7 @@ export default function OrderPageClient() {
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => sendGAEvent('event', 'whatsapp_send_clicked', { event_category: 'order_funnel', event_label: 'order_form_step2' })}
+              onClick={() => sendGAEvent('event', GA4_EVENT.WHATSAPP_SEND_CLICKED, { event_category: 'order_funnel', event_label: 'order_form_step2' })}
               className="flex w-full items-center justify-center gap-3 rounded-lg bg-[#25D366] px-6 py-4 font-sans text-base font-bold text-white shadow-sm transition-colors hover:bg-[#1ebe5d]"
             >
               <WhatsAppIcon />

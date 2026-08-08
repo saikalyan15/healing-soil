@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { sendGAEvent } from '@next/third-parties/google'
+import { GA4_EVENT } from '@/lib/analytics'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
 import { trackMetaEvent } from '@/lib/meta-pixel'
@@ -43,7 +44,7 @@ export default function BundlePicker({ products, defaultIds }: BundlePickerProps
 
   function handleAdd() {
     selection.forEach((p) => addItem(p))
-    sendGAEvent('event', 'add_to_cart', {
+    sendGAEvent('event', GA4_EVENT.ADD_TO_CART, {
       currency: 'INR',
       value: total,
       items: selection.map((p) => ({
