@@ -27,22 +27,7 @@ export const CANONICAL_PRODUCT_SLUGS = [
   'soap-squares-rich-box',
 ] as const
 
-export const PRODUCT_SLUG_ALIASES = {
-  'neem-tulsi-goatmilk-soap': 'neem-tulsi-goat-milk-soap',
-  'honey-and-oats-goatmilk-soap': 'honey-oats-goat-milk-soap',
-  'honey-oats-goatmilk-soap': 'honey-oats-goat-milk-soap',
-  'ginger-rosemary-goat-milk-soap': 'ginger-rosemary-goat-milk-soap',
-  'ginger-rosemary-goatmilk-soap': 'ginger-rosemary-goat-milk-soap',
-  'orange-goatmilk-soap': 'orange-goat-milk-soap',
-  'rice-rose-goatmilk-soap': 'rice-rose-goat-milk-soap',
-  'pomegranate-goatmilk-soap': 'pomegranate-goat-milk-soap',
-  'turmeric-honey-goatmilk-soap': 'turmeric-honey-goat-milk-soap',
-  'sheabutter-kesar-gulab': 'shea-butter-kesar-gulab',
-  'sheabutter-turmeric-gulab': 'shea-butter-turmeric-gulab',
-  'honey-kesar-haldi-sheabutter-soap': 'honey-kesar-haldi-shea-butter-soap',
-  'pomegranate-glycerine': 'pomegranate-glycerin-soap',
-  orange: 'orange-glycerin-soap',
-} as const
+export const PRODUCT_SLUG_ALIASES = productSlugAliases
 
 export type LegacyProductSlug = keyof typeof PRODUCT_SLUG_ALIASES
 
@@ -73,3 +58,4 @@ export function canonicalProductName(name: string): string {
     name
   )
 }
+import productSlugAliases from '../../config/product-slug-aliases.json'

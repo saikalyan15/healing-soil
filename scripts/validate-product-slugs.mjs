@@ -1,9 +1,11 @@
 import { readFileSync } from 'node:fs'
 import { relative, resolve } from 'node:path'
+import nextConfig from '../next.config.mjs'
 
 const root = process.cwd()
 const slugModulePath = resolve(root, 'src/lib/product-slugs.ts')
 const slugModule = readFileSync(slugModulePath, 'utf8')
+const aliasesPath = resolve(root, 'config/product-slug-aliases.json')
 
 function stringLiterals(source) {
   return [...source.matchAll(/'([^']+)'/g)].map((match) => match[1])
@@ -21,24 +23,17 @@ function readArrayExport(name) {
 }
 
 function readAliasMap() {
-  const match = slugModule.match(/export const PRODUCT_SLUG_ALIASES = \{([\s\S]*?)\} as const/)
-  if (!match) throw new Error('Could not find PRODUCT_SLUG_ALIASES in src/lib/product-slugs.ts')
-
-  const aliases = new Map()
-  for (const entry of match[1].split('\n')) {
-    const quoted = entry.match(/'([^']+)':\s*'([^']+)'/)
-    if (quoted) {
-      aliases.set(quoted[1], quoted[2])
-      continue
-    }
-    const bare = entry.match(/\s*([a-zA-Z0-9_-]+):\s*'([^']+)'/)
-    if (bare) aliases.set(bare[1], bare[2])
-  }
-  return aliases
+  return new Map(Object.entries(JSON.parse(readFileSync(aliasesPath, 'utf8'))))
 }
 
 const canonicalSlugs = new Set(readArrayExport('CANONICAL_PRODUCT_SLUGS'))
 const aliases = readAliasMap()
+const redirects = await nextConfig.redirects()
+const redirectsBySource = new Map(
+  redirects
+    .filter((redirect) => !redirect.has)
+    .map((redirect) => [redirect.source, redirect])
+)
 
 function canonicalSlugFor(slug) {
   return aliases.get(slug) ?? slug
@@ -85,6 +80,43 @@ function extractReferencedProductSlugs(file, source) {
 
 const failures = []
 const referenced = new Set()
+
+for (const [legacySlug, canonicalSlug] of aliases) {
+  if (legacySlug === canonicalSlug) {
+    failures.push({
+      file: 'config/product-slug-aliases.json',
+      slug: legacySlug,
+      canonical: 'alias must differ from its canonical slug',
+    })
+    continue
+  }
+
+  if (!canonicalSlugs.has(canonicalSlug)) {
+    failures.push({
+      file: 'config/product-slug-aliases.json',
+      slug: legacySlug,
+      canonical: `${canonicalSlug} is not canonical`,
+    })
+    continue
+  }
+
+  const source = `/shop/${legacySlug}`
+  const redirect = redirectsBySource.get(source)
+  let finalCanonicalPath = `/shop/${canonicalSlug}`
+  const seen = new Set()
+  while (redirectsBySource.has(finalCanonicalPath) && !seen.has(finalCanonicalPath)) {
+    seen.add(finalCanonicalPath)
+    finalCanonicalPath = redirectsBySource.get(finalCanonicalPath).destination
+  }
+
+  if (!redirect || !redirect.permanent || redirect.destination !== finalCanonicalPath) {
+    failures.push({
+      file: 'next.config.mjs',
+      slug: source,
+      canonical: `expected a direct permanent redirect to ${finalCanonicalPath}`,
+    })
+  }
+}
 
 for (const file of filesToScan) {
   const path = resolve(root, file)

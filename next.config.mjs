@@ -1,7 +1,24 @@
 import { fileURLToPath } from 'url'
+import { createRequire } from 'module'
 import { dirname } from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const require = createRequire(import.meta.url)
+const productSlugAliases = require('./config/product-slug-aliases.json')
+
+// Some aliases point to products that are no longer sold. Send those directly
+// to their final destination so crawlers never have to follow a redirect chain.
+const retiredProductDestinations = {
+  'rice-rose-goat-milk-soap': '/shop',
+}
+
+const legacyProductRedirects = Object.entries(productSlugAliases).map(
+  ([legacySlug, canonicalSlug]) => ({
+    source: `/shop/${legacySlug}`,
+    destination: retiredProductDestinations[canonicalSlug] ?? `/shop/${canonicalSlug}`,
+    permanent: true,
+  })
+)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -29,6 +46,8 @@ const nextConfig = {
     return [
       // www → non-www canonical redirect
       { source: '/:path*', has: [{ type: 'host', value: 'www.healingsoil.in' }], destination: 'https://healingsoil.in/:path*', permanent: true },
+      // Product aliases are generated from the same map used by product lookup.
+      ...legacyProductRedirects,
       // Consolidate overlapping search intent into the strongest existing URLs.
       { source: '/compare/glycerin-vs-goat-milk-soap', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
       { source: '/blog/goat-milk-soap-base-vs-glycerin-soap-base', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
@@ -55,13 +74,11 @@ const nextConfig = {
       { source: '/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice', destination: '/blog',                    permanent: true },
       { source: '/soap-for/exfoliation',                  destination: '/soap-for/loofah-body-soap', permanent: true },
       { source: '/soap-for/exfoliation/',                 destination: '/soap-for/loofah-body-soap', permanent: true },
-      { source: '/shop/orange',                          destination: '/shop/orange-glycerin-soap', permanent: true },
       // Products whose slug changed or which were withdrawn in SoapLedger. Both
       // were still in the sitemap and are indexed by Google, so they showed up
       // under "Not found (404)" in Search Console. 301 to the successor rather
       // than leaving them dead.
       { source: '/shop/kesar-haldi-goat-milk-soap',      destination: '/shop/kesar-haldi-papaya-cucumber-soap', permanent: true },
-      { source: '/shop/rice-rose-goatmilk-soap',         destination: '/shop', permanent: true },
       { source: '/shop/rice-rose-goat-milk-soap',        destination: '/shop', permanent: true },
       { source: '/stories',                              destination: '/blog',     permanent: true },
       { source: '/stories/',                             destination: '/blog',     permanent: true },
