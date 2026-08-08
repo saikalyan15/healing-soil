@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { submitOrder } from '@/lib/orders'
 import { sendLeadCapiEvent, sendPurchaseCapiEvent } from '@/lib/meta-capi'
 import {
+  sendLeadMpEvent,
   sendPurchaseMpEvent,
   parseGaClientId,
   parseGaSessionId,
@@ -17,6 +18,27 @@ import {
   RATE_LIMIT_WINDOW_MS,
   RATE_LIMIT_ORDER_ATTEMPTS,
 } from '@/lib/order-limits'
+import type { OrderAttribution } from '@/lib/attribution'
+import { classifyOrderSource, safeEventSourceUrl } from '@/lib/order-attribution'
+
+const attributionTouchSchema = z.object({
+  source: z.string().min(1).max(100),
+  medium: z.string().min(1).max(100),
+  campaign: z.string().max(200).optional(),
+  content: z.string().max(200).optional(),
+  term: z.string().max(200).optional(),
+  campaign_id: z.string().max(200).optional(),
+  fbclid: z.string().max(500).optional(),
+  landing_page: z.string().min(1).max(500),
+  referrer: z.string().max(500).optional(),
+  captured_at: z.string().datetime(),
+})
+
+const attributionSchema = z.object({
+  version: z.literal(1),
+  first_touch: attributionTouchSchema,
+  last_touch: attributionTouchSchema,
+})
 
 const orderSchema = z.object({
   customer_name: z.string().min(1),
@@ -30,6 +52,7 @@ const orderSchema = z.object({
   })).min(1).max(MAX_DISTINCT_ITEMS),
   shipping: z.number().nonnegative(),
   notes: z.string().optional(),
+  attribution: attributionSchema.optional(),
   payment: z.object({
     razorpay_order_id: z.string().min(1),
     razorpay_payment_id: z.string().min(1),
@@ -58,6 +81,17 @@ export async function POST(req: NextRequest) {
     }
 
     const { customer_name, customer_phone, items, address, shipping, notes, payment } = result.data
+    const fbp = req.cookies.get('_fbp')?.value
+    const fbc = req.cookies.get('_fbc')?.value
+    const attribution: OrderAttribution | undefined = result.data.attribution
+      ? {
+          ...result.data.attribution,
+          identifiers: {
+            ...(fbp ? { fbp } : {}),
+            ...(fbc ? { fbc } : {}),
+          },
+        }
+      : undefined
 
     if (payment && (!isRazorpayEnabled() || !verifyPaymentSignature({
       orderId: payment.razorpay_order_id,
@@ -98,7 +132,8 @@ export async function POST(req: NextRequest) {
       })),
       shipping: shipping,
       notes: combinedNotes,
-      source: 'Website Order',
+      source: classifyOrderSource(attribution),
+      attribution,
     })
 
     const eventId = ref || order_id
@@ -111,11 +146,11 @@ export async function POST(req: NextRequest) {
       contentIds: items.map((i) => i.product_slug),
       numItems: items.reduce((sum, i) => sum + i.qty, 0),
       phone: customer_phone,
-      eventSourceUrl: req.nextUrl.origin + '/order',
+      eventSourceUrl: safeEventSourceUrl(req.nextUrl.origin, attribution),
       clientIpAddress: req.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
       clientUserAgent: req.headers.get('user-agent') ?? undefined,
-      fbp: req.cookies.get('_fbp')?.value,
-      fbc: req.cookies.get('_fbc')?.value,
+      fbp,
+      fbc,
     }
 
     if (isPaid) {
@@ -131,6 +166,13 @@ export async function POST(req: NextRequest) {
       })
     } else {
       await sendLeadCapiEvent(metaEvent)
+      await sendLeadMpEvent({
+        leadId: eventId,
+        value: subtotal + shipping,
+        currency: 'INR',
+        clientId,
+        sessionId,
+      })
     }
 
     return NextResponse.json({ order_id, ref })

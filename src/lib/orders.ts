@@ -1,5 +1,7 @@
 // lib/orders.ts — Order submission and notification for Healing Soil
 
+import type { OrderAttribution } from '@/lib/attribution'
+
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
 export type LineItem = {
@@ -24,6 +26,7 @@ export type OrderPayload = {
   shipping: number         // Shipping cost
   notes?: string           // Customer instructions
   source: string           // e.g. "Website Order"
+  attribution?: OrderAttribution
 }
 
 export type ShippingAddress = {

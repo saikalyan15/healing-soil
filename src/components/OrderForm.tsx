@@ -8,6 +8,7 @@ import { buildWhatsAppMessage, type WhatsAppLineItem, type ShippingAddress } fro
 import OrderPreferences from './OrderPreferences'
 import { trackMetaLeadOnce, trackMetaPurchaseOnce } from '@/lib/meta-pixel'
 import { GA4_EVENT } from '@/lib/analytics'
+import { getStoredAttribution } from '@/lib/attribution'
 
 const FREE_SHIPPING_THRESHOLD = 1000
 const SHIPPING_STANDARD = 100
@@ -167,6 +168,7 @@ export default function OrderForm({ onSuccess }: Props) {
         shipping,
         notes: preferencesNote || undefined,
         payment,
+        attribution: getStoredAttribution(),
       }),
     })
 
@@ -199,11 +201,6 @@ export default function OrderForm({ onSuccess }: Props) {
       })
       trackMetaPurchaseOnce(humanRef, attributionParams)
     } else {
-      sendGAEvent('event', GA4_EVENT.GENERATE_LEAD, {
-        lead_id: humanRef,
-        currency: 'INR',
-        value: total,
-      })
       trackMetaLeadOnce(humanRef, attributionParams)
     }
 

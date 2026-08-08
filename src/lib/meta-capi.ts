@@ -78,7 +78,14 @@ async function sendOrderCapiEvent(
     if (!res.ok) {
       const errorText = await res.text().catch(() => res.statusText)
       console.error(`[Meta CAPI] ${eventName} event rejected:`, res.status, errorText)
+      return
     }
+
+    const response = await res.json().catch(() => ({})) as { events_received?: number }
+    console.info(`[Meta CAPI] ${eventName} event accepted`, {
+      eventId: params.eventId,
+      eventsReceived: response.events_received,
+    })
   } catch (err) {
     console.error(`[Meta CAPI] Unexpected error sending ${eventName} event:`, err)
   }

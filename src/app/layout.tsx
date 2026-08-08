@@ -9,6 +9,7 @@ import Footer from '@/components/Footer'
 import OrderTray from '@/components/OrderTray'
 import WelcomeBanner from '@/components/WelcomeBanner'
 import MetaPixelEvents from '@/components/MetaPixelEvents'
+import AttributionCapture from '@/components/AttributionCapture'
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/seo'
 
 const cormorant = Cormorant_Garamond({
@@ -88,6 +89,7 @@ fbq('track','PageView');`}
         <main className="pb-[60px]">{children}</main>
         <Footer />
         <OrderTray />
+        <AttributionCapture />
         <MetaPixelEvents />
         <GoogleAnalytics gaId="G-EWQR3K5MW7" />
         <Script
