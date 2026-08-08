@@ -22,7 +22,7 @@ export default function ReviewsPage() {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: 'Healing Soil Handmade Natural Soaps',
-    description: 'Small-batch handmade soaps made on a farm in South Goa. Glycerin and goat milk bases, real ingredients, no chemicals.',
+    description: 'Small-batch handmade soaps made on a farm in South Goa with glycerin and goat milk bases. No SLS, parabens, or synthetic fragrance.',
     brand: { '@type': 'Brand', name: 'Healing Soil' },
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -41,13 +41,7 @@ export default function ReviewsPage() {
       {
         '@type': 'Review',
         author: { '@type': 'Person', name: 'Snehal Rane' },
-        reviewBody: 'This handmade natural soap has become a staple in my routine. My skin feels noticeably softer, dryness is a thing of the past.',
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      },
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Krutika' },
-        reviewBody: 'Allergic to all the commercial soaps due to skin sensitivity. These were the only soaps that my skin did not react to.',
+        reviewBody: 'Every use leaves me feeling calm and refreshed. It is the little luxury I did not know I needed.',
         reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
       },
       {

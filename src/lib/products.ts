@@ -1,6 +1,7 @@
 // lib/products.ts — SoapLedger API integration for Healing Soil products
 import { unstable_cache } from 'next/cache'
 import { canonicalProductName, canonicalSlugFor, productSlugMatches } from './product-slugs'
+import { prohibitedClaimCategories } from './compliance'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -133,7 +134,21 @@ const getProductsCached = unstable_cache(
     }
 
     return json
-      .map(normalise)
+      .map((raw) => {
+        const claimCategories = prohibitedClaimCategories([
+          raw.name,
+          raw.short_description,
+          ...(raw.ingredients ?? []),
+        ].filter(Boolean).join(' '))
+
+        if (claimCategories.length > 0) {
+          throw new Error(
+            `SoapLedger product ${raw.slug} contains prohibited claim categories: ${claimCategories.join(', ')}`
+          )
+        }
+
+        return normalise(raw)
+      })
       .sort((a, b) => a.display_order - b.display_order)
   },
   ['products'],

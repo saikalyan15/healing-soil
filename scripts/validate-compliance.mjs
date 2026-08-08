@@ -2,20 +2,16 @@ import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { extname, join, relative } from 'node:path'
 
 const root = process.cwd()
-const scanRoots = ['content/blog', 'src/app', 'src/components', 'src/data', 'public']
+const scanRoots = ['content/blog', 'src', 'public']
 const extensions = new Set(['.mdx', '.ts', '.tsx', '.txt'])
 
-const prohibited = [
-  ['therapeutic ingredient claims', /\b(?:antibacterial|antifungal|anti-inflammatory)\b/i],
-  ['named skin conditions', /\b(?:eczema|psoriasis|acne|dermatitis|rashes?)\b/i],
-  ['treatment language', /\b(?:treats?|cures?|heals?|relieves?)\b/i],
-  ['skin-barrier claim', /\bskin barrier\b/i],
-  ['exfoliation claim', /\b(?:exfoliat\w*|dead skin|lactic acid)\b/i],
-  ['appearance claim', /\b(?:pigmentation|anti[- ]?ag(?:e|ing)|wrinkles?)\b/i],
-  ['detox or circulation claim', /\b(?:removes? toxins?|detox(?:es|ing)?|stimulates? circulation)\b/i],
-  ['clinical support claim', /\b(?:clinical stud(?:y|ies)|peer[- ]reviewed)\b/i],
-  ['pore-blocking claim', /\b(?:non[- ]?comedogenic|comedogenic|clog(?:s|ging)? pores?)\b/i],
-]
+const rules = JSON.parse(
+  readFileSync(join(root, 'config/compliance-rules.json'), 'utf8')
+)
+const prohibited = rules.map(({ label, pattern, flags }) => [
+  label,
+  new RegExp(pattern, flags),
+])
 
 function walk(directory) {
   return readdirSync(directory).flatMap((name) => {

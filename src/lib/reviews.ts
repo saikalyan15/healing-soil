@@ -30,7 +30,7 @@ export const reviews: Review[] = [
     location: 'Bangalore',
     rating: 5,
     comment:
-      'This handmade natural soap has become a staple in my routine. My skin feels noticeably softer, dryness is a thing of the past, and it has even helped reduce my tan. Every use leaves me feeling calm and refreshed. It is the little luxury I did not know I needed.',
+      'Every use leaves me feeling calm and refreshed. It is the little luxury I did not know I needed.',
     featured: true,
   },
 
@@ -59,16 +59,6 @@ export const reviews: Review[] = [
     rating: 5,
     comment: 'Neem Tulsi soap was amazing and has soft mild fragrance',
     featured: false,
-  },
-  {
-    id: 'review-006',
-    author: 'Krutika',
-    location: 'Goa',
-    occupation: 'Housewife',
-    rating: 5,
-    comment:
-      'Allergic to all the commercial soaps due to skin sensitivity. These were the only soaps that my skin did not react to',
-    featured: true,
   },
   {
     id: 'review-007',

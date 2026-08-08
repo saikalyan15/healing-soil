@@ -1,0 +1,52 @@
+[
+  {
+    "label": "therapeutic ingredient claims",
+    "pattern": "\\b(?:antibacterial|antifungal|anti-inflammatory)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "named skin conditions",
+    "pattern": "\\b(?:eczema|psoriasis|acne|dermatitis|rashes?)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "treatment language",
+    "pattern": "\\b(?:treats?|cures?|heals?|relieves?)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "skin repair or barrier claim",
+    "pattern": "\\b(?:repairs?(?:\\s+(?:the\\s+)?skin)?|skin barrier)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "exfoliation claim",
+    "pattern": "\\b(?:exfoliat\\w*|dead skin|lactic acid)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "appearance claim",
+    "pattern": "\\b(?:pigmentation|reduces?(?:\\s+my)?\\s+tan|anti[- ]?ag(?:e|ing)|signs? of ag(?:e|ing)|wrinkles?)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "detox or circulation claim",
+    "pattern": "\\b(?:removes? toxins?|detox(?:es|ing)?|stimulates? circulation)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "clinical support claim",
+    "pattern": "\\b(?:clinical stud(?:y|ies)|peer[- ]reviewed)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "pore-blocking claim",
+    "pattern": "\\b(?:non[- ]?comedogenic|comedogenic|clog(?:s|ging)? pores?)\\b",
+    "flags": "i"
+  },
+  {
+    "label": "medical reaction claim",
+    "pattern": "\\b(?:allerg(?:y|ic)|skin (?:did not|doesn.t) react|skin reaction)\\b",
+    "flags": "i"
+  }
+]

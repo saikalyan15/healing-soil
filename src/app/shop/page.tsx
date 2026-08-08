@@ -74,7 +74,7 @@ export default async function ShopPage() {
   // shop would be worse than serving the last good render.
   const products = await getProducts()
 
-  const krutika = reviews.find((r) => r.id === 'review-006')!
+  const riya = reviews.find((r) => r.id === 'review-010')!
   const samyuktha = reviews.find((r) => r.id === 'review-008')!
 
   const itemListSchema = products.length > 0
@@ -163,18 +163,18 @@ export default async function ShopPage() {
             The soaps
           </h1>
           <p className="font-sans text-base leading-relaxed text-[#666666]">
-            Every Healing Soil handmade soap bar is made by hand in small batches on a farm in South Goa. No chemicals,
-            no synthetics. Order and we will make it fresh for you.
+            Every Healing Soil handmade soap bar is made by hand in small batches on a farm in South Goa. No SLS,
+            parabens, or synthetic fragrance. Order and we will make it fresh for you.
           </p>
         </div>
 
-        {/* Social proof — skin sensitivity buyers */}
+        {/* Social proof */}
         <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ReviewCard
-            quote={krutika.comment}
-            name={krutika.author}
-            location={krutika.location}
-            occupation={krutika.occupation}
+            quote={riya.comment}
+            name={riya.author}
+            location={riya.location}
+            occupation={riya.occupation}
             featured={false}
           />
           <ReviewCard

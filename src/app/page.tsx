@@ -120,12 +120,6 @@ export default async function HomePage() {
   // Named by role rather than by customer, so re-picking a review later does not
   // leave a variable called after someone who is no longer quoted.
   //
-  // Two reviews were deliberately dropped from this page. review-002 says the
-  // Exclude reviews that make results-based cosmetic claims, and review-006
-  // says "allergic to all commercial soaps", which is a claim about a condition.
-  // Testimonials count as advertiser claims, so neither belongs on the homepage.
-  // Both remain on /reviews as genuine customer feedback.
-
   // Short enough for the hero quote card. Gentle, no health claim.
   const heroReview = reviews.find((r) => r.id === 'review-010')
 
@@ -206,7 +200,7 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* ── Section 1: Hero (Krutika Review + Farm Context) ────────────────── */}
+      {/* ── Section 1: Hero review + farm context ─────────────────────────── */}
       <section className="w-full overflow-hidden bg-[#F7F5F0]">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-12 sm:px-6 md:flex-row md:gap-16 md:py-24">
           <div className="z-10 flex-1 text-center md:text-left">
