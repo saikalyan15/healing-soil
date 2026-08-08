@@ -11,12 +11,12 @@
   },
   {
     "label": "treatment language",
-    "pattern": "\\b(?:treats?|cures?|heals?|relieves?)\\b",
+    "pattern": "\\b(?:treats?|cures?|heals?|relieves?)\\b[^\\n.!?]{0,60}\\b(?:skin|dryness|irritation|redness|itching|condition|symptoms?)\\b",
     "flags": "i"
   },
   {
     "label": "skin repair or barrier claim",
-    "pattern": "\\b(?:repairs?(?:\\s+(?:the\\s+)?skin)?|skin barrier)\\b",
+    "pattern": "\\b(?:repairs?\\s+(?:the\\s+)?skin(?:\\s+barrier)?|skin barrier)\\b",
     "flags": "i"
   },
   {

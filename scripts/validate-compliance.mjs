@@ -2,7 +2,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { extname, join, relative } from 'node:path'
 
 const root = process.cwd()
-const scanRoots = ['content/blog', 'src', 'public']
+const scanRoots = ['content/blog', 'content/stories', 'src', 'public']
 const extensions = new Set(['.mdx', '.ts', '.tsx', '.txt'])
 
 const rules = JSON.parse(
@@ -27,7 +27,7 @@ for (const scanRoot of scanRoots) {
     if (!extensions.has(extname(path))) continue
 
     const source = readFileSync(path, 'utf8')
-    if (path.includes(`${join('content', 'blog')}/`) && /^---[\s\S]*?\bpublished:\s*false\b[\s\S]*?---/i.test(source)) {
+    if (path.includes(`${join('content')}/`) && /^---[\s\S]*?\bpublished:\s*false\b[\s\S]*?---/i.test(source)) {
       continue
     }
 
