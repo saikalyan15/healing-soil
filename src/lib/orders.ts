@@ -179,6 +179,8 @@ export type SoapLedgerPaymentOrder = {
   ref: string
   status: string
   payment_status: string
+  provider_order_id?: string
+  provider_payment_id?: string
   order_value: string | number
   shipping_charge: string | number
   customer_name: string
