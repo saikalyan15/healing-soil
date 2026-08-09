@@ -45,11 +45,11 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
   no heavy lather.
 - **Primary offer:** starter bundle, 4 soaps at ₹1,000. Single desired action.
 - **Farm is in Goa.** Bangalore is where customers are, never the origin.
-- **Payments are WhatsApp-only** by choice. Razorpay is built but toggled off
-  behind `NEXT_PUBLIC_ENABLE_RAZORPAY` because gateway fees are overhead at
-  current volume.
+- **Payments:** Razorpay is the default website checkout behind
+  `NEXT_PUBLIC_ENABLE_RAZORPAY`. WhatsApp is shown only after a definite gateway
+  failure or checkout dismissal. SoapLedger has an immediate order-pause switch.
 - **Shipping:** free on orders of ₹1,000 and above. Below that ₹100, or ₹150 for
-  the nine North India states listed in `OrderForm.tsx`. Never claim
+  the nine North India states listed in `src/lib/shipping.ts`. Never claim
   unconditional free shipping.
 
 ## Verify against the live system, not against docs

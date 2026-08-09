@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { sendGAEvent } from '@next/third-parties/google'
 import { useOrderStore } from '@/lib/store'
 import { formatPreferencesAsNote } from '@/lib/store'
@@ -9,16 +9,8 @@ import OrderPreferences from './OrderPreferences'
 import { trackMetaLeadOnce, trackMetaPurchaseOnce } from '@/lib/meta-pixel'
 import { GA4_EVENT } from '@/lib/analytics'
 import { getStoredAttribution } from '@/lib/attribution'
-
-const FREE_SHIPPING_THRESHOLD = 1000
-const SHIPPING_STANDARD = 100
-const SHIPPING_NORTH = 150
+import { calculateShipping, FREE_SHIPPING_THRESHOLD } from '@/lib/shipping'
 const WA_NUMBER = '917483100651'
-
-const NORTH_INDIA_STATES = [
-  'Delhi', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Ladakh',
-  'Punjab', 'Rajasthan', 'Uttar Pradesh', 'Uttarakhand',
-]
 
 const ALL_STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat',
@@ -74,10 +66,11 @@ function loadRazorpayScript(): Promise<boolean> {
 const RAZORPAY_ENABLED = process.env.NEXT_PUBLIC_ENABLE_RAZORPAY === 'true'
 
 type Props = {
-  onSuccess: (ref: string, waHref: string, paid: boolean) => void
+  acceptingOrders: boolean
+  onSuccess: (ref: string, waHref: string, outcome: 'paid' | 'pending' | 'manual' | 'interest') => void
 }
 
-export default function OrderForm({ onSuccess }: Props) {
+export default function OrderForm({ onSuccess, acceptingOrders: initialAcceptingOrders }: Props) {
   const items = useOrderStore((s) => s.items)
   const clearOrder = useOrderStore((s) => s.clearOrder)
   const updateQty = useOrderStore((s) => s.updateQty)
@@ -86,19 +79,18 @@ export default function OrderForm({ onSuccess }: Props) {
 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [state, setState] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [acceptingOrders, setAcceptingOrders] = useState(initialAcceptingOrders)
+  const [contactConsent, setContactConsent] = useState(false)
+  const [pendingOrder, setPendingOrder] = useState<{ orderId: string; ref: string; token: string } | null>(null)
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
-  let shipping = 0
-  if (subtotal < FREE_SHIPPING_THRESHOLD && state) {
-    shipping = NORTH_INDIA_STATES.includes(state) ? SHIPPING_NORTH : SHIPPING_STANDARD
-  } else if (subtotal < FREE_SHIPPING_THRESHOLD && !state) {
-    shipping = SHIPPING_STANDARD
-  }
+  const shipping = calculateShipping(subtotal, state)
 
   const total = subtotal + shipping
 
@@ -116,9 +108,26 @@ export default function OrderForm({ onSuccess }: Props) {
 
   const [paymentDismissed, setPaymentDismissed] = useState(false)
 
+  useEffect(() => {
+    const refresh = async () => {
+      try {
+        const res = await fetch('/api/order-availability', { cache: 'no-store' })
+        const data = await res.json()
+        setAcceptingOrders(data.accepting_orders === true)
+      } catch {
+        setAcceptingOrders(false)
+      }
+    }
+    const onFocus = () => void refresh()
+    window.addEventListener('focus', onFocus)
+    void refresh()
+    return () => window.removeEventListener('focus', onFocus)
+  }, [])
+
   function validateForm(): boolean {
     if (!name.trim()) { setError('Please enter your full name.'); return false }
     if (!validateIndianPhone(phone)) { setError('Please enter a valid Indian mobile number.'); return false }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setError('Please enter a valid email address.'); return false }
     if (!state) { setError('Please select your state.'); return false }
     if (!address.trim()) { setError('Please enter your delivery address.'); return false }
     if (items.length === 0) { setError('Your order is empty.'); return false }
@@ -128,21 +137,10 @@ export default function OrderForm({ onSuccess }: Props) {
   // Saves the order to SoapLedger, fires attribution events, builds the
   // WhatsApp message, and hands off to the parent's "send" step. Shared by
   // both the paid (Razorpay) path and the WhatsApp-only fallback path.
-  async function submitToSoapLedgerAndProceed(payment?: {
-    razorpay_order_id: string
-    razorpay_payment_id: string
-    razorpay_signature: string
-  }) {
+  function buildManualWhatsAppHref(humanRef: string) {
     const normalizedPhone = normalizePhone(phone)
     const fullAddress = `${address.trim()}, ${state}`
     const preferencesNote = formatPreferencesAsNote(preferences)
-
-    const lineItems = items.map((i) => ({
-      product_id: i.product_id,
-      product_slug: i.product_slug,
-      price: i.price,
-      qty: i.qty,
-    }))
 
     const whatsappItems: WhatsAppLineItem[] = items.map((i) => ({
       product_id: i.product_id,
@@ -157,17 +155,33 @@ export default function OrderForm({ onSuccess }: Props) {
       address_line_1: fullAddress,
     }
 
+    const waMessage = buildWhatsAppMessage(
+      humanRef,
+      { name: name.trim() },
+      whatsappItems,
+      shippingAddress,
+      shipping,
+      preferencesNote || undefined
+    )
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
+  }
+
+  async function submitToSoapLedgerAndProceed(intent?: 'interest') {
+    const normalizedPhone = normalizePhone(phone)
+    const preferencesNote = formatPreferencesAsNote(preferences)
     const res = await fetch('/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         customer_name: name.trim(),
         customer_phone: normalizedPhone,
-        items: lineItems,
-        address: fullAddress,
-        shipping,
+        customer_email: email.trim().toLowerCase(),
+        items: items.map((i) => ({ product_id: i.product_id, product_slug: i.product_slug, qty: i.qty })),
+        address: address.trim(),
+        state,
         notes: preferencesNote || undefined,
-        payment,
+        intent,
+        consent: intent === 'interest' ? contactConsent : undefined,
         attribution: getStoredAttribution(),
       }),
     })
@@ -181,6 +195,11 @@ export default function OrderForm({ onSuccess }: Props) {
     const { order_id, ref } = data
     const humanRef = ref || order_id
 
+    if (intent === 'interest') {
+      onSuccess(humanRef, '', 'interest')
+      return
+    }
+
     const attributionParams = {
       value: total,
       currency: 'INR',
@@ -191,40 +210,42 @@ export default function OrderForm({ onSuccess }: Props) {
       num_items: items.reduce((sum, item) => sum + item.qty, 0),
     }
 
-    if (payment) {
-      sendGAEvent('event', GA4_EVENT.PURCHASE, {
-        transaction_id: humanRef,
-        currency: 'INR',
-        value: total,
-        shipping,
-        items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
-      })
-      trackMetaPurchaseOnce(humanRef, attributionParams)
-    } else {
-      trackMetaLeadOnce(humanRef, attributionParams)
-    }
-
-    const waMessage = buildWhatsAppMessage(
-      humanRef,
-      { name: name.trim() },
-      whatsappItems,
-      shippingAddress,
-      shipping,
-      preferencesNote || undefined,
-      payment?.razorpay_payment_id
-    )
-
-    const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`
+    trackMetaLeadOnce(humanRef, attributionParams)
+    const waHref = buildManualWhatsAppHref(humanRef)
 
     // Clear cart first, then hand off to parent — orderPlacedRef in parent
     // is already set before clearOrder() triggers any re-render
     clearOrder()
-    onSuccess(humanRef, waHref, Boolean(payment))
+    onSuccess(humanRef, waHref, 'manual')
   }
 
-  // ── Primary path: pay now via Razorpay, then hand off to WhatsApp ─────────
+  function finishPaidCheckout(ref: string, outcome: 'paid' | 'pending') {
+    sendGAEvent('event', GA4_EVENT.PURCHASE, {
+      transaction_id: ref,
+      currency: 'INR',
+      value: total,
+      shipping,
+      items: items.map((i) => ({ item_id: i.product_id, item_name: i.product_name, price: i.price, quantity: i.qty })),
+    })
+    trackMetaPurchaseOnce(ref, {
+      value: total,
+      currency: 'INR',
+      content_ids: items.map((i) => i.product_slug),
+      content_type: 'product',
+      num_items: items.reduce((sum, item) => sum + item.qty, 0),
+    })
+    clearOrder()
+    onSuccess(ref, '', outcome)
+  }
+
+  // ── Primary path: pay on the website via Razorpay ────────────────────────
   async function handlePayNow(e: React.FormEvent) {
     e.preventDefault()
+
+    if (!acceptingOrders) {
+      await handleInterest()
+      return
+    }
 
     if (!RAZORPAY_ENABLED) {
       await handleWhatsAppFallback()
@@ -242,15 +263,27 @@ export default function OrderForm({ onSuccess }: Props) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          customer_name: name.trim(),
+          customer_phone: normalizePhone(phone),
+          customer_email: email.trim().toLowerCase(),
+          address: address.trim(),
+          state,
+          notes: formatPreferencesAsNote(preferences) || undefined,
           items: items.map((i) => ({ product_id: i.product_id, qty: i.qty })),
-          shipping,
+          attribution: getStoredAttribution(),
         }),
       })
 
       const orderData = await orderRes.json().catch(() => ({}))
       if (!orderRes.ok) {
+        if (orderData.code === 'ORDERS_PAUSED') {
+          setAcceptingOrders(false)
+          throw new Error('Orders are temporarily paused while we catch up.')
+        }
         throw new Error(orderData.error || `Server error ${orderRes.status}`)
       }
+      const createdOrder = { orderId: orderData.order_id, ref: orderData.ref, token: orderData.fallback_token }
+      setPendingOrder(createdOrder)
 
       const scriptLoaded = await loadRazorpayScript()
       if (!scriptLoaded) {
@@ -267,6 +300,7 @@ export default function OrderForm({ onSuccess }: Props) {
         prefill: {
           name: name.trim(),
           contact: normalizePhone(phone),
+          email: email.trim().toLowerCase(),
         },
         theme: { color: '#1E5631' },
         handler: async (response: unknown) => {
@@ -287,11 +321,12 @@ export default function OrderForm({ onSuccess }: Props) {
               throw new Error('Payment could not be verified')
             }
 
-            await submitToSoapLedgerAndProceed(r)
+            finishPaidCheckout(verifyData.ref || createdOrder.ref, verifyData.pending ? 'pending' : 'paid')
+            setLoading(false)
           } catch (err) {
-            setError(
-              "Your payment went through, but we couldn't confirm it automatically. Please message us on WhatsApp with your payment details and we'll sort it out right away."
-            )
+            // A valid Checkout success can still lose its browser callback.
+            // The signed webhook will finish this same SoapLedger order.
+            finishPaidCheckout(createdOrder.ref, 'pending')
             setLoading(false)
           }
         },
@@ -310,9 +345,8 @@ export default function OrderForm({ onSuccess }: Props) {
 
       razorpay.open()
     } catch (err) {
-      setError(
-        "We're sorry, but we couldn't start the payment right now. Please message us on WhatsApp and we'll help you place your order manually."
-      )
+      setError(err instanceof Error ? err.message : 'Could not start payment. Please try again.')
+      if (acceptingOrders) setPaymentDismissed(true)
       setLoading(false)
     }
   }
@@ -324,17 +358,55 @@ export default function OrderForm({ onSuccess }: Props) {
 
     setLoading(true)
     try {
-      await submitToSoapLedgerAndProceed()
+      if (pendingOrder) {
+        const res = await fetch('/api/razorpay/manual-fallback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ provider_order_id: pendingOrder.orderId, fallback_token: pendingOrder.token }),
+        })
+        const data = await res.json().catch(() => ({}))
+        if (!res.ok) {
+          if (data.code === 'ORDERS_PAUSED') setAcceptingOrders(false)
+          throw new Error(data.error || 'Could not switch to manual payment.')
+        }
+        const waHref = buildManualWhatsAppHref(data.ref || pendingOrder.ref)
+        clearOrder()
+        onSuccess(data.ref || pendingOrder.ref, waHref, 'manual')
+      } else {
+        await submitToSoapLedgerAndProceed()
+      }
     } catch (err) {
-      setError(
-        "We're sorry, but we couldn't process your order right now. Please message us on WhatsApp and we'll help you place your order manually."
-      )
+      setError(err instanceof Error ? err.message : 'Could not process your order right now.')
+      setLoading(false)
+    }
+  }
+
+  async function handleInterest() {
+    setError('')
+    if (!validateForm()) return
+    if (!contactConsent) {
+      setError('Please tick the box so we can email you when orders reopen.')
+      return
+    }
+    setLoading(true)
+    try {
+      await submitToSoapLedgerAndProceed('interest')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not save your interest. Please try again.')
       setLoading(false)
     }
   }
 
   return (
     <form onSubmit={handlePayNow} className="space-y-6">
+      {!acceptingOrders && (
+        <div className="rounded-lg border border-[#E8D29B] bg-[#FFF8E8] p-5">
+          <h2 className="font-serif text-xl text-[#1E5631]">Orders are temporarily paused while we catch up.</h2>
+          <p className="mt-2 font-sans text-sm leading-relaxed text-[#555]">
+            Your cart is safe. Submit your details below and we&apos;ll save this as an Expression of Interest in SoapLedger, then email you when ordering reopens.
+          </p>
+        </div>
+      )}
       {/* Order summary */}
       <div className="rounded-lg bg-[#F7F5F0] p-5">
         <div className="mb-4 flex items-center justify-between">
@@ -456,6 +528,20 @@ export default function OrderForm({ onSuccess }: Props) {
 
         <div>
           <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
+            Email Address <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            autoComplete="email"
+            className="w-full rounded border border-[#D6CFC4] bg-white px-3 py-2.5 font-sans text-sm text-[#1A1A14] placeholder:text-[#bbb] focus:border-[#1E5631] focus:outline-none focus:ring-1 focus:ring-[#1E5631]"
+          />
+        </div>
+
+        <div>
+          <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
             State <span className="text-red-500">*</span>
           </label>
           <select
@@ -488,17 +574,21 @@ export default function OrderForm({ onSuccess }: Props) {
 
       <OrderPreferences />
 
+      {!acceptingOrders && (
+        <label className="flex items-start gap-3 rounded border border-[#D6CFC4] bg-white p-4 font-sans text-sm text-[#444]">
+          <input
+            type="checkbox"
+            checked={contactConsent}
+            onChange={(e) => setContactConsent(e.target.checked)}
+            className="mt-0.5 h-4 w-4 accent-[#1E5631]"
+          />
+          <span>Email me when Healing Soil is accepting orders again. This does not reserve stock or place a paid order.</span>
+        </label>
+      )}
+
       {error && (
         <div className="rounded border border-red-200 bg-red-50 px-4 py-3">
           <p className="font-sans text-sm font-medium text-red-800">{error}</p>
-          <a
-            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Healing Soil, I'm having trouble placing my order on the website. Can you help me?")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block font-sans text-sm font-bold text-[#1E5631] underline"
-          >
-            Message us on WhatsApp →
-          </a>
         </div>
       )}
 
@@ -508,7 +598,9 @@ export default function OrderForm({ onSuccess }: Props) {
           disabled={loading || items.length === 0}
           className="flex w-full items-center justify-center gap-2 rounded bg-[#1E5631] py-3 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {RAZORPAY_ENABLED ? (
+          {!acceptingOrders ? (
+            loading ? 'Saving your interest…' : 'Save My Interest & Notify Me'
+          ) : RAZORPAY_ENABLED ? (
             loading ? 'Starting payment…' : `Pay ₹${total.toLocaleString('en-IN')} & Place Order`
           ) : loading ? (
             'Saving your order…'
@@ -519,15 +611,15 @@ export default function OrderForm({ onSuccess }: Props) {
             </>
           )}
         </button>
-        {!loading && !paymentDismissed && (
+        {!loading && !paymentDismissed && acceptingOrders && (
           <p className="text-center font-sans text-xs text-[#999999]">
             {RAZORPAY_ENABLED
-              ? "Pay securely, then we'll confirm your order on WhatsApp."
+              ? 'Secure payment by Razorpay. Your paid order is confirmed on this website.'
               : 'Clicking this saves your order and shows you how to send it on WhatsApp in one step.'}
           </p>
         )}
 
-        {paymentDismissed && !loading && (
+        {paymentDismissed && !loading && acceptingOrders && (
           <div className="rounded border border-[#D6CFC4] bg-[#F7F5F0] px-4 py-3 text-center">
             <p className="font-sans text-xs text-[#666666]">
               No worries — you can also place your order now and pay via a payment link we send

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Track Your Order — Healing Soil',
-  description: 'Check the status of your Healing Soil order via WhatsApp.',
+  description: 'Check the status of your Healing Soil order.',
   robots: { index: false, follow: false },
 }
 
@@ -14,7 +14,7 @@ export default function TrackOrderPage() {
         <h1 className="mb-4 font-serif text-4xl text-[#1E5631]">Track Your Order</h1>
         <p className="mb-10 font-sans text-base leading-relaxed text-[#666666]">
           Our process is personal. We check availability and confirm every order 
-          individually on WhatsApp before taking payment.
+          individually and prepare every paid order fresh.
         </p>
 
         <div className="rounded-xl border border-[#D6CFC4] bg-white p-8 shadow-sm">
@@ -38,10 +38,10 @@ export default function TrackOrderPage() {
             <h3 className="mb-3 font-sans text-sm font-bold text-[#1A1A14]">Our Process:</h3>
             <ul className="space-y-3">
               {[
-                { step: '1', title: 'Order Received', desc: 'We check your order and confirm details on WhatsApp.' },
-                { step: '2', title: 'Payment', desc: 'We send a UPI QR code. No Cash on Delivery (COD) is available.' },
-                { step: '3', title: 'Made to Order', desc: 'Your soaps are handmade fresh. Shipped in 2 days. Arrives in 4-7 days depending on your city.' },
-                { step: '4', title: 'Speed Post', desc: 'We ship via India Post. They will notify you via SMS on the day of delivery.' },
+                { step: '1', title: 'Payment Confirmed', desc: 'Your secure website payment is recorded automatically.' },
+                { step: '2', title: 'Made to Order', desc: 'We prepare your order fresh after payment.' },
+                { step: '3', title: 'Dispatch', desc: 'We send your soaps via India Post Speed Post from South Goa.' },
+                { step: '4', title: 'Tracking', desc: 'We share tracking after dispatch. India Post may also notify you by SMS.' },
               ].map((item) => (
                 <li key={item.step} className="flex gap-3">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F7F5F0] text-[10px] font-bold text-[#1E5631]">

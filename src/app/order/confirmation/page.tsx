@@ -20,7 +20,7 @@ export default async function ConfirmationPage() {
 
         <h1 className="mb-2 font-serif text-4xl text-[#1A1A14]">Order received</h1>
         <p className="mb-8 font-sans text-base text-[#666666]">
-          We&apos;ll confirm your order and send you a payment link on WhatsApp shortly.
+          Your payment and order have been confirmed. No WhatsApp follow-up is required.
         </p>
 
         <div className="mb-10 text-left">
@@ -29,10 +29,9 @@ export default async function ConfirmationPage() {
             <div className="flex gap-4">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">1</span>
               <div>
-                <p className="font-sans text-sm font-bold text-[#1A1A14]">Confirmation &amp; Payment</p>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Payment Confirmed</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  We will message you to confirm and send a UPI QR code.{' '}
-                  <span className="font-medium text-[#1A1A14]">Please note: We do not offer Cash on Delivery (COD).</span>
+                  Your secure Razorpay payment is recorded with your order.
                 </p>
               </div>
             </div>
@@ -48,9 +47,9 @@ export default async function ConfirmationPage() {
             <div className="flex gap-4">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">3</span>
               <div>
-                <p className="font-sans text-sm font-bold text-[#1A1A14]">Speed Post from Goa</p>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Dispatch from Goa</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  We ship via India Post Speed Post from South Goa. India Post will notify you via SMS on the day of delivery.
+                  We ship via India Post Speed Post from South Goa and share tracking after dispatch.
                 </p>
               </div>
             </div>

@@ -20,7 +20,7 @@ function WhatsAppIcon() {
   )
 }
 
-export default function OrderPageClient() {
+export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: boolean }) {
   const router = useRouter()
   const itemCount = useOrderStore((s) => s.itemCount)
   const items = useOrderStore((s) => s.items)
@@ -30,7 +30,7 @@ export default function OrderPageClient() {
   const [orderRef, setOrderRef] = useState('')
   const [waHref, setWaHref] = useState('')
   const [isMobile, setIsMobile] = useState(false)
-  const [paid, setPaid] = useState(false)
+  const [outcome, setOutcome] = useState<'paid' | 'pending' | 'manual' | 'interest'>('manual')
 
   // Set synchronously before any clearOrder() call so the redirect guard
   // below never fires during the cart-clear re-render
@@ -62,17 +62,48 @@ export default function OrderPageClient() {
   }, [itemCount, router])
 
   // Called by OrderForm after a successful SoapLedger submission
-  function handleOrderSuccess(ref: string, href: string, wasPaid: boolean) {
+  function handleOrderSuccess(ref: string, href: string, result: 'paid' | 'pending' | 'manual' | 'interest') {
     orderPlacedRef.current = true  // gate the redirect — set before clearOrder fires
     setOrderRef(ref)
     setWaHref(href)
-    setPaid(wasPaid)
+    setOutcome(result)
     setStep('send')
   }
 
   // ── Step 2: Send on WhatsApp ───────────────────────────────────────────────
 
   if (step === 'send') {
+    if (outcome !== 'manual') {
+      const isInterest = outcome === 'interest'
+      return (
+        <div className="mx-auto max-w-md space-y-6 py-8 text-center">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#1E5631]">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="font-serif text-2xl text-[#1A1A14]">
+              {isInterest
+                ? 'Your interest has been saved.'
+                : outcome === 'pending' ? 'Payment received. Confirmation is in progress.' : 'Payment received. Your order is confirmed.'}
+            </h2>
+            <p className="mt-1 font-sans text-sm text-[#999]">Reference #{orderRef}</p>
+          </div>
+          <p className="font-sans text-sm leading-relaxed text-[#444444]">
+            {isInterest
+              ? 'No payment was taken and stock has not been reserved. We will email you when orders reopen; your cart remains available.'
+              : outcome === 'pending'
+                ? 'You do not need to pay again or message us. Razorpay’s signed confirmation will complete this order automatically.'
+                : 'We will start preparing your made-to-order soaps and share tracking after dispatch. No WhatsApp confirmation is needed.'}
+          </p>
+          <a href="/shop" className="inline-block rounded bg-[#1E5631] px-6 py-3 font-sans text-sm font-bold text-white">
+            {isInterest ? 'Return to Shop' : 'Continue Shopping'}
+          </a>
+        </div>
+      )
+    }
+
     return (
       <div className="mx-auto max-w-md space-y-6 py-4 text-center">
 
@@ -84,15 +115,13 @@ export default function OrderPageClient() {
 
         <div>
           <h2 className="font-serif text-2xl text-[#1A1A14]">
-            {paid ? 'Payment received. Confirm on WhatsApp to finish.' : 'Your order is ready. Send it on WhatsApp to place it.'}
+            Your order is ready. Send it on WhatsApp to place it.
           </h2>
           <p className="mt-1 font-sans text-sm text-[#999]">Order #{orderRef}</p>
         </div>
 
         <p className="font-sans text-sm text-[#444444]">
-          {paid
-            ? "Your payment is confirmed. Send us your order details on WhatsApp so we can start making it."
-            : "Send us your order on WhatsApp. We'll confirm it and send you a payment link."}
+          Send us your order on WhatsApp. We&apos;ll confirm it and send you a payment link.
         </p>
 
         {isMobile ? (
@@ -124,9 +153,7 @@ export default function OrderPageClient() {
         )}
 
         <p className="font-sans text-xs text-[#999999]">
-          {paid
-            ? "After you send: we'll start making your order fresh and share tracking once it ships."
-            : "After you send: we'll confirm your order and send you a payment link on WhatsApp."}
+          After you send: we&apos;ll confirm your order and send you a payment link on WhatsApp.
         </p>
 
         <p className="font-sans text-xs text-[#999999]">
@@ -184,7 +211,7 @@ export default function OrderPageClient() {
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-lg border border-[#D6CFC4] bg-white p-6 sm:p-8">
-          <OrderForm onSuccess={handleOrderSuccess} />
+          <OrderForm onSuccess={handleOrderSuccess} acceptingOrders={acceptingOrders} />
         </div>
       </div>
 
@@ -205,11 +232,11 @@ export default function OrderPageClient() {
             <h3 className="mb-3 font-sans text-sm font-bold text-[#1A1A14]">What happens next?</h3>
             <ul className="space-y-3">
               {[
-                { title: 'Place Order', desc: 'Confirm your items and delivery address.' },
-                { title: 'Confirmation', desc: 'We check your order and send you a UPI QR code for payment.' },
-                { title: 'Made to Order', desc: 'Every bar is handmade fresh. Shipped in 2 days. Arrives in 4-7 days depending on your city.' },
-                { title: 'Shipping', desc: 'Your soaps are sent via India Post Speed Post from South Goa.' },
-                { title: 'Tracking', desc: 'India Post Speed Post notifies you via SMS on the day of delivery.' },
+                { title: 'Pay Securely', desc: 'Complete payment on the website through Razorpay.' },
+                { title: 'Payment Confirmed', desc: 'Your paid order is recorded automatically—no WhatsApp confirmation needed.' },
+                { title: 'Made to Order', desc: 'Every bar is handmade fresh and prepared for dispatch.' },
+                { title: 'Dispatch', desc: 'Your soaps are sent via India Post Speed Post from South Goa.' },
+                { title: 'Tracking', desc: 'We share tracking after dispatch; India Post may also notify you by SMS.' },
               ].map((s, i) => (
                 <li key={i} className="flex gap-3 font-sans text-sm">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C9A84C] text-[10px] font-bold text-white">

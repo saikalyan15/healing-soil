@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
           <p>We collect only the information needed to process and deliver your order:</p>
           <ul className="mt-3 list-disc pl-5 space-y-1">
             <li><strong>Name</strong> — to address your order</li>
-            <li><strong>Phone number</strong> — to confirm your order via WhatsApp and coordinate delivery</li>
+            <li><strong>Phone number and email</strong> — to process your order, coordinate delivery, and send requested order-availability updates</li>
             <li><strong>Delivery address</strong> — to ship your order to you</li>
             <li><strong>Order details</strong> — the products you ordered, quantities, and total amount</li>
           </ul>
