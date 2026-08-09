@@ -11,3 +11,4 @@ export const MAX_ORDER_TOTAL_INR = 25_000
 export const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000 // 10 minutes
 export const RATE_LIMIT_PAYMENT_ATTEMPTS = 5   // /api/razorpay/create-order
 export const RATE_LIMIT_ORDER_ATTEMPTS = 8     // /api/orders
+export const RATE_LIMIT_TRACK_ATTEMPTS = 5     // /api/orders/track

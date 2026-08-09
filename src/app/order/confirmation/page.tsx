@@ -56,9 +56,9 @@ export default async function ConfirmationPage() {
             <div className="flex gap-4">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#1E5631] text-xs font-bold text-white">4</span>
               <div>
-                <p className="font-sans text-sm font-bold text-[#1A1A14]">Tracking by Phone Number</p>
+                <p className="font-sans text-sm font-bold text-[#1A1A14]">Track securely on our website</p>
                 <p className="font-sans text-sm leading-relaxed text-[#666666]">
-                  Need an update? Just message us on WhatsApp with your registered mobile number.
+                  Use your order reference and registered mobile number to see the latest status.
                 </p>
               </div>
             </div>

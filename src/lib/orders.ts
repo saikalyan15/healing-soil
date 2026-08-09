@@ -218,6 +218,37 @@ export async function updateSoapLedgerPayment(params: {
   return res.json()
 }
 
+export type TrackedOrder = {
+  ref: string
+  status: string
+  payment_status: 'unpaid' | 'pending' | 'failed' | 'manual' | 'paid'
+  is_interest: boolean
+  order_date: string
+  created_at: string
+  paid_at: string | null
+  payment_failed_at: string | null
+  total: number
+  shipping: number
+  items: Array<{ name: string; quantity: number }>
+  shipments: Array<{
+    status: string
+    dispatched_at: string | null
+    delivered_at: string | null
+  }>
+}
+
+export async function trackSoapLedgerOrder(ref: string, phone: string): Promise<TrackedOrder | null> {
+  const res = await fetch(`${getApiBase()}/api/orders/track`, {
+    method: 'POST',
+    headers: getApiHeaders(),
+    body: JSON.stringify({ ref, phone }),
+    cache: 'no-store',
+  })
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`Could not track order: ${res.status}`)
+  return res.json()
+}
+
 // ─── WhatsApp deep-link builder ────────────────────────────────────────────────
 
 /**

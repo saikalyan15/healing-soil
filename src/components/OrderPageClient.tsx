@@ -97,9 +97,19 @@ export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: 
                 ? 'You do not need to pay again or message us. Razorpay’s signed confirmation will complete this order automatically.'
                 : 'We will start preparing your made-to-order soaps and share tracking after dispatch. No WhatsApp confirmation is needed.'}
           </p>
-          <a href="/shop" className="inline-block rounded bg-[#1E5631] px-6 py-3 font-sans text-sm font-bold text-white">
-            {isInterest ? 'Return to Shop' : 'Continue Shopping'}
-          </a>
+          <div className="flex flex-wrap justify-center gap-3">
+            {!isInterest ? (
+              <a
+                href={`/order/track?ref=${encodeURIComponent(orderRef)}`}
+                className="inline-block rounded bg-[#1E5631] px-6 py-3 font-sans text-sm font-bold text-white"
+              >
+                Track This Order
+              </a>
+            ) : null}
+            <a href="/shop" className="inline-block rounded border border-[#1E5631] px-6 py-3 font-sans text-sm font-bold text-[#1E5631]">
+              {isInterest ? 'Return to Shop' : 'Continue Shopping'}
+            </a>
+          </div>
         </div>
       )
     }
