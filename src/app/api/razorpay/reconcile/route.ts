@@ -62,7 +62,13 @@ export async function POST(req: NextRequest) {
       payment = await getRazorpayClient().payments.fetch(provider_payment_id)
     } catch (err) {
       console.error('[Razorpay reconcile] payment fetch failed', { provider_order_id, provider_payment_id, err })
-      return NextResponse.json({ error: 'Razorpay could not find that payment ID.' }, { status: 404 })
+      const providerStatus = typeof err === 'object' && err !== null && 'statusCode' in err
+        ? Number(err.statusCode)
+        : null
+      if (providerStatus === 400 || providerStatus === 404) {
+        return NextResponse.json({ error: 'Razorpay could not find that payment ID.' }, { status: 404 })
+      }
+      return NextResponse.json({ error: 'Razorpay verification is temporarily unavailable. Please try again.' }, { status: 502 })
     }
 
     const expectedAmount = Math.round(Number(ledger.order.order_value) * 100)
