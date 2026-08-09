@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { confirmPaidOrder } from '@/lib/payment-confirmation'
 import { verifyWebhookSignature } from '@/lib/razorpay'
+import { updateSoapLedgerPayment } from '@/lib/orders'
 
 export async function POST(req: NextRequest) {
   const rawBody = await req.text()
@@ -12,14 +13,33 @@ export async function POST(req: NextRequest) {
 
     const event = JSON.parse(rawBody) as {
       event?: string
-      payload?: { payment?: { entity?: { id?: string; order_id?: string; status?: string } } }
+      payload?: { payment?: { entity?: {
+        id?: string
+        order_id?: string
+        status?: string
+        error_description?: string
+        error_reason?: string
+      } } }
     }
-    if (!['order.paid', 'payment.captured'].includes(event.event || '')) {
+    if (!['order.paid', 'payment.captured', 'payment.failed'].includes(event.event || '')) {
       return NextResponse.json({ received: true, ignored: true })
     }
 
     const payment = event.payload?.payment?.entity
-    if (!payment?.id || !payment.order_id || (payment.status && payment.status !== 'captured')) {
+    if (!payment?.id || !payment.order_id) {
+      return NextResponse.json({ received: true, ignored: true })
+    }
+
+    if (event.event === 'payment.failed') {
+      await updateSoapLedgerPayment({
+        action: 'failed',
+        providerOrderId: payment.order_id,
+        failureReason: payment.error_description || payment.error_reason || 'Payment was not completed',
+      })
+      return NextResponse.json({ received: true })
+    }
+
+    if (payment.status && payment.status !== 'captured') {
       return NextResponse.json({ received: true, ignored: true })
     }
 

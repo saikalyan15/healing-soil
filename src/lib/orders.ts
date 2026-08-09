@@ -198,9 +198,10 @@ export type SoapLedgerPaymentOrder = {
 }
 
 export async function updateSoapLedgerPayment(params: {
-  action: 'confirm' | 'manual' | 'status'
+  action: 'confirm' | 'failed' | 'manual' | 'status'
   providerOrderId: string
   providerPaymentId?: string
+  failureReason?: string
 }): Promise<{ transitioned: boolean; order: SoapLedgerPaymentOrder }> {
   const res = await fetch(`${getApiBase()}/api/orders/payment`, {
     method: 'POST',
@@ -209,6 +210,7 @@ export async function updateSoapLedgerPayment(params: {
       action: params.action,
       provider_order_id: params.providerOrderId,
       provider_payment_id: params.providerPaymentId,
+      failure_reason: params.failureReason,
     }),
     cache: 'no-store',
   })
