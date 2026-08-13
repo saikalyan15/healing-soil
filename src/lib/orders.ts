@@ -20,6 +20,7 @@ export type OrderPayload = {
   customer: {
     name: string
     phone: string
+    email?: string
     address: string
   }
   items: LineItem[]
@@ -27,6 +28,12 @@ export type OrderPayload = {
   notes?: string           // Customer instructions
   source: string           // e.g. "Website Order"
   attribution?: OrderAttribution
+  payment?: {
+    provider: 'razorpay'
+    provider_order_id: string
+  }
+  intent?: 'interest'
+  consent?: boolean
 }
 
 export type ShippingAddress = {
@@ -36,7 +43,7 @@ export type ShippingAddress = {
 }
 
 /** Shape of the SoapLedger order creation response */
-type SoapLedgerOrderResponse = {
+export type SoapLedgerOrderResponse = {
   order_id: string
   ref: string              // human-readable ref e.g. "HS-2025-0042"
   status: string
@@ -65,7 +72,7 @@ function getApiHeaders(): HeadersInit {
  * Sends an order notification email to the store owner via Resend.
  * NEVER throws — a failed notification must never block or lose an order.
  */
-async function sendOwnerEmail(
+export async function sendOwnerEmail(
   orderId: string,
   ref: string,
   payload: OrderPayload
@@ -85,6 +92,9 @@ async function sendOwnerEmail(
     const subtotal = payload.items.reduce((sum, item) => sum + item.price * item.qty, 0)
     const total = subtotal + payload.shipping
     const waLink = `https://wa.me/${payload.customer.phone.replace(/\D/g, '')}`
+    const escapeHtml = (value: unknown) => String(value ?? '')
+      .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;').replaceAll("'", '&#039;')
 
     await resend.emails.send({
       from: 'orders@healingsoil.in',
@@ -92,12 +102,13 @@ async function sendOwnerEmail(
       subject: `New Order — ${ref}`,
       html: `
         <h2 style="color:#1E5631">New Order: ${ref}</h2>
-        <p><strong>Customer:</strong> ${payload.customer.name}</p>
-        <p><strong>Phone:</strong> <a href="${waLink}">${payload.customer.phone}</a></p>
-        <p><strong>Address:</strong> ${payload.customer.address}</p>
+        <p><strong>Customer:</strong> ${escapeHtml(payload.customer.name)}</p>
+        <p><strong>Phone:</strong> <a href="${waLink}">${escapeHtml(payload.customer.phone)}</a></p>
+        ${payload.customer.email ? `<p><strong>Email:</strong> ${escapeHtml(payload.customer.email)}</p>` : ''}
+        <p><strong>Address:</strong> ${escapeHtml(payload.customer.address)}</p>
         <p><strong>Items:</strong> ${payload.items.length}</p>
         <p><strong>Total:</strong> ₹${total} (incl. ₹${payload.shipping} shipping)</p>
-        ${payload.notes ? `<p><strong>Notes:</strong> ${payload.notes}</p>` : ''}
+        ${payload.notes ? `<p><strong>Notes:</strong> ${escapeHtml(payload.notes)}</p>` : ''}
         <p><a href="https://soap-ledger.vercel.app/orders/${orderId}">View in SoapLedger →</a></p>
       `,
     })
@@ -117,7 +128,10 @@ async function sendOwnerEmail(
  *
  * @returns Object with order_id (UUID) and ref (human-readable)
  */
-export async function submitOrder(payload: OrderPayload): Promise<{ order_id: string; ref: string }> {
+export async function submitOrder(
+  payload: OrderPayload,
+  options: { notifyOwner?: boolean } = {}
+): Promise<{ order_id: string; ref: string; status?: string; payment_status?: string }> {
   const body = JSON.stringify(payload)
   if (process.env.NODE_ENV !== 'production') {
     console.log('[SoapLedger Request Payload]:', body)
@@ -143,9 +157,98 @@ export async function submitOrder(payload: OrderPayload): Promise<{ order_id: st
   const humanRef = order.ref || `WEB-${Date.now().toString().slice(-6)}`
 
   // 2. Fire owner email notification (non-blocking, errors are swallowed)
-  await sendOwnerEmail(order.order_id, humanRef, payload)
+  if (options.notifyOwner !== false) {
+    await sendOwnerEmail(order.order_id, humanRef, payload)
+  }
 
-  return { order_id: order.order_id, ref: humanRef }
+  return { ...order, ref: humanRef }
+}
+
+export async function getOrderAvailability(): Promise<boolean> {
+  const res = await fetch(`${getApiBase()}/api/order-availability`, {
+    headers: getApiHeaders(),
+    cache: 'no-store',
+  })
+  if (!res.ok) throw new Error(`Could not check order availability: ${res.status}`)
+  const data = await res.json()
+  return data.accepting_orders === true
+}
+
+export type SoapLedgerPaymentOrder = {
+  id: string
+  ref: string
+  status: string
+  payment_status: string
+  provider_order_id?: string
+  provider_payment_id?: string
+  order_value: string | number
+  shipping_charge: string | number
+  customer_name: string
+  customer_phone: string
+  customer_email?: string
+  customer_address: string
+  notes?: string
+  source?: string
+  attribution?: OrderAttribution
+  items: Array<{
+    product_id: string
+    product_slug: string
+    product_name: string
+    price: string | number
+    qty: string | number
+  }>
+}
+
+export async function updateSoapLedgerPayment(params: {
+  action: 'confirm' | 'failed' | 'manual' | 'status'
+  providerOrderId: string
+  providerPaymentId?: string
+  failureReason?: string
+}): Promise<{ transitioned: boolean; order: SoapLedgerPaymentOrder }> {
+  const res = await fetch(`${getApiBase()}/api/orders/payment`, {
+    method: 'POST',
+    headers: getApiHeaders(),
+    body: JSON.stringify({
+      action: params.action,
+      provider_order_id: params.providerOrderId,
+      provider_payment_id: params.providerPaymentId,
+      failure_reason: params.failureReason,
+    }),
+    cache: 'no-store',
+  })
+  if (!res.ok) throw new Error(`Could not update payment: ${res.status} — ${await res.text()}`)
+  return res.json()
+}
+
+export type TrackedOrder = {
+  ref: string
+  status: string
+  payment_status: 'unpaid' | 'pending' | 'failed' | 'manual' | 'paid'
+  is_interest: boolean
+  order_date: string
+  created_at: string
+  paid_at: string | null
+  payment_failed_at: string | null
+  total: number
+  shipping: number
+  items: Array<{ name: string; quantity: number }>
+  shipments: Array<{
+    status: string
+    dispatched_at: string | null
+    delivered_at: string | null
+  }>
+}
+
+export async function trackSoapLedgerOrder(ref: string, phone: string): Promise<TrackedOrder | null> {
+  const res = await fetch(`${getApiBase()}/api/orders/track`, {
+    method: 'POST',
+    headers: getApiHeaders(),
+    body: JSON.stringify({ ref, phone }),
+    cache: 'no-store',
+  })
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`Could not track order: ${res.status}`)
+  return res.json()
 }
 
 // ─── WhatsApp deep-link builder ────────────────────────────────────────────────

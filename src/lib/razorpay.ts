@@ -22,6 +22,12 @@ function getKeySecret(): string {
   return secret
 }
 
+function getWebhookSecret(): string {
+  const secret = process.env.RAZORPAY_WEBHOOK_SECRET
+  if (!secret) throw new Error('RAZORPAY_WEBHOOK_SECRET is not set')
+  return secret
+}
+
 let client: Razorpay | null = null
 
 export function getRazorpayClient(): Razorpay {
@@ -50,4 +56,23 @@ export function verifyPaymentSignature(params: {
   if (expectedBuf.length !== actualBuf.length) return false
 
   return crypto.timingSafeEqual(expectedBuf, actualBuf)
+}
+
+function verifyHmac(payload: string, signature: string, secret: string): boolean {
+  const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex')
+  const expectedBuf = Buffer.from(expected)
+  const actualBuf = Buffer.from(signature)
+  return expectedBuf.length === actualBuf.length && crypto.timingSafeEqual(expectedBuf, actualBuf)
+}
+
+export function verifyWebhookSignature(payload: string, signature: string): boolean {
+  return verifyHmac(payload, signature, getWebhookSecret())
+}
+
+export function createFallbackToken(providerOrderId: string): string {
+  return crypto.createHmac('sha256', getKeySecret()).update(`manual|${providerOrderId}`).digest('hex')
+}
+
+export function verifyFallbackToken(providerOrderId: string, token: string): boolean {
+  return verifyHmac(`manual|${providerOrderId}`, token, getKeySecret())
 }

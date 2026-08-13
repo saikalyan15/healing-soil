@@ -18,6 +18,8 @@ export type OrderAttribution = {
   identifiers?: {
     fbp?: string
     fbc?: string
+    ga_client_id?: string
+    ga_session_id?: string
   }
 }
 
