@@ -5,8 +5,11 @@ with Meta Ads write tools disabled. It is intended for read-only campaign
 audits and reporting.
 
 The Meta access token is read at runtime from `.env.local`, with macOS Keychain
-as a fallback. `.env.local` is excluded by the repository's `.gitignore`, and
-the token is not stored in `~/.codex/config.toml`.
+as a fallback on macOS. `.env.local` is excluded by the repository's
+`.gitignore`, and the token is not stored in `~/.codex/config.toml`.
+
+Use `start.mjs` on Windows. On macOS, `start.sh` additionally supports Keychain
+as a token fallback. Both launchers keep Meta Ads write tools disabled.
 
 ## Store the token in `.env.local`
 
