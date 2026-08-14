@@ -204,6 +204,14 @@ export async function updateSoapLedgerPayment(params: {
   providerOrderId: string
   providerPaymentId?: string
   failureReason?: string
+  failureDetails?: {
+    paymentId?: string
+    method?: string
+    code?: string
+    source?: string
+    step?: string
+    reason?: string
+  }
 }): Promise<{ transitioned: boolean; order: SoapLedgerPaymentOrder }> {
   const res = await fetch(`${getApiBase()}/api/orders/payment`, {
     method: 'POST',
@@ -213,6 +221,14 @@ export async function updateSoapLedgerPayment(params: {
       provider_order_id: params.providerOrderId,
       provider_payment_id: params.providerPaymentId,
       failure_reason: params.failureReason,
+      failure_details: params.failureDetails ? {
+        payment_id: params.failureDetails.paymentId,
+        method: params.failureDetails.method,
+        code: params.failureDetails.code,
+        source: params.failureDetails.source,
+        step: params.failureDetails.step,
+        reason: params.failureDetails.reason,
+      } : undefined,
     }),
     cache: 'no-store',
   })

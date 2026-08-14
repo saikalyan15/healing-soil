@@ -17,7 +17,11 @@ export async function POST(req: NextRequest) {
         id?: string
         order_id?: string
         status?: string
+        method?: string
+        error_code?: string
         error_description?: string
+        error_source?: string
+        error_step?: string
         error_reason?: string
       } } }
     }
@@ -35,6 +39,14 @@ export async function POST(req: NextRequest) {
         action: 'failed',
         providerOrderId: payment.order_id,
         failureReason: payment.error_description || payment.error_reason || 'Payment was not completed',
+        failureDetails: {
+          paymentId: payment.id,
+          method: payment.method,
+          code: payment.error_code,
+          source: payment.error_source,
+          step: payment.error_step,
+          reason: payment.error_reason,
+        },
       })
       return NextResponse.json({ received: true })
     }
