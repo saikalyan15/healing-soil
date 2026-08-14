@@ -23,6 +23,9 @@ export async function POST(req: NextRequest) {
         error_source?: string
         error_step?: string
         error_reason?: string
+        amount?: number | string
+        currency?: string
+        created_at?: number
       } } }
     }
     if (!['order.paid', 'payment.captured', 'payment.failed'].includes(event.event || '')) {
@@ -38,6 +41,7 @@ export async function POST(req: NextRequest) {
       await updateSoapLedgerPayment({
         action: 'failed',
         providerOrderId: payment.order_id,
+        providerPaymentId: payment.id,
         failureReason: payment.error_description || payment.error_reason || 'Payment was not completed',
         failureDetails: {
           paymentId: payment.id,
@@ -46,6 +50,14 @@ export async function POST(req: NextRequest) {
           source: payment.error_source,
           step: payment.error_step,
           reason: payment.error_reason,
+          description: payment.error_description,
+        },
+        paymentDetails: {
+          status: payment.status,
+          method: payment.method,
+          amountPaise: Number(payment.amount),
+          currency: payment.currency,
+          createdAt: payment.created_at,
         },
       })
       return NextResponse.json({ received: true })
@@ -59,6 +71,13 @@ export async function POST(req: NextRequest) {
       providerOrderId: payment.order_id,
       providerPaymentId: payment.id,
       origin: req.nextUrl.origin,
+      paymentDetails: {
+        status: payment.status || 'captured',
+        method: payment.method,
+        amountPaise: Number(payment.amount),
+        currency: payment.currency,
+        createdAt: payment.created_at,
+      },
     })
     return NextResponse.json({ received: true })
   } catch (err) {

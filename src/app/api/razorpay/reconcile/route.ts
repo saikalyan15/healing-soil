@@ -93,6 +93,13 @@ export async function POST(req: NextRequest) {
       providerOrderId: provider_order_id,
       providerPaymentId: provider_payment_id,
       origin: req.nextUrl.origin,
+      paymentDetails: {
+        status: payment.status,
+        method: payment.method,
+        amountPaise: Number(payment.amount),
+        currency: payment.currency,
+        createdAt: payment.created_at,
+      },
     })
 
     return NextResponse.json({

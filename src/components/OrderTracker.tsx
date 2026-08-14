@@ -53,8 +53,10 @@ function getStatusMessage(order: TrackedOrder) {
   }
   if (order.payment_status === 'pending') {
     return {
-      title: 'Payment confirmation is pending',
-      body: 'If money was deducted, do not pay again. Razorpay’s signed confirmation can update this order automatically; refresh after a few minutes.',
+      title: order.payment_provider === 'razorpay' ? 'Payment confirmation is pending' : 'Payment pending',
+      body: order.payment_provider === 'razorpay'
+        ? 'If money was deducted, do not pay again. Razorpay’s signed confirmation can update this order automatically; refresh after a few minutes.'
+        : 'We have received your order details and are awaiting payment confirmation.',
       tone: 'border-[#E8D29B] bg-[#FFF8E8] text-[#6B4E16]',
     }
   }

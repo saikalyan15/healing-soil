@@ -10,11 +10,19 @@ export async function confirmPaidOrder(params: {
   providerOrderId: string
   providerPaymentId: string
   origin: string
+  paymentDetails?: {
+    status?: string
+    method?: string
+    amountPaise?: number
+    currency?: string
+    createdAt?: number
+  }
 }) {
   const result = await updateSoapLedgerPayment({
     action: 'confirm',
     providerOrderId: params.providerOrderId,
     providerPaymentId: params.providerPaymentId,
+    paymentDetails: params.paymentDetails,
   })
   const order = result.order
 

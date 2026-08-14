@@ -31,6 +31,8 @@ export type OrderPayload = {
   payment?: {
     provider: 'razorpay'
     provider_order_id: string
+    checkout_session_id: string
+    checkout_fingerprint: string
   }
   intent?: 'interest'
   consent?: boolean
@@ -47,6 +49,14 @@ export type SoapLedgerOrderResponse = {
   order_id: string
   ref: string              // human-readable ref e.g. "HS-2025-0042"
   status: string
+  payment_status?: string
+  payment_provider?: string
+  provider_order_id?: string
+  provider_payment_id?: string
+  checkout_session_id?: string
+  checkout_fingerprint?: string
+  order_value?: string | number
+  shipping_charge?: string | number
 }
 
 // ─── Internal helpers ──────────────────────────────────────────────────────────
@@ -131,7 +141,7 @@ export async function sendOwnerEmail(
 export async function submitOrder(
   payload: OrderPayload,
   options: { notifyOwner?: boolean } = {}
-): Promise<{ order_id: string; ref: string; status?: string; payment_status?: string }> {
+): Promise<SoapLedgerOrderResponse> {
   const body = JSON.stringify(payload)
   if (process.env.NODE_ENV !== 'production') {
     console.log('[SoapLedger Request Payload]:', body)
@@ -162,6 +172,24 @@ export async function submitOrder(
   }
 
   return { ...order, ref: humanRef }
+}
+
+export async function getSoapLedgerCheckoutSession(
+  checkoutSessionId: string,
+  checkoutFingerprint: string
+): Promise<SoapLedgerOrderResponse | null> {
+  const res = await fetch(`${getApiBase()}/api/orders/checkout-session`, {
+    method: 'POST',
+    headers: getApiHeaders(),
+    body: JSON.stringify({
+      checkout_session_id: checkoutSessionId,
+      checkout_fingerprint: checkoutFingerprint,
+    }),
+    cache: 'no-store',
+  })
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`Could not look up checkout session: ${res.status} — ${await res.text()}`)
+  return res.json()
 }
 
 export async function getOrderAvailability(): Promise<boolean> {
@@ -211,6 +239,14 @@ export async function updateSoapLedgerPayment(params: {
     source?: string
     step?: string
     reason?: string
+    description?: string
+  }
+  paymentDetails?: {
+    status?: string
+    method?: string
+    amountPaise?: number
+    currency?: string
+    createdAt?: number
   }
 }): Promise<{ transitioned: boolean; order: SoapLedgerPaymentOrder }> {
   const res = await fetch(`${getApiBase()}/api/orders/payment`, {
@@ -228,6 +264,14 @@ export async function updateSoapLedgerPayment(params: {
         source: params.failureDetails.source,
         step: params.failureDetails.step,
         reason: params.failureDetails.reason,
+        description: params.failureDetails.description,
+      } : undefined,
+      payment_details: params.paymentDetails ? {
+        status: params.paymentDetails.status,
+        method: params.paymentDetails.method,
+        amount_paise: params.paymentDetails.amountPaise,
+        currency: params.paymentDetails.currency,
+        created_at: params.paymentDetails.createdAt,
       } : undefined,
     }),
     cache: 'no-store',
@@ -240,6 +284,7 @@ export type TrackedOrder = {
   ref: string
   status: string
   payment_status: 'unpaid' | 'pending' | 'failed' | 'manual' | 'paid'
+  payment_provider?: string | null
   is_interest: boolean
   order_date: string
   created_at: string

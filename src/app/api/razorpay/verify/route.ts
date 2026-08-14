@@ -50,6 +50,13 @@ export async function POST(req: NextRequest) {
       providerOrderId: razorpay_order_id,
       providerPaymentId: razorpay_payment_id,
       origin: req.nextUrl.origin,
+      paymentDetails: {
+        status: payment.status,
+        method: payment.method,
+        amountPaise: Number(payment.amount),
+        currency: payment.currency,
+        createdAt: payment.created_at,
+      },
     })
     return NextResponse.json({ verified: true, paid: true, payment_id: razorpay_payment_id, ref: confirmed.ref })
   } catch (err) {

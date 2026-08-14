@@ -11,6 +11,7 @@ import { GA4_EVENT } from '@/lib/analytics'
 import { getStoredAttribution } from '@/lib/attribution'
 import { calculateShipping, FREE_SHIPPING_THRESHOLD } from '@/lib/shipping'
 const WA_NUMBER = '917483100651'
+const PENDING_CHECKOUT_STORAGE_KEY = 'healing-soil-pending-checkout'
 
 const ALL_STATES = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat',
@@ -86,7 +87,13 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
   const [error, setError] = useState('')
   const [acceptingOrders, setAcceptingOrders] = useState(initialAcceptingOrders)
   const [contactConsent, setContactConsent] = useState(false)
-  const [pendingOrder, setPendingOrder] = useState<{ orderId: string; ref: string; token: string } | null>(null)
+  const [pendingOrder, setPendingOrder] = useState<{
+    sessionId: string
+    checkoutKey: string
+    orderId: string
+    ref: string
+    token: string
+  } | null>(null)
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
@@ -95,6 +102,25 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
   const total = subtotal + shipping
 
   const checkoutFiredRef = useRef(false)
+  const payRequestInFlightRef = useRef(false)
+
+  async function currentCheckoutKey() {
+    const value = JSON.stringify({
+      customer: {
+        name: name.trim(),
+        phone: normalizePhone(phone),
+        email: email.trim().toLowerCase(),
+        address: address.trim(),
+        state,
+      },
+      notes: formatPreferencesAsNote(preferences) || '',
+      items: items
+        .map((item) => ({ product_id: item.product_id, price: item.price, qty: item.qty }))
+        .sort((a, b) => a.product_id.localeCompare(b.product_id)),
+    })
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('')
+  }
 
   function handleFirstFocus() {
     if (checkoutFiredRef.current) return
@@ -109,6 +135,23 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
   const [paymentDismissed, setPaymentDismissed] = useState(false)
 
   useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(PENDING_CHECKOUT_STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (parsed && typeof parsed === 'object'
+            && typeof parsed.sessionId === 'string'
+            && typeof parsed.checkoutKey === 'string'
+            && typeof parsed.orderId === 'string'
+            && typeof parsed.ref === 'string'
+            && typeof parsed.token === 'string') {
+          setPendingOrder(parsed)
+        }
+      }
+    } catch {
+      sessionStorage.removeItem(PENDING_CHECKOUT_STORAGE_KEY)
+    }
+
     const refresh = async () => {
       try {
         const res = await fetch('/api/order-availability', { cache: 'no-store' })
@@ -215,6 +258,8 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
 
     // Clear cart first, then hand off to parent — orderPlacedRef in parent
     // is already set before clearOrder() triggers any re-render
+    sessionStorage.removeItem(PENDING_CHECKOUT_STORAGE_KEY)
+    setPendingOrder(null)
     clearOrder()
     onSuccess(humanRef, waHref, 'manual')
   }
@@ -234,6 +279,8 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
       content_type: 'product',
       num_items: items.reduce((sum, item) => sum + item.qty, 0),
     })
+    sessionStorage.removeItem(PENDING_CHECKOUT_STORAGE_KEY)
+    setPendingOrder(null)
     clearOrder()
     onSuccess(ref, '', outcome)
   }
@@ -241,6 +288,8 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
   // ── Primary path: pay on the website via Razorpay ────────────────────────
   async function handlePayNow(e: React.FormEvent) {
     e.preventDefault()
+
+    if (payRequestInFlightRef.current) return
 
     if (!acceptingOrders) {
       await handleInterest()
@@ -256,13 +305,19 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
     setPaymentDismissed(false)
     if (!validateForm()) return
 
+    payRequestInFlightRef.current = true
     setLoading(true)
 
     try {
+      const checkoutKey = await currentCheckoutKey()
+      const checkoutSessionId = pendingOrder?.checkoutKey === checkoutKey
+        ? pendingOrder.sessionId
+        : crypto.randomUUID()
       const orderRes = await fetch('/api/razorpay/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          checkout_session_id: checkoutSessionId,
           customer_name: name.trim(),
           customer_phone: normalizePhone(phone),
           customer_email: email.trim().toLowerCase(),
@@ -282,8 +337,28 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
         }
         throw new Error(orderData.error || `Server error ${orderRes.status}`)
       }
-      const createdOrder = { orderId: orderData.order_id, ref: orderData.ref, token: orderData.fallback_token }
+      const createdOrder = {
+        sessionId: checkoutSessionId,
+        checkoutKey,
+        orderId: orderData.order_id,
+        ref: orderData.ref,
+        token: orderData.fallback_token,
+      }
       setPendingOrder(createdOrder)
+      sessionStorage.setItem(PENDING_CHECKOUT_STORAGE_KEY, JSON.stringify(createdOrder))
+
+      if (orderData.already_paid) {
+        payRequestInFlightRef.current = false
+        setLoading(false)
+        finishPaidCheckout(createdOrder.ref, 'paid')
+        return
+      }
+      if (orderData.payment_pending) {
+        payRequestInFlightRef.current = false
+        setLoading(false)
+        finishPaidCheckout(createdOrder.ref, 'pending')
+        return
+      }
 
       const scriptLoaded = await loadRazorpayScript()
       if (!scriptLoaded) {
@@ -303,6 +378,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
           email: email.trim().toLowerCase(),
         },
         theme: { color: '#1E5631' },
+        retry: { enabled: true, max_count: 4 },
         handler: async (response: unknown) => {
           const r = response as {
             razorpay_order_id: string
@@ -322,16 +398,19 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
             }
 
             finishPaidCheckout(verifyData.ref || createdOrder.ref, verifyData.pending ? 'pending' : 'paid')
+            payRequestInFlightRef.current = false
             setLoading(false)
           } catch (err) {
             // A valid Checkout success can still lose its browser callback.
             // The signed webhook will finish this same SoapLedger order.
             finishPaidCheckout(createdOrder.ref, 'pending')
+            payRequestInFlightRef.current = false
             setLoading(false)
           }
         },
         modal: {
           ondismiss: () => {
+            payRequestInFlightRef.current = false
             setLoading(false)
             setPaymentDismissed(true)
           },
@@ -339,12 +418,14 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
       })
 
       razorpay.on('payment.failed', () => {
+        payRequestInFlightRef.current = false
         setLoading(false)
         setPaymentDismissed(true)
       })
 
       razorpay.open()
     } catch (err) {
+      payRequestInFlightRef.current = false
       setError(err instanceof Error ? err.message : 'Could not start payment. Please try again.')
       if (acceptingOrders) setPaymentDismissed(true)
       setLoading(false)
@@ -358,7 +439,8 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
 
     setLoading(true)
     try {
-      if (pendingOrder) {
+      const checkoutKey = await currentCheckoutKey()
+      if (pendingOrder && pendingOrder.checkoutKey === checkoutKey) {
         const res = await fetch('/api/razorpay/manual-fallback', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -370,6 +452,8 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
           throw new Error(data.error || 'Could not switch to manual payment.')
         }
         const waHref = buildManualWhatsAppHref(data.ref || pendingOrder.ref)
+        sessionStorage.removeItem(PENDING_CHECKOUT_STORAGE_KEY)
+        setPendingOrder(null)
         clearOrder()
         onSuccess(data.ref || pendingOrder.ref, waHref, 'manual')
       } else {

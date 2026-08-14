@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createHash } from 'crypto'
 import { z } from 'zod'
 import { getProducts } from '@/lib/products'
 import { createFallbackToken, getRazorpayClient, isRazorpayEnabled } from '@/lib/razorpay'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { calculateShipping } from '@/lib/shipping'
-import { getOrderAvailability, submitOrder } from '@/lib/orders'
+import { getOrderAvailability, getSoapLedgerCheckoutSession, submitOrder, type SoapLedgerOrderResponse } from '@/lib/orders'
+import { confirmPaidOrder } from '@/lib/payment-confirmation'
 import { classifyOrderSource } from '@/lib/order-attribution'
 import { parseGaClientId, parseGaSessionId, GA4_SESSION_COOKIE_NAME } from '@/lib/ga4-mp'
 import {
@@ -25,6 +27,7 @@ const touchSchema = z.object({
 })
 
 const createOrderSchema = z.object({
+  checkout_session_id: z.string().uuid(),
   customer_name: z.string().trim().min(1).max(120),
   customer_phone: z.string().regex(/^91[6-9]\d{9}$/),
   customer_email: z.string().email().max(254),
@@ -37,6 +40,10 @@ const createOrderSchema = z.object({
   })).min(1).max(MAX_DISTINCT_ITEMS),
   attribution: z.object({ version: z.literal(1), first_touch: touchSchema, last_touch: touchSchema }).optional(),
 })
+
+function checkoutFingerprint(value: unknown): string {
+  return createHash('sha256').update(JSON.stringify(value)).digest('hex')
+}
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req)
@@ -78,10 +85,74 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'This order cannot be paid online. Please contact us.' }, { status: 400 })
     }
 
-    const razorpayOrder = await getRazorpayClient().orders.create({
+    const fingerprint = checkoutFingerprint({
+      customer: {
+        name: data.customer_name,
+        phone: data.customer_phone,
+        email: data.customer_email.toLowerCase(),
+        address: data.address,
+        state: data.state,
+      },
+      notes: data.notes || '',
+      items: ledgerItems
+        .map((item) => ({ product_id: item.product_id, price: item.price, qty: item.qty }))
+        .sort((a, b) => a.product_id.localeCompare(b.product_id)),
+      shipping,
+      total,
+    })
+
+    const razorpay = getRazorpayClient()
+    const responseForLedgerOrder = async (ledgerOrder: SoapLedgerOrderResponse) => {
+      const providerOrderId = ledgerOrder.provider_order_id
+      if (!providerOrderId) throw new Error('Checkout session is missing its Razorpay order')
+      const [providerOrder, payments] = await Promise.all([
+        razorpay.orders.fetch(providerOrderId),
+        razorpay.orders.fetchPayments(providerOrderId),
+      ])
+      if (Number(providerOrder.amount) !== Math.round(total * 100) || providerOrder.currency !== 'INR') {
+        throw new Error('Stored checkout amount does not match the current basket')
+      }
+
+      const captured = payments.items.find((payment) => payment.status === 'captured')
+      if (captured && ledgerOrder.payment_status !== 'paid') {
+        await confirmPaidOrder({
+          providerOrderId,
+          providerPaymentId: captured.id,
+          origin: req.nextUrl.origin,
+          paymentDetails: {
+            status: captured.status,
+            method: captured.method,
+            amountPaise: Number(captured.amount),
+            currency: captured.currency,
+            createdAt: captured.created_at,
+          },
+        })
+      }
+      const paymentPending = !captured && (
+        providerOrder.status === 'paid'
+        || payments.items.some((payment) => payment.status === 'authorized')
+      )
+      return NextResponse.json({
+        order_id: providerOrderId,
+        amount: providerOrder.amount,
+        currency: providerOrder.currency,
+        ref: ledgerOrder.ref,
+        fallback_token: createFallbackToken(providerOrderId),
+        shipping,
+        total,
+        reused: true,
+        already_paid: Boolean(captured || ledgerOrder.payment_status === 'paid'),
+        payment_pending: paymentPending,
+      })
+    }
+
+    const existingCheckout = await getSoapLedgerCheckoutSession(data.checkout_session_id, fingerprint)
+    if (existingCheckout) return responseForLedgerOrder(existingCheckout)
+
+    const razorpayOrder = await razorpay.orders.create({
       amount: Math.round(total * 100),
       currency: 'INR',
-      receipt: `hs-${Date.now()}`,
+      receipt: `hs-${data.checkout_session_id}`,
     })
 
     const fbp = req.cookies.get('_fbp')?.value
@@ -108,8 +179,20 @@ export async function POST(req: NextRequest) {
       notes: data.notes,
       source: classifyOrderSource(attribution),
       attribution,
-      payment: { provider: 'razorpay', provider_order_id: razorpayOrder.id },
+      payment: {
+        provider: 'razorpay',
+        provider_order_id: razorpayOrder.id,
+        checkout_session_id: data.checkout_session_id,
+        checkout_fingerprint: fingerprint,
+      },
     }, { notifyOwner: false })
+
+    // A concurrent duplicate request can lose the unique-session race after it
+    // has created a Razorpay order. SoapLedger returns the winning order, and
+    // only that order is ever exposed to Checkout.
+    if (ledgerOrder.provider_order_id && ledgerOrder.provider_order_id !== razorpayOrder.id) {
+      return responseForLedgerOrder(ledgerOrder)
+    }
 
     return NextResponse.json({
       order_id: razorpayOrder.id,
@@ -119,6 +202,9 @@ export async function POST(req: NextRequest) {
       fallback_token: createFallbackToken(razorpayOrder.id),
       shipping,
       total,
+      reused: false,
+      already_paid: false,
+      payment_pending: false,
     })
   } catch (err) {
     console.error('[POST /api/razorpay/create-order] unexpected error', { ip, err })
