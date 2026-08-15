@@ -3,12 +3,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
+import { useOrderAvailability } from './OrderAvailabilityProvider'
 
 export default function OrderTray() {
   const items = useOrderStore((s) => s.items)
   const total = useOrderStore((s) => s.total)
   const itemCount = useOrderStore((s) => s.itemCount)
   const pathname = usePathname()
+  const { acceptingOrders } = useOrderAvailability()
+  const ordersPaused = acceptingOrders === false
 
   if (itemCount === 0 || pathname === '/order') return null
 
@@ -26,7 +29,7 @@ export default function OrderTray() {
           href="/order"
           className="rounded bg-[#1E5631] px-5 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
         >
-          Checkout
+          {ordersPaused ? 'Review Interest' : 'Checkout'}
         </Link>
       </div>
     </div>

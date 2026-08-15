@@ -21,7 +21,7 @@ export type OrderPayload = {
     name: string
     phone: string
     email?: string
-    address: string
+    address?: string
   }
   items: LineItem[]
   shipping: number         // Shipping cost
@@ -36,6 +36,7 @@ export type OrderPayload = {
   }
   intent?: 'interest'
   consent?: boolean
+  consent_channel?: 'whatsapp'
 }
 
 export type ShippingAddress = {
@@ -192,14 +193,28 @@ export async function getSoapLedgerCheckoutSession(
   return res.json()
 }
 
-export async function getOrderAvailability(): Promise<boolean> {
+export type OrderAvailability = {
+  accepting_orders: boolean
+  reopen_date: string | null
+}
+
+export async function getOrderAvailabilityDetails(): Promise<OrderAvailability> {
   const res = await fetch(`${getApiBase()}/api/order-availability`, {
     headers: getApiHeaders(),
     cache: 'no-store',
   })
   if (!res.ok) throw new Error(`Could not check order availability: ${res.status}`)
   const data = await res.json()
-  return data.accepting_orders === true
+  return {
+    accepting_orders: data.accepting_orders === true,
+    reopen_date: typeof data.reopen_date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data.reopen_date)
+      ? data.reopen_date
+      : null,
+  }
+}
+
+export async function getOrderAvailability(): Promise<boolean> {
+  return (await getOrderAvailabilityDetails()).accepting_orders
 }
 
 export type SoapLedgerPaymentOrder = {

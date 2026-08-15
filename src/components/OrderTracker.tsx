@@ -33,7 +33,7 @@ function getStatusMessage(order: TrackedOrder) {
   if (order.is_interest) {
     return {
       title: 'Your interest is saved',
-      body: 'This is not yet a placed or paid order. We will email you when ordering reopens.',
+      body: 'This is not yet a placed or paid order. We will WhatsApp you when ordering reopens.',
       tone: 'border-[#E8D29B] bg-[#FFF8E8] text-[#6B4E16]',
     }
   }

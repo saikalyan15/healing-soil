@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { useOrderStore } from '@/lib/store'
+import { useOrderAvailability } from './OrderAvailabilityProvider'
 
 const navLinks = [
   { label: 'Shop', href: '/shop' },
@@ -18,6 +19,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const itemCount = useOrderStore((s) => s.itemCount)
+  const { acceptingOrders } = useOrderAvailability()
 
   return (
     <header className="w-full bg-white border-b border-[#E8E0D5] relative z-50">
@@ -56,7 +58,7 @@ export default function Header() {
           <Link
             href="/order"
             className="relative flex items-center justify-center p-2 text-[#1A1A14] hover:text-[#1E5631] transition-colors"
-            aria-label="View Cart"
+            aria-label={acceptingOrders === false ? 'Review interest list' : 'View cart'}
           >
             <CartIcon />
             {itemCount > 0 && (

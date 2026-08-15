@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
+import { useOrderAvailability } from './OrderAvailabilityProvider'
 
 type ProductCardProps = {
   product: Product
@@ -15,6 +16,8 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const { acceptingOrders } = useOrderAvailability()
+  const ordersPaused = acceptingOrders === false
 
   function handleAddToOrder() {
     addItem(product)
@@ -106,7 +109,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
               : 'bg-[#D6CFC4] text-[#999] cursor-not-allowed'
           }`}
         >
-          {added ? 'Added to Cart ✓' : 'Add to Cart'}
+          {added ? (ordersPaused ? 'Added to interest list ✓' : 'Added to Cart ✓') : ordersPaused ? 'Add to interest list' : 'Add to Cart'}
         </button>
       </div>
     </Link>

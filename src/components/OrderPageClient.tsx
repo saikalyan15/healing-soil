@@ -9,6 +9,11 @@ import { useOrderStore } from '@/lib/store'
 import OrderForm from './OrderForm'
 import EmailCapture from './EmailCapture'
 import { trackMetaInitiateCheckoutOnce } from '@/lib/meta-pixel'
+import {
+  formatReopenDate,
+  futureReopenDate,
+  useOrderAvailability,
+} from './OrderAvailabilityProvider'
 
 const WA_NUMBER = '917483100651'
 
@@ -20,11 +25,20 @@ function WhatsAppIcon() {
   )
 }
 
-export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: boolean }) {
+export default function OrderPageClient({
+  acceptingOrders: initialAcceptingOrders,
+  reopenDate: initialReopenDate,
+}: {
+  acceptingOrders: boolean
+  reopenDate: string | null
+}) {
   const router = useRouter()
   const itemCount = useOrderStore((s) => s.itemCount)
   const items = useOrderStore((s) => s.items)
   const total = useOrderStore((s) => s.total)
+  const availability = useOrderAvailability()
+  const acceptingOrders = availability.acceptingOrders ?? initialAcceptingOrders
+  const reopenDate = futureReopenDate(availability.reopenDate ?? initialReopenDate)
 
   const [step, setStep] = useState<'form' | 'send'>('form')
   const [orderRef, setOrderRef] = useState('')
@@ -37,7 +51,7 @@ export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: 
   const orderPlacedRef = useRef(false)
 
   useEffect(() => {
-    if (itemCount === 0) return
+    if (!acceptingOrders || itemCount === 0) return
     const cartSignature = items
       .map((item) => `${item.product_slug}:${item.qty}`)
       .sort()
@@ -48,7 +62,7 @@ export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: 
       content_ids: items.map((item) => item.product_slug),
       num_items: itemCount,
     })
-  }, [itemCount, items, total])
+  }, [acceptingOrders, itemCount, items, total])
 
   useEffect(() => {
     setIsMobile(/Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent))
@@ -92,7 +106,7 @@ export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: 
           </div>
           <p className="font-sans text-sm leading-relaxed text-[#444444]">
             {isInterest
-              ? 'No payment was taken and stock has not been reserved. We will email you when orders reopen; your cart remains available.'
+              ? `No payment was taken and stock has not been reserved. We will WhatsApp you when orders reopen${reopenDate ? `, expected ${formatReopenDate(reopenDate)}` : ''}; your selection remains available.`
               : outcome === 'pending'
                 ? 'You do not need to pay again or message us. Razorpay’s signed confirmation will complete this order automatically.'
                 : 'We will start preparing your made-to-order soaps and share tracking after dispatch. No WhatsApp confirmation is needed.'}
@@ -221,7 +235,11 @@ export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: 
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-lg border border-[#D6CFC4] bg-white p-6 sm:p-8">
-          <OrderForm onSuccess={handleOrderSuccess} acceptingOrders={acceptingOrders} />
+          <OrderForm
+            onSuccess={handleOrderSuccess}
+            acceptingOrders={acceptingOrders}
+            reopenDate={reopenDate}
+          />
         </div>
       </div>
 
@@ -241,13 +259,17 @@ export default function OrderPageClient({ acceptingOrders }: { acceptingOrders: 
           <div>
             <h3 className="mb-3 font-sans text-sm font-bold text-[#1A1A14]">What happens next?</h3>
             <ul className="space-y-3">
-              {[
+              {(acceptingOrders ? [
                 { title: 'Pay Securely', desc: 'Complete payment on the website through Razorpay.' },
                 { title: 'Payment Confirmed', desc: 'Your paid order is recorded automatically—no WhatsApp confirmation needed.' },
                 { title: 'Made to Order', desc: 'Every bar is handmade fresh and prepared for dispatch.' },
                 { title: 'Dispatch', desc: 'Your soaps are sent via India Post Speed Post from South Goa.' },
                 { title: 'Tracking', desc: 'We share tracking after dispatch; India Post may also notify you by SMS.' },
-              ].map((s, i) => (
+              ] : [
+                { title: 'Save Your Selection', desc: 'Tell us which soaps and quantities interest you.' },
+                { title: 'No Payment Yet', desc: 'This does not place an order, take payment, or reserve stock.' },
+                { title: 'WhatsApp Follow-up', desc: reopenDate ? `We expect to reopen on ${formatReopenDate(reopenDate)} and will message you then.` : 'We will message you when website ordering reopens.' },
+              ]).map((s, i) => (
                 <li key={i} className="flex gap-3 font-sans text-sm">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#C9A84C] text-[10px] font-bold text-white">
                     {i + 1}

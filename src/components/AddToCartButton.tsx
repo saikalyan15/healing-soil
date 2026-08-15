@@ -6,10 +6,13 @@ import type { Product } from '@/lib/products'
 import { sendGAEvent } from '@next/third-parties/google'
 import { GA4_EVENT } from '@/lib/analytics'
 import { trackMetaEvent } from '@/lib/meta-pixel'
+import { useOrderAvailability } from './OrderAvailabilityProvider'
 
 export default function AddToCartButton({ product }: { product: Product }) {
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
+  const { acceptingOrders } = useOrderAvailability()
+  const ordersPaused = acceptingOrders === false
 
   function handleAdd() {
     if (!product.in_stock) return
@@ -43,7 +46,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
           : 'bg-[#D6CFC4] text-[#999] cursor-not-allowed'
       }`}
     >
-      {added ? 'Added to Cart ✓' : 'Add to Cart'}
+      {added ? (ordersPaused ? 'Added to interest list ✓' : 'Added to Cart ✓') : ordersPaused ? 'Add to interest list' : 'Add to Cart'}
     </button>
   )
 }

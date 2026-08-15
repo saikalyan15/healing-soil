@@ -10,6 +10,8 @@ import OrderTray from '@/components/OrderTray'
 import WelcomeBanner from '@/components/WelcomeBanner'
 import MetaPixelEvents from '@/components/MetaPixelEvents'
 import AttributionCapture from '@/components/AttributionCapture'
+import { OrderAvailabilityProvider } from '@/components/OrderAvailabilityProvider'
+import OrderPauseBanner from '@/components/OrderPauseBanner'
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/seo'
 
 const cormorant = Cormorant_Garamond({
@@ -83,14 +85,17 @@ fbq('track','PageView');`}
         </Script>
       </head>
       <body>
-        <WelcomeBanner />
-        <Header />
-        <TrustStrip />
-        <main className="pb-[60px]">{children}</main>
-        <Footer />
-        <OrderTray />
-        <AttributionCapture />
-        <MetaPixelEvents />
+        <OrderAvailabilityProvider>
+          <OrderPauseBanner />
+          <WelcomeBanner />
+          <Header />
+          <TrustStrip />
+          <main className="pb-[60px]">{children}</main>
+          <Footer />
+          <OrderTray />
+          <AttributionCapture />
+          <MetaPixelEvents />
+        </OrderAvailabilityProvider>
         <GoogleAnalytics gaId="G-EWQR3K5MW7" />
         <Script
           id="datafast"

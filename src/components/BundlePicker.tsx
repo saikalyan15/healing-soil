@@ -7,6 +7,7 @@ import { GA4_EVENT } from '@/lib/analytics'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
 import { trackMetaEvent } from '@/lib/meta-pixel'
+import { useOrderAvailability } from './OrderAvailabilityProvider'
 
 type BundlePickerProps = {
   products: Product[]
@@ -16,6 +17,8 @@ type BundlePickerProps = {
 export default function BundlePicker({ products, defaultIds }: BundlePickerProps) {
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
+  const { acceptingOrders } = useOrderAvailability()
+  const ordersPaused = acceptingOrders === false
 
   // A sold-out default would land in a slot and leave the add button dead on
   // arrival, so swap it for the closest available bar (same base first).
@@ -145,11 +148,13 @@ export default function BundlePicker({ products, defaultIds }: BundlePickerProps
               : 'bg-[#D6CFC4] text-[#999] cursor-not-allowed'
           }`}
         >
-          {added ? 'Added to cart ✓' : 'Add the bundle to cart'}
+          {added
+            ? ordersPaused ? 'Added to interest list ✓' : 'Added to cart ✓'
+            : ordersPaused ? 'Add bundle to interest list' : 'Add the bundle to cart'}
         </button>
         <p className="mt-3 font-sans text-xs text-[#666666]">
           {allAvailable
-            ? 'You can swap any soap before checkout.'
+            ? ordersPaused ? 'You can swap any soap before saving your interest.' : 'You can swap any soap before checkout.'
             : 'One of these is sold out right now. Pick another soap in that slot to carry on.'}
         </p>
       </div>

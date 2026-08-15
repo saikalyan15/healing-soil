@@ -18,22 +18,36 @@ const touchSchema = z.object({
   referrer: z.string().max(500).optional(), captured_at: z.string().datetime(),
 })
 
-const orderSchema = z.object({
+const itemSchema = z.object({
+  product_id: z.string().min(1),
+  product_slug: z.string().min(1),
+  qty: z.number().int().positive().max(MAX_QTY_PER_ITEM),
+})
+
+const sharedFields = {
   customer_name: z.string().trim().min(1).max(120),
   customer_phone: z.string().regex(/^91[6-9]\d{9}$/),
+  items: z.array(itemSchema).min(1).max(MAX_DISTINCT_ITEMS),
+  notes: z.string().max(1000).optional(),
+  attribution: z.object({ version: z.literal(1), first_touch: touchSchema, last_touch: touchSchema }).optional(),
+}
+
+const standardOrderSchema = z.object({
+  ...sharedFields,
   customer_email: z.string().email().max(254),
   address: z.string().trim().min(5).max(1000),
   state: z.string().trim().min(1).max(100),
-  items: z.array(z.object({
-    product_id: z.string().min(1),
-    product_slug: z.string().min(1),
-    qty: z.number().int().positive().max(MAX_QTY_PER_ITEM),
-  })).min(1).max(MAX_DISTINCT_ITEMS),
-  notes: z.string().max(1000).optional(),
-  intent: z.enum(['interest']).optional(),
+  intent: z.undefined().optional(),
   consent: z.boolean().optional(),
-  attribution: z.object({ version: z.literal(1), first_touch: touchSchema, last_touch: touchSchema }).optional(),
 })
+
+const interestSchema = z.object({
+  ...sharedFields,
+  intent: z.literal('interest'),
+  consent: z.literal(true),
+})
+
+const orderSchema = z.union([interestSchema, standardOrderSchema])
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req)
@@ -45,11 +59,12 @@ export async function POST(req: NextRequest) {
     if (!result.success) return NextResponse.json({ error: 'Please check your order details.', details: result.error.flatten() }, { status: 400 })
     const data = result.data
     const isInterest = data.intent === 'interest'
-    if (isInterest && data.consent !== true) {
-      return NextResponse.json({ error: 'Please consent to being contacted when orders reopen.' }, { status: 400 })
-    }
-    if (!isInterest && !await getOrderAvailability()) {
+    const acceptingOrders = await getOrderAvailability()
+    if (!isInterest && !acceptingOrders) {
       return NextResponse.json({ error: 'Orders are temporarily paused while we catch up.', code: 'ORDERS_PAUSED' }, { status: 503 })
+    }
+    if (isInterest && acceptingOrders) {
+      return NextResponse.json({ error: 'Ordering is open. Please place your order through checkout.', code: 'ORDERS_OPEN' }, { status: 409 })
     }
 
     const products = await getProducts()
@@ -62,7 +77,7 @@ export async function POST(req: NextRequest) {
       subtotal += product.price * item.qty
       ledgerItems.push({ product_id: product.id, price: product.price, qty: item.qty })
     }
-    const shipping = calculateShipping(subtotal, data.state)
+    const shipping = isInterest ? 0 : calculateShipping(subtotal, data.state)
     if (subtotal + shipping > MAX_ORDER_TOTAL_INR) {
       return NextResponse.json({ error: 'This order is above the website limit. Please contact us.' }, { status: 400 })
     }
@@ -82,8 +97,10 @@ export async function POST(req: NextRequest) {
       customer: {
         name: data.customer_name,
         phone: data.customer_phone,
-        email: data.customer_email,
-        address: `${data.address}, ${data.state}`,
+        ...(!isInterest ? {
+          email: data.customer_email,
+          address: `${data.address}, ${data.state}`,
+        } : {}),
       },
       items: ledgerItems,
       shipping,
@@ -92,6 +109,7 @@ export async function POST(req: NextRequest) {
       attribution,
       intent: data.intent,
       consent: data.consent,
+      consent_channel: isInterest ? 'whatsapp' : undefined,
     }, { notifyOwner: !isInterest })
 
     if (!isInterest) {

@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
-import { getOrderAvailability } from '@/lib/orders'
+import { getOrderAvailabilityDetails } from '@/lib/orders'
 
 export async function GET() {
   try {
-    return NextResponse.json({ accepting_orders: await getOrderAvailability() })
+    return NextResponse.json(await getOrderAvailabilityDetails())
   } catch (err) {
     console.error('[Order availability] failed', err)
-    return NextResponse.json({ accepting_orders: false }, { status: 503 })
+    return NextResponse.json({ accepting_orders: false, reopen_date: null }, { status: 503 })
   }
 }

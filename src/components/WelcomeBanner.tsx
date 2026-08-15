@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
+import { useOrderAvailability } from './OrderAvailabilityProvider'
 
 export default function WelcomeBanner() {
   const [visible, setVisible] = useState(false)
   const itemCount = useOrderStore((s) => s.itemCount)
   const pathname = usePathname()
+  const { acceptingOrders } = useOrderAvailability()
+  const ordersPaused = acceptingOrders === false
 
   // Only show on home page if there are items in the cart
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function WelcomeBanner() {
             href="/order"
             className="rounded bg-[#C9A84C] px-3 py-1 font-sans text-xs font-bold text-[#1A1A14] transition-colors hover:bg-white"
           >
-            Finish Order →
+            {ordersPaused ? 'Review Interest →' : 'Finish Order →'}
           </Link>
           <button
             onClick={() => setVisible(false)}

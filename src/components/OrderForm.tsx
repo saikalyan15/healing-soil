@@ -9,7 +9,12 @@ import OrderPreferences from './OrderPreferences'
 import { trackMetaLeadOnce, trackMetaPurchaseOnce } from '@/lib/meta-pixel'
 import { GA4_EVENT } from '@/lib/analytics'
 import { getStoredAttribution } from '@/lib/attribution'
-import { calculateShipping, FREE_SHIPPING_THRESHOLD } from '@/lib/shipping'
+import { calculateShipping } from '@/lib/shipping'
+import {
+  formatReopenDate,
+  futureReopenDate,
+  useOrderAvailability,
+} from './OrderAvailabilityProvider'
 const WA_NUMBER = '917483100651'
 const PENDING_CHECKOUT_STORAGE_KEY = 'healing-soil-pending-checkout'
 
@@ -68,15 +73,23 @@ const RAZORPAY_ENABLED = process.env.NEXT_PUBLIC_ENABLE_RAZORPAY === 'true'
 
 type Props = {
   acceptingOrders: boolean
+  reopenDate: string | null
   onSuccess: (ref: string, waHref: string, outcome: 'paid' | 'pending' | 'manual' | 'interest') => void
 }
 
-export default function OrderForm({ onSuccess, acceptingOrders: initialAcceptingOrders }: Props) {
+export default function OrderForm({
+  onSuccess,
+  acceptingOrders: initialAcceptingOrders,
+  reopenDate: initialReopenDate,
+}: Props) {
   const items = useOrderStore((s) => s.items)
   const clearOrder = useOrderStore((s) => s.clearOrder)
   const updateQty = useOrderStore((s) => s.updateQty)
   const removeItem = useOrderStore((s) => s.removeItem)
   const preferences = useOrderStore((s) => s.preferences)
+  const availability = useOrderAvailability()
+  const acceptingOrders = availability.acceptingOrders ?? initialAcceptingOrders
+  const reopenDate = futureReopenDate(availability.reopenDate ?? initialReopenDate)
 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -85,7 +98,6 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
   const [state, setState] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [acceptingOrders, setAcceptingOrders] = useState(initialAcceptingOrders)
   const [contactConsent, setContactConsent] = useState(false)
   const [pendingOrder, setPendingOrder] = useState<{
     sessionId: string
@@ -97,7 +109,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0)
 
-  const shipping = calculateShipping(subtotal, state)
+  const shipping = acceptingOrders ? calculateShipping(subtotal, state) : 0
 
   const total = subtotal + shipping
 
@@ -123,7 +135,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
   }
 
   function handleFirstFocus() {
-    if (checkoutFiredRef.current) return
+    if (!acceptingOrders || checkoutFiredRef.current) return
     checkoutFiredRef.current = true
     sendGAEvent('event', GA4_EVENT.BEGIN_CHECKOUT, {
       currency: 'INR',
@@ -152,28 +164,16 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
       sessionStorage.removeItem(PENDING_CHECKOUT_STORAGE_KEY)
     }
 
-    const refresh = async () => {
-      try {
-        const res = await fetch('/api/order-availability', { cache: 'no-store' })
-        const data = await res.json()
-        setAcceptingOrders(data.accepting_orders === true)
-      } catch {
-        setAcceptingOrders(false)
-      }
-    }
-    const onFocus = () => void refresh()
-    window.addEventListener('focus', onFocus)
-    void refresh()
-    return () => window.removeEventListener('focus', onFocus)
   }, [])
 
   function validateForm(): boolean {
     if (!name.trim()) { setError('Please enter your full name.'); return false }
     if (!validateIndianPhone(phone)) { setError('Please enter a valid Indian mobile number.'); return false }
+    if (items.length === 0) { setError(acceptingOrders ? 'Your order is empty.' : 'Your interest list is empty.'); return false }
+    if (!acceptingOrders) return true
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setError('Please enter a valid email address.'); return false }
     if (!state) { setError('Please select your state.'); return false }
     if (!address.trim()) { setError('Please enter your delivery address.'); return false }
-    if (items.length === 0) { setError('Your order is empty.'); return false }
     return true
   }
 
@@ -218,11 +218,11 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
       body: JSON.stringify({
         customer_name: name.trim(),
         customer_phone: normalizedPhone,
-        customer_email: email.trim().toLowerCase(),
+        customer_email: intent === 'interest' ? undefined : email.trim().toLowerCase(),
         items: items.map((i) => ({ product_id: i.product_id, product_slug: i.product_slug, qty: i.qty })),
-        address: address.trim(),
-        state,
-        notes: preferencesNote || undefined,
+        address: intent === 'interest' ? undefined : address.trim(),
+        state: intent === 'interest' ? undefined : state,
+        notes: intent === 'interest' ? undefined : preferencesNote || undefined,
         intent,
         consent: intent === 'interest' ? contactConsent : undefined,
         attribution: getStoredAttribution(),
@@ -232,6 +232,9 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
     const data = await res.json().catch(() => ({}))
 
     if (!res.ok) {
+      if (data.code === 'ORDERS_OPEN' || data.code === 'ORDERS_PAUSED') {
+        await availability.refresh()
+      }
       throw new Error(data.error || `Server error ${res.status}`)
     }
 
@@ -332,7 +335,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
       const orderData = await orderRes.json().catch(() => ({}))
       if (!orderRes.ok) {
         if (orderData.code === 'ORDERS_PAUSED') {
-          setAcceptingOrders(false)
+          await availability.refresh()
           throw new Error('Orders are temporarily paused while we catch up.')
         }
         throw new Error(orderData.error || `Server error ${orderRes.status}`)
@@ -448,7 +451,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
         })
         const data = await res.json().catch(() => ({}))
         if (!res.ok) {
-          if (data.code === 'ORDERS_PAUSED') setAcceptingOrders(false)
+          if (data.code === 'ORDERS_PAUSED') await availability.refresh()
           throw new Error(data.error || 'Could not switch to manual payment.')
         }
         const waHref = buildManualWhatsAppHref(data.ref || pendingOrder.ref)
@@ -469,7 +472,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
     setError('')
     if (!validateForm()) return
     if (!contactConsent) {
-      setError('Please tick the box so we can email you when orders reopen.')
+      setError('Please tick the box so we can WhatsApp you when orders reopen.')
       return
     }
     setLoading(true)
@@ -487,14 +490,15 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
         <div className="rounded-lg border border-[#E8D29B] bg-[#FFF8E8] p-5">
           <h2 className="font-serif text-xl text-[#1E5631]">Orders are temporarily paused while we catch up.</h2>
           <p className="mt-2 font-sans text-sm leading-relaxed text-[#555]">
-            Your cart is safe. Submit your details below and we&apos;ll save this as an Expression of Interest in SoapLedger, then email you when ordering reopens.
+            Save the soaps you like and we&apos;ll WhatsApp you when ordering reopens
+            {reopenDate ? `, expected ${formatReopenDate(reopenDate)}` : ''}. No payment will be taken and stock is not reserved.
           </p>
         </div>
       )}
       {/* Order summary */}
       <div className="rounded-lg bg-[#F7F5F0] p-5">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-serif text-xl text-[#1A1A14]">Order Summary</h2>
+          <h2 className="font-serif text-xl text-[#1A1A14]">{acceptingOrders ? 'Order Summary' : 'Selected Products'}</h2>
           <button
             type="button"
             onClick={() => clearOrder()}
@@ -556,26 +560,24 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
 
         <div className="space-y-1.5 border-t border-[#D6CFC4] pt-4">
           <div className="flex justify-between font-sans text-sm text-[#666666]">
-            <span>Subtotal</span>
+            <span>{acceptingOrders ? 'Subtotal' : 'Estimated value'}</span>
             <span>₹{subtotal.toLocaleString('en-IN')}</span>
           </div>
-          <div className="flex justify-between font-sans text-sm text-[#666666]">
-            <span>Shipping</span>
-            {shipping === 0 ? (
-              <span className="font-medium text-[#1E5631]">Free</span>
-            ) : (
-              <span>₹{shipping}</span>
-            )}
-          </div>
-          {shipping > 0 && (
-            <p className="font-sans text-xs text-[#999]">
-              Free shipping on orders above ₹1,000
-            </p>
+          {acceptingOrders ? (
+            <>
+              <div className="flex justify-between font-sans text-sm text-[#666666]">
+                <span>Shipping</span>
+                {shipping === 0 ? <span className="font-medium text-[#1E5631]">Free</span> : <span>₹{shipping}</span>}
+              </div>
+              {shipping > 0 && <p className="font-sans text-xs text-[#999]">Free shipping on orders above ₹1,000</p>}
+              <div className="flex justify-between border-t border-[#D6CFC4] pt-2 font-sans text-base font-bold text-[#1A1A14]">
+                <span>Total</span>
+                <span>₹{total.toLocaleString('en-IN')}</span>
+              </div>
+            </>
+          ) : (
+            <p className="font-sans text-xs text-[#999]">Final prices and delivery charges will be confirmed when ordering reopens.</p>
           )}
-          <div className="flex justify-between border-t border-[#D6CFC4] pt-2 font-sans text-base font-bold text-[#1A1A14]">
-            <span>Total</span>
-            <span>₹{total.toLocaleString('en-IN')}</span>
-          </div>
         </div>
       </div>
 
@@ -598,7 +600,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
 
         <div>
           <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
-            Phone Number <span className="text-red-500">*</span>
+            {acceptingOrders ? 'Phone Number' : 'WhatsApp Number'} <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
@@ -610,6 +612,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
           />
         </div>
 
+        {acceptingOrders && <>
         <div>
           <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
             Email Address <span className="text-red-500">*</span>
@@ -654,9 +657,10 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
           />
         </div>
 
+        </>}
       </div>
 
-      <OrderPreferences />
+      {acceptingOrders && <OrderPreferences />}
 
       {!acceptingOrders && (
         <label className="flex items-start gap-3 rounded border border-[#D6CFC4] bg-white p-4 font-sans text-sm text-[#444]">
@@ -666,7 +670,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
             onChange={(e) => setContactConsent(e.target.checked)}
             className="mt-0.5 h-4 w-4 accent-[#1E5631]"
           />
-          <span>Email me when Healing Soil is accepting orders again. This does not reserve stock or place a paid order.</span>
+          <span>WhatsApp me when Healing Soil is accepting orders again. This does not reserve stock or place a paid order.</span>
         </label>
       )}
 
@@ -683,7 +687,7 @@ export default function OrderForm({ onSuccess, acceptingOrders: initialAccepting
           className="flex w-full items-center justify-center gap-2 rounded bg-[#1E5631] py-3 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {!acceptingOrders ? (
-            loading ? 'Saving your interest…' : 'Save My Interest & Notify Me'
+            loading ? 'Saving your interest…' : 'Save My Interest'
           ) : RAZORPAY_ENABLED ? (
             loading ? 'Starting payment…' : `Pay ₹${total.toLocaleString('en-IN')} & Place Order`
           ) : loading ? (
