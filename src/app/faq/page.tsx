@@ -3,12 +3,12 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'FAQ — Healing Soil',
   description:
-    'Answers to common questions about Healing Soil handmade soaps — ingredients, delivery, ordering, and skin safety.',
+    'Answers to common questions about Healing Soil handmade soaps — ingredients, delivery, ordering, and product selection.',
   alternates: { canonical: '/faq' },
   openGraph: {
     title: 'FAQ — Healing Soil',
     description:
-      'Answers to common questions about Healing Soil handmade soaps — ingredients, delivery, ordering, and skin safety.',
+      'Answers to common questions about Healing Soil handmade soaps — ingredients, delivery, ordering, and product selection.',
     url: '/faq',
     siteName: 'Healing Soil',
     type: 'website',
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 
 const faqItems = [
   {
-    q: 'Are these soaps really chemical-free?',
-    a: 'Our soaps contain no synthetic additives: no SLS, no artificial fragrance, no parabens, no preservatives. Every ingredient is something you can read and recognise.',
+    q: 'What do you leave out of your soaps?',
+    a: 'Our soaps contain no SLS, parabens, synthetic fragrance, or added preservatives. Each product page lists the ingredients used in that bar.',
   },
   {
     q: 'What is the difference between glycerin, goat milk, and shea butter soap?',
-    a: 'Glycerin soap is light and clear, best for oily or normal skin. Goat milk soap is creamier and more nourishing, suited to sensitive or dry skin. Shea butter soap is the richest of the three, best for very dry skin or anyone who wants to skip a separate moisturiser.',
+    a: 'Glycerin soap has a light, clean lather. Goat milk soap has a softer, creamier feel. Shea butter soap has the richest texture and a moisturising feel that leaves skin feeling soft. Choose based on the lather, texture, and ingredients you prefer.',
   },
   {
     q: 'Do you ship across India?',
@@ -34,11 +34,11 @@ const faqItems = [
   },
   {
     q: 'How do I order?',
-    a: 'You can order through our website or reach us on WhatsApp. Both work.',
+    a: 'Add your soaps to the cart and pay securely online through Razorpay. Orders are prepaid and cash on delivery is not currently available. You can reach us on WhatsApp if you need help choosing.',
   },
   {
     q: 'Are these soaps suitable for sensitive skin?',
-    a: 'Yes. Our soaps contain no synthetic fragrance, no SLS, and no parabens — the ingredients most likely to cause problems for people with sensitive skin. The goat milk and shea butter bases give a particularly gentle, creamy lather.',
+    a: 'Our range includes gentle options suitable for sensitive skin. They contain no SLS, parabens, or synthetic fragrance. If you are unsure, choose a smooth bar and review the ingredient list before ordering.',
   },
   {
     q: 'Is this a made-to-order product?',

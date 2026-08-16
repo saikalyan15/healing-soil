@@ -69,9 +69,9 @@ export default function OurStoryPage() {
           />
         </div>
 
-        {/* Section 2 — Why no chemicals */}
+        {/* Section 2 — What we leave out */}
         <section className="mb-12">
-          <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">Why no chemicals</h2>
+          <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">What we leave out</h2>
           <p className="font-sans text-base leading-relaxed text-[#1A1A14]">
             We wanted bars with clear labels, gentle lather, and quiet botanical scents. We use
             glycerin, goat milk, and shea butter bases and make every bar without SLS, parabens, or

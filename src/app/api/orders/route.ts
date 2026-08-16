@@ -34,7 +34,7 @@ const sharedFields = {
 
 const standardOrderSchema = z.object({
   ...sharedFields,
-  customer_email: z.string().email().max(254),
+  customer_email: z.string().email().max(254).optional(),
   address: z.string().trim().min(5).max(1000),
   state: z.string().trim().min(1).max(100),
   intent: z.undefined().optional(),

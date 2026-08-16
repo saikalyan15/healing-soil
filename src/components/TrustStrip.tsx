@@ -1,6 +1,6 @@
 import React from 'react'
 
-const items = ['Handmade', 'No chemicals', 'Small batch', 'Made to order', 'Goa']
+const items = ['Handmade', 'No SLS or parabens', 'Small batch', 'Made to order', 'Goa']
 
 export default function TrustStrip() {
   return (

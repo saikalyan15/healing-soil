@@ -5,7 +5,7 @@ export default function StoryCTA() {
     <div className="my-10 rounded-lg border border-[#1E5631]/20 bg-[#1E5631]/5 px-6 py-7">
       <p className="mb-1 font-serif text-xl text-[#1E5631]">Made with the same values</p>
       <p className="mb-5 font-sans text-sm leading-relaxed text-[#555]">
-        Handmade soaps from our farm in Goa. No chemicals. Made to order.
+        Handmade soaps from our farm in Goa. No SLS, parabens, or synthetic fragrance. Made to order.
       </p>
       <Link
         href="/shop"

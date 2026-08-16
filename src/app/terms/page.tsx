@@ -62,9 +62,8 @@ export default function TermsPage() {
           <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">Payments</h2>
           <p>
             We accept UPI, credit/debit cards, net banking, and other payment methods enabled
-            through our payment partners, along with cash on delivery where available. Your order
-            is confirmed once payment is received or, for cash-on-delivery orders, once we confirm
-            the order with you directly.
+            through Razorpay. Orders are prepaid, and cash on delivery is not currently available.
+            Your order is confirmed once payment is received.
           </p>
         </section>
 

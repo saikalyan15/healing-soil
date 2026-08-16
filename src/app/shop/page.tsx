@@ -4,16 +4,17 @@ import { absoluteUrl, ORGANIZATION_ID } from '@/lib/seo'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import ShopClient from '@/components/ShopClient'
+import { FREE_SHIPPING_THRESHOLD } from '@/lib/shipping'
 
 export const metadata: Metadata = {
   title: 'Shop Handmade Soaps — Healing Soil',
   description:
-    'Buy handmade chemical-free soaps from Goa. Glycerin and goat milk bases, natural ingredients. Made to order and shipped across India.',
+    'Buy handmade soaps from Goa. No SLS, parabens, or synthetic fragrance. Made to order and shipped across India.',
   alternates: { canonical: '/shop' },
   openGraph: {
     title: 'Shop Handmade Soaps — Healing Soil',
     description:
-      'Buy handmade chemical-free soaps from Goa. Glycerin and goat milk bases, natural ingredients. Made to order and shipped across India.',
+      'Buy handmade soaps from Goa. No SLS, parabens, or synthetic fragrance. Made to order and shipped across India.',
     url: '/shop',
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Healing Soil handmade soaps' }],
@@ -23,12 +24,12 @@ export const metadata: Metadata = {
 
 const faqItems = [
   {
-    q: 'Are these soaps really chemical-free?',
-    a: 'Our soaps contain no synthetic additives: no SLS, no artificial fragrance, no parabens, no preservatives. Every ingredient is something you can read and recognise.',
+    q: 'What do you leave out of your soaps?',
+    a: 'Our soaps contain no SLS, parabens, synthetic fragrance, or added preservatives. Each product page lists the ingredients used in that bar.',
   },
   {
     q: 'What is the difference between glycerin, goat milk, and shea butter soap?',
-    a: 'Glycerin soap is light and clear, best for oily or normal skin. Goat milk soap is creamier and more nourishing, suited to sensitive or dry skin. Shea butter soap is the richest of the three, best for very dry skin or anyone who wants to skip a separate moisturiser.',
+    a: 'Glycerin soap has a light, clean lather. Goat milk soap has a softer, creamier feel. Shea butter soap has the richest texture and a moisturising feel that leaves skin feeling soft. Choose based on the lather, texture, and ingredients you prefer.',
   },
   {
     q: 'Do you ship across India?',
@@ -44,11 +45,11 @@ const faqItems = [
   },
   {
     q: 'How do I order?',
-    a: 'You can order through our website or reach us on WhatsApp. Both work.',
+    a: 'Add your soaps to the cart and pay securely online through Razorpay. Orders are prepaid and cash on delivery is not currently available. You can reach us on WhatsApp if you need help choosing.',
   },
   {
     q: 'Are these soaps suitable for sensitive skin?',
-    a: 'Yes. Our soaps contain no synthetic fragrance, no SLS, and no parabens — the ingredients most likely to cause problems for people with sensitive skin. The goat milk and shea butter bases give a particularly gentle, creamy lather.',
+    a: 'Our range includes gentle options suitable for sensitive skin. They contain no SLS, parabens, or synthetic fragrance. If you are unsure, choose a smooth bar and review the ingredient list before ordering.',
   },
   {
     q: 'Is this a made-to-order product?',
@@ -166,6 +167,24 @@ export default async function ShopPage() {
           <p className="font-sans text-base leading-relaxed text-[#666666]">
             Every Healing Soil handmade soap bar is made by hand in small batches on a farm in South Goa. No SLS,
             parabens, or synthetic fragrance. Order and we will make it fresh for you.
+          </p>
+        </div>
+
+        {/* Payment and delivery information shown before product selection. */}
+        <div className="mb-8 grid gap-3 rounded-lg border border-[#D6CFC4] bg-white p-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ['Secure payment', 'Prepaid online through Razorpay'],
+            ['Delivery', 'Pan-India shipping'],
+            ['Dispatch', 'Within 2 business days'],
+            ['Shipping offer', `Free above ₹${FREE_SHIPPING_THRESHOLD.toLocaleString('en-IN')}`],
+          ].map(([title, detail]) => (
+            <div key={title} className="border-b border-[#E8E0D5] pb-3 last:border-0 last:pb-0 sm:border-b-0 sm:border-r sm:pb-0 sm:pr-3 sm:even:border-r-0 lg:even:border-r lg:last:border-r-0">
+              <p className="font-sans text-xs font-semibold uppercase tracking-wide text-[#1E5631]">{title}</p>
+              <p className="mt-1 font-sans text-sm text-[#666666]">{detail}</p>
+            </div>
+          ))}
+          <p className="font-sans text-xs text-[#666666] sm:col-span-2 lg:col-span-4">
+            Cash on delivery is not currently available. Shipping is calculated at checkout for orders below ₹{FREE_SHIPPING_THRESHOLD.toLocaleString('en-IN')}.
           </p>
         </div>
 

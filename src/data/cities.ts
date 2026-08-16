@@ -28,7 +28,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Can I get cash on delivery in Bangalore?',
-        a: 'Yes, we offer cash on delivery options for our customers in Bangalore to make the ordering process as convenient as possible.'
+        a: 'Cash on delivery is not currently available. Orders are prepaid securely online through Razorpay.'
       }
     ],
     publishedAt: '2026-05-14'
@@ -187,7 +187,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'How can I pay for my order from Kolkata?',
-        a: 'We accept various payment methods, including UPI, credit/debit cards, and cash on delivery for your convenience.'
+        a: 'Orders are prepaid securely online through Razorpay using the payment methods available at checkout. Cash on delivery is not currently available.'
       }
     ],
     publishedAt: '2026-05-16'
@@ -561,7 +561,7 @@ export const cities: CityPage[] = [
       },
       {
         q: 'Do you offer cash on delivery in Thane?',
-        a: 'Yes, we provide cash on delivery options for our customers in Thane for a convenient ordering experience.'
+        a: 'Cash on delivery is not currently available. Orders are prepaid securely online through Razorpay.'
       }
     ],
     publishedAt: '2026-05-16'

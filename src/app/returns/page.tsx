@@ -68,8 +68,8 @@ export default function ReturnsPage() {
           <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">Refunds</h2>
           <p>
             Approved refunds are processed to your original payment method within 5 to 7 business
-            days. If you paid via UPI or cash on delivery, we&apos;ll confirm the best way to
-            return your payment when we approve the refund.
+            days. If an automatic refund is not available for your payment method, we&apos;ll confirm
+            the best way to return your payment when we approve the refund.
           </p>
         </section>
 

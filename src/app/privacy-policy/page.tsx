@@ -47,8 +47,8 @@ export default function PrivacyPolicyPage() {
             <li><strong>Order details</strong> — the products you ordered, quantities, and total amount</li>
           </ul>
           <p className="mt-3">
-            We do not collect payment card details. Payments are handled directly via UPI, bank transfer,
-            or cash on delivery — we never see or store your card or bank credentials.
+            We do not collect payment card details. Payments are handled by Razorpay, and we never
+            see or store your card or bank credentials.
           </p>
         </section>
 

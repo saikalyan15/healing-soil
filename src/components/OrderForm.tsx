@@ -171,7 +171,7 @@ export default function OrderForm({
     if (!validateIndianPhone(phone)) { setError('Please enter a valid Indian mobile number.'); return false }
     if (items.length === 0) { setError(acceptingOrders ? 'Your order is empty.' : 'Your interest list is empty.'); return false }
     if (!acceptingOrders) return true
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setError('Please enter a valid email address.'); return false }
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setError('Please enter a valid email address.'); return false }
     if (!state) { setError('Please select your state.'); return false }
     if (!address.trim()) { setError('Please enter your delivery address.'); return false }
     return true
@@ -218,7 +218,7 @@ export default function OrderForm({
       body: JSON.stringify({
         customer_name: name.trim(),
         customer_phone: normalizedPhone,
-        customer_email: intent === 'interest' ? undefined : email.trim().toLowerCase(),
+        customer_email: intent === 'interest' || !email.trim() ? undefined : email.trim().toLowerCase(),
         items: items.map((i) => ({ product_id: i.product_id, product_slug: i.product_slug, qty: i.qty })),
         address: intent === 'interest' ? undefined : address.trim(),
         state: intent === 'interest' ? undefined : state,
@@ -323,7 +323,7 @@ export default function OrderForm({
           checkout_session_id: checkoutSessionId,
           customer_name: name.trim(),
           customer_phone: normalizePhone(phone),
-          customer_email: email.trim().toLowerCase(),
+          customer_email: email.trim() ? email.trim().toLowerCase() : undefined,
           address: address.trim(),
           state,
           notes: formatPreferencesAsNote(preferences) || undefined,
@@ -378,7 +378,7 @@ export default function OrderForm({
         prefill: {
           name: name.trim(),
           contact: normalizePhone(phone),
-          email: email.trim().toLowerCase(),
+          ...(email.trim() ? { email: email.trim().toLowerCase() } : {}),
         },
         theme: { color: '#1E5631' },
         retry: { enabled: true, max_count: 4 },
@@ -486,6 +486,16 @@ export default function OrderForm({
 
   return (
     <form onSubmit={handlePayNow} className="space-y-6">
+      {acceptingOrders && RAZORPAY_ENABLED && (
+        <div className="rounded-lg border border-[#BFD3C5] bg-[#F2F8F4] p-4">
+          <p className="font-sans text-sm font-semibold text-[#1E5631]">
+            Secure prepaid checkout through Razorpay
+          </p>
+          <p className="mt-1 font-sans text-xs leading-relaxed text-[#555]">
+            Pay online by UPI, card, or another method offered by Razorpay. Cash on delivery is not currently available.
+          </p>
+        </div>
+      )}
       {!acceptingOrders && (
         <div className="rounded-lg border border-[#E8D29B] bg-[#FFF8E8] p-5">
           <h2 className="font-serif text-xl text-[#1E5631]">Orders are temporarily paused while we catch up.</h2>
@@ -615,7 +625,12 @@ export default function OrderForm({
         {acceptingOrders && <>
         <div>
           <label className="mb-1 block font-sans text-sm font-medium text-[#1A1A14]">
-            Email Address <span className="text-red-500">*</span>
+            Email Address{' '}
+            {acceptingOrders ? (
+              <span className="font-normal text-[#777]">(optional)</span>
+            ) : (
+              <span className="text-red-500">*</span>
+            )}
           </label>
           <input
             type="email"
@@ -702,7 +717,7 @@ export default function OrderForm({
         {!loading && !paymentDismissed && acceptingOrders && (
           <p className="text-center font-sans text-xs text-[#999999]">
             {RAZORPAY_ENABLED
-              ? 'Secure payment by Razorpay. Your paid order is confirmed on this website.'
+              ? 'Secure prepaid payment by Razorpay. Cash on delivery is not currently available.'
               : 'Clicking this saves your order and shows you how to send it on WhatsApp in one step.'}
           </p>
         )}

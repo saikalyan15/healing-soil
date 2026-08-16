@@ -30,7 +30,7 @@ const createOrderSchema = z.object({
   checkout_session_id: z.string().uuid(),
   customer_name: z.string().trim().min(1).max(120),
   customer_phone: z.string().regex(/^91[6-9]\d{9}$/),
-  customer_email: z.string().email().max(254),
+  customer_email: z.string().email().max(254).optional(),
   address: z.string().trim().min(5).max(1000),
   state: z.string().trim().min(1).max(100),
   notes: z.string().max(1000).optional(),
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
       customer: {
         name: data.customer_name,
         phone: data.customer_phone,
-        email: data.customer_email.toLowerCase(),
+        email: data.customer_email?.toLowerCase(),
         address: data.address,
         state: data.state,
       },

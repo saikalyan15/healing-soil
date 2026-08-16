@@ -61,10 +61,10 @@ export default function ShopClient({ products }: ShopClientProps) {
         <section className="mb-10 rounded-lg border border-[#D6CFC4] bg-white p-4 sm:p-6">
           <div className="mb-5 max-w-3xl">
             <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-wide text-[#C9A84C]">
-              New discovery boxes
+              Start here · An easy way to try the range
             </p>
             <h2 className="font-serif text-3xl leading-tight text-[#1A1A14]">
-              Soap Squares Discovery Box
+              Choose your Soap Squares Discovery Box
             </h2>
             <p className="mt-2 font-sans text-sm leading-relaxed text-[#666666]">
               Four mini handmade soaps in one kraft box. Pick Light, Creamy, or Rich.
@@ -111,7 +111,7 @@ export default function ShopClient({ products }: ShopClientProps) {
                       {detail?.selectionCopy}
                     </p>
                     <span className="mt-4 inline-flex items-center font-sans text-sm font-semibold text-[#1E5631] group-hover:text-[#C9A84C]">
-                      Choose this box
+                      View this box
                     </span>
                   </div>
                 </Link>
