@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getProducts, getFeaturedProducts, type Product } from '@/lib/products'
 import { canonicalSlugFor } from '@/lib/product-slugs'
 import { getAllPosts } from '@/lib/blog'
+import { SITE_URL } from '@/lib/seo'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
 import BundlePicker from '@/components/BundlePicker'
@@ -23,12 +24,15 @@ export const metadata: Metadata = {
   title: { absolute: 'Handmade Natural Soap for the Whole Family | Healing Soil' },
   description:
     'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free. Starter bundle of four soaps for ₹1,000.',
-  alternates: { canonical: '/' },
+  // Absolute, not '/': relative canonicals resolve against metadataBase with a
+  // trailing slash, which disagreed with the no-trailing-slash canonical Google
+  // had already chosen for the homepage (GSC canonical mismatch, Aug 2026).
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Handmade Natural Soap for the Whole Family | Healing Soil',
     description:
       'Handmade in small batches on our farm in South Goa, with botanicals we grow ourselves. No SLS, no parabens, no synthetic fragrance.',
-    url: '/',
+    url: SITE_URL,
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 1200, alt: 'Healing Soil handmade soaps from Goa' }],
     type: 'website',

@@ -167,6 +167,14 @@ export default async function GoatMilkSoapPage() {
           <ul className="space-y-2 font-sans text-sm">
             <li>
               <Link
+                href="/blog/goat-milk-soap-benefits"
+                className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+              >
+                Goat milk soap guide: ingredients, lather and daily use
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/blog/glycerin-vs-goat-milk-soap"
                 className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
               >
