@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { confirmPaidOrder } from '@/lib/payment-confirmation'
 import { getRazorpayClient, isRazorpayEnabled, verifyPaymentSignature } from '@/lib/razorpay'
 import { updateSoapLedgerPayment } from '@/lib/orders'
+import { payablePaise } from '@/lib/payment-fee'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { RATE_LIMIT_WINDOW_MS, RATE_LIMIT_PAYMENT_ATTEMPTS } from '@/lib/order-limits'
 
@@ -36,7 +37,8 @@ export async function POST(req: NextRequest) {
     ])
     const paymentOrderId = String(payment.order_id || '')
     const paymentAmount = Number(payment.amount)
-    const expectedAmount = Math.round(Number(ledger.order.order_value) * 100)
+    // SoapLedger stores the order value; Razorpay collected that plus the fee.
+    const expectedAmount = payablePaise(Number(ledger.order.order_value))
     if (paymentOrderId !== razorpay_order_id || paymentAmount !== expectedAmount || payment.currency !== 'INR') {
       console.error('[Razorpay verify] payment/order mismatch', { razorpay_order_id, razorpay_payment_id })
       return NextResponse.json({ verified: false, error: 'Payment details did not match the order.' }, { status: 400 })

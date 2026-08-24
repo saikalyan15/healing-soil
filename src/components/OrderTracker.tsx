@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import type { TrackedOrder } from '@/lib/orders'
+import { payableWithFee } from '@/lib/payment-fee'
 
 const PROGRESS_STEPS = [
   { label: 'Order received', description: 'Your order details are recorded.' },
@@ -115,6 +116,13 @@ export default function OrderTracker({ initialRef = '' }: { initialRef?: string 
   const activeStep = order ? progressIndex(order.status) : 0
   const dispatchedAt = order?.shipments.find((shipment) => shipment.dispatched_at)?.dispatched_at || null
   const deliveredAt = order?.shipments.find((shipment) => shipment.delivered_at)?.delivered_at || null
+  // SoapLedger stores the order value. A checkout that went through Razorpay was
+  // charged the online payment charge on top, so show what was actually paid.
+  const summaryTotal = order
+    ? (order.payment_provider === 'razorpay' && (order.payment_status === 'paid' || order.payment_status === 'pending')
+        ? payableWithFee(order.total)
+        : order.total)
+    : 0
   const whatsappHref = order
     ? `https://wa.me/917483100651?text=${encodeURIComponent(`Hi Healing Soil, I need help with order ${order.ref}.`)}`
     : 'https://wa.me/917483100651'
@@ -220,7 +228,7 @@ export default function OrderTracker({ initialRef = '' }: { initialRef?: string 
           <div className="rounded-xl border border-[#D6CFC4] bg-white p-6 shadow-sm">
             <div className="flex items-center justify-between gap-4 border-b border-[#EEE9E1] pb-4">
               <h2 className="font-serif text-xl text-[#1A1A14]">Order summary</h2>
-              <span className="font-sans text-base font-bold text-[#1E5631]">₹{order.total.toLocaleString('en-IN')}</span>
+              <span className="font-sans text-base font-bold text-[#1E5631]">₹{summaryTotal.toLocaleString('en-IN')}</span>
             </div>
             <ul className="divide-y divide-[#EEE9E1]">
               {order.items.map((item, index) => (

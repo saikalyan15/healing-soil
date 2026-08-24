@@ -10,6 +10,7 @@ import { trackMetaLeadOnce, trackMetaPurchaseOnce } from '@/lib/meta-pixel'
 import { GA4_EVENT } from '@/lib/analytics'
 import { getStoredAttribution } from '@/lib/attribution'
 import { calculateShipping } from '@/lib/shipping'
+import { paymentFee } from '@/lib/payment-fee'
 import {
   formatReopenDate,
   futureReopenDate,
@@ -112,6 +113,12 @@ export default function OrderForm({
   const shipping = acceptingOrders ? calculateShipping(subtotal, state) : 0
 
   const total = subtotal + shipping
+
+  // Online payments carry Razorpay's charge on top of the order total. The
+  // WhatsApp path is settled off the gateway, so it never picks this up.
+  const onlineFee = acceptingOrders && RAZORPAY_ENABLED ? paymentFee(total) : 0
+
+  const payable = total + onlineFee
 
   const checkoutFiredRef = useRef(false)
   const payRequestInFlightRef = useRef(false)
@@ -580,9 +587,15 @@ export default function OrderForm({
                 {shipping === 0 ? <span className="font-medium text-[#1E5631]">Free</span> : <span>₹{shipping}</span>}
               </div>
               {shipping > 0 && <p className="font-sans text-xs text-[#999]">Free shipping on orders above ₹1,000</p>}
+              {onlineFee > 0 && (
+                <div className="flex justify-between font-sans text-sm text-[#666666]">
+                  <span>Online payment charge (2.5%)</span>
+                  <span>₹{onlineFee.toLocaleString('en-IN')}</span>
+                </div>
+              )}
               <div className="flex justify-between border-t border-[#D6CFC4] pt-2 font-sans text-base font-bold text-[#1A1A14]">
                 <span>Total</span>
-                <span>₹{total.toLocaleString('en-IN')}</span>
+                <span>₹{payable.toLocaleString('en-IN')}</span>
               </div>
             </>
           ) : (
@@ -704,7 +717,7 @@ export default function OrderForm({
           {!acceptingOrders ? (
             loading ? 'Saving your interest…' : 'Save My Interest'
           ) : RAZORPAY_ENABLED ? (
-            loading ? 'Starting payment…' : `Pay ₹${total.toLocaleString('en-IN')} & Place Order`
+            loading ? 'Starting payment…' : `Pay ₹${payable.toLocaleString('en-IN')} & Place Order`
           ) : loading ? (
             'Saving your order…'
           ) : (

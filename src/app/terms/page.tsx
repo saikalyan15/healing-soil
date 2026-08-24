@@ -63,7 +63,9 @@ export default function TermsPage() {
           <p>
             We accept UPI, credit/debit cards, net banking, and other payment methods enabled
             through Razorpay. Orders are prepaid, and cash on delivery is not currently available.
-            Your order is confirmed once payment is received.
+            Online payments carry a 2.5% payment charge, added to the order total and rounded to
+            the nearest rupee. You will see it in your order summary before you pay. Your order is
+            confirmed once payment is received.
           </p>
         </section>
 

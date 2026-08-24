@@ -34,7 +34,7 @@ const faqItems = [
   },
   {
     q: 'How do I order?',
-    a: 'Add your soaps to the cart and pay securely online through Razorpay. Orders are prepaid and cash on delivery is not currently available. You can reach us on WhatsApp if you need help choosing.',
+    a: 'Add your soaps to the cart and pay securely online through Razorpay. Orders are prepaid and cash on delivery is not currently available. A 2.5% online payment charge is added to the order total, rounded to the nearest rupee, and shown in your summary before you pay. You can reach us on WhatsApp if you need help choosing.',
   },
   {
     q: 'Are these soaps suitable for sensitive skin?',

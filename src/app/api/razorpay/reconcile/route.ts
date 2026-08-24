@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { confirmPaidOrder } from '@/lib/payment-confirmation'
 import { getRazorpayClient } from '@/lib/razorpay'
 import { updateSoapLedgerPayment } from '@/lib/orders'
+import { payablePaise } from '@/lib/payment-fee'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 
 const reconcileSchema = z.object({
@@ -71,7 +72,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Razorpay verification is temporarily unavailable. Please try again.' }, { status: 502 })
     }
 
-    const expectedAmount = Math.round(Number(ledger.order.order_value) * 100)
+    // SoapLedger stores the order value; Razorpay collected that plus the fee.
+    const expectedAmount = payablePaise(Number(ledger.order.order_value))
     if (String(payment.order_id || '') !== provider_order_id) {
       return NextResponse.json({ error: 'The payment belongs to a different Razorpay order.' }, { status: 409 })
     }

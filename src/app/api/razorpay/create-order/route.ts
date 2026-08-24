@@ -5,6 +5,7 @@ import { getProducts } from '@/lib/products'
 import { createFallbackToken, getRazorpayClient, isRazorpayEnabled } from '@/lib/razorpay'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { calculateShipping } from '@/lib/shipping'
+import { payablePaise, payableWithFee } from '@/lib/payment-fee'
 import { getOrderAvailability, getSoapLedgerCheckoutSession, submitOrder, type SoapLedgerOrderResponse } from '@/lib/orders'
 import { confirmPaidOrder } from '@/lib/payment-confirmation'
 import { classifyOrderSource } from '@/lib/order-attribution'
@@ -81,6 +82,8 @@ export async function POST(req: NextRequest) {
 
     const shipping = calculateShipping(subtotal, data.state)
     const total = subtotal + shipping
+    // Razorpay collects the order total plus the online payment charge.
+    const payable = payableWithFee(total)
     if (total <= 0 || total > MAX_ORDER_TOTAL_INR) {
       return NextResponse.json({ error: 'This order cannot be paid online. Please contact us.' }, { status: 400 })
     }
@@ -109,7 +112,7 @@ export async function POST(req: NextRequest) {
         razorpay.orders.fetch(providerOrderId),
         razorpay.orders.fetchPayments(providerOrderId),
       ])
-      if (Number(providerOrder.amount) !== Math.round(total * 100) || providerOrder.currency !== 'INR') {
+      if (Number(providerOrder.amount) !== payablePaise(total) || providerOrder.currency !== 'INR') {
         throw new Error('Stored checkout amount does not match the current basket')
       }
 
@@ -140,6 +143,7 @@ export async function POST(req: NextRequest) {
         fallback_token: createFallbackToken(providerOrderId),
         shipping,
         total,
+        payable,
         reused: true,
         already_paid: Boolean(captured || ledgerOrder.payment_status === 'paid'),
         payment_pending: paymentPending,
@@ -150,7 +154,7 @@ export async function POST(req: NextRequest) {
     if (existingCheckout) return responseForLedgerOrder(existingCheckout)
 
     const razorpayOrder = await razorpay.orders.create({
-      amount: Math.round(total * 100),
+      amount: payablePaise(total),
       currency: 'INR',
       receipt: `hs-${data.checkout_session_id}`,
     })
@@ -202,6 +206,7 @@ export async function POST(req: NextRequest) {
       fallback_token: createFallbackToken(razorpayOrder.id),
       shipping,
       total,
+      payable,
       reused: false,
       already_paid: false,
       payment_pending: false,
