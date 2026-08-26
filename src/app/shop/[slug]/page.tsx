@@ -14,6 +14,7 @@ import { buildTitle, buildDescription, absoluteUrl, ORGANIZATION_ID } from '@/li
 import ProductCard from '@/components/ProductCard'
 import { comparisons } from '@/data/comparisons'
 import { canonicalSlugFor } from '@/lib/product-slugs'
+import { NORTH_INDIA_STATES, SHIPPING_NORTH, SHIPPING_STANDARD } from '@/lib/shipping'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -214,6 +215,22 @@ export default async function ProductPage({ params }: Props) {
   const supportingLinks = PRODUCT_SUPPORT_LINKS[canonicalSlug] ?? []
   const soapSquaresDetail = getSoapSquaresBoxDetail(canonicalSlug)
 
+  const shippingDeliveryTime = {
+    '@type': 'ShippingDeliveryTime',
+    handlingTime: {
+      '@type': 'QuantitativeValue',
+      minValue: 2,
+      maxValue: 2,
+      unitCode: 'DAY',
+    },
+    transitTime: {
+      '@type': 'QuantitativeValue',
+      minValue: 3,
+      maxValue: 7,
+      unitCode: 'DAY',
+    },
+  }
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -236,33 +253,35 @@ export default async function ProductPage({ params }: Props) {
         applicableCountry: 'IN',
         returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
       },
-      shippingDetails: {
-        '@type': 'OfferShippingDetails',
-        shippingRate: {
-          '@type': 'MonetaryAmount',
-          value: 100,
-          currency: 'INR',
-        },
-        shippingDestination: {
-          '@type': 'DefinedRegion',
-          addressCountry: 'IN',
-        },
-        deliveryTime: {
-          '@type': 'ShippingDeliveryTime',
-          handlingTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 2,
-            maxValue: 2,
-            unitCode: 'DAY',
+      shippingDetails: [
+        {
+          '@type': 'OfferShippingDetails',
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: SHIPPING_NORTH,
+            currency: 'INR',
           },
-          transitTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 3,
-            maxValue: 7,
-            unitCode: 'DAY',
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'IN',
+            addressRegion: [...NORTH_INDIA_STATES],
           },
+          deliveryTime: shippingDeliveryTime,
         },
-      },
+        {
+          '@type': 'OfferShippingDetails',
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: SHIPPING_STANDARD,
+            currency: 'INR',
+          },
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'IN',
+          },
+          deliveryTime: shippingDeliveryTime,
+        },
+      ],
     },
     ...(productSpecificReviews.length > 0 && {
       aggregateRating: {
