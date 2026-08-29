@@ -1,30 +1,32 @@
-import { NextRequest } from 'next/server'
-
 /**
- * WhatsApp Embedded Signup OAuth redirect target.
+ * ABANDONED: WhatsApp Embedded Signup OAuth redirect target.
  *
- * Registered in the Meta app dashboard as a "Redirect URI" so Meta can send a
- * logged-in admin's browser back here after they finish the Facebook / WhatsApp
- * Embedded Signup flow. This is a one-time internal configuration endpoint — it
- * is not linked from anywhere in the site and carries no user traffic.
+ * The WhatsApp Business Platform onboarding (Embedded Signup + Coexistence,
+ * intended to let us send order-status messages to customers) was shelved.
  *
- * What it does:
- *  - Accepts an unauthenticated GET (Meta redirects a browser here; there is no
- *    session and no API key involved).
- *  - Captures every query parameter Meta returns (`code`, `state`, and on
- *    failure `error` / `error_description` / `error_reason`).
- *  - Logs the full query string to the server logs and, best-effort, emails it
- *    to NOTIFY_EMAIL_TO so it can be retrieved after the fact.
- *  - Renders a plain confirmation page. The `code` value is never written to the
- *    page — it only goes to the server-side log and the notification email.
- *
- * Must stay publicly reachable over HTTPS at exactly /whatsapp/callback with no
- * redirect and no auth wall. There is no middleware in this app, and
- * next.config.mjs has no rule matching this path, so a plain 200 is returned.
+ * This endpoint is disabled: it now returns 404 so there is nothing live to
+ * fail against Meta's URL checks. The original implementation is preserved in
+ * the comment block below. To bring it back, restore that code, re-enable the
+ * `/whatsapp/connect` rewrite in next.config.mjs, and rename
+ * public/whatsapp/connect.html.disabled back to connect.html.
  */
 
-// Never prerender or cache — every hit must run the handler.
 export const dynamic = 'force-dynamic'
+
+export async function GET() {
+  return new Response('Not found', {
+    status: 404,
+    headers: {
+      'content-type': 'text/plain; charset=utf-8',
+      'cache-control': 'no-store',
+      'x-robots-tag': 'noindex, nofollow',
+    },
+  })
+}
+
+/* ─── Original implementation (disabled) ───────────────────────────────────────
+
+import { NextRequest } from 'next/server'
 
 async function emailQueryString(fullQueryString: string, receivedAt: string): Promise<void> {
   try {
@@ -73,8 +75,6 @@ export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams
   const fullQueryString = params.toString()
 
-  // Structured server-side log. `code` is intentionally included here (server
-  // logs only) so it can be retrieved from the Vercel dashboard.
   console.log('[whatsapp/callback] OAuth redirect received', {
     receivedAt,
     fullQueryString,
@@ -114,9 +114,9 @@ export async function GET(request: NextRequest) {
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'cache-control': 'no-store',
-      // Keeps this internal endpoint out of search results. Does not affect
-      // Meta's redirect, which is a plain browser navigation, not a crawl.
       'x-robots-tag': 'noindex, nofollow',
     },
   })
 }
+
+──────────────────────────────────────────────────────────────────────────────── */

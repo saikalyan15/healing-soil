@@ -42,14 +42,16 @@ const nextConfig = {
     ]
   },
 
-  async rewrites() {
-    return [
-      // One-time internal page for the Meta WhatsApp Embedded Signup (Coexistence)
-      // flow. Served verbatim from public/whatsapp/connect.html with no templating;
-      // the rewrite keeps the clean URL /whatsapp/connect. Not linked anywhere.
-      { source: '/whatsapp/connect', destination: '/whatsapp/connect.html' },
-    ]
-  },
+  // ── ABANDONED: Meta WhatsApp Embedded Signup / order-message onboarding ──────
+  // The WhatsApp Business Platform onboarding was shelved. The rewrite that
+  // exposed the one-time signup page at /whatsapp/connect is disabled; the
+  // page source is kept at public/whatsapp/connect.html.disabled. Re-enable this
+  // block (and the /whatsapp/callback route) if the integration is picked back up.
+  // async rewrites() {
+  //   return [
+  //     { source: '/whatsapp/connect', destination: '/whatsapp/connect.html' },
+  //   ]
+  // },
 
   async redirects() {
     return [
