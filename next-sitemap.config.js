@@ -35,6 +35,8 @@ const config = {
     '/regenerative-living',
     '/my-account',
     '/distributor-soap-squares-catalog',
+    '/whatsapp/callback',    // internal Meta Embedded Signup OAuth redirect target
+    '/whatsapp/*',
     '/icon.png',             // App Router favicon picked up as route
   ],
 
@@ -43,7 +45,7 @@ const config = {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/*?wc-ajax=', '/distributor-soap-squares-catalog'],
+        disallow: ['/*?wc-ajax=', '/distributor-soap-squares-catalog', '/whatsapp/'],
       },
     ],
     additionalSitemaps: [],
