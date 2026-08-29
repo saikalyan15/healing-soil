@@ -42,6 +42,15 @@ const nextConfig = {
     ]
   },
 
+  async rewrites() {
+    return [
+      // One-time internal page for the Meta WhatsApp Embedded Signup (Coexistence)
+      // flow. Served verbatim from public/whatsapp/connect.html with no templating;
+      // the rewrite keeps the clean URL /whatsapp/connect. Not linked anywhere.
+      { source: '/whatsapp/connect', destination: '/whatsapp/connect.html' },
+    ]
+  },
+
   async redirects() {
     return [
       // www → non-www canonical redirect

@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Healing Soil — Connect WhatsApp Business App (Coexistence)</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; color: #1c1e21; }
+  h1 { font-size: 20px; }
+  button { background: #1877f2; color: #fff; border: none; padding: 12px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; }
+  button:disabled { background: #a9c4f5; cursor: not-allowed; }
+  #log { margin-top: 24px; padding: 12px; background: #f0f2f5; border-radius: 6px; white-space: pre-wrap; font-family: monospace; font-size: 13px; max-height: 400px; overflow: auto; }
+  .field { margin-bottom: 16px; }
+  label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+  input { width: 100%; padding: 8px; font-size: 14px; box-sizing: border-box; }
+</style>
+</head>
+<body>
+  <h1>Connect Healing Soil's WhatsApp number to the Business Platform</h1>
+  <p>This page runs a one-time Embedded Signup flow with the <code>whatsapp_business_app_onboarding</code> feature type, which tells Meta to offer <strong>Coexistence</strong> (keep the WhatsApp Business App working) instead of a plain migration.</p>
+
+  <div class="field">
+    <label for="appId">App ID</label>
+    <input id="appId" value="1360313391726594" />
+  </div>
+  <div class="field">
+    <label for="configId">Configuration ID (from Facebook Login for Business &gt; Configurations)</label>
+    <input id="configId" value="1047732371461601" />
+  </div>
+
+  <button id="loginBtn" disabled>Loading Facebook SDK…</button>
+
+  <div id="log">Waiting…</div>
+
+  <script>
+    const logEl = document.getElementById('log');
+    function log(msg, data) {
+      const line = typeof data !== 'undefined' ? `${msg} ${JSON.stringify(data, null, 2)}` : msg;
+      logEl.textContent += '\n' + line;
+      console.log(msg, data);
+    }
+
+    window.fbAsyncInit = function () {
+      const appId = document.getElementById('appId').value.trim();
+      FB.init({
+        appId: appId,
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v21.0'
+      });
+      document.getElementById('loginBtn').disabled = false;
+      document.getElementById('loginBtn').textContent = 'Connect WhatsApp Business App';
+      log('Facebook SDK ready.');
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function fbLoginCallback(response) {
+      log('FB.login callback response:', response);
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', function () {
+      const configId = document.getElementById('configId').value.trim();
+      if (!configId) {
+        alert('Paste the Configuration ID first — create it in Meta App Dashboard under Facebook Login for Business > Configurations.');
+        return;
+      }
+      log('Launching Embedded Signup with config_id: ' + configId);
+      FB.login(fbLoginCallback, {
+        config_id: configId,
+        response_type: 'code',
+        override_default_response_type: true,
+        extras: {
+          setup: {},
+          featureType: 'whatsapp_business_app_onboarding',
+          sessionInfoVersion: '3'
+        }
+      });
+    });
+
+    window.addEventListener('message', function (event) {
+      if (!event.origin || !event.origin.endsWith('facebook.com')) return;
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'WA_EMBEDDED_SIGNUP') {
+          log('WA_EMBEDDED_SIGNUP event:', data);
+          if (data.event && data.event.startsWith('FINISH')) {
+            log('✅ Coexistence connection completed. WABA / phone details above — save the waba_id and phone_number_id for your n8n / Graph API setup.');
+          }
+          if (data.event === 'CANCEL') {
+            log('⚠️ Flow was cancelled or hit an error at step: ' + (data.data && data.data.current_step));
+          }
+        }
+      } catch (e) {
+        // not a JSON message we care about
+      }
+    });
+  </script>
+</body>
+</html>
