@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { buildMetadata } from '@/lib/seo'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
+import WhatsAppNudge from '@/components/WhatsAppNudge'
 
 export const metadata = buildMetadata({
   title: 'Soap Ingredients: What Goes Into Every Bar',
@@ -139,7 +141,7 @@ export default function IngredientsPage() {
               className="rounded-lg border border-[#D6CFC4] bg-white p-5"
             >
               <h3 className="mb-2 font-serif text-xl text-[#1E5631]">
-                {item.slug ? (
+                {item.slug && COMMERCE_ENABLED ? (
                   <Link href={`/ingredient/${item.slug}`} className="hover:underline">
                     {item.name}
                   </Link>
@@ -150,7 +152,7 @@ export default function IngredientsPage() {
               <p className="font-sans text-sm leading-relaxed text-[#666666]">
                 {item.description}
               </p>
-              {item.slug && (
+              {item.slug && COMMERCE_ENABLED && (
                 <Link
                   href={`/ingredient/${item.slug}`}
                   className="mt-2 inline-block font-sans text-xs font-medium text-[#C9A84C] hover:underline"
@@ -163,17 +165,23 @@ export default function IngredientsPage() {
         </div>
 
         {/* CTA */}
-        <div className="border-t border-[#D6CFC4] pt-10 text-center">
-          <p className="mb-5 font-sans text-base text-[#1A1A14]">
-            Every soap shows exactly which ingredients are in it.
-          </p>
-          <Link
-            href="/shop"
-            className="inline-block rounded bg-[#1E5631] px-8 py-3 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
-          >
-            Shop by ingredient
-          </Link>
-        </div>
+        {COMMERCE_ENABLED ? (
+          <div className="border-t border-[#D6CFC4] pt-10 text-center">
+            <p className="mb-5 font-sans text-base text-[#1A1A14]">
+              Every soap shows exactly which ingredients are in it.
+            </p>
+            <Link
+              href="/shop"
+              className="inline-block rounded bg-[#1E5631] px-8 py-3 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
+            >
+              Shop by ingredient
+            </Link>
+          </div>
+        ) : (
+          <div className="border-t border-[#D6CFC4] pt-10">
+            <WhatsAppNudge source="ingredients_page" />
+          </div>
+        )}
 
       </article>
     </div>

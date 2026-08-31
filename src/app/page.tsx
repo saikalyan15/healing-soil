@@ -11,6 +11,9 @@ import BundlePicker from '@/components/BundlePicker'
 import VideoTestimonial from '@/components/VideoTestimonial'
 import ProductCard from '@/components/ProductCard'
 import BlogCard from '@/components/BlogCard'
+import WhatsAppLanding from '@/components/WhatsAppLanding'
+import HoldingPage from '@/components/HoldingPage'
+import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
 
 // Statically rendered and served from the Full Route Cache. Product data comes
 // from getProducts(), which is tagged 'products', so this page is rebuilt when
@@ -18,12 +21,17 @@ import BlogCard from '@/components/BlogCard'
 // falls back to the 24h data-cache TTL. It was previously force-dynamic, which
 // ran a Vercel Function on every single request including crawler traffic.
 
+// The description drops the bundle/price line when the storefront is closed; the
+// title and canonical are unchanged in every mode.
+const HOME_DESCRIPTION = COMMERCE_ENABLED
+  ? 'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free. Starter bundle of four soaps for ₹1,000.'
+  : 'Handmade soap made in small batches on our farm in South Goa. SLS-free, paraben-free, and free of synthetic fragrance. Botanicals grown on the farm.'
+
 export const metadata: Metadata = {
   // absolute, so buildTitle does not apply — keep this within the 60 char budget
   // by hand. Currently 57.
   title: { absolute: 'Handmade Natural Soap for the Whole Family | Healing Soil' },
-  description:
-    'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free. Starter bundle of four soaps for ₹1,000.',
+  description: HOME_DESCRIPTION,
   // Absolute, not '/': relative canonicals resolve against metadataBase with a
   // trailing slash, which disagreed with the no-trailing-slash canonical Google
   // had already chosen for the homepage (GSC canonical mismatch, Aug 2026).
@@ -96,6 +104,11 @@ function pickBundleDefaults(products: Product[]): string[] {
 }
 
 export default async function HomePage() {
+  // Site posture switch (src/lib/site-mode.ts). Checked before any SoapLedger
+  // fetch so the closed-storefront modes do no catalogue work.
+  if (SITE_DARK) return <HoldingPage />
+  if (!COMMERCE_ENABLED) return <WhatsAppLanding />
+
   // Deliberately not caught. Under force-dynamic a swallowed failure only blanked
   // one request; now that this page is statically cached, returning [] here would
   // bake an empty storefront into the Full Route Cache until the next revalidation.

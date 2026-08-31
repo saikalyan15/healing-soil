@@ -5,8 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import { useOrderAvailability } from './OrderAvailabilityProvider'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 export default function WelcomeBanner() {
+  if (!COMMERCE_ENABLED) return null
+  return <WelcomeBannerInner />
+}
+
+function WelcomeBannerInner() {
   const [visible, setVisible] = useState(false)
   const itemCount = useOrderStore((s) => s.itemCount)
   const pathname = usePathname()

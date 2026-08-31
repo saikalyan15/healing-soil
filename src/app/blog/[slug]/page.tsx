@@ -11,6 +11,8 @@ import RandomReview from '@/components/RandomReview'
 import StoryCTA from '@/components/StoryCTA'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
 import ProductCard from '@/components/ProductCard'
+import CommerceOnly from '@/components/CommerceOnly'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -80,9 +82,25 @@ const mdxComponents = {
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong className="font-semibold text-[#1A1A14]" {...props} />
   ),
-  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]" {...props} />
-  ),
+  a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    // Storefront closed: inline links to shop / bundle written into old posts
+    // become plain text rather than pointing at redirected routes.
+    const toStorefront =
+      typeof href === 'string' &&
+      (href.startsWith('/shop') || href === '/#bundle' || href === '#bundle' || href.startsWith('/order'))
+    if (!COMMERCE_ENABLED && toStorefront) {
+      return <span {...props}>{children}</span>
+    }
+    return (
+      <a
+        href={href}
+        className="text-[#1E5631] underline underline-offset-2 hover:text-[#C9A84C]"
+        {...props}
+      >
+        {children}
+      </a>
+    )
+  },
   hr: () => <hr className="my-10 border-[#D6CFC4]" />,
 }
 
@@ -326,7 +344,8 @@ export default async function BlogPostPage({ params }: Props) {
   // features. A plain filter would return whichever product sorted first by
   // display_order instead.
   const relatedSlugs = relatedProductsBySlug[slug] ?? []
-  const allProducts = relatedSlugs.length > 0 ? await getProducts().catch(() => []) : []
+  const allProducts =
+    COMMERCE_ENABLED && relatedSlugs.length > 0 ? await getProducts().catch(() => []) : []
   const relatedProducts = relatedSlugs
     .map((want) =>
       allProducts.find((p) => canonicalSlugFor(p.slug) === want && p.in_stock),
@@ -490,34 +509,36 @@ export default async function BlogPostPage({ params }: Props) {
               <RandomReview />
             </div>
 
-            {relatedProducts.length > 0 ? (
-              <div className="mt-8">
-                <p className="mb-4 font-serif text-2xl text-[#1E5631]">Shop these soaps</p>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {relatedProducts.map((p) => (
-                    <ProductCard key={p.id} product={p} />
-                  ))}
+            <CommerceOnly>
+              {relatedProducts.length > 0 ? (
+                <div className="mt-8">
+                  <p className="mb-4 font-serif text-2xl text-[#1E5631]">Shop these soaps</p>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {relatedProducts.map((p) => (
+                      <ProductCard key={p.id} product={p} />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
-                <p className="mb-1 font-serif text-2xl text-[#1E5631]">
-                  Try the starter bundle
-                </p>
-                <p className="mb-1 font-sans text-sm text-[#666666]">
-                  Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
-                </p>
-                <p className="mb-4 font-sans text-xs text-[#999]">
-                  Shipped in 2 days. Free shipping over ₹1,000.
-                </p>
-                <Link
-                  href="/#bundle"
-                  className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
-                >
-                  See the starter bundle
-                </Link>
-              </div>
-            )}
+              ) : (
+                <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
+                  <p className="mb-1 font-serif text-2xl text-[#1E5631]">
+                    Try the starter bundle
+                  </p>
+                  <p className="mb-1 font-sans text-sm text-[#666666]">
+                    Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
+                  </p>
+                  <p className="mb-4 font-sans text-xs text-[#999]">
+                    Shipped in 2 days. Free shipping over ₹1,000.
+                  </p>
+                  <Link
+                    href="/#bundle"
+                    className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
+                  >
+                    See the starter bundle
+                  </Link>
+                </div>
+              )}
+            </CommerceOnly>
 
             <p className="mt-8 font-sans text-sm text-[#999]">
               Want the full picture?{' '}

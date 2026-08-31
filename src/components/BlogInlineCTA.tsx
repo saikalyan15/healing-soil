@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Product } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
+import WhatsAppNudge from './WhatsAppNudge'
 
 type Props = {
   /**
@@ -18,6 +20,9 @@ type Props = {
 }
 
 export default function BlogInlineCTA({ product }: Props) {
+  // Storefront closed: no bundle or product link, just a soft WhatsApp line.
+  if (!COMMERCE_ENABLED) return <WhatsAppNudge source="blog_inline" />
+
   // No mapped product for this post, so fall back to the bundle.
   if (!product) {
     return (

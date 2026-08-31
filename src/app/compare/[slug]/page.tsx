@@ -4,10 +4,12 @@ import { comparisons } from '@/data/comparisons'
 import { buildMetadata } from '@/lib/seo'
 import ComparisonPage from '@/components/programmatic/ComparisonPage'
 import { getProducts , selectProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
   return comparisons
     .filter((c) => c.publishedAt !== null && c.publishedAt <= today)

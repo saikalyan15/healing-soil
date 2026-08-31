@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type AvailabilityContextValue = {
   acceptingOrders: boolean | null
@@ -37,6 +38,12 @@ export function OrderAvailabilityProvider({ children }: { children: React.ReactN
   const [reopenDate, setReopenDate] = useState<string | null>(null)
 
   const refresh = useCallback(async () => {
+    // Outside the 'full' site mode there is no storefront to be open or closed.
+    if (!COMMERCE_ENABLED) {
+      setAcceptingOrders(false)
+      setReopenDate(null)
+      return
+    }
     try {
       const response = await fetch('/api/order-availability', { cache: 'no-store' })
       const data = await response.json().catch(() => ({}))
@@ -51,6 +58,7 @@ export function OrderAvailabilityProvider({ children }: { children: React.ReactN
 
   useEffect(() => {
     void refresh()
+    if (!COMMERCE_ENABLED) return
     const onFocus = () => void refresh()
     const onVisibility = () => {
       if (document.visibilityState === 'visible') void refresh()

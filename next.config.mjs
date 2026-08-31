@@ -1,10 +1,47 @@
 import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
-import { dirname } from 'path'
+import { dirname, join } from 'path'
+import { readFileSync } from 'fs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(import.meta.url)
 const productSlugAliases = require('./config/product-slug-aliases.json')
+
+// Site posture (see src/lib/site-mode.ts). In content-only and dark modes the
+// storefront routes 307-redirect to /. Read here at build time so the redirect
+// list is baked into the deploy.
+const SITE_MODE = process.env.NEXT_PUBLIC_SITE_MODE
+const COMMERCE_OFF = SITE_MODE === 'content-only' || SITE_MODE === 'dark'
+
+/** Root-level [combo] slugs, read from the data file (a .ts, so not require-able). */
+function comboSlugs() {
+  try {
+    const src = readFileSync(join(__dirname, 'src/data/combinations.ts'), 'utf8')
+    return [...src.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1])
+  } catch {
+    return []
+  }
+}
+
+const storefrontRedirects = COMMERCE_OFF
+  ? [
+      '/shop',
+      '/shop/:path*',
+      '/order',
+      '/order/:path*',
+      '/cart',
+      '/checkout',
+      '/my-account',
+      '/ingredient/:path*',
+      '/soap/:path*',
+      '/compare/:path*',
+      '/occasion/:path*',
+      '/soap-for/:path*',
+      '/ayurvedic-soap/:path*',
+    ]
+      .map((source) => ({ source, destination: '/', permanent: false }))
+      .concat(comboSlugs().map((s) => ({ source: `/${s}`, destination: '/', permanent: false })))
+  : []
 
 // Some aliases point to products that are no longer sold. Send those directly
 // to their final destination so crawlers never have to follow a redirect chain.
@@ -55,6 +92,10 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Storefront routes when the site is in content-only / dark mode. First so
+      // they win over the SEO consolidation rules below. Temporary (307) on
+      // purpose: this reverses when NEXT_PUBLIC_SITE_MODE goes back to full.
+      ...storefrontRedirects,
       // www → non-www canonical redirect
       { source: '/:path*', has: [{ type: 'host', value: 'www.healingsoil.in' }], destination: 'https://healingsoil.in/:path*', permanent: true },
       // Product aliases are generated from the same map used by product lookup.

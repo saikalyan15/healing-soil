@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import { getProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 import { absoluteUrl, ORGANIZATION_ID } from '@/lib/seo'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
@@ -71,6 +73,10 @@ const faqSchema = {
 // other product-consuming pages. Previously force-dynamic, which ran a Vercel
 // Function on every request.
 export default async function ShopPage() {
+  // Storefront closed (site mode content-only / dark). next.config.mjs also
+  // redirects this path; this is the in-app backstop.
+  if (!COMMERCE_ENABLED) redirect('/')
+
   // Not caught on purpose — see the note in src/app/page.tsx. Caching an empty
   // shop would be worse than serving the last good render.
   const products = await getProducts()

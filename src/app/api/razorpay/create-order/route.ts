@@ -3,6 +3,7 @@ import { createHash } from 'crypto'
 import { z } from 'zod'
 import { getProducts } from '@/lib/products'
 import { createFallbackToken, getRazorpayClient, isRazorpayEnabled } from '@/lib/razorpay'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 import { calculateShipping } from '@/lib/shipping'
 import { payablePaise, payableWithFee } from '@/lib/payment-fee'
@@ -47,6 +48,9 @@ function checkoutFingerprint(value: unknown): string {
 }
 
 export async function POST(req: NextRequest) {
+  if (!COMMERCE_ENABLED) {
+    return NextResponse.json({ error: 'Website ordering is closed.' }, { status: 410 })
+  }
   const ip = getClientIp(req)
   if (!isRazorpayEnabled()) {
     return NextResponse.json({ error: 'Online payment is not available right now.' }, { status: 404 })

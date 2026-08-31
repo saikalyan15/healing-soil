@@ -3,11 +3,13 @@ import type { Metadata } from 'next'
 import { decisions } from '@/data/decisions'
 import { buildMetadata } from '@/lib/seo'
 import { getProducts, selectProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 import DecisionPage from '@/components/programmatic/DecisionPage'
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
   return decisions
     .filter((d) => d.publishedAt !== null && d.publishedAt <= today)

@@ -7,19 +7,46 @@ import { usePathname } from 'next/navigation'
 
 import { useOrderStore } from '@/lib/store'
 import { useOrderAvailability } from './OrderAvailabilityProvider'
+import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
+import { whatsappLink } from '@/lib/whatsapp'
 
-const navLinks = [
-  { label: 'Shop', href: '/shop' },
-  { label: 'Our Story', href: '/our-story' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-]
+const navLinks = COMMERCE_ENABLED
+  ? [
+      { label: 'Shop', href: '/shop' },
+      { label: 'Our Story', href: '/our-story' },
+      { label: 'Blog', href: '/blog' },
+      { label: 'Contact', href: '/contact' },
+    ]
+  : [
+      { label: 'Blog', href: '/blog' },
+      { label: 'Our Story', href: '/our-story' },
+      { label: 'Contact', href: '/contact' },
+    ]
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const itemCount = useOrderStore((s) => s.itemCount)
   const { acceptingOrders } = useOrderAvailability()
+
+  // 'dark' mode: everything but / redirects to /, so the header is just the mark.
+  if (SITE_DARK) {
+    return (
+      <header className="w-full bg-white border-b border-[#E8E0D5]">
+        <div className="mx-auto flex max-w-7xl items-center justify-center px-6 py-3">
+          <Image
+            src="/logo.png"
+            alt="Healing Soil"
+            width={200}
+            height={80}
+            className="object-contain"
+            style={{ height: '72px', width: 'auto' }}
+            priority
+          />
+        </div>
+      </header>
+    )
+  }
 
   return (
     <header className="w-full bg-white border-b border-[#E8E0D5] relative z-50">
@@ -55,21 +82,23 @@ export default function Header() {
 
         {/* Right side */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <Link
-            href="/order"
-            className="relative flex items-center justify-center p-2 text-[#1A1A14] hover:text-[#1E5631] transition-colors"
-            aria-label={acceptingOrders === false ? 'Review interest list' : 'View cart'}
-          >
-            <CartIcon />
-            {itemCount > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1E5631] text-[10px] font-bold text-white">
-                {itemCount}
-              </span>
-            )}
-          </Link>
+          {COMMERCE_ENABLED && (
+            <Link
+              href="/order"
+              className="relative flex items-center justify-center p-2 text-[#1A1A14] hover:text-[#1E5631] transition-colors"
+              aria-label={acceptingOrders === false ? 'Review interest list' : 'View cart'}
+            >
+              <CartIcon />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#1E5631] text-[10px] font-bold text-white">
+                  {itemCount}
+                </span>
+              )}
+            </Link>
+          )}
 
           <a
-            href="https://wa.me/917483100651"
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#1E5631] px-4 py-2 text-xs font-medium text-white hover:bg-[#1E5631]/90 transition-colors"
@@ -121,7 +150,7 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="https://wa.me/917483100651"
+              href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#1E5631] px-4 py-2 text-xs font-medium text-white"

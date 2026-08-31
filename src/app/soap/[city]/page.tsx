@@ -5,10 +5,12 @@ import CityPage from '@/components/programmatic/CityPage'
 import { buildMetadata } from '@/lib/seo'
 import { climateFor, waterNote } from '@/data/climate'
 import { getProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ city: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
   return cities
     .filter((c) => c.publishedAt !== null && c.publishedAt <= today)

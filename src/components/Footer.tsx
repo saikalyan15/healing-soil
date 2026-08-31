@@ -1,15 +1,26 @@
 import Link from 'next/link'
 import EmailCapture from './EmailCapture'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
-const footerNav = [
-  { label: 'Shop', href: '/shop' },
-  { label: 'Our Story', href: '/our-story' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Track Order', href: '/order/track' },
-  { label: 'Reviews', href: '/reviews' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'FAQ', href: '/faq' },
-]
+const footerNav = (
+  COMMERCE_ENABLED
+    ? [
+        { label: 'Shop', href: '/shop' },
+        { label: 'Our Story', href: '/our-story' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Track Order', href: '/order/track' },
+        { label: 'Reviews', href: '/reviews' },
+        { label: 'Contact', href: '/contact' },
+        { label: 'FAQ', href: '/faq' },
+      ]
+    : [
+        { label: 'Our Story', href: '/our-story' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Reviews', href: '/reviews' },
+        { label: 'Contact', href: '/contact' },
+        { label: 'FAQ', href: '/faq' },
+      ]
+)
 
 export default function Footer() {
   return (

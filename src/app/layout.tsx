@@ -13,6 +13,7 @@ import AttributionCapture from '@/components/AttributionCapture'
 import { OrderAvailabilityProvider } from '@/components/OrderAvailabilityProvider'
 import OrderPauseBanner from '@/components/OrderPauseBanner'
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/seo'
+import { SITE_DARK } from '@/lib/site-mode'
 
 const cormorant = Cormorant_Garamond({
   weight: ['400', '600'],
@@ -85,17 +86,21 @@ fbq('track','PageView');`}
         </Script>
       </head>
       <body>
-        <OrderAvailabilityProvider>
-          <OrderPauseBanner />
-          <WelcomeBanner />
-          <Header />
-          <TrustStrip />
-          <main className="pb-[60px]">{children}</main>
-          <Footer />
-          <OrderTray />
-          <AttributionCapture />
-          <MetaPixelEvents />
-        </OrderAvailabilityProvider>
+        {SITE_DARK ? (
+          <main>{children}</main>
+        ) : (
+          <OrderAvailabilityProvider>
+            <OrderPauseBanner />
+            <WelcomeBanner />
+            <Header />
+            <TrustStrip />
+            <main className="pb-[60px]">{children}</main>
+            <Footer />
+            <OrderTray />
+            <AttributionCapture />
+            <MetaPixelEvents />
+          </OrderAvailabilityProvider>
+        )}
         <GoogleAnalytics gaId="G-EWQR3K5MW7" />
         <Script
           id="datafast"

@@ -1,6 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 
+// Site posture (see src/lib/site-mode.ts). Outside 'full' the sitemap must not
+// advertise the storefront or programmatic pages, which now redirect to /.
+const SITE_MODE = process.env.NEXT_PUBLIC_SITE_MODE
+const CONTENT_ONLY = SITE_MODE === 'content-only'
+const DARK = SITE_MODE === 'dark'
+
 /** @type {import('next-sitemap').IConfig} */
 const config = {
   siteUrl: 'https://healingsoil.in',
@@ -9,6 +15,17 @@ const config = {
 
   // Pages that should not appear in the sitemap
   exclude: [
+    // Storefront and programmatic families when the site is not in 'full' mode:
+    // they redirect to / and additionalPaths already omits them, but this keeps
+    // next-sitemap's own route discovery from re-adding any that still build.
+    ...(SITE_MODE && SITE_MODE !== 'full'
+      ? [
+          '/shop', '/shop/*',
+          '/ingredient/*', '/soap/*', '/compare/*',
+          '/occasion/*', '/soap-for/*', '/ayurvedic-soap/*',
+        ]
+      : []),
+    ...(DARK ? ['/blog', '/blog/*', '/our-story', '/guide/*', '/ingredients', '/contact', '/reviews', '/faq', '/returns', '/shipping-policy', '/terms', '/privacy-policy', '/glycerin-soap', '/goat-milk-soap', '/shea-butter-soap', '/sls-free-soap', '/soap-for-sensitive-skin'] : []),
     '/cart',
     '/checkout',
     '/order',
@@ -184,6 +201,41 @@ const config = {
       'transform-your-mental-health-how-mindful-cooking-became-my-healing-practice',
       'handmade-soap-sensitive-skin',
     ])
+
+    // dark: only the holding page is served.
+    if (DARK) return [{ loc: '/' }]
+
+    // content-only: the blog and brand/legal pages stay indexed; the storefront
+    // and every programmatic family redirect to / and must not be advertised.
+    if (CONTENT_ONLY) {
+      const contentStaticPaths = [
+        '/',
+        '/our-story',
+        '/guide/handmade-soap-india',
+        '/ingredients',
+        '/contact',
+        '/reviews',
+        '/faq',
+        '/returns',
+        '/shipping-policy',
+        '/terms',
+        '/privacy-policy',
+        '/glycerin-soap',
+        '/goat-milk-soap',
+        '/shea-butter-soap',
+        '/sls-free-soap',
+        '/soap-for-sensitive-skin',
+      ]
+      return [
+        ...contentStaticPaths.map((loc) => ({ loc })),
+        ...blogPosts
+          .filter((p) => !redirectedBlogSlugs.has(p.slug))
+          .map((p) => ({ loc: `/blog/${p.slug}`, changefreq: 'monthly', priority: 0.8, ...withLastmod(p.lastmod) })),
+        ...storyPosts
+          .filter((p) => !excludedStorySlugs.has(p.slug))
+          .map((p) => ({ loc: `/blog/${p.slug}`, changefreq: 'monthly', priority: 0.8, ...withLastmod(p.lastmod) })),
+      ]
+    }
 
     return [
       ...staticPaths.map((loc) => ({ loc })),

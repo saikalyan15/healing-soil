@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getProductBySlug, getProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 import { getSoapSquaresBoxDetail, isSoapSquaresProduct, soapSquaresBoxDetails } from '@/lib/soap-squares'
 import { reviewsForProduct, featuredReviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
@@ -26,6 +27,10 @@ type Props = {
  * SoapLedger between deploys still renders on first request and is then cached.
  */
 export async function generateStaticParams() {
+  // Storefront closed (site mode content-only / dark): prerender nothing. The
+  // path is redirected in next.config.mjs; with dynamicParams default true a
+  // stray request still renders, so the component also guards.
+  if (!COMMERCE_ENABLED) return []
   try {
     const products = await getProducts()
     return products.map((p) => ({ slug: canonicalSlugFor(p.slug) }))
@@ -186,6 +191,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
+  if (!COMMERCE_ENABLED) redirect('/')
   const { slug } = await params
   const product = await getProductBySlug(slug)
   if (!product) notFound()
