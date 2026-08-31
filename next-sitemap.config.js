@@ -56,21 +56,31 @@ const config = {
 
   // Add dynamic blog and story routes
   additionalPaths: async () => {
-    const getSlugsByDir = (dir) => {
+    // lastmod comes from the content that backs each URL: MDX frontmatter
+    // `date` for posts, `publishedAt` for programmatic data entries. A uniform
+    // build-time timestamp on all 500+ URLs tells Google the dates are not
+    // real, so it ignores lastmod entirely. When a page is genuinely revised,
+    // add an `updated:` / `updatedAt:` field and wire it in here.
+    const isoOrNull = (d) => (d ? new Date(d).toISOString() : null)
+    const withLastmod = (lastmod) => (lastmod ? { lastmod } : {})
+
+    const getPostsByDir = (dir) => {
       const dirPath = path.join(process.cwd(), 'content', dir)
       if (!fs.existsSync(dirPath)) return []
       return fs
         .readdirSync(dirPath)
         .filter((f) => f.endsWith('.mdx'))
-        .filter((f) => {
+        .map((f) => {
           const content = fs.readFileSync(path.join(dirPath, f), 'utf8')
-          return !content.includes('published: false')
+          if (content.includes('published: false')) return null
+          const m = content.match(/^date:\s*['"]?(\d{4}-\d{2}-\d{2})/m)
+          return { slug: f.replace(/\.mdx$/, ''), lastmod: isoOrNull(m && m[1]) }
         })
-        .map((f) => f.replace(/\.mdx$/, ''))
+        .filter(Boolean)
     }
 
-    const blogSlugs = getSlugsByDir('blog')
-    const storySlugs = getSlugsByDir('stories')
+    const blogPosts = getPostsByDir('blog')
+    const storyPosts = getPostsByDir('stories')
     const redirectedBlogSlugs = new Set([
       'goat-milk-soap-base-vs-glycerin-soap-base',
       'garden-to-bar-marigold-soap',
@@ -94,21 +104,21 @@ const config = {
     // Programmatic SEO data
     const today = new Date().toISOString().split('T')[0]
     
-    const extractLiveSlugs = (filePath) => {
+    const extractLiveEntries = (filePath) => {
       const fullPath = path.resolve(process.cwd(), filePath)
       if (!fs.existsSync(fullPath)) return []
       const content = fs.readFileSync(fullPath, 'utf8')
-      const slugs = []
+      const entries = []
       // [\s\S]*? handles multi-line objects that contain nested arrays (e.g. faqs: [{...}])
       // Only matches entries with a real date string — null entries are skipped naturally
       const entryRegex = /slug:\s*['"]([^'"]+)['"][\s\S]*?publishedAt:\s*'(\d{4}-\d{2}-\d{2})'/g
       let match
       while ((match = entryRegex.exec(content)) !== null) {
         if (match[2] <= today) {
-          slugs.push(match[1])
+          entries.push({ slug: match[1], lastmod: isoOrNull(match[2]) })
         }
       }
-      return slugs
+      return entries
     }
 
     // Comparison pages whose rel=canonical points somewhere else. These must
@@ -119,30 +129,30 @@ const config = {
       'glycerin-vs-goat-milk-soap', // canonical → /blog/glycerin-vs-goat-milk-soap
     ])
 
-    const compareSlugs = extractLiveSlugs('src/data/comparisons.ts').filter(
-      (slug) => !canonicalOverriddenCompareSlugs.has(slug)
+    const compareEntries = extractLiveEntries('src/data/comparisons.ts').filter(
+      (e) => !canonicalOverriddenCompareSlugs.has(e.slug)
     )
-    const ingredientSlugs = extractLiveSlugs('src/data/ingredients.ts')
-    const decisionSlugs = extractLiveSlugs('src/data/decisions.ts')
-    const citySlugs = extractLiveSlugs('src/data/cities.ts')
-    const occasionSlugs = extractLiveSlugs('src/data/occasions.ts')
-    const ayurvedicSlugs = extractLiveSlugs('src/data/ayurvedic.ts')
-    const combinationSlugs = extractLiveSlugs('src/data/combinations.ts')
+    const ingredientEntries = extractLiveEntries('src/data/ingredients.ts')
+    const decisionEntries = extractLiveEntries('src/data/decisions.ts')
+    const cityEntries = extractLiveEntries('src/data/cities.ts')
+    const occasionEntries = extractLiveEntries('src/data/occasions.ts')
+    const ayurvedicEntries = extractLiveEntries('src/data/ayurvedic.ts')
+    const combinationEntries = extractLiveEntries('src/data/combinations.ts')
 
     // City-ingredient cross-pages use ingredientSlug: field, not slug:
-    const extractCityIngredientSlugs = (filePath) => {
+    const extractCityIngredientEntries = (filePath) => {
       const fullPath = path.resolve(process.cwd(), filePath)
       if (!fs.existsSync(fullPath)) return []
       const content = fs.readFileSync(fullPath, 'utf8')
-      const slugs = []
+      const entries = []
       const entryRegex = /ingredientSlug:\s*['"]([^'"]+)['"][\s\S]*?publishedAt:\s*'(\d{4}-\d{2}-\d{2})'/g
       let match
       while ((match = entryRegex.exec(content)) !== null) {
-        if (match[2] <= today) slugs.push(match[1])
+        if (match[2] <= today) entries.push({ ingredientSlug: match[1], lastmod: isoOrNull(match[2]) })
       }
-      return slugs
+      return entries
     }
-    const enabledCityIngredientSlugs = extractCityIngredientSlugs('src/data/city-ingredients.ts')
+    const enabledCityIngredientEntries = extractCityIngredientEntries('src/data/city-ingredients.ts')
 
     // Product slugs are read from the pages the build actually prerendered,
     // rather than hand-maintained here.
@@ -177,76 +187,79 @@ const config = {
 
     return [
       ...staticPaths.map((loc) => ({ loc })),
+      // Products have no static date source (name, price and stock all live in
+      // SoapLedger and can change any day), so build time is the honest value.
       ...productSlugs.map((slug) => ({
         loc: `/shop/${slug}`,
         changefreq: 'weekly',
         priority: 0.9,
         lastmod: new Date().toISOString(),
       })),
-      ...blogSlugs
-        .filter((slug) => !redirectedBlogSlugs.has(slug))
-        .map((slug) => ({
-          loc: `/blog/${slug}`,
+      ...blogPosts
+        .filter((p) => !redirectedBlogSlugs.has(p.slug))
+        .map((p) => ({
+          loc: `/blog/${p.slug}`,
           changefreq: 'monthly',
           priority: 0.8,
-          lastmod: new Date().toISOString(),
+          ...withLastmod(p.lastmod),
         })),
-      ...storySlugs
-        .filter((slug) => !excludedStorySlugs.has(slug))
-        .map((slug) => ({
-          loc: `/blog/${slug}`,
+      ...storyPosts
+        .filter((p) => !excludedStorySlugs.has(p.slug))
+        .map((p) => ({
+          loc: `/blog/${p.slug}`,
           changefreq: 'monthly',
           priority: 0.8,
-          lastmod: new Date().toISOString(),
+          ...withLastmod(p.lastmod),
         })),
-      ...compareSlugs.map((slug) => ({
-        loc: `/compare/${slug}`,
+      ...compareEntries.map((e) => ({
+        loc: `/compare/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...decisionSlugs.map((slug) => ({
-        loc: `/soap-for/${slug}`,
+      ...decisionEntries.map((e) => ({
+        loc: `/soap-for/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.8,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...ingredientSlugs.map((slug) => ({
-        loc: `/ingredient/${slug}`,
+      ...ingredientEntries.map((e) => ({
+        loc: `/ingredient/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...citySlugs.map((slug) => ({
-        loc: `/soap/${slug}`,
+      ...cityEntries.map((e) => ({
+        loc: `/soap/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.6,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...occasionSlugs.map((slug) => ({
-        loc: `/occasion/${slug}`,
+      ...occasionEntries.map((e) => ({
+        loc: `/occasion/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.6,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...ayurvedicSlugs.map((slug) => ({
-        loc: `/ayurvedic-soap/${slug}`,
+      ...ayurvedicEntries.map((e) => ({
+        loc: `/ayurvedic-soap/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.8,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...combinationSlugs.map((slug) => ({
-        loc: `/${slug}`,
+      ...combinationEntries.map((e) => ({
+        loc: `/${e.slug}`,
         changefreq: 'monthly',
         priority: 0.7,
-        lastmod: new Date().toISOString(),
+        ...withLastmod(e.lastmod),
       })),
-      ...enabledCityIngredientSlugs.flatMap((ingredientSlug) =>
-        citySlugs.map((citySlug) => ({
-          loc: `/soap/${citySlug}/${ingredientSlug}`,
+      ...enabledCityIngredientEntries.flatMap((ci) =>
+        cityEntries.map((city) => ({
+          loc: `/soap/${city.slug}/${ci.ingredientSlug}`,
           changefreq: 'monthly',
           priority: 0.6,
-          lastmod: new Date().toISOString(),
+          // the later of the city hub's date and the cross-page's own date
+          ...withLastmod([city.lastmod, ci.lastmod].filter(Boolean).sort().pop() || null),
         }))
       ),
     ]
