@@ -4,10 +4,12 @@ import { combinations } from '@/data/combinations'
 import { buildMetadata } from '@/lib/seo'
 import CombinationPage from '@/components/programmatic/CombinationPage'
 import { getProducts , selectProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ combo: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
   return combinations
     .filter((c) => c.publishedAt !== null && c.publishedAt <= today)

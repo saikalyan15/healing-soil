@@ -4,10 +4,12 @@ import { occasions } from '@/data/occasions'
 import { buildMetadata } from '@/lib/seo'
 import OccasionPage from '@/components/programmatic/OccasionPage'
 import { getProducts , selectProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
   return occasions
     .filter((o) => o.publishedAt !== null && o.publishedAt <= today)

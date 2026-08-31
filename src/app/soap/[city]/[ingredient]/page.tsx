@@ -6,10 +6,12 @@ import { cityIngredientBatches } from '@/data/city-ingredients'
 import { buildMetadata } from '@/lib/seo'
 import CityIngredientPage from '@/components/programmatic/CityIngredientPage'
 import { getProducts, selectProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ city: string; ingredient: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
 
   const enabledIngredientSlugs = cityIngredientBatches

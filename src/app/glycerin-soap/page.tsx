@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { getProducts } from '@/lib/products'
 import ProductCard from '@/components/ProductCard'
 import BlogInlineCTA from '@/components/BlogInlineCTA'
+import CommerceOnly from '@/components/CommerceOnly'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 export const metadata: Metadata = {
   title: 'Glycerin Soap: Handmade in Goa | Healing Soil',
@@ -71,7 +73,7 @@ const breadcrumbSchema = {
 }
 
 export default async function GlycerinSoapPage() {
-  const allProducts = await getProducts()
+  const allProducts = COMMERCE_ENABLED ? await getProducts() : []
   const products = allProducts.filter((p) => p.base === 'Glycerine')
 
   return (
@@ -122,14 +124,16 @@ export default async function GlycerinSoapPage() {
         </ul>
 
         {/* Product Grid */}
-        <div className="mb-12">
-          <h2 className="mb-6 font-serif text-3xl text-[#1E5631]">Our glycerin soaps</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
+        <CommerceOnly>
+          <div className="mb-12">
+            <h2 className="mb-6 font-serif text-3xl text-[#1E5631]">Our glycerin soaps</h2>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {products.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
           </div>
-        </div>
+        </CommerceOnly>
 
         <BlogInlineCTA />
 

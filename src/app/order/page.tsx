@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import OrderPageClient from '@/components/OrderPageClient'
 import { getOrderAvailabilityDetails, type OrderAvailability } from '@/lib/orders'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,6 +14,8 @@ export const metadata: Metadata = {
 }
 
 export default async function OrderPage() {
+  if (!COMMERCE_ENABLED) redirect('/')
+
   let availability: OrderAvailability = { accepting_orders: false, reopen_date: null }
   try {
     availability = await getOrderAvailabilityDetails()

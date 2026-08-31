@@ -2,8 +2,14 @@
 
 import Link from 'next/link'
 import { formatReopenDate, futureReopenDate, useOrderAvailability } from './OrderAvailabilityProvider'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 export default function OrderPauseBanner() {
+  if (!COMMERCE_ENABLED) return null
+  return <OrderPauseBannerInner />
+}
+
+function OrderPauseBannerInner() {
   const { acceptingOrders, reopenDate } = useOrderAvailability()
   if (acceptingOrders !== false) return null
 

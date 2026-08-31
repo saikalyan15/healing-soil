@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
+import WhatsAppNudge from './WhatsAppNudge'
 
 export default function StoryCTA() {
+  if (!COMMERCE_ENABLED) return <WhatsAppNudge source="story_cta" />
   return (
     <div className="my-10 rounded-lg border border-[#1E5631]/20 bg-[#1E5631]/5 px-6 py-7">
       <p className="mb-1 font-serif text-xl text-[#1E5631]">Made with the same values</p>

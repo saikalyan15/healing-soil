@@ -4,10 +4,12 @@ import { ingredients } from '@/data/ingredients'
 import { buildMetadata } from '@/lib/seo'
 import IngredientPage from '@/components/programmatic/IngredientPage'
 import { getProducts , selectProducts } from '@/lib/products'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
+  if (!COMMERCE_ENABLED) return []
   const today = new Date().toISOString().split('T')[0]
   return ingredients
     .filter((i) => i.publishedAt !== null && i.publishedAt <= today)

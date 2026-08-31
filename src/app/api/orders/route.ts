@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 import { getOrderAvailability, submitOrder } from '@/lib/orders'
 import { getProducts } from '@/lib/products'
 import { calculateShipping } from '@/lib/shipping'
@@ -50,6 +51,9 @@ const interestSchema = z.object({
 const orderSchema = z.union([interestSchema, standardOrderSchema])
 
 export async function POST(req: NextRequest) {
+  if (!COMMERCE_ENABLED) {
+    return NextResponse.json({ error: 'Website ordering is closed.' }, { status: 410 })
+  }
   const ip = getClientIp(req)
   try {
     if (!checkRateLimit(`orders:${ip}`, RATE_LIMIT_ORDER_ATTEMPTS, RATE_LIMIT_WINDOW_MS)) {

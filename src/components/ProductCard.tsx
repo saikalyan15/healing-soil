@@ -6,13 +6,21 @@ import Link from 'next/link'
 import { useOrderStore } from '@/lib/store'
 import type { Product } from '@/lib/products'
 import { useOrderAvailability } from './OrderAvailabilityProvider'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 type ProductCardProps = {
   product: Product
   priority?: boolean
 }
 
-export default function ProductCard({ product, priority = false }: ProductCardProps) {
+export default function ProductCard(props: ProductCardProps) {
+  // Content pages that stay published outside 'full' mode wrap their product
+  // grids in <CommerceOnly>, but this is the backstop if one is missed.
+  if (!COMMERCE_ENABLED) return null
+  return <ProductCardInner {...props} />
+}
+
+function ProductCardInner({ product, priority = false }: ProductCardProps) {
   const addItem = useOrderStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
   const [expanded, setExpanded] = useState(false)

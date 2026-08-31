@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
+import WhatsAppNudge from '@/components/WhatsAppNudge'
 
 export const metadata: Metadata = {
   title: 'The Complete Guide to Handmade Soap in India',
@@ -281,20 +283,25 @@ export default function HandmadeSoapIndiaGuide() {
           ))}
         </ul>
 
-        {/* Bundle CTA */}
-        <div className="mt-10 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
-          <p className="mb-1 font-serif text-2xl text-[#1E5631]">Try the starter bundle</p>
-          <p className="mb-1 font-sans text-sm text-[#666666]">
-            Four soaps to find the one your skin agrees with. ₹1,000. Free shipping.
-          </p>
-          <p className="mb-4 font-sans text-xs text-[#999]">Shipped in 2 days. Arrives in 4-7 days depending on your city.</p>
-          <Link
-            href="/#bundle"
-            className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
-          >
-            See the starter bundle
-          </Link>
-        </div>
+        {/* Closing CTA */}
+        {COMMERCE_ENABLED ? (
+          <div className="mt-10 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
+            <p className="mb-1 font-serif text-2xl text-[#1E5631]">See the soaps</p>
+            <p className="mb-4 font-sans text-sm text-[#666666]">
+              Glycerin, goat milk, and shea butter bars, made to order in South Goa.
+            </p>
+            <Link
+              href="/shop"
+              className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
+            >
+              Browse the soaps
+            </Link>
+          </div>
+        ) : (
+          <div className="mt-10">
+            <WhatsAppNudge source="guide_handmade_soap" />
+          </div>
+        )}
 
       </article>
     </div>

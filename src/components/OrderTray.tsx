@@ -4,8 +4,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useOrderStore } from '@/lib/store'
 import { useOrderAvailability } from './OrderAvailabilityProvider'
+import { COMMERCE_ENABLED } from '@/lib/site-mode'
 
 export default function OrderTray() {
+  if (!COMMERCE_ENABLED) return null
+  return <OrderTrayInner />
+}
+
+function OrderTrayInner() {
   const items = useOrderStore((s) => s.items)
   const total = useOrderStore((s) => s.total)
   const itemCount = useOrderStore((s) => s.itemCount)

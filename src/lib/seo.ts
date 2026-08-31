@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { COMMERCE_ENABLED } from './site-mode'
 
 /**
  * Shared metadata builders.
@@ -20,9 +21,15 @@ export const SITE_URL = 'https://healingsoil.in'
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 export const WEBSITE_ID = `${SITE_URL}/#website`
 
-/** Canonical entity definitions reused by every page-level schema reference. */
+/**
+ * Canonical entity definitions reused by every page-level schema reference.
+ *
+ * While the storefront is closed (site mode content-only / dark) the entity is
+ * described as an Organization rather than a Store, and the priceRange hint is
+ * dropped, so crawlers do not read the site as an active shop.
+ */
 export const ORGANIZATION_SCHEMA = {
-  '@type': 'Store',
+  '@type': COMMERCE_ENABLED ? 'Store' : 'Organization',
   '@id': ORGANIZATION_ID,
   name: BRAND,
   url: SITE_URL,
@@ -43,7 +50,7 @@ export const ORGANIZATION_SCHEMA = {
     '@type': 'Country',
     name: 'India',
   },
-  priceRange: '₹₹',
+  ...(COMMERCE_ENABLED ? { priceRange: '₹₹' } : {}),
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
@@ -55,7 +62,7 @@ export const ORGANIZATION_SCHEMA = {
     'https://www.instagram.com/healingsoil.in',
     'https://www.facebook.com/profile.php?id=61576352186521',
   ],
-} as const
+}
 
 export const WEBSITE_SCHEMA = {
   '@type': 'WebSite',

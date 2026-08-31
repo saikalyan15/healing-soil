@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs'
-import { extname, join, relative } from 'node:path'
+import { extname, join, relative, sep } from 'node:path'
 
 const root = process.cwd()
 const scanRoots = ['content/blog', 'content/stories', 'src', 'public']
@@ -27,7 +27,9 @@ for (const scanRoot of scanRoots) {
     if (!extensions.has(extname(path))) continue
 
     const source = readFileSync(path, 'utf8')
-    if (path.includes(`${join('content')}/`) && /^---[\s\S]*?\bpublished:\s*false\b[\s\S]*?---/i.test(source)) {
+    // Normalise separators so the content-dir check works on Windows too.
+    const posixPath = path.split(sep).join('/')
+    if (posixPath.includes('/content/') && /^---[\s\S]*?\bpublished:\s*false\b[\s\S]*?---/i.test(source)) {
       continue
     }
 
