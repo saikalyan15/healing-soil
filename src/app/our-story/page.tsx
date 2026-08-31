@@ -3,12 +3,12 @@ import Link from 'next/link'
 import ReviewCard from '@/components/ReviewCard'
 
 export const metadata = {
-  title: 'Our Story — Healing Soil',
+  title: 'Our Story | Healing Soil',
   description:
     'From Bangalore to a farm in South Goa: how Healing Soil began and why we make soap the way we do.',
   alternates: { canonical: '/our-story' },
   openGraph: {
-    title: 'Our Story — Healing Soil',
+    title: 'Our Story | Healing Soil',
     description: 'From Bangalore to a farm in South Goa: how Healing Soil began and why we make soap the way we do.',
     url: '/our-story',
     siteName: 'Healing Soil',

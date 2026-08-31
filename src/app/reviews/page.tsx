@@ -3,12 +3,12 @@ import ReviewCard from '@/components/ReviewCard'
 import { featuredReviews, reviews, shortReviews } from '@/lib/reviews'
 
 export const metadata: Metadata = {
-  title: 'Customer Reviews — Healing Soil',
+  title: 'Customer Reviews | Healing Soil',
   description:
     'Read what customers say about Healing Soil handmade soaps from Goa. Real reviews from real people, lightly formatted for clarity.',
   alternates: { canonical: '/reviews' },
   openGraph: {
-    title: 'Customer Reviews — Healing Soil',
+    title: 'Customer Reviews | Healing Soil',
     description: 'Read what customers say about Healing Soil handmade soaps from Goa.',
     url: '/reviews',
     siteName: 'Healing Soil',

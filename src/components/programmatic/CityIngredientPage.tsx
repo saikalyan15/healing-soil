@@ -15,9 +15,11 @@ type Props = {
 const CityIngredientPage: React.FC<Props> = ({ city, ingredient, products }) => {
   const faqs = [
     {
-      q: `How long does delivery of ${ingredient.name} soap to ${city.displayName} take?`,
-      a: city.faqs.find((f) => f.q.toLowerCase().includes('long') || f.q.toLowerCase().includes('deliver'))?.a ??
-        `We ship from our workshop in South Goa. Delivery to ${city.displayName} typically arrives within a few business days of dispatch.`,
+      q: `How do you deliver ${ingredient.name} soap to ${city.displayName}?`,
+      // Bind the answer to the city's own delivery copy rather than fuzzy-matching
+      // against city.faqs: that lookup keyed on "long" and paired this question
+      // with unrelated answers like "How long does a single bar last?".
+      a: city.deliveryNote,
     },
     {
       q: `What does ${ingredient.name} soap feel like?`,

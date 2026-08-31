@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions — Healing Soil',
+  title: 'Terms and Conditions | Healing Soil',
   description: 'Terms and conditions for using healingsoil.in and ordering from Healing Soil.',
   alternates: { canonical: '/terms' },
   openGraph: {
-    title: 'Terms and Conditions — Healing Soil',
+    title: 'Terms and Conditions | Healing Soil',
     description: 'Terms and conditions for using healingsoil.in and ordering from Healing Soil.',
     url: '/terms',
     siteName: 'Healing Soil',

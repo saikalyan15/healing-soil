@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Order Received — Healing Soil',
+  title: 'Order Received | Healing Soil',
   description: 'Your order has been received by Healing Soil.',
   robots: { index: false, follow: false },
 }

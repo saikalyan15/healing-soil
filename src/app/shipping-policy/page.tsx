@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Shipping Policy — Healing Soil',
+  title: 'Shipping Policy | Healing Soil',
   description: 'Shipping and delivery policy for Healing Soil handmade natural soaps, shipped pan-India from Goa.',
   alternates: { canonical: '/shipping-policy' },
   openGraph: {
-    title: 'Shipping Policy — Healing Soil',
+    title: 'Shipping Policy | Healing Soil',
     description: 'Shipping and delivery policy for Healing Soil handmade natural soaps, shipped pan-India from Goa.',
     url: '/shipping-policy',
     siteName: 'Healing Soil',

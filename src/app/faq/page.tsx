@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'FAQ — Healing Soil',
+  title: 'FAQ | Healing Soil',
   description:
     'Answers to common questions about Healing Soil handmade soaps — ingredients, delivery, ordering, and product selection.',
   alternates: { canonical: '/faq' },
   openGraph: {
-    title: 'FAQ — Healing Soil',
+    title: 'FAQ | Healing Soil',
     description:
       'Answers to common questions about Healing Soil handmade soaps — ingredients, delivery, ordering, and product selection.',
     url: '/faq',

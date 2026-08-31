@@ -1,7 +1,6 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /*?wc-ajax=
 Disallow: /distributor-soap-squares-catalog
 Disallow: /whatsapp/
 

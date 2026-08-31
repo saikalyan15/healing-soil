@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cart — Healing Soil',
+  title: 'Cart | Healing Soil',
   robots: { index: false, follow: false },
 }
 

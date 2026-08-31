@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cancellation and Refunds — Healing Soil',
+  title: 'Cancellation and Refunds | Healing Soil',
   description: 'Cancellation and refund policy for Healing Soil handmade natural soaps.',
   alternates: { canonical: '/returns' },
   openGraph: {
-    title: 'Cancellation and Refunds — Healing Soil',
+    title: 'Cancellation and Refunds | Healing Soil',
     description: 'Cancellation and refund policy for Healing Soil handmade natural soaps.',
     url: '/returns',
     siteName: 'Healing Soil',

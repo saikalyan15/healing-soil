@@ -3,7 +3,7 @@ import Link from 'next/link'
 import OrderTracker from '@/components/OrderTracker'
 
 export const metadata: Metadata = {
-  title: 'Track Your Order — Healing Soil',
+  title: 'Track Your Order | Healing Soil',
   description: 'Check the status of your Healing Soil order.',
   robots: { index: false, follow: false },
 }

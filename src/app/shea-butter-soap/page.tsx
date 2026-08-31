@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Shea Butter Soap — Handmade in Goa | Healing Soil',
+  title: 'Shea Butter Soap | Handmade in Goa | Healing Soil',
   description: 'Rich shea butter soap with a creamy lather and conditioning feel. Small-batch, SLS-free, and made without parabens or synthetic fragrance.',
   alternates: { canonical: '/shea-butter-soap' },
   openGraph: {
-    title: 'Shea Butter Soap — Handmade in Goa | Healing Soil',
+    title: 'Shea Butter Soap | Handmade in Goa | Healing Soil',
     description: 'Rich, conditioning shea butter soap made in small batches in Goa.',
     url: '/shea-butter-soap',
     siteName: 'Healing Soil',

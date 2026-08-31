@@ -7,12 +7,12 @@ import ShopClient from '@/components/ShopClient'
 import { FREE_SHIPPING_THRESHOLD } from '@/lib/shipping'
 
 export const metadata: Metadata = {
-  title: 'Shop Handmade Soaps — Healing Soil',
+  title: 'Shop Handmade Soaps | Healing Soil',
   description:
     'Buy handmade soaps from Goa. No SLS, parabens, or synthetic fragrance. Made to order and shipped across India.',
   alternates: { canonical: '/shop' },
   openGraph: {
-    title: 'Shop Handmade Soaps — Healing Soil',
+    title: 'Shop Handmade Soaps | Healing Soil',
     description:
       'Buy handmade soaps from Goa. No SLS, parabens, or synthetic fragrance. Made to order and shipped across India.',
     url: '/shop',

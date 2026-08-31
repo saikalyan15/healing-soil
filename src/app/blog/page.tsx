@@ -2,12 +2,12 @@ import { getAllPosts } from '@/lib/blog'
 import BlogGrid from '@/components/BlogGrid'
 
 export const metadata = {
-  title: 'From the Farm — Healing Soil Blog',
+  title: 'From the Farm | Healing Soil Blog',
   description:
     'Writing about handmade soap, natural ingredients, slow living, and farm life from South Goa.',
   alternates: { canonical: '/blog' },
   openGraph: {
-    title: 'From the Farm — Healing Soil Blog',
+    title: 'From the Farm | Healing Soil Blog',
     description: 'Soap, slow living, and stories from a farm in South Goa.',
     url: '/blog',
     siteName: 'Healing Soil',

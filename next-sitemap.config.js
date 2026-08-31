@@ -45,7 +45,10 @@ const config = {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/*?wc-ajax=', '/distributor-soap-squares-catalog', '/whatsapp/'],
+        // /distributor-soap-squares-catalog is a real private page (noindex,
+        // nofollow at the meta level) — kept out of crawling on purpose.
+        // /whatsapp/* are internal Meta Embedded Signup redirect targets.
+        disallow: ['/distributor-soap-squares-catalog', '/whatsapp/'],
       },
     ],
     additionalSitemaps: [],

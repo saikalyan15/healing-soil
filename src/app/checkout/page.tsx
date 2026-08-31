@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import OrderPreferences from '@/components/OrderPreferences'
 
 export const metadata: Metadata = {
-  title: 'Checkout — Healing Soil',
+  title: 'Checkout | Healing Soil',
   robots: { index: false, follow: false },
 }
 

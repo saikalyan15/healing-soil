@@ -5,7 +5,7 @@ import { getOrderAvailabilityDetails, type OrderAvailability } from '@/lib/order
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Place Your Order — Healing Soil',
+  title: 'Place Your Order | Healing Soil',
   description:
     'Review your selected soaps and place an order or save your interest.',
   robots: { index: false, follow: false },

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   // owned by buildTitle() in src/lib/seo.ts, which appends the brand only when
   // the title stays inside the 60 character budget. A template here would
   // double-apply it, which is what put 510 of 535 titles over the limit.
-  title: 'Healing Soil — Handmade Natural Soaps from Goa',
+  title: 'Handmade Natural Soaps from Goa | Healing Soil',
   description:
     'Healing Soil crafts small-batch, handmade natural soaps rooted in the spirit of Goa. Regenerative ingredients, slow living, and care for the earth.',
   metadataBase: new URL('https://healingsoil.in'),
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     google: '2DgyjvWpPPDWaK3g3Qv5lQlj_4A5VM5tXUWE6wms14c',
   },
   openGraph: {
-    title: 'Healing Soil — Handmade Natural Soaps from Goa',
+    title: 'Handmade Natural Soaps from Goa | Healing Soil',
     description:
       'Healing Soil crafts small-batch, handmade natural soaps rooted in the spirit of Goa.',
     url: 'https://healingsoil.in',

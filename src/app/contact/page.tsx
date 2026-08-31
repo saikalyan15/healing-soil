@@ -1,10 +1,10 @@
 export const metadata = {
-  title: 'Contact — Healing Soil',
+  title: 'Contact | Healing Soil',
   description:
     'Get in touch with Healing Soil. Chat with us on WhatsApp, follow us on Instagram, or find us on Facebook.',
   alternates: { canonical: '/contact' },
   openGraph: {
-    title: 'Contact — Healing Soil',
+    title: 'Contact | Healing Soil',
     description: 'Get in touch with Healing Soil. The fastest way to reach us is WhatsApp.',
     url: '/contact',
     siteName: 'Healing Soil',
