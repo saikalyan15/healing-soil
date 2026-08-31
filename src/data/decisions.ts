@@ -176,7 +176,7 @@ export const decisions: DecisionPage[] = [
       },
       {
         q: 'Which Healing Soil soap should I start with?',
-        a: 'If you have never used handmade soap before, start with the goat milk base — it is the most versatile and suits most skin types. Neem tulsi goat milk is our most popular bar. If you prefer something lighter, the honey oats glycerin bar is a good entry point. The starter bundle covers multiple bases and is the easiest way to find what works for your skin.'
+        a: 'If you have never used handmade soap before, start with the goat milk base — it is the most versatile and suits most skin types. Neem tulsi goat milk is our most popular bar. If you prefer something lighter, the honey oats glycerin bar is a good entry point.'
       },
       {
         q: 'Does Healing Soil ship across India?',

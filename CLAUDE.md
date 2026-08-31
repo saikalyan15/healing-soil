@@ -43,9 +43,17 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
   already moved off commercial soap. Not looking for "the best soap", looking for
   one that does not hurt her. Two recurring themes in reviews: no reaction, and
   no heavy lather.
-- **Primary offer:** starter bundle, 4 soaps at ₹1,000. Single desired action.
+- **Primary offer:** individual bars from the shop. There is no starter bundle
+  (removed). Do not reintroduce a "bundle" or "4 soaps for ₹1,000" offer without
+  the owner asking for it.
 - **Farm is in Goa.** Bangalore is where customers are, never the origin.
-- **Payments:** Razorpay is the default website checkout behind
+- **Site posture:** `NEXT_PUBLIC_SITE_MODE` (`src/lib/site-mode.ts`) gates how
+  much of the site is live: `full` (storefront), `content-only` (no storefront,
+  one-page WhatsApp landing, blog stays indexed), `dark` (holding page only).
+  The site currently runs `content-only` because there is no GST registration for
+  interstate online sales. Reversal to `full` is a one env var change plus
+  redeploy; nothing is deleted.
+- **Payments (full mode only):** Razorpay is the default website checkout behind
   `NEXT_PUBLIC_ENABLE_RAZORPAY`. WhatsApp is shown only after a definite gateway
   failure or checkout dismissal. SoapLedger has an immediate order-pause switch.
 - **Shipping:** free on orders of ₹1,000 and above. Below that ₹100, or ₹150 for

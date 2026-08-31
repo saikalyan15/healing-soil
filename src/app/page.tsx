@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getProducts, getFeaturedProducts, type Product } from '@/lib/products'
+import { getProducts, getFeaturedProducts } from '@/lib/products'
 import { canonicalSlugFor } from '@/lib/product-slugs'
 import { getAllPosts } from '@/lib/blog'
 import { SITE_URL } from '@/lib/seo'
 import { reviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
-import BundlePicker from '@/components/BundlePicker'
 import VideoTestimonial from '@/components/VideoTestimonial'
 import ProductCard from '@/components/ProductCard'
 import BlogCard from '@/components/BlogCard'
@@ -21,10 +20,9 @@ import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
 // falls back to the 24h data-cache TTL. It was previously force-dynamic, which
 // ran a Vercel Function on every single request including crawler traffic.
 
-// The description drops the bundle/price line when the storefront is closed; the
-// title and canonical are unchanged in every mode.
+// Title and canonical are unchanged in every mode.
 const HOME_DESCRIPTION = COMMERCE_ENABLED
-  ? 'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free. Starter bundle of four soaps for ₹1,000.'
+  ? 'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free, with botanicals grown on the farm.'
   : 'Handmade soap made in small batches on our farm in South Goa. SLS-free, paraben-free, and free of synthetic fragrance. Botanicals grown on the farm.'
 
 export const metadata: Metadata = {
@@ -47,62 +45,6 @@ export const metadata: Metadata = {
   },
 }
 
-// Exact slugs for the starter bundle (Stage 2 offer in docs/growth-strategy.md).
-const BUNDLE_DEFINITIONS: { slug: string; fallback: RegExp }[] = [
-  { slug: 'honey-oats-glycerin-soap', fallback: /honey.*oat.*glycerin/i },
-  { slug: 'neem-tulsi-goat-milk-soap', fallback: /neem.*tulsi.*goat/i },
-  { slug: 'pomegranate-goat-milk-soap', fallback: /pomegranate.*goat/i },
-  { slug: 'travel-soaps', fallback: /travel/i },
-]
-
-function pickBundleDefaults(products: Product[]): string[] {
-  const used = new Set<string>()
-  const picked: string[] = []
-  const take = (p: Product) => {
-    picked.push(p.id)
-    used.add(p.id)
-  }
-
-  // Pass 1: claim the bundle soaps that are actually available, so a sold-out slot
-  // cannot steal a bar that a later slot matches by name.
-  const slots = BUNDLE_DEFINITIONS.map((def) => {
-    const matches = products.filter(
-      (p) => !used.has(p.id) && (p.slug === def.slug || def.fallback.test(p.slug)),
-    )
-    const inStock =
-      matches.find((p) => p.slug === def.slug && p.in_stock) ?? matches.find((p) => p.in_stock)
-    if (inStock) used.add(inStock.id)
-    return { inStock, soldOut: matches.find((p) => p.slug === def.slug) ?? matches[0] }
-  })
-
-  // Pass 2: where the soap we wanted is sold out, stand in the closest bar that is
-  // available — same base first, so goat milk stays goat milk.
-  for (const { inStock, soldOut } of slots) {
-    if (inStock) {
-      picked.push(inStock.id)
-      continue
-    }
-    const substitute =
-      (soldOut && products.find((p) => p.in_stock && !used.has(p.id) && p.base === soldOut.base)) ??
-      products.find((p) => p.in_stock && !used.has(p.id))
-    if (substitute) take(substitute)
-  }
-
-  // Top the bundle up to four slots, available bars first.
-  for (const p of products) {
-    if (picked.length >= 4) break
-    if (!used.has(p.id) && p.in_stock) take(p)
-  }
-  // Only if the shop cannot field four available bars do we fall back to sold-out
-  // ones, so the section still renders rather than collapsing.
-  for (const p of products) {
-    if (picked.length >= 4) break
-    if (!used.has(p.id)) take(p)
-  }
-
-  return picked
-}
-
 export default async function HomePage() {
   // Site posture switch (src/lib/site-mode.ts). Checked before any SoapLedger
   // fetch so the closed-storefront modes do no catalogue work.
@@ -121,8 +63,6 @@ export default async function HomePage() {
   
   const allPosts = getAllPosts()
   const recentPosts = allPosts.slice(0, 3)
-  
-  const bundleDefaults = pickBundleDefaults(products)
 
   // The designated hero bar. An editorial choice, not a sales one, so it is
   // deliberately not sourced from getFeaturedProducts(). Falls back to hiding
@@ -230,16 +170,16 @@ export default async function HomePage() {
             <div className="flex flex-col items-center gap-4 md:items-start">
               <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  href="#bundle"
+                  href="/shop"
                   className="w-full rounded bg-[#1E5631] px-10 py-4 text-center font-sans text-sm font-bold text-white transition-all hover:bg-[#153d22] active:scale-[0.98] sm:w-auto md:px-12 md:py-5 md:text-base"
                 >
-                  Try the starter bundle (₹1,000)
+                  Browse the soaps
                 </Link>
                 <Link
-                  href="/shop"
+                  href="/our-story"
                   className="w-full rounded border-2 border-[#1E5631] px-8 py-4 text-center font-sans text-sm font-bold text-[#1E5631] transition-all hover:bg-[#1E5631] hover:text-white active:scale-[0.98] sm:w-auto md:px-10 md:py-5 md:text-base"
                 >
-                  Browse individual soaps
+                  Read our story
                 </Link>
               </div>
               <p className="font-sans text-xs font-medium leading-relaxed text-[#666666]">
@@ -264,30 +204,6 @@ export default async function HomePage() {
               />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Section 2: Bundle (Primary Offer) ────────────────────────────── */}
-      <section id="bundle" className="w-full bg-white py-16 scroll-mt-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-12 text-center md:mb-16">
-            <h2 className="mb-4 font-serif text-3xl text-[#1E5631] md:text-5xl">
-              The Starter Bundle
-            </h2>
-            <p className="mx-auto max-w-2xl font-sans text-base leading-relaxed text-[#666666] md:text-lg">
-              Not sure which one to pick? Get four different soaps to find the one your skin agrees with, without committing to a full bar of any single one.
-            </p>
-          </div>
-
-          {products.length > 0 ? (
-            <BundlePicker products={products} defaultIds={bundleDefaults} />
-          ) : (
-            <div className="rounded-lg border border-[#D6CFC4] bg-[#F7F5F0] p-12 text-center">
-              <p className="font-sans text-sm text-[#999]">
-                Fetching the harvest. Please refresh in a moment.
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
@@ -559,20 +475,20 @@ export default async function HomePage() {
             Ready to find your soap?
           </h2>
           <p className="mb-12 font-sans text-lg leading-relaxed text-white/80 md:text-xl">
-            Start with the trial bundle. Four soaps, one week, and you&rsquo;ll know if your skin has finally found what it needs.
+            Pick a base by how it feels. Glycerin is lighter, goat milk is creamier, shea butter is the richest. Each bar is made to order once you choose.
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="#bundle"
+              href="/shop"
               className="w-full rounded bg-white px-10 py-5 font-sans text-sm font-bold text-[#1E5631] shadow-xl transition-all hover:bg-[#F7F5F0] active:scale-[0.98] sm:w-auto md:px-12 md:text-base"
             >
-              Get the Bundle (₹1,000)
+              Browse the soaps
             </Link>
             <Link
-              href="/shop"
+              href="/our-story"
               className="w-full rounded border-2 border-white/30 px-10 py-5 font-sans text-sm font-bold text-white transition-all hover:bg-white/10 sm:w-auto md:px-12 md:text-base"
             >
-              Browse All Soaps
+              Read our story
             </Link>
           </div>
           <p className="mt-8 font-sans text-xs font-medium uppercase tracking-[0.2em] text-white/50">

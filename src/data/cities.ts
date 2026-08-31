@@ -208,8 +208,8 @@ export const cities: CityPage[] = [
         a: 'Our soaps retain natural glycerin and use nourishing bases like goat milk, providing a creamier lather and a softer skin feel.'
       },
       {
-        q: 'Do you offer a variety pack?',
-        a: 'Yes, we have a starter bundle that includes different bases, allowing you to find the one that best suits your skin type.'
+        q: 'How do I choose between the bases?',
+        a: 'Each bar lists its base and ingredients. Glycerin feels lighter, goat milk is creamier, and shea butter is the richest. Message us on WhatsApp if you would like help picking one for your skin type.'
       }
     ],
     publishedAt: '2026-05-16'

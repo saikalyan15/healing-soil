@@ -251,7 +251,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'What soap is best for skin in Bangalore?',
-      answer: 'No single soap works for everyone, but the pattern that helps most people in Bangalore is SLS-free, no synthetic fragrance, and a base matched to skin type. Glycerin suits oily or combination skin. Goat milk suits sensitive or dry skin. Shea butter suits very dry skin. The Healing Soil starter bundle covers all three bases for ₹1,000 — a practical way to find which one works without committing to a full bar of each.',
+      answer: 'No single soap works for everyone, but the pattern that helps most people in Bangalore is SLS-free, no synthetic fragrance, and a base matched to skin type. Glycerin suits oily or combination skin. Goat milk suits sensitive or dry skin. Shea butter suits very dry skin. Each Healing Soil bar lists its base and ingredients, so you can match one to your skin type.',
     },
     {
       question: 'How do I check if my soap contains SLS?',
@@ -321,7 +321,7 @@ const faqsBySlug: Record<string, Array<{ question: string; answer: string }>> = 
     },
     {
       question: 'Can I use both goat milk and glycerin soap base?',
-      answer: 'Yes. Many people use different bases for face and body, or switch seasonally. Goat milk is often preferred for the face and for dry or winter conditions; glycerin works well for the body or in warmer, more humid months when a lighter wash is preferred. The Healing Soil starter bundle includes both bases so you can find what works for your skin.',
+      answer: 'Yes. Many people use different bases for face and body, or switch seasonally. Goat milk is often preferred for the face and for dry or winter conditions; glycerin works well for the body or in warmer, more humid months when a lighter wash is preferred. Healing Soil makes bars in both bases, so you can try each and see what works for your skin.',
     },
   ],
 }
@@ -463,8 +463,8 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* Inline CTA, soap/skincare posts only. Passed the post's first mapped
-            product so the reader is sent to that bar rather than to the homepage
-            bundle anchor. Falls back to the bundle when a post has no mapping. */}
+            product so the reader is sent to that bar. Falls back to /shop when a
+            post has no mapping, or to a WhatsApp line when the shop is closed. */}
         {post.source !== 'stories' && (
           <BlogInlineCTA product={relatedProducts[0]} />
         )}
@@ -522,19 +522,16 @@ export default async function BlogPostPage({ params }: Props) {
               ) : (
                 <div className="mt-8 rounded-lg border border-[#C9A84C] bg-[#FFF8E8] p-6 text-center">
                   <p className="mb-1 font-serif text-2xl text-[#1E5631]">
-                    Try the starter bundle
+                    See the soaps
                   </p>
-                  <p className="mb-1 font-sans text-sm text-[#666666]">
-                    Four soaps to find the one your skin agrees with. ₹1,000. SLS-free, made to order from Goa.
-                  </p>
-                  <p className="mb-4 font-sans text-xs text-[#999]">
-                    Shipped in 2 days. Free shipping over ₹1,000.
+                  <p className="mb-4 font-sans text-sm text-[#666666]">
+                    Glycerin, goat milk, and shea butter bars, SLS-free and made to order in South Goa.
                   </p>
                   <Link
-                    href="/#bundle"
+                    href="/shop"
                     className="inline-block rounded bg-[#1E5631] px-6 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
                   >
-                    See the starter bundle
+                    Browse all soaps
                   </Link>
                 </div>
               )}

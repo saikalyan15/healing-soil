@@ -7,14 +7,9 @@ import WhatsAppNudge from './WhatsAppNudge'
 type Props = {
   /**
    * The most relevant product for the post this CTA sits inside. When present,
-   * the CTA points at that product page instead of the homepage bundle anchor.
-   *
-   * This matters more than it looks. The CTA always linked to /#bundle, so a
-   * reader who had just been told which bar suits the monsoon was sent to the
-   * homepage to assemble a four-soap bundle from scratch. It also meant the
-   * main call to action on every post could never fire view_item, which only
-   * fires on /shop/[slug]. Blog traffic is the largest source on the site and
-   * almost none of it reached a product page.
+   * the CTA points at that product page; otherwise it points at /shop. Blog
+   * traffic is the largest source on the site, so the CTA should land the
+   * reader on a page that can fire view_item rather than a generic hub.
    */
   product?: Product
 }
@@ -23,21 +18,21 @@ export default function BlogInlineCTA({ product }: Props) {
   // Storefront closed: no bundle or product link, just a soft WhatsApp line.
   if (!COMMERCE_ENABLED) return <WhatsAppNudge source="blog_inline" />
 
-  // No mapped product for this post, so fall back to the bundle.
+  // No mapped product for this post, so point at the full range.
   if (!product) {
     return (
       <div className="my-8 flex flex-col gap-3 rounded-lg border border-[#D6CFC4] bg-[#F0EDE6] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-serif text-lg text-[#1E5631]">Try the starter bundle</p>
+          <p className="font-serif text-lg text-[#1E5631]">See the soaps</p>
           <p className="font-sans text-sm text-[#666666]">
-            Four soaps, ₹1,000. SLS-free, made to order from Goa.
+            SLS-free, made to order from our farm in South Goa.
           </p>
         </div>
         <Link
-          href="/#bundle"
+          href="/shop"
           className="shrink-0 rounded bg-[#1E5631] px-5 py-2 text-center font-sans text-sm font-medium text-white transition-colors hover:bg-[#C9A84C] hover:text-[#1A1A14]"
         >
-          See the bundle
+          Browse all soaps
         </Link>
       </div>
     )
