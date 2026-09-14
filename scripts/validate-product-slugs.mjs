@@ -48,6 +48,7 @@ const filesToScan = [
   'src/data/occasions.ts',
   'src/app/blog/[slug]/page.tsx',
   'src/app/page.tsx',
+  'src/components/WhatsAppLanding.tsx',
 ]
 
 function extractReferencedProductSlugs(file, source) {
@@ -70,6 +71,15 @@ function extractReferencedProductSlugs(file, source) {
 
   if (file.endsWith('src/app/page.tsx')) {
     const block = source.match(/const BUNDLE_DEFINITIONS:[\s\S]*?= \[([\s\S]*?)\]/)
+    if (block) {
+      for (const match of block[1].matchAll(/slug:\s*'([^']+)'/g)) refs.push(match[1])
+    }
+  }
+
+  // The content-only landing page hardcodes an editorial selection of bars
+  // rather than fetching the catalogue, so its slugs are checked here.
+  if (file.endsWith('src/components/WhatsAppLanding.tsx')) {
+    const block = source.match(/const gallery: GalleryBar\[\] = \[([\s\S]*?)\n\]/)
     if (block) {
       for (const match of block[1].matchAll(/slug:\s*'([^']+)'/g)) refs.push(match[1])
     }
