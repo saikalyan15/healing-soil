@@ -23,7 +23,6 @@ export const occasions: OccasionPage[] = [
     relatedProducts: [
       'shea-butter-kesar-gulab',
       'red-rose-soap',
-      'honey-kesar-haldi-shea-butter-soap',
       'soap-squares-rich-box',
     ],
     faqs: [
@@ -80,12 +79,10 @@ export const occasions: OccasionPage[] = [
     content: 'Dry skin requires a soap that cleans without stripping away natural oils. Our small-batch process retains glycerin, a natural humectant that helps skin stay hydrated. By using bases rich in natural fats, we provide a creamy lather that contributes to a soft and comfortable skin feel.',
     relatedProducts: [
       'shea-butter-kesar-gulab',
-      'honey-kesar-haldi-shea-butter-soap',
       'neem-tulsi-goat-milk-soap',
-      'kesar-haldi-goat-milk-soap',
+      'kesar-haldi-papaya-cucumber-soap',
       'honey-oats-goat-milk-soap',
       'orange-goat-milk-soap',
-      'rice-rose-goat-milk-soap',
       'pomegranate-goat-milk-soap',
     ],
     faqs: [
@@ -112,14 +109,12 @@ export const occasions: OccasionPage[] = [
     tagline: 'A sensory journey through natural botanicals. Discover our collection of gentle, aromatic bars designed for a nourishing personal care routine.',
     content: 'Our collection for her features soft floral notes and moisturising ingredients. Each bar is a blend of traditional care and modern mindfulness, handmade on our Goa farm. From the delicate scent of rose to the rich feel of honey and kesar, these soaps provide a gentle wash and a moment of daily luxury.',
     relatedProducts: [
-      'rice-rose-goat-milk-soap',
       'shea-butter-kesar-gulab',
       'pomegranate-goat-milk-soap',
       'pomegranate-glycerin-soap',
       'honey-oats-goat-milk-soap',
       'honey-oats-glycerin-soap',
-      'honey-kesar-haldi-shea-butter-soap',
-      'kesar-haldi-goat-milk-soap',
+      'kesar-haldi-papaya-cucumber-soap',
     ],
     faqs: [
       {
@@ -227,9 +222,8 @@ export const occasions: OccasionPage[] = [
     tagline: 'Warmth and tradition in every bar. Kesar and haldi are valued in Ayurvedic personal care for their gentle feel and traditional presence.',
     content: 'The combination of saffron and turmeric is a time-honoured tradition in Indian care. Our kesar haldi soaps provide a warm, golden wash that leaves skin feeling soft and refreshed. Made in small batches in Goa, these bars represent an honest approach to traditional personal care without the use of SLS or parabens.',
     relatedProducts: [
-      'kesar-haldi-goat-milk-soap',
+      'kesar-haldi-papaya-cucumber-soap',
       'shea-butter-kesar-gulab',
-      'honey-kesar-haldi-shea-butter-soap',
     ],
     faqs: [
       {

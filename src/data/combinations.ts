@@ -138,7 +138,9 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Shea butter provides the richest and most conditioning of our three bases. It creates a dense lather with a soft feel that is particularly suited to skin that needs more nourishment.',
     whyCombination: 'Honey, kesar and haldi are all traditionally used together in Indian personal care routines. Paired with a shea butter base, they create a bar with a warm, earthy character and a rich, luxurious feel.',
     feel: 'Rich, dense lather with a warm, earthy scent from the kesar and haldi. It rinses completely and leaves skin feeling soft and nourished.',
-    relatedProducts: ['honey-kesar-haldi-shea-butter-soap'],
+    // Retired in SoapLedger. Copy kept so the page can come back if the bar
+    // does; unpublished here and 301'd to /shea-butter-soap in next.config.mjs.
+    relatedProducts: [],
     faqs: [
       {
         q: 'What is in the honey shea butter soap?',
@@ -153,7 +155,7 @@ export const combinations: CombinationPage[] = [
         a: 'No. We use haldi in proportions that give the bar its warm colour but rinse away cleanly from skin during use.',
       },
     ],
-    publishedAt: '2026-05-14',
+    publishedAt: null,
   },
   {
     slug: 'kesar-goat-milk-soap',
@@ -166,7 +168,7 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Goat milk is used as the complete soap base, contributing natural fats that make the lather richer and creamier than a standard bar. It is gentle and suitable for sensitive skin types.',
     whyCombination: 'Kesar and haldi have been combined in Indian personal care routines for centuries. The goat milk base adds a creamy softness that complements the warm, earthy character of the botanicals.',
     feel: 'Warm and earthy scent with a creamy, soft lather. It rinses completely and leaves skin feeling smooth and nourished.',
-    relatedProducts: ['kesar-haldi-goat-milk-soap'],
+    relatedProducts: ['kesar-haldi-papaya-cucumber-soap'],
     faqs: [
       {
         q: 'What is kesar haldi goat milk soap?',
@@ -306,7 +308,9 @@ export const combinations: CombinationPage[] = [
     baseNote: 'Goat milk as the full soap base creates a creamy, soft lather with natural fats. It pairs gently with the delicate floral notes of rose for a nourishing daily experience.',
     whyCombination: 'Rose and rice are traditional pairings in Indian personal care — the floral note of rose complemented by the mild texture of rice. The goat milk base adds creaminess and softness to complete the bar.',
     feel: 'Creamy, soft lather with a delicate natural rose scent. It rinses completely and leaves skin feeling very soft.',
-    relatedProducts: ['rice-rose-goat-milk-soap'],
+    // Retired in SoapLedger. Copy kept so the page can come back if the bar
+    // does; unpublished here and 301'd to /goat-milk-soap in next.config.mjs.
+    relatedProducts: [],
     faqs: [
       {
         q: 'What does rose goat milk soap smell like?',
@@ -321,7 +325,7 @@ export const combinations: CombinationPage[] = [
         a: 'Rice is added for its mild and gentle texture, providing a soft feel during the wash without being scratchy.',
       },
     ],
-    publishedAt: '2026-05-14',
+    publishedAt: null,
   },
   {
     slug: 'ginger-glycerin-soap',

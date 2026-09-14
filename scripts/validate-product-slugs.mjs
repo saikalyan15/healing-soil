@@ -27,6 +27,7 @@ function readAliasMap() {
 }
 
 const canonicalSlugs = new Set(readArrayExport('CANONICAL_PRODUCT_SLUGS'))
+const retiredSlugs = new Set(readArrayExport('RETIRED_PRODUCT_SLUGS'))
 const aliases = readAliasMap()
 const redirects = await nextConfig.redirects()
 const redirectsBySource = new Map(
@@ -136,6 +137,17 @@ for (const file of filesToScan) {
     const canonical = canonicalSlugFor(slug)
     if (!canonicalSlugs.has(canonical)) {
       failures.push({ file, slug, canonical })
+      continue
+    }
+    // Retired slugs stay canonical so their URLs keep redirecting, but content
+    // must not recommend them: selectProducts drops a product the catalogue no
+    // longer returns without erroring, so the page just renders a thinner list.
+    if (retiredSlugs.has(canonical)) {
+      failures.push({
+        file,
+        slug,
+        canonical: `${canonical} is retired in SoapLedger and must not be recommended`,
+      })
     }
   }
 }

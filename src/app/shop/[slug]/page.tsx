@@ -122,7 +122,7 @@ const PRODUCT_META_OVERRIDES: Record<string, { title: string; description: strin
     title: 'Rose Shaped Handmade Soap | Pure Rose Essential Oil | Healing Soil Goa',
     description: 'A handmade soap shaped like a rose, made with pure rose essential oil and vitamin E. Soft, creamy lather with a delicate floral scent. Made to order in South Goa.',
   },
-  'kesar-haldi-goat-milk-soap': {
+  'kesar-haldi-papaya-cucumber-soap': {
     title: 'Kesar Haldi Goat Milk Soap | Saffron Turmeric Soap from Goa | Healing Soil',
     description: 'Saffron and turmeric in a creamy goat milk base — long celebrated in Indian skincare. Handmade in small batches in South Goa. No SLS, no parabens.',
   },

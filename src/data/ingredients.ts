@@ -77,7 +77,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Sourced from local farms near our property in Goa. We use goat milk as a complete base rather than adding it to a pre-made mix.',
     traditionalUse: 'Goat milk has been used in personal care for centuries. Its natural fats and vitamins survive the soap-making process and contribute to a soft, creamy wash.',
     feel: 'Creamy and soft lather that feels distinctly richer than a standard glycerin base. It is particularly suitable for sensitive or dry skin.',
-    relatedProducts: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-goat-milk-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap', 'rice-rose-goat-milk-soap', 'pomegranate-goat-milk-soap'],
+    relatedProducts: ['neem-tulsi-goat-milk-soap', 'kesar-haldi-papaya-cucumber-soap', 'honey-oats-goat-milk-soap', 'orange-goat-milk-soap', 'pomegranate-goat-milk-soap'],
     faqs: [
       {
         q: 'Why use goat milk instead of water?',
@@ -129,7 +129,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Sourced from West Africa where it is traditionally extracted from the nuts of the shea tree using time-honoured methods.',
     traditionalUse: 'Shea butter has been used in personal care for generations. In soap, it contributes to a rich feel that is highly valued for mature or very dry skin.',
     feel: 'Rich, dense lather that provides a conditioning sensation. It is the most nourishing of our three bases and leaves skin feeling very soft.',
-    relatedProducts: ['shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
+    relatedProducts: ['shea-butter-kesar-gulab'],
     faqs: [
       {
         q: 'Will shea butter soap clog my pores?',
@@ -155,7 +155,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Locally sourced from suppliers in Goa. We use real honey in our soap batches, never synthetic honey fragrances or extracts.',
     traditionalUse: 'Honey has been used in personal care since ancient times. It is valued for its ability to draw moisture to the skin and its gentle presence in handmade soap.',
     feel: 'Smooth texture with a very mild, naturally sweet scent. It leaves the skin feeling soft and moisturised after every wash.',
-    relatedProducts: ['honey-oats-glycerin-soap', 'honey-oats-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
+    relatedProducts: ['honey-oats-glycerin-soap', 'honey-oats-goat-milk-soap'],
     faqs: [
       {
         q: 'Can I use honey soap on my face?',
@@ -208,7 +208,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'Our saffron is sourced from trusted producers in Kashmir, ensuring a high-quality botanical addition to our soap batches.',
     traditionalUse: 'Kesar has been used in Ayurvedic personal care for generations. It is traditionally valued for its gentle nature and its contribution to a rich, golden wash.',
     feel: 'Warm and smooth feel with a subtle, earthy floral scent. It contributes to a creamy lather that is suitable for all skin types.',
-    relatedProducts: ['kesar-haldi-goat-milk-soap', 'shea-butter-kesar-gulab', 'honey-kesar-haldi-shea-butter-soap'],
+    relatedProducts: ['kesar-haldi-papaya-cucumber-soap', 'shea-butter-kesar-gulab'],
     faqs: [
       {
         q: 'Does kesar soap stain the skin?',
@@ -235,7 +235,7 @@ export const ingredients: IngredientPage[] = [
     traditionalUse: 'Haldi is traditionally used in Ayurvedic personal care. It is a cornerstone of Indian routines, valued for its gentle cleansing properties and traditional framing.',
     feel: 'Earthy and grounded feel with a natural, herbaceous scent. It contributes to a soft lather that leaves skin feeling refreshed.',
     image: '/images/ingredients/ingredient-haldi.webp',
-    relatedProducts: ['kesar-haldi-goat-milk-soap', 'honey-kesar-haldi-shea-butter-soap'],
+    relatedProducts: ['kesar-haldi-papaya-cucumber-soap'],
     faqs: [
       {
         q: 'Will turmeric soap turn my skin yellow?',
@@ -261,7 +261,7 @@ export const ingredients: IngredientPage[] = [
     origin: 'We use rose oil and dried petals sourced from Indian producers who specialise in traditional floral extractions.',
     traditionalUse: 'Rose has been used in personal care across cultures for centuries. In traditional routines, it is valued for its mild nature and pleasing floral scent.',
     feel: 'Soft and floral feel with a delicate, natural rose scent. It provides a gentle lather that contributes to a moisturising wash.',
-    relatedProducts: ['shea-butter-kesar-gulab', 'rice-rose-goat-milk-soap'],
+    relatedProducts: ['shea-butter-kesar-gulab'],
     faqs: [
       {
         q: 'Do you use synthetic rose fragrance?',

@@ -95,13 +95,23 @@ const gallery: GalleryBar[] = [
   },
 ]
 
-// Botanicals we grow, shown as texture rather than as a claim about any of them.
-const ingredients = [
-  { name: 'Neem', image: '/images/ingredients/ingredient-neem.webp' },
-  { name: 'Tulsi', image: '/images/ingredients/ingredient-tulsi.webp' },
-  { name: 'Haldi', image: '/images/ingredients/ingredient-haldi.webp' },
-  { name: 'Oats', image: '/images/ingredients/ingredient-oats.webp' },
-  { name: 'Pomegranate', image: '/images/ingredients/ingredient-pomegranate.webp' },
+// Origin per ingredient, transcribed from src/data/ingredients.ts. Only neem and
+// tulsi say "Grown on our farm" there; haldi, oats and pomegranate are sourced.
+// An earlier draft put one "Grown on the farm" heading over all five, which
+// claimed farm origin for three ingredients we buy.
+type Botanical = {
+  slug: string
+  name: string
+  image: string
+  origin: 'farm' | 'sourced'
+}
+
+const botanicals: Botanical[] = [
+  { slug: 'neem', name: 'Neem', image: '/images/ingredients/ingredient-neem.webp', origin: 'farm' },
+  { slug: 'tulsi', name: 'Tulsi', image: '/images/ingredients/ingredient-tulsi.webp', origin: 'farm' },
+  { slug: 'haldi', name: 'Haldi', image: '/images/ingredients/ingredient-haldi.webp', origin: 'sourced' },
+  { slug: 'oats', name: 'Oats', image: '/images/ingredients/ingredient-oats.webp', origin: 'sourced' },
+  { slug: 'pomegranate', name: 'Pomegranate', image: '/images/ingredients/ingredient-pomegranate.webp', origin: 'sourced' },
 ]
 
 const process = [
@@ -302,34 +312,69 @@ export default function WhatsAppLanding() {
         </div>
       </section>
 
-      {/* ── Botanicals strip ───────────────────────────────────────────────── */}
+      {/* ── Ingredients carousel ───────────────────────────────────────────
+          Scrolls horizontally on narrow screens and settles into a centred row
+          once there is space, so it needs no controls and no JavaScript. Each
+          card carries its own origin rather than inheriting one heading.
+
+          Cards link to /ingredients, not /ingredient/<slug>: the per-ingredient
+          routes return no static params while commerce is off, so they 404 in
+          this mode. The index page stays live and lists all of them. */}
       <section className="w-full bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-          <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
-            Grown on the farm
-          </p>
-          <div className="mt-10 flex flex-wrap items-start justify-center gap-x-8 gap-y-8 sm:gap-x-14">
-            {ingredients.map((item) => (
-              <div key={item.name} className="w-[88px] sm:w-[108px]">
-                <div className="relative aspect-square w-full overflow-hidden rounded-full bg-[#F7F5F0] ring-1 ring-[#E8DFC4]">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                    sizes="108px"
-                  />
-                </div>
-                <p className="mt-3 font-sans text-[11px] uppercase tracking-[0.18em] text-[#666666]">
-                  {item.name}
-                </p>
-              </div>
-            ))}
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="text-center">
+            <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
+              Ingredients
+            </p>
+            <h2 className="mt-4 font-serif text-3xl leading-tight text-[#1E5631] md:text-[38px]">
+              What goes in, and where it comes from
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg font-sans text-base leading-[1.8] text-[#666666]">
+              Neem and tulsi are grown on our farm in South Goa and harvested for each batch.
+              The rest we source, and we would rather say which is which.
+            </p>
           </div>
-          <p className="mx-auto mt-10 max-w-lg font-sans text-sm leading-[1.8] text-[#666666]">
-            Harvested fresh for each batch. The glycerine, goat milk and shea butter bases are
-            sourced, and we would rather say which is which.
-          </p>
+
+          {/* Negative margin lets the row bleed to the screen edge on mobile so
+              the last card is visibly cut off, which is what signals it scrolls. */}
+          <div className="-mx-4 mt-12 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <ul className="flex snap-x snap-mandatory justify-start gap-6 sm:gap-10 lg:justify-center">
+              {botanicals.map((item) => (
+                <li key={item.slug} className="w-[104px] flex-shrink-0 snap-start sm:w-[124px]">
+                  <Link href="/ingredients" className="group block text-center">
+                    <div className="relative aspect-square w-full overflow-hidden rounded-full bg-[#F7F5F0] ring-1 ring-[#E8DFC4] transition-all group-hover:ring-2 group-hover:ring-[#C9A84C]">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                        sizes="124px"
+                      />
+                    </div>
+                    <p className="mt-4 font-serif text-[17px] text-[#1A1A14] group-hover:text-[#1E5631]">
+                      {item.name}
+                    </p>
+                    <p
+                      className={`mt-1 font-sans text-[10px] uppercase tracking-[0.16em] ${
+                        item.origin === 'farm' ? 'text-[#C9A84C]' : 'text-[#999999]'
+                      }`}
+                    >
+                      {item.origin === 'farm' ? 'Our farm' : 'Sourced'}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link
+              href="/ingredients"
+              className="font-sans text-sm font-bold text-[#1E5631] underline decoration-[#C9A84C] decoration-2 underline-offset-[6px] hover:text-[#C9A84C]"
+            >
+              Every ingredient, and what it does
+            </Link>
+          </div>
         </div>
       </section>
 
