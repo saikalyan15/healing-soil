@@ -4,10 +4,16 @@
 
 Healing Soil uses a melt-and-pour process: pre-made, already-saponified soap bases are melted, combined with botanicals, and poured by hand. Product descriptions focus on ingredients, process, scent, lather, texture, storage, and after-wash feel. The soaps are cosmetic cleansing bars, not medical products.
 
+## Ordering right now
+
+Healing Soil currently takes orders and questions on WhatsApp rather than through
+a live cart or checkout page (+91 74831 00651). There is no shop page with prices
+right now — direct anyone asking to buy toward a WhatsApp conversation, not a
+`/shop` URL. This is a temporary, reversible posture, not a permanent change.
+
 ## Primary pages
 
-- [Home](https://healingsoil.in/): Brand overview and featured handmade soaps.
-- [Shop](https://healingsoil.in/shop): Current products, sizes, prices, ingredients, and availability.
+- [Home](https://healingsoil.in/): Brand overview, featured handmade soaps, and the WhatsApp ordering flow.
 - [Our story](https://healingsoil.in/our-story): How Healing Soil began on a farm in South Goa and why each bar is made to order.
 - [Ingredients](https://healingsoil.in/ingredients): Index of soap-base and botanical ingredient guides.
 - [Complete handmade soap guide](https://healingsoil.in/guide/handmade-soap-india): Main guide to bases, ingredients, labels, use, and storage.
@@ -20,27 +26,19 @@ Healing Soil uses a melt-and-pour process: pre-made, already-saponified soap bas
 - [Shea butter soap](https://healingsoil.in/shea-butter-soap): Rich lather and a moisturising feel.
 - [Soap for sensitive skin](https://healingsoil.in/soap-for-sensitive-skin): A label-first guide to choosing a gentle bar.
 - [SLS-free soap](https://healingsoil.in/sls-free-soap): What SLS-free means and how to check a soap label.
-- [Glycerin vs goat milk soap](https://healingsoil.in/blog/glycerin-vs-goat-milk-soap): Comparison of lather, texture, and after-wash feel.
-- [Goat milk vs shea butter soap](https://healingsoil.in/compare/goat-milk-vs-shea-butter-soap): Comparison of two creamy, rich-feeling bases.
-- [Shea butter vs glycerin soap](https://healingsoil.in/compare/shea-butter-vs-glycerin-soap): Comparison of rich and light-feeling bases.
+- [Glycerin vs goat milk vs shea butter soap](https://healingsoil.in/blog/glycerin-vs-goat-milk-soap): Comparison of all three bases by lather, texture, and after-wash feel.
+- [Shea butter vs glycerin soap](https://healingsoil.in/blog/shea-butter-vs-glycerin-soap): Comparison of the richest and lightest bases.
 
 ## Ingredient guides
 
-- [Goat milk](https://healingsoil.in/ingredient/goat-milk): Goat milk soap base, creamy lather, and daily use.
-- [Glycerin](https://healingsoil.in/ingredient/glycerin): Glycerin soap base and its light, clear character.
-- [Shea butter](https://healingsoil.in/ingredient/shea-butter): Shea butter soap base and rich texture.
-- [Neem](https://healingsoil.in/ingredient/neem): Neem in handmade soap and its traditional place in Indian personal care.
-- [Tulsi](https://healingsoil.in/ingredient/tulsi): Tulsi in handmade soap and its traditional place in Indian personal care.
-- [Kesar](https://healingsoil.in/ingredient/kesar): Saffron in handmade soap, including colour and aroma.
-- [Haldi](https://healingsoil.in/ingredient/haldi): Turmeric in handmade soap and traditional personal-care use.
-- [Honey](https://healingsoil.in/ingredient/honey): Honey as a soap ingredient.
-- [Oats](https://healingsoil.in/ingredient/oats): Oats and the texture they add to a bar.
-- [Pomegranate](https://healingsoil.in/ingredient/pomegranate): Pomegranate peel in handmade soap.
+Individual ingredient pages are temporarily unavailable; the index below stays live and links out once they return.
+
+- [Ingredients index](https://healingsoil.in/ingredients): Goat milk, glycerin, shea butter, neem, tulsi, kesar, haldi, honey, oats, and pomegranate.
 
 ## Current practical guides
 
 - [Best soap for rainy season in India](https://healingsoil.in/blog/best-soap-for-rainy-season-india): Choosing and storing soap during humid monsoon weather.
-- [How to pack soap for travel](https://healingsoil.in/blog/small-travel-soap-bars-india): Drying, storage, and mini-bar tips.
+- [Mini soap bars for travel](https://healingsoil.in/blog/small-travel-soap-bars-india): Small travel-size bars, drying, storage, and packing tips.
 - [Goat milk soap guide](https://healingsoil.in/blog/goat-milk-soap-benefits): Ingredients, creamy lather, and daily use.
 - [Shea butter soap guide](https://healingsoil.in/blog/understanding-the-benefits-of-shea-butter-in-soap): Ingredients, lather, and after-wash feel.
 - [Sensitive-skin soap label guide](https://healingsoil.in/blog/natural-soap-sensitive-skin-india): How to read a label and choose a simple formula.
@@ -53,9 +51,8 @@ Healing Soil uses a melt-and-pour process: pre-made, already-saponified soap bas
 
 - [Shipping policy](https://healingsoil.in/shipping-policy): Current India-wide shipping charges, dispatch timing, delivery estimates, and tracking information.
 - [Cancellation and refunds](https://healingsoil.in/returns): Current cancellation, damaged-order, and refund terms.
-- [Track an order](https://healingsoil.in/order/track): Order-status lookup.
 - [FAQ](https://healingsoil.in/faq): Common questions about products, ordering, and care.
-- [Contact](https://healingsoil.in/contact): Current contact details.
+- [Contact](https://healingsoil.in/contact): Current contact details. Order tracking is handled over WhatsApp for now.
 
 ## Business facts
 
@@ -65,7 +62,7 @@ Healing Soil uses a melt-and-pour process: pre-made, already-saponified soap bas
 - Formula statements: no SLS, parabens, or synthetic fragrance.
 - Botanicals: neem and tulsi described as farm-grown are grown on the farm; other ingredients are sourced.
 - Shipping: within India only. Use the shipping policy for current charges and delivery estimates.
-- Catalogue: product sizes, prices, and availability vary; use the shop or individual product page for current details.
+- Catalogue: product sizes, prices, and availability vary; ask on WhatsApp for current details.
 - Product scope: descriptions cover cosmetic cleansing, sensory qualities, and traditional personal-care use only.
 
-Last updated: 2026-08-03
+Last updated: 2026-09-21
