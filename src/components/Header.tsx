@@ -5,10 +5,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { sendGAEvent } from '@next/third-parties/google'
 import { useOrderStore } from '@/lib/store'
 import { useOrderAvailability } from './OrderAvailabilityProvider'
 import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
 import { whatsappLink } from '@/lib/whatsapp'
+import { GA4_EVENT } from '@/lib/analytics'
+
+/** Fired on every WhatsApp CTA in this file; matches WhatsAppCTA.tsx's pattern. */
+function trackWhatsAppClick(source: string) {
+  sendGAEvent('event', GA4_EVENT.WHATSAPP_SEND_CLICKED, {
+    event_category: 'contact',
+    event_label: source,
+  })
+}
 
 const navLinks = COMMERCE_ENABLED
   ? [
@@ -101,6 +111,7 @@ export default function Header() {
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick('header')}
             className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#1E5631] px-4 py-2 text-xs font-medium text-white hover:bg-[#1E5631]/90 transition-colors"
           >
             <WhatsAppIcon />
@@ -153,6 +164,7 @@ export default function Header() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick('header')}
               className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#1E5631] px-4 py-2 text-xs font-medium text-white"
             >
               <WhatsAppIcon />

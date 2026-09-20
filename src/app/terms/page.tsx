@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import WhatsAppCTA from '@/components/WhatsAppCTA'
 
 export const metadata: Metadata = {
   title: 'Terms and Conditions | Healing Soil',
@@ -128,9 +129,9 @@ export default function TermsPage() {
           <h2 className="font-serif text-2xl text-[#1A1A14] mb-3">Contact us</h2>
           <p>
             Questions about these terms? Reach us on WhatsApp at{' '}
-            <a href="https://wa.me/917483100651" className="text-green-primary underline">
+            <WhatsAppCTA source="terms_page" className="text-green-primary underline">
               +91 74831 00651
-            </a>{' '}
+            </WhatsAppCTA>{' '}
             or by email at{' '}
             <a href="mailto:healingsoil.in@gmail.com" className="text-green-primary underline">
               healingsoil.in@gmail.com

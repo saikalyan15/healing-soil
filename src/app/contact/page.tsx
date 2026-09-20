@@ -1,3 +1,5 @@
+import WhatsAppCTA from '@/components/WhatsAppCTA'
+
 export const metadata = {
   title: 'Contact | Healing Soil',
   description:
@@ -28,15 +30,13 @@ export default function ContactPage() {
 
         {/* Primary Contact Options */}
         <div className="mb-10 space-y-4">
-          <a
-            href="https://wa.me/917483100651"
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppCTA
+            source="contact_page"
             className="flex w-full items-center justify-center gap-3 rounded-lg bg-[#1E5631] px-8 py-4 font-sans text-base font-medium text-white transition-colors hover:bg-[#25D366]"
           >
             <WhatsAppIcon size={22} />
             <span>WhatsApp <span className="ml-1 opacity-80">+91 74831 00651</span></span>
-          </a>
+          </WhatsAppCTA>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <a

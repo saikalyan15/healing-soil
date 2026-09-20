@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import WhatsAppCTA from '@/components/WhatsAppCTA'
 
 export const metadata: Metadata = {
   title: 'Cancellation and Refunds | Healing Soil',
@@ -26,9 +27,9 @@ export default function ReturnsPage() {
           <p>
             You can cancel your order free of charge any time before it is dispatched. Message us
             on WhatsApp at{' '}
-            <a href="https://wa.me/917483100651" className="text-green-primary underline">
+            <WhatsAppCTA source="returns_page" className="text-green-primary underline">
               +91 74831 00651
-            </a>{' '}
+            </WhatsAppCTA>{' '}
             as soon as possible with your order details, and we&apos;ll confirm the cancellation
             and refund any payment already made. Once an order has been dispatched, it can no
             longer be cancelled — see Returns below.
@@ -49,9 +50,9 @@ export default function ReturnsPage() {
           <p>
             If your order arrives damaged or incorrect, please contact us within 48 hours of
             delivery on WhatsApp at{' '}
-            <a href="https://wa.me/917483100651" className="text-green-primary underline">
+            <WhatsAppCTA source="returns_page" className="text-green-primary underline">
               +91 74831 00651
-            </a>{' '}
+            </WhatsAppCTA>{' '}
             or email us at{' '}
             <a href="mailto:healingsoil.in@gmail.com" className="text-green-primary underline">
               healingsoil.in@gmail.com
