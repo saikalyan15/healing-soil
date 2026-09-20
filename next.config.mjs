@@ -43,6 +43,20 @@ const storefrontRedirects = COMMERCE_OFF
       .concat(comboSlugs().map((s) => ({ source: `/${s}`, destination: '/', permanent: false })))
   : []
 
+// A couple of storefront/programmatic URLs that ranked well before content-only
+// mode had real search demand behind them, so their equity is pointed at a
+// blog post that covers the same topic instead of falling into the generic
+// homepage catch-all above. Must be listed before storefrontRedirects (Next
+// matches redirects in order, first wins) and stays 307/temporary — same
+// "reverses when NEXT_PUBLIC_SITE_MODE goes back to full" convention, not a
+// permanent SEO consolidation like the rules further down.
+const contentOnlyRescueRedirects = COMMERCE_OFF
+  ? [
+      { source: '/shop/travel-soaps', destination: '/blog/small-travel-soap-bars-india', permanent: false },
+      { source: '/compare/shea-butter-vs-glycerin-soap', destination: '/blog/shea-butter-vs-glycerin-soap', permanent: false },
+    ]
+  : []
+
 // Some aliases point to products that are no longer sold. Send those directly
 // to their final destination so crawlers never have to follow a redirect chain.
 const retiredProductDestinations = {
@@ -105,6 +119,10 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Specific rescue redirects must come before the wildcard storefront
+      // catch-all below, or /shop/:path* etc. would match first and these two
+      // paths would never reach their blog destinations.
+      ...contentOnlyRescueRedirects,
       // Storefront routes when the site is in content-only / dark mode. First so
       // they win over the SEO consolidation rules below. Temporary (307) on
       // purpose: this reverses when NEXT_PUBLIC_SITE_MODE goes back to full.
