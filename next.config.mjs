@@ -132,6 +132,10 @@ const nextConfig = {
       // Product aliases are generated from the same map used by product lookup.
       ...legacyProductRedirects,
       ...retiredCombinationRedirects,
+      // City × ingredient pages were unpublished (src/data/city-ingredients.ts).
+      // Point each at its city hub. In content-only mode storefrontRedirects
+      // above matches first, so there is no chain.
+      { source: '/soap/:city/:ingredient', destination: '/soap/:city', permanent: true },
       // Consolidate overlapping search intent into the strongest existing URLs.
       { source: '/compare/glycerin-vs-goat-milk-soap', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
       { source: '/blog/goat-milk-soap-base-vs-glycerin-soap-base', destination: '/blog/glycerin-vs-goat-milk-soap', permanent: true },
