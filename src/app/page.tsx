@@ -332,7 +332,7 @@ export default async function HomePage() {
                   },
                   {
                     t: 'Lighter on the earth',
-                    d: 'Small batches, a food-grade biodegradable cling wrap to keep moisture out, and paper on the outside. Peels and offcuts go back to the soil they came from.',
+                    d: 'Small batches and paper wrapping. Peels and offcuts go back to the soil they came from.',
                   },
                 ].map((item, i) => (
                   <div key={item.t} className="flex gap-5 py-5 first:pt-0">
