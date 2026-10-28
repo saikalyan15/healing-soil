@@ -6,6 +6,8 @@ import BlogCard from './BlogCard'
 import { WA_DEFAULT_MESSAGE, WHATSAPP_DISPLAY } from '@/lib/whatsapp'
 import { reviews } from '@/lib/reviews'
 import { getAllPosts } from '@/lib/blog'
+import FestiveGiftingBand, { FestiveStrip } from './FestiveGifting'
+import ValueList from './ValueList'
 
 // The homepage in 'content-only' site mode: a single page about Healing Soil and
 // handmade soap, with WhatsApp as the way to get in touch. Copy follows
@@ -114,29 +116,6 @@ const botanicals: Botanical[] = [
   { slug: 'pomegranate', name: 'Pomegranate', image: '/images/ingredients/ingredient-pomegranate.webp', origin: 'sourced' },
 ]
 
-const process = [
-  {
-    t: 'No SLS or parabens',
-    d: 'Our bars contain no SLS, parabens, or synthetic fragrance.',
-  },
-  {
-    t: 'Glycerin retained',
-    d: 'Glycerin is a natural byproduct of soap making. Commercial makers extract and sell it separately. We leave it in the bar.',
-  },
-  {
-    t: 'Botanicals from our farm',
-    d: 'Neem, tulsi and lemongrass are grown in South Goa and harvested fresh for each batch. The bases are sourced, and we would rather say so.',
-  },
-  {
-    t: 'Made to order',
-    d: 'We do not warehouse thousands of bars. Every batch is hand-poured after you order.',
-  },
-  {
-    t: 'Lighter on the earth',
-    d: 'Small batches, paper wrapping, no plastic. Peels and offcuts go back to the soil they came from.',
-  },
-]
-
 const faqItems = [
   {
     q: 'What is Healing Soil handmade soap made from?',
@@ -183,6 +162,8 @@ export default function WhatsAppLanding() {
 
   return (
     <div className="bg-[#F7F5F0]">
+      {/* Seasonal, renders nothing outside a festival window. */}
+      <FestiveStrip />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -237,6 +218,8 @@ export default function WhatsAppLanding() {
           </WhatsAppCTA>
         </div>
       </section>
+
+      <FestiveGiftingBand />
 
       {/* ── Farm band ──────────────────────────────────────────────────────
           Full bleed and cinematic, so the page has a visual anchor before it
@@ -456,7 +439,9 @@ export default function WhatsAppLanding() {
         </div>
       </section>
 
-      {/* ── Why it is different ────────────────────────────────────────────── */}
+      {/* ── Where the price goes ───────────────────────────────────────────
+          Answers "why does this cost more than supermarket soap" with what goes
+          into a bar. Shared list: src/data/value-story.ts. */}
       <section className="w-full bg-white py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -465,7 +450,7 @@ export default function WhatsAppLanding() {
                   above, and the cashew tree shot is the lead image on
                   /our-story, which stays live in this mode. Deliberately not
                   the marigold process shot: the bar in it is plastic wrapped,
-                  which would sit directly beside the no-plastic line below. */}
+                  which would undercut the farm and small-batch story beside it. */}
               <Image
                 src="/hero-soap.webp"
                 alt="A honey oats bar resting on a woven tray"
@@ -477,27 +462,13 @@ export default function WhatsAppLanding() {
 
             <div className="space-y-8 lg:pl-4">
               <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
-                Why it is different
+                Where the price goes
               </p>
               <h2 className="font-serif text-3xl leading-tight text-[#1E5631] md:text-4xl lg:text-[44px]">
-                Five things we do that most soap does not.
+                What goes into a bar
               </h2>
 
-              <div className="divide-y divide-[#D6CFC4]">
-                {process.map((item, i) => (
-                  <div key={item.t} className="flex gap-5 py-5 first:pt-0">
-                    <span className="mt-1 font-serif text-lg leading-none text-[#C9A84C]/70">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <h3 className="mb-1.5 font-sans text-sm font-semibold tracking-wide text-[#1A1A14]">
-                        {item.t}
-                      </h3>
-                      <p className="font-sans text-sm leading-[1.7] text-[#666666]">{item.d}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <ValueList />
 
               <Link
                 href="/our-story"

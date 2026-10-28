@@ -25,7 +25,7 @@ const config = {
           '/occasion/*', '/soap-for/*', '/ayurvedic-soap/*',
         ]
       : []),
-    ...(DARK ? ['/blog', '/blog/*', '/our-story', '/guide/*', '/ingredients', '/contact', '/reviews', '/faq', '/returns', '/shipping-policy', '/terms', '/privacy-policy', '/glycerin-soap', '/goat-milk-soap', '/shea-butter-soap', '/sls-free-soap', '/soap-for-sensitive-skin'] : []),
+    ...(DARK ? ['/gift-hampers', '/blog', '/blog/*', '/our-story', '/guide/*', '/ingredients', '/contact', '/reviews', '/faq', '/returns', '/shipping-policy', '/terms', '/privacy-policy', '/glycerin-soap', '/goat-milk-soap', '/shea-butter-soap', '/sls-free-soap', '/soap-for-sensitive-skin'] : []),
     '/cart',
     '/checkout',
     '/order',
@@ -109,6 +109,7 @@ const config = {
     const staticPaths = [
       '/',
       '/shop',
+      '/gift-hampers',
       '/our-story',
       '/ingredients',
       '/contact',
@@ -210,6 +211,7 @@ const config = {
     if (CONTENT_ONLY) {
       const contentStaticPaths = [
         '/',
+        '/gift-hampers',
         '/our-story',
         '/guide/handmade-soap-india',
         '/ingredients',

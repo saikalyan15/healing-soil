@@ -43,3 +43,49 @@ h1, h2, h3, h4, h5, h6 {
     animation: none;
   }
 }
+
+/*
+ * Festive decor (src/components/FestiveDecor.tsx). These are the one place the
+ * site runs looping animation, and only inside a festival window. Kept to
+ * opacity and transform so they stay on the compositor, slow enough to read as
+ * lamplight rather than as motion, and off entirely under reduced motion.
+ */
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) skewX(0deg); }
+  20%      { transform: scaleY(1.08) skewX(-2deg); }
+  45%      { transform: scaleY(0.95) skewX(1.5deg); }
+  70%      { transform: scaleY(1.04) skewX(-1deg); }
+}
+
+.flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flame-flicker 1.9s ease-in-out infinite;
+}
+
+@keyframes bulb-twinkle {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+.bulb {
+  animation: bulb-twinkle var(--dur, 3s) ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes lamp-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 0.9; transform: scale(1.04); }
+}
+
+.lamp-glow {
+  animation: lamp-glow 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame,
+  .bulb,
+  .lamp-glow {
+    animation: none;
+  }
+  .bulb { opacity: 0.85; }
+}

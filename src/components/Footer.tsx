@@ -6,6 +6,7 @@ const footerNav = (
   COMMERCE_ENABLED
     ? [
         { label: 'Shop', href: '/shop' },
+        { label: 'Gift Hampers', href: '/gift-hampers' },
         { label: 'Our Story', href: '/our-story' },
         { label: 'Blog', href: '/blog' },
         { label: 'Track Order', href: '/order/track' },
@@ -14,6 +15,7 @@ const footerNav = (
         { label: 'FAQ', href: '/faq' },
       ]
     : [
+        { label: 'Gift Hampers', href: '/gift-hampers' },
         { label: 'Our Story', href: '/our-story' },
         { label: 'Blog', href: '/blog' },
         { label: 'Reviews', href: '/reviews' },

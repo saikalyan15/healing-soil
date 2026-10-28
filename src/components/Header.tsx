@@ -23,11 +23,13 @@ function trackWhatsAppClick(source: string) {
 const navLinks = COMMERCE_ENABLED
   ? [
       { label: 'Shop', href: '/shop' },
+      { label: 'Gift Hampers', href: '/gift-hampers' },
       { label: 'Our Story', href: '/our-story' },
       { label: 'Blog', href: '/blog' },
       { label: 'Contact', href: '/contact' },
     ]
   : [
+      { label: 'Gift Hampers', href: '/gift-hampers' },
       { label: 'Blog', href: '/blog' },
       { label: 'Our Story', href: '/our-story' },
       { label: 'Contact', href: '/contact' },

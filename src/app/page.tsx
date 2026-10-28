@@ -12,6 +12,10 @@ import ProductCard from '@/components/ProductCard'
 import BlogCard from '@/components/BlogCard'
 import WhatsAppLanding from '@/components/WhatsAppLanding'
 import HoldingPage from '@/components/HoldingPage'
+import ValueList from '@/components/ValueList'
+import FestiveGiftingBand, { FestiveStrip } from '@/components/FestiveGifting'
+import { activeSeason } from '@/data/festive-seasons'
+import { LOWEST_HAMPER_PRICE, formatRupees } from '@/data/gift-hampers'
 import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
 
 // Statically rendered and served from the Full Route Cache. Product data comes
@@ -20,12 +24,28 @@ import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
 // falls back to the 24h data-cache TTL. It was previously force-dynamic, which
 // ran a Vercel Function on every single request including crawler traffic.
 
+// Daily, matching the 24h data-cache TTL, so the festive strip and band
+// (src/data/festive-seasons.ts) switch on and off without a redeploy.
+export const revalidate = 86400
+
 // Title and canonical are unchanged in every mode.
 const HOME_DESCRIPTION = COMMERCE_ENABLED
   ? 'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free, with botanicals grown on the farm.'
   : 'Handmade soap made in small batches on our farm in South Goa. SLS-free, paraben-free, and free of synthetic fragrance. Botanicals grown on the farm.'
 
-export const metadata: Metadata = {
+// A function rather than a const so the season is judged at each revalidation,
+// not once when the module loads. In a festival window the description leads
+// with the gift hampers so the homepage snippet carries the season; the title
+// stays fixed.
+export function generateMetadata(): Metadata {
+  const season = activeSeason()
+  const description = season
+    ? `${season.name} gift hampers from ${formatRupees(LOWEST_HAMPER_PRICE)}, and handmade soap made in small batches on our farm in South Goa. No SLS, parabens or synthetic fragrance.`
+    : HOME_DESCRIPTION
+  return { ...baseMetadata, description }
+}
+
+const baseMetadata: Metadata = {
   // absolute, so buildTitle does not apply — keep this within the 60 char budget
   // by hand. Currently 57.
   title: { absolute: 'Handmade Natural Soap for the Whole Family | Healing Soil' },
@@ -126,6 +146,7 @@ export default async function HomePage() {
 
   return (
     <div className="bg-[#F7F5F0]">
+      <FestiveStrip />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -206,6 +227,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <FestiveGiftingBand />
 
       {/* ── Section 2.5: Hero product ─────────────────────────────────────
           A deliberate editorial pick, kept separate from "Most Loved" below,
@@ -304,50 +327,14 @@ export default async function HomePage() {
             </div>
             <div className="space-y-8 lg:pl-8">
               <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
-                Why it is different
+                Where the price goes
               </p>
               <h2 className="font-serif text-3xl leading-tight text-[#1E5631] md:text-4xl lg:text-5xl">
-                Five things we do that most soap does not.
+                What goes into a bar
               </h2>
 
-              {/* Hairline-separated list rather than a card grid. Reads as
-                  editorial rather than as a feature table. */}
-              <div className="divide-y divide-[#D6CFC4]">
-                {[
-                  {
-                    t: 'No SLS or parabens',
-                    d: 'Our bars contain no SLS, parabens, or synthetic fragrance.',
-                  },
-                  {
-                    t: 'Glycerin retained',
-                    d: 'Glycerin is a natural byproduct of soap making. Commercial makers extract and sell it separately. We leave it in the bar.',
-                  },
-                  {
-                    t: 'Botanicals from our farm',
-                    d: 'Neem, tulsi and lemongrass are grown in South Goa and harvested fresh for each batch. The bases are sourced, and we would rather say so.',
-                  },
-                  {
-                    t: 'Made to order',
-                    d: 'We do not warehouse thousands of bars. Every batch is hand-poured after you order.',
-                  },
-                  {
-                    t: 'Lighter on the earth',
-                    d: 'Small batches and paper wrapping. Peels and offcuts go back to the soil they came from.',
-                  },
-                ].map((item, i) => (
-                  <div key={item.t} className="flex gap-5 py-5 first:pt-0">
-                    <span className="mt-1 font-serif text-lg leading-none text-[#C9A84C]/70">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <h3 className="mb-1.5 font-sans text-sm font-semibold tracking-wide text-[#1A1A14]">
-                        {item.t}
-                      </h3>
-                      <p className="font-sans text-sm leading-[1.7] text-[#666666]">{item.d}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {/* Shared with the content-only homepage: src/data/value-story.ts. */}
+              <ValueList />
 
               <div className="pt-6">
                 <Link
