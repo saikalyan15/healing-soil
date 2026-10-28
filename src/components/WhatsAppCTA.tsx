@@ -2,7 +2,7 @@
 
 import { sendGAEvent } from '@next/third-parties/google'
 import { GA4_EVENT } from '@/lib/analytics'
-import { whatsappLink } from '@/lib/whatsapp'
+import { whatsappCatalogLink, whatsappLink } from '@/lib/whatsapp'
 
 function WhatsAppIcon() {
   return (
@@ -15,6 +15,8 @@ function WhatsAppIcon() {
 type Props = {
   /** Pre-filled message for the chat. Omit to just open the conversation. */
   message?: string
+  /** Open the WhatsApp Business catalogue instead of a chat. `message` is ignored. */
+  catalog?: boolean
   /** Where the click happened, sent with the GA event for funnel analysis. */
   source: string
   children: React.ReactNode
@@ -26,10 +28,10 @@ type Props = {
  * `Contact` event is fired separately by the global listener in MetaPixelEvents,
  * which matches any wa.me link, so it is not repeated here.
  */
-export default function WhatsAppCTA({ message, source, children, className }: Props) {
+export default function WhatsAppCTA({ message, catalog, source, children, className }: Props) {
   return (
     <a
-      href={whatsappLink(message)}
+      href={catalog ? whatsappCatalogLink() : whatsappLink(message)}
       target="_blank"
       rel="noopener noreferrer"
       className={className}

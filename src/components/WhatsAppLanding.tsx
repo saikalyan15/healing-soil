@@ -228,6 +228,13 @@ export default function WhatsAppLanding() {
           <p className="mt-4 font-sans text-xs leading-relaxed text-[#999999]">
             We are taking orders and answering questions on WhatsApp for now. {WHATSAPP_DISPLAY}
           </p>
+          <WhatsAppCTA
+            source="landing_primary_catalog"
+            catalog
+            className="mt-3 inline-block font-sans text-sm font-semibold text-[#1E5631] underline decoration-[#C9A84C] underline-offset-4 hover:text-[#153d22]"
+          >
+            Browse the catalogue
+          </WhatsAppCTA>
         </div>
       </section>
 
@@ -252,7 +259,8 @@ export default function WhatsAppLanding() {
       </section>
 
       {/* ── The soaps ──────────────────────────────────────────────────────
-          No price and no buy button anywhere in this section, by design. */}
+          No price and no buy button anywhere in this section, by design. Prices
+          live in the WhatsApp catalogue, which the button below opens. */}
       <section className="w-full bg-[#F7F5F0] py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
@@ -297,16 +305,16 @@ export default function WhatsAppLanding() {
 
           <div className="mt-16 text-center">
             <p className="mx-auto max-w-lg font-sans text-sm leading-relaxed text-[#666666]">
-              There are more bars than these. If you are looking for something in particular,
-              ask and we will tell you what is available.
+              There are more bars than these. The full range, with prices, is in our
+              WhatsApp catalogue.
             </p>
             <WhatsAppCTA
-              source="landing_gallery"
-              message={WA_DEFAULT_MESSAGE}
+              source="landing_gallery_catalog"
+              catalog
               className="mt-6 inline-flex items-center justify-center gap-2.5 rounded border-2 border-[#1E5631] px-9 py-4 font-sans text-sm font-bold text-[#1E5631] transition-all hover:bg-[#1E5631] hover:text-white active:scale-[0.98]"
             >
               <WhatsAppIcon />
-              Ask about a bar
+              See the catalogue
             </WhatsAppCTA>
           </div>
         </div>

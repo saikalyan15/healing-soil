@@ -1,7 +1,11 @@
 // Run with: npm test
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { WHATSAPP_NUMBER, whatsappLink, WA_DEFAULT_MESSAGE } from './whatsapp.ts'
+import { WHATSAPP_NUMBER, whatsappLink, whatsappCatalogLink, WA_DEFAULT_MESSAGE } from './whatsapp.ts'
+
+test('the catalogue link uses the wa.me/c form with the same number', () => {
+  assert.equal(whatsappCatalogLink(), `https://wa.me/c/${WHATSAPP_NUMBER}`)
+})
 
 test('the number is the bare international form, no plus or spaces', () => {
   assert.match(WHATSAPP_NUMBER, /^91\d{10}$/)

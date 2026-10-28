@@ -17,6 +17,11 @@ export function whatsappLink(message?: string): string {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base
 }
 
+/** Opens the WhatsApp Business catalogue, where the bars and their prices are listed. */
+export function whatsappCatalogLink(): string {
+  return `https://wa.me/c/${WHATSAPP_NUMBER}`
+}
+
 /** Default opener used by the landing page and the generic "order on WhatsApp" CTA. */
 export const WA_DEFAULT_MESSAGE =
   'Hi Healing Soil, I would like to know more about your soaps.'
