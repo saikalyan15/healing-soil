@@ -1,8 +1,8 @@
-import { SUPPORT_EMAIL, PHONE_DISPLAY } from '@/lib/contact'
-import { whatsappLink } from '@/lib/whatsapp'
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { SUPPORT_EMAIL, PHONE_DISPLAY } from '@/lib/contact'
+import { whatsappLink } from '@/lib/whatsapp'
 import { QRCodeSVG } from 'qrcode.react'
 import { sendGAEvent } from '@next/third-parties/google'
 import { GA4_EVENT } from '@/lib/analytics'
