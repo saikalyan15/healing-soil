@@ -16,7 +16,7 @@ import {
   futureReopenDate,
   useOrderAvailability,
 } from './OrderAvailabilityProvider'
-const WA_NUMBER = '917483100651'
+import { WHATSAPP_NUMBER as WA_NUMBER } from '@/lib/contact'
 const PENDING_CHECKOUT_STORAGE_KEY = 'healing-soil-pending-checkout'
 
 const ALL_STATES = [

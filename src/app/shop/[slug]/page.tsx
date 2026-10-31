@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound, redirect } from 'next/navigation'
 import { getProductBySlug, getProducts } from '@/lib/products'
 import { COMMERCE_ENABLED } from '@/lib/site-mode'
+import { whatsappLink } from '@/lib/whatsapp'
 import { getSoapSquaresBoxDetail, isSoapSquaresProduct, soapSquaresBoxDetails } from '@/lib/soap-squares'
 import { reviewsForProduct, featuredReviews } from '@/lib/reviews'
 import ReviewCard from '@/components/ReviewCard'
@@ -416,7 +417,7 @@ export default async function ProductPage({ params }: Props) {
 
             {/* WhatsApp CTA */}
             <a
-              href={`https://wa.me/917483100651?text=Hi%2C%20I%27d%20like%20to%20order%20${encodeURIComponent(product.name)}%20from%20Healing%20Soil`}
+              href={whatsappLink(`Hi, I'd like to order ${product.name} from Healing Soil`)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 rounded border border-[#25D366] py-2.5 font-sans text-sm font-medium text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"

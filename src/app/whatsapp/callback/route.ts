@@ -27,6 +27,7 @@ export async function GET() {
 /* ─── Original implementation (disabled) ───────────────────────────────────────
 
 import { NextRequest } from 'next/server'
+import { ORDERS_FROM_EMAIL } from '@/lib/contact'
 
 async function emailQueryString(fullQueryString: string, receivedAt: string): Promise<void> {
   try {
@@ -51,7 +52,7 @@ async function emailQueryString(fullQueryString: string, receivedAt: string): Pr
         .replaceAll("'", '&#039;')
 
     await resend.emails.send({
-      from: 'orders@healingsoil.in',
+      from: ORDERS_FROM_EMAIL,
       to: to.split(',').map((entry) => entry.trim()),
       subject: 'WhatsApp Embedded Signup — OAuth callback received',
       html: `

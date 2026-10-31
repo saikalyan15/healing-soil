@@ -1,3 +1,5 @@
+import { SUPPORT_EMAIL, PHONE_DISPLAY } from '@/lib/contact'
+import { whatsappLink } from '@/lib/whatsapp'
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -15,7 +17,6 @@ import {
   useOrderAvailability,
 } from './OrderAvailabilityProvider'
 
-const WA_NUMBER = '917483100651'
 
 function WhatsAppIcon() {
   return (
@@ -183,10 +184,10 @@ export default function OrderPageClient({
         <p className="font-sans text-xs text-[#999999]">
           No WhatsApp?{' '}
           <a
-            href="mailto:healingsoil.in@gmail.com"
+            href={`mailto:${SUPPORT_EMAIL}`}
             className="font-medium text-[#1E5631] underline"
           >
-            Email us at healingsoil.in@gmail.com
+            Email us at {SUPPORT_EMAIL}
           </a>
         </p>
 
@@ -286,12 +287,12 @@ export default function OrderPageClient({
           <p className="border-t border-[#D6CFC4] pt-4 font-sans text-xs text-[#666666]">
             Questions? WhatsApp Healing Soil at{' '}
             <a
-              href="https://wa.me/917483100651"
+              href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-[#1E5631]"
             >
-              +91 74831 00651
+              {PHONE_DISPLAY}
             </a>
           </p>
         </div>

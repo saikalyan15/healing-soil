@@ -1,3 +1,4 @@
+import { SUPPORT_EMAIL, PHONE_DISPLAY } from '@/lib/contact'
 import type { Metadata } from 'next'
 import WhatsAppCTA from '@/components/WhatsAppCTA'
 
@@ -28,7 +29,7 @@ export default function ReturnsPage() {
             You can cancel your order free of charge any time before it is dispatched. Message us
             on WhatsApp at{' '}
             <WhatsAppCTA source="returns_page" className="text-green-primary underline">
-              +91 74831 00651
+              {PHONE_DISPLAY}
             </WhatsAppCTA>{' '}
             as soon as possible with your order details, and we&apos;ll confirm the cancellation
             and refund any payment already made. Once an order has been dispatched, it can no
@@ -51,11 +52,11 @@ export default function ReturnsPage() {
             If your order arrives damaged or incorrect, please contact us within 48 hours of
             delivery on WhatsApp at{' '}
             <WhatsAppCTA source="returns_page" className="text-green-primary underline">
-              +91 74831 00651
+              {PHONE_DISPLAY}
             </WhatsAppCTA>{' '}
             or email us at{' '}
-            <a href="mailto:healingsoil.in@gmail.com" className="text-green-primary underline">
-              healingsoil.in@gmail.com
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-green-primary underline">
+              {SUPPORT_EMAIL}
             </a>
             . We will replace or refund at our discretion.
           </p>

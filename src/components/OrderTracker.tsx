@@ -4,6 +4,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import type { TrackedOrder } from '@/lib/orders'
 import { payableWithFee } from '@/lib/payment-fee'
+import { whatsappLink } from '@/lib/whatsapp'
 
 const PROGRESS_STEPS = [
   { label: 'Order received', description: 'Your order details are recorded.' },
@@ -124,8 +125,8 @@ export default function OrderTracker({ initialRef = '' }: { initialRef?: string 
         : order.total)
     : 0
   const whatsappHref = order
-    ? `https://wa.me/917483100651?text=${encodeURIComponent(`Hi Healing Soil, I need help with order ${order.ref}.`)}`
-    : 'https://wa.me/917483100651'
+    ? whatsappLink(`Hi Healing Soil, I need help with order ${order.ref}.`)
+    : whatsappLink()
 
   return (
     <div className="space-y-6">

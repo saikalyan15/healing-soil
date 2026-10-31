@@ -1,3 +1,4 @@
+import { ORDERS_FROM_EMAIL } from '@/lib/contact'
 // lib/orders.ts — Order submission and notification for Healing Soil
 
 import type { OrderAttribution } from '@/lib/attribution'
@@ -108,7 +109,7 @@ export async function sendOwnerEmail(
       .replaceAll('"', '&quot;').replaceAll("'", '&#039;')
 
     await resend.emails.send({
-      from: 'orders@healingsoil.in',
+      from: ORDERS_FROM_EMAIL,
       to: to.split(',').map((e) => e.trim()),
       subject: `New Order — ${ref}`,
       html: `

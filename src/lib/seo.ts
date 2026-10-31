@@ -1,3 +1,4 @@
+import { PHONE_SCHEMA } from '@/lib/contact'
 import type { Metadata } from 'next'
 import { COMMERCE_ENABLED } from './site-mode'
 
@@ -54,7 +55,7 @@ export const ORGANIZATION_SCHEMA = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    telephone: '+91-74831-00651',
+    telephone: PHONE_SCHEMA,
     url: `${SITE_URL}/contact`,
     availableLanguage: ['English', 'Hindi'],
   },

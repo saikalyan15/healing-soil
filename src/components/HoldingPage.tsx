@@ -1,3 +1,4 @@
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from '@/lib/contact'
 import Image from 'next/image'
 import WhatsAppCTA, { WhatsAppIcon } from './WhatsAppCTA'
 import { WA_DEFAULT_MESSAGE } from '@/lib/whatsapp'
@@ -34,12 +35,12 @@ export default function HoldingPage() {
             Message on WhatsApp
           </WhatsAppCTA>
           <a
-            href="https://instagram.com/healingsoil.in"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="font-sans text-sm text-[#1E5631] underline underline-offset-4 hover:text-[#C9A84C]"
           >
-            @healingsoil.in
+            {INSTAGRAM_HANDLE}
           </a>
         </div>
       </div>

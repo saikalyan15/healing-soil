@@ -1,3 +1,4 @@
+import { whatsappLink } from '@/lib/whatsapp'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -81,7 +82,7 @@ export default async function ConfirmationPage() {
         <p className="mt-8 font-sans text-xs text-[#999999]">
           Having trouble?{' '}
           <a
-            href="https://wa.me/917483100651"
+            href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-[#1E5631] underline"

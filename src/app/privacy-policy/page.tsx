@@ -1,3 +1,4 @@
+import { PRIVACY_EMAIL } from '@/lib/contact'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -31,8 +32,8 @@ export default function PrivacyPolicyPage() {
           </p>
           <p className="mt-3">
             If you have any questions about this policy, you can reach us at{' '}
-            <a href="mailto:hello@healingsoil.in" className="text-green-primary underline">
-              hello@healingsoil.in
+            <a href={`mailto:${PRIVACY_EMAIL}`} className="text-green-primary underline">
+              {PRIVACY_EMAIL}
             </a>.
           </p>
         </section>
@@ -129,8 +130,8 @@ export default function PrivacyPolicyPage() {
             email service to manage our list and send emails. Your address is not shared with other
             parties for their own use. You can unsubscribe at any time by clicking the unsubscribe
             link in any email we send, or by writing to us at{' '}
-            <a href="mailto:hello@healingsoil.in" className="text-green-primary underline">
-              hello@healingsoil.in
+            <a href={`mailto:${PRIVACY_EMAIL}`} className="text-green-primary underline">
+              {PRIVACY_EMAIL}
             </a>.
           </p>
         </section>
@@ -150,8 +151,8 @@ export default function PrivacyPolicyPage() {
           <p>
             You have the right to request access to, correction of, or deletion of your personal
             information held by us. To make a request, email us at{' '}
-            <a href="mailto:hello@healingsoil.in" className="text-green-primary underline">
-              hello@healingsoil.in
+            <a href={`mailto:${PRIVACY_EMAIL}`} className="text-green-primary underline">
+              {PRIVACY_EMAIL}
             </a>{' '}
             and we will respond within a reasonable time.
           </p>

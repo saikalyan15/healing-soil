@@ -5,8 +5,11 @@
 // checkout components keep their own local copies for now since those screens do
 // not render outside the 'full' site mode.
 
-export const WHATSAPP_NUMBER = '917483100651'
-export const WHATSAPP_DISPLAY = '+91 74831 00651'
+import { WHATSAPP_NUMBER, PHONE_DISPLAY } from './contact.ts'
+
+// Re-exported so existing imports keep working. The values live in lib/contact.ts.
+export { WHATSAPP_NUMBER }
+export const WHATSAPP_DISPLAY = PHONE_DISPLAY
 
 /**
  * Builds a wa.me deep link. With a message it opens the chat with that text

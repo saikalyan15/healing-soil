@@ -1,3 +1,4 @@
+import { PHONE_E164, SUPPORT_EMAIL, PHONE_DISPLAY, INSTAGRAM_HANDLE, INSTAGRAM_URL } from '@/lib/contact'
 import WhatsAppCTA from '@/components/WhatsAppCTA'
 
 export const metadata = {
@@ -35,24 +36,24 @@ export default function ContactPage() {
             className="flex w-full items-center justify-center gap-3 rounded-lg bg-[#1E5631] px-8 py-4 font-sans text-base font-medium text-white transition-colors hover:bg-[#25D366]"
           >
             <WhatsAppIcon size={22} />
-            <span>WhatsApp <span className="ml-1 opacity-80">+91 74831 00651</span></span>
+            <span>WhatsApp <span className="ml-1 opacity-80">{PHONE_DISPLAY}</span></span>
           </WhatsAppCTA>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <a
-              href="tel:+917483100651"
+              href={`tel:${PHONE_E164}`}
               className="flex items-center gap-3 rounded-lg border border-[#D6CFC4] bg-white px-6 py-4 font-sans text-sm font-medium text-[#1A1A14] transition-colors hover:border-[#1E5631] hover:text-[#1E5631]"
             >
               <PhoneIcon />
-              <span>Call: +91 74831 00651</span>
+              <span>Call: {PHONE_DISPLAY}</span>
             </a>
 
             <a
-              href="mailto:healingsoil.in@gmail.com"
+              href={`mailto:${SUPPORT_EMAIL}`}
               className="flex items-center gap-3 rounded-lg border border-[#D6CFC4] bg-white px-6 py-4 font-sans text-sm font-medium text-[#1A1A14] transition-colors hover:border-[#1E5631] hover:text-[#1E5631]"
             >
               <MailIcon />
-              <span>healingsoil.in@gmail.com</span>
+              <span>{SUPPORT_EMAIL}</span>
             </a>
           </div>
         </div>
@@ -61,7 +62,7 @@ export default function ContactPage() {
         <div className="space-y-4">
           <h2 className="font-serif text-2xl text-[#1E5631] mb-2">Socials</h2>
           <a
-            href="https://instagram.com/healingsoil.in"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex w-full items-center gap-3 rounded-lg border border-[#D6CFC4] bg-white px-6 py-3.5 font-sans text-sm font-medium text-[#1A1A14] transition-colors hover:border-[#C9A84C] hover:text-[#1E5631]"
@@ -69,7 +70,7 @@ export default function ContactPage() {
             <InstagramIcon />
             <span>
               Instagram{' '}
-              <span className="font-normal text-[#666666]">@healingsoil.in</span>
+              <span className="font-normal text-[#666666]">{INSTAGRAM_HANDLE}</span>
             </span>
           </a>
 

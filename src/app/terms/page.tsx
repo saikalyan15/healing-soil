@@ -1,3 +1,4 @@
+import { SUPPORT_EMAIL, PHONE_DISPLAY } from '@/lib/contact'
 import type { Metadata } from 'next'
 import WhatsAppCTA from '@/components/WhatsAppCTA'
 
@@ -130,11 +131,11 @@ export default function TermsPage() {
           <p>
             Questions about these terms? Reach us on WhatsApp at{' '}
             <WhatsAppCTA source="terms_page" className="text-green-primary underline">
-              +91 74831 00651
+              {PHONE_DISPLAY}
             </WhatsAppCTA>{' '}
             or by email at{' '}
-            <a href="mailto:healingsoil.in@gmail.com" className="text-green-primary underline">
-              healingsoil.in@gmail.com
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-green-primary underline">
+              {SUPPORT_EMAIL}
             </a>.
           </p>
         </section>

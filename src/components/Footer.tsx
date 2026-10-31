@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import EmailCapture from './EmailCapture'
 import { COMMERCE_ENABLED } from '@/lib/site-mode'
+import { INSTAGRAM_URL } from '@/lib/contact'
 
 const footerNav = (
   COMMERCE_ENABLED
@@ -39,7 +40,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-4">
             <a
-              href="https://instagram.com/healingsoil.in"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
