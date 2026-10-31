@@ -96,7 +96,7 @@ export default function GiftHampersPage() {
             '@id': `${PAGE_URL}#${h.id}`,
             name: `${h.name.replace(/^The /, '')} gift hamper`,
             description: `${h.contents.join('. ')}.${h.note ? ` ${h.note}` : ''}`,
-            image: `${SITE_URL}${h.image?.src ?? '/products/50g-soap-squares/images/neem-tulsi-goatmilk-50g.webp'}`,
+            image: `${SITE_URL}${h.image.src}`,
             brand: { '@type': 'Brand', name: 'Healing Soil' },
             offers: {
               '@type': 'Offer',

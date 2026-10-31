@@ -22,8 +22,8 @@ export type GiftHamper = {
   contents: string[]
   /** Optional note under the contents, e.g. the card or where an item comes from. */
   note?: string
-  /** Single photo. Omitted for the discovery box, which renders a 2x2 mosaic. */
-  image?: { src: string; alt: string; position?: string }
+  /** Single photo shown on the card and in the structured data. */
+  image: { src: string; alt: string; position?: string }
 }
 
 export const giftHampers: GiftHamper[] = [
@@ -46,6 +46,11 @@ export const giftHampers: GiftHamper[] = [
     price: 899,
     summary: 'Four 50g soaps in one box.',
     contents: ['Four assorted 50g handmade soaps', 'Packed together in one box'],
+    image: {
+      src: '/products/soap-squares-light-box.webp',
+      alt: 'Four 50g handmade soaps in a kraft gift box printed with the Healing Soil logo, with neem leaves and marigold petals around it',
+      position: '50% 55%',
+    },
   },
   {
     id: 'festive-potli',
@@ -81,14 +86,6 @@ export const giftHampers: GiftHamper[] = [
       position: '50% 72%',
     },
   },
-]
-
-/** The discovery box has no single photo; these four 50g bars stand in for it. */
-export const discoveryMosaic = [
-  { src: '/products/50g-soap-squares/images/neem-tulsi-goatmilk-50g.webp', alt: 'Neem Tulsi goat milk soap, 50g' },
-  { src: '/products/50g-soap-squares/images/honey-oats-glycerin-50g.webp', alt: 'Honey Oats glycerine soap, 50g' },
-  { src: '/products/50g-soap-squares/images/kesar-gulab-sheabutter-50g.webp', alt: 'Kesar Gulab shea butter soap, 50g' },
-  { src: '/products/50g-soap-squares/images/orange-glycerine-50g.webp', alt: 'Orange glycerine soap, 50g' },
 ]
 
 export function formatRupees(n: number): string {

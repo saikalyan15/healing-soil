@@ -1,32 +1,21 @@
 import Image from 'next/image'
 import WhatsAppCTA, { WhatsAppIcon } from './WhatsAppCTA'
-import { discoveryMosaic, formatRupees, type GiftHamper } from '@/data/gift-hampers'
+import { formatRupees, type GiftHamper } from '@/data/gift-hampers'
 
 // One hamper: photo, price, contents, and a WhatsApp CTA with a pre-filled
 // message. Shared by /gift-hampers and /corporate-gifting, which differ only in
 // the message, the GA source and the price suffix.
 
 export function HamperImage({ hamper, sizes }: { hamper: GiftHamper; sizes: string }) {
-  if (hamper.image) {
-    return (
-      <Image
-        src={hamper.image.src}
-        alt={hamper.image.alt}
-        fill
-        className="object-cover"
-        style={hamper.image.position ? { objectPosition: hamper.image.position } : undefined}
-        sizes={sizes}
-      />
-    )
-  }
   return (
-    <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-1 bg-white p-1">
-      {discoveryMosaic.map((m) => (
-        <div key={m.src} className="relative overflow-hidden">
-          <Image src={m.src} alt={m.alt} fill className="object-cover" sizes="(max-width: 768px) 45vw, 12vw" />
-        </div>
-      ))}
-    </div>
+    <Image
+      src={hamper.image.src}
+      alt={hamper.image.alt}
+      fill
+      className="object-cover"
+      style={hamper.image.position ? { objectPosition: hamper.image.position } : undefined}
+      sizes={sizes}
+    />
   )
 }
 
