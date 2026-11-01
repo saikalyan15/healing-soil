@@ -21,7 +21,7 @@ const ingredients = [
     name: 'Glycerin',
     slug: 'glycerin',
     description:
-      'A natural byproduct of the soap-making process. Most commercial makers extract it and sell it separately; we keep it in the bar, which gives it a moisturising feel and a light, clean rinse.',
+      'A natural byproduct of making soap from oils. We pour from sourced bases that keep their glycerin rather than having it extracted, which gives the bar a moisturising feel and a light, clean rinse.',
   },
   {
     name: 'Shea Butter',
@@ -40,6 +40,16 @@ const ingredients = [
     slug: 'tulsi',
     description:
       'Holy basil, grown on our farm in South Goa. A familiar ingredient in Indian home remedies and traditional personal care. Has a fresh, slightly herbal fragrance.',
+  },
+  {
+    name: 'Lemongrass',
+    description:
+      'Grown on our farm in South Goa. Adds a fresh, citrusy scent to the bar.',
+  },
+  {
+    name: 'Marigold',
+    description:
+      'Grown on our farm in South Goa and sun-dried by hand. Petals in the bar give a golden colour and a soft floral look.',
   },
   {
     name: 'Goat Milk',
@@ -127,9 +137,11 @@ export default function IngredientsPage() {
           </p>
           <p className="font-sans text-base leading-relaxed text-[#666666]">
             Every bar is made to order in small batches on our farm in South Goa, with no SLS,
-            no parabens and no synthetic fragrance. Some ingredients, like neem, tulsi and
-            lemongrass, are grown on the farm itself. Others, like shea butter and the soap
-            bases, are sourced, and we would rather say so than pretend otherwise.
+            no parabens and no synthetic fragrance. Some ingredients, like neem, tulsi,
+            lemongrass and marigold, are grown on the farm itself. Others, like shea butter and the soap
+            bases, are sourced, and we would rather say so than pretend otherwise. Our red rose
+            bar is made on a sourced red wine and pomegranate base, with vitamin E and rose
+            essential oil. It has no farm botanicals.
           </p>
         </div>
 

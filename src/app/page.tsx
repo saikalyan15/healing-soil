@@ -30,8 +30,8 @@ export const revalidate = 86400
 
 // Title and canonical are unchanged in every mode.
 const HOME_DESCRIPTION = COMMERCE_ENABLED
-  ? 'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free, with botanicals grown on the farm.'
-  : 'Handmade soap made in small batches on our farm in South Goa. SLS-free, paraben-free, and free of synthetic fragrance. Botanicals grown on the farm.'
+  ? 'Handmade soap for the whole family, made in small batches on our farm in South Goa. SLS-free and paraben-free. Some botanicals grown on the farm, soap bases sourced.'
+  : 'Handmade soap made in small batches on our farm in South Goa. SLS-free, paraben-free, and free of synthetic fragrance. Some botanicals grown on the farm, soap bases sourced.'
 
 // A function rather than a const so the season is judged at each revalidation,
 // not once when the module loads. In a festival window the description leads
@@ -57,7 +57,7 @@ const baseMetadata: Metadata = {
   openGraph: {
     title: 'Handmade Natural Soap for the Whole Family | Healing Soil',
     description:
-      'Handmade in small batches on our farm in South Goa, with botanicals we grow ourselves. No SLS, no parabens, no synthetic fragrance.',
+      'Handmade in small batches on our farm in South Goa. Some botanicals are grown on the farm, the soap bases are sourced. No SLS, no parabens, no synthetic fragrance.',
     url: SITE_URL,
     siteName: 'Healing Soil',
     images: [{ url: '/og-image.jpg', width: 1200, height: 1200, alt: 'Healing Soil handmade soaps from Goa' }],
@@ -114,11 +114,11 @@ export default async function HomePage() {
   const faqItems = [
     {
       q: 'What is Healing Soil handmade soap made from?',
-      a: 'Healing Soil handmade soap bars are made from glycerine, goat milk, or shea butter bases, hand-poured with farm-grown botanicals like neem and tulsi. Every bar is SLS-free, paraben-free, and free of synthetic fragrance.',
+      a: 'Healing Soil handmade soap bars are made from glycerine, goat milk, or shea butter bases, hand-poured, in most bars with farm-grown botanicals like neem and tulsi. Our red rose bar is the exception: it uses a sourced red wine and pomegranate base with vitamin E and rose essential oil, and no farm botanicals. Every bar is SLS-free, paraben-free, and free of synthetic fragrance.',
     },
     {
       q: 'Is Healing Soil cold-process or melt-and-pour soap?',
-      a: 'Healing Soil is melt-and-pour, not cold-process. We melt pre-made, already-saponified soap bases and hand-pour them with botanicals in small batches, rather than mixing raw oils and lye from scratch.',
+      a: 'Healing Soil is melt-and-pour, not cold-process. We melt pre-made, already-saponified soap bases and hand-pour them, usually with botanicals, in small batches, rather than mixing raw oils and lye from scratch.',
     },
     {
       q: 'How long does shipping take?',
@@ -126,7 +126,7 @@ export default async function HomePage() {
     },
     {
       q: 'Is Healing Soil soap suitable for sensitive skin?',
-      a: 'Healing Soil soap is a gentle option suitable for sensitive skin. Every bar contains no SLS, no synthetic fragrance, and no parabens. Patch test any new personal-care product before regular use.',
+      a: 'Our range includes gentle options suitable for sensitive skin. No bar contains SLS, synthetic fragrance, or parabens. If you are unsure, review the ingredient list and patch test any new personal-care product before regular use.',
     },
     {
       q: 'Where is Healing Soil soap made?',
@@ -163,8 +163,8 @@ export default async function HomePage() {
               One bar your whole{' '}<br className="hidden md:block" />family can use.
             </h1>
             <p className="mb-8 max-w-lg font-sans text-base leading-[1.75] text-[#666] md:text-lg">
-              Handmade in small batches on our farm in South Goa, with botanicals we grow
-              ourselves. No SLS, no parabens, no synthetic fragrance.
+              Handmade in small batches on our farm in South Goa. Some botanicals are grown on
+              the farm, and the soap bases are sourced. No SLS, no parabens, no synthetic fragrance.
             </p>
 
             {heroReview && (

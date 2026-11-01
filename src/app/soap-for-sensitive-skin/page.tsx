@@ -103,8 +103,8 @@ export default async function SoapForSensitiveSkinPage() {
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          By retaining the natural glycerin and using nourishing bases like goat milk and shea
-          butter, we create bars that clean gently while leaving a moisturising feel.
+          We pour from sourced bases like goat milk and shea butter that keep their natural
+          glycerin, which gives bars that clean gently and leave a moisturising feel.
         </p>
 
         <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">What to look for</h2>

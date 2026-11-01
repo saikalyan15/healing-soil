@@ -148,8 +148,8 @@ export default async function GoatMilkSoapPage() {
         </p>
 
         <p className="mb-10 font-sans text-base leading-[1.8] text-[#1A1A14]">
-          By retaining the natural glycerin that forms during soap-making, we ensure that our bars
-          provide a gentle wash that leaves skin feeling soft and conditioned.
+          We pour from a sourced goat milk base that keeps its natural glycerin, which gives a
+          gentle wash that leaves skin feeling soft and conditioned.
         </p>
 
         <h2 className="mb-6 font-serif text-3xl text-[#1E5631]">Common questions</h2>

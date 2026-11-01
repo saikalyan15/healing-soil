@@ -57,7 +57,7 @@ export default function GiftHampersPage() {
     },
     {
       q: 'Why do the hampers cost what they do?',
-      a: 'Neem, tulsi, lemongrass and marigold are grown on our farm in South Goa and sun-dried by hand. The scent comes from essential oils rather than synthetic fragrance, and every bar has added vitamin E. Each batch is poured by hand after you order, in small numbers. That is why a bar costs more than one from a supermarket shelf, and why we can only make so many.',
+      a: 'Neem, tulsi, lemongrass and marigold, which go into many of our bars, are grown on our farm in South Goa and sun-dried by hand. The scent comes from essential oils rather than synthetic fragrance, and every bar has added vitamin E. Each batch is poured by hand after you order, in small numbers. That is why a bar costs more than one from a supermarket shelf, and why we can only make so many.',
     },
     {
       q: 'What is in the festive potli?',

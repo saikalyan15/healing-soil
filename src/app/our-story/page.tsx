@@ -52,10 +52,10 @@ export default function OurStoryPage() {
         <section className="mb-12">
           <h2 className="mb-4 font-serif text-3xl text-[#1E5631]">The farm</h2>
           <p className="font-sans text-base leading-relaxed text-[#1A1A14]">
-            We grow vegetables and tend to the land. The same ingredients that go into our kitchen
-            go into our soaps. Neem from our tree. Herbs from our garden. When you hold a bar of
-            Healing Soil soap, you are holding something that came from the same soil we walk on
-            every morning.
+            We grow vegetables and tend to the land. Neem, tulsi and some of the other herbs in our
+            soaps come from our own trees and garden. The rest, like the soap bases and shea butter,
+            we source, and we would rather say which is which. Every bar is made by hand on the
+            same land we walk on every morning.
           </p>
         </section>
 

@@ -29,7 +29,7 @@ export const valuePoints: ValuePoint[] = [
   },
   {
     t: 'Vitamin E in every bar',
-    d: 'We add vitamin E to each bar, and keep the glycerin that forms in the base rather than extracting it to sell separately. No SLS, no parabens.',
+    d: 'We add vitamin E to each bar. No SLS, no parabens.',
   },
   {
     t: 'Poured by hand, after you order',

@@ -119,7 +119,7 @@ const botanicals: Botanical[] = [
 const faqItems = [
   {
     q: 'What is Healing Soil handmade soap made from?',
-    a: 'Healing Soil handmade soap bars are made from glycerine, goat milk, or shea butter bases, hand-poured with farm-grown botanicals like neem and tulsi. Every bar is SLS-free, paraben-free, and free of synthetic fragrance.',
+    a: 'Healing Soil handmade soap bars are made from glycerine, goat milk, or shea butter bases, hand-poured, in most bars with farm-grown botanicals like neem and tulsi. Our red rose bar is the exception: it uses a sourced red wine and pomegranate base with vitamin E and rose essential oil, and no farm botanicals. Every bar is SLS-free, paraben-free, and free of synthetic fragrance.',
   },
   {
     q: 'Is Healing Soil cold-process or melt-and-pour soap?',
