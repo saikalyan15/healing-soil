@@ -18,8 +18,8 @@ export type FestiveSeason = {
   /** Off switch independent of dates, for an entry still being prepared. */
   live: boolean
   name: string
-  /** The festival day itself, stated as a fact next to delivery times. */
-  dateLabel: string
+  /** The festival days, as one plain sentence placed next to delivery times. */
+  dateNote: string
   from: string
   until: string
   decor: SeasonDecor
@@ -36,46 +36,28 @@ export type FestiveSeason = {
 
 export const festiveSeasons: FestiveSeason[] = [
   {
-    id: 'diwali-2026',
+    // One window for both, live from the day Diwali gifting was taken down. Early on
+    // purpose: everything is made to order, so gifts for 25 December need
+    // ordering by mid-December. Ends after Epiphany, when New Year gifting
+    // is done.
+    id: 'christmas-new-year-2026',
     live: true,
-    name: 'Diwali',
-    dateLabel: 'Sunday, 8 November',
-    from: '2026-10-01',
-    // Bhai Dooj is 11 November.
-    until: '2026-11-11',
-    decor: 'marigold',
-    eyebrow: 'Diwali gifting',
-    headline: 'Handmade soap hampers for Diwali',
-    intro:
-      'Four hampers, each made to order on our farm in South Goa. Something small for the people you see every day, and something fuller for family.',
-    heroImage: {
-      src: '/images/gifting/diwali-potli.webp',
-      alt: 'A cream and gold embroidered potli with a Happy Diwali tag, four handmade soaps and a pack of chocolate cashews in a wooden tray',
-    },
-    enquiry: 'Hi Healing Soil, I would like to ask about a Diwali gift hamper.',
-    // 58 chars, within the 60 char budget.
-    metaTitle: 'Diwali Gift Hampers, Handmade Soap from Goa | Healing Soil',
-  },
-  {
-    // Prepared, not live. Before switching on: check the dates, the copy and
-    // pick a photo without a Diwali tag in it.
-    id: 'christmas-2026',
-    live: false,
-    name: 'Christmas',
-    dateLabel: 'Friday, 25 December',
-    from: '2026-12-01',
-    until: '2026-12-26',
+    name: 'Christmas and New Year',
+    dateNote: 'Christmas is on Friday, 25 December, and New Year’s Day on Friday, 1 January.',
+    from: '2026-11-09',
+    until: '2027-01-06',
     decor: 'evergreen',
-    eyebrow: 'Christmas gifting',
-    headline: 'Handmade soap hampers for Christmas',
+    eyebrow: 'Christmas and New Year gifting',
+    headline: 'Handmade gifts for Christmas and the New Year',
     intro:
-      'Four hampers, each made to order on our farm in South Goa. For the people you see every day, and for family.',
+      'Three gift sets, each made to order on our farm in South Goa. Something small for the people you see every day, and something fuller for family.',
     heroImage: {
       src: '/images/gifting/jute-bag-farm.webp',
       alt: 'A jute gift bag with a kraft card, a wrapped soap and two handmade soaps on a wooden board, with greenery behind',
     },
-    enquiry: 'Hi Healing Soil, I would like to ask about a Christmas gift hamper.',
-    metaTitle: 'Christmas Gift Hampers, Handmade Soap | Healing Soil',
+    enquiry: 'Hi Healing Soil, I would like to ask about a gift set for Christmas or the New Year.',
+    // 50 chars, within the 60 char budget.
+    metaTitle: 'Christmas and New Year Gift Hampers | Healing Soil',
   },
 ]
 

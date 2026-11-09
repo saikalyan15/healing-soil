@@ -7,6 +7,7 @@ import { WA_DEFAULT_MESSAGE, WHATSAPP_DISPLAY } from '@/lib/whatsapp'
 import { reviews } from '@/lib/reviews'
 import { getAllPosts } from '@/lib/blog'
 import FestiveGiftingBand, { FestiveStrip } from './FestiveGifting'
+import { activeSeason } from '@/data/festive-seasons'
 import ValueList from './ValueList'
 
 // The homepage in 'content-only' site mode: a single page about Healing Soil and
@@ -159,6 +160,7 @@ export default function WhatsAppLanding() {
     .filter((r): r is NonNullable<typeof r> => r != null)
 
   const recentPosts = getAllPosts().slice(0, 3)
+  const season = activeSeason()
 
   return (
     <div className="bg-[#F7F5F0]">
@@ -188,11 +190,13 @@ export default function WhatsAppLanding() {
 
         {/* No logo here: the site header already carries it. */}
         <div className="text-center md:text-left">
+          {/* In a gifting season the first screen leads with gifts; outside one
+              it goes back to the plain brand line. */}
           <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
-            Handmade in South Goa
+            {season ? season.eyebrow : 'Handmade in South Goa'}
           </p>
           <h1 className="mt-4 font-serif text-[clamp(34px,4.6vw,54px)] font-normal leading-[1.08] tracking-[-0.01em] text-[#1E5631]">
-            Handmade soap, made to order
+            {season ? 'Handmade soap gifts, made to order' : 'Handmade soap, made to order'}
           </h1>
 
           {/* Gold hairline. A quieter divider than a rule across the column. */}
@@ -223,6 +227,12 @@ export default function WhatsAppLanding() {
             >
               Browse the catalogue
             </WhatsAppCTA>
+            <Link
+              href="/gift-hampers"
+              className="mt-3 ml-5 inline-block font-sans text-sm font-semibold text-[#1E5631] underline decoration-[#C9A84C] underline-offset-4 hover:text-[#153d22]"
+            >
+              See the gift sets
+            </Link>
           </div>
         </div>
       </section>

@@ -15,7 +15,6 @@ import HoldingPage from '@/components/HoldingPage'
 import ValueList from '@/components/ValueList'
 import FestiveGiftingBand, { FestiveStrip } from '@/components/FestiveGifting'
 import { activeSeason } from '@/data/festive-seasons'
-import { LOWEST_HAMPER_PRICE, formatRupees } from '@/data/gift-hampers'
 import { COMMERCE_ENABLED, SITE_DARK } from '@/lib/site-mode'
 
 // Statically rendered and served from the Full Route Cache. Product data comes
@@ -40,7 +39,7 @@ const HOME_DESCRIPTION = COMMERCE_ENABLED
 export function generateMetadata(): Metadata {
   const season = activeSeason()
   const description = season
-    ? `${season.name} gift hampers from ${formatRupees(LOWEST_HAMPER_PRICE)}, and handmade soap made in small batches on our farm in South Goa. No SLS, parabens or synthetic fragrance.`
+    ? `${season.name} gift sets, and handmade soap made in small batches on our farm in South Goa. No SLS, parabens or synthetic fragrance.`
     : HOME_DESCRIPTION
   return { ...baseMetadata, description }
 }

@@ -1,21 +1,20 @@
-// data/gift-hampers.ts — the one place gift hamper contents and prices live.
+// data/gift-hampers.ts — the one place gift set contents live.
 //
 // Read by /gift-hampers (consumer, indexed), /corporate-gifting (ad landing),
-// and the Diwali band on the homepage. Change a price here and every surface,
-// including the Product/Offer structured data, follows. Two static files quote
-// the prices by hand and must be updated with them: public/llms.txt and
-// content/blog/gifting-handmade-soap.mdx (the price range).
+// and the gifting band on the homepage.
+//
+// No prices, by the owner's decision (Nov 2026): the sets are quoted on
+// WhatsApp. Do not add a price field back without the owner asking. Two static
+// files describe the sets by hand and must follow any change here:
+// public/llms.txt and content/blog/gifting-handmade-soap.mdx.
 //
 // Copy rules from CLAUDE.md apply: no em-dashes, no superlatives, no urgency, no
 // therapeutic claims. Say which items are made on the farm and which are bought
-// in. The chocolate cashews are bought in from a packaged-food maker that holds
-// its own FSSAI registration, so the copy makes no food claims of our own.
+// in.
 
 export type GiftHamper = {
   id: string
   name: string
-  /** Rupees, as a number, so structured data and display share one source. */
-  price: number
   /** One-line summary for compact tiles. */
   summary: string
   /** Itemised contents for the full card and the schema description. */
@@ -30,7 +29,6 @@ export const giftHampers: GiftHamper[] = [
   {
     id: 'jute-bag',
     name: 'The jute bag set',
-    price: 300,
     summary: 'A reusable jute bag with three mini soaps.',
     contents: ['A reusable jute drawstring bag', 'Three mini handmade soaps'],
     note: 'Comes with a kraft card, with space for a handwritten note.',
@@ -43,7 +41,6 @@ export const giftHampers: GiftHamper[] = [
   {
     id: 'discovery-box',
     name: 'The discovery box',
-    price: 899,
     summary: 'Four 50g soaps in one box.',
     contents: ['Four assorted 50g handmade soaps', 'Packed together in one box'],
     image: {
@@ -53,26 +50,8 @@ export const giftHampers: GiftHamper[] = [
     },
   },
   {
-    id: 'festive-potli',
-    name: 'The festive potli',
-    price: 1299,
-    summary: 'An embroidered potli with four 50g soaps and chocolate cashews.',
-    contents: [
-      'A festive embroidered potli bag, reusable',
-      'Four assorted 50g handmade soaps',
-      'Five chocolate-coated cashews',
-    ],
-    note: 'The soaps are made on our farm. The chocolate cashews are bought in from a packaged-food maker.',
-    image: {
-      src: '/images/gifting/diwali-potli.webp',
-      alt: 'A cream and gold embroidered potli with a Happy Diwali tag, four handmade soaps and a pack of chocolate cashews in a wooden tray',
-      position: '50% 60%',
-    },
-  },
-  {
     id: 'full-set',
     name: 'The full set',
-    price: 1499,
     summary: 'Two soaps, an avocado body butter and a kokum lip balm.',
     contents: [
       'One 100g handmade soap',
@@ -88,9 +67,3 @@ export const giftHampers: GiftHamper[] = [
   },
 ]
 
-export function formatRupees(n: number): string {
-  return `₹${n.toLocaleString('en-IN')}`
-}
-
-export const LOWEST_HAMPER_PRICE = Math.min(...giftHampers.map((h) => h.price))
-export const HIGHEST_HAMPER_PRICE = Math.max(...giftHampers.map((h) => h.price))

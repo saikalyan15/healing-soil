@@ -11,8 +11,8 @@ import { WHATSAPP_DISPLAY } from '@/lib/whatsapp'
 // no therapeutic claims, the maker is not named, and the shipping line never
 // promises free delivery. There is no cart and no checkout here. In
 // 'content-only' site mode the order is placed in the WhatsApp conversation, and
-// this page does the same: it prices the four sets and hands the reader to a
-// pre-filled quote request. No invoice or GST wording appears on the page.
+// this page does the same: it shows the three sets, without prices, and hands
+// the reader to a pre-filled quote request. No invoice or GST wording appears on the page.
 //
 // noindex while this is an ad-only page. Flip `robots` to index it once the
 // owner wants it found through search as well.
@@ -39,8 +39,8 @@ function quoteMessage(set: string): string {
   return `Hi Healing Soil, I would like a quote for corporate gifts.\nSet: ${set}\nQuantity:\nCity:\nNeeded by:`
 }
 
-// Sets, contents and prices come from src/data/gift-hampers.ts, shared with
-// /gift-hampers, so the two pages cannot quote different prices.
+// Sets and contents come from src/data/gift-hampers.ts, shared with
+// /gift-hampers, so the two pages cannot describe different sets.
 
 const steps = [
   {
@@ -94,7 +94,7 @@ export default function CorporateGiftingPage() {
           <div className="mx-auto mt-7 h-px w-16 bg-[#C9A84C] md:mx-0" />
           <p className="mt-7 font-sans text-base leading-[1.85] text-[#666666] md:text-lg">
             Small batches, hand-poured on our farm in South Goa and packed as gift sets. For
-            Diwali, a client thank-you, a new joiner or a team offsite. Everything is made to
+            Christmas, the New Year, a client thank-you, a new joiner or a team offsite. Everything is made to
             order.
           </p>
           <div className="mt-9">
@@ -132,14 +132,14 @@ export default function CorporateGiftingPage() {
               The sets
             </p>
             <h2 className="mt-4 font-serif text-3xl leading-tight text-[#1E5631] md:text-[40px]">
-              Four ways to give
+              Three ways to give
             </h2>
             <p className="mt-5 font-sans text-base leading-[1.8] text-[#666666]">
-              Prices are per set. We confirm the final quote, including delivery, on WhatsApp.
+              Tell us the set, how many and where they are going, and we will send a quote, including delivery, on WhatsApp.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-12 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {giftHampers.map((h) => (
               <GiftHamperCard
                 key={h.id}
@@ -147,7 +147,6 @@ export default function CorporateGiftingPage() {
                 message={quoteMessage(`${h.name} (${h.contents.join(', ')})`)}
                 source={`corporate_gifting_${h.id}`}
                 ctaLabel="Ask about this set"
-                priceSuffix="per set"
               />
             ))}
           </div>

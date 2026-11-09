@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import WhatsAppCTA, { WhatsAppIcon } from './WhatsAppCTA'
-import { formatRupees, type GiftHamper } from '@/data/gift-hampers'
+import type { GiftHamper } from '@/data/gift-hampers'
 
-// One hamper: photo, price, contents, and a WhatsApp CTA with a pre-filled
-// message. Shared by /gift-hampers and /corporate-gifting, which differ only in
-// the message, the GA source and the price suffix.
+// One gift set: photo, contents, and a WhatsApp CTA with a pre-filled message.
+// No price, by the owner's decision: sets are quoted on WhatsApp. Shared by
+// /gift-hampers and /corporate-gifting, which differ only in the message and
+// the GA source.
 
 export function HamperImage({ hamper, sizes }: { hamper: GiftHamper; sizes: string }) {
   return (
@@ -24,13 +25,11 @@ type Props = {
   message: string
   source: string
   ctaLabel: string
-  /** e.g. "per set" on the corporate page. */
-  priceSuffix?: string
   /** Gold ring and a small label, for the hamper the page leads with. */
   highlight?: string
 }
 
-export default function GiftHamperCard({ hamper, message, source, ctaLabel, priceSuffix, highlight }: Props) {
+export default function GiftHamperCard({ hamper, message, source, ctaLabel, highlight }: Props) {
   return (
     <article
       id={hamper.id}
@@ -48,15 +47,7 @@ export default function GiftHamperCard({ hamper, message, source, ctaLabel, pric
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <p className="font-serif text-[28px] leading-none text-[#1E5631]">
-          {formatRupees(hamper.price)}
-          {priceSuffix && (
-            <span className="ml-2 font-sans text-[11px] uppercase tracking-[0.18em] text-[#999999]">
-              {priceSuffix}
-            </span>
-          )}
-        </p>
-        <h3 className="mt-3 font-serif text-[23px] leading-snug text-[#1A1A14]">{hamper.name}</h3>
+        <h3 className="font-serif text-[23px] leading-snug text-[#1A1A14]">{hamper.name}</h3>
         <ul className="mt-3 space-y-1.5">
           {hamper.contents.map((c) => (
             <li key={c} className="flex gap-2.5 font-sans text-[14px] leading-[1.6] text-[#444444]">
