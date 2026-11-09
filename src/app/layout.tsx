@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import './globals.css'
@@ -15,16 +15,20 @@ import OrderPauseBanner from '@/components/OrderPauseBanner'
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from '@/lib/seo'
 import { SITE_DARK } from '@/lib/site-mode'
 
-const cormorant = Cormorant_Garamond({
-  weight: ['400', '600'],
-  subsets: ['latin'],
+// Self-hosted, not next/font/google. The Google variant downloads the font
+// files from Google during every build, and a failed download there broke a
+// Vercel deploy (Nov 2026). These are the same Google files (latin subset,
+// variable weight), committed in src/app/fonts so the build needs no network.
+const cormorant = localFont({
+  src: './fonts/cormorant-garamond-latin.woff2',
+  weight: '400 600',
   variable: '--font-cormorant',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
-  weight: ['400', '500'],
-  subsets: ['latin'],
+const dmSans = localFont({
+  src: './fonts/dm-sans-latin.woff2',
+  weight: '400 500',
   variable: '--font-dm-sans',
   display: 'swap',
 })
