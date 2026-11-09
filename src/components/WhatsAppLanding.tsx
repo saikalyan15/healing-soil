@@ -169,53 +169,61 @@ export default function WhatsAppLanding() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-3xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pb-20 sm:pt-24">
-        <Image
-          src="/logo.png"
-          alt="Healing Soil"
-          width={200}
-          height={80}
-          priority
-          className="mx-auto object-contain"
-          style={{ height: '84px', width: 'auto' }}
-        />
+      {/* ── Hero ───────────────────────────────────────────────────────────
+          Split hero: words left, photo right on desktop, so the photo and the
+          WhatsApp button are both visible without scrolling. On phones the
+          photo stacks first (it is only ~210px tall at that width) and the
+          headline and button still fit on the first screen. */}
+      <section className="mx-auto grid max-w-7xl items-center gap-7 px-4 pb-16 pt-6 sm:px-6 sm:pb-20 md:grid-cols-2 md:gap-12 md:pt-16 lg:gap-16">
+        <div className="relative order-first aspect-[16/9] w-full overflow-hidden rounded-lg shadow-[0_24px_50px_-28px_rgba(30,86,49,0.45)] md:order-last">
+          <Image
+            src="/images/hero-gift-soaps.webp"
+            alt="Handmade soaps on a mossy stone in a garden: a red rose bar, two heart-shaped bars, a honey oats round, a neem tulsi glycerin bar and a neem tulsi goat milk bar"
+            fill
+            priority
+            className="object-cover"
+            sizes="(min-width: 1280px) 600px, (min-width: 768px) 50vw, 100vw"
+          />
+        </div>
 
-        <p className="mt-10 font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
-          Handmade in South Goa
-        </p>
-        <h1 className="mt-5 font-serif text-[clamp(34px,5.5vw,56px)] font-normal leading-[1.08] tracking-[-0.01em] text-[#1E5631]">
-          Handmade soap, made to order
-        </h1>
-
-        {/* Gold hairline. A quieter divider than a rule across the column. */}
-        <div className="mx-auto mt-8 h-px w-16 bg-[#C9A84C]" />
-
-        <p className="mx-auto mt-8 max-w-xl font-sans text-base leading-[1.85] text-[#666666] md:text-lg">
-          Small batches, hand-poured on our farm in South Goa. Botanicals like neem and tulsi
-          are grown on the farm; the glycerine, goat milk, and shea butter bases are sourced.
-          No SLS, no parabens, no synthetic fragrance.
-        </p>
-
-        <div className="mt-11">
-          <WhatsAppCTA
-            source="landing_primary"
-            message={WA_DEFAULT_MESSAGE}
-            className="inline-flex items-center justify-center gap-2.5 rounded bg-[#1E5631] px-10 py-4 font-sans text-sm font-bold text-white shadow-[0_12px_30px_-12px_rgba(30,86,49,0.55)] transition-all hover:bg-[#153d22] active:scale-[0.98] md:px-12 md:py-5 md:text-base"
-          >
-            <WhatsAppIcon />
-            Start a conversation
-          </WhatsAppCTA>
-          <p className="mt-4 font-sans text-xs leading-relaxed text-[#999999]">
-            We are taking orders and answering questions on WhatsApp for now. {WHATSAPP_DISPLAY}
+        {/* No logo here: the site header already carries it. */}
+        <div className="text-center md:text-left">
+          <p className="font-sans text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
+            Handmade in South Goa
           </p>
-          <WhatsAppCTA
-            source="landing_primary_catalog"
-            catalog
-            className="mt-3 inline-block font-sans text-sm font-semibold text-[#1E5631] underline decoration-[#C9A84C] underline-offset-4 hover:text-[#153d22]"
-          >
-            Browse the catalogue
-          </WhatsAppCTA>
+          <h1 className="mt-4 font-serif text-[clamp(34px,4.6vw,54px)] font-normal leading-[1.08] tracking-[-0.01em] text-[#1E5631]">
+            Handmade soap, made to order
+          </h1>
+
+          {/* Gold hairline. A quieter divider than a rule across the column. */}
+          <div className="mx-auto mt-6 h-px w-16 bg-[#C9A84C] md:mx-0" />
+
+          <p className="mx-auto mt-6 max-w-xl font-sans text-[15px] leading-[1.75] text-[#666666] md:mx-0 md:text-[17px] md:leading-[1.8]">
+            Small batches, hand-poured on our farm in South Goa. Botanicals like neem and tulsi
+            are grown on the farm; the glycerine, goat milk, and shea butter bases are sourced.
+            No SLS, no parabens, no synthetic fragrance.
+          </p>
+
+          <div className="mt-7 md:mt-9">
+            <WhatsAppCTA
+              source="landing_primary"
+              message={WA_DEFAULT_MESSAGE}
+              className="inline-flex items-center justify-center gap-2.5 rounded bg-[#1E5631] px-10 py-4 font-sans text-sm font-bold text-white shadow-[0_12px_30px_-12px_rgba(30,86,49,0.55)] transition-all hover:bg-[#153d22] active:scale-[0.98] md:px-12 md:py-5 md:text-base"
+            >
+              <WhatsAppIcon />
+              Start a conversation
+            </WhatsAppCTA>
+            <p className="mt-4 font-sans text-xs leading-relaxed text-[#999999]">
+              We are taking orders and answering questions on WhatsApp for now. {WHATSAPP_DISPLAY}
+            </p>
+            <WhatsAppCTA
+              source="landing_primary_catalog"
+              catalog
+              className="mt-3 inline-block font-sans text-sm font-semibold text-[#1E5631] underline decoration-[#C9A84C] underline-offset-4 hover:text-[#153d22]"
+            >
+              Browse the catalogue
+            </WhatsAppCTA>
+          </div>
         </div>
       </section>
 
