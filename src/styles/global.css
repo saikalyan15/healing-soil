@@ -182,3 +182,6 @@ ol { padding: 0; list-style: none; }
 .sq .per { font-size: 12px; letter-spacing: 0.06em; color: var(--muted); }
 .fine { font-size: 13px; color: var(--muted); max-width: 640px; }
 .biz-steps { max-width: 760px; }
+
+.credit { font-size: 12px; color: var(--muted); }
+.credit a { color: var(--muted); }
