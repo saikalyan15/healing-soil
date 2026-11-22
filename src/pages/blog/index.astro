@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro'
+import { getPosts } from '../../lib/posts'
+
+const posts = await getPosts()
+const fmt = (d: Date) => d.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+---
+<Base
+  title="Journal | Healing Soil"
+  description="Notes on handmade soap: how it is made, what goes in it, and how each base and ingredient behaves."
+>
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <div class="chapter"><span class="label">Journal</span></div>
+        <h1 class="h2">Notes from the soap table</h1>
+      </div>
+    </div>
+    <ul class="post-list">
+      {posts.map((p) => (
+        <li>
+          <a href={`/blog/${p.id}`}>
+            <span class="post-meta">{fmt(p.data.date)} · {p.data.category.replace(/-/g, ' ')}</span>
+            <span class="post-title">{p.data.title}</span>
+            {p.data.excerpt && <span class="post-excerpt">{p.data.excerpt}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>

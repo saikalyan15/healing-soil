@@ -1,0 +1,42 @@
+---
+import { render } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+import { getPosts } from '../../lib/posts'
+import { SITE, whatsappLink, MESSAGES } from '../../config/site'
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }))
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+const d = post.data
+const url = new URL(`/blog/${post.id}`, SITE.url).toString()
+const fmt = d.date.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  datePublished: d.date.toISOString(),
+  author: { '@type': 'Organization', name: SITE.name },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  mainEntityOfPage: url,
+  ...(d.featuredImage ? { image: new URL(d.featuredImage, SITE.url).toString() } : {}),
+}
+---
+<Base title={d.seoTitle ?? `${d.title} | Healing Soil`} description={d.seoDescription ?? d.excerpt} image={d.featuredImage}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} slot="head" />
+  <article class="wrap post">
+    <header class="post-head">
+      <div class="label">{fmt} · {d.category.replace(/-/g, ' ')}</div>
+      <h1 class="h2">{d.title}</h1>
+    </header>
+    {d.featuredImage && <img class="photo post-hero" src={d.featuredImage} alt="" width="1200" height="800" fetchpriority="high" />}
+    <div class="prose"><Content /></div>
+    <footer class="post-foot">
+      <a class="link-line" href={whatsappLink(MESSAGES.general)}>Ask us about the soaps on WhatsApp</a>
+      <a class="link" href="/blog">Back to the journal</a>
+    </footer>
+  </article>
+</Base>

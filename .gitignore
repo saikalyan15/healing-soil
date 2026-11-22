@@ -60,3 +60,4 @@ tools/meta-ads-mcp/node_modules/
 # astro
 /dist/
 /.astro/
+public/_redirects
