@@ -112,7 +112,7 @@ ol { padding: 0; list-style: none; }
 .harvest .ph { background: #dad5cb; }
 .items { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 48px 40px; }
 .item { display: flex; flex-direction: column; gap: 18px; }
-.item .ph { width: 100%; aspect-ratio: 4 / 3; }
+.item .ph, .item img { width: 100%; aspect-ratio: 4 / 3; }
 .item .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .item .name { font-family: var(--display); font-size: 34px; line-height: 1; }
 .item .d { font-size: 15px; color: var(--body); max-width: 480px; }
