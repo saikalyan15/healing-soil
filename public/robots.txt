@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /whatsapp/
+Disallow: /print/
 
 Sitemap: https://healingsoil.in/sitemap-index.xml

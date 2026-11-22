@@ -7,6 +7,9 @@
 // A null price means "not confirmed yet": the page shows "Ask us" instead of a number, so
 // nothing invented can reach the live site.
 
+/** When the owner last confirmed these prices. Shown on the rate card. */
+export const PRICES_AS_OF = '2026-11-22'
+
 export const SQUARES = {
   weightGrams: 50,
   minPerSoap: 25,

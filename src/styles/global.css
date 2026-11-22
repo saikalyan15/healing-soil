@@ -185,3 +185,4 @@ ol { padding: 0; list-style: none; }
 
 .credit { font-size: 12px; color: var(--muted); }
 .credit a { color: var(--muted); }
+.dl { display: flex; flex-wrap: wrap; gap: 14px 32px; }

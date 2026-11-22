@@ -1,0 +1,70 @@
+---
+import Print from '../../layouts/Print.astro'
+import { SQUARES, LEAD_TIME, PRICES_AS_OF, formatINR } from '../../data/pricing'
+import { SITE } from '../../config/site'
+
+const asOf = new Date(PRICES_AS_OF).toLocaleDateString('en-IN', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+const terms = [
+  `Minimum ${SQUARES.minPerSoap} pieces of each soap.`,
+  `Made to order. A batch of 50 squares takes ${LEAD_TIME.replace('about ', '').replace(' for 50 squares', '')}; larger orders are confirmed when you ask.`,
+  'Wrapping and custom packaging are quoted separately.',
+  'Shipping is quoted with your order, by destination.',
+  'Payment by UPI once the details are confirmed.',
+  'Prices are per piece, before shipping.',
+]
+---
+<Print title="Healing Soil soap squares: rate card">
+  <section class="sheet">
+    <div class="mark">Healing Soil</div>
+    <div style="margin-top:22mm;display:flex;flex-direction:column;gap:5mm">
+      <div class="eyebrow">Rate card · {asOf}</div>
+      <h1 class="display" style="font-size:40pt;line-height:1;letter-spacing:-0.01em">Soap squares</h1>
+      <p style="max-width:120mm;color:var(--body)">Handmade 50g soap squares for events, hotels, homestays and gifts. Made in small batches after you order, and wrapped in paper.</p>
+    </div>
+
+    <div style="margin-top:16mm">
+      <table class="rc">
+        <thead><tr><th>Soap</th><th>Base</th><th>Per 50g piece</th><th>Minimum</th></tr></thead>
+        <tbody>
+          {SQUARES.soaps.map((s) => (
+            <tr>
+              <td class="display" style="font-size:16pt">{s.name}</td>
+              <td>{s.base ?? 'On request'}</td>
+              <td class="display" style="font-size:16pt">{s.price !== null ? formatINR(s.price) : 'On request'}</td>
+              <td>{SQUARES.minPerSoap} pieces</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:14mm;display:grid;grid-template-columns:1fr 1fr;gap:10mm">
+      <div>
+        <div class="eyebrow" style="margin-bottom:3mm">Terms</div>
+        <ul class="terms">{terms.map((t) => <li>{t}</li>)}</ul>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:3mm">What is in every wrap</div>
+        <ul class="terms">
+          <li>The full ingredient list, on the label.</li>
+          <li>No SLS, no parabens, no synthetic fragrance.</li>
+          <li>Scent from essential oils and herbs.</li>
+          <li>Vitamin E in every recipe.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>To order, message us on WhatsApp: {SITE.whatsappDisplay}</span>
+      <span>healingsoil.in · @healingsoil.in</span>
+    </div>
+  </section>
+</Print>
+<style is:global>
+  .rc { width: 100%; border-collapse: collapse; }
+  .rc th { text-align: left; font-size: 7.5pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 400; padding: 0 0 3mm; border-bottom: 1px solid var(--ink); }
+  .rc td { padding: 5mm 4mm 5mm 0; border-bottom: 1px solid var(--hairline); vertical-align: baseline; }
+  .terms { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2mm; color: var(--body); font-size: 9.5pt; }
+  .terms li { padding-left: 4mm; position: relative; }
+  .terms li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 2mm; border-top: 1px solid var(--ink); }
+</style>
