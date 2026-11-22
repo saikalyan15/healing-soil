@@ -21,6 +21,8 @@ export function whatsappLink(message?: string): string {
 export const MESSAGES = {
   general: 'Hi Healing Soil, I would like to know more about your soaps.',
   business: 'Hi Healing Soil, I am enquiring for a shop, event or company. Shop or company name: \nCity: \nQuantity: \nDate needed: ',
+  squares: 'Hi Healing Soil, I would like a quote for soap squares.\nPurpose (event, stay, gift, shop): \nSoaps: \nQuantity: \nDate needed: \nCity: ',
+  rateCard: 'Hi Healing Soil, please send me the rate card for soap squares.',
   harvest: 'Hi Healing Soil, what is ready this season: kokum lip balm or avocado body butter?',
   bar: (name: string) => `Hi Healing Soil, I would like to order ${name}.`,
 }

@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro'
+import { SQUARES, formatINR } from '../data/pricing'
+import { whatsappLink, MESSAGES } from '../config/site'
+
+const uses = [
+  ['Events and weddings', 'Favours and return gifts, wrapped in paper for each guest.'],
+  ['Hotels, homestays and retreats', 'A small bar for the guest bathroom, in a size that suits a short stay.'],
+  ['Companies and gifting', 'Festival and team gifts, with the soaps and wrapping chosen to suit the occasion.'],
+  ['Shops', 'We quote each shop by message, based on the soaps and the quantity.'],
+]
+const steps = [
+  ['Tell us', 'The soaps you like, how many, the date and the city.'],
+  ['We confirm', 'Price, wrapping and a date that works for the batch.'],
+  ['Pay by UPI', 'Once the details are settled.'],
+  ['We make, then ship', 'Made to order in small batches, wrapped in paper.'],
+]
+---
+<Base
+  title="Soap squares for events, stays and gifting | Healing Soil"
+  description="Handmade 50g soap squares in small batches for events, hotels, homestays and gifts. Honey Oats, Kesar Haldi and Red Rose, from 25 per soap. Order by WhatsApp."
+  image="/products/50g-soap-squares/images/honey-oats-glycerin-50g.webp"
+>
+  <section class="wrap section biz-hero">
+    <div class="label">For businesses</div>
+    <h1>Soap squares for<br /><em>events, stays and gifts</em></h1>
+    <p>A 50g bar, made by hand in small batches and wrapped in paper. Every ingredient is on the label, and the soap is made after you order.</p>
+    <div class="hero-actions">
+      <a class="btn" href={whatsappLink(MESSAGES.squares)}>Ask for a quote</a>
+      <a class="link" href={whatsappLink(MESSAGES.rateCard)}>Ask for the rate card</a>
+    </div>
+  </section>
+
+  <section class="bordered">
+    <div class="wrap section" style="padding-top:clamp(80px,9vw,128px);padding-bottom:clamp(80px,9vw,128px)">
+      <div class="section-head">
+        <div>
+          <div class="chapter"><span class="num">I</span><span class="label">The soaps</span></div>
+          <h2 class="h2">Three soaps, from {SQUARES.minPerSoap} pieces each</h2>
+        </div>
+        <p>Price is per piece. Choose one soap or all three, with at least {SQUARES.minPerSoap} of each.</p>
+      </div>
+      <div class="sq-grid">
+        {SQUARES.soaps.map((s) => (
+          <div class="sq">
+            <img class="photo" src={s.image} alt={`${s.name} 50g soap square`} width="800" height="800" loading="lazy" />
+            <div class="row"><span class="name">{s.name}</span><span class="tag">{s.base ?? 'Base to confirm'}</span></div>
+            <p class="d">{s.note}</p>
+            <div class="price">
+              {s.price !== null
+                ? <><span class="amt">{formatINR(s.price)}</span><span class="per">per {SQUARES.weightGrams}g piece</span></>
+                : <a class="link-line" href={whatsappLink(MESSAGES.squares)}>Ask us for the price</a>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="fine">Wrapping and custom packaging are quoted separately. Larger orders and mixed orders: send us a message.</p>
+    </div>
+  </section>
+
+  <section class="bordered">
+    <div class="wrap section" style="padding-top:clamp(80px,9vw,128px);padding-bottom:clamp(80px,9vw,128px)">
+      <div class="section-head">
+        <div>
+          <div class="chapter"><span class="num">II</span><span class="label">Who it is for</span></div>
+          <h2 class="h2">Made to suit the occasion</h2>
+        </div>
+      </div>
+      <div class="facts">
+        {uses.map(([t, d]) => <div class="fact"><span class="t">{t}</span><span class="d">{d}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="bordered harvest">
+    <div class="wrap section" style="padding-top:clamp(80px,9vw,128px);padding-bottom:clamp(80px,9vw,128px)">
+      <div class="section-head">
+        <div>
+          <div class="chapter"><span class="num">III</span><span class="label">How it works</span></div>
+          <h2 class="h2">One message to start</h2>
+        </div>
+        <p>Because each batch is made after you order, tell us your date early and we will say what is possible.</p>
+      </div>
+      <ol class="steps biz-steps">
+        {steps.map(([t, d], i) => <li><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{t}</span><span class="d">{d}</span></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="bordered">
+    <div class="wrap order">
+      <h2>Tell us what<br /><em>you have in mind</em></h2>
+      <a class="btn" href={whatsappLink(MESSAGES.squares)}>Message on WhatsApp</a>
+      <a class="quiet" href="/">Back to the soaps</a>
+    </div>
+  </section>
+</Base>
