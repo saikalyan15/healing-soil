@@ -17,6 +17,8 @@ const productJsonLd = {
   brand: { '@type': 'Brand', name: SITE.name },
   ...(soap.image ? { image: new URL(soap.image, SITE.url).toString() } : {}),
 }
+const hasEO = soap.ingredients.some((i) => i.name.toLowerCase().startsWith('essential oil'))
+const orderName = `${soap.name} (${soap.base.toLowerCase()})`
 const facts = [
   ['Base', soap.base],
   ['Made by', soap.method === 'Cold process' ? 'Cold process, made from scratch' : 'Melt and pour, finished by hand'],
@@ -44,6 +46,7 @@ const facts = [
           {soap.ingredients.map((i) => <li><span>{i.name}</span>{originLabel(i.origin) && <span class="tag">{originLabel(i.origin)}</span>}</li>)}
         </ul>
         <p class="fine" style="margin-top:12px">The full ingredient list is on the label. No SLS, no parabens, no synthetic fragrance.</p>
+        {hasEO && <p class="fine" style="margin-top:8px">The essential oils change from batch to batch. If you would like this bar without them, <a href={whatsappLink(MESSAGES.unscented(orderName))}>ask us</a> and we will leave them out.</p>}
       </div>
       <div class="hero-actions">
         <a class="btn" href={whatsappLink(MESSAGES.bar(`${soap.name} (${soap.base.toLowerCase()})`))}>Order on WhatsApp</a>
