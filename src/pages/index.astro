@@ -1,0 +1,205 @@
+---
+import Base from '../layouts/Base.astro'
+import { whatsappLink, MESSAGES } from '../config/site'
+
+const cold = [
+  ['Weigh', 'Oils and butters, weighed for each recipe.'],
+  ['Mix', 'Blended with lye, which reacts with the oils and turns them into soap.'],
+  ['Pour', 'Herbs and essential oils go in, then into the mould.'],
+  ['Cure', 'Left on a rack to cure, until the bar is firm and mild.'],
+  ['Cut', 'Cut into bars, checked by hand and wrapped in paper.'],
+]
+const melt = [
+  ['Melt', 'The base is melted gently, one small batch at a time.'],
+  ['Add', 'Herbs, essential oils and vitamin E, measured in by hand.'],
+  ['Pour', 'Into moulds, and left to set.'],
+  ['Unmould', 'Each bar turned out and checked by hand.'],
+  ['Wrap', 'In paper, after you order. No shelf of old stock.'],
+]
+const notIn = [
+  ['No SLS', 'A soft, creamy lather instead of a tall foam.'],
+  ['No synthetic fragrance', 'Scent comes only from essential oils and herbs.'],
+  ['No parabens', 'Made in small batches, after you order.'],
+  ['Glycerine kept in', 'It gives the bar a mild, moisturising feel.'],
+]
+const herbs = [
+  { name: 'Neem', tag: 'Grown on our farm', img: '/images/ingredients/ingredient-neem.webp', alt: 'Neem leaves', d: 'Traditionally used in Ayurvedic personal care. A green, earthy note.' },
+  { name: 'Tulsi', tag: 'Grown on our farm', img: '/images/ingredients/ingredient-tulsi.webp', alt: 'Tulsi leaves', d: 'Holy basil, part of Indian homes for generations. Fresh and lightly peppery.' },
+  { name: 'Marigold', tag: 'Grown on our farm', img: '/blog/Marigold-Petals.webp', alt: 'Marigold petals', d: 'Petals dried in the sun, for colour and a mild, sweet scent.' },
+  { name: 'Kokum', tag: 'Grown here in Goa', img: null, alt: '', d: 'A Konkan fruit. Its seed gives the firm butter in our lip balm.' },
+  { name: 'Turmeric', tag: 'Sourced, Indian farms', img: '/images/ingredients/ingredient-haldi.webp', alt: 'Turmeric', d: 'Long used in Indian personal care. It gives the bar a warm gold.' },
+  { name: 'Ginger, rosemary', tag: 'Sourced, Indian farms', img: '/products/ginger-rosemary-glycerin.webp', alt: 'Ginger Rosemary soap bar', d: 'Warm spice and a fresh herbal note, together in one bar.' },
+  { name: 'Saffron', tag: 'Sourced, Kashmir', img: '/products/kesar-gulab-sheabutter.webp', alt: 'Kesar Gulab soap bar', d: 'A few strands per batch, for colour and a gentle warmth.' },
+]
+const harvest = [
+  { name: 'Kokum Lip Balm', tag: 'Kokum grown here in Goa', photo: 'Kokum lip balm', d: 'Kokum is a Konkan fruit. Its seed gives a firm butter that softens at the touch, and it makes a balm with a smooth, soft feel.' },
+  { name: 'Avocado Body Butter', tag: 'Avocados from our own trees', photo: 'Avocado body butter', d: 'Made with avocados from our own trees in Bangalore, whipped into a rich butter that sinks in slowly.' },
+]
+const bars = [
+  { name: 'Neem Tulsi', base: 'Goat milk', img: '/products/neem-tulsi-goatmilk.webp' },
+  { name: 'Ginger Rosemary', base: 'Glycerine', img: '/products/ginger-rosemary-glycerin.webp' },
+  { name: 'Kesar Gulab', base: 'Shea butter', img: '/products/kesar-gulab-sheabutter.webp' },
+  { name: 'Honey Oats', base: 'Glycerine', img: '/products/honey-oats-glycerin.webp' },
+]
+---
+<Base
+  title="Healing Soil | Handmade soap with a label you can read"
+  description="Small-batch cold-process and hand-finished soap made with herbs, essential oils and vitamin E. No SLS, no parabens, no synthetic fragrance. Order on WhatsApp."
+  image="/hero-soap.webp"
+>
+  <section class="hero">
+    <div class="hero-copy">
+      <div>
+        <div class="label">Cold-process and hand-finished soap</div>
+        <h1>Soap you<br /><em>can read</em></h1>
+        <p>Small batches made by hand with herbs, essential oils and vitamin E. Every ingredient is on the label. Nothing hides behind the word “parfum”.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#bars">See the soaps</a>
+          <a class="link" href={whatsappLink(MESSAGES.general)}>Order on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <img class="photo" src="/hero-soap.webp" alt="Handmade soap bar with oats on a woven tray" width="1024" height="1024" fetchpriority="high" />
+  </section>
+
+  <section class="wrap section" id="process">
+    <div class="section-head">
+      <div>
+        <div class="chapter"><span class="num">I</span><span class="label">The process</span></div>
+        <h2 class="h2">Two ways we make soap</h2>
+      </div>
+      <p>Some bars we make from scratch. Others start from a ready base that we finish by hand. Both are honest ways to make soap, and every label says which one you are holding.</p>
+    </div>
+    <div class="methods">
+      <div class="method">
+        <div class="method-head">
+          <span class="label">Made from scratch</span>
+          <span class="name">Cold process</span>
+          <span class="what">We make the soap ourselves, from plant oils, butters and lye, then let it cure slowly.</span>
+        </div>
+        <ol class="steps">
+          {cold.map(([t, d], i) => <li><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{t}</span><span class="d">{d}</span></li>)}
+        </ol>
+      </div>
+      <div class="method">
+        <div class="method-head">
+          <span class="label">Melt and pour</span>
+          <span class="name">Hand-finished</span>
+          <span class="what">We start with a ready base of glycerine, goat milk or shea butter, and finish it by hand.</span>
+        </div>
+        <ol class="steps">
+          {melt.map(([t, d], i) => <li><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{t}</span><span class="d">{d}</span></li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="bordered" style="border-bottom:1px solid var(--hairline)">
+    <div class="wrap section centered" style="padding-top:clamp(96px,11vw,160px);padding-bottom:clamp(96px,11vw,160px)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:18px">
+        <div class="chapter"><span class="num">II</span><span class="label">What's not in it</span></div>
+        <h2 class="h2" style="font-size:clamp(34px,4vw,56px);max-width:760px">A short label is the point</h2>
+      </div>
+      <div class="facts" style="width:100%">
+        {notIn.map(([t, d]) => <div class="fact"><span class="t">{t}</span><span class="d">{d}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <img class="photo" src="/products/ginger-rosemary-glycerin.webp" alt="Ginger Rosemary soap bar with rosemary needles" width="1024" height="1024" loading="lazy" />
+    <div class="dark-copy">
+      <div>
+        <div class="chapter"><span class="num">III</span><span class="label">Essential oils</span></div>
+        <p class="lead">Scent from plants, not from a bottle marked “parfum”.</p>
+        <p class="soft">Essential oils are distilled or pressed from leaves, peel, flowers and roots. Their scent is softer than a synthetic fragrance and fades the way a plant's does. Each one is named on the label.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section vite">
+    <div class="big-wrap">
+      <div class="chapter"><span class="num">IV</span><span class="label">In every bar</span></div>
+      <div class="big">Vitamin E</div>
+    </div>
+    <div class="side">
+      <p class="lead">Vitamin E is an antioxidant.</p>
+      <p>In soap, it helps keep the plant oils fresh, and it is a familiar part of moisturising care. We add it to every recipe, and it is listed on every label.</p>
+    </div>
+  </section>
+
+  <section class="bordered" id="herbs">
+    <div class="wrap section" style="padding-top:clamp(112px,13vw,176px);padding-bottom:clamp(112px,13vw,176px)">
+      <div class="section-head">
+        <div>
+          <div class="chapter"><span class="num">V</span><span class="label">The herbs</span></div>
+          <h2 class="h2">Herbs with a long history in Indian homes</h2>
+        </div>
+        <p style="max-width:400px">Some we grow here in Goa. The rest we buy, and each label says which is which.</p>
+      </div>
+      <div class="herbs">
+        {herbs.map((h) => (
+          <div class="herb">
+            {h.img ? <img class="photo" src={h.img} alt={h.alt} width="800" height="600" loading="lazy" /> : <div class="ph">Photo to come</div>}
+            <div class="row"><span class="name">{h.name}</span><span class="tag">{h.tag}</span></div>
+            <span class="d">{h.d}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="harvest">
+    <div class="wrap section" style="padding-top:clamp(112px,13vw,176px);padding-bottom:clamp(112px,13vw,176px)">
+      <div class="section-head">
+        <div>
+          <div class="chapter"><span class="num">VI</span><span class="label">Small batches</span></div>
+          <h2 class="h2">As the harvest allows</h2>
+        </div>
+        <p style="max-width:400px">Two things we make only when the fruit is in. The numbers depend on the season, so ask us what is ready.</p>
+      </div>
+      <div class="items">
+        {harvest.map((h) => (
+          <div class="item">
+            <div class="ph">Photo to come: {h.photo}</div>
+            <div class="row"><span class="name">{h.name}</span><span class="tag">{h.tag}</span></div>
+            <p class="d">{h.d}</p>
+            <span class="meta">Limited by season</span>
+          </div>
+        ))}
+      </div>
+      <a class="link-line" style="align-self:flex-start" href={whatsappLink(MESSAGES.harvest)}>Ask what's ready on WhatsApp</a>
+    </div>
+  </section>
+
+  <section class="bordered" id="bars">
+    <div class="wrap" style="padding-top:clamp(80px,9vw,128px);padding-bottom:clamp(80px,9vw,128px);display:flex;flex-direction:column;gap:48px">
+      <div class="bars-head">
+        <h2 class="h2" style="font-size:clamp(36px,4vw,56px);line-height:1">The bars</h2>
+        <a class="link" href={whatsappLink(MESSAGES.general)}>Ask for the full list</a>
+      </div>
+      <div class="bars">
+        {bars.map((b) => (
+          <a class="bar" href={whatsappLink(MESSAGES.bar(b.name))}>
+            <img class="photo" src={b.img} alt={`${b.name} soap bar`} width="600" height="800" loading="lazy" />
+            <span class="cap"><span class="name">{b.name}</span><span class="base">{b.base}</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bordered">
+    <div class="wrap order">
+      <h2>To order,<br /><em>send us a message</em></h2>
+      <ol>
+        <li>1 · Tell us the bars</li>
+        <li>2 · We confirm price and date</li>
+        <li>3 · Pay by UPI</li>
+        <li>4 · We make, then ship</li>
+      </ol>
+      <a class="btn" href={whatsappLink(MESSAGES.general)}>Message on WhatsApp</a>
+      <a class="quiet" href={whatsappLink(MESSAGES.business)}>For shops, events and companies</a>
+    </div>
+  </section>
+</Base>

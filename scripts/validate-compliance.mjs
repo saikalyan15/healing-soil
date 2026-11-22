@@ -3,7 +3,7 @@ import { extname, join, relative, sep } from 'node:path'
 
 const root = process.cwd()
 const scanRoots = ['content/blog', 'content/stories', 'src', 'public']
-const extensions = new Set(['.mdx', '.ts', '.tsx', '.txt'])
+const extensions = new Set(['.mdx', '.ts', '.tsx', '.txt', '.astro'])
 
 const rules = JSON.parse(
   readFileSync(join(root, 'config/compliance-rules.json'), 'utf8')

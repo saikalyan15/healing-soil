@@ -1,11 +1,5 @@
-# *
 User-agent: *
 Allow: /
-Disallow: /distributor-soap-squares-catalog
 Disallow: /whatsapp/
 
-# Host
-Host: https://healingsoil.in
-
-# Sitemaps
-Sitemap: https://healingsoil.in/sitemap.xml
+Sitemap: https://healingsoil.in/sitemap-index.xml

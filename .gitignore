@@ -56,3 +56,7 @@ tools/ga4-mcp/node_modules/
 tools/meta-ads-mcp/node_modules/
 
 *.log
+
+# astro
+/dist/
+/.astro/

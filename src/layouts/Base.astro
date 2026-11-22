@@ -1,0 +1,67 @@
+---
+import '../styles/global.css'
+import { SITE, whatsappLink, MESSAGES } from '../config/site'
+
+interface Props {
+  title: string
+  description: string
+  image?: string
+}
+const { title, description, image = '/og-image.jpg' } = Astro.props
+const canonical = new URL(Astro.url.pathname, SITE.url).toString()
+const ogImage = new URL(image, SITE.url).toString()
+const sameAs = [SITE.socials.instagram, SITE.socials.facebook].filter(Boolean)
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+  logo: new URL('/logo.png', SITE.url).toString(),
+  sameAs,
+}
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <nav aria-label="Main">
+          <a href="/#bars">Soaps</a>
+          <a href="/#herbs">Ingredients</a>
+        </nav>
+        <a class="wordmark" href="/">Healing Soil</a>
+        <nav class="right" aria-label="Secondary">
+          <a href={whatsappLink(MESSAGES.business)}>For businesses</a>
+          <a href={whatsappLink(MESSAGES.general)} style="border-bottom:1px solid var(--ink)">WhatsApp</a>
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="wordmark">Healing Soil</div>
+        <div class="footer-links">
+          <span>{SITE.region}</span>
+          <a href={SITE.socials.instagram}>Instagram</a>
+          {SITE.socials.facebook && <a href={SITE.socials.facebook}>Facebook</a>}
+          <a href={whatsappLink()}>{SITE.whatsappDisplay}</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
