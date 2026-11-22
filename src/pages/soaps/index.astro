@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro'
+import { SOAPS } from '../../data/soaps'
+import { formatINR } from '../../data/pricing'
+import { whatsappLink, MESSAGES } from '../../config/site'
+
+const groups = [
+  ['Glycerine', 'A clear base with a light, clean-rinsing lather.', (s: any) => s.base === 'Glycerine'],
+  ['Goat milk', 'A creamy base with a richer lather.', (s: any) => s.base === 'Goat milk'],
+  ['Papaya cucumber and shea butter', 'A goat-milk-free bar, and a rich butter bar.', (s: any) => ['Papaya cucumber', 'Shea butter'].includes(s.base)],
+  ['Cold process', 'Made from scratch from oils, then cured.', (s: any) => s.method === 'Cold process'],
+  ['More', 'Marigold, Red Rose, Loofah and the travel bars.', (s: any) => ['marigold-soap', 'red-rose-soap', 'loofah-soaps', 'travel-soaps'].includes(s.slug)],
+] as const
+const used = new Set<string>()
+const sections = groups.map(([title, blurb, test]) => {
+  const items = SOAPS.filter((s) => test(s) && !used.has(s.slug))
+  items.forEach((s) => used.add(s.slug))
+  return { title, blurb, items }
+}).filter((g) => g.items.length)
+---
+<Base
+  title="Handmade soaps | Healing Soil"
+  description="Handmade soap in glycerine, goat milk, papaya cucumber and shea butter bases, with herbs and essential oils. See each bar's ingredients and order on WhatsApp."
+  image="/products/neem-tulsi-glycerine.webp"
+>
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <div class="chapter"><span class="label">The soaps</span></div>
+        <h1 class="h2">Every bar, and what is in it</h1>
+      </div>
+      <p>Each bar is made in small batches after you order. Tap a soap to see its ingredients, then message us to order.</p>
+    </div>
+    {sections.map((g) => (
+      <div class="soap-group">
+        <div class="soap-group-head"><h2>{g.title}</h2><span>{g.blurb}</span></div>
+        <div class="bars">
+          {g.items.map((s) => (
+            <a class="bar" href={`/soaps/${s.slug}`}>
+              {s.image
+                ? <img class="photo" src={s.image} alt={`${s.name} soap bar`} width="800" height="800" loading="lazy" />
+                : <div class="ph" style="aspect-ratio:1/1">Photo to come</div>}
+              <span class="cap">
+                <span class="name">{s.name}</span>
+                <span class="base">{s.base}{s.weightGrams ? ` · ${s.weightGrams}g` : ''}</span>
+                <span class="price-line">{formatINR(s.price)}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+    <p class="fine">Prices are per bar. Shipping is confirmed when you message us. For shops, events and companies, see <a href="/wholesale">soap squares for businesses</a>.</p>
+    <div><a class="btn" href={whatsappLink(MESSAGES.general)}>Order on WhatsApp</a></div>
+  </section>
+</Base>

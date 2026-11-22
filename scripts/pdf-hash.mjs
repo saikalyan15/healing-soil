@@ -7,7 +7,6 @@ export function pdfSourceHash(root = process.cwd()) {
   const files = [
     'src/data/pricing.ts',
     'src/layouts/Print.astro',
-    'src/styles/global.css',
     ...readdirSync(join(root, 'src/pages/print')).map((f) => `src/pages/print/${f}`),
   ].sort()
   const h = createHash('sha256')

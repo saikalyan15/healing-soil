@@ -67,7 +67,9 @@
 /xmlrpc.php /blog
 
 # PENDING: add these when the destination pages exist (soaps, our-story, contact, wholesale).
-#   /our-products /shop, /contact-us /contact, /about /our-story, /author/* /our-story
-#   /shop, /shop/*, /cart, /checkout, /order*, /my-account, /ingredient/*, /soap/*, /compare/*,
+#   /contact-us /contact, /about /our-story, /author/* /our-story
+#   /cart, /checkout, /order*, /my-account, /ingredient/*, /soap/*, /compare/*,
 #   /occasion/*, /soap-for/*, /ayurvedic-soap/*, the root-level combo slugs, /gift-hampers,
 #   /corporate-gifting. Targets are set out in the redesign plan.
+
+# /shop and every product URL are generated from src/data/soaps.ts by scripts/build-redirects.mjs.

@@ -15,6 +15,23 @@ for (const raw of readFileSync(join(root, 'config/redirects.txt'), 'utf8').split
   add(from, to)
 }
 
+// Old shop URLs: /shop/<slug> and every legacy slug go to the matching /soaps page.
+// Retired products and anything unknown fall through to /soaps.
+const { SOAPS } = await import('../src/data/soaps.ts')
+const aliases = JSON.parse(readFileSync(join(root, 'config/product-slug-aliases.json'), 'utf8'))
+for (const soap of SOAPS) {
+  add(`/shop/${soap.slug}`, `/soaps/${soap.slug}`)
+  for (const legacy of soap.legacySlugs ?? []) add(`/shop/${legacy}`, `/soaps/${soap.slug}`)
+}
+for (const [legacy, canonical] of Object.entries(aliases)) {
+  const soap = SOAPS.find((s) => s.slug === canonical)
+  add(`/shop/${legacy}`, soap ? `/soaps/${soap.slug}` : '/soaps')
+}
+for (const gone of ['rice-rose-goat-milk-soap', 'turmeric-honey-goat-milk-soap', 'shea-butter-turmeric-gulab', 'honey-kesar-haldi-shea-butter-soap']) add(`/shop/${gone}`, '/soaps')
+add('/shop', '/soaps')
+add('/our-products', '/soaps')
+add('/shop/*', '/soaps')
+
 const published = (path) => !/^---[\s\S]*?\bpublished:\s*false\b[\s\S]*?---/i.test(readFileSync(path, 'utf8'))
 const blogSlugs = new Set(readdirSync(join(root, 'content/blog')).filter((f) => f.endsWith('.mdx')).map((f) => f.replace(/\.mdx$/, '')))
 for (const f of readdirSync(join(root, 'content/stories')).filter((f) => f.endsWith('.mdx'))) {

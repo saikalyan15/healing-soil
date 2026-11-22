@@ -36,10 +36,10 @@ const harvest = [
   { name: 'Avocado Body Butter', tag: 'Avocados from our own trees', photo: 'Avocado body butter', img: '/products/avocado-body-butter.webp', alt: 'Avocado Body Butter in an amber jar', d: 'Made with avocados from our own trees in Bangalore, whipped into a rich butter that sinks in slowly.' },
 ]
 const bars = [
-  { name: 'Neem Tulsi', base: 'Goat milk', img: '/products/neem-tulsi-goatmilk.webp' },
-  { name: 'Ginger Rosemary', base: 'Glycerine', img: '/products/ginger-rosemary-glycerin.webp' },
-  { name: 'Kesar Gulab', base: 'Shea butter', img: '/products/kesar-gulab-sheabutter.webp' },
-  { name: 'Honey Oats', base: 'Glycerine', img: '/products/honey-oats-glycerin.webp' },
+  { name: 'Neem Tulsi', base: 'Goat milk', img: '/products/neem-tulsi-goatmilk.webp', slug: 'neem-tulsi-goat-milk-soap' },
+  { name: 'Ginger Rosemary', base: 'Glycerine', img: '/products/ginger-rosemary-glycerin.webp', slug: 'ginger-rosemary-glycerin-soap' },
+  { name: 'Kesar Gulab', base: 'Shea butter', img: '/products/kesar-gulab-sheabutter.webp', slug: 'shea-butter-kesar-gulab' },
+  { name: 'Honey Oats', base: 'Glycerine', img: '/products/honey-oats-glycerin.webp', slug: 'honey-oats-glycerin-soap' },
 ]
 ---
 <Base
@@ -177,12 +177,12 @@ const bars = [
     <div class="wrap" style="padding-top:clamp(80px,9vw,128px);padding-bottom:clamp(80px,9vw,128px);display:flex;flex-direction:column;gap:48px">
       <div class="bars-head">
         <h2 class="h2" style="font-size:clamp(36px,4vw,56px);line-height:1">The bars</h2>
-        <a class="link" href={whatsappLink(MESSAGES.general)}>Ask for the full list</a>
+        <a class="link" href="/soaps">All soaps</a>
       </div>
       <div class="bars">
         {bars.map((b) => (
-          <a class="bar" href={whatsappLink(MESSAGES.bar(b.name))}>
-            <img class="photo" src={b.img} alt={`${b.name} soap bar`} width="600" height="800" loading="lazy" />
+          <a class="bar" href={`/soaps/${b.slug}`}>
+            <img class="photo" src={b.img} alt={`${b.name} soap bar`} width="800" height="800" loading="lazy" />
             <span class="cap"><span class="name">{b.name}</span><span class="base">{b.base}</span></span>
           </a>
         ))}

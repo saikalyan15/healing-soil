@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro'
+import { SOAPS, originLabel } from '../../data/soaps'
+import { formatINR } from '../../data/pricing'
+import { SITE, whatsappLink, MESSAGES } from '../../config/site'
+
+export function getStaticPaths() {
+  return SOAPS.map((soap) => ({ params: { slug: soap.slug }, props: { soap } }))
+}
+const { soap } = Astro.props
+const title = `${soap.name}, ${soap.base.toLowerCase()} soap | Healing Soil`
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `${soap.name} (${soap.base.toLowerCase()}) soap`,
+  description: soap.description,
+  brand: { '@type': 'Brand', name: SITE.name },
+  ...(soap.image ? { image: new URL(soap.image, SITE.url).toString() } : {}),
+}
+const facts = [
+  ['Base', soap.base],
+  ['Made by', soap.method === 'Cold process' ? 'Cold process, made from scratch' : 'Melt and pour, finished by hand'],
+  ...(soap.weightGrams ? [['Weight', `${soap.weightGrams}g`]] : []),
+  ['Price', formatINR(soap.price)],
+]
+---
+<Base title={title} description={soap.description} image={soap.image ?? undefined}>
+  <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} slot="head" />
+  <section class="wrap soap-page">
+    {soap.image
+      ? <img class="photo soap-photo" src={soap.image} alt={`${soap.name} soap bar`} width="1000" height="1000" fetchpriority="high" />
+      : <div class="ph soap-photo" style="aspect-ratio:1/1">Photo to come</div>}
+    <div class="soap-info">
+      <a class="link" href="/soaps">All soaps</a>
+      <div class="label">{soap.base}</div>
+      <h1 class="display" style="font-size:clamp(44px,5vw,72px);line-height:1">{soap.name}</h1>
+      <p class="lead-p">{soap.description}</p>
+      <dl class="facts-list">
+        {facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+      <div>
+        <div class="label" style="margin-bottom:10px">What is in it</div>
+        <ul class="ing">
+          {soap.ingredients.map((i) => <li><span>{i.name}</span>{originLabel(i.origin) && <span class="tag">{originLabel(i.origin)}</span>}</li>)}
+        </ul>
+        <p class="fine" style="margin-top:12px">The full ingredient list is on the label. No SLS, no parabens, no synthetic fragrance.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn" href={whatsappLink(MESSAGES.bar(`${soap.name} (${soap.base.toLowerCase()})`))}>Order on WhatsApp</a>
+        <span class="fine">Made in a small batch after you order.</span>
+      </div>
+    </div>
+  </section>
+</Base>
