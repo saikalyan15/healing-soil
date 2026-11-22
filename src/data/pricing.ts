@@ -26,7 +26,7 @@ export const SQUARES = {
       id: 'kesar-haldi',
       name: 'Kesar Haldi',
       base: 'Papaya cucumber',
-      price: 200 as number | null, // carried over from the goat milk tier; owner to confirm for papaya cucumber
+      price: 200 as number | null,
       image: '/products/50g-soap-squares/images/kesar-haldi-goatmilk-50g.webp',
       note: 'Saffron and turmeric in a papaya cucumber base, made without goat milk.',
     },
@@ -34,7 +34,7 @@ export const SQUARES = {
       id: 'red-rose',
       name: 'Red Rose',
       base: 'Red wine' as string | null, // owner said "Red Vine"; SoapLedger lists the base as Red Wine. Confirm the spelling.
-      price: null as number | null, // owner to confirm
+      price: 150 as number | null,
       image: '/products/50g-soap-squares/images/red-rose-50g.webp',
       note: 'A rose bar with a soft floral scent.',
     },
