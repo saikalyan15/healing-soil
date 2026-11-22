@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro'
-import { SQUARES, formatINR } from '../data/pricing'
+import { SQUARES, LEAD_TIME, formatINR } from '../data/pricing'
 import { whatsappLink, MESSAGES } from '../config/site'
 
 const uses = [
@@ -79,7 +79,7 @@ const steps = [
           <div class="chapter"><span class="num">III</span><span class="label">How it works</span></div>
           <h2 class="h2">One message to start</h2>
         </div>
-        <p>Because each batch is made after you order, tell us your date early and we will say what is possible.</p>
+        <p>Each batch is made after you order, and takes {LEAD_TIME}. Larger orders take longer, so tell us your date and we will say what is possible.</p>
       </div>
       <ol class="steps biz-steps">
         {steps.map(([t, d], i) => <li><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{t}</span><span class="d">{d}</span></li>)}

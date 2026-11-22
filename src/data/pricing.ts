@@ -30,12 +30,15 @@ export const SQUARES = {
     {
       id: 'red-rose',
       name: 'Red Rose',
-      base: null as string | null, // owner to confirm the base
+      base: 'Red wine' as string | null, // owner said "Red Vine"; SoapLedger lists the base as Red Wine. Confirm the spelling.
       price: null as number | null, // owner to confirm
       image: '/products/50g-soap-squares/images/red-rose-50g.webp',
       note: 'A rose bar with a soft floral scent.',
     },
   ],
 } as const
+
+/** Owner, 2026-11-22: about 5 to 7 days for 50 squares of 50g. Larger orders are confirmed by message. */
+export const LEAD_TIME = 'about 5 to 7 days for 50 squares'
 
 export const formatINR = (n: number) => `₹${n.toLocaleString('en-IN')}`
