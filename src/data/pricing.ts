@@ -25,10 +25,10 @@ export const SQUARES = {
     {
       id: 'kesar-haldi',
       name: 'Kesar Haldi',
-      base: 'Goat milk',
-      price: 200 as number | null,
+      base: 'Papaya cucumber',
+      price: 200 as number | null, // carried over from the goat milk tier; owner to confirm for papaya cucumber
       image: '/products/50g-soap-squares/images/kesar-haldi-goatmilk-50g.webp',
-      note: 'Saffron and turmeric in a creamy goat milk base.',
+      note: 'Saffron and turmeric in a papaya cucumber base, made without goat milk.',
     },
     {
       id: 'red-rose',
