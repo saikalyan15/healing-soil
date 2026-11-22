@@ -23,6 +23,8 @@ export interface Soap {
   image: string | null
   description: string
   ingredients: Ingredient[]
+  seoTitle?: string
+  seoDescription?: string
   /** Old SoapLedger or site slugs that redirect here. */
   legacySlugs?: string[]
 }
@@ -117,6 +119,7 @@ export const SOAPS: Soap[] = [
   {
     slug: 'marigold-soap', name: 'Marigold', base: 'Glycerine', method: 'Melt and pour', weightGrams: null, price: 300,
     image: '/products/marigold-glycerine.webp',
+    seoTitle: 'Marigold soap: glycerine bar with marigold oil and petals | Healing Soil',
     description: 'Made with marigold oil and marigold petals, with a very mild, sweet scent. The oil is made at home from marigolds grown on our farm, and the bar is finished with petals and vitamin E.',
     ingredients: [{ name: 'Marigold oil', origin: farm }, { name: 'Marigold petals', origin: farm }, VE],
   },
@@ -129,6 +132,7 @@ export const SOAPS: Soap[] = [
   {
     slug: 'loofah-soaps', name: 'Loofah', base: 'Glycerine', method: 'Melt and pour', weightGrams: 150, price: 500,
     image: '/products/loofah.webp',
+    seoTitle: 'Loofah soap: 150g glycerine bar with natural loofah | Healing Soil',
     description: 'A glycerine soap with a full slice of sun-dried loofah running through it. The loofah softens when wet, giving each wash a firm, textured feel. One bar in place of two: glycerine soap and natural loofah, with no SLS and no synthetic fragrance.',
     ingredients: [{ name: 'Dried sponge gourd (loofah)' }, EO, VE],
   },
@@ -136,6 +140,8 @@ export const SOAPS: Soap[] = [
     slug: 'travel-soaps', name: 'Travel soaps', base: 'Glycerine and goat milk', method: 'Melt and pour', weightGrams: 30, price: 50,
     image: '/products/travel-soap.webp',
     description: 'Compact bars of our handmade soaps, made for travel, gym bags, or trying a new scent before you commit to a full bar. Same ingredients, same small-batch making, in a size for the road.',
+    seoTitle: 'Travel soap bars: 30g mini soaps from ₹50 | Healing Soil',
+    seoDescription: 'Small 30g handmade soap bars for travel, gym bags and guest stays. Glycerine and goat milk, made without SLS or synthetic fragrance. Order on WhatsApp.',
     ingredients: [EO, VE],
   },
   {

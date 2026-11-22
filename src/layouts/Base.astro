@@ -21,13 +21,14 @@ const orgJsonLd = {
 }
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={title} />
@@ -36,6 +37,7 @@ const orgJsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+    <script is:inline src="/analytics.js" defer></script>
     <slot name="head" />
   </head>
   <body>
@@ -62,6 +64,22 @@ const orgJsonLd = {
           {SITE.socials.facebook && <a href={SITE.socials.facebook}>Facebook</a>}
           <a href={whatsappLink()}>{SITE.whatsappDisplay}</a>
         </div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="/soaps">Soaps</a>
+          <a href="/gifting">Gifting</a>
+          <a href="/wholesale">For businesses</a>
+          <a href="/ingredients">Ingredients</a>
+          <a href="/blog">Journal</a>
+          <a href="/our-story">About</a>
+          <a href="/faq">FAQ</a>
+          <a href="/contact">Contact</a>
+        </nav>
+        <nav class="footer-links" aria-label="Policies">
+          <a href="/shipping-policy">Shipping</a>
+          <a href="/returns">Refunds</a>
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </nav>
       </div>
     </footer>
   </body>

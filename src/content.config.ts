@@ -24,7 +24,23 @@ const loader = (base: string) =>
     generateId: ({ entry }) => entry.replace(/\.mdx$/, ''),
   })
 
+const pageSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  h1: z.string(),
+  lead: z.string().optional(),
+  updated: z.string().optional(),
+  faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional().default([]),
+  cta: z.enum(['soaps', 'whatsapp', 'none']).optional().default('soaps'),
+  products: z.array(z.string()).optional().default([]),
+  productsTitle: z.string().optional(),
+})
+
 export const collections = {
+  pages: defineCollection({
+    loader: glob({ pattern: '**/*.mdx', base: './content/pages', generateId: ({ entry }) => entry.replace(/\.mdx$/, '') }),
+    schema: pageSchema,
+  }),
   blog: defineCollection({ loader: loader('./content/blog'), schema }),
   stories: defineCollection({ loader: loader('./content/stories'), schema }),
 }

@@ -1,16 +1,14 @@
 # Healing Soil
 
-E-commerce website for Healing Soil, a soap business—supporting product discovery and customer orders.
+Static website for Healing Soil, a handmade soap business in Goa. Soaps, ingredients, gifting,
+business pricing and a journal. Orders happen on WhatsApp.
 
 Live site: https://healingsoil.in
 
-## What it does
-- Presents the Healing Soil product range
-- Supports customer ordering
-- Creates a simple digital storefront for a real operating business
+Built with Astro and deployed on Cloudflare Pages. See `CLAUDE.md` for the stack, commands and rules.
 
-## Why I built it
-I built the website to give the business a direct online presence and a practical way to accept customer orders.
-
-## Status
-Live.
+```
+npm install
+npm run dev
+npm run build
+```

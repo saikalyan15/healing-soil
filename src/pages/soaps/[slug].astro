@@ -8,7 +8,7 @@ export function getStaticPaths() {
   return SOAPS.map((soap) => ({ params: { slug: soap.slug }, props: { soap } }))
 }
 const { soap } = Astro.props
-const title = `${soap.name}, ${soap.base.toLowerCase()} soap | Healing Soil`
+const title = soap.seoTitle ?? `${soap.name} soap, ${soap.base.toLowerCase()} base, ${formatINR(soap.price)} | Healing Soil`
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -26,7 +26,7 @@ const facts = [
   ['Price', formatINR(soap.price)],
 ]
 ---
-<Base title={title} description={soap.description} image={soap.image ?? undefined}>
+<Base title={title} description={soap.seoDescription ?? soap.description} image={soap.image ?? undefined}>
   <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} slot="head" />
   <section class="wrap soap-page">
     {soap.image

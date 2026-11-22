@@ -12,7 +12,7 @@
     "preview": "astro preview",
     "validate:compliance": "node scripts/validate-compliance.mjs",
     "prebuild": "node scripts/build-redirects.mjs",
-    "postbuild": "node scripts/check-redirects.mjs && node scripts/check-pdfs.mjs",
+    "postbuild": "node scripts/check-redirects.mjs && node scripts/check-links.mjs && node scripts/check-pdfs.mjs",
     "check": "npm run validate:compliance && npm run build",
     "pdf": "node scripts/build-pdfs.mjs"
   },

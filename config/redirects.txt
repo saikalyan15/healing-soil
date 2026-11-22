@@ -66,10 +66,44 @@
 /wp-signup.php /blog
 /xmlrpc.php /blog
 
-# PENDING: add these when the destination pages exist (soaps, our-story, contact, wholesale).
-#   /contact-us /contact, /about /our-story, /author/* /our-story
-#   /cart, /checkout, /order*, /my-account, /ingredient/*, /soap/*, /compare/*,
-#   /occasion/*, /soap-for/*, /ayurvedic-soap/*, the root-level combo slugs, /gift-hampers,
-#   /corporate-gifting. Targets are set out in the redesign plan.
+# Old storefront and programmatic pages, pointed at the closest page that exists now
+/gift-hampers /gifting
+/corporate-gifting /wholesale
+/distributor-soap-squares-catalog /wholesale
+/compare/glycerin-vs-goat-milk-soap /blog/glycerin-vs-goat-milk-soap
+/compare/shea-butter-vs-glycerin-soap /blog/shea-butter-vs-glycerin-soap
+/soap-for/exfoliation /soaps/loofah-soaps
+/soap-for/monsoon /blog/best-soap-for-rainy-season-india
+/contact-us /contact
+/about /our-story
+/author/* /our-story
+/order /contact
+/order/* /contact
+/cart /contact
+/checkout /contact
+/my-account /
+/ingredient/* /ingredients
+/soap/* /soaps
+/compare/* /soaps
+/occasion/* /gifting
+/soap-for/* /soaps
+/ayurvedic-soap/* /ingredients
+/honey-shea-butter-soap /shea-butter-soap
+/rose-goat-milk-soap /goat-milk-soap
+
+# Old root-level combination pages (one per slug), grouped by topic
+/ginger-glycerin-soap /glycerin-soap
+/ginger-goat-milk-soap /goat-milk-soap
+/honey-glycerin-soap /glycerin-soap
+/honey-goat-milk-soap /goat-milk-soap
+/honey-shea-butter-soap /shea-butter-soap
+/kesar-goat-milk-soap /goat-milk-soap
+/kesar-shea-butter-soap /shea-butter-soap
+/neem-glycerin-soap /glycerin-soap
+/neem-goat-milk-soap /goat-milk-soap
+/orange-goat-milk-soap /goat-milk-soap
+/pomegranate-glycerin-soap /glycerin-soap
+/pomegranate-goat-milk-soap /goat-milk-soap
+/rose-goat-milk-soap /goat-milk-soap
 
 # /shop and every product URL are generated from src/data/soaps.ts by scripts/build-redirects.mjs.
