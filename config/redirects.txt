@@ -108,3 +108,19 @@
 /rose-goat-milk-soap /goat-milk-soap
 
 # /shop and every product URL are generated from src/data/soaps.ts by scripts/build-redirects.mjs.
+
+
+# Withdrawn posts (maker named, or health claims). Old addresses included.
+/blog/why-we-left-bangalore /our-story
+/stories/why-we-left-bangalore /our-story
+/why-we-left-bangalore /our-story
+/blog/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration /blog
+/stories/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration /blog
+/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration /blog
+/blog/grounding-practices-soil-connection-earth-element /blog
+/stories/grounding-practices-soil-connection-earth-element /blog
+/grounding-practices-soil-connection-earth-element /blog
+/blog/mental-health-slow-living-useless-activities /blog
+/stories/mental-health-slow-living-useless-activities /blog
+/mental-health-slow-living-useless-activities /blog
+/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration/feed/* /blog

@@ -7,5 +7,5 @@ export default defineConfig({
   site: 'https://healingsoil.in',
   trailingSlash: 'never',
   build: { format: 'file' },
-  integrations: [mdx(), sitemap({ filter: (page) => !page.includes('/print/') })],
+  integrations: [mdx(), sitemap({ filter: (page) => !page.includes('/print/') && !page.includes('/corporate-gifting') })],
 })
