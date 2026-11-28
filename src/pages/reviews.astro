@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro'
+import { reviews } from '../data/reviews'
+import { whatsappLink, MESSAGES } from '../config/site'
+const featured = reviews.filter((r) => r.featured)
+const short = reviews.filter((r) => !r.featured)
+const who = (r: (typeof reviews)[number]) => [r.author === 'Customer' ? null : r.author, r.location].filter(Boolean).join(', ')
+---
+<Base title="Reviews | Healing Soil" description="What customers say about Healing Soil handmade soaps: gentle, mild and quiet scent, with a light lather.">
+  <section class="wrap section">
+    <div class="section-head"><div><div class="label">Reviews</div><h1 class="h2">What customers say</h1></div></div>
+    <div>
+      {featured.map((r) => <figure class="review" style="margin:0"><blockquote class="q" style="margin:0">“{r.comment}”</blockquote><figcaption class="label">{who(r)}</figcaption></figure>)}
+      {short.map((r) => <figure class="review short" style="margin:0"><blockquote class="q" style="margin:0">“{r.comment}”</blockquote><figcaption class="label">{who(r)}</figcaption></figure>)}
+    </div>
+    <div><a class="btn" href={whatsappLink(MESSAGES.general)}>Order on WhatsApp</a></div>
+  </section>
+</Base>

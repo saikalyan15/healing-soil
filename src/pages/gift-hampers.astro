@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro'
+import { giftHampers } from '../data/gift-hampers'
+import { activeSeason } from '../data/festive-seasons'
+import { whatsappLink } from '../config/site'
+
+const season = activeSeason()
+const title = season?.metaTitle ?? 'Handmade Soap Gift Hampers from Goa | Healing Soil'
+const description = `Three handmade soap gift sets${season ? ` for ${season.name}` : ''}, made to order on our farm in South Goa and shipped across India. Ask for a quote on WhatsApp.`
+const hero = season?.heroImage ?? { src: '/images/gifting/jute-bag-farm.webp', alt: 'A jute gift bag with a kraft card, a wrapped soap and two handmade soaps on a wooden board, with greenery behind' }
+const enquiry = (name: string) => `Hi Healing Soil, I would like to order ${name.toLowerCase()}${season ? ` for ${season.name}` : ''}.\nHow many: \nCity: \nNeeded by: `
+const general = season?.enquiry ?? 'Hi Healing Soil, I would like to ask about a gift set.'
+const timing = `Allow 2 to 3 days for us to make a set after you confirm, then about 4 to 7 days for delivery, depending on the city.${season ? ` ${season.dateNote}` : ''}`
+
+const faqs = [
+  { q: 'How much do the gift sets cost?', a: 'We quote each order on WhatsApp, because the cost depends on the set, how many you need and where they are going. Shipping is free on orders of ₹1,000 and above; below that it is ₹100, or ₹150 for North India.' },
+  { q: 'How long does a gift set take to arrive?', a: `${timing} Tell us the date you need it by and we will say whether we can make it.` },
+  { q: 'How do I order a gift set?', a: 'Message us on WhatsApp with the set, how many, the city and the date you need it by. We confirm and share payment details there.' },
+  { q: 'Can I order gift sets for an office or clients?', a: 'Yes. The same sets are available for teams and clients, and we quote larger quantities including delivery. See our corporate gifting page.' },
+  { q: 'What goes into the soaps?', a: 'No SLS, no parabens, no synthetic fragrance. Neem, tulsi, lemongrass and marigold are grown on our farm, though not every bar uses them. The soap bases are sourced.' },
+]
+const faqJsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }
+---
+<Base title={title} description={description} image={hero.src}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} slot="head" />
+
+  <section class="season-hero">
+    <div class="season-copy">
+      <div>
+        <div class="label">{season?.eyebrow ?? 'Gifting'}</div>
+        <h1>{season?.headline ?? 'Handmade soap gift hampers'}</h1>
+        <p>{season?.intro ?? 'Three gift sets, each made to order on our farm in South Goa and shipped across India.'}</p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="#sets">See the gift sets</a>
+          <a class="link" href={whatsappLink(general)}>Ask on WhatsApp</a>
+        </div>
+        {season && <p class="small">{season.dateNote}</p>}
+      </div>
+    </div>
+    <img class="photo" src={hero.src} alt={hero.alt} width="900" height="1200" fetchpriority="high" />
+  </section>
+
+  <section class="wrap section" id="sets">
+    <div class="section-head">
+      <div><div class="label">The gift sets</div><h2 class="h2">Three ways to give</h2></div>
+      <p>Choose a set and tell us how many and where they are going. We reply with a quote, including delivery.</p>
+    </div>
+    <div class="sq-grid">
+      {giftHampers.map((h) => (
+        <div class="sq">
+          <img class="photo" src={h.image.src} alt={h.image.alt} width="800" height="800" loading="lazy" style={`object-position:${h.image.position ?? '50% 50%'}`} />
+          <div class="row"><span class="name">{h.name}</span></div>
+          <p class="d">{h.summary}</p>
+          <ul class="terms-list">{h.contents.map((c) => <li>{c}</li>)}</ul>
+          {h.note && <p class="fine">{h.note}</p>}
+          <div class="price"><a class="link-line" href={whatsappLink(enquiry(h.name))}>Order on WhatsApp</a></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bordered">
+    <div class="wrap section">
+      <div class="section-head">
+        <div><div class="label">What you are giving</div><h2 class="h2">What goes into a set</h2></div>
+        <p>Every ingredient is on the label, so the person you are giving to can read what is in the bar.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="t">Grown on our farm</span><span class="d">Neem, tulsi, lemongrass and marigold are grown on our farm in South Goa. They go into many of our bars, not all.</span></div>
+        <div class="fact"><span class="t">Sourced, and we say so</span><span class="d">The soap bases are bought in. Shea butter is from West Africa, honey from Goa, saffron from Kashmir.</span></div>
+        <div class="fact"><span class="t">Scent from plants</span><span class="d">Essential oils and botanicals, never synthetic fragrance. We can leave the essential oils out on request.</span></div>
+        <div class="fact"><span class="t">Made after you order</span><span class="d">Each batch is made by hand in small numbers, with vitamin E, and no SLS or parabens.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bordered harvest">
+    <div class="wrap section">
+      <div class="section-head">
+        <div><div class="label">Timing</div><h2 class="h2">Made after you order, so allow a little time</h2></div>
+        <p>{timing} Tell us the date you need it by and we will say whether we can make it.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="link-line" href="/corporate-gifting">Gifts for teams and clients</a>
+        <a class="link-line" href="/wholesale">50g soap squares for events</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap post" style="padding-bottom:0">
+    <div class="faq" style="border-top:0;padding-top:0">
+      <h2 class="h2" style="font-size:clamp(28px,3vw,40px)">Questions</h2>
+      {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+    </div>
+  </section>
+
+  <section class="wrap order">
+    <h2>Not sure<br /><em>which one?</em></h2>
+    <a class="btn" href={whatsappLink(general)}>Message on WhatsApp</a>
+  </section>
+</Base>

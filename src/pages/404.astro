@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro'
+import { whatsappLink, MESSAGES } from '../config/site'
+---
+<Base title="Page not found | Healing Soil" description="That page could not be found.">
+  <section class="wrap order">
+    <div class="label">404</div>
+    <h2>We could not find<br /><em>that page</em></h2>
+    <a class="btn" href="/soaps">See the soaps</a>
+    <a class="quiet" href={whatsappLink(MESSAGES.general)}>Or message us on WhatsApp</a>
+  </section>
+</Base>

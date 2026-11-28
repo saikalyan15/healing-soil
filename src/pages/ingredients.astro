@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro'
+import { whatsappLink, MESSAGES } from '../config/site'
+
+const items = [
+  { name: 'Neem', tag: 'Grown on our farm', d: 'Sun-dried leaves, traditionally used in Ayurvedic personal care. A green, earthy note.' },
+  { name: 'Tulsi', tag: 'Grown on our farm', d: 'Holy basil, part of Indian homes for generations. Fresh and lightly peppery.' },
+  { name: 'Marigold', tag: 'Grown on our farm', d: 'Petals dried in the sun, and a marigold oil made at home, for colour and a mild, sweet scent.' },
+  { name: 'Lemongrass', tag: 'Grown on our farm', d: 'A fresh, citrusy scent.' },
+  { name: 'Kokum', tag: 'Grown here in Goa', d: 'A Konkan fruit. Its seed gives the firm butter in our lip balm.' },
+  { name: 'Honey', tag: 'Sourced, Goa', d: 'Real honey from suppliers in Goa, never a honey fragrance.' },
+  { name: 'Saffron (kesar)', tag: 'Sourced, Kashmir', d: 'A few strands per batch, for colour and a gentle warmth.' },
+  { name: 'Turmeric (haldi)', tag: 'Sourced, Indian farms', d: 'Long used in Indian personal care. It gives the bar a warm gold.' },
+  { name: 'Ginger and rosemary', tag: 'Sourced, Indian farms', d: 'Warm spice and a fresh herbal note, together in one bar.' },
+  { name: 'Rose', tag: 'Sourced, India', d: 'Rose oil and dried petals from Indian producers of traditional floral extracts.' },
+  { name: 'Pomegranate peel', tag: 'Sourced, Indian farms', d: 'Sun-dried and ground to a powder, for a deep natural colour.' },
+  { name: 'Orange peel', tag: 'Sourced, Indian farms', d: 'Sun-dried peel for a fresh citrus scent.' },
+  { name: 'Oats', tag: 'Sourced', d: 'Added as flakes for a gentle texture.' },
+  { name: 'Shea butter', tag: 'Sourced, West Africa', d: 'The base of our richest bar, with a dense, creamy lather.' },
+  { name: 'Glycerine, goat milk and papaya cucumber bases', tag: 'Ready bases from a specialist maker', d: 'The starting point for our melt-and-pour bars. Glycerine is light, goat milk is creamy, and papaya cucumber is a goat-milk-free option.' },
+  { name: 'Essential oils', tag: 'Sourced', d: 'Scent from plants. They change from batch to batch, are listed on the label, and can be left out on request.' },
+  { name: 'Vitamin E', tag: 'In every recipe', d: 'An antioxidant that helps keep the plant oils fresh. Listed on every label.' },
+]
+---
+<Base title="Ingredients and where they come from | Healing Soil" description="What goes into Healing Soil soaps and where it comes from: neem, tulsi, lemongrass and marigold grown on our farm in Goa, and the rest sourced from named places.">
+  <section class="wrap section">
+    <div class="section-head">
+      <div><div class="label">Ingredients</div><h1 class="h2">What goes in, and where it comes from</h1></div>
+      <p>Some we grow here in Goa. The rest we buy, and we tell you which is which.</p>
+    </div>
+    <div class="ing-grid">
+      {items.map((i) => (
+        <div class="ing-card">
+          <div class="ing-row"><span class="name">{i.name}</span></div>
+          <span class="tag" style="text-align:left">{i.tag}</span>
+          <span class="d" style="font-size:15px;color:var(--body)">{i.d}</span>
+        </div>
+      ))}
+    </div>
+    <div class="hero-actions"><a class="btn" href="/soaps">See the soaps</a><a class="link" href={whatsappLink(MESSAGES.general)}>Ask us about an ingredient</a></div>
+  </section>
+</Base>

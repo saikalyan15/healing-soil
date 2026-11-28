@@ -1,0 +1,126 @@
+# Hand-maintained 301 redirects: "<from> <to>", one per line. Lines starting with # are ignored.
+# Rules that end in /* send the rest of the path along as :splat.
+# Trailing-slash variants are added automatically. Per-story redirects are generated from
+# content/stories by scripts/build-redirects.mjs. scripts/check-redirects.mjs fails the
+# build if a destination is not a built page.
+
+# Blog posts folded into a stronger post
+/blog/goat-milk-soap-base-vs-glycerin-soap-base /blog/glycerin-vs-goat-milk-soap
+/blog/garden-to-bar-marigold-soap /blog/marigold-soap-benefits
+/blog/pomegranate-soap-benefits /blog/pomegranate-peel-soap
+/blog/what-makes-goat-milk-soap-beneficial-for-sensitive-skin /blog/goat-milk-soap-benefits
+/blog/handmade-soap-sensitive-skin /blog/natural-soap-sensitive-skin-india
+/blog/sls-parabens-soap-india /blog/sls-free-soap-india
+
+# Old WordPress post slugs
+/blog/why-we-dont-use-chemicals /blog/what-makes-soap-chemical-free
+/blog/how-to-make-handmade-soap-last-longer /blog/why-handmade-soap-lasts-longer
+/blog/natural-soap-for-eczema-dry-skin /blog/natural-soap-sensitive-skin-india
+/blog/shea-butter-soap-benefits /blog/understanding-the-benefits-of-shea-butter-in-soap
+/blog/goat-milk-soap-for-sensitive-skin /blog/goat-milk-soap-benefits
+/blog/best-natural-soap-for-eczema /blog/natural-soap-sensitive-skin-india
+
+# Retired posts and stories
+/blog/seven-days-without-paracetamol-how-we-beat-the-flu /blog
+/blog/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice /blog
+/stories/seven-days-without-paracetamol-how-we-beat-the-flu /blog
+/stories/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice /blog
+/seven-days-without-paracetamol-how-we-beat-the-flu /blog
+/transform-your-mental-health-how-mindful-cooking-became-my-healing-practice /blog
+/stories/how-to-make-handmade-soap-last-longer /blog/why-handmade-soap-lasts-longer
+/stories/natural-soap-for-eczema-dry-skin /blog/natural-soap-sensitive-skin-india
+/stories/shea-butter-soap-benefits /blog/understanding-the-benefits-of-shea-butter-in-soap
+/stories/goat-milk-soap-for-sensitive-skin /blog/goat-milk-soap-benefits
+/stories/handmade-soap-sensitive-skin /blog/natural-soap-sensitive-skin-india
+/stories/best-natural-soap-for-eczema /blog/natural-soap-sensitive-skin-india
+/handmade-soap-sensitive-skin /blog/natural-soap-sensitive-skin-india
+
+# Old WordPress sections and archives
+/stories /blog
+/our-stories /blog
+/our-stories/2 /blog
+/our-stories-2 /blog
+/our-stories/* /blog/:splat
+/category/slow-living /blog
+/category/slow-livings /blog
+/category/regenerative-living /blog
+/slow-livings /blog
+/slow-living /blog
+/mental-health /blog
+/regenerative-living /blog
+/healing-pillars /blog
+/healing-pillars/* /blog
+/recommends/* /blog
+/slow-living/feed/* /blog
+/mental-health/feed/* /blog
+/regenerative-living/feed/* /blog
+/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain/feed/* /blog/monsoon-gardening-5-sustainable-ways-to-protect-your-plants-from-heavy-rain
+/caterpillar-content-writing-lessons/feed/* /blog/caterpillar-content-writing-lessons
+/diy-neem-soap-slow-living /blog/diy-neem-soap-slow-living
+/home /
+/eco-picks /
+/wp-includes/* /blog
+/wp-content/* /blog
+/wp-admin/* /blog
+/wp-login.php /blog
+/wp-signup.php /blog
+/xmlrpc.php /blog
+
+# Old storefront and programmatic pages, pointed at the closest page that exists now
+# /gift-hampers and /corporate-gifting are real pages at their live addresses.
+/gifting /gift-hampers
+/christmas /gift-hampers
+/distributor-soap-squares-catalog /wholesale
+/compare/glycerin-vs-goat-milk-soap /blog/glycerin-vs-goat-milk-soap
+/compare/shea-butter-vs-glycerin-soap /blog/shea-butter-vs-glycerin-soap
+/soap-for/exfoliation /soaps/loofah-soaps
+/soap-for/monsoon /blog/best-soap-for-rainy-season-india
+/contact-us /contact
+/about /our-story
+/author/* /our-story
+/order /contact
+/order/* /contact
+/cart /contact
+/checkout /contact
+/my-account /
+/ingredient/* /ingredients
+/soap/* /soaps
+/compare/* /soaps
+/occasion/* /gift-hampers
+/soap-for/* /soaps
+/ayurvedic-soap/* /ingredients
+/honey-shea-butter-soap /shea-butter-soap
+/rose-goat-milk-soap /goat-milk-soap
+
+# Old root-level combination pages (one per slug), grouped by topic
+/ginger-glycerin-soap /glycerin-soap
+/ginger-goat-milk-soap /goat-milk-soap
+/honey-glycerin-soap /glycerin-soap
+/honey-goat-milk-soap /goat-milk-soap
+/honey-shea-butter-soap /shea-butter-soap
+/kesar-goat-milk-soap /goat-milk-soap
+/kesar-shea-butter-soap /shea-butter-soap
+/neem-glycerin-soap /glycerin-soap
+/neem-goat-milk-soap /goat-milk-soap
+/orange-goat-milk-soap /goat-milk-soap
+/pomegranate-glycerin-soap /glycerin-soap
+/pomegranate-goat-milk-soap /goat-milk-soap
+/rose-goat-milk-soap /goat-milk-soap
+
+# /shop and every product URL are generated from src/data/soaps.ts by scripts/build-redirects.mjs.
+
+
+# Withdrawn posts (maker named, or health claims). Old addresses included.
+/blog/why-we-left-bangalore /our-story
+/stories/why-we-left-bangalore /our-story
+/why-we-left-bangalore /our-story
+/blog/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration /blog
+/stories/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration /blog
+/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration /blog
+/blog/grounding-practices-soil-connection-earth-element /blog
+/stories/grounding-practices-soil-connection-earth-element /blog
+/grounding-practices-soil-connection-earth-element /blog
+/blog/mental-health-slow-living-useless-activities /blog
+/stories/mental-health-slow-living-useless-activities /blog
+/mental-health-slow-living-useless-activities /blog
+/farm-tea-ritual-how-regenerative-living-includes-rest-and-restoration/feed/* /blog

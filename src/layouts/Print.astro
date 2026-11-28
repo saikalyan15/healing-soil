@@ -1,0 +1,28 @@
+---
+import '../styles/global.css'
+interface Props { title: string }
+const { title } = Astro.props
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <style is:global>
+      @page { size: A4; margin: 0; }
+      html, body { margin: 0; background: #d9d5cd; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .sheet { width: 210mm; height: 297mm; margin: 0 auto 8mm; background: var(--paper); position: relative; overflow: hidden; page-break-after: always; break-after: page; display: flex; flex-direction: column; padding: 16mm 17mm; box-sizing: border-box; font-size: 10.5pt; line-height: 1.55; }
+      .sheet:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+      @media print { html, body { background: none; } .sheet { margin: 0; } }
+      .sheet h1, .sheet h2, .sheet p { margin: 0; }
+      .sheet .mark { font-family: var(--display); font-size: 14pt; letter-spacing: 0.32em; text-transform: uppercase; }
+      .sheet .eyebrow { font-size: 7.5pt; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); }
+      .sheet .rule { border: 0; border-top: 1px solid var(--hairline); margin: 0; }
+      .sheet .foot { margin-top: auto; padding-top: 6mm; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; gap: 8mm; font-size: 8.5pt; color: var(--muted); }
+    </style>
+  </head>
+  <body><slot /></body>
+</html>

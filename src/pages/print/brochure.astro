@@ -1,0 +1,73 @@
+---
+import Print from '../../layouts/Print.astro'
+import { SQUARES, LEAD_TIME, formatINR } from '../../data/pricing'
+import { SITE, SHOW_PRICES } from '../../config/site'
+
+const steps = [
+  ['Tell us', 'The soaps, how many, the date and the city.'],
+  ['We confirm', 'Price, wrapping and a date that works.'],
+  ['Pay by UPI', 'Once the details are settled.'],
+  ['We make, then ship', 'Made to order, wrapped in paper.'],
+]
+---
+<Print title="Healing Soil soap squares: brochure">
+  <section class="sheet" style="padding:0">
+    <img src="/print-assets/cover.jpg" alt="" style="width:100%;height:178mm;object-fit:cover" />
+    <div style="padding:14mm 17mm 16mm;display:flex;flex-direction:column;gap:6mm;flex:1">
+      <div class="mark">Healing Soil</div>
+      <h1 class="display" style="font-size:44pt;line-height:0.98;letter-spacing:-0.02em;margin-top:6mm">Soap squares for<br /><em>events, stays and gifts</em></h1>
+      <p style="max-width:130mm;color:var(--body);font-size:11.5pt">A 50g bar made by hand in small batches, wrapped in paper. Every ingredient is on the label.</p>
+      <div class="foot"><span>Cold-process and hand-finished soap · {SITE.region}</span><span>healingsoil.in</span></div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div class="mark">Healing Soil</div><div class="eyebrow">Soap squares</div>
+    </div>
+
+    <h2 class="display" style="font-size:28pt;line-height:1.05;margin-top:12mm">Three soaps, from {SQUARES.minPerSoap} pieces each</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7mm;margin-top:8mm">
+      {SQUARES.soaps.map((s) => (
+        <div style="display:flex;flex-direction:column;gap:2.5mm">
+          <img src={`/print-assets/${s.id}.jpg`} alt="" style="width:100%;aspect-ratio:1/1;object-fit:cover" />
+          <div class="display" style="font-size:16pt;line-height:1.05">{s.name}</div>
+          <div class="eyebrow">{s.base ?? 'Base on request'}</div>
+          <div style="font-size:9pt;color:var(--body)">{s.note}</div>
+          <div style="border-top:1px solid var(--ink);padding-top:2mm;font-size:9.5pt">{SHOW_PRICES && s.price !== null ? <><span class="display" style="font-size:15pt">{formatINR(s.price)}</span> per piece</> : `From ${SQUARES.minPerSoap} pieces`}</div>
+        </div>
+      ))}
+    </div>
+
+    <hr class="rule" style="margin-top:10mm" />
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:8mm">
+      <div>
+        <div class="eyebrow" style="margin-bottom:3mm">How we make it</div>
+        <p style="color:var(--body);font-size:9.5pt">Each square starts from a ready base, glycerine, papaya cucumber, or red wine and pomegranate, depending on the soap. We melt it gently, add herbs, essential oils and vitamin E by hand, pour it into moulds and wrap it in paper after you order.</p>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:3mm">What is not in it</div>
+        <p style="color:var(--body);font-size:9.5pt">No SLS, no parabens and no synthetic fragrance. Scent comes from essential oils and herbs, and the full list is on every label.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:9mm">
+      <div class="eyebrow" style="margin-bottom:3mm">How to order</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6mm">
+        {steps.map(([t, d], i) => (
+          <div style="border-top:1px solid var(--ink);padding-top:2.5mm">
+            <div class="eyebrow">{String(i + 1).padStart(2, '0')}</div>
+            <div class="display" style="font-size:13pt;line-height:1.1;margin:1mm 0 1.5mm">{t}</div>
+            <div style="font-size:8.5pt;color:var(--body)">{d}</div>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:5mm;font-size:9pt;color:var(--muted)">A batch of 50 squares takes {LEAD_TIME.replace('about ', '').replace(' for 50 squares', '')}. Larger orders are confirmed when you ask. Wrapping and custom packaging are quoted separately. Essential oils can be left out on request.</p>
+    </div>
+
+    <div class="foot">
+      <span>WhatsApp: {SITE.whatsappDisplay}</span>
+      <span>healingsoil.in · @healingsoil.in</span>
+    </div>
+  </section>
+</Print>

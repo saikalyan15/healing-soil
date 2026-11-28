@@ -1,0 +1,20 @@
+# The site is static, so festive seasons (src/data/festive-seasons.ts) switch on and off when it is
+# rebuilt. This asks Cloudflare Pages for a rebuild once a day, just after midnight in India.
+# Needs one repository secret: CF_DEPLOY_HOOK, a Cloudflare Pages deploy hook URL for the
+# production branch. Without it the job does nothing and says so.
+name: Daily rebuild
+on:
+  schedule:
+    - cron: '45 18 * * *' # 00:15 IST
+  workflow_dispatch:
+permissions: {}
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy
+        env:
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "::warning::CF_DEPLOY_HOOK is not set, skipping"; exit 0; fi
+          curl --fail --silent --show-error -X POST "$HOOK" > /dev/null

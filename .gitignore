@@ -57,5 +57,11 @@ tools/meta-ads-mcp/node_modules/
 
 *.log
 
+# astro
+/dist/
+/.astro/
+public/_redirects
+
 # brainstorming mockups (local only)
 .superpowers/
+.pdfbuild/
