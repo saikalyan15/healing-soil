@@ -19,6 +19,16 @@ Updated 2026-11-28. Confirm an item is still open before acting on it. **(you)**
 
 - [ ] GA4 showed **no paid social sessions in the 14 days to 2026-11-28**. Check where the Christmas ads point and that their links carry UTM tags. `/gift-hampers` and `/corporate-gifting` keep their addresses.
 
+## Legal checks, for an adviser **(you)**
+
+The site's wording was reviewed on 2026-11-28 (rendered text, images, PDFs). These are outside wording and are not confirmed:
+
+- [ ] **Manufacturing licence.** Soap appears to be a cosmetic under the Cosmetics Rules, 2020, which license cosmetic manufacture through the State Licensing Authority. No handmade or small-scale exemption was found. `CLAUDE.md` says no claims means no licence; verify that before relying on it. Same for the lip balm and body butter.
+- [ ] **Seller disclosures.** The Consumer Protection (E-Commerce) Rules, 2020 ask for legal name, address, customer care and a named grievance officer. Whether they apply to WhatsApp ordering was not confirmed. Reconcile with never naming the maker (for example a registered trade name and business address).
+- [ ] **Listing declarations.** Legal Metrology rules ask online listings to show maker/packer name and address, net quantity and MRP inclusive of taxes. Net weight is missing for Marigold, Red Rose and Coconut Moringa.
+- [ ] **GST** and showing per-bar prices.
+- [ ] **Privacy:** analytics and ad cookies load without a consent prompt. Check the DPDP Act timetable.
+
 ## Facts to confirm **(you)**
 
 - [ ] Which bars besides Coconut Moringa are cold process, and a photo for Coconut Moringa. The old live FAQ (Nov 1) said "melt-and-pour, not cold-process"; the new site says both, from your note of 18 November.
@@ -44,3 +54,8 @@ Updated 2026-11-28. Confirm an item is still open before acting on it. **(you)**
 - [ ] Travel queries get many impressions and few clicks. Watch `/soaps/travel-soaps`.
 - [ ] Proof for event planners (past events, testimonials), as it appears.
 - [ ] Older posts still carry some wording from the shop era. Review them over time.
+
+## Wording left as a judgement call
+
+- [ ] "Best soap for ..." appears in post titles and text that rank in search. Brand rules say no superlatives.
+- [ ] Withdrawn on 2026-11-28: the post naming the maker and three stories with health claims. Set `published: false` back only after rewriting.
