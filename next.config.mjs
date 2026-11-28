@@ -119,6 +119,9 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Post withdrawn from public view. Temporary redirect.
+      { source: '/blog/why-we-left-bangalore', destination: '/our-story', permanent: false },
+      { source: '/stories/why-we-left-bangalore', destination: '/our-story', permanent: false },
       // Specific rescue redirects must come before the wildcard storefront
       // catch-all below, or /shop/:path* etc. would match first and these two
       // paths would never reach their blog destinations.
