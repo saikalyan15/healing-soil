@@ -41,10 +41,24 @@ for (const f of readdirSync(join(root, 'content/stories')).filter((f) => f.endsW
   if (!blogSlugs.has(slug)) add(`/${slug}`, `/blog/${slug}`)
 }
 
+// Cloudflare Pages counts every rule after the first wildcard as "dynamic" and silently ignores
+// anything past 100 of those. So all exact rules go first, then the wildcard rules in the order
+// they were added.
+const isDynamic = (from) => from.includes('*') || from.includes('/:')
+const ordered = [...rules].sort((a, b) => Number(isDynamic(a[0])) - Number(isDynamic(b[0])))
+
 const lines = []
-for (const [from, to] of rules) {
+for (const [from, to] of ordered) {
   lines.push(`${from} ${to} 301`)
   if (!from.includes('*') && from !== '/' && !from.endsWith('.php')) lines.push(`${from}/ ${to} 301`)
 }
+
+const firstDynamic = lines.findIndex((l) => isDynamic(l.split(' ')[0]))
+const exact = firstDynamic === -1 ? lines.length : firstDynamic
+const dynamic = lines.length - exact
+if (exact > 2000 || dynamic > 100) {
+  console.error(`Too many redirects for Cloudflare Pages: ${exact} exact (max 2000), ${dynamic} from the first wildcard on (max 100).`)
+  process.exit(1)
+}
 writeFileSync(join(root, 'public/_redirects'), lines.join('\n') + '\n')
-console.log(`Wrote public/_redirects with ${lines.length} rules`)
+console.log(`Wrote public/_redirects with ${exact} exact and ${dynamic} wildcard rules`)
