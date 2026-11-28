@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro'
+import { giftHampers } from '../data/gift-hampers'
+import { activeSeason } from '../data/festive-seasons'
+import { whatsappLink } from '../config/site'
+
+// Ad landing page for teams and clients. noindex while it is ad-only. No prices and no tax or
+// invoice wording: every set is quoted in the WhatsApp conversation.
+const season = activeSeason()
+const quote = (set: string) => `Hi Healing Soil, I would like a quote for corporate gifts.\nSet: ${set}\nQuantity: \nCity: \nNeeded by: `
+const steps = [
+  ['Tell us', 'The set, how many, the city and the date you need them by.'],
+  ['We quote', 'What we can make in that time, with delivery included.'],
+  ['Made after you confirm', 'Nothing sits on a shelf. We ship from our farm in South Goa.'],
+]
+---
+<Base title="Corporate Gifting | Healing Soil" description="Handmade soap gift sets for teams and clients, made to order on our farm in South Goa." image="/images/gifting/jute-bag-farm.webp" noindex>
+  <section class="season-hero">
+    <div class="season-copy">
+      <div>
+        <div class="label">{season ? `Corporate gifting · ${season.name}` : 'Corporate gifting'}</div>
+        <h1>Handmade soap gifts for your team</h1>
+        <p>Small batches, made on our farm in South Goa and packed as gift sets. For {season ? 'Christmas, the New Year, ' : ''}a client thank-you, a new joiner or a team offsite. Everything is made to order.</p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href={whatsappLink(quote('Not sure yet'))}>Ask for a quote</a>
+          <a class="link" href="#sets">See the sets</a>
+        </div>
+        {season && <p class="small">{season.dateNote} Allow 2 to 3 days to make, then about 4 to 7 days for delivery. Larger quantities take longer.</p>}
+      </div>
+    </div>
+    <img class="photo" src="/images/gifting/jute-bag-farm.webp" alt="A jute gift bag with a kraft card, a wrapped soap and two handmade soaps on a wooden board" width="900" height="1200" fetchpriority="high" />
+  </section>
+
+  <section class="wrap section" id="sets">
+    <div class="section-head">
+      <div><div class="label">The sets</div><h2 class="h2">Three ways to give</h2></div>
+      <p>Tell us the set, how many and where they are going, and we will send a quote on WhatsApp.</p>
+    </div>
+    <div class="sq-grid">
+      {giftHampers.map((h) => (
+        <div class="sq">
+          <img class="photo" src={h.image.src} alt={h.image.alt} width="800" height="800" loading="lazy" style={`object-position:${h.image.position ?? '50% 50%'}`} />
+          <div class="row"><span class="name">{h.name}</span></div>
+          <p class="d">{h.summary}</p>
+          <div class="price"><a class="link-line" href={whatsappLink(quote(`${h.name} (${h.contents.join(', ')})`))}>Ask about this set</a></div>
+        </div>
+      ))}
+    </div>
+    <p class="fine">Need many small gifts? <a href="/wholesale">50g soap squares</a> start at 25 pieces per soap.</p>
+  </section>
+
+  <section class="bordered harvest">
+    <div class="wrap section">
+      <div class="section-head"><div><div class="label">How it works</div><h2 class="h2">A short conversation, then we make it</h2></div></div>
+      <ol class="steps biz-steps">
+        {steps.map(([t, d], i) => <li><span class="n">{String(i + 1).padStart(2, '0')}</span><span class="t">{t}</span><span class="d">{d}</span></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap order">
+    <h2>Thinking about<br /><em>gifts for a team?</em></h2>
+    <a class="btn" href={whatsappLink(quote('Not sure yet'))}>Message on WhatsApp</a>
+  </section>
+</Base>

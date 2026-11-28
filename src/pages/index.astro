@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro'
 import { whatsappLink, MESSAGES } from '../config/site'
+import { activeSeason } from '../data/festive-seasons'
+
+const season = activeSeason()
 
 const cold = [
   ['Weigh', 'Oils and butters, weighed for each recipe.'],
@@ -20,7 +23,7 @@ const notIn = [
   ['No SLS', 'A soft, creamy lather instead of a tall foam.'],
   ['No synthetic fragrance', 'Scent comes only from essential oils and herbs.'],
   ['No parabens', 'Made in small batches, after you order.'],
-  ['Glycerine kept in', 'It gives the bar a mild, moisturising feel.'],
+  ['Glycerine in the base', 'The bases we use keep their glycerine, for a mild, moisturising feel.'],
 ]
 const herbs = [
   { name: 'Neem', tag: 'Grown on our farm', img: '/images/ingredients/ingredient-neem.webp', alt: 'Neem leaves', d: 'Traditionally used in Ayurvedic personal care. A green, earthy note.' },
@@ -61,6 +64,18 @@ const bars = [
     </div>
     <img class="photo" src="/hero-soap.webp" alt="Handmade soap bar with oats on a woven tray" width="1024" height="1024" fetchpriority="high" />
   </section>
+
+  {season && (
+    <section class="season-band">
+      <div class="wrap">
+        <div>
+          <div class="label" style="color:#c8b98a">{season.eyebrow}</div>
+          <div class="name">Three gift sets, made to order</div>
+        </div>
+        <a class="link-line" style="border-color:#efece3" href="/gift-hampers">See the gift sets</a>
+      </div>
+    </section>
+  )}
 
   <section class="wrap section" id="process">
     <div class="section-head">
@@ -135,7 +150,7 @@ const bars = [
           <div class="chapter"><span class="num">V</span><span class="label">The herbs</span></div>
           <h2 class="h2">Herbs with a long history in Indian homes</h2>
         </div>
-        <p style="max-width:400px">Some we grow here in Goa. The rest we buy, and each label says which is which.</p>
+        <p style="max-width:400px">Neem, tulsi, lemongrass and marigold grow on our farm in Goa, though not every bar uses them. The rest we buy, and we say which is which.</p>
       </div>
       <div class="herbs">
         {herbs.map((h) => (

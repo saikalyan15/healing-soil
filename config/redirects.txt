@@ -67,8 +67,9 @@
 /xmlrpc.php /blog
 
 # Old storefront and programmatic pages, pointed at the closest page that exists now
-/gift-hampers /gifting
-/corporate-gifting /wholesale
+# /gift-hampers and /corporate-gifting are real pages at their live addresses.
+/gifting /gift-hampers
+/christmas /gift-hampers
 /distributor-soap-squares-catalog /wholesale
 /compare/glycerin-vs-goat-milk-soap /blog/glycerin-vs-goat-milk-soap
 /compare/shea-butter-vs-glycerin-soap /blog/shea-butter-vs-glycerin-soap
@@ -85,7 +86,7 @@
 /ingredient/* /ingredients
 /soap/* /soaps
 /compare/* /soaps
-/occasion/* /gifting
+/occasion/* /gift-hampers
 /soap-for/* /soaps
 /ayurvedic-soap/* /ingredients
 /honey-shea-butter-soap /shea-butter-soap

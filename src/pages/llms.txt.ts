@@ -3,7 +3,8 @@
 import type { APIRoute } from 'astro'
 import { SOAPS } from '../data/soaps'
 import { SQUARES, LEAD_TIME, formatINR } from '../data/pricing'
-import { giftHampers, formatRupees } from '../data/gift-hampers'
+import { giftHampers } from '../data/gift-hampers'
+import { activeSeason } from '../data/festive-seasons'
 import { getPosts } from '../lib/posts'
 import { SITE } from '../config/site'
 
@@ -28,7 +29,8 @@ export const GET: APIRoute = async () => {
   const u = (path: string) => `${SITE.url}${path}`
   const retail = SOAPS.map((s) => `- [${s.name}, ${s.base.toLowerCase()}](${u('/soaps/' + s.slug)}): ${formatINR(s.price)}${s.weightGrams ? `, ${s.weightGrams}g` : ''}, ${s.method.toLowerCase()}.`).join('\n')
   const squares = SQUARES.soaps.filter((s) => s.price !== null).map((s) => `- ${s.name} (${String(s.base).toLowerCase()}): ${formatINR(s.price as number)} per ${SQUARES.weightGrams}g piece.`).join('\n')
-  const hampers = giftHampers.map((h) => `- ${h.name}, ${formatRupees(h.price)}: ${h.summary}`).join('\n')
+  const hampers = giftHampers.map((h) => `- ${h.name}: ${h.contents.join(', ')}.`).join('\n')
+  const season = activeSeason()
   const guides = GUIDES.filter(([slug]) => live.has(slug)).map(([slug, d]) => `- [${slug.replace(/-/g, ' ')}](${u('/blog/' + slug)}): ${d}`).join('\n')
   const today = new Date().toISOString().slice(0, 10)
 
@@ -56,11 +58,13 @@ ${squares}
 
 - [Business page and rate card](${u('/wholesale')}), [rate card PDF](${u('/downloads/healing-soil-rate-card.pdf')}), [brochure PDF](${u('/downloads/healing-soil-brochure.pdf')}).
 
-## Gift hampers
+## Gift sets${season ? ` for ${season.name}` : ''}
+
+No prices are listed; each order is quoted on WhatsApp, depending on the set, the quantity and the delivery city. Made to order: 2 to 3 days to make, then about 4 to 7 days for delivery.${season ? ` ${season.dateNote}` : ''}
 
 ${hampers}
 
-- [Gift hampers](${u('/gifting')})
+- [Gift hampers](${u('/gift-hampers')})
 
 ## Choose a soap base
 
@@ -72,7 +76,7 @@ ${hampers}
 
 ## Ingredients and sourcing
 
-- [Ingredients and where they come from](${u('/ingredients')}): neem, tulsi and marigold are grown on the farm; kokum is grown in Goa; honey is from Goa, saffron from Kashmir, and the rest from Indian farms or named sources.
+- [Ingredients and where they come from](${u('/ingredients')}): neem, tulsi, lemongrass and marigold are grown on the farm (not every bar uses them; the Red Rose bar uses a sourced red wine and pomegranate base and no farm botanicals); kokum is grown in Goa; honey is from Goa, saffron from Kashmir, and the rest from Indian farms or named sources.
 - Essential oils change from batch to batch and can be left out on request, for unscented soap.
 - [The complete guide to handmade soap in India](${u('/guide/handmade-soap-india')})
 

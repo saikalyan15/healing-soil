@@ -46,13 +46,18 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
 - **All business happens on WhatsApp.** The site has no cart, checkout, accounts or
   backend. Every order CTA opens a wa.me link with a prefilled message
   (`src/config/site.ts`). Payment is UPI after the owner confirms price and date.
-- **No starter bundle** ("4 soaps for ₹1,000" was removed). The gift hampers on `/gifting` are
-  separate; do not add other bundle offers unless the owner asks.
+- **No starter bundle** ("4 soaps for ₹1,000" was removed). Do not add bundle offers unless the
+  owner asks.
+- **Gift sets have no prices** (owner decision, Nov 2026). Three sets: jute bag, discovery box,
+  full set. They are quoted on WhatsApp. Do not add a price field back without the owner asking.
+- **Farm-grown:** neem, tulsi, lemongrass and marigold (and kokum). Not every bar uses them. The
+  Red Rose bar is a sourced red wine and pomegranate base with no farm botanicals.
+- **Public email is `hello@healingsoil.in`.** Instagram is the only social listed.
 - **Farm is in Goa.** Bangalore is where customers are, never the origin. The one
   exception is the avocado body butter, whose avocados come from the owner's own trees
   in Bangalore; say that only as an ingredient source.
 - **Two ways of making soap, and each bar says which.** Most bars are melt and pour from a
-  bought base (glycerine, goat milk, papaya cucumber, shea butter, red wine). Some are cold
+  bought base (glycerine, goat milk, papaya cucumber, shea butter, red wine and pomegranate). Some are cold
   process, made from scratch. Never imply every bar is one or the other.
 - **Wholesale is 50g soap squares only** (Honey Oats, Kesar Haldi, Red Rose), minimum 25 per
   soap, public prices for events, hospitality and gifting. Shops that resell are quoted by
@@ -103,6 +108,10 @@ Run `npm run validate:compliance` after editing any copy.
   origin, and legacy slugs (which become redirects).
 - `src/data/pricing.ts`: wholesale squares, minimum, lead time. A `null` price renders as "ask us".
 - `src/data/gift-hampers.ts`, `src/data/reviews.ts`: gifting and reviews.
+- `src/data/festive-seasons.ts`: seasonal gifting. In season, `/gift-hampers` is the collection
+  page, with a homepage band and a header link. `/corporate-gifting` is the noindex ad landing.
+  Both keep their addresses because ads and search results point at them. The site is static, so
+  `.github/workflows/daily-rebuild.yml` rebuilds daily (needs the `CF_DEPLOY_HOOK` secret).
 - `src/config/site.ts`: WhatsApp number, socials, and every prefilled message. Change a number or a
   social link here only.
 - `content/blog` and `content/stories`: MDX, both served at `/blog/<slug>` (filename is the slug;
@@ -112,8 +121,9 @@ Run `npm run validate:compliance` after editing any copy.
 - `src/pages/llms.txt.ts`: `/llms.txt`, generated from the data so it cannot drift.
 - `public/analytics.js`: GA4, Meta Pixel and Clarity, live domain only. WhatsApp clicks fire
   `whatsapp_click` and `whatsapp_send_clicked` (GA4) and Meta `Contact`. Keep those names.
-- `public/_headers`: security headers. **While the site is a preview it contains a
-  `X-Robots-Tag: noindex` line that must be removed at cutover.**
+- `public/_headers`: security headers, plus `noindex` for the `*.pages.dev` addresses only.
+- `vercel.json` turns Vercel deployments off, so pushing `main` cannot replace the old live site
+  with a build that lacks the redirects. Delete the file once Vercel is retired.
 
 Adding a soap: add an entry to `src/data/soaps.ts` and a photo in `public/products/`. Its page,
 the listing, the redirects and `llms.txt` follow. Do not add a SoapLedger or any runtime API call.

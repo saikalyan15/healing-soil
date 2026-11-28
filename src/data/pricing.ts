@@ -33,7 +33,7 @@ export const SQUARES = {
     {
       id: 'red-rose',
       name: 'Red Rose',
-      base: 'Red wine' as string | null, // owner said "Red Vine"; SoapLedger lists the base as Red Wine. Confirm the spelling.
+      base: 'Red wine and pomegranate' as string | null,
       price: 150 as number | null,
       image: '/products/50g-soap-squares/images/red-rose-50g.webp',
       note: 'A rose bar with a soft floral scent.',

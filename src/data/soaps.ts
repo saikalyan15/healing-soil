@@ -124,9 +124,9 @@ export const SOAPS: Soap[] = [
     ingredients: [{ name: 'Marigold oil', origin: farm }, { name: 'Marigold petals', origin: farm }, VE],
   },
   {
-    slug: 'red-rose-soap', name: 'Red Rose', base: 'Red wine', method: 'Melt and pour', weightGrams: null, price: 250,
+    slug: 'red-rose-soap', name: 'Red Rose', base: 'Red wine and pomegranate', method: 'Melt and pour', weightGrams: null, price: 250,
     image: '/products/red-rose.webp',
-    description: 'A handmade soap shaped like a rose, made with rose essential oil and vitamin E. Soft, creamy lather with a delicate floral scent.',
+    description: 'A handmade soap shaped like a rose, made on a sourced red wine and pomegranate base with rose essential oil and vitamin E. No farm botanicals. Soft, creamy lather with a delicate floral scent.',
     ingredients: [{ name: 'Rose essential oil', origin: india }, VE],
   },
   {
@@ -157,4 +157,4 @@ export const getSoap = (slug: string) => SOAPS.find((s) => s.slug === slug)
 export const originLabel = (o?: Origin) =>
   !o ? null : o.kind === 'farm' ? 'Grown on our farm' : `Sourced${o.place ? `, ${o.place}` : ''}`
 
-export const BASE_ORDER = ['Glycerine', 'Goat milk', 'Papaya cucumber', 'Shea butter', 'Red wine', 'Made from scratch']
+export const BASE_ORDER = ['Glycerine', 'Goat milk', 'Papaya cucumber', 'Shea butter', 'Red wine and pomegranate', 'Made from scratch']

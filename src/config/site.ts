@@ -5,10 +5,11 @@ export const SITE = {
   url: 'https://healingsoil.in',
   whatsappNumber: '917483100651',
   whatsappDisplay: '+91 74831 00651',
+  email: 'hello@healingsoil.in',
   region: 'South Goa',
   socials: {
     instagram: 'https://www.instagram.com/healingsoil.in',
-    // Two different Facebook URLs existed on the old site. Add the correct one here.
+    // Instagram is the only social the live site lists. Add Facebook here if wanted.
     facebook: null as string | null,
   },
 } as const

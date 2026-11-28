@@ -38,7 +38,7 @@ const sections = groups.map(([title, blurb, test]) => {
           {g.items.map((s) => (
             <a class="bar" href={`/soaps/${s.slug}`}>
               {s.image
-                ? <img class="photo" src={s.image} alt={`${s.name} soap bar`} width="800" height="800" loading="lazy" />
+                ? <img class="photo" src={s.image} alt={`${s.name} soap bar`} width="800" height="800" loading={g === sections[0] && g.items.indexOf(s) < 4 ? 'eager' : 'lazy'} />
                 : <div class="ph" style="aspect-ratio:1/1">Photo to come</div>}
               <span class="cap">
                 <span class="name">{s.name}</span>

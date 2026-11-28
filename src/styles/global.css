@@ -222,3 +222,19 @@ ol { padding: 0; list-style: none; }
 .ing-card { display: flex; flex-direction: column; gap: 8px; padding-top: 18px; border-top: 1px solid var(--ink); }
 .ing-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .ing-row .name { font-family: var(--display); font-size: 26px; line-height: 1; }
+
+/* seasonal gifting */
+.season-hero { display: flex; flex-wrap: wrap; background: #21302a; color: #efece3; }
+.season-copy { flex: 1 1 520px; display: flex; align-items: center; padding: clamp(56px, 7vw, 112px) 32px; }
+.season-copy > div { max-width: 540px; margin-left: auto; margin-right: clamp(0px, 4vw, 72px); display: flex; flex-direction: column; gap: 28px; }
+.season-hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(42px, 5.4vw, 80px); line-height: 1; letter-spacing: -0.015em; margin: 0; }
+.season-hero .label { color: #c8b98a; }
+.season-hero p { font-size: 17px; color: #d6d6cc; }
+.season-hero .small { font-size: 13px; }
+.season-hero a.link { color: #efece3; }
+.season-hero > img { flex: 1 1 520px; width: auto; min-width: 0; align-self: stretch; min-height: 520px; max-height: 760px; }
+.btn-light, .btn-light:hover { background: #efece3; color: #1e1c19; }
+.season-band { background: #21302a; color: #efece3; }
+.season-band .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; padding-top: 28px; padding-bottom: 28px; }
+.season-band .name { font-family: var(--display); font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; }
+.season-band a { color: #efece3; }

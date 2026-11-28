@@ -61,3 +61,6 @@ tools/meta-ads-mcp/node_modules/
 /dist/
 /.astro/
 public/_redirects
+
+# brainstorming mockups (local only)
+.superpowers/
