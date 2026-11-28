@@ -1,7 +1,7 @@
 ---
 import Print from '../../layouts/Print.astro'
 import { SQUARES, LEAD_TIME, formatINR } from '../../data/pricing'
-import { SITE } from '../../config/site'
+import { SITE, SHOW_PRICES } from '../../config/site'
 
 const steps = [
   ['Tell us', 'The soaps, how many, the date and the city.'],
@@ -34,7 +34,7 @@ const steps = [
           <div class="display" style="font-size:16pt;line-height:1.05">{s.name}</div>
           <div class="eyebrow">{s.base ?? 'Base on request'}</div>
           <div style="font-size:9pt;color:var(--body)">{s.note}</div>
-          <div style="border-top:1px solid var(--ink);padding-top:2mm;font-size:9.5pt"><span class="display" style="font-size:15pt">{s.price !== null ? formatINR(s.price) : 'On request'}</span> {s.price !== null ? 'per piece' : ''}</div>
+          <div style="border-top:1px solid var(--ink);padding-top:2mm;font-size:9.5pt">{SHOW_PRICES && s.price !== null ? <><span class="display" style="font-size:15pt">{formatINR(s.price)}</span> per piece</> : `From ${SQUARES.minPerSoap} pieces`}</div>
         </div>
       ))}
     </div>

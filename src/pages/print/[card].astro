@@ -3,6 +3,12 @@ import Print from '../../layouts/Print.astro'
 import { SQUARES, LEAD_TIME, PRICES_AS_OF, formatINR } from '../../data/pricing'
 import { SITE } from '../../config/site'
 
+// The rate card carries prices, so it is not part of the public site. It is only built by
+// scripts/build-pdfs.mjs, which sets RATE_CARD=1 and writes the PDF to docs/rate-card/.
+export function getStaticPaths() {
+  return process.env.RATE_CARD ? [{ params: { card: 'rate-card' } }] : []
+}
+
 const asOf = new Date(PRICES_AS_OF).toLocaleDateString('en-IN', { month: 'long', year: 'numeric', timeZone: 'UTC' })
 const terms = [
   `Minimum ${SQUARES.minPerSoap} pieces of each soap.`,

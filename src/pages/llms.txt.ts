@@ -2,7 +2,7 @@
 // soaps and methods cannot drift from the pages. Replaces the hand-written file.
 import type { APIRoute } from 'astro'
 import { SOAPS } from '../data/soaps'
-import { SQUARES, LEAD_TIME, formatINR } from '../data/pricing'
+import { SQUARES, LEAD_TIME } from '../data/pricing'
 import { giftHampers } from '../data/gift-hampers'
 import { activeSeason } from '../data/festive-seasons'
 import { getPosts } from '../lib/posts'
@@ -27,8 +27,8 @@ const GUIDES: [string, string][] = [
 export const GET: APIRoute = async () => {
   const live = new Set((await getPosts()).map((p) => p.id))
   const u = (path: string) => `${SITE.url}${path}`
-  const retail = SOAPS.map((s) => `- [${s.name}, ${s.base.toLowerCase()}](${u('/soaps/' + s.slug)}): ${formatINR(s.price)}${s.weightGrams ? `, ${s.weightGrams}g` : ''}, ${s.method.toLowerCase()}.`).join('\n')
-  const squares = SQUARES.soaps.filter((s) => s.price !== null).map((s) => `- ${s.name} (${String(s.base).toLowerCase()}): ${formatINR(s.price as number)} per ${SQUARES.weightGrams}g piece.`).join('\n')
+  const retail = SOAPS.map((s) => `- [${s.name}, ${s.base.toLowerCase()}](${u('/soaps/' + s.slug)}): ${s.weightGrams ? `${s.weightGrams}g, ` : ''}${s.method.toLowerCase()}.`).join('\n')
+  const squares = SQUARES.soaps.map((s) => `- ${s.name} (${String(s.base).toLowerCase()}), ${SQUARES.weightGrams}g square.`).join('\n')
   const hampers = giftHampers.map((h) => `- ${h.name}: ${h.contents.join(', ')}.`).join('\n')
   const season = activeSeason()
   const guides = GUIDES.filter(([slug]) => live.has(slug)).map(([slug, d]) => `- [${slug.replace(/-/g, ' ')}](${u('/blog/' + slug)}): ${d}`).join('\n')
@@ -42,9 +42,9 @@ Soap is made two ways. Most bars start from a ready glycerine, goat milk, papaya
 
 ## How to order
 
-Message ${SITE.whatsappDisplay} on WhatsApp: ${SITE.url}/contact. The bars, prices and bases are listed on the soaps pages below. Shipping is free on orders of ₹1,000 and above, ₹100 below that, or ₹150 for the North India states. Dispatch is within 2 business days of confirming an order; delivery takes about 4 to 7 business days.
+Message ${SITE.whatsappDisplay} on WhatsApp: ${SITE.url}/contact. The bars and bases are listed on the soaps pages below. Prices are not listed on the website; ask on WhatsApp. Shipping is free on orders of ₹1,000 and above, ₹100 below that, or ₹150 for the North India states. Dispatch is within 2 business days of confirming an order; delivery takes about 4 to 7 business days.
 
-## The soaps (retail, per bar)
+## The soaps
 
 ${retail}
 
@@ -56,7 +56,7 @@ All soaps: ${u('/soaps')}
 
 ${squares}
 
-- [Business page and rate card](${u('/wholesale')}), [rate card PDF](${u('/downloads/healing-soil-rate-card.pdf')}), [brochure PDF](${u('/downloads/healing-soil-brochure.pdf')}).
+- [Business page](${u('/wholesale')}), [brochure PDF](${u('/downloads/healing-soil-brochure.pdf')}). Prices are sent on WhatsApp.
 
 ## Gift sets${season ? ` for ${season.name}` : ''}
 

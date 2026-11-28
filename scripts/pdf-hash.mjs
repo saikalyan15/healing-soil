@@ -6,6 +6,7 @@ import { join } from 'node:path'
 export function pdfSourceHash(root = process.cwd()) {
   const files = [
     'src/data/pricing.ts',
+    'src/config/site.ts',
     'src/layouts/Print.astro',
     ...readdirSync(join(root, 'src/pages/print')).map((f) => `src/pages/print/${f}`),
   ].sort()

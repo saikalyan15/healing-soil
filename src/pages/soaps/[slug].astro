@@ -2,13 +2,13 @@
 import Base from '../../layouts/Base.astro'
 import { SOAPS, originLabel } from '../../data/soaps'
 import { formatINR } from '../../data/pricing'
-import { SITE, whatsappLink, MESSAGES } from '../../config/site'
+import { SITE, whatsappLink, MESSAGES, SHOW_PRICES } from '../../config/site'
 
 export function getStaticPaths() {
   return SOAPS.map((soap) => ({ params: { slug: soap.slug }, props: { soap } }))
 }
 const { soap } = Astro.props
-const title = soap.seoTitle ?? `${soap.name} soap, ${soap.base.toLowerCase()} base, ${formatINR(soap.price)} | Healing Soil`
+const title = soap.seoTitle ?? `${soap.name} soap, ${soap.base.toLowerCase()} base | Healing Soil`
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -23,7 +23,7 @@ const facts = [
   ['Base', soap.base],
   ['Made by', soap.method === 'Cold process' ? 'Cold process, made from scratch' : 'Melt and pour, finished by hand'],
   ...(soap.weightGrams ? [['Weight', `${soap.weightGrams}g`]] : []),
-  ['Price', formatINR(soap.price)],
+  ...(SHOW_PRICES ? [['Price', formatINR(soap.price)]] : []),
 ]
 ---
 <Base title={title} description={soap.seoDescription ?? soap.description} image={soap.image ?? undefined}>

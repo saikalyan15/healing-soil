@@ -140,7 +140,7 @@ export const SOAPS: Soap[] = [
     slug: 'travel-soaps', name: 'Travel soaps', base: 'Glycerine and goat milk', method: 'Melt and pour', weightGrams: 30, price: 50,
     image: '/products/travel-soap.webp',
     description: 'Compact bars of our handmade soaps, made for travel, gym bags, or trying a new scent before you commit to a full bar. Same ingredients, same small-batch making, in a size for the road.',
-    seoTitle: 'Travel soap bars: 30g mini soaps from ₹50 | Healing Soil',
+    seoTitle: 'Travel soap bars: 30g mini soaps | Healing Soil',
     seoDescription: 'Small 30g handmade soap bars for travel, gym bags and guest stays. Glycerine and goat milk, made without SLS or synthetic fragrance. Order on WhatsApp.',
     ingredients: [EO, VE],
   },

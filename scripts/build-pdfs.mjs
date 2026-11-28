@@ -4,27 +4,38 @@
 // is stored so scripts/check-pdfs.mjs can fail the site build when prices change but the PDFs
 // were not regenerated.
 import { spawn, spawnSync } from 'node:child_process'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pdfSourceHash } from './pdf-hash.mjs'
 
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const PORT = 4399
 const root = process.cwd()
+const OUT = '.pdfbuild'
+// The brochure is public. The rate card has prices, so it goes to docs/ for sending on WhatsApp.
 const pages = [
-  ['rate-card', 'healing-soil-rate-card.pdf'],
-  ['brochure', 'healing-soil-brochure.pdf'],
+  ['rate-card', 'docs/rate-card/healing-soil-rate-card.pdf'],
+  ['brochure', 'public/downloads/healing-soil-brochure.pdf'],
 ]
 
 mkdirSync(join(root, 'public/downloads'), { recursive: true })
-const server = spawn('npx', ['astro', 'preview', '--port', String(PORT)], { cwd: root, stdio: 'ignore' })
+mkdirSync(join(root, 'docs/rate-card'), { recursive: true })
+const run = (args, env = {}) => {
+  const r = spawnSync('npx', ['astro', ...args], { cwd: root, stdio: 'pipe', env: { ...process.env, ...env } })
+  if (r.status !== 0 && args[1] !== 'stop') throw new Error(`astro ${args.join(' ')} failed: ${r.stderr}${r.stdout}`)
+}
+run(['build', '--outDir', OUT], { RATE_CARD: '1' })
+run(['preview', 'stop'])
+const server = spawn('npx', ['astro', 'preview', '--port', String(PORT), '--outDir', OUT], { cwd: root, stdio: 'ignore' })
 try {
-  for (let i = 0; i < 40; i++) {
-    try { if ((await fetch(`http://localhost:${PORT}/`)).ok) break } catch {}
-    await new Promise((r) => setTimeout(r, 250))
+  let up = false
+  for (let i = 0; i < 60 && !up; i++) {
+    try { up = (await fetch(`http://localhost:${PORT}/print/rate-card`)).ok } catch {}
+    if (!up) await new Promise((r) => setTimeout(r, 250))
   }
+  if (!up) throw new Error('The preview server did not serve the rate card page')
   for (const [page, file] of pages) {
-    const out = join(root, 'public/downloads', file)
+    const out = join(root, file)
     const r = spawnSync(CHROME, [
       '--headless=new', '--disable-gpu', '--no-pdf-header-footer', '--hide-scrollbars',
       '--virtual-time-budget=6000', `--print-to-pdf=${out}`, `http://localhost:${PORT}/print/${page}`,
@@ -35,4 +46,6 @@ try {
   writeFileSync(join(root, 'config/pdf-source.hash'), pdfSourceHash() + '\n')
 } finally {
   server.kill()
+  run(['preview', 'stop'])
+  rmSync(join(root, OUT), { recursive: true, force: true })
 }

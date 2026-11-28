@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import Base from '../layouts/Base.astro'
-import { SITE, whatsappLink, MESSAGES } from '../config/site'
+import { SITE, whatsappLink, MESSAGES, SHOW_PRICES } from '../config/site'
 import { getSoap } from '../data/soaps'
 import { formatINR } from '../data/pricing'
 
@@ -49,7 +49,7 @@ if (d.faqs.length) {
           {items.map((s) => (
             <a class="bar" href={`/soaps/${s.slug}`}>
               {s.image ? <img class="photo" src={s.image} alt={`${s.name} soap bar`} width="800" height="800" loading="lazy" /> : <div class="ph" style="aspect-ratio:1/1">Photo to come</div>}
-              <span class="cap"><span class="name">{s.name}</span><span class="base">{s.base}{s.weightGrams ? ` · ${s.weightGrams}g` : ''}</span><span class="price-line">{formatINR(s.price)}</span></span>
+              <span class="cap"><span class="name">{s.name}</span><span class="base">{s.base}{s.weightGrams ? ` · ${s.weightGrams}g` : ''}</span>{SHOW_PRICES && <span class="price-line">{formatINR(s.price)}</span>}</span>
             </a>
           ))}
         </div>

@@ -23,7 +23,10 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
 - Ingredient lists and process/origin descriptions
 - "gentle lather," "creamy texture," "earthy scent"
 
-**Why this matters:** CDSCO (not FSSAI — that's food) classifies soap as a drug if it makes therapeutic claims. No claims = no drug/cosmetic license needed for handmade soap.
+**Why this matters:** CDSCO (not FSSAI — that's food) classifies soap as a drug if it makes therapeutic claims.
+Avoiding claims does not by itself remove licensing duties: soap appears to be a cosmetic, and the
+Cosmetics Rules, 2020 license cosmetic manufacture. Treat the licence question as open until an
+adviser confirms it (see `docs/pending.md`).
 
 ## Brand constraints (non-negotiable)
 
@@ -46,6 +49,10 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
 - **All business happens on WhatsApp.** The site has no cart, checkout, accounts or
   backend. Every order CTA opens a wa.me link with a prefilled message
   (`src/config/site.ts`). Payment is UPI after the owner confirms price and date.
+- **No prices on the public site** (owner decision, 2026-11-28), retail or wholesale, until GST
+  registration and listing rules are settled. `SHOW_PRICES` in `src/config/site.ts` is the switch.
+  Prices stay in the data files. The rate card with prices is `docs/rate-card/`, sent on WhatsApp
+  and never published. Shipping charges are still shown.
 - **No starter bundle** ("4 soaps for ₹1,000" was removed). Do not add bundle offers unless the
   owner asks.
 - **Gift sets have no prices** (owner decision, Nov 2026). Three sets: jute bag, discovery box,
@@ -60,8 +67,8 @@ Making therapeutic or medicinal claims without a drug/cosmetic license is an off
   bought base (glycerine, goat milk, papaya cucumber, shea butter, red wine and pomegranate). Some are cold
   process, made from scratch. Never imply every bar is one or the other.
 - **Wholesale is 50g soap squares only** (Honey Oats, Kesar Haldi, Red Rose), minimum 25 per
-  soap, public prices for events, hospitality and gifting. Shops that resell are quoted by
-  message, with no public resale price. 100g bars are retail only. Prices live in
+  soap. Events, hospitality and gifting get the rate card price on WhatsApp; shops that resell are
+  quoted separately. 100g bars are retail only. Prices live in
   `src/data/pricing.ts`; the rate card and brochure PDFs are made from it.
 - **Shipping:** free on orders of ₹1,000 and above. Below that ₹100, or ₹150 for the North
   India states. Never claim unconditional free shipping.

@@ -64,3 +64,4 @@ public/_redirects
 
 # brainstorming mockups (local only)
 .superpowers/
+.pdfbuild/

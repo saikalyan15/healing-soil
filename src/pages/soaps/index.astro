@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro'
 import { SOAPS } from '../../data/soaps'
 import { formatINR } from '../../data/pricing'
-import { whatsappLink, MESSAGES } from '../../config/site'
+import { whatsappLink, MESSAGES, SHOW_PRICES } from '../../config/site'
 
 const groups = [
   ['Glycerine', 'A clear base with a light, clean-rinsing lather.', (s: any) => s.base === 'Glycerine'],
@@ -43,14 +43,14 @@ const sections = groups.map(([title, blurb, test]) => {
               <span class="cap">
                 <span class="name">{s.name}</span>
                 <span class="base">{s.base}{s.weightGrams ? ` · ${s.weightGrams}g` : ''}</span>
-                <span class="price-line">{formatINR(s.price)}</span>
+                {SHOW_PRICES && <span class="price-line">{formatINR(s.price)}</span>}
               </span>
             </a>
           ))}
         </div>
       </div>
     ))}
-    <p class="fine">Prices are per bar. Shipping is confirmed when you message us. For shops, events and companies, see <a href="/wholesale">soap squares for businesses</a>.</p>
+    <p class="fine">Message us for the price. Shipping is confirmed at the same time. For shops, events and companies, see <a href="/wholesale">soap squares for businesses</a>.</p>
     <div><a class="btn" href={whatsappLink(MESSAGES.general)}>Order on WhatsApp</a></div>
   </section>
 </Base>

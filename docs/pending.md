@@ -26,13 +26,13 @@ The site's wording was reviewed on 2026-11-28 (rendered text, images, PDFs). The
 - [ ] **Manufacturing licence.** Soap appears to be a cosmetic under the Cosmetics Rules, 2020, which license cosmetic manufacture through the State Licensing Authority. No handmade or small-scale exemption was found. `CLAUDE.md` says no claims means no licence; verify that before relying on it. Same for the lip balm and body butter.
 - [ ] **Seller disclosures.** The Consumer Protection (E-Commerce) Rules, 2020 ask for legal name, address, customer care and a named grievance officer. Whether they apply to WhatsApp ordering was not confirmed. Reconcile with never naming the maker (for example a registered trade name and business address).
 - [ ] **Listing declarations.** Legal Metrology rules ask online listings to show maker/packer name and address, net quantity and MRP inclusive of taxes. Net weight is missing for Marigold, Red Rose and Coconut Moringa.
-- [ ] **GST** and showing per-bar prices.
+- [ ] **GST.** All product prices were removed from the public site on 2026-11-28. Turn `SHOW_PRICES` on only after advice.
+- [ ] Send the rate card (`docs/rate-card/`) by WhatsApp only.
 - [ ] **Privacy:** analytics and ad cookies load without a consent prompt. Check the DPDP Act timetable.
 
 ## Facts to confirm **(you)**
 
 - [ ] Which bars besides Coconut Moringa are cold process, and a photo for Coconut Moringa. The old live FAQ (Nov 1) said "melt-and-pour, not cold-process"; the new site says both, from your note of 18 November.
-- [ ] Showing retail prices per bar: the old content-only site showed none, because there is no GST registration for interstate online sales. The new site shows them. Confirm that is fine.
 - [ ] Which bars contain essential oils (none listed for Marigold, and the Pomegranate and Orange glycerine bars).
 - [ ] Which bars contain lemongrass. It is named as farm-grown, but no bar lists it.
 - [ ] Bases are SLS-free and paraben-free: confirm with the supplier's spec sheets.

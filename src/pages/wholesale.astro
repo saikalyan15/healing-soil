@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import { SQUARES, LEAD_TIME, formatINR } from '../data/pricing'
-import { whatsappLink, MESSAGES } from '../config/site'
+import { whatsappLink, MESSAGES, SHOW_PRICES } from '../config/site'
 
 const uses = [
   ['Events and weddings', 'Favours and return gifts, wrapped in paper for each guest.'],
@@ -29,7 +29,7 @@ const steps = [
       <a class="btn" href={whatsappLink(MESSAGES.squares)}>Ask for a quote</a>
     </div>
     <div class="dl">
-      <a class="link-line" href="/downloads/healing-soil-rate-card.pdf" download>Rate card (PDF)</a>
+      <a class="link-line" href={whatsappLink(MESSAGES.rateCard)}>Ask for prices</a>
       <a class="link-line" href="/downloads/healing-soil-brochure.pdf" download>Brochure (PDF)</a>
     </div>
   </section>
@@ -41,7 +41,7 @@ const steps = [
           <div class="chapter"><span class="num">I</span><span class="label">The soaps</span></div>
           <h2 class="h2">Three soaps, from {SQUARES.minPerSoap} pieces each</h2>
         </div>
-        <p>Price is per piece. Choose one soap or all three, with at least {SQUARES.minPerSoap} of each.</p>
+        <p>Choose one soap or all three, with at least {SQUARES.minPerSoap} of each. We send the price on WhatsApp.</p>
       </div>
       <div class="sq-grid">
         {SQUARES.soaps.map((s) => (
@@ -50,9 +50,9 @@ const steps = [
             <div class="row"><span class="name">{s.name}</span><span class="tag">{s.base ?? 'Base to confirm'}</span></div>
             <p class="d">{s.note}</p>
             <div class="price">
-              {s.price !== null
+              {SHOW_PRICES && s.price !== null
                 ? <><span class="amt">{formatINR(s.price)}</span><span class="per">per {SQUARES.weightGrams}g piece</span></>
-                : <a class="link-line" href={whatsappLink(MESSAGES.squares)}>Ask us for the price</a>}
+                : <a class="link-line" href={whatsappLink(MESSAGES.squares)}>Ask for a quote</a>}
             </div>
           </div>
         ))}
